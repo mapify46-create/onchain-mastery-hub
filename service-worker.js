@@ -11,7 +11,7 @@
 // IMPORTANTE ao editar arquivos do app: aumente o número em CACHE_VERSAO. Sem isso,
 // quem já instalou o app continua vendo a versão antiga guardada em cache.
 
-const CACHE_VERSAO = 'omh-cache-v6';
+const CACHE_VERSAO = 'omh-cache-v7';
 
 const ARQUIVOS_DO_APP = [
   './',

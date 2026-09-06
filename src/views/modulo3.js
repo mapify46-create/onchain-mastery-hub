@@ -11,10 +11,153 @@ import {
   criarBotao,
   criarAbas,
   mostrarToast,
+  html,
 } from '../ui.js';
 import { montarMatrizDeFerramentas } from '../components/toolMatrix.js';
 import { montarQuiz } from '../components/quiz.js';
+import { montarDestaques } from '../components/destaques.js';
+import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
 import { obterEstado, atualizar } from '../store.js';
+
+// ---------------------------------------------------------------------------
+// Destaques e mapa — derivados do catálogo
+//
+// Diferente dos outros módulos, os destaques do M3 moram aqui e não em
+// src/data/modulo3.js: quase todos são CONTAGENS do próprio catálogo de
+// ferramentas (quantas de risco baixo, quantas por pilar), e contar na view
+// garante que o número acompanha qualquer edição no catálogo sem virar dado
+// duplicado e desatualizado. Só os textos são fixos.
+// ---------------------------------------------------------------------------
+
+function contarPorRisco(risco) {
+  return modulo3.ferramentas.filter((f) => f.risco === risco).length;
+}
+
+function contarPorPilar(pilar) {
+  return modulo3.ferramentas.filter((f) => f.pilar === pilar).length;
+}
+
+function destaquesDaVisaoGeral() {
+  const tecnico = contarPorPilar('tecnico');
+  const social = contarPorPilar('social');
+  return [
+    {
+      rotulo: 'Pilares de checagem',
+      valor: '2',
+      nota: 'Social (a atenção está chegando?) e técnico (o contrato resiste?). Duas checagens, não uma — e nenhuma substitui a outra.',
+    },
+    {
+      rotulo: 'Ferramentas catalogadas',
+      valor: String(tecnico + social),
+      nota:
+        tecnico +
+        ' no pilar técnico e ' +
+        social +
+        ' no social. O social é o lado mais raso do catálogo — e o exemplo dele está marcado como não confirmado.',
+    },
+    {
+      rotulo: 'O nome certo',
+      valor: 'Axiom',
+      nota: '"Axon" não existe. A correção está em destaque na aba porque erro de nome é exatamente o que um impostor explora.',
+    },
+  ];
+}
+
+function destaquesDaMatriz() {
+  return [
+    {
+      rotulo: 'Ferramentas de risco baixo',
+      valor: String(contarPorRisco('baixo')),
+      nota: 'Todas só de leitura: visualizam e checam, não executam ordens nem guardam chave.',
+      tom: 'ok',
+    },
+    {
+      rotulo: 'Ferramentas de risco alto',
+      valor: String(contarPorRisco('alto')),
+      nota: 'O que têm em comum: executam ordens — e algumas guardam a chave por você.',
+      tom: 'alerta',
+    },
+    {
+      rotulo: 'Papéis que uma ferramenta pode ter',
+      valor: String(modulo3.papeis.length),
+      nota: 'Visualização, execução, checagem, monitoramento social. Uma ferramenta que faz tudo é uma ferramenta em que você precisa confiar para tudo.',
+    },
+  ];
+}
+
+// Os números do cenário vêm do texto de modulo3.cenarioLaunchpads, que já os
+// carrega com a ressalva de que mudam de mês em mês.
+const DESTAQUES_DO_CENARIO = [
+  {
+    rotulo: 'Receita de launchpad capturada pelo Pump.fun',
+    valor: '~98%',
+    nota: 'Início de agosto de 2025 — um mês depois de ter sido ultrapassado pelo LetsBonk. A liderança oscila em semanas.',
+  },
+  {
+    rotulo: 'Tokens criados num só dia na Four.meme',
+    valor: '20.000+',
+    nota: 'Em 08/10/2025, na BNB Chain, com ~US$ 1,4 mi de receita em 24h contra ~US$ 885 mil do Pump.fun.',
+  },
+  {
+    rotulo: 'O que fica quando o líder muda',
+    valor: 'O conceito',
+    nota: 'Launchpad + bonding curve + graduação para uma DEX. Nomes e números mudam — e estão editáveis em src/data/modulo3.js.',
+  },
+];
+
+// O mapa dos dois pilares: cada ferramenta no pilar e nos papéis em que atua,
+// com o risco na cor do ponto. Agrupamento, não scatter, de propósito — `pilar`
+// é categórico; uma posição contínua num eixo "social ↔ técnico" seria nota
+// inventada. Uma ferramenta com vários papéis aparece em vários grupos: é
+// justamente o que se quer mostrar.
+function criarMapaDosPilares() {
+  const COR_RISCO = { baixo: 'bg-risco-baixo', medio: 'bg-risco-medio', alto: 'bg-risco-alto' };
+
+  const coluna = (pilarId, titulo, classeBorda) => {
+    const doPilar = modulo3.ferramentas.filter((f) => f.pilar === pilarId);
+    const grupos = modulo3.papeis
+      .map((papel) => ({ papel, itens: doPilar.filter((f) => f.papeis.includes(papel.id)) }))
+      .filter((grupo) => grupo.itens.length > 0);
+
+    return html`<div class="rounded-card border ${classeBorda} bg-fundo p-4">
+      <h3 class="text-base font-semibold">${titulo}</h3>
+      <p class="mt-1 text-xs text-texto-suave">
+        ${doPilar.length} ferramenta${doPilar.length === 1 ? '' : 's'}
+      </p>
+      ${grupos.map(
+        (grupo) => html`<div class="mt-4">
+          <p class="text-xs font-semibold uppercase tracking-wide text-texto-suave">
+            ${grupo.papel.nome}
+          </p>
+          <ul class="mt-2 flex flex-wrap gap-2">
+            ${grupo.itens.map(
+              (f) => html`<li
+                class="flex items-center gap-2 rounded-full border border-borda bg-superficie px-3 py-1 text-xs text-texto"
+              >
+                <span class="h-2 w-2 shrink-0 rounded-full ${COR_RISCO[f.risco]}" aria-hidden="true"></span>
+                ${f.nome}
+                <span class="sr-only">, risco ${f.risco}</span>
+              </li>`,
+            )}
+          </ul>
+        </div>`,
+      )}
+    </div>`;
+  };
+
+  return criarCard([
+    criarElemento('h2', { class: 'text-lg font-semibold' }, ['O mapa dos dois pilares']),
+    criarElemento('p', { class: 'mt-2 text-sm text-texto-suave' }, [
+      'Cada ferramenta do catálogo, no pilar e nos papéis em que atua. A cor do ponto é o ' +
+        'risco: verde baixo, âmbar médio, vermelho alto. Uma ferramenta que aparece em vários ' +
+        'papéis é uma ferramenta em que você precisa confiar para várias coisas.',
+    ]),
+    html`<div class="mt-4 grid gap-4 md:grid-cols-[3fr_2fr]">
+      ${coluna('tecnico', 'Pilar técnico', 'border-primaria/50')}
+      ${coluna('social', 'Pilar social', 'border-acento/50')}
+    </div>`,
+  ]);
+}
 
 // Parágrafo de apoio usado no topo de várias abas.
 function criarIntroducao(texto) {
@@ -71,10 +214,14 @@ function montarVisaoGeral() {
     ),
   ]);
 
+  // O mapa entra antes da seção do pilar social: ela argumenta que esse pilar é
+  // raso, e o mapa mostra isso antes de o texto dizer.
   return criarElemento('div', { class: 'space-y-6' }, [
     objetivos,
+    montarDestaques(destaquesDaVisaoGeral()),
     correcao,
     ...secoes,
+    criarMapaDosPilares(),
     pilarSocial,
   ]);
 }
@@ -84,6 +231,7 @@ function montarVisaoGeral() {
 // ---------------------------------------------------------------------------
 function montarAbaMatriz() {
   return criarElemento('div', { class: 'space-y-6' }, [
+    montarDestaques(destaquesDaMatriz()),
     criarIntroducao(
       'Filtre por pilar, chain e papel para achar a ferramenta certa. Clique numa ' +
         'ferramenta para abrir o card com "o que faz", "quando usar" e o risco.',
@@ -100,21 +248,24 @@ function montarAbaMatriz() {
 // Aba 3 — Cenário de launchpads 2025–2026
 // ---------------------------------------------------------------------------
 function montarAbaCenario() {
-  return criarElemento('div', { class: 'space-y-6' }, [
-    criarIntroducao(modulo3.cenarioLaunchpads.introducao),
+  const { cenarioLaunchpads } = modulo3;
 
-    criarElemento(
-      'ol',
-      { class: 'space-y-4' },
-      modulo3.cenarioLaunchpads.eventos.map((evento) =>
-        criarElemento('li', { class: 'rounded-card border border-borda bg-superficie p-5' }, [
-          criarElemento('p', { class: 'text-xs font-semibold uppercase tracking-wide text-acento' }, [
-            evento.data,
-          ]),
-          criarElemento('p', { class: 'mt-2 text-texto-suave' }, [evento.texto]),
-        ]),
-      ),
-    ),
+  // A lista de eventos virou linha do tempo: a mesma informação, mas agora a
+  // ORDEM e a distância entre os marcos ficam visíveis — que é a tese da aba
+  // (a liderança muda em semanas).
+  return criarElemento('div', { class: 'space-y-6' }, [
+    montarDestaques(DESTAQUES_DO_CENARIO),
+    criarIntroducao(cenarioLaunchpads.introducao),
+
+    montarLinhaDoTempo({
+      id: 'm3-cronologia-launchpads',
+      titulo: cenarioLaunchpads.titulo,
+      marcos: cenarioLaunchpads.eventos.map((evento) => ({
+        data: evento.data,
+        titulo: evento.texto,
+        tom: 'atencao',
+      })),
+    }),
 
     criarCard(
       [

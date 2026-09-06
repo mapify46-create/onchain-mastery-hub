@@ -518,6 +518,185 @@ export const modulo2 = {
   // ---------------------------------------------------------------------------
   // Mini-quiz (aba "Quiz") — 4 perguntas
   // ---------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+  // Destaques — os números grandes que abrem cada aba
+  //
+  // Este módulo não tem lista de `fontes` no topo; os casos reais trazem as
+  // suas próprias. Todo destaque abaixo sai do texto do módulo ou dos números
+  // dos casos, com a fonte que já está lá. Nada novo entra.
+  // ---------------------------------------------------------------------------
+  destaques: {
+    visaoGeral: [
+      {
+        rotulo: 'O que move o preço de uma memecoin',
+        valor: 'Olhos',
+        nota: 'Não fundamento: atenção. "O preço é feito de olhos" — quando a atenção migra, o preço vai junto.',
+      },
+      {
+        rotulo: 'Fases de um ciclo típico',
+        valor: '4',
+        nota: 'Lançamento, consolidação, expansão por catálise, degradação. Muitos tokens pulam fases — e a maioria não passa da primeira.',
+      },
+      {
+        rotulo: 'Desfecho da maioria',
+        valor: 'Zero',
+        nota: 'A tese central do módulo. Não é pessimismo: é a base de qualquer regra de tamanho e de saída.',
+        tom: 'alerta',
+      },
+    ],
+
+    vieses: [
+      {
+        rotulo: 'Vieses que fazem quase todo o estrago',
+        valor: '5',
+        nota: 'FOMO, prova social, custo afundado, excesso de confiança e efeito disposição. Cada um tem gatilho, momento e antídoto.',
+      },
+      {
+        rotulo: 'Mecanismo nº 1 de compra no topo',
+        valor: 'FOMO',
+        nota: 'Você vê o gráfico subindo sem você e sente que é a última chance. Compra correndo, sem checar nada.',
+        tom: 'alerta',
+      },
+      {
+        rotulo: 'O que o custo afundado faz com uma perda de 30%',
+        valor: '→ 100%',
+        nota: '"Já perdi tanto que agora tenho que esperar voltar." É o viés que transforma perda pequena em perda total.',
+        tom: 'alerta',
+      },
+    ],
+
+    tipos: [
+      {
+        rotulo: 'Tipos de token catalogados',
+        valor: '10',
+        nota: 'Em 5 categorias: IA, comunidade, memes culturais, narrativas virais e figuras públicas. Cada um com um motor de atenção diferente.',
+      },
+      {
+        rotulo: 'Tipos com risco alto',
+        valor: '8 de 10',
+        nota: 'Só o token de comunidade nativa e o meme cultural de longa duração ficam em risco médio. Nenhum é baixo.',
+        tom: 'alerta',
+      },
+      {
+        rotulo: 'O teste dos 30 segundos',
+        valor: '30 s',
+        nota: '"Se você não consegue usar o produto em 30 segundos, o produto é o token." Vale para toda narrativa "IA" sem produto.',
+      },
+    ],
+
+    casos: [
+      {
+        rotulo: 'Market cap da TRUMP em cerca de 24 horas',
+        valor: 'US$ 15 bi',
+        nota: 'Lançada em 17/01/2025, virou a 2ª maior memecoin naquele momento. Depois, mais de 96% abaixo do topo.',
+      },
+      {
+        rotulo: 'Queda da MELANIA até dezembro de 2025',
+        valor: '99%+',
+        nota: 'Do pico, segundo a Messari. Em 06/02/2025 já tinha caído cerca de 90% (Bloomberg).',
+        tom: 'alerta',
+      },
+      {
+        rotulo: 'Duração do pico de atenção nos três casos',
+        valor: 'Horas',
+        nota: 'Quem comprou perto do topo ficou com o prejuízo quando a atenção migrou. Pump-and-dump com nomes conhecidos.',
+        tom: 'alerta',
+      },
+    ],
+
+    fases: [
+      {
+        rotulo: 'Fases com risco alto',
+        valor: '2 de 4',
+        nota: 'Lançamento e degradação — o começo e o fim. É onde a atenção está no extremo, e onde mais se perde.',
+        tom: 'alerta',
+      },
+      {
+        rotulo: 'Tempo de vida de um lançamento',
+        valor: 'Minutos',
+        nota: 'Idade medida em minutos, punhado de holders, volume de bots e snipers. Nenhum histórico para comparar.',
+      },
+      {
+        rotulo: 'O que muda a pergunta certa',
+        valor: 'A fase',
+        nota: 'Saber em que fase você está muda o que perguntar. É modelo didático, não previsão — muitos tokens pulam fases.',
+      },
+    ],
+  },
+
+  // ---------------------------------------------------------------------------
+  // Anatomia — um post de hype, com os sinais de manipulação marcados
+  //
+  // Post esquemático; nenhum perfil ou token real foi copiado. Cada marcador liga
+  // um elemento do post ao viés que ele explora. É defensivo, na lógica do
+  // módulo: reconhecer, não produzir.
+  // ---------------------------------------------------------------------------
+  anatomias: {
+    postDeHype: {
+      titulo: 'Anatomia de um post de hype',
+      descricao: 'Os seis elementos que quase toda campanha repete — e o viés que cada um está tentando acionar em você.',
+      viewBox: [0, 0, 640, 320],
+      paineis: [
+        { id: 'autor', x: 12, y: 12, w: 400, h: 56, rotulo: '@perfil-grande · verificado', tipo: 'campo' },
+        { id: 'texto', x: 12, y: 80, w: 400, h: 110, rotulo: '"$TICKER vai 100x, ainda dá tempo, não fique de fora"', tipo: 'texto' },
+        { id: 'grafico', x: 424, y: 12, w: 204, h: 178, rotulo: 'Print do gráfico subindo', tipo: 'grafico' },
+        { id: 'metricas', x: 12, y: 202, w: 400, h: 50, rotulo: 'milhares de curtidas · reposts · "eu comprei"', tipo: 'numeros' },
+        { id: 'contrato', x: 424, y: 202, w: 204, h: 50, rotulo: 'CA: 0x… (na bio)', tipo: 'campo', alerta: true },
+        { id: 'urgencia', x: 12, y: 264, w: 616, h: 44, rotulo: '"Últimas horas antes da listagem"', tipo: 'texto', alerta: true },
+      ],
+      itens: [
+        {
+          painel: 'texto',
+          titulo: 'A promessa sem tese',
+          texto: '"Vai 100x", "não fique de fora". Nenhum evento concreto, nenhum prazo — só o preço como motivo. É o FOMO sendo fabricado, não descrito.',
+        },
+        {
+          painel: 'grafico',
+          titulo: 'O gráfico que já subiu',
+          texto: 'Print de vela verde é a isca do FOMO: mostra o que você perdeu, não o que vem. Quem posta comprou antes do print.',
+        },
+        {
+          painel: 'metricas',
+          titulo: 'Prova social comprável',
+          texto: 'Milhares de curtidas, dezenas de "eu comprei". Bots e calls pagos custam pouco. Volume de vozes não é liquidez nem contrato auditável.',
+        },
+        {
+          painel: 'autor',
+          titulo: 'O perfil grande',
+          texto: 'Muitas vezes recebe pelo post ou comprou antes. Endosso não é análise — e o Módulo 1 lembra: confirme o endereço oficial na fonte.',
+        },
+        {
+          painel: 'contrato',
+          titulo: 'O contrato na bio',
+          texto: 'Onde o impostor mora. Ticker é apelido; quem busca pelo nome pode comprar o token errado.',
+        },
+        {
+          painel: 'urgencia',
+          titulo: 'A pressa',
+          texto: '"Últimas horas" existe para impedir a espera de 10 minutos que o antídoto do FOMO pede.',
+        },
+      ],
+      nota: 'Post esquemático. Nenhum perfil ou token real foi copiado; os elementos são os que se repetem em quase toda campanha de hype.',
+    },
+  },
+
+  // ---------------------------------------------------------------------------
+  // Linha do tempo dos casos reais (aba Casos). Datas e números dos próprios
+  // casos acima, com as mesmas fontes.
+  // ---------------------------------------------------------------------------
+  linhaDoTempoCasos: {
+    titulo: 'Os três casos, na ordem em que aconteceram',
+    descricao: 'Da estreia ao esquecimento, em semanas. Repare na distância entre o pico e a queda.',
+    marcos: [
+      { data: '17/01/2025', titulo: 'OFFICIAL TRUMP é lançada', texto: 'Em cerca de 24 horas vira a 2ª maior memecoin, com pico de market cap perto de US$ 15 bilhões. Quem chegou no segundo dia comprou de quem estava saindo.' },
+      { data: '01/2025', titulo: 'MELANIA MEME é lançada' },
+      { data: '06/02/2025', titulo: 'MELANIA já caiu cerca de 90%', texto: 'Noticiado pela Bloomberg.', tom: 'alerta' },
+      { data: '14/02/2025', titulo: 'LIBRA é lançada na Argentina', texto: 'Pico de market cap de cerca de US$ 4,56 bilhões no mesmo dia. O pico de atenção durou horas.', tom: 'alerta' },
+      { data: '12/2025', titulo: 'MELANIA acumula queda de mais de 99% do pico', texto: 'Segundo a Messari. A TRUMP, mais de 96% abaixo do topo.', tom: 'alerta' },
+    ],
+    nota: 'Números registrados pelas fontes citadas em cada caso, nas datas indicadas. Fato histórico, não recomendação.',
+  },
+
   quiz: [
     {
       id: 'q1',

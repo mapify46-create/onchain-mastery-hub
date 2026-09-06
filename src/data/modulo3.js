@@ -356,18 +356,20 @@ export const modulo3 = {
       'Verificado, com uma ressalva importante: os números abaixo mudam de mês em mês. O ' +
       'que fica é o conceito — launchpad + bonding curve + graduação para uma DEX — não o ' +
       'nome de quem lidera hoje.',
+    // Em ordem cronológica — a view desenha isto como linha do tempo, e uma
+    // linha do tempo fora de ordem ensina errado.
     eventos: [
-      {
-        data: 'Início de agosto de 2025',
-        texto:
-          'O Pump.fun capturou cerca de 98% da receita de launchpad rastreada (~US$ 1,1 mi ' +
-          'de receita sobre ~US$ 542 mi de volume).',
-      },
       {
         data: '07/07/2025',
         texto:
           'O LetsBonk (Bonk.fun) ultrapassou o Pump.fun, com ~54,8–55% de market share e ' +
           '~US$ 539 mi de volume diário.',
+      },
+      {
+        data: 'Início de agosto de 2025',
+        texto:
+          'O Pump.fun capturou cerca de 98% da receita de launchpad rastreada (~US$ 1,1 mi ' +
+          'de receita sobre ~US$ 542 mi de volume).',
       },
       {
         data: 'Fim de 2025',

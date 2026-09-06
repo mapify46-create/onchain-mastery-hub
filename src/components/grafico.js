@@ -206,9 +206,11 @@ function criarReservaEmpilhada(grupos, camadas, sufixo) {
   );
 }
 
-// Duas casas decimais, com vírgula — o padrão do resto do hub.
+// Duas casas decimais, com vírgula — o padrão do resto do hub. Inteiro fica
+// inteiro: um gráfico que conta unidades ("2 tipos") não pode mostrar "2,00".
 function formatarNumero(valor) {
-  return Number(valor).toFixed(2).replace('.', ',');
+  const n = Number(valor);
+  return Number.isInteger(n) ? String(n) : n.toFixed(2).replace('.', ',');
 }
 
 /**
@@ -341,6 +343,9 @@ function eixosBase({ empilhado = false, maximo = 100, sufixo = '%' } = {}) {
       ...(empilhado ? {} : { max: maximo }),
       ticks: {
         color: corTexto,
+        // Sem casas decimais nas marcas do eixo: "0,5 tipos" não existe, e para
+        // porcentagem "0%, 1%, 2%, 3%" lê melhor que "0,5%, 1,5%...".
+        precision: 0,
         callback: (valor) => String(valor).replace('.', ',') + sufixo,
       },
       grid: { color: corBorda },

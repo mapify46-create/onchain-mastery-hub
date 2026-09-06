@@ -23,6 +23,10 @@ import {
   montarCardsDeFases,
 } from '../components/phaseFlow.js';
 import { montarQuiz } from '../components/quiz.js';
+import { montarDestaques } from '../components/destaques.js';
+import { montarAnatomia } from '../components/anatomia.js';
+import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
+import { montarGraficoEmpilhado, renderizarGrafico } from '../components/grafico.js';
 import { obterEstado, atualizar } from '../store.js';
 
 // Nome legível de uma categoria de token a partir do id.
@@ -63,7 +67,11 @@ function montarVisaoGeral() {
     ]),
   );
 
-  return criarElemento('div', { class: 'space-y-6' }, [objetivos, ...secoes]);
+  return criarElemento('div', { class: 'space-y-6' }, [
+    objetivos,
+    montarDestaques(modulo2.destaques.visaoGeral),
+    ...secoes,
+  ]);
 }
 
 // ---------------------------------------------------------------------------
@@ -125,7 +133,10 @@ function criarCardDeVies(vies) {
 }
 
 function montarVieses() {
+  const postDeHype = modulo2.anatomias?.postDeHype;
+
   return criarElemento('div', { class: 'space-y-6' }, [
+    montarDestaques(modulo2.destaques.vieses),
     criarIntroducao(
       'Cinco vieses fazem quase todo o estrago em memecoin. Cada card mostra a armadilha ' +
         'na frente; clique para virar e ver o antídoto no verso.',
@@ -135,6 +146,8 @@ function montarVieses() {
       { class: 'grid gap-4 sm:grid-cols-2 xl:grid-cols-3' },
       modulo2.vieses.map(criarCardDeVies),
     ),
+    // Depois de conhecer os vieses um a um, ver todos juntos num post de verdade.
+    postDeHype && montarAnatomia({ id: 'm2-anatomia-hype', ...postDeHype }),
   ]);
 }
 
@@ -184,6 +197,39 @@ function criarCardDeTipo(tipo) {
       ]),
     ],
   );
+}
+
+// Onde o risco se concentra: tipos por categoria, repartidos pelo nível de risco
+// do próprio catálogo. Calculado de modulo2.tiposDeToken, então acompanha
+// qualquer edição no catálogo sem precisar mexer aqui.
+function criarGraficoDeRiscoPorCategoria() {
+  const grupos = modulo2.categoriasDeToken.map((categoria) => {
+    const doTipo = modulo2.tiposDeToken.filter((tipo) => tipo.categoria === categoria.id);
+    const contar = (risco) => doTipo.filter((tipo) => tipo.risco === risco).length;
+    return {
+      rotulo: categoria.nome,
+      detalhe: doTipo.length + (doTipo.length === 1 ? ' tipo' : ' tipos'),
+      valores: { alto: contar('alto'), medio: contar('medio'), baixo: contar('baixo') },
+    };
+  });
+
+  return criarCard([
+    criarElemento('h2', { class: 'text-lg font-semibold' }, ['Onde o risco se concentra']),
+    criarElemento('div', { class: 'mt-4' }, [
+      montarGraficoEmpilhado({
+        camadas: [
+          { chave: 'alto', rotulo: 'Risco alto', cor: 'risco-alto' },
+          { chave: 'medio', rotulo: 'Risco médio', cor: 'risco-medio' },
+          { chave: 'baixo', rotulo: 'Risco baixo', cor: 'risco-baixo' },
+        ],
+        grupos,
+        sufixo: '',
+        legenda:
+          'Tipos de token por categoria, separados pelo nível de risco do catálogo. Repare ' +
+          'que nenhuma categoria tem um tipo de risco baixo — e que três delas são só vermelho.',
+      }),
+    ]),
+  ]);
 }
 
 function montarTiposDeToken() {
@@ -262,10 +308,12 @@ function montarTiposDeToken() {
   aplicarFiltro();
 
   return criarElemento('div', { class: 'space-y-6' }, [
+    montarDestaques(modulo2.destaques.tipos),
     criarIntroducao(
       'Antes de olhar preço, saiba o que você está olhando. Cada tipo de token tem um motor ' +
         'de atenção diferente — e, por isso, um risco diferente. Use os filtros por categoria.',
     ),
+    criarGraficoDeRiscoPorCategoria(),
     filtros,
     contador,
     grade,
@@ -337,7 +385,10 @@ function criarCardDeCaso(caso) {
 }
 
 function montarCasos() {
+  const cronologia = modulo2.linhaDoTempoCasos;
+
   return criarElemento('div', { class: 'space-y-6' }, [
+    montarDestaques(modulo2.destaques.casos),
     criarIntroducao(
       'Três lançamentos de figuras públicas em 2025, com números registrados por fontes ' +
         'públicas. Servem para você ver o ciclo da atenção acontecendo em escala bilionária ' +
@@ -345,6 +396,10 @@ function montarCasos() {
     ),
 
     criarElemento('div', { class: 'space-y-4' }, modulo2.casos.map(criarCardDeCaso)),
+
+    // Os três casos, um em cima do outro, viram uma cronologia só: é a distância
+    // entre pico e queda que a lista de cards não deixa ver.
+    cronologia && montarLinhaDoTempo({ id: 'm2-cronologia-casos', ...cronologia }),
 
     criarCard(
       [
@@ -373,6 +428,7 @@ function montarFases() {
   });
 
   return criarElemento('div', { class: 'space-y-6' }, [
+    montarDestaques(modulo2.destaques.fases),
     criarIntroducao(
       'O mesmo ciclo se repete em quase todo token: nasce, esfria, explode se aparecer uma ' +
         'catálise e depois se apaga. Saber em que fase você está muda a pergunta que você faz.',
@@ -471,7 +527,15 @@ export function montarModulo2() {
     abas: [
       { id: 'visao-geral', rotulo: 'Visão geral', montar: montarVisaoGeral },
       { id: 'vieses', rotulo: 'Vieses', montar: montarVieses },
-      { id: 'tipos', rotulo: 'Tipos de token', montar: montarTiposDeToken },
+      {
+        id: 'tipos',
+        rotulo: 'Tipos de token',
+        montar: montarTiposDeToken,
+        // Sem sempreRemontar, de propósito: remontar zeraria os filtros a cada
+        // visita. O Chart.js só precisa ser desenhado quando o painel está
+        // visível — e renderizarGrafico já destrói a instância anterior.
+        aoAtivar: (painel) => painel.querySelectorAll('[data-grafico]').forEach(renderizarGrafico),
+      },
       { id: 'casos', rotulo: 'Casos reais', montar: montarCasos },
       {
         id: 'fases',
