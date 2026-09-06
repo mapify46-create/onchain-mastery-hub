@@ -3,9 +3,10 @@
   "configurations": [
     {
       "name": "onchain-mastery-hub",
+      "//": "-c-1 desliga o cache HTTP. Sem isso o navegador guarda os ES modules e continua rodando a versao antiga depois de uma edicao — o que ja custou tempo de depuracao mais de uma vez. Vale so para o servidor local de desenvolvimento; em producao quem cuida disso e o service-worker.js com o CACHE_VERSAO.",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "."],
-      "autoPort": true
+      "runtimeArgs": ["http-server", ".", "-c-1", "--silent"],
+      "port": 8080
     }
   ]
 }

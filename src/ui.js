@@ -28,6 +28,149 @@ export function criarElemento(tag, atributos = {}, filhos = []) {
   return elemento;
 }
 
+// ---------------------------------------------------------------------------
+// html`` e svg`` — escrever markup como markup
+//
+// criarElemento() acima é ótimo para estrutura simples, mas aninhar cinco níveis
+// vira uma pilha de parênteses difícil de ler — e, pior, ele NÃO consegue criar
+// SVG: document.createElement('circle') faz um elemento HTML desconhecido, não um
+// círculo. SVG exige createElementNS, e é por isso que o hub não tinha uma única
+// ilustração desenhada.
+//
+// Estas duas funções resolvem os dois problemas de uma vez:
+//
+//   html`<section class="${classe}">
+//          <h2>${titulo}</h2>
+//          ${itens.map((i) => html`<li>${i}</li>`)}
+//        </section>`
+//
+// Segurança: o valor interpolado NUNCA vira markup. Ele entra como nó de texto
+// (ou como nó do DOM, se já for um). Então mesmo que um texto de src/data/ tenha
+// "<script>", ele aparece escrito na tela, não executa. É a mesma garantia que o
+// projeto já tinha ao evitar innerHTML.
+//
+// Como funciona: as partes fixas do template viram uma string HTML com marcadores
+// no lugar dos ${}, essa string é parseada num <template>, e depois percorremos a
+// árvore trocando cada marcador pelo valor correspondente. Como o parser de HTML
+// entende <svg> nativamente, os elementos SVG saem no namespace certo de graça.
+// ---------------------------------------------------------------------------
+
+// Marcador improvável de aparecer em markup de verdade.
+const MARCADOR = 'omh';
+
+/**
+ * Monta DOM a partir de um template literal. Devolve o elemento quando há uma raiz
+ * só, ou um DocumentFragment quando há várias.
+ */
+export function html(partes, ...valores) {
+  const template = document.createElement('template');
+  template.innerHTML = partes.join(MARCADOR).trim();
+
+  aplicarValores(template.content, criarLeitor(valores));
+
+  return template.content.childNodes.length === 1
+    ? template.content.firstChild
+    : template.content;
+}
+
+/**
+ * Igual ao html``, mas para PEDAÇOS de SVG (um <circle>, um <path>) que não vêm
+ * dentro de um <svg>. Sem o envelope, o parser de HTML descartaria essas tags por
+ * não serem HTML válido. Um SVG completo (começando em <svg>) pode usar html``.
+ */
+export function svg(partes, ...valores) {
+  const template = document.createElement('template');
+  template.innerHTML = '<svg>' + partes.join(MARCADOR).trim() + '</svg>';
+
+  const raiz = template.content.firstChild;
+  aplicarValores(raiz, criarLeitor(valores));
+
+  const filhos = [...raiz.childNodes];
+  if (filhos.length === 1) return filhos[0];
+
+  const fragmento = document.createDocumentFragment();
+  fragmento.append(...filhos);
+  return fragmento;
+}
+
+// Entrega os valores na ordem em que os ${} aparecem no template.
+function criarLeitor(valores) {
+  let indice = 0;
+  return () => valores[indice++];
+}
+
+// Percorre a árvore em ordem de documento (atributos antes dos filhos), que é
+// exatamente a ordem em que os ${} aparecem no texto do template.
+function aplicarValores(raiz, proximo) {
+  for (const no of [...raiz.childNodes]) {
+    if (no.nodeType === Node.ELEMENT_NODE) {
+      aplicarAtributos(no, proximo);
+      aplicarValores(no, proximo);
+    } else if (no.nodeType === Node.TEXT_NODE && no.data.includes(MARCADOR)) {
+      aplicarTexto(no, proximo);
+    }
+  }
+}
+
+function aplicarAtributos(elemento, proximo) {
+  for (const atributo of [...elemento.attributes]) {
+    if (!atributo.value.includes(MARCADOR)) continue;
+
+    const pedacos = atributo.value.split(MARCADOR);
+    const nome = atributo.name;
+
+    // O atributo inteiro é um ${} sozinho: o valor passa cru, o que permite
+    // função (vira listener), booleano e null.
+    if (pedacos.length === 2 && pedacos[0] === '' && pedacos[1] === '') {
+      const valor = proximo();
+      elemento.removeAttribute(nome);
+
+      if (nome.startsWith('on') && typeof valor === 'function') {
+        elemento.addEventListener(nome.slice(2).toLowerCase(), valor);
+      } else if (valor === true) {
+        elemento.setAttribute(nome, '');
+      } else if (valor !== false && valor !== null && valor !== undefined) {
+        elemento.setAttribute(nome, String(valor));
+      }
+      continue;
+    }
+
+    // ${} no meio de um texto (ex.: class="base ${extra}"): concatena.
+    let resultado = pedacos[0];
+    for (let i = 1; i < pedacos.length; i += 1) {
+      const valor = proximo();
+      resultado += (valor === null || valor === undefined || valor === false ? '' : String(valor)) + pedacos[i];
+    }
+    elemento.setAttribute(nome, resultado);
+  }
+}
+
+function aplicarTexto(noDeTexto, proximo) {
+  const pedacos = noDeTexto.data.split(MARCADOR);
+  const fragmento = document.createDocumentFragment();
+
+  fragmento.append(pedacos[0]);
+  for (let i = 1; i < pedacos.length; i += 1) {
+    inserirValor(fragmento, proximo());
+    fragmento.append(pedacos[i]);
+  }
+
+  noDeTexto.replaceWith(fragmento);
+}
+
+// append() com string cria nó de texto — é aqui que mora a garantia de que
+// conteúdo interpolado nunca é interpretado como HTML.
+function inserirValor(destino, valor) {
+  if (valor === null || valor === undefined || typeof valor === 'boolean') return;
+
+  if (Array.isArray(valor)) {
+    for (const item of valor) inserirValor(destino, item);
+    return;
+  }
+
+  destino.append(valor instanceof Node ? valor : String(valor));
+}
+
 // Escapa texto vindo de src/data/ antes de ir para innerHTML.
 export function escaparHtml(texto) {
   return String(texto)

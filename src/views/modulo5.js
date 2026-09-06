@@ -19,11 +19,14 @@ import {
   criarBotao,
   criarAbas,
   mostrarToast,
+  html,
 } from '../ui.js';
 import { montarChecklist } from '../components/checklist.js';
 import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { montarQuiz } from '../components/quiz.js';
 import { montarDiagrama, renderizarDiagrama } from '../components/diagrama.js';
+import { montarGraficoEmpilhado, renderizarGrafico } from '../components/grafico.js';
+import { montarCalculadora } from '../components/calculadora.js';
 import { obterEstado, atualizar } from '../store.js';
 
 // Parágrafo de apoio usado no topo de várias abas.
@@ -86,9 +89,69 @@ function criarFiguraDoDiagrama(id) {
   });
 }
 
-// Redesenha todo diagrama presente no painel — usado no aoAtivar das abas.
+// Redesenha diagramas e gráficos do painel — usado no aoAtivar das abas.
+// Os dois precisam disso pelo mesmo motivo: Mermaid e Chart.js medem o elemento
+// para desenhar, e num painel escondido todas as medidas são zero.
 function redesenharDiagramasDoPainel(painel) {
   painel.querySelectorAll('[data-diagrama]').forEach(renderizarDiagrama);
+  painel.querySelectorAll('[data-grafico]').forEach(renderizarGrafico);
+}
+
+// Cartão de número grande. Existe para a aba não ser mais uma sequência de
+// parágrafos: são os três números que contradizem a suposição comum sobre taxa.
+function criarCartaoDeDestaque(destaque) {
+  const CLASSE_POR_TOM = {
+    neutro: 'omh-destaque',
+    alerta: 'omh-destaque omh-destaque-alerta',
+    ok: 'omh-destaque omh-destaque-ok',
+  };
+
+  return html`<div class="rounded-card p-5 ${CLASSE_POR_TOM[destaque.tom ?? 'neutro']}">
+    <p class="text-xs font-semibold uppercase tracking-wide text-texto-suave">${destaque.rotulo}</p>
+    <p class="omh-numero omh-numero-grande mt-2 text-texto">${destaque.valor}</p>
+    <p class="mt-3 text-sm text-texto-suave">${destaque.nota}</p>
+  </div>`;
+}
+
+// A conta da calculadora de atrito.
+//
+// restante = (1 - custo)^n — cada ida e volta multiplica o que sobrou pelo mesmo
+// fator. É juro composto ao contrário, e é por isso que o resultado surpreende:
+// 3,2% parece pouco até ser aplicado cinquenta vezes seguidas.
+function calcularAtrito({ operacoes, custo }) {
+  const fator = 1 - custo / 100;
+  const restante = Math.pow(fator, operacoes) * 100;
+
+  const formatar = (n) => n.toFixed(1).replace('.', ',') + '%';
+
+  // Marcos fixos para mostrar o formato da curva — o destaque acima já responde
+  // pelo número exato que a pessoa escolheu.
+  const marcos = [10, 25, 50, 100].map((n) => {
+    const sobra = Math.pow(fator, n) * 100;
+    return {
+      rotulo: 'Depois de ' + n + ' operações',
+      percentual: sobra,
+      valor: formatar(sobra) + ' do capital',
+    };
+  });
+
+  return {
+    destaques: [
+      {
+        rotulo: 'Sobra do capital',
+        valor: formatar(restante),
+        nota: 'Depois de ' + operacoes + ' operações completas, com o preço parado.',
+        tom: restante < 50 ? 'alerta' : 'neutro',
+      },
+      {
+        rotulo: 'Consumido só em taxa',
+        valor: formatar(100 - restante),
+        nota: 'Isso saiu do seu bolso sem o mercado ter se mexido em nenhuma direção.',
+        tom: 'neutro',
+      },
+    ],
+    barras: marcos,
+  };
 }
 
 // Uma tabela comparativa só é montada se tiver linhas. É o que permite os campos
@@ -131,16 +194,29 @@ function montarAbaCustodia() {
 // ---------------------------------------------------------------------------
 // Aba 3 — Taxas (as cinco camadas + a matriz de cenários + diagrama)
 // ---------------------------------------------------------------------------
+// A aba segue um arco de propósito: gancho (os três números) → explicação →
+// detalhe → visualização da proporção → ferramenta para o leitor sentir o efeito
+// acumulado. Cada etapa responde uma pergunta que a anterior levanta.
 function montarAbaTaxas() {
   const matriz = modulo5.matrizDeCusto;
+  const grafico = modulo5.graficoDeCamadas;
+  const calc = modulo5.calculadoraDeAtrito;
 
   return criarElemento('div', { class: 'space-y-6' }, [
+    // 1. Gancho: os três números que contradizem o que se supõe sobre taxa.
+    html`<div class="grid gap-4 sm:grid-cols-3">
+      ${modulo5.destaquesDeTaxa.map(criarCartaoDeDestaque)}
+    </div>`,
+
+    // 2. Explicação.
     ...criarSecoesDaAba('taxas'),
     criarFiguraDoDiagrama('caminho-do-dinheiro'),
 
+    // 3. Detalhe camada por camada.
     criarIntroducao('As cinco camadas de custo de uma compra, uma a uma.'),
     temLinhas(modulo5.tabelaTaxas) && montarTabelaComparativa(modulo5.tabelaTaxas),
 
+    // 4. Proporção: o gráfico mostra o que a tabela só enumera.
     temLinhas(matriz) &&
       criarElemento('div', { class: 'space-y-4' }, [
         criarElemento('h2', { class: 'text-lg font-semibold' }, [
@@ -151,6 +227,15 @@ function montarAbaTaxas() {
             'tamanho da ordem e com o lugar onde o token está sendo negociado — estas três ' +
             'linhas são a mesma plataforma, no mesmo dia.',
         ),
+        grafico &&
+          criarCard([
+            montarGraficoEmpilhado({
+              camadas: grafico.camadas,
+              grupos: grafico.grupos,
+              sufixo: grafico.sufixo,
+              legenda: grafico.legenda,
+            }),
+          ]),
         montarTabelaComparativa(matriz),
         matriz.cotacaoAssumida &&
           criarElemento(
@@ -166,6 +251,17 @@ function montarAbaTaxas() {
             ],
           ),
       ]),
+
+    // 5. Ferramenta: sentir o custo se acumular é diferente de ler sobre ele.
+    calc &&
+      montarCalculadora({
+        id: 'm5-atrito',
+        titulo: calc.titulo,
+        descricao: calc.descricao,
+        controles: calc.controles,
+        nota: calc.nota,
+        calcular: calcularAtrito,
+      }),
   ]);
 }
 

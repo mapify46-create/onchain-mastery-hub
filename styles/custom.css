@@ -176,3 +176,167 @@ summary.list-none::-webkit-details-marker {
     transition-delay: 0ms !important;
   }
 }
+
+/* ===========================================================================
+   Sistema visual — elevação, números de destaque, controles e anatomias
+   ===========================================================================
+   Até aqui o hub tinha um estilo de cartão só, dez cores chapadas e nenhuma
+   escala tipográfica: por isso toda tela saía com a mesma cara. O que vem
+   abaixo é o vocabulário visual usado pelos componentes novos (calculadora,
+   anatomia, cartões de destaque).
+
+   Os gradientes são de propósito discretos — alfa baixo, só um tingimento do
+   fundo. Contraste do texto continua vindo dos tokens sólidos, então a leitura
+   permanece AA independentemente do gradiente. */
+
+:root {
+  /* Elevação: mesma família da superfície, um degrau acima e um abaixo. */
+  --omh-superficie-alta: #1B2330;
+  --omh-superficie-baixa: #10151E;
+
+  /* Tingimentos de acento para fundo. Nunca para texto. */
+  --omh-tint-primaria: rgba(124, 58, 237, 0.16);
+  --omh-tint-acento: rgba(34, 211, 238, 0.1);
+  --omh-tint-risco-alto: rgba(239, 68, 68, 0.12);
+  --omh-tint-risco-medio: rgba(245, 158, 11, 0.12);
+  --omh-tint-risco-baixo: rgba(34, 197, 94, 0.12);
+}
+
+/* --- Números de destaque -------------------------------------------------
+   Dado quantitativo pede numeral tabular: sem isso os dígitos têm larguras
+   diferentes e o número "pula" na tela a cada recálculo da calculadora. */
+.omh-numero {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.omh-numero-grande {
+  font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.5rem);
+  font-weight: 700;
+}
+
+/* Cartão de destaque: superfície elevada com tingimento diagonal. */
+.omh-destaque {
+  background-image: linear-gradient(135deg, var(--omh-tint-primaria), var(--omh-tint-acento));
+  background-color: var(--omh-superficie-alta);
+  border: 1px solid var(--omh-borda);
+}
+
+.omh-destaque-alerta {
+  background-image: linear-gradient(135deg, var(--omh-tint-risco-alto), transparent);
+}
+
+.omh-destaque-ok {
+  background-image: linear-gradient(135deg, var(--omh-tint-risco-baixo), transparent);
+}
+
+/* --- input[type=range] ---------------------------------------------------
+   Não existia nenhum range no projeto, e o Tailwind não estiliza
+   ::-webkit-slider-thumb sem plugin. O alvo do polegar tem 24px para atender
+   ao tamanho mínimo de alvo de toque (WCAG 2.2), mesmo o traço visual sendo
+   menor. */
+.omh-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 24px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.omh-range::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--omh-superficie-baixa);
+  border: 1px solid var(--omh-borda);
+}
+
+.omh-range::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--omh-superficie-baixa);
+  border: 1px solid var(--omh-borda);
+}
+
+.omh-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -8px;
+  border-radius: 50%;
+  background: var(--omh-primaria);
+  border: 2px solid var(--omh-texto);
+  transition: transform 120ms ease;
+}
+
+.omh-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--omh-primaria);
+  border: 2px solid var(--omh-texto);
+  transition: transform 120ms ease;
+}
+
+.omh-range:hover::-webkit-slider-thumb,
+.omh-range:active::-webkit-slider-thumb {
+  transform: scale(1.15);
+}
+
+.omh-range:hover::-moz-range-thumb,
+.omh-range:active::-moz-range-thumb {
+  transform: scale(1.15);
+}
+
+/* O :focus-visible geral desenha o contorno em volta do controle inteiro; num
+   range de largura total isso vira uma moldura enorme. Aqui o foco vai no
+   polegar, que é o que o teclado de fato move. */
+.omh-range:focus-visible {
+  outline: none;
+}
+
+.omh-range:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--omh-acento);
+  outline-offset: 2px;
+}
+
+.omh-range:focus-visible::-moz-range-thumb {
+  outline: 2px solid var(--omh-acento);
+  outline-offset: 2px;
+}
+
+/* --- Anatomias (mockup de tela com marcadores numerados) ------------------ */
+.omh-marcador {
+  cursor: pointer;
+  transition: transform 120ms ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.omh-marcador:hover,
+.omh-marcador[aria-pressed='true'] {
+  transform: scale(1.18);
+}
+
+.omh-legenda-item[data-ativo='true'] {
+  border-color: var(--omh-acento);
+  background-color: var(--omh-tint-acento);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .omh-range::-webkit-slider-thumb,
+  .omh-range::-moz-range-thumb,
+  .omh-marcador {
+    transition: none;
+  }
+
+  .omh-range:hover::-webkit-slider-thumb,
+  .omh-range:active::-webkit-slider-thumb,
+  .omh-marcador:hover,
+  .omh-marcador[aria-pressed='true'] {
+    transform: none;
+  }
+}

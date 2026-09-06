@@ -27,6 +27,12 @@ let promessaChart = null;
 // Guarda os dados de cada figura, para poder desenhar (e redesenhar) depois.
 const dadosDoGrafico = new WeakMap();
 
+// Instância do Chart.js já desenhada em cada figura. Serve para duas coisas:
+// destruir a anterior antes de desenhar de novo (o aoAtivar das abas chama
+// renderizarGrafico toda vez que a aba reaparece, e o Chart.js recusa desenhar
+// num canvas já em uso), e redimensionar quando o container muda de largura.
+const instanciaDoGrafico = new WeakMap();
+
 // Cores do tema, lidas do CSS para não duplicar a paleta em dois lugares.
 // Se o CSS não tiver carregado, cai num valor equivalente ao token.
 function corDoTema(nome, reserva) {
@@ -153,7 +159,129 @@ export function montarGraficoDeBarras({ barras = [], legenda = '' }) {
       ),
   ]);
 
-  dadosDoGrafico.set(figura, barras);
+  dadosDoGrafico.set(figura, { tipo: 'barras', barras });
+  return figura;
+}
+
+// ---------------------------------------------------------------------------
+// Barras empilhadas
+//
+// Existe para uma pergunta que a barra simples não responde: como um total se
+// REPARTE. No Módulo 5, o custo de uma operação é a soma de camadas de tamanhos
+// muito diferentes, e a lição inteira está na proporção entre elas — a fatia
+// anunciada é a pequena e estável, as outras é que variam. Uma tabela mostra os
+// números; só a barra empilhada mostra a proporção.
+// ---------------------------------------------------------------------------
+
+// Reserva em texto de um gráfico empilhado: cada grupo vira um bloco com o total
+// em destaque e as camadas discriminadas embaixo.
+function criarReservaEmpilhada(grupos, camadas, sufixo) {
+  return criarElemento(
+    'ul',
+    { class: 'space-y-4' },
+    grupos.map((grupo) =>
+      criarElemento('li', { class: 'rounded-lg border border-borda bg-fundo p-3' }, [
+        criarElemento('div', { class: 'flex items-baseline justify-between gap-3' }, [
+          criarElemento('span', { class: 'text-sm font-medium text-texto' }, [grupo.rotulo]),
+          criarElemento('span', { class: 'text-sm font-semibold text-texto' }, [grupo.detalhe]),
+        ]),
+        criarElemento(
+          'ul',
+          { class: 'mt-2 space-y-1' },
+          camadas.map((camada) =>
+            criarElemento(
+              'li',
+              { class: 'flex items-baseline justify-between gap-3 text-xs text-texto-suave' },
+              [
+                criarElemento('span', {}, [camada.rotulo]),
+                criarElemento('span', {}, [
+                  formatarNumero(grupo.valores[camada.chave]) + sufixo,
+                ]),
+              ],
+            ),
+          ),
+        ),
+      ]),
+    ),
+  );
+}
+
+// Duas casas decimais, com vírgula — o padrão do resto do hub.
+function formatarNumero(valor) {
+  return Number(valor).toFixed(2).replace('.', ',');
+}
+
+/**
+ * Monta um gráfico de barras horizontais empilhadas. Mesmo contrato do
+ * montarGraficoDeBarras: devolve o elemento na hora, e quem chama passa a figura
+ * para renderizarGrafico() quando ela estiver visível.
+ *
+ * @param {object} opcoes
+ * @param {Array}  opcoes.camadas [{ chave, rotulo, cor }] — `cor` é o nome de um
+ *                                token do tema (ex.: 'primaria', 'risco-alto').
+ * @param {Array}  opcoes.grupos  [{ rotulo, detalhe, valores: { [chave]: numero } }].
+ * @param {string} [opcoes.sufixo]  Unidade colada no número (ex.: '%').
+ * @param {string} [opcoes.legenda] Texto pequeno embaixo do gráfico.
+ */
+export function montarGraficoEmpilhado({ camadas = [], grupos = [], sufixo = '', legenda = '' }) {
+  const resumoAcessivel = grupos
+    .map(
+      (grupo) =>
+        grupo.rotulo +
+        ', total ' +
+        grupo.detalhe +
+        ': ' +
+        camadas
+          .map((c) => c.rotulo + ' ' + formatarNumero(grupo.valores[c.chave]) + sufixo)
+          .join(', '),
+    )
+    .join('. ');
+
+  const canvas = criarElemento('canvas', {
+    'data-grafico-canvas': '',
+    role: 'img',
+    'aria-label': 'Gráfico de barras empilhadas. ' + resumoAcessivel + '.',
+  });
+
+  const areaDoCanvas = criarElemento(
+    'div',
+    {
+      'data-grafico-area': '',
+      class: 'relative w-full',
+      // Empilhada precisa de mais altura por barra que a simples: cada faixa
+      // carrega várias camadas e a legenda de cores fica dentro do canvas.
+      style: 'height: ' + (grupos.length * 64 + 64) + 'px',
+    },
+    [canvas],
+  );
+
+  const reserva = criarElemento('div', { 'data-grafico-reserva': '', hidden: true }, [
+    criarReservaEmpilhada(grupos, camadas, sufixo),
+  ]);
+
+  const status = criarElemento(
+    'p',
+    {
+      'data-grafico-status': '',
+      class: 'mt-3 text-center text-xs text-texto-suave',
+      role: 'status',
+    },
+    ['Carregando o gráfico...'],
+  );
+
+  const figura = criarElemento('figure', { 'data-grafico': '' }, [
+    areaDoCanvas,
+    reserva,
+    status,
+    legenda &&
+      criarElemento(
+        'figcaption',
+        { 'data-grafico-legenda': '', class: 'mt-3 text-center text-xs text-texto-suave' },
+        [legenda],
+      ),
+  ]);
+
+  dadosDoGrafico.set(figura, { tipo: 'empilhado', camadas, grupos, sufixo });
   return figura;
 }
 
@@ -175,6 +303,135 @@ function mostrarReserva(figura, mensagem) {
   }
 }
 
+// Figuras que já têm um observador de largura, para não criar dois.
+const observadas = new WeakSet();
+
+// O "responsive: true" do Chart.js sozinho não estava encolhendo o canvas quando
+// o container ficava mais estreito — girar o celular ou redimensionar a janela
+// deixava o gráfico estourando a largura da página. Um ResizeObserver no
+// container resolve, e vale para os dois tipos de gráfico.
+function observarLargura(figura, grafico) {
+  if (observadas.has(figura) || typeof ResizeObserver !== 'function') return;
+
+  const area = figura.querySelector('[data-grafico-area]');
+  if (!area) return;
+
+  const observador = new ResizeObserver(() => {
+    // Só a instância atual: uma figura redesenhada troca de instância, e a
+    // antiga já foi destruída.
+    const atual = instanciaDoGrafico.get(figura);
+    if (atual) atual.resize();
+  });
+
+  observador.observe(area);
+  observadas.add(figura);
+}
+
+// Eixos e grade compartilhados pelos dois tipos de gráfico.
+function eixosBase({ empilhado = false, maximo = 100, sufixo = '%' } = {}) {
+  const corTexto = corDoTema('texto-suave', '#9AA7B4');
+  const corBorda = corDoTema('borda', '#1F2733');
+
+  return {
+    x: {
+      stacked: empilhado,
+      min: 0,
+      // No empilhado o total varia por grupo; deixar o Chart.js escolher o topo
+      // aproveita melhor a largura do que travar em 100%.
+      ...(empilhado ? {} : { max: maximo }),
+      ticks: {
+        color: corTexto,
+        callback: (valor) => String(valor).replace('.', ',') + sufixo,
+      },
+      grid: { color: corBorda },
+      border: { color: corBorda },
+    },
+    y: {
+      stacked: empilhado,
+      ticks: { color: corTexto },
+      grid: { display: false },
+      border: { color: corBorda },
+    },
+  };
+}
+
+// Configuração do gráfico de barras simples (uma série, percentual de 0 a 100).
+function configBarras(barras) {
+  return {
+    type: 'bar',
+    data: {
+      labels: barras.map((barra) => barra.rotulo),
+      datasets: [
+        {
+          data: barras.map((barra) => Math.round(barra.percentual)),
+          backgroundColor: corDoTema('primaria', '#7C3AED'),
+          hoverBackgroundColor: corDoTema('acento', '#22D3EE'),
+          borderRadius: 6,
+          // Barra um pouco mais fina que a faixa: dá respiro entre elas.
+          barPercentage: 0.7,
+        },
+      ],
+    },
+    options: {
+      indexAxis: 'y', // barras horizontais: os rótulos são longos
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: prefereMenosMovimento() ? false : { duration: 500 },
+      plugins: {
+        legend: { display: false }, // uma série só: legenda seria ruído
+        tooltip: {
+          callbacks: {
+            // Mostra "3 de 4 módulos" em vez de só "75"
+            label: (contexto) => barras[contexto.dataIndex].detalhe,
+          },
+        },
+      },
+      scales: eixosBase(),
+    },
+  };
+}
+
+// Configuração do gráfico empilhado: uma série por camada, todas na mesma barra.
+function configEmpilhado({ camadas, grupos, sufixo }) {
+  const corTexto = corDoTema('texto-suave', '#9AA7B4');
+
+  return {
+    type: 'bar',
+    data: {
+      labels: grupos.map((grupo) => grupo.rotulo),
+      datasets: camadas.map((camada) => ({
+        label: camada.rotulo,
+        data: grupos.map((grupo) => grupo.valores[camada.chave]),
+        backgroundColor: corDoTema(camada.cor, '#7C3AED'),
+        borderRadius: 3,
+        barPercentage: 0.62,
+      })),
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: prefereMenosMovimento() ? false : { duration: 500 },
+      plugins: {
+        // Aqui a legenda é obrigatória: sem ela as cores não significam nada.
+        legend: {
+          position: 'bottom',
+          labels: { color: corTexto, boxWidth: 12, boxHeight: 12, padding: 16 },
+        },
+        tooltip: {
+          callbacks: {
+            label: (contexto) =>
+              contexto.dataset.label + ': ' + formatarNumero(contexto.parsed.x) + sufixo,
+            // Rodapé com o total da barra — é a leitura que mais interessa.
+            footer: (itens) => 'Total: ' + grupos[itens[0].dataIndex].detalhe,
+          },
+        },
+      },
+      scales: eixosBase({ empilhado: true, sufixo }),
+    },
+  };
+}
+
 /**
  * Desenha o gráfico. Nunca lança: se o Chart.js falhar, cai na reserva em texto.
  * @returns {Promise<'grafico'|'reserva'>} qual das duas versões ficou na tela.
@@ -185,9 +442,12 @@ export async function renderizarGrafico(figura) {
   const canvas = figura.querySelector('[data-grafico-canvas]');
   const reserva = figura.querySelector('[data-grafico-reserva]');
   const status = figura.querySelector('[data-grafico-status]');
-  const barras = dadosDoGrafico.get(figura);
+  const config = dadosDoGrafico.get(figura);
 
-  if (!canvas || !barras?.length) {
+  const temDados =
+    config?.tipo === 'empilhado' ? config.grupos?.length > 0 : config?.barras?.length > 0;
+
+  if (!canvas || !temDados) {
     mostrarReserva(figura, 'Gráfico indisponível; os números estão na lista acima.');
     return 'reserva';
   }
@@ -210,54 +470,16 @@ export async function renderizarGrafico(figura) {
   if (!estaVisivel(figura)) return 'reserva';
 
   try {
-    const corTexto = corDoTema('texto-suave', '#9AA7B4');
-    const corBorda = corDoTema('borda', '#1F2733');
+    // Desenhar duas vezes no mesmo canvas faz o Chart.js recusar ("canvas is
+    // already in use") e vaza a instância antiga junto com seus listeners.
+    instanciaDoGrafico.get(figura)?.destroy();
 
-    new Chart(canvas, {
-      type: 'bar',
-      data: {
-        labels: barras.map((barra) => barra.rotulo),
-        datasets: [
-          {
-            data: barras.map((barra) => Math.round(barra.percentual)),
-            backgroundColor: corDoTema('primaria', '#7C3AED'),
-            hoverBackgroundColor: corDoTema('acento', '#22D3EE'),
-            borderRadius: 6,
-            // Barra um pouco mais fina que a faixa: dá respiro entre elas.
-            barPercentage: 0.7,
-          },
-        ],
-      },
-      options: {
-        indexAxis: 'y', // barras horizontais: os rótulos são longos
-        responsive: true,
-        maintainAspectRatio: false,
-        animation: prefereMenosMovimento() ? false : { duration: 500 },
-        plugins: {
-          legend: { display: false }, // uma série só: legenda seria ruído
-          tooltip: {
-            callbacks: {
-              // Mostra "3 de 4 módulos" em vez de só "75"
-              label: (contexto) => barras[contexto.dataIndex].detalhe,
-            },
-          },
-        },
-        scales: {
-          x: {
-            min: 0,
-            max: 100,
-            ticks: { color: corTexto, callback: (valor) => valor + '%' },
-            grid: { color: corBorda },
-            border: { color: corBorda },
-          },
-          y: {
-            ticks: { color: corTexto },
-            grid: { display: false },
-            border: { color: corBorda },
-          },
-        },
-      },
-    });
+    const grafico = new Chart(
+      canvas,
+      config.tipo === 'empilhado' ? configEmpilhado(config) : configBarras(config.barras),
+    );
+    instanciaDoGrafico.set(figura, grafico);
+    observarLargura(figura, grafico);
 
     if (reserva) reserva.hidden = true;
     if (status) status.hidden = true;

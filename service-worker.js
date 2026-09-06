@@ -11,7 +11,7 @@
 // IMPORTANTE ao editar arquivos do app: aumente o número em CACHE_VERSAO. Sem isso,
 // quem já instalou o app continua vendo a versão antiga guardada em cache.
 
-const CACHE_VERSAO = 'omh-cache-v3';
+const CACHE_VERSAO = 'omh-cache-v4';
 
 const ARQUIVOS_DO_APP = [
   './',
@@ -21,6 +21,7 @@ const ARQUIVOS_DO_APP = [
   'index.html',
   'manifest.json',
   'src/app.js',
+  'src/components/calculadora.js',
   'src/components/checklist.js',
   'src/components/comparisonTable.js',
   'src/components/diagrama.js',

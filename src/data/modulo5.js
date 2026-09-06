@@ -650,6 +650,105 @@ export const modulo5 = {
   },
 
   // ---------------------------------------------------------------------------
+  // Números de destaque da aba Taxas
+  //
+  // Três números que resumem o módulo inteiro. Ficam grandes de propósito: são a
+  // primeira coisa que alguém lê ao abrir a aba, e cada um contradiz uma
+  // suposição comum.
+  // ---------------------------------------------------------------------------
+  destaquesDeTaxa: [
+    {
+      rotulo: 'A fatia que é anunciada',
+      valor: '0,95%',
+      nota: 'A taxa da plataforma no nível de entrada. É a única que aparece no marketing.',
+      tom: 'neutro',
+    },
+    {
+      rotulo: 'O custo real de uma compra pequena',
+      valor: '3,2%',
+      nota: 'Somando as cinco camadas, numa ordem de R$100 em token na bonding curve. Mais de três vezes o número anunciado.',
+      tom: 'alerta',
+    },
+    {
+      rotulo: 'Quantas vezes você paga isso',
+      valor: '2×',
+      nota: 'Comprar é uma transação, vender é outra. O pedágio é cobrado nas duas pontas — inclusive quando a operação dá errado.',
+      tom: 'neutro',
+    },
+  ],
+
+  // ---------------------------------------------------------------------------
+  // Gráfico de barras empilhadas: como o custo se reparte em cada cenário
+  //
+  // Mesmos três cenários da matrizDeCusto, mas mostrando a PROPORÇÃO entre as
+  // camadas. A tabela dá os números; só a barra empilhada mostra que a fatia
+  // anunciada é a única que praticamente não muda de um cenário para o outro.
+  // ---------------------------------------------------------------------------
+  graficoDeCamadas: {
+    camadas: [
+      { chave: 'fixos', rotulo: 'Custos fixos (rede, prioridade, gorjeta)', cor: 'acento' },
+      { chave: 'plataforma', rotulo: 'Taxa da plataforma (a anunciada)', cor: 'primaria' },
+      { chave: 'pool', rotulo: 'Taxa da pool', cor: 'risco-medio' },
+    ],
+    grupos: [
+      {
+        rotulo: 'R$100, bonding curve',
+        detalhe: '3,21%',
+        valores: { fixos: 1.03, plataforma: 0.94, pool: 1.24 },
+      },
+      {
+        rotulo: 'R$512, bonding curve',
+        detalhe: '2,40%',
+        valores: { fixos: 0.2, plataforma: 0.95, pool: 1.25 },
+      },
+      {
+        rotulo: 'R$512, AMM madura',
+        detalhe: '1,40%',
+        valores: { fixos: 0.2, plataforma: 0.95, pool: 0.25 },
+      },
+    ],
+    sufixo: '%',
+    legenda:
+      'Cada barra é uma compra, repartida nas camadas de custo, em porcentagem da ordem. ' +
+      'Repare que a faixa roxa — a única taxa anunciada — é quase do mesmo tamanho nas três.',
+  },
+
+  // ---------------------------------------------------------------------------
+  // Calculadora de atrito (a matemática mora em views/modulo5.js)
+  // ---------------------------------------------------------------------------
+  calculadoraDeAtrito: {
+    titulo: 'Quanto o atrito come, com o mercado parado',
+    descricao:
+      'Cada operação cobra o pedágio na ida e na volta. Arraste os controles para ver o que ' +
+      'sobra do capital depois de um tanto de operações — sem o preço ter subido nem caído.',
+    controles: [
+      {
+        id: 'operacoes',
+        rotulo: 'Operações completas (comprar e vender)',
+        min: 1,
+        max: 100,
+        passo: 1,
+        valor: 20,
+        // Contagem é número inteiro; sem isto o padrão de 2 casas mostraria "20,00".
+        formatar: (n) => String(n),
+      },
+      {
+        id: 'custo',
+        rotulo: 'Custo de cada ida e volta',
+        min: 0.5,
+        max: 8,
+        passo: 0.1,
+        valor: 3.2,
+        sufixo: '%',
+      },
+    ],
+    nota:
+      'Isto não é uma previsão e não diz nada sobre ganhar ou perder no mercado — é aritmética ' +
+      'de custo, assumindo o preço parado, justamente para isolar o atrito. No mundo real o ' +
+      'preço também se move, para os dois lados, e o atrito continua acontecendo por cima disso.',
+  },
+
+  // ---------------------------------------------------------------------------
   // ETAPA B — preencher quando chegar a continuação da pesquisa do Prompt 2.
   // A view ignora estes três campos enquanto estiverem vazios, então o módulo
   // funciona sem eles; ao preencher, nada precisa mudar na view.
