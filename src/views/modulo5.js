@@ -27,6 +27,8 @@ import { montarQuiz } from '../components/quiz.js';
 import { montarDiagrama, renderizarDiagrama } from '../components/diagrama.js';
 import { montarGraficoEmpilhado, renderizarGrafico } from '../components/grafico.js';
 import { montarCalculadora } from '../components/calculadora.js';
+import { montarDestaques } from '../components/destaques.js';
+import { montarAnatomia } from '../components/anatomia.js';
 import { obterEstado, atualizar } from '../store.js';
 
 // Parágrafo de apoio usado no topo de várias abas.
@@ -97,20 +99,112 @@ function redesenharDiagramasDoPainel(painel) {
   painel.querySelectorAll('[data-grafico]').forEach(renderizarGrafico);
 }
 
-// Cartão de número grande. Existe para a aba não ser mais uma sequência de
-// parágrafos: são os três números que contradizem a suposição comum sobre taxa.
-function criarCartaoDeDestaque(destaque) {
-  const CLASSE_POR_TOM = {
-    neutro: 'omh-destaque',
-    alerta: 'omh-destaque omh-destaque-alerta',
-    ok: 'omh-destaque omh-destaque-ok',
-  };
+// Monta uma anatomia a partir de modulo5.anatomias[chave]. Devolve null se não
+// existir, para a view poder listar sem condicional.
+function criarAnatomia(chave, id) {
+  const dados = modulo5.anatomias?.[chave];
+  return dados ? montarAnatomia({ id, ...dados }) : null;
+}
 
-  return html`<div class="rounded-card p-5 ${CLASSE_POR_TOM[destaque.tom ?? 'neutro']}">
-    <p class="text-xs font-semibold uppercase tracking-wide text-texto-suave">${destaque.rotulo}</p>
-    <p class="omh-numero omh-numero-grande mt-2 text-texto">${destaque.valor}</p>
-    <p class="mt-3 text-sm text-texto-suave">${destaque.nota}</p>
-  </div>`;
+// Ilustração das camadas (aba Terminal): quatro caixas em fila, cada uma com a
+// taxa da etapa em destaque. Substitui a caixa-e-seta do Mermaid por um desenho
+// que mostra ONDE o dinheiro é retido — a informação que o fluxograma não tinha.
+function criarIlustracaoDasCamadas(camadas) {
+  const LARGURA = 128;
+  const VAO = 36;
+  const MARGEM = 10;
+  const ALTURA = 140;
+
+  const caixas = camadas.map((camada, i) => {
+    const x = MARGEM + i * (LARGURA + VAO);
+    const ehTerminal = camada.id === 'terminal';
+    return html`<svg>
+      <rect x="${x}" y="20" width="${LARGURA}" height="100" rx="12"
+        fill="var(--omh-superficie)"
+        stroke="${ehTerminal ? 'var(--omh-primaria)' : 'var(--omh-borda)'}"
+        stroke-width="${ehTerminal ? 2 : 1}" />
+      <text x="${x + LARGURA / 2}" y="44" text-anchor="middle" font-size="12"
+        font-weight="600" fill="var(--omh-texto)">${camada.rotulo}</text>
+      <text x="${x + LARGURA / 2}" y="78" text-anchor="middle" font-size="22"
+        font-weight="700" fill="${ehTerminal ? 'var(--omh-primaria)' : 'var(--omh-acento)'}"
+        class="omh-numero">${camada.taxa}</text>
+      <text x="${x + LARGURA / 2}" y="104" text-anchor="middle" font-size="10"
+        fill="var(--omh-texto-suave)">${camada.detalhe}</text>
+    </svg>`.childNodes;
+  });
+
+  const setas = camadas.slice(0, -1).map((_, i) => {
+    const x1 = MARGEM + i * (LARGURA + VAO) + LARGURA + 6;
+    const x2 = x1 + VAO - 12;
+    return html`<svg>
+      <line x1="${x1}" y1="70" x2="${x2}" y2="70" stroke="var(--omh-texto-suave)" stroke-width="2" />
+      <polygon points="${x2},70 ${x2 - 7},65 ${x2 - 7},75" fill="var(--omh-texto-suave)" />
+    </svg>`.childNodes;
+  });
+
+  const descricao = camadas.map((c) => c.rotulo + ' (' + c.taxa + ')').join(' → ');
+
+  return criarCard([
+    criarElemento('h2', { class: 'text-lg font-semibold' }, ['Onde cada camada retém a sua parte']),
+    html`<div class="mt-4 overflow-x-auto">
+      <svg
+        viewBox="0 0 ${MARGEM * 2 + camadas.length * LARGURA + (camadas.length - 1) * VAO} ${ALTURA}"
+        class="min-w-[560px] w-full"
+        role="img"
+        aria-label="Caminho da ordem: ${descricao}."
+      >
+        ${caixas.map((nos) => [...nos])}
+        ${setas.map((nos) => [...nos])}
+      </svg>
+    </div>`,
+    criarElemento('p', { class: 'mt-3 text-sm text-texto-suave' }, [
+      'A caixa roxa é a única cuja taxa aparece no marketing. As outras são cobradas do mesmo jeito.',
+    ]),
+  ]);
+}
+
+// A conta da calculadora de impacto de preço.
+//
+// Produto constante: numa pool com X de um lado e Y do outro, X·Y não muda numa
+// troca. Comprando com dx, você recebe dy = Y·dx/(X+dx), e o preço efetivo fica
+// pior que o cotado numa fração de dx/(X+dx). É a matemática por trás de "pool
+// rasa": a sua própria ordem é parte relevante da pool, então ela move o preço.
+function calcularImpacto({ ordem, pool }) {
+  const impacto = ordem / (pool + ordem);
+  const recebe = 1 - impacto;
+  const pct = (n) => (n * 100).toFixed(1).replace('.', ',') + '%';
+
+  // Mesma ordem em pools de profundidades diferentes — o "venue muda o custo",
+  // agora sentido no controle em vez de lido na tabela.
+  const profundidades = [5, 20, 50, 200].map((p) => {
+    const imp = ordem / (p + ordem);
+    return {
+      rotulo: 'Pool de ' + p + ' SOL',
+      percentual: (1 - imp) * 100,
+      valor: pct(1 - imp) + ' do cotado',
+    };
+  });
+
+  return {
+    destaques: [
+      {
+        rotulo: 'Impacto no preço',
+        valor: pct(impacto),
+        nota: 'Quanto a sua própria compra empurra o preço contra você, antes de qualquer bot.',
+        tom: impacto > 0.1 ? 'alerta' : 'neutro',
+      },
+      {
+        rotulo: 'Você recebe',
+        valor: pct(recebe),
+        nota: 'Do que receberia se o preço cotado se mantivesse. O resto ficou na curva da pool.',
+      },
+    ],
+    barras: profundidades,
+    aviso:
+      impacto > 0.15
+        ? 'Numa pool assim, a sua ordem É o mercado. Qualquer slippage folgado aqui vira convite a um ataque de sandwich.'
+        : null,
+  };
 }
 
 // A conta da calculadora de atrito.
@@ -175,8 +269,11 @@ function montarAbaTerminal() {
 
   return criarElemento('div', { class: 'space-y-6' }, [
     objetivos,
+    montarDestaques(modulo5.destaques.terminal),
     ...criarSecoesDaAba('terminal'),
-    criarFiguraDoDiagrama('camadas-carteira-dex'),
+    // A ilustração em SVG substitui o fluxograma Mermaid desta aba: mostra a
+    // taxa retida em cada etapa, que a caixa-e-seta não tinha como mostrar.
+    criarIlustracaoDasCamadas(modulo5.ilustracaoCamadas),
     criarIntroducao(
       'Compare as três camadas lado a lado. Clique em "Ver mais" para o detalhe de cada uma.',
     ),
@@ -188,7 +285,11 @@ function montarAbaTerminal() {
 // Aba 2 — Custódia
 // ---------------------------------------------------------------------------
 function montarAbaCustodia() {
-  return criarElemento('div', { class: 'space-y-6' }, [...criarSecoesDaAba('custodia')]);
+  return criarElemento('div', { class: 'space-y-6' }, [
+    montarDestaques(modulo5.destaques.custodia),
+    ...criarSecoesDaAba('custodia'),
+    criarAnatomia('custodia', 'm5-anatomia-custodia'),
+  ]);
 }
 
 // ---------------------------------------------------------------------------
@@ -204,9 +305,7 @@ function montarAbaTaxas() {
 
   return criarElemento('div', { class: 'space-y-6' }, [
     // 1. Gancho: os três números que contradizem o que se supõe sobre taxa.
-    html`<div class="grid gap-4 sm:grid-cols-3">
-      ${modulo5.destaquesDeTaxa.map(criarCartaoDeDestaque)}
-    </div>`,
+    montarDestaques(modulo5.destaques.taxas),
 
     // 2. Explicação.
     ...criarSecoesDaAba('taxas'),
@@ -269,7 +368,10 @@ function montarAbaTaxas() {
 // Aba 4 — Configurações (tipos de ordem, slippage/prioridade/MEV, ler a tela)
 // ---------------------------------------------------------------------------
 function montarAbaConfiguracoes() {
+  const calc = modulo5.calculadoraDeImpacto;
+
   return criarElemento('div', { class: 'space-y-6' }, [
+    montarDestaques(modulo5.destaques.configuracoes),
     ...criarSecoesDaAba('configuracoes'),
 
     // Etapa B: preenchido quando a continuação da pesquisa chegar.
@@ -279,7 +381,21 @@ function montarAbaConfiguracoes() {
         montarTabelaComparativa(modulo5.tabelaOrdens),
       ]),
 
+    // "Como ler a tela" era prosa pura; agora é um desenho com os painéis marcados.
+    criarAnatomia('telaDoTerminal', 'm5-anatomia-terminal'),
+
     criarFiguraDoDiagrama('slippage-mal-configurado'),
+
+    // Depois de ver o slippage dar errado no diagrama, sentir o impacto no controle.
+    calc &&
+      montarCalculadora({
+        id: 'm5-impacto',
+        titulo: calc.titulo,
+        descricao: calc.descricao,
+        controles: calc.controles,
+        nota: calc.nota,
+        calcular: calcularImpacto,
+      }),
   ]);
 }
 
@@ -312,7 +428,9 @@ function montarLinhaDoErro(erro) {
 
 function montarAbaErros() {
   return criarElemento('div', { class: 'space-y-6' }, [
+    montarDestaques(modulo5.destaques.erros),
     ...criarSecoesDaAba('erros'),
+    criarAnatomia('tokenImpostor', 'm5-anatomia-impostor'),
 
     // Etapa B.
     modulo5.errosComuns.length > 0 &&
@@ -325,6 +443,7 @@ function montarAbaErros() {
 // ---------------------------------------------------------------------------
 function montarAbaProcesso() {
   return criarElemento('div', { class: 'space-y-6' }, [
+    montarDestaques(modulo5.destaques.processo),
     ...criarSecoesDaAba('processo'),
     criarFiguraDoDiagrama('fluxo-de-decisao'),
 

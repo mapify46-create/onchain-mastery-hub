@@ -650,32 +650,306 @@ export const modulo5 = {
   },
 
   // ---------------------------------------------------------------------------
-  // Números de destaque da aba Taxas
+  // Destaques — os números grandes que abrem cada aba
   //
-  // Três números que resumem o módulo inteiro. Ficam grandes de propósito: são a
-  // primeira coisa que alguém lê ao abrir a aba, e cada um contradiz uma
-  // suposição comum.
+  // São a primeira coisa que alguém lê ao abrir a aba, e cada um contradiz uma
+  // suposição comum. REGRA: todo número aqui já está com fonte em `fontes`; onde
+  // não há número pesquisado, o destaque é uma afirmação concreta, nunca uma
+  // estatística inventada.
   // ---------------------------------------------------------------------------
-  destaquesDeTaxa: [
-    {
-      rotulo: 'A fatia que é anunciada',
-      valor: '0,95%',
-      nota: 'A taxa da plataforma no nível de entrada. É a única que aparece no marketing.',
-      tom: 'neutro',
+  destaques: {
+    terminal: [
+      {
+        rotulo: 'Camadas entre você e a pool',
+        valor: '3',
+        nota: 'Carteira → terminal → agregador → pool. Cada camada que você acrescenta é uma taxa a mais.',
+      },
+      {
+        rotulo: 'O que o agregador cobra',
+        valor: '0%',
+        nota: 'No modo manual do Jupiter, sem taxa de protocolo no swap básico. Você paga a DEX por baixo e a rede.',
+        tom: 'ok',
+      },
+      {
+        rotulo: 'A camada mais cara',
+        valor: '0,95%',
+        nota: 'O terminal. Não compra preço melhor — compra a interface, a descoberta e os botões.',
+        tom: 'alerta',
+      },
+    ],
+
+    custodia: [
+      {
+        rotulo: 'Depósito na empresa, no trading spot',
+        valor: '0',
+        nota: 'Não-custodial: o dinheiro fica na sua carteira, na blockchain. Confirmado na FAQ oficial.',
+        tom: 'ok',
+      },
+      {
+        rotulo: 'Chaves privadas expostas no incidente de fev/2026',
+        valor: '0',
+        nota: 'Foi abuso de ferramenta interna de suporte — visibilidade, não controle. Nenhum fundo reportado como roubado.',
+      },
+      {
+        rotulo: 'O risco que sobra',
+        valor: 'App fora do ar',
+        nota: 'Em 28–29/08/2025 usuários ficaram horas sem conseguir vender. Quem tinha a semente exportada vendeu por outro caminho.',
+        tom: 'alerta',
+      },
+    ],
+
+    taxas: [
+      {
+        rotulo: 'A fatia que é anunciada',
+        valor: '0,95%',
+        nota: 'A taxa da plataforma no nível de entrada. É a única que aparece no marketing.',
+        tom: 'neutro',
+      },
+      {
+        rotulo: 'O custo real de uma compra pequena',
+        valor: '3,2%',
+        nota: 'Somando as cinco camadas, numa ordem de R$100 em token na bonding curve. Mais de três vezes o número anunciado.',
+        tom: 'alerta',
+      },
+      {
+        rotulo: 'Quantas vezes você paga isso',
+        valor: '2×',
+        nota: 'Comprar é uma transação, vender é outra. O pedágio é cobrado nas duas pontas — inclusive quando a operação dá errado.',
+        tom: 'neutro',
+      },
+    ],
+
+    configuracoes: [
+      {
+        rotulo: 'Modos de proteção de MEV',
+        valor: '3',
+        nota: 'Off, Reduced e Secure. A própria documentação recomenda o Secure sempre que possível.',
+      },
+      {
+        rotulo: 'Priority fee e gorjeta, no padrão',
+        valor: '0,001 SOL',
+        nota: 'Cada um. Somam 0,002 SOL por transação — cerca de 1% numa ordem de R$100.',
+      },
+      {
+        rotulo: 'Ordem limite dispara com o app fechado?',
+        valor: 'Não verificado',
+        nota: 'A documentação oficial não diz se a ordem fica on-chain ou depende do servidor. Teste com valor mínimo antes de confiar.',
+        tom: 'alerta',
+      },
+    ],
+
+    erros: [
+      {
+        rotulo: 'Duração de um slot na Solana',
+        valor: '350 ms',
+        nota: 'Desde 21/08/2026. Um bot reage em dezenas de milissegundos, com transação pré-assinada.',
+      },
+      {
+        rotulo: 'Você, do "vi" ao "confirmado"',
+        valor: '30–60 s',
+        nota: 'Quando você vê um token novo já subindo, os bots já entraram. O preço que sobra é o que eles recusaram.',
+        tom: 'alerta',
+      },
+      {
+        rotulo: 'Tokens que podem ter o mesmo ticker',
+        valor: 'Ilimitado',
+        nota: 'Nome e ticker são apelido; endereço do contrato é identidade. Busque sempre pelo endereço.',
+        tom: 'alerta',
+      },
+    ],
+
+    processo: [
+      {
+        rotulo: 'Saídas em "não opero" no fluxo',
+        valor: '2',
+        nota: 'Checagem reprovada, ou tese que não fica clara. Passar na maioria das vezes é o comportamento esperado.',
+        tom: 'ok',
+      },
+      {
+        rotulo: 'Quando nasce a obrigação de registrar',
+        valor: '1ª operação',
+        nota: 'Não quando aparece lucro. Data, valor em reais e custo de aquisição de cada compra e venda.',
+      },
+      {
+        rotulo: 'Exportação de histórico pelo terminal',
+        valor: 'Não verificado',
+        nota: 'Nenhuma página oficial sobre isso. O histórico on-chain sempre pode ser exportado do explorador.',
+        tom: 'alerta',
+      },
+    ],
+  },
+
+  // ---------------------------------------------------------------------------
+  // Anatomias — mockups desenhados com marcadores numerados
+  //
+  // Ilustrações esquemáticas, não capturas de plataforma nenhuma: captura seria
+  // republicação de material de terceiro, pareceria endosso, e nasceria vencida.
+  // Coordenadas no viewBox; a legenda é o conteúdo, o desenho é enriquecimento.
+  // ---------------------------------------------------------------------------
+  anatomias: {
+    telaDoTerminal: {
+      titulo: 'Anatomia da tela de um terminal',
+      descricao:
+        'O que cada painel mostra, e o que cada um NÃO prova. Clique num item da legenda para ' +
+        'localizar no desenho.',
+      viewBox: [0, 0, 640, 400],
+      paineis: [
+        { id: 'grafico', x: 12, y: 12, w: 400, h: 220, rotulo: 'Gráfico de preço', tipo: 'grafico' },
+        { id: 'numeros', x: 424, y: 12, w: 204, h: 100, rotulo: 'Market cap · Volume · Liquidez', tipo: 'numeros' },
+        { id: 'holders', x: 424, y: 124, w: 204, h: 108, rotulo: 'Holders', tipo: 'lista' },
+        { id: 'transacoes', x: 12, y: 244, w: 400, h: 144, rotulo: 'Transações recentes', tipo: 'lista' },
+        { id: 'quantia', x: 424, y: 244, w: 204, h: 66, rotulo: 'Quantia', tipo: 'campo' },
+        { id: 'comprar', x: 424, y: 322, w: 204, h: 66, rotulo: 'Comprar', tipo: 'botao', alerta: true },
+      ],
+      itens: [
+        {
+          painel: 'grafico',
+          titulo: 'Gráfico de preço',
+          texto: 'Mostra o passado. A vela que já subiu é exatamente a que você não deveria perseguir — isso é erro de disciplina, não de análise.',
+        },
+        {
+          painel: 'numeros',
+          titulo: 'Market cap, volume e liquidez',
+          texto: 'O que importa para a SUA ordem é a liquidez: pool rasa significa que a sua própria compra move o preço. Conecta direto com o slippage.',
+        },
+        {
+          painel: 'holders',
+          titulo: 'Distribuição de holders',
+          texto: 'Poucas carteiras com percentual alto significam risco de despejo. É a checagem de concentração do Módulo 3.',
+        },
+        {
+          painel: 'transacoes',
+          titulo: 'Feed de transações',
+          texto: 'Quatro ou mais compras no mesmo bloco podem ser bundle — demanda coordenada fingindo ser orgânica. A própria documentação admite falsos positivos.',
+        },
+        {
+          painel: 'quantia',
+          titulo: 'Campo de quantia',
+          texto: 'Confira o valor antes de clicar. O botão de compra rápida executa o preset sem tela de revisão — e o preset pode ser o da operação anterior.',
+        },
+        {
+          painel: 'comprar',
+          titulo: 'O botão',
+          texto: 'Executa com o slippage, a prioridade e a proteção de MEV que estiverem configurados. Se algum estiver errado, é aqui que o erro vira prejuízo.',
+        },
+      ],
+      nota: 'Ler os painéis reduz surpresa, não garante segurança. Nenhum indicador, sinal social ou rastreamento de carteira é prova de que um token é seguro.',
     },
-    {
-      rotulo: 'O custo real de uma compra pequena',
-      valor: '3,2%',
-      nota: 'Somando as cinco camadas, numa ordem de R$100 em token na bonding curve. Mais de três vezes o número anunciado.',
-      tom: 'alerta',
+
+    custodia: {
+      titulo: 'Custodial × não-custodial, lado a lado',
+      descricao: 'Dois sinais na tela dizem qual dos dois modelos você está usando.',
+      viewBox: [0, 0, 640, 300],
+      paineis: [
+        { id: 'saldo-c', x: 12, y: 12, w: 300, h: 80, rotulo: 'CUSTODIAL — saldo na plataforma', tipo: 'numeros' },
+        { id: 'deposito', x: 12, y: 104, w: 300, h: 70, rotulo: 'Depositar', tipo: 'botao', alerta: true },
+        { id: 'chaves-c', x: 12, y: 186, w: 300, h: 100, rotulo: 'Chaves: nos servidores da empresa', tipo: 'texto', alerta: true },
+        { id: 'saldo-n', x: 328, y: 12, w: 300, h: 80, rotulo: 'NÃO-CUSTODIAL — saldo na sua carteira', tipo: 'numeros' },
+        { id: 'semente', x: 328, y: 104, w: 300, h: 70, rotulo: 'Frase de recuperação (exportável)', tipo: 'campo' },
+        { id: 'chaves-n', x: 328, y: 186, w: 300, h: 100, rotulo: 'Chaves: com você', tipo: 'texto' },
+      ],
+      itens: [
+        {
+          painel: 'deposito',
+          titulo: 'Botão de depósito',
+          texto: 'Sinal de custódia: o dinheiro sai da sua carteira e vira um saldo dentro da empresa. Quem tem as chaves tem o dinheiro.',
+        },
+        {
+          painel: 'chaves-c',
+          titulo: 'Chaves nos servidores',
+          texto: 'Se a plataforma cair, for hackeada ou agir de má-fé, o saldo vai junto. É o risco de contraparte do Módulo 1.',
+        },
+        {
+          painel: 'semente',
+          titulo: 'Frase de recuperação exportável',
+          texto: 'Sinal de autocustódia: a plataforma te entrega a semente. Uma empresa que te entrega a semente não está guardando o seu dinheiro.',
+        },
+        {
+          painel: 'chaves-n',
+          titulo: 'Chaves com você',
+          texto: 'Se o app sair do ar, você importa a semente em outra carteira e continua com acesso. A responsabilidade de segurança também é 100% sua.',
+        },
+      ],
+      nota: 'O Axiom, exemplo deste módulo, está no modelo da direita segundo a documentação oficial. Vários bots de Telegram estão no da esquerda. Confira antes de depositar qualquer coisa.',
     },
-    {
-      rotulo: 'Quantas vezes você paga isso',
-      valor: '2×',
-      nota: 'Comprar é uma transação, vender é outra. O pedágio é cobrado nas duas pontas — inclusive quando a operação dá errado.',
-      tom: 'neutro',
+
+    tokenImpostor: {
+      titulo: 'Anatomia do token impostor',
+      descricao: 'Dois resultados para a mesma busca. Um deles foi criado para pegar quem busca pelo nome.',
+      viewBox: [0, 0, 640, 260],
+      paineis: [
+        { id: 'busca', x: 12, y: 12, w: 616, h: 56, rotulo: 'Buscar: nome do token', tipo: 'campo' },
+        { id: 'legitimo', x: 12, y: 84, w: 616, h: 76, rotulo: 'Resultado 1 — liquidez alta, milhares de holders', tipo: 'numeros' },
+        { id: 'impostor', x: 12, y: 172, w: 616, h: 76, rotulo: 'Resultado 2 — mesmo nome, mesmo ticker, liquidez baixa', tipo: 'numeros', alerta: true },
+      ],
+      itens: [
+        {
+          painel: 'busca',
+          titulo: 'Buscar pelo nome',
+          texto: 'Este é o erro. Nome e ticker podem ser duplicados à vontade — qualquer um cria um token chamado igual ao que está em alta, em minutos.',
+        },
+        {
+          painel: 'legitimo',
+          titulo: 'O token que você queria',
+          texto: 'Liquidez, holders e histórico coerentes. Mas nada disso é o que o identifica.',
+        },
+        {
+          painel: 'impostor',
+          titulo: 'O impostor',
+          texto: 'Mesmo nome, mesmo ticker, contrato diferente. Quem compra aqui comprou um token que ninguém mais vai comprar.',
+        },
+      ],
+      nota: 'A única identidade de um token é o endereço do contrato. Copie o endereço de uma fonte confiável e busque por ele — nunca pelo nome.',
     },
+  },
+
+  // ---------------------------------------------------------------------------
+  // Ilustração das camadas (aba Terminal): o caminho da ordem com a taxa de cada
+  // etapa anotada. Desenhada em SVG na view; aqui ficam só os rótulos.
+  // ---------------------------------------------------------------------------
+  ilustracaoCamadas: [
+    { id: 'carteira', rotulo: 'Carteira', taxa: 'assina', detalhe: 'Você autoriza cada transação' },
+    { id: 'terminal', rotulo: 'Terminal', taxa: '0,95%', detalhe: 'Interface e ferramentas' },
+    { id: 'agregador', rotulo: 'Agregador', taxa: '0%', detalhe: 'Busca a melhor rota' },
+    { id: 'pool', rotulo: 'Pool da DEX', taxa: '0,25–1,25%', detalhe: 'Onde a troca acontece' },
   ],
+
+  // ---------------------------------------------------------------------------
+  // Calculadora de impacto de preço (a matemática mora em views/modulo5.js)
+  // ---------------------------------------------------------------------------
+  calculadoraDeImpacto: {
+    titulo: 'Quanto a sua própria ordem empurra o preço',
+    descricao:
+      '"Pool rasa" é adjetivo até virar número. Arraste o tamanho da ordem e a liquidez da pool ' +
+      'e veja quanto do preço cotado você de fato recebe.',
+    controles: [
+      {
+        id: 'ordem',
+        rotulo: 'Tamanho da sua ordem',
+        min: 0.1,
+        max: 20,
+        passo: 0.1,
+        valor: 1,
+        sufixo: ' SOL',
+        formatar: (n) => n.toFixed(1).replace('.', ','),
+      },
+      {
+        id: 'pool',
+        rotulo: 'Liquidez da pool (lado do SOL)',
+        min: 1,
+        max: 500,
+        passo: 1,
+        valor: 50,
+        sufixo: ' SOL',
+        formatar: (n) => String(n),
+      },
+    ],
+    nota:
+      'Modelo de produto constante (x · y = k), a fórmula básica das AMMs. Pools reais anunciam ' +
+      'liquidez somando os dois lados, então uma pool "de 100 SOL" tem cerca de 50 SOL deste ' +
+      'lado. O impacto aqui é só o da sua ordem: não inclui a taxa da pool nem o slippage que ' +
+      'você configurou — os dois vêm por cima.',
+  },
 
   // ---------------------------------------------------------------------------
   // Gráfico de barras empilhadas: como o custo se reparte em cada cenário
