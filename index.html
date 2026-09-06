@@ -6,6 +6,18 @@
   <meta name="description" content="Central de estudos local e interativa para aprender trading on-chain e memecoins do zero. Conteúdo educacional, sem aconselhamento financeiro.">
   <title>onchain-mastery-hub</title>
 
+  <!-- PWA: permite "Instalar app" / "Adicionar à tela inicial" e abrir offline
+       depois da primeira visita (ver manifest.json e service-worker.js). Um único
+       SVG cobre favicon, ícone do manifest e apple-touch-icon — sem precisar gerar
+       PNG em vários tamanhos. -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/icon.svg">
+  <link rel="apple-touch-icon" href="assets/icons/icon.svg">
+  <meta name="theme-color" content="#0B0F17">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="OMH Hub">
+
   <!-- Fontes: Inter (texto) e JetBrains Mono (endereços/código) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -12,6 +12,20 @@ function iniciarTema() {
   document.documentElement.style.colorScheme = 'dark';
 }
 
+// Registra o service worker (ver service-worker.js na raiz) — é o que permite
+// "Instalar app" e abrir offline depois da primeira visita. Roda em segundo
+// plano, sem atrasar o boot: se falhar (navegador antigo, arquivo ausente no
+// servidor), o app funciona normalmente do mesmo jeito, só sem o recurso extra.
+function iniciarServiceWorker() {
+  if (!('serviceWorker' in navigator)) return;
+
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('./service-worker.js')
+      .catch((erro) => console.warn('[app] service worker não registrou:', erro));
+  });
+}
+
 // Progresso geral mostrado na barra fixa do topo: média dos módulos que já têm
 // conteúdo (ver MODULOS_DISPONIVEIS em router.js). Cada módulo vale metade por
 // responder o quiz e metade por ser marcado como concluído.
@@ -21,6 +35,7 @@ function calcularProgressoGeral(estado) {
 
 function iniciar() {
   iniciarTema();
+  iniciarServiceWorker();
 
   const estado = iniciarStore();
   atualizarProgressoGlobal(calcularProgressoGeral(estado));

@@ -17,7 +17,20 @@ Conteúdo educacional. NÃO é aconselhamento financeiro, jurídico ou tributár
 - index.html — página única
 - src/ — app.js, router.js, store.js, ui.js, components/, views/, data/
 - styles/custom.css — ajustes de estilo
+- manifest.json + service-worker.js + assets/icons/icon.svg — PWA (ver seção abaixo)
 - Conteúdo editável em src/data/*.js
+
+## Instalar como app (PWA)
+O hub pode ser instalado como um aplicativo — no computador (Chrome/Edge mostram um
+ícone de instalar na barra de endereço) ou no celular ("Adicionar à tela inicial").
+Depois da primeira visita, ele continua abrindo mesmo sem internet, graças ao
+`service-worker.js`. Isso só funciona quando o site está servido por HTTPS (ou em
+`localhost`) — abrir o `index.html` direto do disco não ativa esse recurso.
+
+Se você editar algum arquivo do app (não conteúdo de `src/data/`, mas lógica em
+`src/app.js`, `src/router.js` etc.), aumente o número em `CACHE_VERSAO` no topo de
+`service-worker.js` — sem isso, quem já instalou continua vendo a versão antiga
+guardada em cache.
 
 ## Como adicionar/editar conteúdo
 Edite os arquivos em src/data/ (modulo1..4, cenarios, glossario). Não é preciso mexer na lógica.

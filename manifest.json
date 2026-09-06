@@ -1,0 +1,19 @@
+{
+  "name": "Onchain Mastery Hub",
+  "short_name": "OMH Hub",
+  "description": "Hub de estudos on-chain e memecoins, do zero, 100% no navegador.",
+  "start_url": "./index.html#/inicio",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0B0F17",
+  "theme_color": "#0B0F17",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "assets/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

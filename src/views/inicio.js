@@ -8,6 +8,7 @@ import { criarElemento, criarTitulo, criarCard, criarBarraProgresso } from '../u
 import { obterEstado, progressoDoModulo, progressoDoGlossario, progressoGeral } from '../store.js';
 import { glossario } from '../data/glossario.js';
 import { cenarios } from '../data/cenarios.js';
+import { montarGraficoDeBarras, renderizarGrafico } from '../components/grafico.js';
 
 // Passos de estudo sugeridos. Texto curto de propósito: a tela inicial orienta,
 // o conteúdo mora nos módulos.
@@ -17,14 +18,6 @@ const COMO_ESTUDAR = [
   'Responda o mini-quiz no fim de cada módulo antes de marcar o módulo como concluído.',
   'Feche com o simulador do Módulo 4: são 12 cenários que treinam a decisão, não o palpite.',
 ];
-
-// Um número grande com legenda embaixo (a linha de estatísticas do topo).
-function criarNumero(valor, rotulo) {
-  return criarElemento('div', { class: 'rounded-card border border-borda bg-fundo p-4' }, [
-    criarElemento('p', { class: 'text-2xl font-semibold' }, [valor]),
-    criarElemento('p', { class: 'mt-1 text-sm text-texto-suave' }, [rotulo]),
-  ]);
-}
 
 // Card-link de uma rota. O card inteiro é o link: alvo grande no celular e
 // uma única parada de Tab por módulo no teclado.
@@ -105,6 +98,44 @@ export function montarInicio(rotas = []) {
       'e o progresso fica salvo aqui mesmo.',
   });
 
+  // Cada barra já traz o número exato no rótulo (o tooltip não funciona bem no
+  // celular) — o gráfico só acrescenta a comparação visual entre as quatro.
+  const graficoDeProgresso = montarGraficoDeBarras({
+    barras: [
+      {
+        rotulo: 'Módulos ' + concluidos + '/' + modulosDisponiveis.length,
+        percentual: modulosDisponiveis.length ? (concluidos / modulosDisponiveis.length) * 100 : 0,
+        detalhe: concluidos + ' de ' + modulosDisponiveis.length + ' módulos concluídos',
+      },
+      {
+        rotulo: 'Quizzes ' + quizzesFeitos + '/' + modulosDisponiveis.length,
+        percentual: modulosDisponiveis.length
+          ? (quizzesFeitos / modulosDisponiveis.length) * 100
+          : 0,
+        detalhe: quizzesFeitos + ' de ' + modulosDisponiveis.length + ' mini-quizzes respondidos',
+      },
+      {
+        rotulo: 'Glossário ' + termosEstudados + '/' + glossario.length,
+        percentual: glossario.length ? (termosEstudados / glossario.length) * 100 : 0,
+        detalhe: termosEstudados + ' de ' + glossario.length + ' termos estudados',
+      },
+      {
+        rotulo: 'Simulador ' + cenariosFeitos + '/' + cenarios.length,
+        percentual: cenarios.length ? (cenariosFeitos / cenarios.length) * 100 : 0,
+        detalhe: cenariosFeitos + ' de ' + cenarios.length + ' cenários respondidos',
+      },
+    ],
+    legenda: 'Passe o mouse (ou toque) numa barra para ver o número por extenso.',
+  });
+
+  // Chamada sem await de propósito: renderizarGrafico() só toca o DOM depois do
+  // primeiro "await" interno (o import do Chart.js pelo CDN). Como router.js encaixa
+  // esta view em <main> de forma síncrona logo depois de montarInicio() retornar, o
+  // nó já está na página quando esse await resolve. Usar requestAnimationFrame aqui
+  // pareceria mais "correto", mas navegadores pausam rAF em abas fora de foco — e o
+  // gráfico ficaria preso em "Carregando..." para sempre nesse caso.
+  renderizarGrafico(graficoDeProgresso);
+
   const progresso = criarCard([
     criarElemento('div', { class: 'flex flex-wrap items-baseline justify-between gap-2' }, [
       criarElemento('h2', { class: 'text-lg font-semibold' }, ['Seu progresso']),
@@ -117,21 +148,7 @@ export function montarInicio(rotas = []) {
       criarBarraProgresso(percentualGeral, 'Progresso geral do curso'),
     ]),
 
-    criarElemento('div', { class: 'mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4' }, [
-      criarNumero(
-        concluidos + '/' + modulosDisponiveis.length,
-        'módulos marcados como concluídos',
-      ),
-      criarNumero(quizzesFeitos + '/' + modulosDisponiveis.length, 'mini-quizzes respondidos'),
-      criarNumero(termosEstudados + '/' + glossario.length, 'termos do glossário estudados'),
-      criarNumero(cenariosFeitos + '/' + cenarios.length, 'cenários do simulador respondidos'),
-    ]),
-
-    modulos.length > modulosDisponiveis.length &&
-      criarElemento('p', { class: 'mt-4 text-sm text-texto-suave' }, [
-        'O Módulo 1 ainda não foi escrito, então ele não entra nessa conta. Quando o ' +
-          'conteúdo dele existir, a barra passa a considerar os quatro módulos.',
-      ]),
+    criarElemento('div', { class: 'mt-5' }, [graficoDeProgresso]),
   ]);
 
   const comoEstudar = criarCard([
