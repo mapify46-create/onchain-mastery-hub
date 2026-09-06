@@ -11,7 +11,7 @@
 // IMPORTANTE ao editar arquivos do app: aumente o número em CACHE_VERSAO. Sem isso,
 // quem já instalou o app continua vendo a versão antiga guardada em cache.
 
-const CACHE_VERSAO = 'omh-cache-v7';
+const CACHE_VERSAO = 'omh-cache-v8';
 
 const ARQUIVOS_DO_APP = [
   './',
@@ -63,11 +63,31 @@ self.addEventListener('install', (evento) => {
   evento.waitUntil(
     caches
       .open(CACHE_VERSAO)
-      .then((cache) => cache.addAll(ARQUIVOS_DO_APP))
-      .catch((erro) => {
-        // Um único arquivo faltando derrubaria a instalação inteira; melhor logar
-        // e seguir do que deixar o app inteiro sem funcionar offline.
-        console.warn('[service-worker] não consegui guardar tudo em cache:', erro);
+      .then((cache) =>
+        // NÃO usar cache.addAll(): ele faz fetch() normal, que respeita o cache
+        // HTTP comum (o GitHub Pages serve com Cache-Control: max-age=600 via
+        // Fastly). Se alguém abrir o site nos ~10 minutos depois de um deploy,
+        // o addAll podia gravar o arquivo VELHO dentro do cache da versão NOVA
+        // — e aí ele ficava preso ali até o próximo bump de CACHE_VERSAO. Isso
+        // já aconteceu na prática (06/09/2026). `cache: 'reload'` força buscar
+        // da rede, ignorando esse cache HTTP intermediário.
+        Promise.allSettled(
+          ARQUIVOS_DO_APP.map((url) =>
+            fetch(url, { cache: 'reload' }).then((resposta) => cache.put(url, resposta)),
+          ),
+        ),
+      )
+      .then((resultados) => {
+        // Um único arquivo faltando não devia derrubar a instalação inteira;
+        // melhor logar os que falharam e seguir do que deixar o app inteiro
+        // sem funcionar offline.
+        const falhas = resultados.filter((r) => r.status === 'rejected');
+        if (falhas.length) {
+          console.warn(
+            '[service-worker] não consegui guardar em cache:',
+            falhas.map((f) => f.reason),
+          );
+        }
       }),
   );
 });
