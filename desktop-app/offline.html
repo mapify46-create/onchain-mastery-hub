@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Sem conexão</title>
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0B0F17;
+    color: #E6EDF3;
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  .cartao {
+    max-width: 26rem;
+    padding: 2rem;
+    text-align: center;
+  }
+  h1 { font-size: 1.25rem; margin-bottom: .75rem; }
+  p { color: #9AA7B4; line-height: 1.5; margin-bottom: 1.5rem; }
+  button {
+    background: #7C3AED;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: .6rem 1.5rem;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button:hover { background: #6D28D9; }
+</style>
+</head>
+<body>
+  <div class="cartao">
+    <h1>Não foi possível carregar o hub</h1>
+    <p>
+      Isso costuma acontecer na primeira vez que o app abre sem internet — depois
+      da primeira visita com conexão, ele passa a abrir offline normalmente.
+      Confira sua conexão e tente de novo.
+    </p>
+    <button onclick="location.href='https://mapify46-create.github.io/onchain-mastery-hub/'">
+      Tentar de novo
+    </button>
+  </div>
+</body>
+</html>

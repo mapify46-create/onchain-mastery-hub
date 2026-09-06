@@ -2,9 +2,15 @@
 .vscode/
 .idea/
 
-# Node (caso algum dia surja; hoje o projeto nao usa npm)
+# Node — o hub em si nao usa (index.html + ES modules puro). O desktop-app/
+# usa Electron de verdade; o package-lock.json dele fica versionado de
+# proposito, pra fixar as versoes exatas usadas no build.
 node_modules/
-package-lock.json
+
+# Build do app desktop (gerado por `npm run build` dentro de desktop-app/)
+desktop-app/dist/
+desktop-app/dist-build/
+desktop-app/dist-old/
 
 # Sistema operacional
 Thumbs.db

@@ -1,0 +1,35 @@
+{
+  "name": "omh-hub-desktop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "App desktop do onchain-mastery-hub — janela Electron que carrega o site publicado no GitHub Pages.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "com.onchainmasteryhub.desktop",
+    "productName": "OMH Hub",
+    "directories": {
+      "output": "dist-build"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^32.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "allowScripts": {
+    "electron@32.3.3": true
+  }
+}
