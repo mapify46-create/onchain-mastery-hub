@@ -1441,6 +1441,354 @@ export const modulo1 = {
   // ---------------------------------------------------------------------------
   // Itens não verificados (aba "Quiz", seção de rodapé)
   // ---------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+  // Destaques — os números grandes que abrem cada aba
+  //
+  // REGRA: todo número aqui já está no texto deste módulo, com fonte em
+  // `fontes`. Onde não há número pesquisado, o destaque é uma afirmação concreta.
+  // ---------------------------------------------------------------------------
+  destaques: {
+    fundamentos: [
+      {
+        rotulo: 'Transações que falharam',
+        valor: 'Ficam gravadas',
+        nota: 'Para sempre — e cobram a taxa de gas do mesmo jeito. O explorador mostra "Failed" em vermelho, mas o custo já foi pago.',
+        tom: 'alerta',
+      },
+      {
+        rotulo: 'Partes do preço do gas',
+        valor: '2',
+        nota: 'Desde a EIP-1559 (agosto de 2021): uma taxa-base, que é queimada, e uma gorjeta ao validador. É por isso que o preço varia com a demanda.',
+      },
+      {
+        rotulo: 'Quem reverte uma transação confirmada',
+        valor: 'Ninguém',
+        nota: 'Nem corretora, nem suporte, nem você. Cada bloco novo em cima do seu aumenta o custo de reescrever a história.',
+      },
+    ],
+
+    carteiras: [
+      {
+        rotulo: 'Quem guarda a chave na corretora',
+        valor: 'A empresa',
+        nota: '"Not your keys, not your coins." Quando FTX, Celsius e Mt. Gox quebraram, quem deixou fundos lá perdeu o acesso.',
+        tom: 'alerta',
+      },
+      {
+        rotulo: 'Corretoras que anunciaram saída do varejo em 2026',
+        valor: '5',
+        nota: 'Bitso, Coinext, NovaDAX, Digitra e Bitnuvem, citando o custo de adequação à regulação. Nome de corretora é exemplo de categoria, nunca recomendação.',
+      },
+      {
+        rotulo: 'Custo de uma hot wallet',
+        valor: 'Grátis',
+        nota: 'Você guarda as chaves, num aparelho conectado. O preço é o risco de malware e phishing — e a responsabilidade inteira.',
+      },
+    ],
+
+    seed: [
+      {
+        rotulo: 'Palavras que SÃO a carteira',
+        valor: '12 ou 24',
+        nota: 'Quem tem a frase tem todo o dinheiro, para sempre, em qualquer dispositivo — sem precisar da sua senha nem do seu aparelho.',
+      },
+      {
+        rotulo: 'Cópias digitais seguras da frase',
+        valor: '0',
+        nota: 'Foto, print, nuvem, e-mail, WhatsApp, bloco de notas — qualquer cópia digital é um ponto de vazamento. Papel ou metal, offline.',
+        tom: 'alerta',
+      },
+      {
+        rotulo: 'Quem recupera uma frase perdida',
+        valor: 'Ninguém',
+        nota: 'Não existe "esqueci minha senha". Perdeu as palavras e o aparelho quebrou, o dinheiro ficou inacessível para sempre.',
+        tom: 'alerta',
+      },
+    ],
+
+    golpes: [
+      {
+        rotulo: 'Roubado por drainers em 2024',
+        valor: 'US$ 494 mi',
+        nota: 'Mais de 332 mil carteiras, alta de 67% sobre 2023. Em 2025 caiu 83%, para cerca de US$ 83,85 milhões.',
+      },
+      {
+        rotulo: 'Fatia de quem espalha a isca',
+        valor: '80%',
+        nota: 'A divisão mais comum entre afiliado e operador do kit. O drainer é um negócio com franquia — e o afiliado é quem te aborda.',
+        tom: 'alerta',
+      },
+      {
+        rotulo: 'O que o drainer NÃO precisa',
+        valor: 'Sua seed',
+        nota: 'Ele rouba com a sua assinatura, não com a sua frase. Você aprova, sem ler, uma permissão que entrega os tokens.',
+        tom: 'alerta',
+      },
+    ],
+
+    defesa: [
+      {
+        rotulo: 'Roubos por assinatura via Permit (2024)',
+        valor: '56,7%',
+        nota: 'Segundo a Scam Sniffer. Aparece na carteira como um inofensivo "assinar mensagem", sem taxa — e é isso que engana.',
+        tom: 'alerta',
+      },
+      {
+        rotulo: 'Vetor novo desde maio de 2025',
+        valor: 'EIP-7702',
+        nota: 'Ativado na atualização Pectra do Ethereum. Casos reais: US$ 146,5 mil em 24/05/2025 e mais de US$ 1,54 mi em 24/08/2025.',
+        tom: 'alerta',
+      },
+      {
+        rotulo: 'O que revogar NÃO faz',
+        valor: 'Desfazer',
+        nota: 'Revogar interrompe gastos futuros. Não recupera o que já saiu, não conserta uma seed vazada, não remove malware instalado.',
+      },
+    ],
+
+    brasil: [
+      {
+        rotulo: 'Resoluções do BC que regulam as PSAVs',
+        valor: '519 · 520 · 521',
+        nota: 'Publicadas em 10/11/2025, em vigor desde 02/02/2026. Corretoras já em operação têm até 30/10/2026 para pedir autorização.',
+      },
+      {
+        rotulo: 'Prejuízo global do pig butchering (2020–2024)',
+        valor: 'US$ 75 bi+',
+        nota: 'Estimativa citada pela CVM. No Brasil, uma só vítima transferiu R$ 37 milhões em seis meses (Operação Criptoabate, 13/08/2026).',
+        tom: 'alerta',
+      },
+      {
+        rotulo: 'Quem informa suas operações à Receita desde julho de 2026',
+        valor: 'As plataformas',
+        nota: 'DeCripto, pela IN RFB 2.291/2025. A obrigação de declarar já existia; agora a Receita recebe os dados também pelo outro lado.',
+      },
+    ],
+  },
+
+  // ---------------------------------------------------------------------------
+  // Anatomias — mockups desenhados com marcadores numerados
+  //
+  // Ilustrações esquemáticas, não capturas de nenhum site ou carteira: captura
+  // seria republicação de material de terceiro, pareceria endosso, e nasceria
+  // vencida. A legenda é o conteúdo; o desenho é enriquecimento.
+  // ---------------------------------------------------------------------------
+  anatomias: {
+    transacao: {
+      titulo: 'Anatomia de uma transação no explorador',
+      descricao:
+        'Os campos que importam para um iniciante, e o erro clássico de leitura. Clique num ' +
+        'item da legenda para localizar no desenho.',
+      viewBox: [0, 0, 640, 360],
+      paineis: [
+        { id: 'hash', x: 12, y: 12, w: 616, h: 52, rotulo: 'Transaction Hash — 0x… (66 caracteres)', tipo: 'campo' },
+        { id: 'status', x: 12, y: 76, w: 200, h: 70, rotulo: 'Status', tipo: 'numeros', alerta: true },
+        { id: 'bloco', x: 224, y: 76, w: 200, h: 70, rotulo: 'Block + confirmações', tipo: 'numeros' },
+        { id: 'timestamp', x: 436, y: 76, w: 192, h: 70, rotulo: 'Timestamp (UTC)', tipo: 'numeros' },
+        { id: 'de', x: 12, y: 158, w: 300, h: 60, rotulo: 'From — quem enviou', tipo: 'campo' },
+        { id: 'para', x: 328, y: 158, w: 300, h: 60, rotulo: 'To — quem recebeu (ou "Contract")', tipo: 'campo' },
+        { id: 'value', x: 12, y: 230, w: 300, h: 56, rotulo: 'Value — moeda nativa', tipo: 'numeros', alerta: true },
+        { id: 'fee', x: 328, y: 230, w: 300, h: 56, rotulo: 'Transaction Fee / Gas', tipo: 'numeros' },
+        { id: 'tokens', x: 12, y: 298, w: 616, h: 50, rotulo: 'Aba Token Transfers — o que de fato se moveu', tipo: 'lista' },
+      ],
+      itens: [
+        {
+          painel: 'hash',
+          titulo: 'O identificador único',
+          texto: 'Cole no explorador para achar a transação. Começa com "0x" em redes EVM; na Solana o equivalente é a Signature.',
+        },
+        {
+          painel: 'status',
+          titulo: 'Success ou Failed',
+          texto: 'Verde deu certo, vermelho falhou — e atenção: mesmo falhando, você pagou a taxa de gas.',
+        },
+        {
+          painel: 'para',
+          titulo: '"To" pode ser um contrato',
+          texto: 'Em transferência de token, o "To" costuma ser o contrato do token, não uma pessoa. A palavra "Contract" no lugar de um endereço comum denuncia isso.',
+        },
+        {
+          painel: 'value',
+          titulo: 'Value 0 não significa "nada aconteceu"',
+          texto: 'O erro clássico de iniciante. Numa transferência de token, o Value (moeda nativa) pode ser zero enquanto tokens se moveram — olhe a aba de baixo.',
+        },
+        {
+          painel: 'tokens',
+          titulo: 'Onde o movimento de verdade aparece',
+          texto: 'A aba Token Transfers (ou Balance Changes, no Solscan) mostra o que de fato saiu e entrou de cada carteira.',
+        },
+        {
+          painel: 'bloco',
+          titulo: 'Confirmações',
+          texto: 'Quantos blocos já foram empilhados em cima do seu. Cada um aumenta o custo de reescrever a história — é o que torna a transação imutável.',
+        },
+      ],
+      nota: 'Layout genérico inspirado em Etherscan e Solscan; muda o nome dos campos, não a lógica. Confira sempre a URL do explorador (etherscan.io, solscan.io) — existem sites falsos.',
+    },
+
+    telaDeBackup: {
+      titulo: 'Anatomia da tela de backup da carteira',
+      descricao: 'O momento em que a carteira te entrega a frase — e os quatro lugares onde se erra.',
+      viewBox: [0, 0, 640, 320],
+      paineis: [
+        { id: 'palavras', x: 12, y: 12, w: 400, h: 200, rotulo: 'Sua frase de recuperação — 12 palavras, numeradas', tipo: 'lista' },
+        { id: 'copiar', x: 424, y: 12, w: 204, h: 60, rotulo: 'Copiar', tipo: 'botao', alerta: true },
+        { id: 'confirmo', x: 424, y: 84, w: 204, h: 60, rotulo: 'Anotei em local seguro', tipo: 'campo' },
+        { id: 'continuar', x: 424, y: 156, w: 204, h: 56, rotulo: 'Continuar', tipo: 'botao' },
+        { id: 'conferencia', x: 12, y: 224, w: 616, h: 84, rotulo: 'Conferência: qual é a palavra 9? E a 3?', tipo: 'campo' },
+      ],
+      itens: [
+        {
+          painel: 'palavras',
+          titulo: 'Anote no papel, na ordem, numeradas',
+          texto: 'É a carteira inteira. Escreva 1, 2, 3… à mão. NUNCA fotografe, faça print nem salve em nuvem ou bloco de notas.',
+        },
+        {
+          painel: 'copiar',
+          titulo: 'O botão que você não usa',
+          texto: 'Copiar coloca a frase na área de transferência — exatamente o que um clipper malware vigia. Papel, não clipboard.',
+        },
+        {
+          painel: 'conferencia',
+          titulo: 'A conferência não é burocracia',
+          texto: 'O app pede palavras em posições específicas para provar que você anotou certo. Pular isso "para anotar depois" é como se perde tudo.',
+        },
+        {
+          painel: 'confirmo',
+          titulo: 'A caixa que mente por você',
+          texto: 'Marcar "anotei" sem ter anotado desliga o único aviso que a carteira vai te dar. Ela acredita em você.',
+        },
+        {
+          painel: 'continuar',
+          titulo: 'Só depois',
+          texto: 'De ter a frase no papel, guardada offline. Se você perder as palavras e o aparelho quebrar, ninguém no mundo recupera.',
+        },
+      ],
+      nota: 'Tela esquemática do fluxo de criação; cada app desenha diferente, mas os quatro elementos — as palavras, o copiar, a confirmação e a conferência — aparecem em quase todos.',
+    },
+
+    sitePhishing: {
+      titulo: 'Anatomia de um site de phishing',
+      descricao: 'Os seis elementos que se repetem em quase toda página feita para drenar carteira.',
+      viewBox: [0, 0, 640, 340],
+      paineis: [
+        { id: 'url', x: 12, y: 12, w: 616, h: 48, rotulo: 'Barra de endereço: nome-parecido-com-o-oficial.com', tipo: 'campo', alerta: true },
+        { id: 'banner', x: 12, y: 72, w: 616, h: 70, rotulo: 'AIRDROP EXCLUSIVO — resgate seus tokens', tipo: 'texto' },
+        { id: 'contador', x: 12, y: 154, w: 300, h: 70, rotulo: 'Termina em 09:41', tipo: 'numeros', alerta: true },
+        { id: 'selos', x: 328, y: 154, w: 300, h: 70, rotulo: 'Auditado · Verificado · Parceiro oficial', tipo: 'lista' },
+        { id: 'conectar', x: 12, y: 236, w: 616, h: 60, rotulo: 'Conectar carteira para resgatar', tipo: 'botao', alerta: true },
+        { id: 'rodape', x: 12, y: 304, w: 616, h: 28, rotulo: 'Suporte 24h no Telegram', tipo: 'texto' },
+      ],
+      itens: [
+        {
+          painel: 'url',
+          titulo: 'O domínio quase certo',
+          texto: 'Um caractere trocado, um hífen a mais, um subdomínio. Confira letra por letra — e desconfie de qualquer link que chegou por mensagem ou anúncio patrocinado.',
+        },
+        {
+          painel: 'banner',
+          titulo: 'A isca',
+          texto: 'Airdrop, resgate, compensação, "seus tokens presos". A promessa existe para você clicar sem pensar.',
+        },
+        {
+          painel: 'contador',
+          titulo: 'A urgência',
+          texto: 'A contagem regressiva existe para impedir a pergunta "espera, isso faz sentido?". Pressa é ferramenta do golpe, não coincidência.',
+        },
+        {
+          painel: 'selos',
+          titulo: 'Selos que qualquer um desenha',
+          texto: '"Auditado", "verificado", "parceiro oficial". Um selo numa página é só uma imagem. Verificação de verdade se confere na fonte, não no site.',
+        },
+        {
+          painel: 'conectar',
+          titulo: 'O botão que drena',
+          texto: 'Conectar é inofensivo; o que vem depois não é — uma assinatura ou aprovação que entrega os tokens. É aqui que o roteiro do drainer começa.',
+        },
+        {
+          painel: 'rodape',
+          titulo: 'O "suporte" que pede a seed',
+          texto: 'Suporte legítimo nunca pede a frase-semente, nunca aparece sozinho no seu Telegram, nunca cobra taxa para "recuperar" fundos.',
+        },
+      ],
+      nota: 'Página esquemática. Nenhum site real foi copiado; os elementos são os que se repetem em quase todo phishing de carteira.',
+    },
+
+    telaDeAssinatura: {
+      titulo: 'Anatomia do pop-up de assinatura',
+      descricao: 'Os campos que se leem ANTES de aprovar — e o que cada um denuncia.',
+      viewBox: [0, 0, 640, 340],
+      paineis: [
+        { id: 'origem', x: 12, y: 12, w: 616, h: 52, rotulo: 'Solicitação de: nome-do-site.com', tipo: 'campo' },
+        { id: 'tipo', x: 12, y: 76, w: 300, h: 60, rotulo: 'Tipo: Aprovação de gasto (approve)', tipo: 'numeros' },
+        { id: 'token', x: 328, y: 76, w: 300, h: 60, rotulo: 'Token: XYZ', tipo: 'numeros' },
+        { id: 'valor', x: 12, y: 148, w: 300, h: 70, rotulo: 'Valor aprovado: ILIMITADO', tipo: 'numeros', alerta: true },
+        { id: 'spender', x: 328, y: 148, w: 300, h: 70, rotulo: 'Spender (quem poderá gastar): 0x…', tipo: 'campo', alerta: true },
+        { id: 'rejeitar', x: 12, y: 232, w: 300, h: 56, rotulo: 'Rejeitar', tipo: 'botao' },
+        { id: 'aprovar', x: 328, y: 232, w: 300, h: 56, rotulo: 'Aprovar', tipo: 'botao', alerta: true },
+        { id: 'gas', x: 12, y: 300, w: 616, h: 32, rotulo: 'Taxa estimada de rede', tipo: 'texto' },
+      ],
+      itens: [
+        {
+          painel: 'origem',
+          titulo: 'Quem está pedindo',
+          texto: 'Confere com o site que VOCÊ abriu? Se a solicitação veio de uma aba que você não reconhece, já é resposta.',
+        },
+        {
+          painel: 'tipo',
+          titulo: 'O que está sendo pedido',
+          texto: 'Approve (permissão de gasto), setApprovalForAll (todos os NFTs de uma coleção) ou "assinar mensagem" (Permit — sem taxa, e por isso mais enganoso).',
+        },
+        {
+          painel: 'valor',
+          titulo: 'O campo que os drainers usam',
+          texto: 'ILIMITADO deixa o contrato livre para esvaziar aquele token quando quiser, sem nova interação sua. Sites legítimos funcionam com o valor exato — edite.',
+        },
+        {
+          painel: 'spender',
+          titulo: 'Quem vai poder mover',
+          texto: 'É o contrato que recebe a permissão. Se você não reconhece o endereço, não existe motivo para aprovar.',
+        },
+        {
+          painel: 'aprovar',
+          titulo: 'Só depois dos três acima',
+          texto: 'Aprovar sem ler é o roteiro inteiro do drainer resumido num clique.',
+        },
+        {
+          painel: 'rejeitar',
+          titulo: 'Custa zero',
+          texto: 'Rejeitar não custa gas nem quebra nada. Na dúvida, é sempre a resposta certa — o site legítimo pede de novo.',
+        },
+      ],
+      nota: 'Pop-up esquemático. As carteiras mudam o layout, mas os campos — origem, tipo, valor, spender — são os mesmos, e é neles que se lê o golpe antes de assinar.',
+    },
+  },
+
+  // ---------------------------------------------------------------------------
+  // Linha do tempo (aba Brasil): marcos regulatórios, golpes emblemáticos e os
+  // prazos que ainda estão correndo. Todas as datas vêm do texto deste módulo.
+  // ---------------------------------------------------------------------------
+  linhaDoTempoRegulacao: {
+    titulo: 'Cripto no Brasil: a cronologia que importa',
+    descricao: 'Marcos regulatórios, golpes emblemáticos e os prazos ainda em aberto — tudo com data.',
+    marcos: [
+      { data: '13/08/2019', titulo: 'CVM proíbe a Atlas Quantum de ofertar o "robô"', texto: 'Deliberação CVM nº 826. O caso emblemático do falso robô de arbitragem no Brasil.', tom: 'alerta' },
+      { data: '2023', titulo: 'Lei 14.754/2023, a "Lei das Offshores"', texto: 'Regras próprias para operações no exterior.' },
+      { data: '21/05/2024', titulo: 'CVM multa a Atlas Quantum em mais de R$ 55,8 milhões', texto: 'Por operação fraudulenta e embaraço à fiscalização.', tom: 'alerta' },
+      { data: '20/05/2025', titulo: 'Binance Pay integrado ao Pix via Z.ro Bank', texto: 'Se o arranjo continua idêntico em setembro de 2026: não verificado.', tom: 'atencao' },
+      { data: '06/10/2025', titulo: 'CVM alerta para o pig butchering', texto: 'Prejuízo global estimado em mais de US$ 75 bilhões entre 2020 e 2024.', tom: 'alerta' },
+      { data: '10/11/2025', titulo: 'BC publica as Resoluções 519, 520 e 521', texto: 'O marco regulatório das PSAVs — corretoras, intermediárias e custodiantes.' },
+      { data: '02/02/2026', titulo: 'As Resoluções entram em vigor', texto: 'Prevenção à lavagem, governança, segurança e segregação de recursos de clientes passam a valer para cripto.' },
+      { data: '30/04/2026', titulo: 'Resolução BCB 561', texto: 'Veda stablecoins como liquidação em câmbio eletrônico (eFX). Não proíbe comprar, vender nem guardar.', tom: 'atencao' },
+      { data: '07/2026', titulo: 'DeCripto passa a valer', texto: 'IN RFB 2.291/2025: as plataformas informam operações à Receita, no padrão CARF da OCDE.' },
+      { data: '13/08/2026', titulo: 'Operação Criptoabate', texto: 'Polícia Civil do RS. Uma vítima transferiu R$ 37 milhões em seis meses a um falso "professor" de WhatsApp.', tom: 'alerta' },
+      { data: '03/09/2026', titulo: 'Coinext anuncia o fim das atividades', texto: 'Uma das cinco corretoras que deixaram o varejo em 2026 citando o custo da adequação.', tom: 'atencao' },
+      { data: '01/10/2026', titulo: 'Resolução 561 entra em vigor', tom: 'atencao' },
+      { data: '30/10/2026', titulo: 'Prazo para as PSAVs pedirem autorização', texto: 'Quem já operava precisa ter pedido até aqui. Qualquer lista de "quem opera" envelhece rápido — confira no BC.', tom: 'atencao' },
+    ],
+    nota: 'Datas conforme o texto deste módulo e suas fontes. Regulação muda: confira no Banco Central e na CVM antes de tomar qualquer decisão baseada nela.',
+  },
+
   naoVerificado: [
     {
       titulo: 'Continuidade do arranjo Binance + Z.ro Bank (Pix) em setembro de 2026',

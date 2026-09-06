@@ -20,6 +20,9 @@ import { montarChecklist } from '../components/checklist.js';
 import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { montarQuiz } from '../components/quiz.js';
 import { montarDiagrama, renderizarDiagrama } from '../components/diagrama.js';
+import { montarDestaques } from '../components/destaques.js';
+import { montarAnatomia } from '../components/anatomia.js';
+import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
 import { obterEstado, atualizar } from '../store.js';
 
 // Parágrafo de apoio usado no topo de várias abas.
@@ -105,6 +108,23 @@ function redesenharDiagramasDoPainel(painel) {
   painel.querySelectorAll('[data-diagrama]').forEach(renderizarDiagrama);
 }
 
+// Monta uma anatomia a partir de modulo1.anatomias[chave]. Devolve null se não
+// existir, para a view poder listar sem condicional.
+function criarAnatomia(chave, id) {
+  const dados = modulo1.anatomias?.[chave];
+  return dados ? montarAnatomia({ id, ...dados }) : null;
+}
+
+// Seções de uma aba, com um elemento extra intercalado logo depois de uma seção
+// específica — para a anatomia entrar exatamente onde o texto a introduz.
+function criarSecoesComIntervalo(idDaAba, depoisDe, extra) {
+  const secoes = modulo1.secoes.filter((secao) => secao.aba === idDaAba);
+  const indice = secoes.findIndex((secao) => secao.id === depoisDe);
+  const cards = secoes.map(criarCardDaSecao);
+  if (indice === -1) return [...cards, extra];
+  return [...cards.slice(0, indice + 1), extra, ...cards.slice(indice + 1)];
+}
+
 // ---------------------------------------------------------------------------
 // Aba 1 — Fundamentos
 // ---------------------------------------------------------------------------
@@ -118,9 +138,15 @@ function montarAbaFundamentos() {
     ),
   ]);
 
+  // A anatomia da transação entra logo depois da seção que ensina a ler uma.
   return criarElemento('div', { class: 'space-y-6' }, [
     objetivos,
-    ...criarSecoesDaAba('fundamentos'),
+    montarDestaques(modulo1.destaques.fundamentos),
+    ...criarSecoesComIntervalo(
+      'fundamentos',
+      'explorador-de-blocos',
+      criarAnatomia('transacao', 'm1-anatomia-transacao'),
+    ),
   ]);
 }
 
@@ -131,6 +157,7 @@ function montarAbaCarteiras() {
   const figura = criarFiguraDoDiagrama('quem-guarda-chave');
 
   return criarElemento('div', { class: 'space-y-6' }, [
+    montarDestaques(modulo1.destaques.carteiras),
     ...criarSecoesDaAba('carteiras'),
     criarIntroducao(
       'Compare as três categorias lado a lado. Clique em "Ver mais" para o detalhe de cada uma.',
@@ -145,7 +172,11 @@ function montarAbaCarteiras() {
 // ---------------------------------------------------------------------------
 function montarAbaSeed() {
   return criarElemento('div', { class: 'space-y-6' }, [
+    montarDestaques(modulo1.destaques.seed),
     ...criarSecoesDaAba('seed'),
+    // A tela de backup vem antes do checklist: primeiro ver onde se erra, depois
+    // marcar o que já fez certo.
+    criarAnatomia('telaDeBackup', 'm1-anatomia-backup'),
     criarCard([
       criarElemento('h2', { class: 'text-lg font-semibold' }, ['Checklist de segurança']),
       criarElemento('p', { class: 'mt-2 mb-4 text-sm text-texto-suave' }, [
@@ -195,7 +226,10 @@ function montarAbaGolpes() {
   const figura = criarFiguraDoDiagrama('roteiro-drainer');
 
   return criarElemento('div', { class: 'space-y-6' }, [
+    montarDestaques(modulo1.destaques.golpes),
     ...criarSecoesDaAba('golpes'),
+    // O site de phishing é a "isca" do roteiro que vem logo abaixo.
+    criarAnatomia('sitePhishing', 'm1-anatomia-phishing'),
     figura,
     criarElemento(
       'ol',
@@ -213,7 +247,11 @@ function montarAbaDefesa() {
   // texto que ela ilustra — a lista solta em modulo1.secoes não tem essa noção
   // de posição, por isso a ordem é montada aqui.
   return criarElemento('div', { class: 'space-y-6' }, [
+    montarDestaques(modulo1.destaques.defesa),
     criarSecaoPorId('revogar-aprovacoes'),
+    // O pop-up de assinatura é onde a aprovação ilimitada — que a revogação
+    // depois desfaz — é concedida. Ler antes de assinar evita ter que revogar.
+    criarAnatomia('telaDeAssinatura', 'm1-anatomia-assinatura'),
     criarSecaoPorId('duas-camadas-permit2-e-eip7702'),
     criarFiguraDoDiagrama('permit2-camadas'),
     criarSecaoPorId('tutorial-revogar-clique-a-clique'),
@@ -228,8 +266,12 @@ function montarAbaDefesa() {
 function montarAbaBrasil() {
   const figura = criarFiguraDoDiagrama('cripto-para-reais');
 
+  const cronologia = modulo1.linhaDoTempoRegulacao;
+
   return criarElemento('div', { class: 'space-y-6' }, [
+    montarDestaques(modulo1.destaques.brasil),
     ...criarSecoesDaAba('brasil'),
+    cronologia && montarLinhaDoTempo({ id: 'm1-cronologia', ...cronologia }),
     figura,
   ]);
 }
