@@ -1,0 +1,178 @@
+/* Ajustes que não vêm do Tailwind. Os hex estão repetidos aqui de propósito:
+   se o Play CDN do Tailwind não carregar, a página continua legível em dark mode. */
+
+:root {
+  color-scheme: dark;
+
+  --omh-fundo: #0B0F17;
+  --omh-superficie: #141A24;
+  --omh-borda: #1F2733;
+  --omh-texto: #E6EDF3;
+  --omh-texto-suave: #9AA7B4;
+  --omh-primaria: #7C3AED;
+  --omh-acento: #22D3EE;
+  --omh-risco-baixo: #22C55E;
+  --omh-risco-medio: #F59E0B;
+  --omh-risco-alto: #EF4444;
+  /* Vermelho de texto com contraste AA sobre os fundos escuros (ver index.html). */
+  --omh-risco-alto-texto: #F87171;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--omh-fundo);
+  color: var(--omh-texto);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Foco sempre visível: requisito de acessibilidade do projeto.
+   O contorno ciano tem 9,7:1 contra a superfície dos cards, e o outline-offset
+   garante que ele apareça mesmo em cima de botões com fundo preenchido. */
+:focus-visible {
+  outline: 2px solid var(--omh-acento);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Alvos que só recebem foco por código (o <main> a cada troca de rota, o resumo do
+   quiz, o cenário do simulador): mover o foco para lá é para o leitor de tela e para
+   o teclado continuarem no lugar certo — mostrar um contorno ali só confunde. */
+#conteudo:focus,
+[data-quiz-resumo]:focus,
+[data-simulador-cenario]:focus,
+[data-simulador-feedback]:focus,
+[data-simulador-resumo]:focus {
+  outline: none;
+}
+
+/* Link de pular conteúdo: escondido até receber foco pelo Tab. */
+.link-pular {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background-color: var(--omh-primaria);
+  color: #fff;
+  border-radius: 0 0 8px 0;
+}
+
+.link-pular:focus {
+  left: 0;
+}
+
+/* Scrollbar discreta, combinando com o dark mode. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--omh-borda) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--omh-borda);
+  border-radius: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Endereços de carteira e hashes em fonte mono. */
+.endereco {
+  font-family: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  word-break: break-all;
+}
+
+/* Nenhuma palavra longa (endereço, ticker, URL) pode esticar a página no celular. */
+h1, h2, h3, h4, h5, p, li, dd, dt, summary, figcaption {
+  overflow-wrap: break-word;
+}
+
+/* O <summary> dos cards de ferramenta (Módulo 3) desenha a própria seta e pede
+   .list-none. No Safari o marcador nativo não some só com list-style, então some
+   aqui — mas só nesses, para os <details> do Módulo 4 manterem o triângulo padrão. */
+summary.list-none::-webkit-details-marker {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Cards de viés com efeito flip (Módulo 2).
+   O Tailwind não cobre transformação 3D de forma confiável pelo Play CDN, então o
+   efeito mora aqui. O card inteiro é um <button aria-expanded>: clicar (ou dar Enter
+   com o foco nele) vira o card e mostra o antídoto no verso.
+
+   As duas faces ficam empilhadas na MESMA célula de um grid — assim a altura do card
+   é a da face mais alta, e nenhum texto é cortado.
+   --------------------------------------------------------------------------- */
+
+.card-flip {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  perspective: 1200px;
+}
+
+.card-flip-interno {
+  display: grid;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 400ms ease;
+}
+
+.card-flip[aria-expanded='true'] .card-flip-interno {
+  transform: rotateY(180deg);
+}
+
+.card-flip-face {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  border: 1px solid var(--omh-borda);
+  border-radius: 12px;
+  background-color: var(--omh-superficie);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.card-flip-verso {
+  transform: rotateY(180deg);
+  border-color: rgba(124, 58, 237, 0.55);
+  background-color: rgba(124, 58, 237, 0.12);
+}
+
+.card-flip:hover .card-flip-frente {
+  border-color: var(--omh-texto-suave);
+}
+
+/* Quem pediu menos animação no sistema operacional não recebe animação nenhuma.
+   Isso vale para as transições do Tailwind, para a gaveta do menu, para o flip dos
+   cards de viés e para a rolagem suave ao trocar de rota. */
+@media (prefers-reduced-motion: reduce) {
+  html,
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}

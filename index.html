@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Central de estudos local e interativa para aprender trading on-chain e memecoins do zero. Conteúdo educacional, sem aconselhamento financeiro.">
+  <title>onchain-mastery-hub</title>
+
+  <!-- Fontes: Inter (texto) e JetBrains Mono (endereços/código) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+
+  <!-- Tailwind CSS v4 via Play CDN (uso em desenvolvimento/estudo local, não em produção) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Tokens do design system expostos como utilitários do Tailwind (bg-fundo, text-texto, ...) -->
+  <style type="text/tailwindcss">
+    @theme {
+      --color-fundo: #0B0F17;
+      --color-superficie: #141A24;
+      --color-borda: #1F2733;
+      --color-texto: #E6EDF3;
+      --color-texto-suave: #9AA7B4;
+      --color-primaria: #7C3AED;
+      --color-acento: #22D3EE;
+      --color-risco-baixo: #22C55E;
+      --color-risco-medio: #F59E0B;
+      --color-risco-alto: #EF4444;
+      /* Vermelho só para TEXTO: o #EF4444 sobre os fundos escuros com 10-15% de
+         vermelho fica em 4,0-4,2:1 e reprova no AA. Este tom claro passa em
+         todos os fundos do app (5,4:1 ou mais). Bordas e fundos seguem no #EF4444. */
+      --color-risco-alto-texto: #F87171;
+
+      --font-sans: "Inter", -apple-system, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+
+      --radius-card: 12px;
+    }
+  </style>
+
+  <!-- Ajustes finos que o Tailwind não cobre (scrollbar, foco, fallback de cores) -->
+  <link rel="stylesheet" href="styles/custom.css">
+</head>
+
+<body class="min-h-screen bg-fundo font-sans text-texto antialiased">
+  <!-- Atalho de acessibilidade: o primeiro Tab da página pula direto para o conteúdo -->
+  <a href="#conteudo" class="link-pular">Pular para o conteúdo</a>
+
+  <!-- Barra de progresso global; src/app.js atualiza a largura a cada mudança no store -->
+  <div id="progresso-global" class="fixed inset-x-0 top-0 z-50 h-1 bg-borda" role="progressbar"
+       aria-label="Progresso geral do curso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <div id="progresso-global-barra" class="h-full w-0 bg-primaria transition-[width] duration-200"></div>
+  </div>
+
+  <div class="flex min-h-screen pt-1">
+    <!-- Menu principal. No desktop é uma coluna fixa; abaixo de lg vira gaveta que
+         entra da esquerda (src/components/sidebar.js cuida de abrir, fechar e do inert). -->
+    <nav id="sidebar" aria-label="Navegação principal"
+         class="fixed inset-y-0 left-0 z-40 w-72 max-w-[85vw] -translate-x-full overflow-y-auto
+                border-r border-borda bg-superficie transition-transform duration-200
+                lg:sticky lg:top-1 lg:z-0 lg:h-[calc(100vh-0.25rem)] lg:w-64 lg:max-w-none
+                lg:shrink-0 lg:translate-x-0 lg:self-start"></nav>
+
+    <!-- Fundo escurecido atrás da gaveta no mobile; clicar aqui fecha o menu. -->
+    <div id="sobreposicao-menu" class="fixed inset-0 z-30 bg-black/60 lg:hidden" hidden></div>
+
+    <div class="flex min-w-0 flex-1 flex-col">
+      <!-- Cabeçalho mobile: guarda o botão hambúrguer. Fica grudado no topo para o
+           menu continuar a um toque de distância mesmo depois de rolar a página. -->
+      <header id="cabecalho-mobile"
+              class="sticky top-1 z-20 flex items-center gap-3 border-b border-borda bg-superficie px-4 py-3 lg:hidden">
+        <button id="botao-menu" type="button"
+                class="flex shrink-0 items-center gap-2 rounded-lg border border-borda px-3 py-2 text-sm font-medium"
+                aria-controls="sidebar" aria-expanded="false">
+          <span aria-hidden="true">☰</span>
+          <span>Menu</span>
+        </button>
+        <span class="min-w-0 flex-1 truncate font-semibold">onchain-mastery-hub</span>
+      </header>
+
+      <!-- O router monta a view ativa aqui dentro -->
+      <main id="conteudo" tabindex="-1" class="flex-1 px-4 py-8 sm:px-6 lg:px-10"></main>
+
+      <footer class="border-t border-borda px-4 py-6 text-sm text-texto-suave sm:px-6 lg:px-10">
+        <p>
+          <strong class="text-texto">Aviso:</strong> conteúdo educacional. Não é aconselhamento
+          financeiro, jurídico ou tributário. Trading de memecoins é de altíssimo risco; a maioria
+          dos tokens perde todo o valor.
+        </p>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Área dos toasts ("Progresso salvo"); aria-live anuncia para leitores de tela -->
+  <div id="toasts" class="pointer-events-none fixed inset-x-4 bottom-4 z-50 flex flex-col items-end gap-2 sm:left-auto sm:right-4"
+       aria-live="polite" aria-atomic="false"></div>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

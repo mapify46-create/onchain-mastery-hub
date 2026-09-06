@@ -1,0 +1,12 @@
+# Editor
+.vscode/
+.idea/
+
+# Node (caso algum dia surja; hoje o projeto nao usa npm)
+node_modules/
+package-lock.json
+
+# Sistema operacional
+Thumbs.db
+Desktop.ini
+.DS_Store
