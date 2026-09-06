@@ -7,6 +7,7 @@ import { montarModulo1 } from './views/modulo1.js';
 import { montarModulo2 } from './views/modulo2.js';
 import { montarModulo3 } from './views/modulo3.js';
 import { montarModulo4 } from './views/modulo4.js';
+import { montarModulo5 } from './views/modulo5.js';
 import { montarViewGlossario } from './views/glossario.js';
 
 // Catálogo de rotas. É a única lista de páginas do app: a sidebar e a tela de
@@ -67,6 +68,16 @@ export const ROTAS = [
     disponivel: true,
     descricao: 'Tese, catálise, take profit e o simulador de cenários.',
     montar: montarModulo4,
+  },
+  {
+    hash: '#/modulo-5',
+    id: 'modulo-5',
+    curto: 'Módulo 5',
+    titulo: 'Módulo 5 — A mecânica da execução',
+    tipo: 'modulo',
+    disponivel: true,
+    descricao: 'Custódia, as cinco camadas de taxa, slippage e erros de execução.',
+    montar: montarModulo5,
   },
   {
     hash: '#/glossario',
