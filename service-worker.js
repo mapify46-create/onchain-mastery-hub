@@ -11,11 +11,13 @@
 // IMPORTANTE ao editar arquivos do app: aumente o número em CACHE_VERSAO. Sem isso,
 // quem já instalou o app continua vendo a versão antiga guardada em cache.
 
-const CACHE_VERSAO = 'omh-cache-v1';
+const CACHE_VERSAO = 'omh-cache-v2';
 
 const ARQUIVOS_DO_APP = [
   './',
   'assets/icons/icon.svg',
+  'assets/icons/icon-192.png',
+  'assets/icons/icon-512.png',
   'index.html',
   'manifest.json',
   'src/app.js',
