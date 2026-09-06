@@ -22,6 +22,7 @@ import {
 } from '../store.js';
 import { criarElemento, criarBotao, mostrarToast } from '../ui.js';
 import { glossario } from '../data/glossario.js';
+import { montarBotaoInstalar } from './instalarApp.js';
 
 const CONSULTA_DESKTOP = '(min-width: 1024px)';
 
@@ -188,6 +189,7 @@ export function montarSidebar() {
   });
 
   const rodape = criarElemento('div', { class: 'border-t border-borda px-3 py-4' }, [
+    montarBotaoInstalar(),
     botaoLimpar,
     criarElemento('p', { class: 'mt-3 text-xs text-texto-suave' }, [
       'Seu progresso fica só neste navegador (localStorage).',

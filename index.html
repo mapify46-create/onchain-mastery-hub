@@ -6,6 +6,26 @@
   <meta name="description" content="Central de estudos local e interativa para aprender trading on-chain e memecoins do zero. Conteúdo educacional, sem aconselhamento financeiro.">
   <title>onchain-mastery-hub</title>
 
+  <!-- Captura o convite de instalação o mais cedo possível — antes de qualquer
+       outro script, inclusive o Tailwind. O navegador dispara isso uma única vez,
+       e cedo demais na carga da página: se esperássemos um módulo carregar para
+       escutar, correríamos o mesmo risco de perder o evento que já vimos com
+       requestAnimationFrame e "load" nesta sessão. Guarda numa variável global +
+       um evento customizado, para src/components/instalarApp.js usar depois,
+       não importa a ordem em que as duas coisas terminarem de carregar. -->
+  <script>
+    window.__omhInstallPrompt = null;
+    window.addEventListener('beforeinstallprompt', function (evento) {
+      evento.preventDefault();
+      window.__omhInstallPrompt = evento;
+      window.dispatchEvent(new CustomEvent('omh:install-disponivel'));
+    });
+    window.addEventListener('appinstalled', function () {
+      window.__omhInstallPrompt = null;
+      window.dispatchEvent(new CustomEvent('omh:install-concluido'));
+    });
+  </script>
+
   <!-- PWA: permite "Instalar app" / "Adicionar à tela inicial" e abrir offline
        depois da primeira visita (ver manifest.json e service-worker.js). Um único
        SVG cobre favicon, ícone do manifest e apple-touch-icon — sem precisar gerar
