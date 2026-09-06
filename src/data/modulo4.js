@@ -353,6 +353,195 @@ export const modulo4 = {
   },
 
   // ---------------------------------------------------------------------------
+  // Destaques — os números grandes que abrem cada aba
+  //
+  // Este módulo não tem lista de `fontes`. Por isso todo destaque abaixo sai do
+  // PRÓPRIO TEXTO do módulo (que já foi pesquisado) ou é aritmética pura. Nenhuma
+  // estatística nova entra aqui — regra do CLAUDE.md.
+  // ---------------------------------------------------------------------------
+  destaques: {
+    tese: [
+      {
+        rotulo: 'Frases antes de comprar',
+        valor: '2',
+        nota: 'A tese ("por que este token?") e a catálise ("por que agora?"). As duas são necessárias e nenhuma sozinha basta.',
+      },
+      {
+        rotulo: 'Campos da ficha de tese',
+        valor: '5',
+        nota: 'Tese, catálise, prazo, invalidação e alvos. Dois minutos que separam uma decisão de um impulso.',
+      },
+      {
+        rotulo: 'Sem a segunda frase',
+        valor: 'Aposta',
+        nota: 'Se você não consegue escrever qual evento concreto precisa acontecer, não é operação.',
+        tom: 'alerta',
+      },
+    ],
+
+    takeProfit: [
+      {
+        rotulo: 'Quando o alvo se define',
+        valor: 'Antes',
+        nota: 'Junto com a tese, não com o gráfico piscando. Definido depois, já nasce contaminado pela euforia ou pelo medo.',
+      },
+      {
+        rotulo: 'Faixas na escada',
+        valor: '3',
+        nota: 'Recuperar o investido, realizar lucro, e um restante COM regra escrita. O que não pode existir é restante sem regra.',
+      },
+      {
+        rotulo: 'Restante sem regra',
+        valor: '5× → 0',
+        nota: 'É assim que uma posição que multiplicou por cinco termina valendo nada. Não depende do token nem da sorte.',
+        tom: 'alerta',
+      },
+    ],
+
+    checagens: [
+      {
+        rotulo: 'Checagens antes da tese',
+        valor: '6',
+        nota: 'LP, mint, freeze, concentração, bundles e liquidez de saída. A peneira do Módulo 3 aplicada à decisão.',
+      },
+      {
+        rotulo: 'Respostas ruins que derrubam a operação',
+        valor: '1',
+        nota: 'Qualquer uma delas. Por melhor que a narrativa esteja, o contrato precisa resistir primeiro.',
+        tom: 'alerta',
+      },
+      {
+        rotulo: 'Duração de um hard rug',
+        valor: 'Um bloco',
+        nota: 'Com a liquidez livre, o criador remove a LP e o preço vira pó no mesmo bloco. Nenhuma outra checagem sobrevive a essa.',
+        tom: 'alerta',
+      },
+    ],
+  },
+
+  // ---------------------------------------------------------------------------
+  // O plano de uma posição, desenhado (aba Tese). Só os rótulos; o SVG mora na
+  // view. De propósito NÃO há linha de preço no desenho: o plano são níveis
+  // decididos antes, e não depende de prever o caminho até eles.
+  // ---------------------------------------------------------------------------
+  planoDaPosicao: {
+    titulo: 'A anatomia de um plano',
+    legenda:
+      'Todos os níveis são escritos ANTES de entrar. Não há gráfico de preço aqui de ' +
+      'propósito: o plano não depende de prever o caminho — depende de ter os níveis ' +
+      'decididos por você frio, para serem cumpridos por você sob pressão.',
+    niveis: [
+      { id: 'alvo2', rotulo: '2º alvo', detalhe: 'lucro realizado', y: 34 },
+      { id: 'alvo1', rotulo: '1º alvo', detalhe: 'recupera o investido', y: 78 },
+      { id: 'entrada', rotulo: 'Entrada', detalhe: 'tese + catálise escritas', y: 128, base: true },
+      { id: 'invalidacao', rotulo: 'Invalidação', detalhe: 'onde você admite que errou', y: 176, alerta: true },
+    ],
+    restante: 'Restante: corre com regra escrita — sair se cair X% do topo, ou se a catálise falhar.',
+  },
+
+  // ---------------------------------------------------------------------------
+  // Calculadoras (a matemática mora em views/modulo4.js)
+  // ---------------------------------------------------------------------------
+  calculadoraDeDegraus: {
+    titulo: 'Onde a posição vai parar, faixa a faixa',
+    descricao:
+      'Exemplo didático da ESTRUTURA da escada — não é sugestão de onde vender. Ajuste os ' +
+      'alvos e veja quanto fica realizado, quanto continua na mesa, e no que vira o pior caso.',
+    controles: [
+      {
+        id: 'alvo1',
+        rotulo: 'Primeiro alvo (múltiplo da entrada)',
+        min: 1.5,
+        max: 10,
+        passo: 0.5,
+        valor: 2,
+        sufixo: '×',
+        formatar: (n) => n.toFixed(1).replace('.', ','),
+      },
+      {
+        id: 'alvo2',
+        rotulo: 'Segundo alvo (múltiplo da entrada)',
+        min: 2,
+        max: 20,
+        passo: 0.5,
+        valor: 4,
+        sufixo: '×',
+        formatar: (n) => n.toFixed(1).replace('.', ','),
+      },
+      {
+        id: 'fracao2',
+        rotulo: 'Vendido no segundo alvo (do que sobrou)',
+        min: 0,
+        max: 100,
+        passo: 5,
+        valor: 50,
+        sufixo: '%',
+        formatar: (n) => String(n),
+      },
+    ],
+    nota:
+      'A primeira faixa vende exatamente o que recupera o valor investido — por isso ela não é ' +
+      'um controle, é a definição. Os números são estrutura, não recomendação: o módulo inteiro ' +
+      'existe para você escrever os seus antes de entrar.',
+  },
+
+  calculadoraDeTamanho: {
+    titulo: 'Quanto da carteira pode ir numa posição',
+    descricao:
+      'A conta que liga o risco que você aceita ao ponto de invalidação que você escreveu. ' +
+      'Quanto mais longe a invalidação, menor a posição — é aritmética, não opinião.',
+    controles: [
+      {
+        id: 'risco',
+        rotulo: 'Risco aceito por operação (% do capital)',
+        min: 0.5,
+        max: 10,
+        passo: 0.5,
+        valor: 2,
+        sufixo: '%',
+        formatar: (n) => n.toFixed(1).replace('.', ','),
+      },
+      {
+        id: 'invalidacao',
+        rotulo: 'Ponto de invalidação (queda desde a entrada)',
+        min: 5,
+        max: 100,
+        passo: 5,
+        valor: 50,
+        sufixo: '%',
+        formatar: (n) => String(n),
+      },
+    ],
+    nota:
+      'Fórmula: tamanho = risco ÷ invalidação. A conta não diz quanto risco aceitar — isso é ' +
+      'decisão sua e depende da sua vida, não do mercado. Ela diz só o que a sua própria regra ' +
+      'implica. Em memecoin, invalidação em 100% ("pode ir a zero") é um cenário realista.',
+  },
+
+  calculadoraDeRecuperacao: {
+    titulo: 'O que uma perda exige de volta',
+    descricao:
+      'Perder e recuperar não são simétricos. Arraste a perda e veja o ganho que seria ' +
+      'necessário só para voltar ao ponto de partida.',
+    controles: [
+      {
+        id: 'perda',
+        rotulo: 'Perda sobre a posição',
+        min: 5,
+        max: 95,
+        passo: 5,
+        valor: 50,
+        sufixo: '%',
+        formatar: (n) => String(n),
+      },
+    ],
+    nota:
+      'Fórmula: ganho necessário = 1 ÷ (1 − perda) − 1. É por isso que o ponto de invalidação ' +
+      'existe: uma perda pequena e planejada custa pouco para recuperar; um rombo custa um ' +
+      'múltiplo — e é o rombo que o custo afundado produz.',
+  },
+
+  // ---------------------------------------------------------------------------
   // Aba 5 — Mini-quiz (4 perguntas)
   // ---------------------------------------------------------------------------
   quiz: [
