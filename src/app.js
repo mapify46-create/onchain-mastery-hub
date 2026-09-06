@@ -17,18 +17,14 @@ function iniciarTema() {
 // plano, sem atrasar o boot: se falhar (navegador antigo, arquivo ausente no
 // servidor), o app funciona normalmente do mesmo jeito, só sem o recurso extra.
 function iniciarServiceWorker() {
-  console.log('[DEBUG] iniciarServiceWorker chamado. temAPI=', 'serviceWorker' in navigator, 'location=', location.href);
   if (!('serviceWorker' in navigator)) return;
 
-  try {
-    const promessa = navigator.serviceWorker.register('./service-worker.js');
-    console.log('[DEBUG] register() chamado, promessa=', promessa);
-    promessa
-      .then((reg) => console.log('[DEBUG] registrou com sucesso, scope=', reg.scope))
-      .catch((erro) => console.warn('[app] service worker não registrou:', erro));
-  } catch (erroSincrono) {
-    console.log('[DEBUG] erro SINCRONO ao chamar register():', erroSincrono);
-  }
+  // Chama direto, sem esperar nenhum evento — register() não precisa disso, e
+  // depender de "load" já se mostrou frágil demais para o boot do app (ver
+  // src/components/diagrama.js e grafico.js para a mesma lição com rAF).
+  navigator.serviceWorker
+    .register('./service-worker.js')
+    .catch((erro) => console.warn('[app] service worker não registrou:', erro));
 }
 
 // Progresso geral mostrado na barra fixa do topo: média dos módulos que já têm
