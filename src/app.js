@@ -19,11 +19,19 @@ function iniciarTema() {
 function iniciarServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
 
-  window.addEventListener('load', () => {
+  const registrar = () => {
     navigator.serviceWorker
       .register('./service-worker.js')
       .catch((erro) => console.warn('[app] service worker não registrou:', erro));
-  });
+  };
+
+  // Não basta esperar o "load": numa página pequena como esta, ele pode disparar
+  // ANTES deste código rodar (o script é type="module", que executa um pouco
+  // depois do parse do HTML) — e um evento que já passou nunca mais dispara de
+  // novo, deixando o service worker sem registrar para sempre. Por isso primeiro
+  // checamos se já está "complete"; só esperamos o evento se ainda não estiver.
+  if (document.readyState === 'complete') registrar();
+  else window.addEventListener('load', registrar);
 }
 
 // Progresso geral mostrado na barra fixa do topo: média dos módulos que já têm
