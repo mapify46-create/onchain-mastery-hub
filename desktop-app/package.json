@@ -10,9 +10,9 @@
   },
   "build": {
     "appId": "com.onchainmasteryhub.desktop",
-    "productName": "OMH Hub",
+    "productName": "mmc",
     "directories": {
-      "output": "dist-build"
+      "output": "dist-build2"
     },
     "win": {
       "target": "nsis",

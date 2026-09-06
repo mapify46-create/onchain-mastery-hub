@@ -8,9 +8,7 @@
 node_modules/
 
 # Build do app desktop (gerado por `npm run build` dentro de desktop-app/)
-desktop-app/dist/
-desktop-app/dist-build/
-desktop-app/dist-old/
+desktop-app/dist*/
 
 # Sistema operacional
 Thumbs.db

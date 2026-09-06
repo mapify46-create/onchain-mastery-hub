@@ -12,9 +12,11 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
 const URL_DO_APP = 'https://mapify46-create.github.io/onchain-mastery-hub/';
+const TITULO_DA_JANELA = 'mmc';
 
 function criarJanela() {
   const janela = new BrowserWindow({
+    title: TITULO_DA_JANELA,
     width: 1280,
     height: 800,
     minWidth: 360,
@@ -26,6 +28,13 @@ function criarJanela() {
       contextIsolation: true,
       nodeIntegration: false,
     },
+  });
+
+  // O site troca o <title> a cada rota (ex.: "Módulo 2 — ... — onchain-mastery-hub"),
+  // e isso normalmente atualizaria o título da janela/barra de tarefas também.
+  // Como o nome do app agora é fixo, ignoramos essa troca.
+  janela.on('page-title-updated', (evento) => {
+    evento.preventDefault();
   });
 
   janela.loadURL(URL_DO_APP);
