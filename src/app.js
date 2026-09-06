@@ -17,16 +17,18 @@ function iniciarTema() {
 // plano, sem atrasar o boot: se falhar (navegador antigo, arquivo ausente no
 // servidor), o app funciona normalmente do mesmo jeito, só sem o recurso extra.
 function iniciarServiceWorker() {
+  console.log('[DEBUG] iniciarServiceWorker chamado. temAPI=', 'serviceWorker' in navigator, 'location=', location.href);
   if (!('serviceWorker' in navigator)) return;
 
-  // De propósito, SEM esperar o evento "load": testado ao vivo e ele se provou
-  // pouco confiável para isso — dependendo de quão rápido a página carrega, o
-  // "load" tanto pode disparar antes deste código rodar quanto, em algumas
-  // situações, nunca disparar. register() não precisa esperar nada: é seguro
-  // chamar assim que o script roda, o navegador cuida do resto.
-  navigator.serviceWorker
-    .register('./service-worker.js')
-    .catch((erro) => console.warn('[app] service worker não registrou:', erro));
+  try {
+    const promessa = navigator.serviceWorker.register('./service-worker.js');
+    console.log('[DEBUG] register() chamado, promessa=', promessa);
+    promessa
+      .then((reg) => console.log('[DEBUG] registrou com sucesso, scope=', reg.scope))
+      .catch((erro) => console.warn('[app] service worker não registrou:', erro));
+  } catch (erroSincrono) {
+    console.log('[DEBUG] erro SINCRONO ao chamar register():', erroSincrono);
+  }
 }
 
 // Progresso geral mostrado na barra fixa do topo: média dos módulos que já têm
