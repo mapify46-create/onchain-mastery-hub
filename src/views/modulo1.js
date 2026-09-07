@@ -23,6 +23,7 @@ import { montarDiagrama, renderizarDiagrama } from '../components/diagrama.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarAnatomia } from '../components/anatomia.js';
 import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
+import { montarVideo } from '../components/video.js';
 import { obterEstado, atualizar } from '../store.js';
 
 // Parágrafo de apoio usado no topo de várias abas.
@@ -115,14 +116,26 @@ function criarAnatomia(chave, id) {
   return dados ? montarAnatomia({ id, ...dados }) : null;
 }
 
+// Vídeo pela chave em modulo1.videos. Devolve null se não existir, para a aba
+// continuar montando normalmente enquanto um vídeo ainda não foi gravado.
+function criarVideo(chave) {
+  const dados = modulo1.videos?.[chave];
+  return dados ? montarVideo({ id: 'm1-video-' + chave, ...dados }) : null;
+}
+
 // Seções de uma aba, com um elemento extra intercalado logo depois de uma seção
 // específica — para a anatomia entrar exatamente onde o texto a introduz.
-function criarSecoesComIntervalo(idDaAba, depoisDe, extra) {
+// `extras` é um mapa { idDaSecao: elemento }: cada elemento entra logo DEPOIS da
+// seção de mesmo id. Assim um vídeo ou uma anatomia aparece junto do texto que
+// ele ilustra, em vez de empilhado no fim da aba. Id que não existir é ignorado
+// (não quebra a aba se uma seção for renomeada).
+function criarSecoesComIntervalo(idDaAba, extras = {}) {
   const secoes = modulo1.secoes.filter((secao) => secao.aba === idDaAba);
-  const indice = secoes.findIndex((secao) => secao.id === depoisDe);
-  const cards = secoes.map(criarCardDaSecao);
-  if (indice === -1) return [...cards, extra];
-  return [...cards.slice(0, indice + 1), extra, ...cards.slice(indice + 1)];
+
+  return secoes.flatMap((secao) => {
+    const extra = extras[secao.id];
+    return extra ? [criarCardDaSecao(secao), extra] : [criarCardDaSecao(secao)];
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -142,11 +155,10 @@ function montarAbaFundamentos() {
   return criarElemento('div', { class: 'space-y-6' }, [
     objetivos,
     montarDestaques(modulo1.destaques.fundamentos),
-    ...criarSecoesComIntervalo(
-      'fundamentos',
-      'explorador-de-blocos',
-      criarAnatomia('transacao', 'm1-anatomia-transacao'),
-    ),
+    ...criarSecoesComIntervalo('fundamentos', {
+      'explorador-de-blocos': criarAnatomia('transacao', 'm1-anatomia-transacao'),
+      'gas-taxa-de-rede': criarVideo('mecanica-do-gas'),
+    }),
   ]);
 }
 

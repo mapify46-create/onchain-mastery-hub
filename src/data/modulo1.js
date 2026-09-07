@@ -1573,6 +1573,35 @@ export const modulo1 = {
   // seria republicação de material de terceiro, pareceria endosso, e nasceria
   // vencida. A legenda é o conteúdo; o desenho é enriquecimento.
   // ---------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+  // Vídeos
+  //
+  // Ficam em assets/videos/, servidos pelo próprio GitHub Pages — sem YouTube,
+  // sem conta de terceiro. Cada um aparece logo depois da seção que ele reforça
+  // (ver criarSecoesComIntervalo em views/modulo1.js).
+  //
+  // O vídeo NUNCA substitui a seção de texto: ele entra ao lado dela. Quem lê
+  // rápido pula, quem prefere assistir assiste, e quem está sem internet ainda
+  // tem o módulo inteiro — porque o vídeo fica fora do precache do service
+  // worker (300 MB de precache tornaria a primeira visita insuportável).
+  // ---------------------------------------------------------------------------
+  videos: {
+    'mecanica-do-gas': {
+      titulo: 'A mecânica do gas',
+      src: 'assets/videos/mecanica-do-gas.mp4',
+      duracao: '8:01',
+      descricao:
+        'Por que toda transação cobra taxa, por que ela varia de minuto a minuto, e por que ' +
+        'uma transação que falha cobra do mesmo jeito.',
+      // PENDENTE: transcrição. Todo outro visual do hub tem versão em texto
+      // (diagrama tem versaoEmTexto, gráfico tem reserva, anatomia tem legenda).
+      // Sem ela, este vídeo é o único elemento do hub sem equivalente em texto —
+      // o que quebra o padrão de acessibilidade e deixa quem está offline sem
+      // nada. Preencher assim que houver a transcrição do áudio.
+      transcricao: [],
+    },
+  },
+
   anatomias: {
     transacao: {
       titulo: 'Anatomia de uma transação no explorador',

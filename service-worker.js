@@ -11,7 +11,7 @@
 // IMPORTANTE ao editar arquivos do app: aumente o número em CACHE_VERSAO. Sem isso,
 // quem já instalou o app continua vendo a versão antiga guardada em cache.
 
-const CACHE_VERSAO = 'omh-cache-v8';
+const CACHE_VERSAO = 'omh-cache-v9';
 
 const ARQUIVOS_DO_APP = [
   './',
@@ -35,6 +35,7 @@ const ARQUIVOS_DO_APP = [
   'src/components/sidebar.js',
   'src/components/simulator.js',
   'src/components/toolMatrix.js',
+  'src/components/video.js',
   'src/data/cenarios.js',
   'src/data/glossario.js',
   'src/data/modulo1.js',
@@ -113,7 +114,20 @@ self.addEventListener('fetch', (evento) => {
   // Só GET é seguro de cachear; POST/PUT etc. (nenhum existe hoje neste app) passam direto.
   if (request.method !== 'GET') return;
 
-  const ehArquivoDoApp = new URL(request.url).origin === self.location.origin;
+  const url = new URL(request.url);
+
+  // Vídeo passa direto, sem o service worker no meio. Dois motivos:
+  //   1. O <video> não baixa o arquivo inteiro: ele pede pedaços, com cabeçalho
+  //      Range, e recebe respostas 206. A Cache API não guarda 206 de forma
+  //      confiável, e mediar esse vai-e-vem pelo SW tem comportamento irregular
+  //      entre navegadores — é uma das causas clássicas de vídeo que não toca
+  //      dentro de PWA.
+  //   2. Os vídeos são grandes demais para o cache do app. Deixar o navegador
+  //      cuidar deles (com o cache HTTP normal) é o certo aqui.
+  // Consequência assumida: o texto do módulo funciona offline, o vídeo não.
+  if (/\.(mp4|webm|m4v|mov)$/i.test(url.pathname)) return;
+
+  const ehArquivoDoApp = url.origin === self.location.origin;
 
   if (ehArquivoDoApp) {
     evento.respondWith(
