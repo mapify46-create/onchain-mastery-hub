@@ -7,6 +7,10 @@ precisa anexar arquivo, é só copiar o bloco inteiro e colar.
 ganham com isso; nos de tabela o limite é a busca, não o esforço. Fable não precisa: 2× o custo
 para tarefa de pesquisa.) Em todos: **busca na web ligada**.
 
+**Conectores:** Scholar Gateway (busca acadêmica) e TinyFish (abre a página de verdade)
+precisam estar conectados na sua conta antes de colar o prompt — cada prompt diz como
+usá-los. Se o seu plano tiver o modo **Research** no claude.ai, use-o nos sete.
+
 Podem rodar em paralelo. Me mande cada resultado conforme sair.
 
 ---
@@ -73,6 +77,22 @@ só vale o que estiver na página oficial HOJE.
 - NÃO VERIFICADO no que não fechar. Sem "provavelmente".
 - Nada de recomendação de ferramenta; descrição neutra.
 
+## Ferramentas conectadas — use assim
+
+Você tem o **TinyFish** conectado (busca na web + leitura do conteúdo real da
+página). Regras de uso nesta pesquisa:
+
+- Para **todo número de preço, limite ou termo de uso**, use `fetch_content` na
+  página oficial e copie o número DA PÁGINA. Não use o snippet da busca para
+  número: snippet resume, arredonda e envelhece.
+- Para páginas que carregam por JavaScript (painéis de preço, dashboards do Dune,
+  documentação em app), use a sessão de navegador do TinyFish, não só a busca.
+- Documentação oficial e página de preço: abra a URL canônica do fornecedor, não
+  um artigo que fala sobre ela.
+- Registre, por fonte, se você **abriu a página** ou usou só o resultado da busca.
+  A diferença aparece no documento como "(página aberta)" ou "(só snippet)".
+- Se uma página bloquear leitura automatizada, diga isso e marque o dado como NÃO
+  VERIFICADO em vez de completar por outra fonte fraca.
 ## Como trabalhar (leia antes de começar)
 
 - **Busque de verdade, agora.** Não responda de memória: tudo que está aqui muda em
@@ -169,6 +189,22 @@ estiver na página oficial hoje.
 - NÃO VERIFICADO no que não fechar.
 - Sem recomendação de provedor — descrição neutra do que cada um dá.
 
+## Ferramentas conectadas — use assim
+
+Você tem o **TinyFish** conectado (busca na web + leitura do conteúdo real da
+página). Regras de uso nesta pesquisa:
+
+- Para **todo número de preço, limite ou termo de uso**, use `fetch_content` na
+  página oficial e copie o número DA PÁGINA. Não use o snippet da busca para
+  número: snippet resume, arredonda e envelhece.
+- Para páginas que carregam por JavaScript (painéis de preço, dashboards do Dune,
+  documentação em app), use a sessão de navegador do TinyFish, não só a busca.
+- Documentação oficial e página de preço: abra a URL canônica do fornecedor, não
+  um artigo que fala sobre ela.
+- Registre, por fonte, se você **abriu a página** ou usou só o resultado da busca.
+  A diferença aparece no documento como "(página aberta)" ou "(só snippet)".
+- Se uma página bloquear leitura automatizada, diga isso e marque o dado como NÃO
+  VERIFICADO em vez de completar por outra fonte fraca.
 ## Como trabalhar (leia antes de começar)
 
 - **Busque de verdade, agora.** Não responda de memória: tudo que está aqui muda em
@@ -271,6 +307,29 @@ Data de referência: setembro de 2026.
 - Nenhuma recomendação de operação. O documento é sobre MEDIR, não sobre lucrar.
 - Explicação para leigo: eu não tenho formação em estatística.
 
+## Ferramentas conectadas — use assim
+
+Você tem duas ferramentas conectadas. Use as duas, cada uma no seu papel:
+
+**Scholar Gateway** (busca acadêmica com citação) — é a fonte primária desta
+pesquisa. Regras:
+- Toda afirmação sobre "o que a literatura mostra" tem que vir de um trabalho
+  achado por ela, com DOI/arXiv/SSRN. Busca comum na web não substitui.
+- Faça várias buscas com termos diferentes (inglês e português; "cryptocurrency
+  return predictability", "meme coin", "social media sentiment crypto", "alpha
+  decay", "forecast scoring rules", "Brier score calibration", e os que fizerem
+  sentido para cada item). Liste as consultas no fim.
+- Para cada trabalho: ano, venue (periódico / conferência / preprint), se é revisado
+  por pares, e o que foi medido — em backtest, fora da amostra, ao vivo ou líquido
+  de custo. Um trabalho que não diz qual dos quatro é vale pouco.
+- Cite o achado com a página ou seção de onde saiu. Não cite só o resumo.
+
+**TinyFish** (busca na web + leitura do conteúdo real da página) — para o que não
+é acadêmico: documentação, relatórios de empresa, dashboards. Regras:
+- Use `fetch_content` para ler a página de verdade; não confie no snippet.
+- Registre "(página aberta)" ou "(só snippet)" em cada fonte.
+- Se um relatório de empresa for a única fonte de um número, marque a qualidade
+  como "relatório de empresa" e diga se há dado on-chain que o confirme.
 ## Como trabalhar (leia antes de começar)
 
 - **Busque de verdade, agora.** Não responda de memória: tudo que está aqui muda em
@@ -358,6 +417,22 @@ que cada número cobre.
 - NÃO VERIFICADO no que não fechar. Número sem fonte não entra.
 - Nada de conclusão de investimento. É descrição do mercado.
 
+## Ferramentas conectadas — use assim
+
+Você tem o **TinyFish** conectado (busca na web + leitura do conteúdo real da
+página). Regras de uso nesta pesquisa:
+
+- Para **todo número de preço, limite ou termo de uso**, use `fetch_content` na
+  página oficial e copie o número DA PÁGINA. Não use o snippet da busca para
+  número: snippet resume, arredonda e envelhece.
+- Para páginas que carregam por JavaScript (painéis de preço, dashboards do Dune,
+  documentação em app), use a sessão de navegador do TinyFish, não só a busca.
+- Documentação oficial e página de preço: abra a URL canônica do fornecedor, não
+  um artigo que fala sobre ela.
+- Registre, por fonte, se você **abriu a página** ou usou só o resultado da busca.
+  A diferença aparece no documento como "(página aberta)" ou "(só snippet)".
+- Se uma página bloquear leitura automatizada, diga isso e marque o dado como NÃO
+  VERIFICADO em vez de completar por outra fonte fraca.
 ## Como trabalhar (leia antes de começar)
 
 - **Busque de verdade, agora.** Não responda de memória: tudo que está aqui muda em
@@ -447,6 +522,29 @@ Data de referência: setembro de 2026.
 - NÃO VERIFICADO no que não fechar. Sem "provavelmente".
 - Nenhuma recomendação de operação.
 
+## Ferramentas conectadas — use assim
+
+Você tem duas ferramentas conectadas. Use as duas, cada uma no seu papel:
+
+**Scholar Gateway** (busca acadêmica com citação) — é a fonte primária desta
+pesquisa. Regras:
+- Toda afirmação sobre "o que a literatura mostra" tem que vir de um trabalho
+  achado por ela, com DOI/arXiv/SSRN. Busca comum na web não substitui.
+- Faça várias buscas com termos diferentes (inglês e português; "cryptocurrency
+  return predictability", "meme coin", "social media sentiment crypto", "alpha
+  decay", "forecast scoring rules", "Brier score calibration", e os que fizerem
+  sentido para cada item). Liste as consultas no fim.
+- Para cada trabalho: ano, venue (periódico / conferência / preprint), se é revisado
+  por pares, e o que foi medido — em backtest, fora da amostra, ao vivo ou líquido
+  de custo. Um trabalho que não diz qual dos quatro é vale pouco.
+- Cite o achado com a página ou seção de onde saiu. Não cite só o resumo.
+
+**TinyFish** (busca na web + leitura do conteúdo real da página) — para o que não
+é acadêmico: documentação, relatórios de empresa, dashboards. Regras:
+- Use `fetch_content` para ler a página de verdade; não confie no snippet.
+- Registre "(página aberta)" ou "(só snippet)" em cada fonte.
+- Se um relatório de empresa for a única fonte de um número, marque a qualidade
+  como "relatório de empresa" e diga se há dado on-chain que o confirme.
 ## Como trabalhar (leia antes de começar)
 
 - **Busque de verdade, agora.** Não responda de memória: tudo que está aqui muda em
@@ -533,6 +631,29 @@ Data de referência: setembro de 2026.
 - NÃO VERIFICADO no que não fechar.
 - O documento é sobre medir; nenhuma recomendação de operação.
 
+## Ferramentas conectadas — use assim
+
+Você tem duas ferramentas conectadas. Use as duas, cada uma no seu papel:
+
+**Scholar Gateway** (busca acadêmica com citação) — é a fonte primária desta
+pesquisa. Regras:
+- Toda afirmação sobre "o que a literatura mostra" tem que vir de um trabalho
+  achado por ela, com DOI/arXiv/SSRN. Busca comum na web não substitui.
+- Faça várias buscas com termos diferentes (inglês e português; "cryptocurrency
+  return predictability", "meme coin", "social media sentiment crypto", "alpha
+  decay", "forecast scoring rules", "Brier score calibration", e os que fizerem
+  sentido para cada item). Liste as consultas no fim.
+- Para cada trabalho: ano, venue (periódico / conferência / preprint), se é revisado
+  por pares, e o que foi medido — em backtest, fora da amostra, ao vivo ou líquido
+  de custo. Um trabalho que não diz qual dos quatro é vale pouco.
+- Cite o achado com a página ou seção de onde saiu. Não cite só o resumo.
+
+**TinyFish** (busca na web + leitura do conteúdo real da página) — para o que não
+é acadêmico: documentação, relatórios de empresa, dashboards. Regras:
+- Use `fetch_content` para ler a página de verdade; não confie no snippet.
+- Registre "(página aberta)" ou "(só snippet)" em cada fonte.
+- Se um relatório de empresa for a única fonte de um número, marque a qualidade
+  como "relatório de empresa" e diga se há dado on-chain que o confirme.
 ## Como trabalhar (leia antes de começar)
 
 - **Busque de verdade, agora.** Não responda de memória: tudo que está aqui muda em
@@ -621,6 +742,22 @@ Data de referência: setembro de 2026. Preços e limites mudam; use a página of
 - NÃO VERIFICADO no que não fechar.
 - Sem recomendação de fornecedor; tabela neutra.
 
+## Ferramentas conectadas — use assim
+
+Você tem o **TinyFish** conectado (busca na web + leitura do conteúdo real da
+página). Regras de uso nesta pesquisa:
+
+- Para **todo número de preço, limite ou termo de uso**, use `fetch_content` na
+  página oficial e copie o número DA PÁGINA. Não use o snippet da busca para
+  número: snippet resume, arredonda e envelhece.
+- Para páginas que carregam por JavaScript (painéis de preço, dashboards do Dune,
+  documentação em app), use a sessão de navegador do TinyFish, não só a busca.
+- Documentação oficial e página de preço: abra a URL canônica do fornecedor, não
+  um artigo que fala sobre ela.
+- Registre, por fonte, se você **abriu a página** ou usou só o resultado da busca.
+  A diferença aparece no documento como "(página aberta)" ou "(só snippet)".
+- Se uma página bloquear leitura automatizada, diga isso e marque o dado como NÃO
+  VERIFICADO em vez de completar por outra fonte fraca.
 ## Como trabalhar (leia antes de começar)
 
 - **Busque de verdade, agora.** Não responda de memória: tudo que está aqui muda em
