@@ -144,6 +144,44 @@ modelo por rodada de avaliação. Longe dos ~US$ 920/mês do cenário do P7.
 
 ---
 
+## 4b. A API da GMGN (conferido em 11/09/2026)
+
+Entra no plano, com uma linha divisória limpa e duas dúvidas em aberto.
+
+**São duas APIs diferentes, e as buscas as confundem:**
+
+- **Cooperation / Trading API:** o acesso é *"granted solely based on sufficient
+  Trading Volume on GMGN"*, por formulário, com 1 chamada a cada 5 segundos. É para
+  integração de corretagem. **Não serve e não queremos.**
+- **OpenAPI / Agent API** (`gmgn.ai/ai`): você gera um par de chaves no seu
+  computador, sobe a pública e recebe a API Key. **Nenhuma exigência de volume é
+  mencionada.** Existe uma chave pública de demonstração, só leitura, *"for testing
+  only"*.
+
+**O que serve (só leitura):** informação de token (fundamentos, segurança, pool,
+holders, traders); quebra de holders em smart money, KOL, rat trader, bundler, sniper
+e baleia; trending de 1m a 24h; descoberta de tokens novos; velas de 1 minuto; e as
+compras e vendas, em tempo real, de carteiras **Smart Money** e de **KOLs**.
+
+**O que fica de fora:** swap, ordens de TP/SL, "cooking" e multi-swap.
+
+**A separação é mecânica, não de disciplina.** A documentação diz: *"Query functions
+need API Key; Swap operations require API Key + Private Key."* O observatório usa só
+a API Key e **nunca carrega a chave privada de assinatura**. Com isso, operar por
+acidente deixa de ser possível — não depende de ninguém se lembrar da regra.
+
+**Por que isso pode substituir a API paga do X:** "uma carteira Smart Money comprou o
+token X" é um sinal com carimbo de tempo, vindo da blockchain. Serve de evento para a
+previsão exatamente como a graduação, e não custa US$ 0,005 por post lido.
+
+**As duas dúvidas em aberto:**
+
+1. **Preço.** Nenhuma das duas páginas oficiais que abri documenta custo. Fontes de
+   terceiros falam em 1 a 10 créditos por chamada, sem dizer quanto vale um crédito.
+2. **As métricas derivadas são caixa-preta.** `rat_trader_amount_rate` e
+   `bundler_trader_amount_rate` não têm método de cálculo publicado. Consequência
+   prática: servem como **entrada** para a previsão, nunca como **medição**. O que o
+   observatório afirma medir precisa ser reproduzível por outra pessoa.
 ## 5. Um achado para o hub, que chegou antes da hora
 
 A frase central do Módulo 2 — "a maioria vai a zero" — agora tem número, da CoinGecko
