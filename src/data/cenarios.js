@@ -221,8 +221,9 @@ export const cenarios = [
     posicao: 'aberta',
     descricao:
       'Você entrou ainda na bonding curve, com uma posição pequena, e está no lucro. O token ' +
-      'atingiu o limiar de graduação (no Pump.fun, por volta de 85 SOL / ~US$ 69 mil) e a ' +
-      'liquidez migrou para a DEX. O livro ficou mais fundo: agora dá para vender um valor ' +
+      'atingiu o limiar de graduação (no Pump.fun, por volta de 85 SOL — o valor em dólar ' +
+      'varia com a cotação, tipicamente entre US$ 11 mil e US$ 101 mil) e a liquidez migrou ' +
+      'para a DEX. O livro ficou mais fundo: agora dá para vender um valor ' +
       'maior sem derrubar o preço.',
     sinais: [
       'Liquidez migrada para a DEX, profundidade bem maior que na curva',

@@ -13,7 +13,7 @@ import { montarGraficoDeBarras, renderizarGrafico } from '../components/grafico.
 // Passos de estudo sugeridos. Texto curto de propósito: a tela inicial orienta,
 // o conteúdo mora nos módulos.
 const COMO_ESTUDAR = [
-  'Comece pelo Módulo 2 e siga na ordem até o 4 — cada um assume o anterior.',
+  'Comece pelo Módulo 1 e siga na ordem até o 5 — cada um assume o anterior.',
   'Abra o Glossário sempre que aparecer um termo novo e marque como estudado o que já entendeu.',
   'Responda o mini-quiz no fim de cada módulo antes de marcar o módulo como concluído.',
   'Feche com o simulador do Módulo 4: são 12 cenários que treinam a decisão, não o palpite.',

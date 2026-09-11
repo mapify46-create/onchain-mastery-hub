@@ -261,6 +261,14 @@ export const modulo5 = {
           'taxa de pool se o token for novo. Isso não é um defeito do terminal — é onde a ' +
           'troca está acontecendo. Mas é informação que muda a sua conta e que raramente ' +
           'aparece explicada.',
+        'Isso não é só taxa anunciada: um estudo da Uniswap Labs sobre 534 mil negociações ' +
+          'reais mediu o custo total efetivo (taxa, deslizamento de preço e o que bots de ' +
+          'MEV extraem) em 140 pontos-base por dólar negociado numa memecoin popular, contra ' +
+          '22 pontos-base num par entre duas moedas estáveis — 6 vezes mais caro, numa pool ' +
+          'mais funda do que a maioria das de memecoin recém-lançada. O mesmo estudo mediu ' +
+          'a chance de sofrer deslizamento de preço causado por um bot adversário como ' +
+          'cerca de 80% maior ao negociar a memecoin do que ao negociar a moeda madura ' +
+          '(Adams, Chan, Markovich & Wan, "Don\'t Let MEV Slip", Financial Cryptography 2024).',
       ],
     },
 
@@ -1352,6 +1360,7 @@ export const modulo5 = {
   // Fontes
   // ---------------------------------------------------------------------------
   fontes: [
+    { titulo: 'Adams, Chan, Markovich & Wan — "Don\'t Let MEV Slip" (Uniswap Labs, custo real de negociar memecoin)', url: 'https://arxiv.org/abs/2309.13648', consultadoEm: '11/09/2026' },
     { titulo: 'Axiom — FAQs (custódia, infraestrutura, bundle checker)', url: 'https://docs.axiom.trade/faqs', consultadoEm: '06/09/2026' },
     { titulo: 'Axiom — Signup (frase de recuperação exportável)', url: 'https://docs.axiom.trade/getting-started/signup', consultadoEm: '06/09/2026' },
     { titulo: 'Axiom — Axiom Fees (tabela de níveis 0,95%–0,75%)', url: 'https://docs.axiom.trade/getting-started/fees/axiom-fees', consultadoEm: '06/09/2026' },

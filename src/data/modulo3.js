@@ -65,13 +65,14 @@ export const modulo3 = {
         'técnico e da sua tese (Módulo 4).',
     ],
     jTracker: {
-      titulo: '"J7 Tracker": exemplo de categoria, não confirmado',
+      titulo: '"J7 Tracker": existe, mas não é o que o nome sugere aqui',
       texto:
-        'O pedido original cita "J7 Tracker" como ferramenta específica. Não foi encontrada ' +
-        'fonte pública confiável que confirme uma ferramenta com esse nome — por isso ela ' +
-        'aparece marcada como "não verificado" na matriz abaixo. A categoria em si — ' +
-        '"tracker de tweets / alertas sociais" — é real e usada no mercado; o hub usa "J7 ' +
-        'Tracker" só como exemplo didático dessa categoria, não como recomendação.',
+        'O J7 Tracker existe (j7tracker.io) — mas é uma ferramenta de sniping e deploy de ' +
+        'token ("sub-1ms server-side deploys"), com um rastreador de tweets embutido como ' +
+        'recurso auxiliar; acesso por credenciais via Discord. Não é uma ferramenta de ' +
+        'tracker de narrativa como exemplo isolado. A categoria em si — "tracker de tweets / ' +
+        'alertas sociais" — é real e usada no mercado; o hub cita o nome só para deixar ' +
+        'claro o que ele de fato é, não como recomendação de uso.',
     },
   },
 
@@ -332,18 +333,19 @@ export const modulo3 = {
       pilar: 'social',
       chains: ['multi'],
       papeis: ['monitoramento-social'],
-      naoVerificado: true,
       oQueFaz:
-        'Categoria: tracker de tweets / alertas sociais. Monitora quando uma conta ' +
-        'específica (influenciador, projeto, carteira) interage com um token, para avisar cedo.',
+        'Ferramenta de sniping e deploy de token ("sub-1ms server-side deploys"), com um ' +
+        'rastreador de tweets embutido como recurso auxiliar. Categoria de fundo: tracker de ' +
+        'tweets / alertas sociais — monitora quando uma conta específica (influenciador, ' +
+        'projeto, carteira) interage com um token, para avisar cedo.',
       quandoUsar:
-        'Como parte do pilar social — para não ser o último a saber que uma conta grande ' +
-        'interagiu com um token.',
+        'A categoria "tracker de tweets" serve para não ser o último a saber que uma conta ' +
+        'grande interagiu com um token. Esta ferramenta específica não é isso: é focada em ' +
+        'velocidade de execução (sniping), não em leitura de narrativa.',
       risco: 'medio',
       observacoes:
-        'Não verificado: nenhuma fonte pública confiável confirma uma ferramenta chamada ' +
-        '"J7 Tracker". Tratado aqui como exemplo didático da categoria "tracker de tweets", ' +
-        'que é real e usada no mercado.',
+        'Site oficial j7tracker.io, acesso por credenciais via Discord. Preço exato e se ' +
+        'expõe API pública: não verificado.',
     },
   ],
 

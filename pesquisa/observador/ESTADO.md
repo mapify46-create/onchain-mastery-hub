@@ -44,14 +44,20 @@ síntese.
   dependências novas (Node com SQLite), o que exige perguntar antes — regra do
   `CLAUDE.md`.
 
-**Correções conhecidas no hub, todas pequenas:**
-- `src/views/inicio.js:16` ainda manda "começar pelo Módulo 2". Texto velho de quando
-  o Módulo 1 e o 5 não existiam.
-- Módulo 3: o item do **J7 Tracker** diz que não há fonte confiável. A pesquisa
-  confirmou que a ferramenta existe (j7tracker.io), mas é de **sniping e deploy**, não
-  tracker de narrativa.
-- Módulo 5: o "US$ 69 mil" da graduação é impreciso — não há limiar em dólar; o valor
-  observado vai de US$ 11 mil a US$ 101 mil.
+**Correções já feitas (11/09/2026), verificadas no navegador, ainda não publicadas:**
+- ~~`src/views/inicio.js:16` mandava "começar pelo Módulo 2"~~ → corrigido para
+  Módulo 1 ao 5.
+- ~~Módulo 3, item J7 Tracker dizia "não confirmado"~~ → corrigido: a ferramenta
+  existe (j7tracker.io), mas é de **sniping e deploy**, não tracker de narrativa.
+- ~~"US$ 69 mil" fixo em `cenarios.js`, `glossario.js` e `modulo4.js`~~ → trocado por
+  faixa observada (US$ 11 mil a US$ 101 mil); não há limiar em dólar, só em SOL.
+- ~~Módulo 2 sem número para "a maioria vai a zero"~~ → `observacaoFases` ganhou a
+  tabela de mortalidade (CoinGecko: 68,67% no dia, 4,55% além de 90 dias) e a
+  contestação pública da pump.fun ao número da Solidus Labs.
+- ~~Módulo 5 sem o dado do Uniswap Labs~~ → acrescentado na seção "o venue muda o
+  custo": 140 pontos-base por dólar em memecoin contra 22 num par estável.
+
+**Correções ainda pendentes, fora de escopo por ora (são conteúdo novo, não fix):**
 - Módulo 5: `tabelaOrdens`, `checklistExecucao` e `errosComuns` estão vazios,
   esperando a continuação de uma pesquisa. A view já ignora bloco vazio.
 - Módulo 1: a transcrição do vídeo de gas está vazia. É hoje o único elemento do hub
