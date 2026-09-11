@@ -55,7 +55,12 @@ nenhum curso de memecoin tem: a taxa de mortalidade medida pelo próprio autor.
 ## 4. Fases
 
 ### Fase 0 — Pesquisa (agora)
-Quatro pesquisas em chats separados (ver `PROMPTS-PESQUISA.md`). Elas decidem:
+**Estado em 11/09/2026:** 3 de 7 completas, 4 no checkpoint. Achados e decisões
+pendentes em [`SINTESE-FASE-0.md`](SINTESE-FASE-0.md) — em especial: orçamento de
+latência L, previsão por evento (e não por minuto), e universo inicial só de tokens
+graduados.
+
+Sete pesquisas em chats separados (ver `PROMPTS-PESQUISA.md`). Elas decidem:
 que fontes de dados são viáveis e a que custo; como simular execução de forma
 honesta; que números o mercado já tem medidos; e o que é, afinal, o "J7 Tracker".
 
