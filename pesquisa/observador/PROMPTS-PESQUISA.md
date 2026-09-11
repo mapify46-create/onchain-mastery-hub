@@ -3,9 +3,9 @@
 Sete prompts independentes, um para cada chat novo. Os prompts 1-4 cobrem dados e metodo; os 5-7 cobrem a pergunta "a IA consegue prever memecoin?" — evidencia, pontuacao e arquitetura. Cada um é autossuficiente: não
 precisa anexar arquivo, é só copiar o bloco inteiro e colar.
 
-**Modelo:** **Sonnet 5, esforço `high`** nos prompts 1, 2, 4 e 7 (levantamento de fatos
-com tabela). **Opus 5, esforço `high`** nos prompts 3, 5 e 6 (evidência e método — é raciocínio, e é
-onde um erro custa mais). Em todos: **busca na web ligada**.
+**Modelo:** **Opus 5, esforço `xhigh`**, nos sete. (Os de raciocínio — 3, 5 e 6 — são os que mais
+ganham com isso; nos de tabela o limite é a busca, não o esforço. Fable não precisa: 2× o custo
+para tarefa de pesquisa.) Em todos: **busca na web ligada**.
 
 Podem rodar em paralelo. Me mande cada resultado conforme sair.
 
@@ -73,6 +73,30 @@ só vale o que estiver na página oficial HOJE.
 - NÃO VERIFICADO no que não fechar. Sem "provavelmente".
 - Nada de recomendação de ferramenta; descrição neutra.
 
+## Como trabalhar (leia antes de começar)
+
+- **Busque de verdade, agora.** Não responda de memória: tudo que está aqui muda em
+  meses. No fim do documento, liste as consultas de busca que você fez.
+- **Abra a página, não confie no snippet.** Se uma afirmação vier só do resumo do
+  buscador e você não conseguiu abrir a fonte, marque "(só snippet)". Isso já
+  causou erro em pesquisa anterior deste projeto.
+- **Fonte primária primeiro:** documentação oficial, página de preço oficial, artigo
+  revisado por pares, dado on-chain. Blog, thread e vídeo são corroboração fraca —
+  se usar, diga que é fraca.
+- **Link logo depois de cada afirmação**, não só no fim. Quero ver em que cada frase
+  se apoia, no lugar onde ela aparece.
+- **Duas fontes divergindo: traga as duas**, com a diferença de método. Não escolha
+  a mais conveniente.
+- **NÃO VERIFICADO é uma resposta boa.** Preencher com estimativa é uma resposta
+  ruim. Sem "provavelmente", sem "em geral".
+- **Não abrevie o final.** Se o documento ficar longo, pare numa seção INTEIRA e
+  escreva "CONTINUA — faltam: X, Y" que eu peço a continuação. Prefiro duas partes
+  completas a uma inteira e outra pela metade.
+- **Explique para leigo.** Não tenho formação técnica nem em estatística. Todo termo
+  explicado na primeira vez em que aparece, dentro da própria frase.
+- **O checkpoint no fim é obrigatório:** responda SÓ ao checkpoint, e espere a minha
+  resposta antes de escrever o documento. Não emende o documento na mesma mensagem.
+- Data de consulta em toda fonte.
 ## Formato da entrega
 
 Um documento com: (1) tabela dos tiers da API do X com preço, limites e o que cada um
@@ -145,6 +169,30 @@ estiver na página oficial hoje.
 - NÃO VERIFICADO no que não fechar.
 - Sem recomendação de provedor — descrição neutra do que cada um dá.
 
+## Como trabalhar (leia antes de começar)
+
+- **Busque de verdade, agora.** Não responda de memória: tudo que está aqui muda em
+  meses. No fim do documento, liste as consultas de busca que você fez.
+- **Abra a página, não confie no snippet.** Se uma afirmação vier só do resumo do
+  buscador e você não conseguiu abrir a fonte, marque "(só snippet)". Isso já
+  causou erro em pesquisa anterior deste projeto.
+- **Fonte primária primeiro:** documentação oficial, página de preço oficial, artigo
+  revisado por pares, dado on-chain. Blog, thread e vídeo são corroboração fraca —
+  se usar, diga que é fraca.
+- **Link logo depois de cada afirmação**, não só no fim. Quero ver em que cada frase
+  se apoia, no lugar onde ela aparece.
+- **Duas fontes divergindo: traga as duas**, com a diferença de método. Não escolha
+  a mais conveniente.
+- **NÃO VERIFICADO é uma resposta boa.** Preencher com estimativa é uma resposta
+  ruim. Sem "provavelmente", sem "em geral".
+- **Não abrevie o final.** Se o documento ficar longo, pare numa seção INTEIRA e
+  escreva "CONTINUA — faltam: X, Y" que eu peço a continuação. Prefiro duas partes
+  completas a uma inteira e outra pela metade.
+- **Explique para leigo.** Não tenho formação técnica nem em estatística. Todo termo
+  explicado na primeira vez em que aparece, dentro da própria frase.
+- **O checkpoint no fim é obrigatório:** responda SÓ ao checkpoint, e espere a minha
+  resposta antes de escrever o documento. Não emende o documento na mesma mensagem.
+- Data de consulta em toda fonte.
 ## Formato da entrega
 
 Um documento com: (1) como detectar lançamento e graduação, passo a passo, com fonte;
@@ -223,6 +271,30 @@ Data de referência: setembro de 2026.
 - Nenhuma recomendação de operação. O documento é sobre MEDIR, não sobre lucrar.
 - Explicação para leigo: eu não tenho formação em estatística.
 
+## Como trabalhar (leia antes de começar)
+
+- **Busque de verdade, agora.** Não responda de memória: tudo que está aqui muda em
+  meses. No fim do documento, liste as consultas de busca que você fez.
+- **Abra a página, não confie no snippet.** Se uma afirmação vier só do resumo do
+  buscador e você não conseguiu abrir a fonte, marque "(só snippet)". Isso já
+  causou erro em pesquisa anterior deste projeto.
+- **Fonte primária primeiro:** documentação oficial, página de preço oficial, artigo
+  revisado por pares, dado on-chain. Blog, thread e vídeo são corroboração fraca —
+  se usar, diga que é fraca.
+- **Link logo depois de cada afirmação**, não só no fim. Quero ver em que cada frase
+  se apoia, no lugar onde ela aparece.
+- **Duas fontes divergindo: traga as duas**, com a diferença de método. Não escolha
+  a mais conveniente.
+- **NÃO VERIFICADO é uma resposta boa.** Preencher com estimativa é uma resposta
+  ruim. Sem "provavelmente", sem "em geral".
+- **Não abrevie o final.** Se o documento ficar longo, pare numa seção INTEIRA e
+  escreva "CONTINUA — faltam: X, Y" que eu peço a continuação. Prefiro duas partes
+  completas a uma inteira e outra pela metade.
+- **Explique para leigo.** Não tenho formação técnica nem em estatística. Todo termo
+  explicado na primeira vez em que aparece, dentro da própria frase.
+- **O checkpoint no fim é obrigatório:** responda SÓ ao checkpoint, e espere a minha
+  resposta antes de escrever o documento. Não emende o documento na mesma mensagem.
+- Data de consulta em toda fonte.
 ## Formato da entrega
 
 Um documento com: (1) resumo da literatura com o horizonte de tempo dos efeitos;
@@ -286,6 +358,30 @@ que cada número cobre.
 - NÃO VERIFICADO no que não fechar. Número sem fonte não entra.
 - Nada de conclusão de investimento. É descrição do mercado.
 
+## Como trabalhar (leia antes de começar)
+
+- **Busque de verdade, agora.** Não responda de memória: tudo que está aqui muda em
+  meses. No fim do documento, liste as consultas de busca que você fez.
+- **Abra a página, não confie no snippet.** Se uma afirmação vier só do resumo do
+  buscador e você não conseguiu abrir a fonte, marque "(só snippet)". Isso já
+  causou erro em pesquisa anterior deste projeto.
+- **Fonte primária primeiro:** documentação oficial, página de preço oficial, artigo
+  revisado por pares, dado on-chain. Blog, thread e vídeo são corroboração fraca —
+  se usar, diga que é fraca.
+- **Link logo depois de cada afirmação**, não só no fim. Quero ver em que cada frase
+  se apoia, no lugar onde ela aparece.
+- **Duas fontes divergindo: traga as duas**, com a diferença de método. Não escolha
+  a mais conveniente.
+- **NÃO VERIFICADO é uma resposta boa.** Preencher com estimativa é uma resposta
+  ruim. Sem "provavelmente", sem "em geral".
+- **Não abrevie o final.** Se o documento ficar longo, pare numa seção INTEIRA e
+  escreva "CONTINUA — faltam: X, Y" que eu peço a continuação. Prefiro duas partes
+  completas a uma inteira e outra pela metade.
+- **Explique para leigo.** Não tenho formação técnica nem em estatística. Todo termo
+  explicado na primeira vez em que aparece, dentro da própria frase.
+- **O checkpoint no fim é obrigatório:** responda SÓ ao checkpoint, e espere a minha
+  resposta antes de escrever o documento. Não emende o documento na mesma mensagem.
+- Data de consulta em toda fonte.
 ## Formato da entrega
 
 Um documento com: (1) tabela-mestra: métrica | número | período | fonte | método |
@@ -351,6 +447,30 @@ Data de referência: setembro de 2026.
 - NÃO VERIFICADO no que não fechar. Sem "provavelmente".
 - Nenhuma recomendação de operação.
 
+## Como trabalhar (leia antes de começar)
+
+- **Busque de verdade, agora.** Não responda de memória: tudo que está aqui muda em
+  meses. No fim do documento, liste as consultas de busca que você fez.
+- **Abra a página, não confie no snippet.** Se uma afirmação vier só do resumo do
+  buscador e você não conseguiu abrir a fonte, marque "(só snippet)". Isso já
+  causou erro em pesquisa anterior deste projeto.
+- **Fonte primária primeiro:** documentação oficial, página de preço oficial, artigo
+  revisado por pares, dado on-chain. Blog, thread e vídeo são corroboração fraca —
+  se usar, diga que é fraca.
+- **Link logo depois de cada afirmação**, não só no fim. Quero ver em que cada frase
+  se apoia, no lugar onde ela aparece.
+- **Duas fontes divergindo: traga as duas**, com a diferença de método. Não escolha
+  a mais conveniente.
+- **NÃO VERIFICADO é uma resposta boa.** Preencher com estimativa é uma resposta
+  ruim. Sem "provavelmente", sem "em geral".
+- **Não abrevie o final.** Se o documento ficar longo, pare numa seção INTEIRA e
+  escreva "CONTINUA — faltam: X, Y" que eu peço a continuação. Prefiro duas partes
+  completas a uma inteira e outra pela metade.
+- **Explique para leigo.** Não tenho formação técnica nem em estatística. Todo termo
+  explicado na primeira vez em que aparece, dentro da própria frase.
+- **O checkpoint no fim é obrigatório:** responda SÓ ao checkpoint, e espere a minha
+  resposta antes de escrever o documento. Não emende o documento na mesma mensagem.
+- Data de consulta em toda fonte.
 ## Formato da entrega
 
 (1) tabela-mestra: trabalho | ativo | horizonte | método | sobreviveu a custos? |
@@ -413,6 +533,30 @@ Data de referência: setembro de 2026.
 - NÃO VERIFICADO no que não fechar.
 - O documento é sobre medir; nenhuma recomendação de operação.
 
+## Como trabalhar (leia antes de começar)
+
+- **Busque de verdade, agora.** Não responda de memória: tudo que está aqui muda em
+  meses. No fim do documento, liste as consultas de busca que você fez.
+- **Abra a página, não confie no snippet.** Se uma afirmação vier só do resumo do
+  buscador e você não conseguiu abrir a fonte, marque "(só snippet)". Isso já
+  causou erro em pesquisa anterior deste projeto.
+- **Fonte primária primeiro:** documentação oficial, página de preço oficial, artigo
+  revisado por pares, dado on-chain. Blog, thread e vídeo são corroboração fraca —
+  se usar, diga que é fraca.
+- **Link logo depois de cada afirmação**, não só no fim. Quero ver em que cada frase
+  se apoia, no lugar onde ela aparece.
+- **Duas fontes divergindo: traga as duas**, com a diferença de método. Não escolha
+  a mais conveniente.
+- **NÃO VERIFICADO é uma resposta boa.** Preencher com estimativa é uma resposta
+  ruim. Sem "provavelmente", sem "em geral".
+- **Não abrevie o final.** Se o documento ficar longo, pare numa seção INTEIRA e
+  escreva "CONTINUA — faltam: X, Y" que eu peço a continuação. Prefiro duas partes
+  completas a uma inteira e outra pela metade.
+- **Explique para leigo.** Não tenho formação técnica nem em estatística. Todo termo
+  explicado na primeira vez em que aparece, dentro da própria frase.
+- **O checkpoint no fim é obrigatório:** responda SÓ ao checkpoint, e espere a minha
+  resposta antes de escrever o documento. Não emende o documento na mesma mensagem.
+- Data de consulta em toda fonte.
 ## Formato da entrega
 
 (1) a regra de pontuação escolhida, com exemplo; (2) calibração para leigo; (3) as
@@ -477,6 +621,30 @@ Data de referência: setembro de 2026. Preços e limites mudam; use a página of
 - NÃO VERIFICADO no que não fechar.
 - Sem recomendação de fornecedor; tabela neutra.
 
+## Como trabalhar (leia antes de começar)
+
+- **Busque de verdade, agora.** Não responda de memória: tudo que está aqui muda em
+  meses. No fim do documento, liste as consultas de busca que você fez.
+- **Abra a página, não confie no snippet.** Se uma afirmação vier só do resumo do
+  buscador e você não conseguiu abrir a fonte, marque "(só snippet)". Isso já
+  causou erro em pesquisa anterior deste projeto.
+- **Fonte primária primeiro:** documentação oficial, página de preço oficial, artigo
+  revisado por pares, dado on-chain. Blog, thread e vídeo são corroboração fraca —
+  se usar, diga que é fraca.
+- **Link logo depois de cada afirmação**, não só no fim. Quero ver em que cada frase
+  se apoia, no lugar onde ela aparece.
+- **Duas fontes divergindo: traga as duas**, com a diferença de método. Não escolha
+  a mais conveniente.
+- **NÃO VERIFICADO é uma resposta boa.** Preencher com estimativa é uma resposta
+  ruim. Sem "provavelmente", sem "em geral".
+- **Não abrevie o final.** Se o documento ficar longo, pare numa seção INTEIRA e
+  escreva "CONTINUA — faltam: X, Y" que eu peço a continuação. Prefiro duas partes
+  completas a uma inteira e outra pela metade.
+- **Explique para leigo.** Não tenho formação técnica nem em estatística. Todo termo
+  explicado na primeira vez em que aparece, dentro da própria frase.
+- **O checkpoint no fim é obrigatório:** responda SÓ ao checkpoint, e espere a minha
+  resposta antes de escrever o documento. Não emende o documento na mesma mensagem.
+- Data de consulta em toda fonte.
 ## Formato da entrega
 
 (1) padrões de arquitetura com evidência de cada um; (2) tabela de modelos: latência
