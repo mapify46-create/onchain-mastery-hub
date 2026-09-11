@@ -174,11 +174,36 @@ acidente deixa de ser possível — não depende de ninguém se lembrar da regra
 token X" é um sinal com carimbo de tempo, vindo da blockchain. Serve de evento para a
 previsão exatamente como a graduação, e não custa US$ 0,005 por post lido.
 
-**As duas dúvidas em aberto:**
+**Preço — respondido pela página da conta do dono (11/09/2026).** É página
+autenticada, então não pude abri-la por conta própria: a fonte é o print.
 
-1. **Preço.** Nenhuma das duas páginas oficiais que abri documenta custo. Fontes de
-   terceiros falam em 1 a 10 créditos por chamada, sem dizer quanto vale um crédito.
-2. **As métricas derivadas são caixa-preta.** `rat_trader_amount_rate` e
+| Plano | Preço | Peso | Chamadas/s num endpoint de peso 1 |
+|---|---|---:|---:|
+| **Gratuito** | **US$ 0** | 5 | **5** |
+| Plus | US$ 290/ano (US$ 24/mês) | 20 | 20 |
+| Pro | US$ 990/ano (US$ 83/mês) | 50 | 50 |
+
+A regra é `chamadas/s = peso do plano ÷ peso do endpoint`. E o plano gratuito tem
+**"acesso total à habilidade, sem barreiras"**: entre os planos muda a velocidade,
+não o que se pode consultar.
+
+No grátis, os endpoints que interessam ficam assim:
+
+| Endpoint | Peso | Chamadas/s no grátis |
+|---|---:|---:|
+| Acompanhar Smart Money | 1 | 5 |
+| Acompanhar KOL | 1 | 5 |
+| Informações e segurança do token | 1 | 5 |
+| Velas (Kline) e tokens novos (Trenches) | 2 | 2,5 |
+| Sinal e tendência de mercado | 3 | 1,67 |
+| Holders e traders do token | 5 | 1 |
+| Acompanhar carteira seguida | 10 | 0,5 |
+
+**A comparação que muda a arquitetura:** o GeckoTerminal grátis dá 10 chamadas por
+**minuto**. O GMGN grátis dá 5 por **segundo** em Smart Money e KOL, e 2,5 por
+segundo em velas. É cerca de 30 vezes mais, sem pagar nada.
+
+**A dúvida que fica: as métricas derivadas são caixa-preta.** `rat_trader_amount_rate` e
    `bundler_trader_amount_rate` não têm método de cálculo publicado. Consequência
    prática: servem como **entrada** para a previsão, nunca como **medição**. O que o
    observatório afirma medir precisa ser reproduzível por outra pessoa.
