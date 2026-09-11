@@ -1,17 +1,17 @@
 # Prompts de pesquisa — Observatório de narrativas (Fase 0)
 
-Quatro prompts independentes, um para cada chat novo. Cada um é autossuficiente: não
+Sete prompts independentes, um para cada chat novo. Os prompts 1-4 cobrem dados e metodo; os 5-7 cobrem a pergunta "a IA consegue prever memecoin?" — evidencia, pontuacao e arquitetura. Cada um é autossuficiente: não
 precisa anexar arquivo, é só copiar o bloco inteiro e colar.
 
-**Modelo:** **Sonnet 5, esforço `high`** nos prompts 1, 2 e 4 (levantamento de fatos
-com tabela). **Opus 5, esforço `high`** no prompt 3 (metodologia — é raciocínio, e é
+**Modelo:** **Sonnet 5, esforço `high`** nos prompts 1, 2, 4 e 7 (levantamento de fatos
+com tabela). **Opus 5, esforço `high`** nos prompts 3, 5 e 6 (evidência e método — é raciocínio, e é
 onde um erro custa mais). Em todos: **busca na web ligada**.
 
 Podem rodar em paralelo. Me mande cada resultado conforme sair.
 
 ---
 
-# PROMPT 1 de 4 — Acesso a dados sociais (X, Telegram e trackers)
+# PROMPT 1 de 7 — Acesso a dados sociais (X, Telegram e trackers)
 
 ```
 Preciso de um levantamento factual, em português do Brasil, sobre acesso programático
@@ -88,7 +88,7 @@ resposta.
 
 ---
 
-# PROMPT 2 de 4 — Dados on-chain e de preço (Solana)
+# PROMPT 2 de 7 — Dados on-chain e de preço (Solana)
 
 ```
 Preciso de um levantamento factual, em português do Brasil, sobre fontes de dados
@@ -159,7 +159,7 @@ resposta muda a arquitetura inteira.
 
 ---
 
-# PROMPT 3 de 4 — Metodologia de paper trading honesto
+# PROMPT 3 de 7 — Metodologia de paper trading honesto
 
 ```
 Preciso de uma metodologia, em português do Brasil, para medir de forma HONESTA se
@@ -239,7 +239,7 @@ E espere minha resposta.
 
 ---
 
-# PROMPT 4 de 4 — O ciclo de vida dos tokens: os números que já existem
+# PROMPT 4 de 7 — O ciclo de vida dos tokens: os números que já existem
 
 ```
 Preciso de um levantamento de NÚMEROS, em português do Brasil, sobre o ciclo de vida
@@ -294,4 +294,196 @@ observatório pode medir primeiro); (4) NÃO VERIFICADOS; (5) fontes com link e 
 
 Antes de escrever o documento, me diga só a taxa de graduação mais bem sustentada
 que encontrou, com fonte e período — e espere minha resposta.
+```
+
+---
+
+# PROMPT 5 de 7 — O que a IA já consegue (e não consegue) prever em cripto
+
+```
+Preciso de uma revisão honesta, em português do Brasil, do estado da arte em
+PREVISÃO de preço de criptoativos com machine learning e modelos de linguagem —
+com foco no que foi validado fora da amostra e líquido de custos. Pesquise na web:
+literatura acadêmica (arXiv, SSRN, periódicos), relatórios técnicos e replicações.
+Opinião de thread e marketing de produto não contam como evidência.
+
+## Contexto
+
+Quero saber se um sistema com várias IAs (modelos rápidos para classificar sinais,
+modelos de raciocínio para gerar previsões) consegue prever, com vantagem real,
+quais memecoins sobem ou caem em horizontes de minutos a dias. Vou testar isso num
+observatório próprio, em paper trading, com previsões registradas ANTES do fato.
+Antes de construir, quero saber o que a evidência publicada diz. Espero que a
+resposta seja desconfortável; prefiro isso a uma ilusão.
+
+Data de referência: setembro de 2026.
+
+## O que preciso saber
+
+1. **Previsibilidade de retorno de cripto com ML** (2020–2026): quais trabalhos
+   encontraram previsibilidade, em que horizonte, com que métrica — e, crucial, se
+   o resultado sobreviveu a (a) teste fora da amostra, (b) custos de transação e
+   slippage, (c) replicação independente. Separe os que sobreviveram dos que não.
+2. **LLMs como previsores de mercado** (2023–2026): estudos que usaram GPT/Claude/
+   Gemini/outros para prever preço ou direção. O que acharam? Houve vazamento de
+   dados de treino (o modelo "conhecia" o período)? Como controlaram isso?
+3. **Memecoins especificamente**: alguma evidência de previsibilidade em tokens de
+   baixíssima liquidez e vida curta? Ou a literatura trata só de BTC/ETH? Diga se
+   há lacuna.
+4. **Decaimento de vantagem**: estudos sobre o que acontece com um sinal lucrativo
+   depois de publicado ou amplamente usado (alpha decay). Isso me diz quanto vale
+   uma vantagem que outros também podem construir com as mesmas APIs.
+5. **Sistemas multiagente / ensembles de modelos** para previsão financeira: há
+   evidência de que combinar modelos melhora previsão fora da amostra, ou só
+   melhora o backtest?
+6. **Torneios de previsão** (Metaculus, Good Judgment, benchmarks de forecasting
+   com LLM): como os modelos se saem contra humanos calibrados, e o que isso
+   sugere para previsão de preço em horizonte curto?
+7. **Produtos comerciais** de "trading com IA" em cripto: algum tem track record
+   auditado por terceiro? Se nenhum tiver, diga isso — é informação.
+
+## Regras
+
+- Cada afirmação com link. Marque a qualidade: revisado por pares / preprint /
+  relatório de empresa / autopublicado.
+- Distinga sempre: resultado em backtest × fora da amostra × ao vivo × líquido de
+  custos. Um resultado que não diz qual dos quatro é vale pouco.
+- NÃO VERIFICADO no que não fechar. Sem "provavelmente".
+- Nenhuma recomendação de operação.
+
+## Formato da entrega
+
+(1) tabela-mestra: trabalho | ativo | horizonte | método | sobreviveu a custos? |
+fora da amostra? | replicado? | link; (2) o que a evidência sustenta e o que não
+sustenta, em linguagem para leigo; (3) a lacuna sobre memecoins; (4) o que eu
+precisaria mostrar para afirmar que "meu sistema prevê" — o padrão mínimo de prova;
+(5) NÃO VERIFICADOS; (6) fontes.
+
+Antes do documento, me diga só: existe algum trabalho revisado por pares que mostre
+previsão de retorno de cripto em horizonte de minutos a horas, líquida de custos,
+fora da amostra? Sim ou não, com a fonte — e espere minha resposta.
+```
+
+---
+
+# PROMPT 6 de 7 — Como pontuar previsões de IA sem se enganar
+
+```
+Preciso de um método, em português do Brasil e para leigo, para PONTUAR previsões
+feitas por modelos de IA sobre movimento de preço, de forma que não dê para me
+enganar. Pesquise na web: literatura de forecasting, avaliação de previsão
+probabilística, e prática de torneios de previsão.
+
+## Contexto
+
+Vou ter vários modelos (alguns rápidos, outros de raciocínio) gerando previsões do
+tipo "este token estará acima do preço atual em 30 minutos, com 70% de confiança".
+Cada previsão fica registrada com hora ANTES do fato. Um observatório mede o que
+aconteceu. Quero um sistema de pontuação que recompense calibração e puna
+excesso de confiança — e que não me deixe escolher só os acertos.
+
+Data de referência: setembro de 2026.
+
+## O que preciso
+
+1. **Regras de pontuação próprias** (Brier, log score e similares): o que cada uma
+   mede, qual usar para previsões binárias e para intervalos, com exemplo numérico.
+2. **Calibração**: como medir se "70% de confiança" acerta 70% das vezes; gráfico
+   de calibração explicado para leigo.
+3. **Linha de base**: contra o que comparar — previsão "sempre não muda", "sempre
+   cai" (em memecoin a maioria cai), aleatória. Uma IA que não bate a linha de base
+   "sempre cai" não prevê nada. Como calcular.
+4. **De previsão a dinheiro**: como converter uma previsão pontuada em resultado
+   financeiro simulado, líquido de custos — e por que uma previsão bem calibrada
+   pode ainda assim não dar lucro (custo maior que a vantagem).
+5. **Comparar modelos entre si** de forma justa: mesmas perguntas, mesmo horário,
+   mesma informação disponível. Como garantir que o modelo de raciocínio não teve
+   "mais tempo" e por isso viu o futuro.
+6. **Vazamento de informação**: como garantir que o modelo não sabia do resultado
+   (dados de treino, contexto passado por engano, relógio errado).
+7. **Quantas previsões** antes de dizer que um modelo é melhor que outro ou que a
+   linha de base, dado que o resultado tem cauda pesada. Método, não número mágico.
+8. **Registro auditável**: formato de log de previsão que permita a qualquer pessoa
+   conferir depois (hash, hora, conteúdo, resultado).
+
+## Regras
+
+- Fonte com link para cada método. Explicação para quem não tem formação em
+  estatística, com exemplo numérico.
+- NÃO VERIFICADO no que não fechar.
+- O documento é sobre medir; nenhuma recomendação de operação.
+
+## Formato da entrega
+
+(1) a regra de pontuação escolhida, com exemplo; (2) calibração para leigo; (3) as
+linhas de base e como calcular; (4) previsão → resultado líquido; (5) protocolo de
+comparação justa entre modelos; (6) lista de vazamentos e como evitar; (7) método
+de tamanho de amostra; (8) formato do log auditável; (9) NÃO VERIFICADOS; (10)
+fontes.
+
+Antes do documento, me diga só qual regra de pontuação você usaria para previsões
+binárias com confiança, e por quê — e espere minha resposta.
+```
+
+---
+
+# PROMPT 7 de 7 — Arquitetura de sistemas multi-IA para análise de mercado
+
+```
+Preciso de um levantamento técnico, em português do Brasil, sobre como sistemas
+com VÁRIOS modelos de IA (rápidos e de raciocínio) são organizados para analisar
+fluxos de dados em tempo quase real — e onde eles falham. Pesquise na web:
+documentação de fornecedores, artigos de engenharia, relatórios de incidentes.
+
+## Contexto
+
+Quero um sistema que: (a) classifique milhares de posts e eventos on-chain por dia
+com modelos rápidos e baratos (Haiku, Mercury 2, Gemini Flash ou equivalentes); (b)
+passe os casos relevantes para modelos de raciocínio (Opus, GPT de raciocínio,
+Gemini Pro) que produzam uma previsão com confiança; (c) registre tudo para ser
+pontuado depois. NÃO opera; só prevê e registra. Roda no meu computador ou numa
+máquina barata.
+
+Data de referência: setembro de 2026. Preços e limites mudam; use a página oficial.
+
+## O que preciso saber
+
+1. **Padrões de arquitetura**: roteamento por custo (barato filtra, caro decide),
+   ensembles, debate entre modelos, "juiz" — o que a literatura e a prática de
+   engenharia mostram que funciona e o que só parece funcionar.
+2. **Latência real de ponta a ponta** de cada modelo candidato: tempo até o primeiro
+   token e tempo total para uma resposta curta (50 tokens) e uma longa (500), com
+   fonte de medição independente (Artificial Analysis ou similar), não do fabricante.
+3. **Custo por dia** para um volume de, por exemplo, 20 mil classificações curtas e
+   500 previsões longas por dia, por modelo, com os preços oficiais de hoje.
+4. **Limites de requisição** de cada API e o que acontece ao estourar.
+5. **Alucinação em dados estruturados**: com que frequência modelos inventam
+   endereço de contrato, ticker ou número ao classificar posts? Como mitigar
+   (validar contra fonte on-chain, nunca confiar no texto do modelo para um
+   endereço).
+6. **Consistência**: o mesmo modelo dá a mesma resposta para a mesma entrada?
+   Como medir e o que fazer com a variação.
+7. **Falhas conhecidas** de sistemas de análise em tempo real com LLM: incidentes
+   documentados, custos que explodiram, loops, dados vazados por prompt injection
+   vindo do conteúdo analisado (um post pode conter instruções para o modelo).
+8. **Injeção de prompt via conteúdo**: como tratar um post ou nome de token que
+   contém texto tentando manipular o classificador. Isso é risco real para mim:
+   o conteúdo que analiso é hostil por natureza.
+
+## Regras
+
+- Fonte com link. Medição independente vale mais que fabricante.
+- Preço e limite: copie da página oficial, com data.
+- NÃO VERIFICADO no que não fechar.
+- Sem recomendação de fornecedor; tabela neutra.
+
+## Formato da entrega
+
+(1) padrões de arquitetura com evidência de cada um; (2) tabela de modelos: latência
+medida, custo por 1M tokens, custo/dia no meu volume, limites; (3) alucinação e
+consistência: dados e mitigação; (4) injeção de prompt: risco e defesa; (5) falhas
+documentadas; (6) NÃO VERIFICADOS; (7) fontes.
+
+Antes do documento, me diga só o custo diário estimado do caminho mais barato
+viável para o meu volume — e espere minha resposta.
 ```

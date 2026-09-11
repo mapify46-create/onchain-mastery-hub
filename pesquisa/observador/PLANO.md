@@ -80,6 +80,19 @@ classificador barato (Haiku ou Mercury 2, testados lado a lado nos seus dados):
 
 **Saída:** feed de sinais com hora exata, ligados a tokens com histórico de preço.
 
+### Fase 2.5 — Previsor multi-IA (a pergunta "a IA consegue prever?")
+Modelos rápidos filtram (classificação); modelos de raciocínio geram **previsões
+com confiança** ("acima do preço atual em 30 min, 70%"), registradas com hora e
+hash ANTES do fato. Nenhuma previsão vira ordem: ela vira uma linha no log, que a
+Fase 3 pontua (regra de pontuação própria, calibração, linha de base "sempre cai",
+resultado líquido de custo). Modelos competem entre si com as mesmas perguntas e a
+mesma informação. As pesquisas 5, 6 e 7 definem evidência prévia, pontuação e
+arquitetura.
+
+**Critério honesto:** um modelo só "prevê" se bater a linha de base *e* der
+resultado líquido positivo, em N suficiente, fora da amostra. Qualquer coisa menos
+que isso se chama "acertou algumas vezes".
+
 ### Fase 3 — Laboratório de hipóteses
 Você escreve as hipóteses (pré-registradas). O sistema roda a simulação honesta e
 gera relatório semanal: por hipótese, quantas observações, resultado líquido,
