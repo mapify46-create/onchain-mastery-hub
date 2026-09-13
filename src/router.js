@@ -8,6 +8,9 @@ import { montarModulo2 } from './views/modulo2.js';
 import { montarModulo3 } from './views/modulo3.js';
 import { montarModulo4 } from './views/modulo4.js';
 import { montarModulo5 } from './views/modulo5.js';
+import { montarModulo6 } from './views/modulo6.js';
+import { montarModulo7 } from './views/modulo7.js';
+import { montarViewChecklist } from './views/checklist.js';
 import { montarViewGlossario } from './views/glossario.js';
 
 // Catálogo de rotas. É a única lista de páginas do app: a sidebar e a tela de
@@ -78,6 +81,38 @@ export const ROTAS = [
     disponivel: true,
     descricao: 'Custódia, as cinco camadas de taxa, slippage e erros de execução.',
     montar: montarModulo5,
+  },
+  {
+    hash: '#/modulo-6',
+    id: 'modulo-6',
+    curto: 'Módulo 6',
+    titulo: 'Módulo 6 — Ler a tela',
+    tipo: 'modulo',
+    disponivel: true,
+    descricao:
+      'Market cap, liquidez e PnL de verdade, volume falso, armadilhas do contrato e o que dá para prever.',
+    montar: montarModulo6,
+  },
+  {
+    hash: '#/modulo-7',
+    id: 'modulo-7',
+    curto: 'Módulo 7',
+    titulo: 'Módulo 7 — A rotina',
+    tipo: 'modulo',
+    disponivel: true,
+    descricao: 'A regra escrita antes, o tamanho que aguenta ir a zero, o diário e a revisão.',
+    montar: montarModulo7,
+  },
+  {
+    hash: '#/checklist',
+    id: 'checklist',
+    curto: 'Checklist',
+    titulo: 'Checklist antes de comprar',
+    tipo: 'pagina',
+    disponivel: true,
+    descricao:
+      'Os dois pilares em itens marcáveis, cada um com a força da evidência, e o fluxograma da decisão.',
+    montar: montarViewChecklist,
   },
   {
     hash: '#/glossario',

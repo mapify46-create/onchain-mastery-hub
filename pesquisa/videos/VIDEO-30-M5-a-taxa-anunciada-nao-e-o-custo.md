@@ -85,6 +85,8 @@ Um token ainda na bonding curve do pump.fun paga 1,25% de taxa de pool, decompos
 
 Ou seja: a mesma ordem, no mesmo terminal, no mesmo dia, custa cinco vezes mais em taxa de pool se o token for novo. Isso não é um defeito do terminal — é onde a troca está acontecendo. Mas é informação que muda a sua conta e que raramente aparece explicada.
 
+Isso não é só taxa anunciada: um estudo da Uniswap Labs sobre 534 mil negociações reais mediu o custo total efetivo (taxa, deslizamento de preço e o que bots de MEV extraem) em 140 pontos-base por dólar negociado numa memecoin popular, contra 22 pontos-base num par entre duas moedas estáveis — 6 vezes mais caro, numa pool mais funda do que a maioria das de memecoin recém-lançada. O mesmo estudo mediu a chance de sofrer deslizamento de preço causado por um bot adversário como cerca de 80% maior ao negociar a memecoin do que ao negociar a moeda madura (Adams, Chan, Markovich & Wan, "Don't Let MEV Slip", Financial Cryptography 2024).
+
 ### Tabela do app: as cinco camadas de custo
 
 |  | Quanto é | Quem recebe | Fixa ou variável |
@@ -92,7 +94,7 @@ Ou seja: a mesma ordem, no mesmo terminal, no mesmo dia, custa cinco vezes mais 
 | **1. Taxa da plataforma** (A única que costuma ser anunciada) | 0,95% líquido no nível de entrada, até 0,75% no topo (1% bruto menos a devolução em SOL). | A plataforma; parte volta ao usuário como devolução em SOL. | Variável por nível de volume. |
 | **2. Taxa-base da rede** (A menor de todas, e ainda assim inescapável) | 0,000005 SOL por assinatura (5.000 lamports). Fração de centavo. | Validadores — metade é queimada. | Fixa. |
 | **3. Priority fee** (Não aparece na taxa anunciada) | Configurável; o padrão do Axiom é 0,001 SOL. | O validador, integralmente. | Fixa em SOL — por isso pesa mais em ordem pequena. |
-| **4. Gorjeta de MEV (Jito)** (Também não aparece na taxa anunciada) | Configurável; o padrão do Axiom é 0,001 SOL. O mínimo do Jito é 0,00001 SOL. | Validadores, pelas contas de gorjeta do Jito. | Fixa em SOL. |
+| **4. Gorjeta de MEV (Jito)** (Também não aparece na taxa anunciada) | Configurável; o padrão do Axiom é 0,001 SOL. O mínimo do Jito é 1.000 lamports (0,000001 SOL). | Validadores, pelas contas de gorjeta do Jito. | Fixa em SOL. |
 | **5. Taxa da pool** (A que mais varia, e não depende do terminal) | 1,25% na bonding curve do pump.fun; 1,25% caindo por faixa no PumpSwap; 0,25% na Raydium. | Criador do token, protocolo e provedores de liquidez, conforme o venue. | Variável conforme onde o token está. |
 
 - *1. Taxa da plataforma* — Fonte: docs.axiom.trade/getting-started/fees/axiom-fees. Fontes de terceiros de 2025 citavam 0,9%; onde houver conflito, vale a documentação oficial — a divergência normalmente indica material desatualizado.

@@ -1,7 +1,8 @@
 // views/modulo3.js — monta a página do Módulo 3 a partir de src/data/modulo3.js.
 //
 // Abas internas (padrão ARIA de tabs, vindo de ui.js):
-//   Visão geral · Matriz de ferramentas · Cenário 2025–2026 · Quiz
+//   Visão geral · Pilar social na prática · Pilar técnico na prática ·
+//   Matriz de ferramentas · Cenário 2025–2026 · Quiz
 
 import { modulo3 } from '../data/modulo3.js';
 import {
@@ -17,6 +18,8 @@ import { montarMatrizDeFerramentas } from '../components/toolMatrix.js';
 import { montarQuiz } from '../components/quiz.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
+import { montarAnatomia } from '../components/anatomia.js';
+import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { obterEstado, atualizar } from '../store.js';
 
 // ---------------------------------------------------------------------------
@@ -26,7 +29,8 @@ import { obterEstado, atualizar } from '../store.js';
 // src/data/modulo3.js: quase todos são CONTAGENS do próprio catálogo de
 // ferramentas (quantas de risco baixo, quantas por pilar), e contar na view
 // garante que o número acompanha qualquer edição no catálogo sem virar dado
-// duplicado e desatualizado. Só os textos são fixos.
+// duplicado e desatualizado. Só os textos são fixos. (As abas práticas são
+// exceção: os destaques delas têm fonte e ficam no arquivo de dados.)
 // ---------------------------------------------------------------------------
 
 function contarPorRisco(risco) {
@@ -44,7 +48,7 @@ function destaquesDaVisaoGeral() {
     {
       rotulo: 'Pilares de checagem',
       valor: '2',
-      nota: 'Social (a atenção está chegando?) e técnico (o contrato resiste?). Duas checagens, não uma — e nenhuma substitui a outra.',
+      nota: 'Social (o token é quem diz ser?) e técnico (o que o contrato e as carteiras permitem?). Duas checagens, não uma — e nenhuma substitui a outra.',
     },
     {
       rotulo: 'Ferramentas catalogadas',
@@ -53,7 +57,7 @@ function destaquesDaVisaoGeral() {
         tecnico +
         ' no pilar técnico e ' +
         social +
-        ' no social. O social é o lado mais raso do catálogo — e o exemplo dele está marcado como não confirmado.',
+        ' no social. O pilar social é quase todo manual: por isso tem tão poucas ferramentas.',
     },
     {
       rotulo: 'O nome certo',
@@ -164,6 +168,49 @@ function criarIntroducao(texto) {
   return criarElemento('p', { class: 'max-w-3xl text-texto-suave' }, [texto]);
 }
 
+// Card de uma seção de texto: título, parágrafos e, se houver, uma lista com título.
+function criarCardDaSecao(secao) {
+  return criarCard([
+    criarElemento('h2', { class: 'text-lg font-semibold' }, [secao.titulo]),
+    ...secao.paragrafos.map((paragrafo) =>
+      criarElemento('p', { class: 'mt-3 text-texto-suave' }, [paragrafo]),
+    ),
+    secao.listaTitulo &&
+      criarElemento('p', { class: 'mt-4 text-sm font-semibold text-texto' }, [secao.listaTitulo]),
+    secao.lista &&
+      criarElemento(
+        'ul',
+        { class: 'mt-2 list-disc space-y-2 pl-5 text-texto-suave' },
+        secao.lista.map((item) => criarElemento('li', {}, [item])),
+      ),
+  ]);
+}
+
+// Card-link para outra página do hub.
+function criarLink(href, titulo, texto) {
+  return criarElemento(
+    'a',
+    {
+      href,
+      class:
+        'block rounded-card border border-primaria/50 bg-primaria/10 p-5 transition-colors ' +
+        'duration-150 hover:border-primaria',
+    },
+    [
+      criarElemento('p', { class: 'text-base font-semibold text-texto' }, [titulo + ' →']),
+      criarElemento('p', { class: 'mt-1 text-sm text-texto-suave' }, [texto]),
+    ],
+  );
+}
+
+// Tabela com título.
+function criarTabela(titulo, tabela) {
+  return criarElemento('div', { class: 'space-y-4' }, [
+    criarElemento('h2', { class: 'text-lg font-semibold' }, [titulo]),
+    montarTabelaComparativa(tabela),
+  ]);
+}
+
 // ---------------------------------------------------------------------------
 // Aba 1 — Visão geral (os dois pilares, a correção Axiom e o J7 Tracker)
 // ---------------------------------------------------------------------------
@@ -188,14 +235,7 @@ function montarVisaoGeral() {
     { class: 'border-acento/50 bg-acento/5' },
   );
 
-  const secoes = modulo3.secoes.map((secao) =>
-    criarCard([
-      criarElemento('h2', { class: 'text-lg font-semibold' }, [secao.titulo]),
-      ...secao.paragrafos.map((paragrafo) =>
-        criarElemento('p', { class: 'mt-3 text-texto-suave' }, [paragrafo]),
-      ),
-    ]),
-  );
+  const secoes = modulo3.secoes.map(criarCardDaSecao);
 
   const pilarSocial = criarCard([
     criarElemento('h2', { class: 'text-lg font-semibold' }, [modulo3.pilarSocial.titulo]),
@@ -227,7 +267,144 @@ function montarVisaoGeral() {
 }
 
 // ---------------------------------------------------------------------------
-// Aba 2 — Matriz de ferramentas (filtrável por pilar/chain/papel)
+// Aba 2 — Pilar social na prática
+// ---------------------------------------------------------------------------
+
+// A rotina de 5 minutos: lista numerada, com a janela de tempo de cada passo.
+function criarRotina(rotina) {
+  return criarCard(
+    [
+      criarElemento('h2', { class: 'text-lg font-semibold' }, [rotina.titulo]),
+      criarElemento('p', { class: 'mt-2 text-sm text-texto-suave' }, [rotina.descricao]),
+      criarElemento(
+        'ol',
+        { class: 'mt-4 space-y-3' },
+        rotina.passos.map((passo, indice) =>
+          criarElemento('li', { class: 'flex gap-3' }, [
+            criarElemento(
+              'span',
+              {
+                class:
+                  'flex h-7 w-7 shrink-0 items-center justify-center rounded-full border ' +
+                  'border-acento/50 text-sm font-semibold text-acento',
+                'aria-hidden': 'true',
+              },
+              [String(indice + 1)],
+            ),
+            criarElemento('div', { class: 'min-w-0' }, [
+              criarElemento('p', { class: 'text-sm font-semibold text-texto' }, [
+                passo.titulo,
+                criarElemento('span', { class: 'ml-2 font-mono text-xs font-normal text-texto-suave' }, [
+                  passo.tempo,
+                ]),
+              ]),
+              criarElemento('p', { class: 'mt-1 text-sm text-texto-suave' }, [passo.texto]),
+            ]),
+          ]),
+        ),
+      ),
+    ],
+    { class: 'border-acento/50' },
+  );
+}
+
+function montarAbaSocial() {
+  const pratica = modulo3.praticaSocial;
+  const secao = (id) => {
+    const dados = pratica.secoes.find((item) => item.id === id);
+    return dados ? criarCardDaSecao(dados) : null;
+  };
+
+  return criarElemento('div', { class: 'space-y-6' }, [
+    montarDestaques(pratica.destaques),
+    criarIntroducao(pratica.introducao),
+    criarRotina(pratica.rotina),
+    secao('endereco'),
+    montarAnatomia({ id: 'm3-anatomia-perfil', ...pratica.anatomiaPerfil }),
+    secao('x'),
+    secao('discord'),
+    secao('telegram'),
+    secao('calls'),
+    criarTabela('Cada sinal social: o que prova e o que não prova', pratica.tabela),
+    criarLink(
+      '#/checklist',
+      'Checklist antes de comprar',
+      'O pilar social vira itens marcáveis, na ordem da rotina, junto com o técnico.',
+    ),
+  ]);
+}
+
+// ---------------------------------------------------------------------------
+// Aba 3 — Pilar técnico na prática (uma ferramenta por vez, na ordem de uso)
+// ---------------------------------------------------------------------------
+function criarSecaoDaFerramenta(ferramenta, indice) {
+  const cabecalho = criarCard([
+    criarElemento('div', { class: 'flex flex-wrap items-baseline justify-between gap-2' }, [
+      criarElemento('h2', { class: 'text-lg font-semibold' }, [
+        indice + 1 + '. ' + ferramenta.nome,
+      ]),
+      criarElemento('span', { class: 'font-mono text-sm text-texto-suave' }, [ferramenta.endereco]),
+    ]),
+    criarElemento('p', { class: 'mt-2 text-base text-acento' }, [ferramenta.pergunta]),
+    criarElemento('p', { class: 'mt-3 text-sm text-texto-suave' }, [
+      criarElemento('strong', { class: 'text-texto' }, ['O que é grátis: ']),
+      ferramenta.gratis,
+    ]),
+  ]);
+
+  const passoAPasso = criarCard([
+    criarElemento('h3', { class: 'text-base font-semibold' }, ['Passo a passo']),
+    criarElemento(
+      'ol',
+      { class: 'mt-3 list-decimal space-y-2 pl-5 text-sm text-texto-suave' },
+      ferramenta.passos.map((passo) => criarElemento('li', {}, [passo])),
+    ),
+    criarElemento(
+      'div',
+      { class: 'mt-4 rounded-lg border border-risco-medio/40 bg-risco-medio/10 p-3 text-sm' },
+      [
+        criarElemento('strong', { class: 'block text-texto' }, ['Armadilhas de leitura']),
+        criarElemento(
+          'ul',
+          { class: 'mt-2 list-disc space-y-1 pl-5 text-texto-suave' },
+          ferramenta.armadilhas.map((armadilha) => criarElemento('li', {}, [armadilha])),
+        ),
+      ],
+    ),
+  ]);
+
+  return criarElemento('section', { class: 'space-y-4', 'aria-label': ferramenta.nome }, [
+    cabecalho,
+    montarAnatomia({ id: 'm3-anatomia-' + ferramenta.id, ...ferramenta.anatomia }),
+    passoAPasso,
+  ]);
+}
+
+function montarAbaTecnico() {
+  const pratica = modulo3.praticaTecnica;
+
+  return criarElemento('div', { class: 'space-y-8' }, [
+    montarDestaques(pratica.destaques),
+    criarIntroducao(pratica.introducao),
+    ...pratica.ferramentas.map(criarSecaoDaFerramenta),
+    criarTabela('O que eu quero checar → onde eu checo', pratica.tabelaOnde),
+    criarElemento('div', { class: 'grid gap-4 md:grid-cols-2' }, [
+      criarLink(
+        '#/modulo-6',
+        'Módulo 6 — Ler a tela',
+        'O que cada número significa, como o volume é fabricado e as extensões de contrato em detalhe.',
+      ),
+      criarLink(
+        '#/checklist',
+        'Checklist antes de comprar',
+        'Os itens técnicos em ordem, com a força da evidência de cada um.',
+      ),
+    ]),
+  ]);
+}
+
+// ---------------------------------------------------------------------------
+// Aba 4 — Matriz de ferramentas (filtrável por pilar/chain/papel)
 // ---------------------------------------------------------------------------
 function montarAbaMatriz() {
   return criarElemento('div', { class: 'space-y-6' }, [
@@ -245,7 +422,7 @@ function montarAbaMatriz() {
 }
 
 // ---------------------------------------------------------------------------
-// Aba 3 — Cenário de launchpads 2025–2026
+// Aba 5 — Cenário de launchpads 2025–2026
 // ---------------------------------------------------------------------------
 function montarAbaCenario() {
   const { cenarioLaunchpads } = modulo3;
@@ -278,7 +455,7 @@ function montarAbaCenario() {
 }
 
 // ---------------------------------------------------------------------------
-// Aba 4 — Quiz + botão de concluir o módulo
+// Aba 6 — Quiz + botão de concluir o módulo + fontes das abas práticas
 // ---------------------------------------------------------------------------
 function montarConclusao() {
   const container = criarCard([]);
@@ -322,15 +499,65 @@ function montarConclusao() {
   return container;
 }
 
+function montarFontesDaPratica() {
+  return criarElemento(
+    'details',
+    { class: 'group rounded-card border border-borda bg-superficie p-5' },
+    [
+      criarElemento(
+        'summary',
+        { class: 'flex cursor-pointer list-none items-center justify-between text-sm font-medium' },
+        [
+          criarElemento('span', {}, ['Fontes das abas práticas e itens não verificados']),
+          criarElemento(
+            'span',
+            {
+              class: 'text-texto-suave transition-transform duration-150 group-open:rotate-180',
+              'aria-hidden': 'true',
+            },
+            ['▾'],
+          ),
+        ],
+      ),
+      criarElemento('h3', { class: 'mt-4 text-sm font-semibold' }, ['Não verificado']),
+      criarElemento(
+        'ul',
+        { class: 'mt-2 space-y-3' },
+        modulo3.naoVerificadoPratica.map((item) =>
+          criarElemento(
+            'li',
+            {
+              class:
+                'rounded-lg border border-risco-medio/40 bg-risco-medio/10 p-3 text-sm text-texto-suave',
+            },
+            [criarElemento('strong', { class: 'text-texto' }, [item.titulo + ': ']), item.texto],
+          ),
+        ),
+      ),
+      criarElemento('h3', { class: 'mt-4 text-sm font-semibold' }, ['Fontes consultadas']),
+      criarElemento(
+        'ul',
+        { class: 'mt-2 space-y-1 text-sm text-texto-suave' },
+        modulo3.fontesPratica.map((fonte) =>
+          criarElemento('li', {}, [
+            fonte.titulo + ' — ' + fonte.url + ' (consulta em ' + fonte.consultadoEm + ')',
+          ]),
+        ),
+      ),
+    ],
+  );
+}
+
 function montarAbaQuiz() {
   return criarElemento('div', { class: 'space-y-6' }, [
     montarQuiz({
       id: modulo3.id,
       titulo: 'Mini-quiz do Módulo 3',
-      descricao: 'Quatro perguntas. As respostas ficam salvas no navegador.',
+      descricao: modulo3.quiz.length + ' perguntas. As respostas ficam salvas no navegador.',
       perguntas: modulo3.quiz,
     }),
     montarConclusao(),
+    montarFontesDaPratica(),
   ]);
 }
 
@@ -349,8 +576,8 @@ export function montarModulo3() {
       },
       [
         criarElemento('strong', { class: 'text-texto' }, ['Lembrete: ']),
-        'este módulo apresenta ferramentas de mercado para você conhecer o ecossistema. ' +
-          'Citar uma ferramenta não é recomendação de uso, e nada aqui é aconselhamento financeiro.',
+        'citar uma ferramenta não é recomendação de uso. Telas e regras de plataforma foram ' +
+          'conferidas em setembro de 2026 — se um campo sumir, procure o mesmo conceito.',
       ],
     ),
   ]);
@@ -360,6 +587,8 @@ export function montarModulo3() {
     rotulo: 'Seções do Módulo 3',
     abas: [
       { id: 'visao-geral', rotulo: 'Visão geral', montar: montarVisaoGeral },
+      { id: 'social', rotulo: 'Pilar social na prática', montar: montarAbaSocial },
+      { id: 'tecnico', rotulo: 'Pilar técnico na prática', montar: montarAbaTecnico },
       { id: 'matriz', rotulo: 'Matriz de ferramentas', montar: montarAbaMatriz },
       { id: 'cenario', rotulo: 'Cenário 2025–2026', montar: montarAbaCenario },
       { id: 'quiz', rotulo: 'Quiz', montar: montarAbaQuiz },

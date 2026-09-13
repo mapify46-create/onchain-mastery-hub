@@ -160,7 +160,7 @@ export function montarSidebar() {
   const cabecalho = criarElemento('div', { class: 'border-b border-borda px-4 py-4' }, [
     criarElemento('p', { class: 'text-sm font-semibold' }, ['onchain-mastery-hub']),
     criarElemento('p', { class: 'mt-1 text-xs text-texto-suave' }, [
-      'Hub de estudos on-chain — conteúdo educacional, sem aconselhamento financeiro.',
+      'Hub de estudos on-chain — material de estudo próprio.',
     ]),
   ]);
 

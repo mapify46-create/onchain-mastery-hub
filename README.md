@@ -2,7 +2,7 @@
 Central de estudos local e interativa para aprender, do zero, trading on-chain e memecoins (Solana e EVM). Dark mode, 100% no navegador, sem backend.
 
 ## Aviso
-Conteúdo educacional. NÃO é aconselhamento financeiro, jurídico ou tributário. Trading de memecoins é de altíssimo risco; a maioria dos tokens perde todo o valor.
+Material de estudo próprio. Memecoin é o ativo de maior risco do mercado: 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia em que nasceram (CoinGecko Research).
 
 ## Requisitos
 - Um navegador moderno (Chrome, Edge, Firefox).
@@ -39,7 +39,9 @@ Edite os arquivos em src/data/ (modulo1..4, cenarios, glossario). Não é precis
 Seu progresso (checklists, glossário, quizzes, simulador) fica salvo no localStorage do seu navegador.
 
 ## Estado atual do conteúdo
-Os quatro módulos, o Glossário e o simulador estão prontos. O conteúdo do Módulo 1
+Os sete módulos, a página Checklist antes de comprar (com o fluxograma dos dois
+pilares), o Glossário e o simulador estão prontos. As pesquisas dos Módulos 3 (reforma),
+6 e 7 e do Checklist estão em `pesquisa/modulos/`. O conteúdo do Módulo 1
 (Fundamentos & Segurança) foi escrito a partir de duas pesquisas independentes — os
 arquivos `PESQUISA-MODULO-1-A.md` e `PESQUISA-MODULO-1-B.md`, na raiz do projeto,
 guardam as fontes originais e ficam disponíveis para conferência.

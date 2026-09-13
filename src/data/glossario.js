@@ -94,8 +94,8 @@ export const glossario = [
     id: 'graduation',
     termo: 'Graduation / migration',
     categorias: ['solana'],
-    definicao: 'O momento em que um token "gradua" da bonding curve para uma DEX de verdade (ex.: Raydium), ao atingir um limiar de volume/valor arrecadado.',
-    exemplo: 'No Pump.fun, a graduação acontece ao completar ~85 SOL arrecadados na curva. Não há limiar fixo em dólar: o valor observado varia de ~US$ 11 mil a ~US$ 101 mil, conforme a cotação do SOL no momento.',
+    definicao: 'O momento em que um token "gradua" da bonding curve para uma pool de DEX de verdade — no Pump.fun, a PumpSwap, desde março de 2025.',
+    exemplo: 'No Pump.fun, a graduação é definida em tokens: acontece quando a curva vende 793,1 milhões dos 1 bilhão — em set/2025, isso correspondia a cerca de 85 SOL arrecadados. Não há limiar fixo em dólar: numa amostra de ago/2026, 80% das graduações ficaram entre ~US$ 11 mil e ~US$ 101 mil (mediana ~US$ 38 mil).',
     alerta: 'A maioria dos tokens lançados em launchpads nunca chega a graduar — morrem ainda na bonding curve.',
   },
   {

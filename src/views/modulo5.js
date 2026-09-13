@@ -596,7 +596,7 @@ export function montarModulo5() {
         'este módulo é mecânico. Nomes de plataformas aparecem só como exemplo da ' +
           'categoria, nunca como recomendação, e nada aqui aumenta chance de lucro — o ' +
           'objetivo é reduzir erro de operação. Como o Módulo 2 mostrou, a maioria das ' +
-          'memecoins vai a zero. Nada aqui é aconselhamento financeiro ou tributário.',
+          'memecoins vai a zero.',
       ],
     ),
   ]);

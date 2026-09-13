@@ -140,5 +140,5 @@ A atenção migra para o próximo token. Sem atenção não há comprador; sem c
 
 **Desfecho mais comum:** Maioria vai a zero
 
-*Observação:* Modelo didático de ciclo de vida. Serve para você saber que perguntas fazer em cada momento — não é previsão nem garantia de comportamento. Muitos tokens pulam fases, e a maioria não passa da primeira.
+*Observação:* Modelo didático de ciclo de vida. Serve para você saber que perguntas fazer em cada momento — não é previsão nem garantia de comportamento. Muitos tokens pulam fases, e a maioria não passa da primeira. O quanto exatamente muda conforme o que se chama de "morrer": 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia do lançamento, 80,37% em até dois dias, e só 4,55% seguiram negociando depois de 90 dias (CoinGecko Research, 18,67 milhões de tokens, jan/2024–jun/2026). Por outra métrica — liquidez abaixo de US$ 1.000 —, a Solidus Labs mediu 98,6%; a Pump.fun contestou publicamente esse número, dizendo que o relatório "carece de entendimento básico de memecoins" (CoinDesk, 07/05/2025). Nenhuma dessas fontes mede o preço chegando literalmente a zero — todas medem parar de negociar ou ficar sem liquidez, que é o que "vai a zero" quer dizer na prática.
 

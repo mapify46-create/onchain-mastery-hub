@@ -12,7 +12,7 @@ Social e técnico são perguntas diferentes: "quem está falando" e "o que o con
 
 **Conexões:** Enquadra os vídeos 22 e 23; o Módulo 5 retoma "ler a tela" como checagem técnica.
 
-**Resumo do módulo, para contexto:** Nenhuma decisão de entrada deveria depender de um sinal só. O pilar social mostra onde a atenção está nascendo; o pilar técnico mostra se o contrato por trás merece confiança. Este módulo apresenta as ferramentas de cada pilar numa matriz filtrável.
+**Resumo do módulo, para contexto:** Nenhuma decisão de entrada deveria depender de um sinal só. O pilar social mostra onde a atenção está nascendo; o pilar técnico mostra se o contrato por trás merece confiança. Este módulo mostra como fazer cada checagem, passo a passo, e apresenta as ferramentas de cada pilar numa matriz filtrável.
 
 ## Instruções para o Gemini
 
@@ -55,7 +55,7 @@ O pilar social cobre X/Twitter, Discord e Telegram: é onde a atenção nasce, a
 
 O pilar técnico cobre gráfico, contrato, liquidez e holders: mostra se o que está por trás do hype resiste a uma checagem. Um contrato limpo sem nenhuma atenção também não vale nada — sem atenção não há comprador.
 
-Os dois pilares se completam. Uma tese de entrada (Módulo 4) só fica de pé quando apoiada nos dois ao mesmo tempo: "por que este token está chamando atenção agora" (social) e "por que é seguro entrar nele" (técnico).
+Os dois pilares se completam. Uma tese de entrada (Módulo 4) só fica de pé quando apoiada nos dois ao mesmo tempo: "este token é quem diz ser, e por que está chamando atenção agora" (social) e "o que o contrato e as carteiras ainda permitem fazer contra mim" (técnico). Passar nas duas checagens não torna um token seguro: só quer dizer que ele não mostrou os problemas que dá para ver.
 
 ### Correção: "Axon" não existe — o nome certo é Axiom
 

@@ -11,7 +11,7 @@
 // IMPORTANTE ao editar arquivos do app: aumente o número em CACHE_VERSAO. Sem isso,
 // quem já instalou o app continua vendo a versão antiga guardada em cache.
 
-const CACHE_VERSAO = 'omh-cache-v9';
+const CACHE_VERSAO = 'omh-cache-v10';
 
 const ARQUIVOS_DO_APP = [
   './',
@@ -37,16 +37,20 @@ const ARQUIVOS_DO_APP = [
   'src/components/toolMatrix.js',
   'src/components/video.js',
   'src/data/cenarios.js',
+  'src/data/checklist.js',
   'src/data/glossario.js',
   'src/data/modulo1.js',
   'src/data/modulo2.js',
   'src/data/modulo3.js',
   'src/data/modulo4.js',
   'src/data/modulo5.js',
+  'src/data/modulo6.js',
+  'src/data/modulo7.js',
   'src/data/referencias.js',
   'src/router.js',
   'src/store.js',
   'src/ui.js',
+  'src/views/checklist.js',
   'src/views/glossario.js',
   'src/views/inicio.js',
   'src/views/modulo1.js',
@@ -54,6 +58,8 @@ const ARQUIVOS_DO_APP = [
   'src/views/modulo3.js',
   'src/views/modulo4.js',
   'src/views/modulo5.js',
+  'src/views/modulo6.js',
+  'src/views/modulo7.js',
   'styles/custom.css',
 ];
 

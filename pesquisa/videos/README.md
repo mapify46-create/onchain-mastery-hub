@@ -58,19 +58,19 @@ mais ganham com vídeo.
 | 17 | M2 | Vieses | Os cinco vieses que fazem você clicar | `VIDEO-17-M2-os-cinco-vieses.md` | 1279 |
 | 18 | M2 | Tipos de token | Os tipos de token e como reconhecer cada um | `VIDEO-18-M2-tipos-de-token.md` | 1545 |
 | 19 | M2 | Casos reais | Casos reais: o que aconteceu, com números e fonte | `VIDEO-19-M2-casos-reais.md` | 1252 |
-| 20 | M2 | As 4 fases | As quatro fases de uma memecoin | `VIDEO-20-M2-as-quatro-fases.md` | 1275 |
-| 21 | M3 | Visão geral | Por que duas checagens, e não uma só | `VIDEO-21-M3-por-que-duas-checagens.md` | 813 |
-| 22 | M3 | Matriz de ferramentas | O pilar social e a matriz de ferramentas | `VIDEO-22-M3-pilar-social-e-ferramentas.md` | 1979 |
-| 23 | M3 | Cenário 2025–2026 | O cenário 2025–2026: launchpads e o que mudou | `VIDEO-23-M3-cenario-2025-2026.md` | 751 |
-| 24 | M4 | Tese vs. catálise | Tese × catálise: escrever antes de entrar | `VIDEO-24-M4-tese-vs-catalise.md` | 1544 |
+| 20 | M2 | As 4 fases | As quatro fases de uma memecoin | `VIDEO-20-M2-as-quatro-fases.md` | 1384 |
+| 21 | M3 | Visão geral | Por que duas checagens, e não uma só | `VIDEO-21-M3-por-que-duas-checagens.md` | 855 |
+| 22 | M3 | Matriz de ferramentas | O pilar social e a matriz de ferramentas | `VIDEO-22-M3-pilar-social-e-ferramentas.md` | 2037 |
+| 23 | M3 | Cenário 2025–2026 | O cenário 2025–2026: launchpads e o que mudou | `VIDEO-23-M3-cenario-2025-2026.md` | 760 |
+| 24 | M4 | Tese vs. catálise | Tese × catálise: escrever antes de entrar | `VIDEO-24-M4-tese-vs-catalise.md` | 1567 |
 | 25 | M4 | Take profit | Take profit em degraus e o erro de segurar demais | `VIDEO-25-M4-take-profit-em-degraus.md` | 1706 |
 | 26 | M4 | Antes de entrar | Antes de entrar: as checagens, o tamanho da posição e a curva de recuperação | `VIDEO-26-M4-antes-de-entrar.md` | 1385 |
 | 27 | M4 | Simulador | O simulador de 12 cenários: como usar e como ler o resumo | `VIDEO-27-M4-como-usar-o-simulador.md` | 1466 |
 | 28 | M5 | Terminal | O que é um terminal de execução e as três camadas | `VIDEO-28-M5-o-que-e-um-terminal.md` | 1830 |
-| 29 | M5 | Custódia | Quem guarda as chaves — e por que o risco real é o app sair do ar | `VIDEO-29-M5-custodia-e-o-risco-real.md` | 2026 |
-| 30 | M5 | Taxas | A taxa anunciada não é o que você paga | `VIDEO-30-M5-a-taxa-anunciada-nao-e-o-custo.md` | 2474 |
-| 31 | M5 | Configurações | Tipos de ordem, slippage, prioridade e proteção de MEV | `VIDEO-31-M5-slippage-prioridade-mev.md` | 2756 |
+| 29 | M5 | Custódia | Quem guarda as chaves — e por que o risco real é o app sair do ar | `VIDEO-29-M5-custodia-e-o-risco-real.md` | 2029 |
+| 30 | M5 | Taxas | A taxa anunciada não é o que você paga | `VIDEO-30-M5-a-taxa-anunciada-nao-e-o-custo.md` | 2587 |
+| 31 | M5 | Configurações | Tipos de ordem, slippage, prioridade e proteção de MEV | `VIDEO-31-M5-slippage-prioridade-mev.md` | 2759 |
 | 32 | M5 | Erros | Os erros que custam dinheiro sem envolver o mercado — e por que você não vence bots | `VIDEO-32-M5-erros-de-execucao-e-bots.md` | 1192 |
-| 33 | M5 | Processo | Do "vi um token" ao "encerrei a posição" — e o registro para imposto | `VIDEO-33-M5-do-token-ao-encerramento.md` | 1957 |
+| 33 | M5 | Processo | Do "vi um token" ao "encerrei a posição" — e o registro para imposto | `VIDEO-33-M5-do-token-ao-encerramento.md` | 1960 |
 
-Total: 33 prompts, ~49.428 palavras.
+Total: 33 prompts, ~49.791 palavras.

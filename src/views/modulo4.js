@@ -603,8 +603,8 @@ export function montarModulo4() {
       },
       [
         criarElemento('strong', { class: 'text-texto' }, ['Lembrete: ']),
-        'este módulo ensina processo de decisão, não onde comprar ou vender. Nada aqui é ' +
-          'aconselhamento financeiro ou tributário, e os cenários do simulador são fictícios.',
+        'este módulo ensina processo de decisão, não onde comprar ou vender. Os cenários ' +
+          'do simulador são fictícios.',
       ],
     ),
   ]);

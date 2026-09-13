@@ -437,7 +437,7 @@ export const modulo5 = {
       lista: [
         'Abrir o terminal pelo favorito oficial, nunca por link de anúncio ou rede social — existem domínios de phishing imitando plataformas conhecidas.',
         'Buscar pelo endereço do contrato verificado, não pelo nome nem pelo ticker.',
-        'Fazer as checagens do Módulo 3: liquidez da pool, LP travada ou queimada, autoridades do contrato, concentração de holders, bundles, histórico de quem criou.',
+        'Passar o token pela página Checklist antes de comprar: endereço oficial, extensões e autoridades do contrato, concentração de holders, bundles, histórico de quem criou.',
         'Escrever a tese antes de comprar, e junto com ela o ponto de invalidação — onde você admite que errou e sai.',
         'Definir o tamanho da posição e conferir o valor no campo, com atenção redobrada se o botão de compra rápida estiver ligado.',
         'Configurar slippage, prioridade e proteção de MEV conscientemente, e fazer uma operação-teste com valor mínimo primeiro.',
@@ -567,7 +567,7 @@ export const modulo5 = {
         titulo: '4. Gorjeta de MEV (Jito)',
         subtitulo: 'Também não aparece na taxa anunciada',
         valores: {
-          quanto: 'Configurável; o padrão do Axiom é 0,001 SOL. O mínimo do Jito é 0,00001 SOL.',
+          quanto: 'Configurável; o padrão do Axiom é 0,001 SOL. O mínimo do Jito é 1.000 lamports (0,000001 SOL).',
           quemRecebe: 'Validadores, pelas contas de gorjeta do Jito.',
           tipo: 'Fixa em SOL.',
         },
@@ -1126,7 +1126,7 @@ export const modulo5 = {
         '  G --> H[Encerrei a posicao]',
       versaoEmTexto: [
         'Vejo um token novo e decido investigar.',
-        'Faço a checagem de segurança: liquidez, LP travada, concentração de holders, contrato. Se falhar, não opero — o processo termina aqui.',
+        'Passo o token pelo Checklist antes de comprar: endereço, contrato, concentração de holders. Se falhar, não opero — o processo termina aqui.',
         'Se a checagem passa, defino a tese de entrada e o ponto de invalidação antes de cogitar comprar.',
         'Se não consigo deixar a tese e a invalidação claras e objetivas, também não opero — o processo termina aqui.',
         'Se a tese está clara, defino o tamanho da posição e entro.',
@@ -1310,7 +1310,7 @@ export const modulo5 = {
     {
       titulo: 'Valor real da gorjeta de MEV no momento',
       texto:
-        'O valor mínimo do Jito (0,00001 SOL) e o padrão do Axiom (0,001 SOL) estão ' +
+        'O valor mínimo do Jito (1.000 lamports, ou 0,000001 SOL) e o padrão do Axiom (0,001 SOL) estão ' +
         'confirmados, mas o "tip floor" ao vivo em setembro de 2026 não pôde ser lido ' +
         'diretamente na pesquisa. Os percentis citados por aí vêm de um exemplo estático da ' +
         'documentação, datado de 2024.',
@@ -1376,7 +1376,7 @@ export const modulo5 = {
     { titulo: 'pump.fun — Bonding curve', url: 'https://pump.fun/docs/bonding-curve', consultadoEm: '06/09/2026' },
     { titulo: 'Raydium — Protocol Fees (0,25% padrão)', url: 'https://docs.raydium.io/ray/protocol-fees', consultadoEm: '06/09/2026' },
     { titulo: 'Jupiter — Manual mode (agregador, sem taxa de protocolo no swap básico)', url: 'https://docs.jup.ag/user-docs/trade/swap/manual-mode', consultadoEm: '06/09/2026' },
-    { titulo: 'Jito — Low latency transaction send (mínimo de gorjeta)', url: 'https://docs.jito.wtf/lowlatencytxnsend', consultadoEm: '06/09/2026' },
+    { titulo: 'Jito — Low latency transaction send (mínimo de gorjeta)', url: 'https://docs.jito.wtf/lowlatencytxnsend', consultadoEm: '13/09/2026' },
     { titulo: 'Solscan — Why did my transaction fail (slippage exceeded)', url: 'https://info.solscan.io/why-did-my-transaction-fail', consultadoEm: '06/09/2026' },
     { titulo: 'Alchemy — Associated Token Account (depósito reembolsável)', url: 'https://www.alchemy.com/overviews/associated-token-account', consultadoEm: '06/09/2026' },
     { titulo: 'CoinDesk — ZachXBT alleges Axiom employee conducted insider trading (26/02/2026)', url: 'https://www.coindesk.com/markets/2026/02/26/zachxbt-alleges-axiom-employee-conducted-insider-trading', consultadoEm: '06/09/2026' },

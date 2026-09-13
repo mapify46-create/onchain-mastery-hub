@@ -516,7 +516,7 @@ export function montarModulo2() {
       [
         criarElemento('strong', { class: 'text-texto' }, ['Lembrete: ']),
         'este módulo descreve comportamento de mercado para você se proteger dele. ' +
-          'Não é aconselhamento financeiro e não é material clínico.',
+          'Não é material clínico.',
       ],
     ),
   ]);

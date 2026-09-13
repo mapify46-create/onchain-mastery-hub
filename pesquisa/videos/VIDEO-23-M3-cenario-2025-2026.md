@@ -12,7 +12,7 @@ Linha do tempo com os eventos que o app registra, com data. Conclusão do app é
 
 **Conexões:** Contexto para o Módulo 5 (bonding curve, PumpSwap, taxa da pool).
 
-**Resumo do módulo, para contexto:** Nenhuma decisão de entrada deveria depender de um sinal só. O pilar social mostra onde a atenção está nascendo; o pilar técnico mostra se o contrato por trás merece confiança. Este módulo apresenta as ferramentas de cada pilar numa matriz filtrável.
+**Resumo do módulo, para contexto:** Nenhuma decisão de entrada deveria depender de um sinal só. O pilar social mostra onde a atenção está nascendo; o pilar técnico mostra se o contrato por trás merece confiança. Este módulo mostra como fazer cada checagem, passo a passo, e apresenta as ferramentas de cada pilar numa matriz filtrável.
 
 ## Instruções para o Gemini
 

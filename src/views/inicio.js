@@ -13,10 +13,11 @@ import { montarGraficoDeBarras, renderizarGrafico } from '../components/grafico.
 // Passos de estudo sugeridos. Texto curto de propósito: a tela inicial orienta,
 // o conteúdo mora nos módulos.
 const COMO_ESTUDAR = [
-  'Comece pelo Módulo 1 e siga na ordem até o 5 — cada um assume o anterior.',
+  'Comece pelo Módulo 1 e siga na ordem até o 7 — cada um assume o anterior.',
   'Abra o Glossário sempre que aparecer um termo novo e marque como estudado o que já entendeu.',
   'Responda o mini-quiz no fim de cada módulo antes de marcar o módulo como concluído.',
-  'Feche com o simulador do Módulo 4: são 12 cenários que treinam a decisão, não o palpite.',
+  'Treine a decisão nos 12 cenários do simulador do Módulo 4.',
+  'Antes de qualquer compra, passe o token pela página Checklist antes de comprar.',
 ];
 
 // Card-link de uma rota. O card inteiro é o link: alvo grande no celular e
@@ -177,9 +178,9 @@ export function montarInicio(rotas = []) {
     },
     [
       criarElemento('strong', { class: 'text-texto' }, ['Antes de tudo: ']),
-      'este hub é material de estudo. Nada aqui é aconselhamento financeiro, jurídico ou ' +
-        'tributário, e os números dos exercícios são de treino. Memecoin é o ativo de maior ' +
-        'risco do mercado — a maioria dos tokens vai a zero.',
+      'este hub é material de estudo próprio, e os números dos exercícios são de treino. ' +
+        'Memecoin é o ativo de maior risco do mercado: 68,67% dos tokens do Pump.fun pararam ' +
+        'de negociar no mesmo dia em que nasceram (CoinGecko Research).',
     ],
   );
 

@@ -422,8 +422,7 @@ export function montarModulo1() {
       [
         criarElemento('strong', { class: 'text-texto' }, ['Lembrete: ']),
         'este módulo ensina segurança e fundamentos técnicos. Nomes de carteiras e ' +
-          'corretoras aparecem só como exemplos de categoria, nunca como recomendação. ' +
-          'Nada aqui é aconselhamento financeiro, jurídico ou tributário.',
+          'corretoras aparecem só como exemplos de categoria, nunca como recomendação.',
       ],
     ),
   ]);

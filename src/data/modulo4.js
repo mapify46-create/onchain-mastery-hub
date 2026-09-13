@@ -127,8 +127,9 @@ export const modulo4 = {
           nome: 'Graduação para a DEX',
           descricao:
             'O token sai da bonding curve e ganha um pool com liquidez mais profunda ' +
-            '(no Pump.fun, por volta de 85 SOL — o valor em dólar varia com a cotação, entre ' +
-            'US$ 11 mil e US$ 101 mil no observado).',
+            '(no Pump.fun, cerca de 85 SOL arrecadados, em dados de set/2025; em dólar não há ' +
+            'limiar fixo — numa amostra de ago/2026, 80% das graduações ficaram entre US$ 11 ' +
+            'mil e US$ 101 mil).',
           alerta:
             'É também o momento em que quem comprou na curva finalmente consegue vender ' +
             'volume — a liquidez que te atrai é a mesma que dá saída para eles.',
