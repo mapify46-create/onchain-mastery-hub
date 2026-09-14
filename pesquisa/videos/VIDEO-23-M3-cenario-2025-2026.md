@@ -1,4 +1,4 @@
-# Vídeo 23 de 33 — O cenário 2025–2026: launchpads e o que mudou
+# Vídeo 23 de 46 — O cenário 2025–2026: launchpads e o que mudou
 
 **Módulo 3 — Os dois pilares (social × técnico) · Aba "Cenário 2025–2026" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

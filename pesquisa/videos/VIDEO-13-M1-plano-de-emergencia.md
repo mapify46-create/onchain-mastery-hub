@@ -1,4 +1,4 @@
-# Vídeo 13 de 33 — Plano de emergência: os primeiros 10 minutos se você foi drenado
+# Vídeo 13 de 46 — Plano de emergência: os primeiros 10 minutos se você foi drenado
 
 **Módulo 1 — Fundamentos & Segurança · Aba "Defesa" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

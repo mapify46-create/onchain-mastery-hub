@@ -1,4 +1,4 @@
-# Vídeo 16 de 33 — Economia da atenção: o preço é feito de olhos
+# Vídeo 16 de 46 — Economia da atenção: o preço é feito de olhos
 
 **Módulo 2 — Psicologia das memecoins · Aba "Visão geral" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

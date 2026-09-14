@@ -15,12 +15,18 @@ import {
   html,
 } from '../ui.js';
 import { montarMatrizDeFerramentas } from '../components/toolMatrix.js';
-import { montarQuiz } from '../components/quiz.js';
+import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
 import { montarAnatomia } from '../components/anatomia.js';
 import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { montarSegmentos, montarPerguntaPrevia, montarTermos } from '../components/didatica.js';
+
+// As perguntas do quiz com o "por que a sua não serve", para usar no fim das partes.
+const PERGUNTAS = juntarPorques(modulo3.quiz, modulo3.porqueErradas);
+function perguntaDoQuiz(id) {
+  return PERGUNTAS.find((pergunta) => pergunta.id === id);
+}
 
 // A pergunta do quiz usada antes de ler uma aba.
 function previa(idDaPergunta) {
@@ -302,6 +308,7 @@ function montarAbaNarrativas() {
         },
         {
           titulo: 'O ciclo e a rotação',
+          pergunta: perguntaDoQuiz('q13'),
           conteudo: [
             secao('ciclo'),
             montarLinhaDoTempo({ id: 'm3-rotacao-narrativas', ...pratica.linhaDoTempo }),
@@ -314,6 +321,7 @@ function montarAbaNarrativas() {
         },
         {
           titulo: 'Rastrear',
+          pergunta: perguntaDoQuiz('q12'),
           conteudo: [
             secao('ferramentas'),
             criarTabela('As ferramentas de "em alta" e de atenção', pratica.tabelaFerramentas),
@@ -400,13 +408,18 @@ function montarAbaSocial() {
         },
         {
           titulo: 'O endereço oficial',
+          pergunta: perguntaDoQuiz('q5'),
           conteudo: [
             secao('endereco'),
             montarAnatomia({ id: 'm3-anatomia-perfil', ...pratica.anatomiaPerfil }),
           ],
         },
-        { titulo: 'X e Discord', conteudo: [secao('x'), secao('discord')] },
-        { titulo: 'Telegram e calls pagos', conteudo: [secao('telegram'), secao('calls')] },
+        { titulo: 'X e Discord', pergunta: perguntaDoQuiz('q7'), conteudo: [secao('x'), secao('discord')] },
+        {
+          titulo: 'Telegram e calls pagos',
+          pergunta: perguntaDoQuiz('q8'),
+          conteudo: [secao('telegram'), secao('calls')],
+        },
         {
           titulo: 'O que cada sinal prova',
           conteudo: [
@@ -482,6 +495,7 @@ function montarAbaTecnico() {
         },
         ...pratica.ferramentas.map((ferramenta, indice) => ({
           titulo: ferramenta.nome,
+          pergunta: perguntaDoQuiz({ bubblemaps: 'q10', dexscreener: 'q1' }[ferramenta.id]),
           conteudo: [criarSecaoDaFerramenta(ferramenta, indice)],
         })),
         {
@@ -658,7 +672,7 @@ function montarAbaQuiz() {
       id: modulo3.id,
       titulo: 'Mini-quiz do Módulo 3',
       descricao: modulo3.quiz.length + ' perguntas. As respostas ficam salvas no navegador.',
-      perguntas: modulo3.quiz,
+      perguntas: juntarPorques(modulo3.quiz, modulo3.porqueErradas),
     }),
     montarConclusao(),
     montarFontesDaPratica(),

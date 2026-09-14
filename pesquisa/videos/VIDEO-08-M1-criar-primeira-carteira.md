@@ -1,4 +1,4 @@
-# Vídeo 8 de 33 — Como criar sua primeira carteira, passo a passo
+# Vídeo 8 de 46 — Como criar sua primeira carteira, passo a passo
 
 **Módulo 1 — Fundamentos & Segurança · Aba "Carteiras" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

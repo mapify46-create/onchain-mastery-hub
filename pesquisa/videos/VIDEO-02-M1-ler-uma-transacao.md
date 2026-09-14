@@ -1,4 +1,4 @@
-# Vídeo 2 de 33 — Explorador de blocos: como ler uma transação
+# Vídeo 2 de 46 — Explorador de blocos: como ler uma transação
 
 **Módulo 1 — Fundamentos & Segurança · Aba "Fundamentos" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

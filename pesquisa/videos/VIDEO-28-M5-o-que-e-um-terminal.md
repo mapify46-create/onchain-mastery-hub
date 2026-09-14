@@ -1,4 +1,4 @@
-# Vídeo 28 de 33 — O que é um terminal de execução e as três camadas
+# Vídeo 28 de 46 — O que é um terminal de execução e as três camadas
 
 **Módulo 5 — A mecânica da execução · Aba "Terminal" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

@@ -1,9 +1,10 @@
-// didatica.js — três peças pequenas que aplicam o que a pesquisa de didática mediu.
-// Detalhe e fontes: pesquisa/modulos/pesquisas/VERIFICACOES-AO-VIVO-2.md, seção 4C.
+// didatica.js — peças pequenas que aplicam o que a pesquisa de didática mediu.
+// Detalhe e fontes: pesquisa/modulos/pesquisas/VERIFICACOES-AO-VIVO-2.md.
 //
-//   montarSegmentos       divide uma aba longa em partes, com uma pausa entre elas
-//   montarPerguntaPrevia  uma pergunta antes de ler a aba
-//   montarTermos          os termos-chave da aba, antes do conteúdo
+//   montarSegmentos        divide uma aba longa em partes, com uma pausa entre elas
+//   montarPerguntaPrevia   uma pergunta antes de ler a aba
+//   montarPerguntaDaParte  uma pergunta no fim de uma parte, corrigida na hora
+//   montarTermos           os termos-chave da aba, antes do conteúdo
 
 import { criarElemento, criarBotao } from '../ui.js';
 
@@ -20,7 +21,8 @@ import { criarElemento, criarBotao } from '../ui.js';
  * calculadora mexida ou uma resposta marcada não se perdem.
  *
  * @param {object} opcoes
- * @param {Array}  opcoes.partes  [{ titulo, conteudo: [nós] }]
+ * @param {Array}  opcoes.partes  [{ titulo, conteudo: [nós], pergunta? }] — a pergunta,
+ *                                se houver, aparece no fim da parte, antes do "Continuar".
  */
 export function montarSegmentos({ partes = [] }) {
   const container = criarElemento('div', { class: 'space-y-8' });
@@ -38,6 +40,7 @@ export function montarSegmentos({ partes = [] }) {
         ['Parte ' + (indice + 1) + ' de ' + partes.length + ' — ' + parte.titulo],
       ),
       ...parte.conteudo,
+      parte.pergunta ? montarPerguntaDaParte({ pergunta: parte.pergunta }) : null,
     ]),
   );
 
@@ -135,6 +138,102 @@ export function montarPerguntaPrevia({ id, pergunta }) {
     criarElemento('div', { class: 'mt-3 space-y-2' }, alternativas),
     aviso,
   ]);
+}
+
+/**
+ * Uma pergunta no fim de uma parte, corrigida na hora.
+ *
+ * Por que: perguntas espalhadas pelo texto, e não só no fim do módulo, seguram a
+ * atenção em material longo (Szpunar et al., 2013) e melhoram o aprendizado do
+ * bloco seguinte (efeito do teste para a frente — Chan, Meissner & Davis, 2018).
+ * A resposta não é salva: é treino; quem conta é o quiz do módulo.
+ *
+ * @param {object} opcoes
+ * @param {object} opcoes.pergunta  Uma pergunta no formato do quiz (com `porque` nas erradas, se houver).
+ */
+export function montarPerguntaDaParte({ pergunta }) {
+  if (!pergunta) return null;
+
+  const container = criarElemento('fieldset', {
+    class: 'rounded-card border border-primaria/40 bg-primaria/5 p-5',
+  });
+
+  function renderizar(escolhida) {
+    const respondida = Boolean(escolhida);
+    const acertou = escolhida === pergunta.correta;
+    const marcada = pergunta.alternativas.find((alternativa) => alternativa.id === escolhida);
+
+    const alternativas = pergunta.alternativas.map((alternativa) => {
+      const certa = alternativa.id === pergunta.correta;
+      const foiEscolhida = alternativa.id === escolhida;
+      let cor = ' border-borda bg-fundo hover:border-texto-suave';
+      if (respondida && certa) cor = ' border-risco-baixo/60 bg-risco-baixo/10';
+      else if (respondida && foiEscolhida) cor = ' border-risco-alto/60 bg-risco-alto/10';
+      else if (respondida) cor = ' border-borda bg-fundo opacity-70';
+
+      return criarElemento(
+        'button',
+        {
+          type: 'button',
+          disabled: respondida,
+          'aria-pressed': String(foiEscolhida),
+          class:
+            'w-full rounded-lg border p-3 text-left text-sm text-texto transition-colors ' +
+            'duration-150 disabled:cursor-default' +
+            cor,
+          onclick: () => {
+            renderizar(alternativa.id);
+            container.querySelector('[data-resultado]')?.focus();
+          },
+        },
+        [alternativa.texto],
+      );
+    });
+
+    const resultado = respondida
+      ? [
+          criarElemento(
+            'p',
+            {
+              'data-resultado': '',
+              tabindex: '-1',
+              class:
+                'mt-4 rounded-lg border p-3 text-sm ' +
+                (acertou
+                  ? 'border-risco-baixo/40 bg-risco-baixo/10'
+                  : 'border-risco-medio/40 bg-risco-medio/10'),
+            },
+            [criarElemento('strong', {}, [acertou ? 'Isso. ' : 'Não foi essa. ']), pergunta.explicacao],
+          ),
+          !acertou && marcada?.porque
+            ? criarElemento(
+                'p',
+                { class: 'mt-2 rounded-lg border border-borda bg-fundo p-3 text-sm text-texto-suave' },
+                [criarElemento('strong', { class: 'text-texto' }, ['Por que a sua não serve: ']), marcada.porque],
+              )
+            : null,
+          criarElemento('div', { class: 'mt-3' }, [
+            criarBotao('Tentar de novo', { variante: 'fantasma', onclick: () => renderizar(null) }),
+          ]),
+        ]
+      : [];
+
+    container.replaceChildren(
+      ...[
+        criarElemento(
+          'legend',
+          { class: 'px-1 text-xs font-semibold uppercase tracking-wide text-texto' },
+          ['Confira antes de seguir'],
+        ),
+        criarElemento('p', { class: 'text-base font-semibold text-texto' }, [pergunta.pergunta]),
+        criarElemento('div', { class: 'mt-3 space-y-2' }, alternativas),
+        ...resultado,
+      ].filter(Boolean),
+    );
+  }
+
+  renderizar(null);
+  return container;
 }
 
 /**

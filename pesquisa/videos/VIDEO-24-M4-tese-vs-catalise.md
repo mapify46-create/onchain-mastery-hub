@@ -1,4 +1,4 @@
-# Vídeo 24 de 33 — Tese × catálise: escrever antes de entrar
+# Vídeo 24 de 46 — Tese × catálise: escrever antes de entrar
 
 **Módulo 4 — Gestão & decisão · Aba "Tese vs. catálise" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

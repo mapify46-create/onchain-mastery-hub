@@ -1,4 +1,4 @@
-# Vídeo 19 de 33 — Casos reais: o que aconteceu, com números e fonte
+# Vídeo 19 de 46 — Casos reais: o que aconteceu, com números e fonte
 
 **Módulo 2 — Psicologia das memecoins · Aba "Casos reais" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 
@@ -102,7 +102,7 @@ Promovida publicamente pelo presidente argentino Javier Milei. Subiu e desabou n
 Da estreia ao esquecimento, em semanas. Repare na distância entre o pico e a queda.
 
 - **17/01/2025** — OFFICIAL TRUMP é lançada: Em cerca de 24 horas vira a 2ª maior memecoin, com pico de market cap perto de US$ 15 bilhões. Quem chegou no segundo dia comprou de quem estava saindo.
-- **01/2025** — MELANIA MEME é lançada: undefined
+- **01/2025** — MELANIA MEME é lançada
 - **06/02/2025** — MELANIA já caiu cerca de 90%: Noticiado pela Bloomberg.
 - **14/02/2025** — LIBRA é lançada na Argentina: Pico de market cap de cerca de US$ 4,56 bilhões no mesmo dia. O pico de atenção durou horas.
 - **12/2025** — MELANIA acumula queda de mais de 99% do pico: Segundo a Messari. A TRUMP, mais de 96% abaixo do topo.

@@ -1,4 +1,4 @@
-# Vídeo 4 de 33 — A mecânica do gas (taxa de rede)
+# Vídeo 4 de 46 — A mecânica do gas (taxa de rede)
 
 **Módulo 1 — Fundamentos & Segurança · Aba "Fundamentos" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

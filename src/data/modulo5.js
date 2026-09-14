@@ -1139,6 +1139,51 @@ export const modulo5 = {
   // ---------------------------------------------------------------------------
   // Quiz
   // ---------------------------------------------------------------------------
+
+  // Por que cada alternativa errada do quiz não serve (o quiz mostra a da resposta escolhida).
+  porqueErradas: {
+    q1: {
+      a: 'Carteira criada nos servidores da plataforma não é só sua: quem tem as chaves tem o dinheiro.',
+      c: 'A blockchain não trava nada: ela executa o que a chave assina.',
+      d: 'Alguém sempre controla — quem tem as chaves.',
+    },
+    q2: {
+      a: 'Slippage não muda a taxa; muda o preço que você aceita.',
+      b: 'Slippage alto é o contrário de garantia: autoriza um preço pior.',
+      d: 'Muda, e muito: numa pool rasa, 40% abre espaço para um ataque de sandwich.',
+    },
+    q3: {
+      a: 'Ordem guardada num servidor não está na blockchain; se o servidor cai, ninguém dispara.',
+      c: 'A blockchain só executa o que foi assinado e enviado; essa ordem nunca chegou lá.',
+      d: 'Ela não vira ordem de mercado sozinha: simplesmente não dispara.',
+    },
+    q4: {
+      a: 'A taxa anunciada é a menor fatia; rede, prioridade, gorjeta e pool vêm à parte.',
+      b: 'A taxa da pool é cobrada à parte, pela própria pool.',
+      d: 'A taxa de rede da Solana é fração de centavo, e não é a taxa anunciada.',
+    },
+    q5: {
+      a: 'Permissão ilimitada é exatamente o mecanismo dos drainers do Módulo 1.',
+      c: 'Aprovar não altera a taxa de rede das próximas transações.',
+      d: 'Uma aprovação não afeta a velocidade da blockchain.',
+    },
+    q6: {
+      a: 'Não é questão de taxa: é tempo — o bot compra antes de o humano ver o token.',
+      c: 'Não precisa de informação secreta: velocidade basta.',
+      d: 'O humano tem carteira; só chega depois.',
+    },
+    q7: {
+      a: 'A rede não fica com o valor da compra: a transação reverte e você perde só a taxa de rede.',
+      c: 'A plataforma não travou: a transação chegou e foi recusada pelo limite que você definiu.',
+      d: 'Não tem relação com a taxa da plataforma: o preço andou além do seu limite.',
+    },
+    q8: {
+      a: 'Print de lucro não é registro: falta data, valor em reais e custo de aquisição.',
+      c: 'A plataforma não apura o imposto por você.',
+      d: 'O ganho é apurado operação por operação, não pelo saldo do fim do ano.',
+    },
+  },
+
   quiz: [
     {
       id: 'q1',

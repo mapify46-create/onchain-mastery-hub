@@ -1,4 +1,4 @@
-# Vídeo 14 de 33 — Sacar para reais no Brasil: Pix, KYC, o marco regulatório e o imposto
+# Vídeo 14 de 46 — Sacar para reais no Brasil: Pix, KYC, o marco regulatório e o imposto
 
 **Módulo 1 — Fundamentos & Segurança · Aba "Brasil" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 
@@ -93,7 +93,7 @@ Marcos regulatórios, golpes emblemáticos e os prazos ainda em aberto — tudo 
 - **07/2026** — DeCripto passa a valer: IN RFB 2.291/2025: as plataformas informam operações à Receita, no padrão CARF da OCDE.
 - **13/08/2026** — Operação Criptoabate: Polícia Civil do RS. Uma vítima transferiu R$ 37 milhões em seis meses a um falso "professor" de WhatsApp.
 - **03/09/2026** — Coinext anuncia o fim das atividades: Uma das cinco corretoras que deixaram o varejo em 2026 citando o custo da adequação.
-- **01/10/2026** — Resolução 561 entra em vigor: undefined
+- **01/10/2026** — Resolução 561 entra em vigor
 - **30/10/2026** — Prazo para as PSAVs pedirem autorização: Quem já operava precisa ter pedido até aqui. Qualquer lista de "quem opera" envelhece rápido — confira no BC.
 
 *Nota:* Datas conforme o texto deste módulo e suas fontes. Regulação muda: confira no Banco Central e na CVM antes de tomar qualquer decisão baseada nela.

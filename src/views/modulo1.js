@@ -18,7 +18,7 @@ import {
 } from '../ui.js';
 import { montarChecklist } from '../components/checklist.js';
 import { montarTabelaComparativa } from '../components/comparisonTable.js';
-import { montarQuiz } from '../components/quiz.js';
+import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { montarDiagrama, renderizarDiagrama } from '../components/diagrama.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarAnatomia } from '../components/anatomia.js';
@@ -399,7 +399,7 @@ function montarAbaQuiz() {
       id: modulo1.id,
       titulo: 'Mini-quiz do Módulo 1',
       descricao: 'As respostas ficam salvas no navegador.',
-      perguntas: modulo1.quiz,
+      perguntas: juntarPorques(modulo1.quiz, modulo1.porqueErradas),
     }),
     montarConclusao(),
     montarFontesEVerificacao(),

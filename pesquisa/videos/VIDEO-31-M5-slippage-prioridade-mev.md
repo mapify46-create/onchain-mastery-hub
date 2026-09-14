@@ -1,4 +1,4 @@
-# Vídeo 31 de 33 — Tipos de ordem, slippage, prioridade e proteção de MEV
+# Vídeo 31 de 46 — Tipos de ordem, slippage, prioridade e proteção de MEV
 
 **Módulo 5 — A mecânica da execução · Aba "Configurações" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

@@ -16,6 +16,8 @@ function estadoInicial() {
       concluido: false,
     },
     modulosConcluidos: [],   // ['modulo-1', 'modulo-2']
+    revisao: { itens: {} },  // fila de revisão espaçada (ver components/revisao.js)
+    plano: '',               // o plano "quando X, eu faço Y" escrito na tela de início
   };
 }
 
@@ -53,6 +55,23 @@ function comoNumero(valor) {
   return typeof valor === 'number' && Number.isFinite(valor) ? valor : 0;
 }
 
+// Um item da fila de revisão espaçada. Devolve null se estiver quebrado.
+function comoItemDeRevisao(valor) {
+  const dados = comoObjeto(valor);
+  if (typeof dados.moduloId !== 'string' || typeof dados.perguntaId !== 'string') return null;
+  return {
+    moduloId: dados.moduloId,
+    perguntaId: dados.perguntaId,
+    degrau: Math.min(4, Math.max(0, Math.floor(comoNumero(dados.degrau)))),
+    proximaTS: comoNumero(dados.proximaTS),
+    acertosSeguidos: comoNumero(dados.acertosSeguidos),
+    tentativas: comoNumero(dados.tentativas),
+    ultimaConfianca: [1, 2, 3].includes(dados.ultimaConfianca) ? dados.ultimaConfianca : 0,
+    ultimaAcertou: typeof dados.ultimaAcertou === 'boolean' ? dados.ultimaAcertou : null,
+    ultimaRevisaoTS: comoNumero(dados.ultimaRevisaoTS),
+  };
+}
+
 function sanitizar(bruto) {
   const salvo = comoObjeto(bruto);
 
@@ -63,7 +82,14 @@ function sanitizar(bruto) {
       acertos: comoNumero(dados.acertos),
       total: comoNumero(dados.total),
       respostas: comoObjeto(dados.respostas),
+      confiancas: comoObjeto(dados.confiancas),
     };
+  }
+
+  const itensDeRevisao = {};
+  for (const [chave, item] of Object.entries(comoObjeto(comoObjeto(salvo.revisao).itens))) {
+    const limpo = comoItemDeRevisao(item);
+    if (limpo) itensDeRevisao[chave] = limpo;
   }
 
   const checklists = {};
@@ -85,6 +111,8 @@ function sanitizar(bruto) {
     modulosConcluidos: Array.isArray(salvo.modulosConcluidos)
       ? [...new Set(salvo.modulosConcluidos.filter((id) => typeof id === 'string'))]
       : [],
+    revisao: { itens: itensDeRevisao },
+    plano: typeof salvo.plano === 'string' ? salvo.plano.slice(0, 2000) : '',
   };
 }
 
@@ -155,6 +183,26 @@ function notificar() {
   }
 }
 
+// O progresso como texto JSON, para o botão "Exportar" da tela de início. Sem
+// servidor nem conta, é o único jeito de levar o progresso para outro navegador.
+export function exportarEstado() {
+  return JSON.stringify(estado, null, 2);
+}
+
+// Importa um JSON exportado antes. Passa pela mesma sanitização do boot, então um
+// arquivo editado à mão ou de outra versão não quebra o app.
+export function importarEstado(texto) {
+  try {
+    estado = sanitizar(JSON.parse(texto));
+  } catch (erro) {
+    console.warn('[store] o arquivo de progresso não é um JSON válido:', erro);
+    return false;
+  }
+  const salvou = salvar();
+  notificar();
+  return salvou;
+}
+
 // Zera o progresso (botão "Limpar progresso" da sidebar).
 export function limparProgresso() {
   estado = estadoInicial();
@@ -197,12 +245,15 @@ export function iniciarStore() {
 // o que evita import circular entre router.js, sidebar.js e store.js.
 // ---------------------------------------------------------------------------
 
-// Progresso de um módulo, de 0 a 100: metade por responder o quiz,
-// metade por marcar o módulo como concluído.
+// Progresso de um módulo, de 0 a 100: metade pelo ACERTO no quiz, metade por
+// marcar o módulo como concluído. Antes a metade do quiz valia só por responder;
+// agora 6 de 8 dão 37,5 de 50. Marcar é autoavaliação, e autoavaliação engana —
+// o acerto no quiz é a medida honesta do que ficou (pesquisa 16 dos módulos).
 export function progressoDoModulo(id, estadoAtual = estado) {
-  const quizFeito = Boolean(comoObjeto(estadoAtual.quizzes)[id]);
+  const quiz = comoObjeto(estadoAtual.quizzes)[id];
+  const parteDoQuiz = quiz && quiz.total > 0 ? (quiz.acertos / quiz.total) * 50 : 0;
   const concluido = (estadoAtual.modulosConcluidos ?? []).includes(id);
-  return (quizFeito ? 50 : 0) + (concluido ? 50 : 0);
+  return parteDoQuiz + (concluido ? 50 : 0);
 }
 
 // Progresso do glossário, de 0 a 100.

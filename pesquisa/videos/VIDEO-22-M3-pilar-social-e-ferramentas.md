@@ -1,4 +1,4 @@
-# Vídeo 22 de 33 — O pilar social e a matriz de ferramentas
+# Vídeo 22 de 46 — O pilar social e a matriz de ferramentas
 
 **Módulo 3 — Os dois pilares (social × técnico) · Aba "Matriz de ferramentas" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

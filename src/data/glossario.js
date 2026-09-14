@@ -32,7 +32,7 @@ export const glossario = [
     categorias: ['liquidez'],
     definicao: 'A liquidez do par (LP) fica travada num contrato por um tempo, ou é queimada (enviada a um endereço sem dono), para o criador não poder sacá-la.',
     exemplo: 'O RugCheck mostra que a LP de um token está marcada como "burned" (queimada).',
-    alerta: 'LP não bloqueada nem queimada é sinal clássico de risco de rug pull — o dev pode remover a liquidez a qualquer momento.',
+    alerta: 'Sem trava, o dev pode remover a liquidez. Mas trava não aprova token: num estudo, 97,3% dos tokens com liquidez travada eram maliciosos, contra 97,7% no geral (Mazorra et al., 2022). No pump.fun, a pool pós-graduação é do protocolo.',
   },
   {
     id: 'bundles',

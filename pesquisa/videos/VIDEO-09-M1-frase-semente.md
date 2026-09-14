@@ -1,4 +1,4 @@
-# Vídeo 9 de 33 — Frase-semente: por que 12 ou 24 palavras SÃO a carteira
+# Vídeo 9 de 46 — Frase-semente: por que 12 ou 24 palavras SÃO a carteira
 
 **Módulo 1 — Fundamentos & Segurança · Aba "Seed phrase" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

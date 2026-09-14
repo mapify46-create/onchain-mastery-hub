@@ -119,9 +119,41 @@ o rótulo só é fixado por escrito depois, e ninguém analisa nada antes disso.
     **pré-mortem, argumento contrário e taxa-base** (8 itens na decisão).
   - Prompts de vídeo: entregável virou **resumo navegável** (não a narração palavra
     por palavra), vídeo em 2–3 segmentos; frase final sem "aconselhamento". 33 regerados.
-- **Ainda não feito:** "por que a sua não serve" nos quizzes de M1 a M5 e nas 10
-  primeiras do M3; revisão espaçada (espera P13 etapa 2); passo a passo e preços das
-  ferramentas de narrativa (espera P9); embaralhar os cenários do simulador.
+- **Leva 3 (14/09): as 7 continuações voltaram completas** — análise em
+  `VERIFICACOES-AO-VIVO-2.md`, "Leva 3". Conferido ao vivo: a Chainalysis diz 3,59%
+  para **2024**; a P10 errou, o app está certo. GOAT (US$ 1,34 bi em 17/11/2024) e
+  MOODENG (15/11/2024) resolvidos. Preço dos Boosts do DexScreener: não existe em
+  página oficial.
+- **Construído em 14/09 (local, não publicado, cache `omh-cache-v13`), verificado no
+  navegador:** página **Revisão espaçada** (`#/revisao`, escada 1/3/7/16/35 dias,
+  confiança antes de responder, placar "quando tenho certeza, acerto?"); chips de
+  confiança no quiz dos módulos; na tela de início, card "Revisão de hoje", plano
+  "se-então" e Exportar/Importar do progresso; aba Narrativas com a coluna "Ler é
+  grátis?", os preços, os componentes do Trending Score e três parágrafos novos em
+  "Narrativa e preço".
+- **Finalizado em 14/09 (o dono pediu "finalize tudo"; cache `omh-cache-v14`),
+  verificado no navegador:**
+  - "Por que a sua não serve" em **todas** as 183 alternativas erradas dos 7 quizzes.
+  - Perguntas de definição viraram cenário (M2 q2 FOMO, M4 q1 catálise); M3 q4
+    atualizado para o pilar social novo.
+  - **Glossário na Revisão:** marcar um termo como estudado põe duas perguntas na fila
+    (pela definição e por uma situação), com 3 alternativas da mesma categoria.
+  - Pergunta "Confira antes de seguir" no fim de partes das abas longas (M3 Narrativas,
+    Social e Técnico; M6 Números e Contrato), corrigida na hora.
+  - Ordem dos cenários do simulador sorteada a cada visita.
+  - **Barra de progresso mede domínio:** metade do módulo agora é o acerto no quiz (6 de
+    8 dão 37,5 de 50), não só ter respondido. Reversível em `progressoDoModulo`.
+  - "Próxima ação" única no topo da tela de início.
+  - LP travada corrigida onde ainda era tratada como sinal de segurança: M4 (checagem,
+    destaque, quiz q4), M2 (fases) e glossário (Mazorra 2022; pool do pump.fun é do
+    protocolo).
+  - 13 prompts de vídeo novos (M3 práticas, M6, M7, Checklist): 46 no total. Com 46
+    vídeos, 4 minutos já passam de 1 GB no bitrate do primeiro — o README explica.
+- **Não feito, de propósito:** 3 alternativas em vez de 4 nos quizzes. A pesquisa diz
+  que a 4ª não prejudica a medida e não mede ganho de aprendizagem com a troca; tirar
+  alternativa quebraria respostas salvas. As perguntas do glossário na Revisão já usam 3.
+- **Conferido ao vivo em 14/09:** o "Meme Coin Factories" não aparece na lista de aceitos
+  do site do CCS 2026 — segue como preprint no app.
 
 **Pendências menores (não bloqueiam publicar):**
 - **Vídeos dos conteúdos novos:** o gerador `scripts/gerar-prompts-de-video.mjs` tem a

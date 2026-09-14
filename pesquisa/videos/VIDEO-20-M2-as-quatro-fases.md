@@ -1,4 +1,4 @@
-# Vídeo 20 de 33 — As quatro fases de uma memecoin
+# Vídeo 20 de 46 — As quatro fases de uma memecoin
 
 **Módulo 2 — Psicologia das memecoins · Aba "As 4 fases" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 
@@ -71,7 +71,7 @@ O token nasce. Liquidez fina, poucos holders, preço definido pela bonding curve
 - Nenhum histórico para comparar
 
 **O que checar:**
-- A LP está bloqueada ou queimada?
+- Alguém consegue tirar a liquidez? (No pump.fun, a pool pós-graduação é do protocolo; fora dele, trava não prova que é seguro.)
 - Mint e freeze authority foram revogadas?
 - Quanto os maiores holders detêm juntos?
 - Houve compras em bloco (bundles) no lançamento?

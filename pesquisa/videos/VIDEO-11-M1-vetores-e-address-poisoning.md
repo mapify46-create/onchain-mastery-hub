@@ -1,4 +1,4 @@
-# Vídeo 11 de 33 — Os vetores técnicos e o address poisoning
+# Vídeo 11 de 46 — Os vetores técnicos e o address poisoning
 
 **Módulo 1 — Fundamentos & Segurança · Aba "Golpes" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

@@ -1,4 +1,4 @@
-# Vídeo 18 de 33 — Os tipos de token e como reconhecer cada um
+# Vídeo 18 de 46 — Os tipos de token e como reconhecer cada um
 
 **Módulo 2 — Psicologia das memecoins · Aba "Tipos de token" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

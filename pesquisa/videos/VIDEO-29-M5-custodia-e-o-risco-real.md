@@ -1,4 +1,4 @@
-# Vídeo 29 de 33 — Quem guarda as chaves — e por que o risco real é o app sair do ar
+# Vídeo 29 de 46 — Quem guarda as chaves — e por que o risco real é o app sair do ar
 
 **Módulo 5 — A mecânica da execução · Aba "Custódia" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

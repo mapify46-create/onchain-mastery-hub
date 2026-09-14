@@ -1,4 +1,4 @@
-# Vídeo 17 de 33 — Os cinco vieses que fazem você clicar
+# Vídeo 17 de 46 — Os cinco vieses que fazem você clicar
 
 **Módulo 2 — Psicologia das memecoins · Aba "Vieses" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

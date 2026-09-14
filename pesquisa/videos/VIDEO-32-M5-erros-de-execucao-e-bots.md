@@ -1,4 +1,4 @@
-# Vídeo 32 de 33 — Os erros que custam dinheiro sem envolver o mercado — e por que você não vence bots
+# Vídeo 32 de 46 — Os erros que custam dinheiro sem envolver o mercado — e por que você não vence bots
 
 **Módulo 5 — A mecânica da execução · Aba "Erros" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

@@ -287,12 +287,15 @@ export const modulo4 = {
       'derruba a operação, por melhor que a narrativa esteja.',
     itens: [
       {
-        pergunta: 'A LP está bloqueada ou queimada?',
+        pergunta: 'Alguém consegue tirar a liquidez da pool?',
         porque:
           'Com a liquidez livre, o criador pode removê-la e o preço vira pó no mesmo bloco — ' +
-          'o hard rug. Nenhuma outra checagem sobrevive a essa.',
-        onde: 'RugCheck; e o explorer para ver quem detém os tokens de LP.',
-        alerta: 'LP livre, ou lock com vencimento próximo.',
+          'o hard rug. No pump.fun, depois da graduação, a pool é do protocolo e isso não ' +
+          'acontece; o golpe que sobra lá é o criador vender a própria compra (Módulo 6).',
+        onde: 'RugCheck (Lockers & LP); e o explorer para ver quem detém os tokens de LP.',
+        alerta:
+          'Tokens de LP numa carteira do criador. Mas trava não aprova token: num estudo, 97,3% ' +
+          'dos tokens com liquidez travada eram maliciosos, contra 97,7% no geral (Mazorra et al., 2022).',
       },
       {
         pergunta: 'A mint authority foi revogada?',
@@ -415,7 +418,7 @@ export const modulo4 = {
       {
         rotulo: 'Duração de um hard rug',
         valor: 'Um bloco',
-        nota: 'Com a liquidez livre, o criador remove a LP e o preço vira pó no mesmo bloco. Nenhuma outra checagem sobrevive a essa.',
+        nota: 'Com a liquidez livre, o criador remove a LP e o preço vira pó no mesmo bloco. No pump.fun a pool pós-graduação é do protocolo; lá, o golpe que sobra é o criador vender.',
         tom: 'alerta',
       },
     ],
@@ -546,22 +549,47 @@ export const modulo4 = {
   // ---------------------------------------------------------------------------
   // Aba 5 — Mini-quiz (4 perguntas)
   // ---------------------------------------------------------------------------
+
+  // Por que cada alternativa errada do quiz não serve (o quiz mostra a da resposta escolhida).
+  porqueErradas: {
+    q1: {
+      a: 'Gráfico e volume descrevem o que já aconteceu; catálise é um evento que ainda vai trazer compradores novos.',
+      c: 'Animação da comunidade é atenção, não evento com data — e pode ser campanha paga.',
+      d: 'Sensação não é verificável: sem evento, não há como saber quando a tese falhou.',
+    },
+    q2: {
+      a: 'Realizar parcial não muda a regra do imposto: cada venda é apurada.',
+      b: 'Nada garante o preço depois; realizar parcial funciona justamente sem prever o topo.',
+      d: 'Vender não aumenta a liquidez da pool; tira dela.',
+    },
+    q3: {
+      b: 'A rede não cobra por tempo de posição.',
+      c: 'O token não é removido da DEX por ficar parado; ele só fica sem comprador.',
+      d: 'Segurar não é neutro: na Degradação, cada dia sem comprador é preço caindo.',
+    },
+    q4: {
+      a: 'Gráfico e volume não dizem nada sobre o contrato nem sobre quem controla o supply.',
+      c: 'Seguidores e tamanho de grupo são fáceis de comprar e não checam o contrato.',
+      d: 'Canal de call é atenção — muitas vezes paga —, não checagem.',
+    },
+  },
+
   quiz: [
     {
       id: 'q1',
-      pergunta: 'O que é uma catálise, na formulação de uma entrada?',
+      pergunta: 'Qual destas é uma catálise, no sentido do Módulo 4?',
       alternativas: [
         {
           id: 'a',
-          texto: 'A sensação de que o token vai subir porque o gráfico está forte.',
+          texto: 'O gráfico está forte e o volume subiu hoje.',
         },
         {
           id: 'b',
           texto:
-            'O evento concreto que precisa acontecer para trazer compradores novos — listagem, graduação para a DEX, campanha, evento com data.',
+            'Uma listagem numa corretora grande, anunciada para sexta-feira.',
         },
-        { id: 'c', texto: 'O momento em que você decide vender toda a posição.' },
-        { id: 'd', texto: 'A taxa paga à rede para a transação ser confirmada.' },
+        { id: 'c', texto: 'A comunidade no Telegram está muito animada.' },
+        { id: 'd', texto: 'Você sente que agora é a hora de entrar.' },
       ],
       correta: 'b',
       explicacao:
@@ -615,14 +643,14 @@ export const modulo4 = {
         {
           id: 'b',
           texto:
-            'LP bloqueada ou queimada, mint e freeze authority revogadas, concentração dos maiores holders, bundles no lançamento e se a liquidez aguenta a sua saída.',
+            'Endereço oficial, extensões e autoridades do contrato, concentração real dos holders, bundles no lançamento e se a liquidez aguenta a sua saída.',
         },
         { id: 'c', texto: 'Quantos seguidores o projeto tem no X e o tamanho do grupo no Telegram.' },
         { id: 'd', texto: 'Apenas se o token já apareceu em algum canal de call que você segue.' },
       ],
       correta: 'b',
       explicacao:
-        'A checagem técnica é a peneira que vem antes de tudo: sem LP travada, com authorities ' +
+        'A checagem técnica é a peneira que vem antes de tudo: com endereço errado, extensão fora do padrão, authorities ' +
         'ativas ou com supply concentrado, nenhuma tese se sustenta. Ferramentas: RugCheck, ' +
         'Solscan/BscScan, Bubblemaps e DexScreener.',
     },

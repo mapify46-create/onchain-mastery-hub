@@ -1,4 +1,4 @@
-# Vídeo 1 de 33 — O que é uma blockchain e por que ela é "imutável"
+# Vídeo 1 de 46 — O que é uma blockchain e por que ela é "imutável"
 
 **Módulo 1 — Fundamentos & Segurança · Aba "Fundamentos" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

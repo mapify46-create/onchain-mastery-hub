@@ -17,7 +17,7 @@ import {
   html,
 } from '../ui.js';
 import { montarSimulador } from '../components/simulator.js';
-import { montarQuiz } from '../components/quiz.js';
+import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarCalculadora } from '../components/calculadora.js';
 import { obterEstado, atualizar } from '../store.js';
@@ -582,7 +582,7 @@ function montarAbaQuiz() {
       id: modulo4.id,
       titulo: 'Mini-quiz do Módulo 4',
       descricao: 'Quatro perguntas. As respostas ficam salvas no navegador.',
-      perguntas: modulo4.quiz,
+      perguntas: juntarPorques(modulo4.quiz, modulo4.porqueErradas),
     }),
     montarConclusao(),
   ]);

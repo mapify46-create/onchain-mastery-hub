@@ -1,4 +1,4 @@
-# Vídeo 33 de 33 — Do "vi um token" ao "encerrei a posição" — e o registro para imposto
+# Vídeo 33 de 46 — Do "vi um token" ao "encerrei a posição" — e o registro para imposto
 
 **Módulo 5 — A mecânica da execução · Aba "Processo" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

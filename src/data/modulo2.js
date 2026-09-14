@@ -412,7 +412,7 @@ export const modulo2 = {
         'Nenhum histórico para comparar',
       ],
       oQueChecar: [
-        'A LP está bloqueada ou queimada?',
+        'Alguém consegue tirar a liquidez? (No pump.fun, a pool pós-graduação é do protocolo; fora dele, trava não prova que é seguro.)',
         'Mint e freeze authority foram revogadas?',
         'Quanto os maiores holders detêm juntos?',
         'Houve compras em bloco (bundles) no lançamento?',
@@ -705,6 +705,30 @@ export const modulo2 = {
     nota: 'Números registrados pelas fontes citadas em cada caso, nas datas indicadas. Fato histórico, não recomendação.',
   },
 
+  // Por que cada alternativa errada do quiz não serve (o quiz mostra a da resposta escolhida).
+  porqueErradas: {
+    q1: {
+      a: 'Memecoin não tem produto nem receita por trás.',
+      c: 'Não existe reserva que garanta preço mínimo.',
+      d: 'Desenvolvedor não sustenta preço de memecoin; muitas nem têm código além do próprio token.',
+    },
+    q2: {
+      a: 'Custo afundado é segurar o que já caiu para não "assumir" a perda; aqui você nem tem posição.',
+      b: 'Efeito disposição é vender o que sobe e segurar o que cai; aqui ainda não há posição.',
+      d: 'Excesso de confiança é achar que sabe mais do que sabe; o gatilho aqui é o gráfico subindo sem você.',
+    },
+    q3: {
+      a: 'Nenhuma corretora cobra aluguel por posição aberta em token.',
+      c: 'Tokens não expiram.',
+      d: 'Na maioria das memecoins o preço não volta: a atenção foi embora.',
+    },
+    q4: {
+      a: 'Endosso concentra atenção num pico curto; os três caíram mais de 90%.',
+      b: 'Esperar o anúncio oficial é chegar quando quem entrou antes já está vendendo.',
+      d: 'Não foram proibidas; caíram porque a atenção foi embora.',
+    },
+  },
+
   quiz: [
     {
       id: 'q1',
@@ -725,16 +749,16 @@ export const modulo2 = {
     },
     {
       id: 'q2',
-      pergunta: 'O que é FOMO?',
+      pergunta: 'Um token subiu 300% na última hora. Você nunca tinha ouvido falar dele e sente que precisa comprar agora, antes que suba mais. Qual viés está agindo?',
       alternativas: [
-        { id: 'a', texto: 'Uma taxa que a corretora cobra em cada venda.' },
-        { id: 'b', texto: 'Uma ferramenta para checar se a liquidez está bloqueada.' },
+        { id: 'a', texto: 'Custo afundado.' },
+        { id: 'b', texto: 'Efeito disposição.' },
         {
           id: 'c',
           texto:
-            'O medo de ficar de fora, que faz você comprar correndo depois de ver o gráfico já subindo.',
+            'FOMO: o medo de ficar de fora, disparado justamente pelo preço já ter subido.',
         },
-        { id: 'd', texto: 'A estratégia de vender metade da posição quando ela dobra.' },
+        { id: 'd', texto: 'Excesso de confiança.' },
       ],
       correta: 'c',
       explicacao:

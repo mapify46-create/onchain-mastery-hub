@@ -24,16 +24,42 @@ const { modulo2 } = await import('../src/data/modulo2.js');
 const { modulo3 } = await import('../src/data/modulo3.js');
 const { modulo4 } = await import('../src/data/modulo4.js');
 const { modulo5 } = await import('../src/data/modulo5.js');
+const { modulo6 } = await import('../src/data/modulo6.js');
+const { modulo7 } = await import('../src/data/modulo7.js');
+const { checklistPreCompra, EVIDENCIAS } = await import('../src/data/checklist.js');
 const { cenarios, OPCOES, FAIXAS_DE_DISCIPLINA } = await import('../src/data/cenarios.js');
 
-const MODULOS = { 1: modulo1, 2: modulo2, 3: modulo3, 4: modulo4, 5: modulo5 };
+const MODULOS = {
+  1: modulo1,
+  2: modulo2,
+  3: modulo3,
+  4: modulo4,
+  5: modulo5,
+  6: modulo6,
+  7: modulo7,
+  checklist: { resumo: checklistPreCompra.resumo },
+};
 const TITULO_DO_MODULO = {
   1: 'Fundamentos & Segurança',
   2: 'Psicologia das memecoins',
   3: 'Os dois pilares (social × técnico)',
   4: 'Gestão & decisão',
   5: 'A mecânica da execução',
+  6: 'Ler a tela',
+  7: 'A rotina',
+  checklist: 'Checklist antes de comprar',
 };
+
+// "M3" para módulo, "CHECKLIST" para a página própria — vai no nome do arquivo e no índice.
+function prefixo(v) {
+  return typeof v.modulo === 'number' ? 'M' + v.modulo : String(v.modulo).toUpperCase();
+}
+
+function rotuloDaOrigem(v) {
+  return typeof v.modulo === 'number'
+    ? `**Módulo ${v.modulo} — ${TITULO_DO_MODULO[v.modulo]} · Aba "${v.aba}"`
+    : `**Página "${TITULO_DO_MODULO[v.modulo]}"`;
+}
 
 // ---------------------------------------------------------------------------
 // Serializadores: transformam cada formato de src/data/ em markdown legível.
@@ -51,6 +77,7 @@ function secao(s) {
   for (const sub of s.subListas ?? []) {
     out += h(4, sub.titulo) + li(sub.passos, true);
   }
+  if (s.listaTitulo) out += p('**' + s.listaTitulo + '**');
   if (s.lista?.length) out += li(s.lista, Boolean(s.ordenada));
   out += (s.paragrafosFinais ?? []).map(p).join('');
   return out;
@@ -113,7 +140,7 @@ function roteiroDrainer(passos) {
 function linhaDoTempo(lt) {
   if (!lt?.marcos?.length) return '';
   let out = h(3, lt.titulo) + p(lt.descricao);
-  out += lt.marcos.map((m) => `- **${m.data}** — ${m.titulo}: ${m.texto}`).join('\n') + '\n\n';
+  out += lt.marcos.map((m) => `- **${m.data}** — ${m.titulo}${m.texto ? ': ' + m.texto : ''}`).join('\n') + '\n\n';
   return out + p(lt.nota ? '*Nota:* ' + lt.nota : '');
 }
 
@@ -160,7 +187,61 @@ function calculadora(c) {
     'No vídeo, mostre a ideia da ferramenta com um ou dois exemplos numéricos — e diga que no ' +
       'app a pessoa pode mexer nos controles e ver o resultado mudar na hora.',
   );
+  if (c.exemplo?.passos?.length) out += h(4, 'Exemplo resolvido que o app mostra') + li(c.exemplo.passos, true);
   return out + p(c.nota ? '*Premissa que a ferramenta assume:* ' + c.nota : '');
+}
+
+// ----- Formatos das abas novas (M3 práticas, M6, M7, Checklist) -----
+function paragrafo(texto) {
+  return p(texto);
+}
+
+function anatomia(a) {
+  if (!a) return '';
+  let out = h(3, 'Anatomia de tela: ' + a.titulo) + p(a.descricao);
+  out += (a.itens ?? []).map((it, i) => `${i + 1}. **${it.titulo}** — ${it.texto}`).join('\n') + '\n\n';
+  return out + p(a.nota ? '*Nota:* ' + a.nota : '');
+}
+
+function rotinaSocial(r) {
+  if (!r) return '';
+  let out = h(3, r.titulo) + p(r.descricao);
+  out += r.passos.map((passo, i) => `${i + 1}. **${passo.titulo}** (${passo.tempo}) — ${passo.texto}`).join('\n') + '\n\n';
+  return out;
+}
+
+function ferramentaTecnica(f) {
+  let out = h(3, `${f.nome} (${f.endereco}) — ${f.pergunta}`) + p('**O que é grátis:** ' + f.gratis);
+  out += anatomia(f.anatomia);
+  out += h(4, 'Passo a passo') + li(f.passos, true);
+  out += h(4, 'Armadilhas de leitura') + li(f.armadilhas);
+  return out;
+}
+
+function blocosDoChecklist(c) {
+  let out = '';
+  for (const bloco of c.blocos ?? []) {
+    out += h(3, bloco.titulo) + p(bloco.descricao);
+    out +=
+      bloco.itens
+        .map(
+          (item, n) =>
+            `${n + 1}. **${item.texto}** — ${item.porque} *(Onde checar: ${item.onde} · Força da evidência: ${EVIDENCIAS[item.evidencia]?.rotulo ?? item.evidencia})*`,
+        )
+        .join('\n') + '\n\n';
+  }
+  return out;
+}
+
+function naoVerificadoDe(lista) {
+  if (!lista?.length) return '';
+  let out = h(2, 'Itens NÃO VERIFICADOS — o vídeo precisa tratá-los como tal');
+  out += p(
+    'Se o vídeo tocar em algum destes pontos, ele deve dizer explicitamente que não está ' +
+      'confirmado. Não "resolva" a dúvida por conta própria.',
+  );
+  for (const n of lista) out += `- **${n.titulo}** — ${n.texto}\n`;
+  return out + '\n';
 }
 
 // Qualquer objeto simples vira "rótulo: valor" — usado para formatos pequenos.
@@ -336,7 +417,7 @@ function planoDaPosicao(pp) {
 // Os 33 vídeos. `partes` é uma lista de funções que devolvem markdown — a ordem
 // aqui é a ordem em que o material aparece no prompt.
 // ---------------------------------------------------------------------------
-const m1 = modulo1, m2 = modulo2, m3 = modulo3, m4 = modulo4, m5 = modulo5;
+const m1 = modulo1, m2 = modulo2, m3 = modulo3, m4 = modulo4, m5 = modulo5, m6 = modulo6, m7 = modulo7;
 
 const VIDEOS = [
   // ============================ MÓDULO 1 (15) ============================
@@ -638,18 +719,200 @@ const VIDEOS = [
     diagramas: ['fluxo-de-decisao'],
     naoVerificado: true,
   },
+
+  // =============== CONTEÚDO NOVO (setembro de 2026) — entra no fim, para ===============
+  // =============== não mudar o número dos 33 vídeos que já existem      ===============
+
+  // ============================ MÓDULO 3 — abas práticas (3) ============================
+  {
+    modulo: 3, aba: 'Narrativas', slug: 'narrativas',
+    titulo: 'Narrativas: de onde vem a atenção — e o que ela não prevê',
+    foco: 'REGRA DURA: este vídeo NÃO ensina a caçar narrativa para comprar. Ensina o que se sabe (a narrativa nasce fora da blockchain; as cópias seguem, não criam; boa parte da atenção é fabricada; toda lista de "em alta" é paga ou fabricável) e o que NÃO se sabe (ninguém mediu qual rede vem primeiro; nenhum número revisado por pares liga atenção a preço de memecoin; em cripto grande o sinal dura minutos e os custos comem). Fechar com a frase honesta do app. Não desenhar gráfico de "surfar a narrativa".',
+    conexoes: 'Espelha as 4 fases do Módulo 2 no nível do tema. Conecta com volume falso (Módulo 6) e com a conta de custos (Módulo 5).',
+    partes: [
+      () => destaques(m3.praticaNarrativas.destaques),
+      () => paragrafo(m3.praticaNarrativas.introducao),
+      () => secoesPorId({ secoes: m3.praticaNarrativas.secoes }, ['o-que-e', 'onde-nasce', 'fabricada', 'ciclo']),
+      () => linhaDoTempo(m3.praticaNarrativas.linhaDoTempo),
+      () => tabela(m3.praticaNarrativas.tabelaNarrativas, 'Tabela do app: as cinco narrativas, lado a lado'),
+      () => secoesPorId({ secoes: m3.praticaNarrativas.secoes }, ['narrativa-e-preco', 'ferramentas']),
+      () => tabela(m3.praticaNarrativas.tabelaFerramentas, 'Tabela do app: ferramentas de "em alta" e de atenção'),
+      () => secoesPorId({ secoes: m3.praticaNarrativas.secoes }, ['rotina']),
+      () => naoVerificadoDe(m3.naoVerificadoPratica),
+    ],
+  },
+  {
+    modulo: 3, aba: 'Pilar social na prática', slug: 'pilar-social-na-pratica',
+    titulo: 'Pilar social na prática: o endereço oficial em 5 minutos, e os golpes do X, Discord e Telegram',
+    foco: 'Vídeo PROCEDIMENTAL. A rotina de 5 minutos é a espinha: uma tela por passo. O ponto que precisa cravar: nome e ticker qualquer um copia; o endereço é a identidade — divergência entre site e post fixado encerra a checagem. Os golpes de Discord viram cenas curtas com a defesa de cada um. Mockup de perfil desenhado, nunca captura do X.',
+    conexoes: 'Assume os vídeos 10 e 11 (drainers, address poisoning). É a primeira parte do Checklist antes de comprar.',
+    partes: [
+      () => destaques(m3.praticaSocial.destaques),
+      () => paragrafo(m3.praticaSocial.introducao),
+      () => rotinaSocial(m3.praticaSocial.rotina),
+      () => secoesPorId({ secoes: m3.praticaSocial.secoes }, ['endereco']),
+      () => anatomia(m3.praticaSocial.anatomiaPerfil),
+      () => secoesPorId({ secoes: m3.praticaSocial.secoes }, ['x', 'discord', 'telegram', 'calls']),
+      () => tabela(m3.praticaSocial.tabela, 'Tabela do app: cada sinal social, o que prova e o que não prova'),
+      () => naoVerificadoDe(m3.naoVerificadoPratica),
+    ],
+  },
+  {
+    modulo: 3, aba: 'Pilar técnico na prática', slug: 'pilar-tecnico-na-pratica',
+    titulo: 'Pilar técnico na prática: RugCheck, Solscan, Bubblemaps e DexScreener, uma pergunta cada',
+    foco: 'Vídeo PROCEDIMENTAL, uma ferramenta por segmento, na ordem do app. Para cada uma: a pergunta que ela responde, o passo a passo e as armadilhas de leitura. Telas como ESQUEMA desenhado (a anatomia do app), não captura. As duas armadilhas que precisam aparecer: "GOOD" no RugCheck não aprova token, e o "Authority" do Solscan com endereço não prova que o dono ainda emite. Nenhuma ferramenta é recomendação.',
+    conexoes: 'Detalha o vídeo 22. Continua no Módulo 6 (o que cada número da tela significa) e é a segunda parte do Checklist.',
+    partes: [
+      () => destaques(m3.praticaTecnica.destaques),
+      () => paragrafo(m3.praticaTecnica.introducao),
+      () => m3.praticaTecnica.ferramentas.map(ferramentaTecnica).join(''),
+      () => tabela(m3.praticaTecnica.tabelaOnde, 'Tabela do app: o que eu quero checar → onde eu checo'),
+    ],
+  },
+
+  // ============================ MÓDULO 6 — Ler a tela (4) ============================
+  {
+    modulo: 6, aba: 'Os números', slug: 'os-numeros-da-tela',
+    titulo: 'Market cap, liquidez e o PnL que não chega na carteira',
+    foco: 'O número que mais engana é o PnL não realizado. Arco: market cap não é dinheiro → a liquidez é o limite de saída → derrubar o preço pela metade devolve só 14,6% da liquidez → a calculadora com o exemplo resolvido → os zeros compactados ($0.0₅2786). Um exemplo numérico por tela, só com os números do app.',
+    conexoes: 'Assume o vídeo 30 (taxas) e o 31 (impacto de preço). Prepara o vídeo sobre volume falso.',
+    partes: [
+      () => destaques(m6.destaques.numeros),
+      () => secoesPorId(m6, ['tres-numeros', 'quanto-sai']),
+      () => tabela(m6.tabelaVendaPorQueda, 'Tabela do app: quanto sai, por queda de preço'),
+      () => calculadora(m6.calculadoraDeSaida),
+      () => secoesPorId(m6, ['zeros-compactados', 'pnl']),
+      () => anatomias(m6, ['numerosDaTela']),
+    ],
+  },
+  {
+    modulo: 6, aba: 'Volume falso', slug: 'volume-falso-e-bundles',
+    titulo: 'Volume falso e bundles: todo sinal público é otimizado contra você',
+    foco: 'A lição que precisa cravar: qualquer número único da tela já foi calibrado contra quem olha — vendedores de volume espalham as operações em 100+ carteiras justamente porque as pessoas olham essa razão. Isso não torna os sinais inúteis; torna cada um uma triagem. Bundle não é prova de golpe: o que importa é quanto as carteiras AINDA seguram. NÃO ensinar a fabricar volume nem a montar bundle.',
+    conexoes: 'Assume o vídeo anterior (os números). Conecta com a aba Narrativas do Módulo 3 (listas de "em alta").',
+    partes: [
+      () => destaques(m6.destaques.volume),
+      () => secoesPorId(m6, ['como-fabrica', 'otimizado-contra', 'o-que-da-para-ver', 'bundles']),
+    ],
+    diagramas: ['wash-trading'],
+  },
+  {
+    modulo: 6, aba: 'O contrato', slug: 'o-contrato-do-token',
+    titulo: 'O contrato: SPL ou Token-2022, extensões, autoridades e o dev dump',
+    foco: 'O que o dono do token ainda pode fazer com você. Arco: qual programa manda no token → as extensões que mudam o jogo (taxa, delegado permanente, hook) → mint e freeze → metadata mutável → dev dump, o golpe que sobra no pump.fun. A armadilha do campo "Authority" do Solscan precisa de uma cena própria. Esquemas desenhados, não capturas.',
+    conexoes: 'Assume o vídeo do Pilar técnico na prática. Alimenta o bloco técnico do Checklist.',
+    partes: [
+      () => destaques(m6.destaques.contrato),
+      () => secoesPorId(m6, ['spl-ou-2022', 'extensoes']),
+      () => tabela(m6.tabelaExtensoes, 'Tabela do app: as extensões, uma a uma'),
+      () => secoesPorId(m6, ['autoridades', 'metadata', 'dev-dump', 'evm']),
+      () => anatomias(m6, ['contratoNoExplorador']),
+    ],
+  },
+  {
+    modulo: 6, aba: 'Prever o golpe', slug: 'prever-o-golpe',
+    titulo: 'Dá para prever um rug? O que o melhor detector acerta — e o chute que ganha dele',
+    foco: 'Vídeo sobre como ler QUALQUER promessa de detecção. O número central: com 81,9% de rugs na amostra, chutar "tudo é rug" dá F1 de 0,90 e o melhor modelo publicado dá 0,79. Explicar taxa-base em linguagem de leigo, com contagem ("de cada 100 tokens…"). Fechar dizendo que o Checklist não aprova token nenhum: só reprova pelo que dá para ver.',
+    conexoes: 'Fecha o Módulo 6. Justifica as etiquetas de força da evidência do Checklist.',
+    partes: [
+      () => destaques(m6.destaques.deteccao),
+      () => secoesPorId(m6, ['o-que-conta', 'melhor-detector', 'sinais']),
+      () => tabela(m6.tabelaSinais, 'Tabela do app: os sinais, pela força da evidência'),
+      () => secoesPorId(m6, ['por-que-importa']),
+    ],
+    naoVerificado: true,
+  },
+
+  // ============================ MÓDULO 7 — A rotina (5) ============================
+  {
+    modulo: 7, aba: 'A regra', slug: 'a-regra-antes',
+    titulo: 'A regra escrita antes da compra: o que ela precisa ter para ser testada',
+    foco: 'REGRA DURA: o vídeo NÃO sugere regra de entrada, gatilho, token nem fração. Mostra só a FORMA de uma regra testável (as cinco partes) e por que ela vem antes: a memória reescreve o que você pensava. A cena da saída automática × lembrete (só a automática mudou o comportamento) é o gancho prático.',
+    conexoes: 'Assume os vídeos 24 a 26 (tese, degraus, checagens). Usa o Checklist como filtro que vem antes do gatilho.',
+    partes: [
+      () => destaques(m7.destaques.regra),
+      () => secoesPorId(m7, ['por-que-antes', 'o-que-a-regra-tem', 'pre-compromisso', 'stop-automatico']),
+    ],
+    diagramas: ['ciclo'],
+  },
+  {
+    modulo: 7, aba: 'Tamanho', slug: 'tamanho-de-posicao',
+    titulo: 'Tamanho de posição: por que a fórmula de Kelly quebra, e o que sobra é sobreviver',
+    foco: 'A matemática, sem sugerir fração. Arco: fração fixa → Kelly precisa de média e variância que talvez não existam em memecoin → ruína do apostador (99,5% na roleta) → a conta (1 − f)ⁿ com o exemplo resolvido da calculadora → recuperar custa mais do que perder. A frase que precisa cravar: o tamanho de cada posição é um valor que você pode perder inteiro.',
+    conexoes: 'Assume o vídeo 26 (curva de recuperação). Conecta com a mortalidade do Módulo 2 (68,67% no mesmo dia).',
+    partes: [
+      () => destaques(m7.destaques.tamanho),
+      () => secoesPorId(m7, ['fracao-fixa', 'kelly', 'ruina', 'a-conta']),
+      () => calculadora(m7.calculadoraDeSequencia),
+    ],
+  },
+  {
+    modulo: 7, aba: 'O diário', slug: 'o-diario',
+    titulo: 'O diário de 9 campos: ele ajuda a seguir a regra, não a ganhar dinheiro',
+    foco: 'As duas frases lado a lado são o centro: "o registro ajuda você a seguir a sua regra" (tem lastro) × "o registro faz ganhar dinheiro" (não foi medido). Traduzir o efeito de 0,40 em chances (61%). Os 9 campos viram uma tela cada, com o campo 7 (saída executada) destacado como a peça que torna o campo 8 verificável.',
+    conexoes: 'Assume o vídeo da regra. Prepara o vídeo da revisão.',
+    partes: [
+      () => destaques(m7.destaques.diario),
+      () => secoesPorId(m7, ['duas-frases', 'o-tamanho-do-efeito', 'nove-campos']),
+      () => tabela(m7.tabelaCampos, 'Tabela do app: os nove campos'),
+    ],
+  },
+  {
+    modulo: 7, aba: 'A revisão', slug: 'a-revisao',
+    titulo: 'Revisar sem se enganar: olhe o resultado pouco, o comportamento muito — e quantas operações provam algo',
+    foco: 'Os vieses de quem revisa o próprio histórico viram cenas curtas. O número que mais surpreende: mesmo no melhor caso são 400 a 1.600 operações para distinguir habilidade de sorte, e com cauda pesada demais nenhum número basta. Dizer que a cadência ideal de revisão nunca foi medida.',
+    conexoes: 'Assume o vídeo do diário. Conecta com o vídeo 27 (o simulador mede disciplina, não resultado).',
+    partes: [
+      () => destaques(m7.destaques.revisao),
+      () => secoesPorId(m7, ['olhar-pouco', 'a-pergunta', 'amostra']),
+    ],
+  },
+  {
+    modulo: 7, aba: 'Números que circulam', slug: 'numeros-que-circulam',
+    titulo: 'As estatísticas de trading que circulam, e o dado real de cada uma',
+    foco: 'Formato "o número que circula × o que o dado real diz", uma linha da tabela por cena. O dado brasileiro precisa aparecer com fonte: 97% dos day traders da B3 que persistiram mais de 300 dias perderam dinheiro. Tom de alerta sem sensacionalismo; não citar nome de curso ou plataforma que espalha os números.',
+    conexoes: 'Fecha o Módulo 7 e o curso: liga de volta ao Módulo 2 (a maioria vai a zero) e à Revisão espaçada.',
+    partes: [
+      () => destaques(m7.destaques.mitos),
+      () => secoesPorId(m7, ['por-que-circulam']),
+      () => tabela(m7.tabelaMitos, 'Tabela do app: o número que circula, e o dado real'),
+    ],
+    naoVerificado: true,
+  },
+
+  // ============================ PÁGINA — Checklist antes de comprar (1) ============================
+  {
+    modulo: 'checklist', aba: 'Página própria', slug: 'checklist-antes-de-comprar',
+    titulo: 'O Checklist antes de comprar: os dois pilares, item por item, com a força de cada evidência',
+    foco: 'Vídeo de orientação da página. O ponto que precisa cravar: passar em tudo NÃO aprova o token — só quer dizer que ele não mostrou os sinais que dá para ver. Explicar as quatro etiquetas (fato do protocolo, sinal medido, sinal fraco, rotina) antes dos itens. O fluxograma vira o roteiro visual. Nenhum item é sinal de compra.',
+    conexoes: 'Amarra os vídeos dos pilares (Módulo 3), do contrato e da detecção (Módulo 6) e da regra (Módulo 7).',
+    partes: [
+      () => destaques(checklistPreCompra.destaques),
+      () => h(3, checklistPreCompra.comoUsar.titulo) + checklistPreCompra.comoUsar.paragrafos.map(p).join(''),
+      () =>
+        h(3, 'As quatro etiquetas de força da evidência') +
+        Object.values(EVIDENCIAS).map((e) => `- **${e.rotulo}** — ${e.descricao}`).join('\n') +
+        '\n\n',
+      () => blocosDoChecklist(checklistPreCompra),
+      () =>
+        h(2, 'Roteiro visual sugerido (o fluxograma do app, em texto)') +
+        h(3, checklistPreCompra.fluxograma.titulo) +
+        p('*' + checklistPreCompra.fluxograma.legenda + '*') +
+        li(checklistPreCompra.fluxograma.versaoEmTexto, true),
+    ],
+  },
 ];
 
-if (VIDEOS.length !== 33) throw new Error('Esperava 33 vídeos, encontrei ' + VIDEOS.length);
+if (VIDEOS.length !== 46) throw new Error('Esperava 46 vídeos, encontrei ' + VIDEOS.length);
 
 // ---------------------------------------------------------------------------
 // O cabeçalho comum: é aqui que mora "o que queremos" em todo vídeo.
 // ---------------------------------------------------------------------------
 function cabecalho(v, n) {
   const mod = MODULOS[v.modulo];
-  return `# Vídeo ${n} de 33 — ${v.titulo}
+  return `# Vídeo ${n} de ${VIDEOS.length} — ${v.titulo}
 
-**Módulo ${v.modulo} — ${TITULO_DO_MODULO[v.modulo]} · Aba "${v.aba}" · Duração-alvo: 4 a 5 minutos (máximo 6)**
+${rotuloDaOrigem(v)} · Duração-alvo: 4 a 5 minutos (máximo 6)**
 
 > Cole este documento inteiro no Gemini. Ele contém as instruções E o material-fonte.
 > Gerado automaticamente a partir dos dados do app (\`scripts/gerar-prompts-de-video.mjs\`);
@@ -720,7 +983,7 @@ function corpo(v) {
 }
 
 function slugArquivo(n, v) {
-  return `VIDEO-${String(n).padStart(2, '0')}-M${v.modulo}-${v.slug}.md`;
+  return `VIDEO-${String(n).padStart(2, '0')}-${prefixo(v)}-${v.slug}.md`;
 }
 
 // ---------------------------------------------------------------------------
@@ -739,7 +1002,22 @@ for (const [i, v] of VIDEOS.entries()) {
   indice.push({ n, v, arquivo, palavras });
 }
 
-const readme = `# Prompts de vídeo — um por aula (33)
+// Tamanho estimado a partir do primeiro vídeo gravado (8 min, 720p, 48,5 MB).
+function tabelaDeTamanho() {
+  const mbPorMinuto = 48.5 / 8;
+  const limiteMb = 1024;
+  const linhas = [8, 5, 4, 3].map((minutos) => {
+    const total = VIDEOS.length * minutos * mbPorMinuto;
+    const texto = total >= 1000 ? '~' + (total / 1024).toFixed(1).replace('.', ',') + ' GB' : '~' + Math.round(total) + ' MB';
+    const cabe = total <= limiteMb * 0.9 ? 'sim' : total <= limiteMb ? 'no limite' : '**não**';
+    return `| ${minutos} min${minutos === 8 ? ' (como o primeiro)' : ''} | ${texto} | ${cabe} |`;
+  });
+  return (
+    `| Se cada vídeo tiver | ${VIDEOS.length} vídeos ocupam | Cabe? |\n|---|---:|---|\n` + linhas.join('\n')
+  );
+}
+
+const readme = `# Prompts de vídeo — um por aula (${VIDEOS.length})
 
 Gerados por \`scripts/gerar-prompts-de-video.mjs\` a partir de \`src/data/\`. **Não edite
 estes arquivos à mão**: mude o texto do módulo (ou o script) e rode de novo:
@@ -756,19 +1034,18 @@ de números usados. O resumo vira a \`transcricao\` do vídeo em \`src/data/modu
 — sem ele, o vídeo é o único elemento do hub sem versão em texto. Não é a narração
 palavra por palavra: texto idêntico à fala, junto do vídeo, atrapalha (redundância).
 
-## Limite de tamanho — leia antes de gerar os 33
+## Limite de tamanho — leia antes de gerar os ${VIDEOS.length}
 
 Os vídeos ficam no próprio repositório, servidos pelo GitHub Pages, que aceita
-**site publicado de até 1 GB**. O primeiro vídeo (8 min, 720p) tem 48,5 MB.
+**site publicado de até 1 GB**. O primeiro vídeo (8 min, 720p) tem 48,5 MB, cerca de
+6 MB por minuto.
 
-| Se cada vídeo tiver | 33 vídeos ocupam | Cabe? |
-|---|---:|---|
-| 8 min (como o primeiro) | ~1,6 GB | **não** |
-| 5 min | ~1,0 GB | no limite |
-| 4 min | ~800 MB | sim |
+${tabelaDeTamanho()}
 
-Por isso a duração-alvo em todos os prompts é **4 a 5 minutos**. Se o Gemini entregar
-mais longo, re-encodar para caber (ou aceitar menos vídeos). Vídeo **não** entra no
+A duração-alvo nos prompts é **4 a 5 minutos**, mas com ${VIDEOS.length} vídeos isso passa
+de 1 GB no bitrate do primeiro. Três saídas: re-encodar mais leve (abaixo de ~5 MB por
+minuto), gravar só os vídeos que o curso mais depende, ou hospedar parte fora do
+repositório. Vídeo **não** entra no
 precache do service worker — funciona online; o texto do módulo funciona offline.
 
 ## Ordem sugerida de gravação
@@ -781,7 +1058,7 @@ mais ganham com vídeo.
 
 | # | Módulo | Aba | Vídeo | Arquivo | Palavras |
 |---|---|---|---|---|---:|
-${indice.map(({ n, v, arquivo, palavras }) => `| ${n} | M${v.modulo} | ${v.aba} | ${v.titulo} | \`${arquivo}\` | ${palavras} |`).join('\n')}
+${indice.map(({ n, v, arquivo, palavras }) => `| ${n} | ${prefixo(v)} | ${v.aba} | ${v.titulo} | \`${arquivo}\` | ${palavras} |`).join('\n')}
 
 Total: ${indice.length} prompts, ~${totalPalavras.toLocaleString('pt-BR')} palavras.
 `;

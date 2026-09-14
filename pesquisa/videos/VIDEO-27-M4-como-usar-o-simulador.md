@@ -1,4 +1,4 @@
-# Vídeo 27 de 33 — O simulador de 12 cenários: como usar e como ler o resumo
+# Vídeo 27 de 46 — O simulador de 12 cenários: como usar e como ler o resumo
 
 **Módulo 4 — Gestão & decisão · Aba "Simulador" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

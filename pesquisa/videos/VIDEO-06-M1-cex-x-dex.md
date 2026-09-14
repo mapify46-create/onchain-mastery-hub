@@ -1,4 +1,4 @@
-# Vídeo 6 de 33 — Corretora (CEX) × troca on-chain (DEX): o que muda na prática
+# Vídeo 6 de 46 — Corretora (CEX) × troca on-chain (DEX): o que muda na prática
 
 **Módulo 1 — Fundamentos & Segurança · Aba "Fundamentos" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

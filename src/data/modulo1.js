@@ -1100,6 +1100,92 @@ export const modulo1 = {
   // ---------------------------------------------------------------------------
   // Mini-quiz (aba "Quiz") — 16 perguntas, sem sobreposição entre as duas pesquisas
   // ---------------------------------------------------------------------------
+  // Por que cada alternativa errada do quiz não serve (o quiz mostra a da resposta
+  // escolhida). Feedback que explica rende muito mais que "certo/errado" (Van der
+  // Kleij, Feskens & Eggen, 2015: 0,49 contra 0,05).
+  porqueErradas: {
+    q1: {
+      a: 'Nem a corretora nem o suporte conseguem desfazer um bloco já confirmado.',
+      c: 'O valor não muda nada: uma transação de centavos é tão definitiva quanto uma de milhões.',
+      d: 'Não existe botão de "final": o que torna a transação definitiva são os blocos empilhados por cima.',
+    },
+    q2: {
+      a: 'Na cold wallet as chaves ficam num aparelho seu, fora da internet.',
+      b: 'Na hot wallet as chaves ficam no seu celular ou navegador — conectadas, mas suas.',
+      d: 'Carteira de hardware é um tipo de cold wallet: as chaves ficam no aparelho, com você.',
+    },
+    q3: {
+      a: 'O cadeado só diz que a conexão é criptografada. Site de golpe também tem cadeado.',
+      b: 'Pressa é o gatilho que o golpe usa; ela não torna nada seguro.',
+      d: 'Uma vez basta: quem recebe a frase recria a carteira inteira na hora.',
+    },
+    q4: {
+      a: 'Um approval é permissão sobre tokens, não acesso ao seu e-mail.',
+      c: 'Assinar na blockchain não expõe dados pessoais; expõe o que você autorizou a mover.',
+      d: 'Approval não roda nada no seu computador: é uma permissão registrada na blockchain.',
+    },
+    q5: {
+      b: 'Um tradutor não lê permissões na blockchain.',
+      c: 'Um explorador só de leitura mostra as aprovações, mas para revogar é preciso conectar e assinar a revogação.',
+      d: 'O banco não enxerga permissões dadas na blockchain.',
+    },
+    q6: {
+      a: 'Conectar sozinho não move nada: o roubo precisa de uma assinatura sua.',
+      c: 'A frase-semente nunca sai da carteira quando você conecta.',
+      d: 'Conectar não custa taxa; taxa só aparece quando uma transação é enviada.',
+    },
+    q7: {
+      a: 'No address poisoning você copia um endereço parecido do próprio histórico — cola o que copiou. No clipper, você copia o certo e o vírus cola outro.',
+      c: 'Permit2 é um sistema de permissões de token; não troca o que você cola.',
+      d: 'Rug pull é o criador do token tirando a liquidez; não tem relação com a área de transferência.',
+    },
+    q8: {
+      a: 'Mudou: as Resoluções BCB 519, 520 e 521 criaram a autorização de PSAV.',
+      b: 'O Pix continua sendo usado para comprar e vender cripto.',
+      d: 'Não houve banimento: as empresas precisam de autorização, e várias saíram do varejo por conta própria.',
+    },
+    q9: {
+      a: '"Success" quer dizer que a transação executou — alguma coisa aconteceu.',
+      b: 'Uma falha apareceria como "Failed", não "Success".',
+      d: 'Value 0 não é devolução: a transferência foi de token, não da moeda nativa.',
+    },
+    q10: {
+      a: 'A frase não é login de corretora: é a origem de todas as chaves da carteira.',
+      c: 'A frase não expira: vale para sempre.',
+      d: 'Funciona em qualquer app compatível — é justamente isso que a torna perigosa.',
+    },
+    q11: {
+      a: 'Sem gas não quer dizer inofensiva: um Permit autoriza mover seus tokens.',
+      c: 'Assinatura de login existe, mas a mesma tela pode esconder um Permit.',
+      d: 'A assinatura vale sem gas; quem paga o gas é o atacante, depois, ao usar a permissão.',
+    },
+    q12: {
+      a: 'O Revoke.cash não estorna nada: a blockchain não tem estorno.',
+      c: 'Não há prazo que recupere: revogar só impede o próximo uso.',
+      d: 'Vale igual para NFT: revogar não traz de volta o que já saiu.',
+    },
+    q13: {
+      a: 'A Solana tem taxas — pequenas, mas tem.',
+      c: 'Na EVM existe aprovação: é o allowance de ERC-20, justamente o que se revoga.',
+      d: 'Na Solana dá para revogar delegações; o mecanismo é por conta, não por allowance.',
+    },
+    q14: {
+      a: 'Não há devolução: a rede fez o trabalho até o ponto do erro.',
+      b: 'Falhar não isenta: o gas paga o processamento, não o resultado.',
+      d: 'Transação que falha também paga — é por isso que slippage mal configurado custa dinheiro.',
+    },
+    q15: {
+      a: 'Não são sinônimos: numa há uma empresa no meio, na outra não.',
+      c: 'A DEX não é mais segura: sem suporte, erro seu não tem volta.',
+      d: 'A DEX também cobra: taxa da pool e taxa de rede.',
+    },
+    q16: {
+      a: 'Corretora de verdade não cobra "taxa para liberar o saque".',
+      c: 'O Banco Central não cobra imposto para liberar saque.',
+      d: 'Pedir dinheiro para liberar dinheiro é o padrão do golpe, não garantia.',
+    },
+  },
+
   quiz: [
     {
       id: 'q1',

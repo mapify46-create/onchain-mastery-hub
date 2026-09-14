@@ -22,7 +22,7 @@ import {
   renderizarFluxoDeFases,
   montarCardsDeFases,
 } from '../components/phaseFlow.js';
-import { montarQuiz } from '../components/quiz.js';
+import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarAnatomia } from '../components/anatomia.js';
 import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
@@ -494,7 +494,7 @@ function montarAbaQuiz() {
       id: modulo2.id,
       titulo: 'Mini-quiz do Módulo 2',
       descricao: 'Quatro perguntas. As respostas ficam salvas no navegador.',
-      perguntas: modulo2.quiz,
+      perguntas: juntarPorques(modulo2.quiz, modulo2.porqueErradas),
     }),
     montarConclusao(),
   ]);

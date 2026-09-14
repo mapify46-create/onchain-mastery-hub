@@ -1,4 +1,4 @@
-# Vídeo 26 de 33 — Antes de entrar: as checagens, o tamanho da posição e a curva de recuperação
+# Vídeo 26 de 46 — Antes de entrar: as checagens, o tamanho da posição e a curva de recuperação
 
 **Módulo 4 — Gestão & decisão · Aba "Antes de entrar" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 
@@ -54,7 +54,7 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 - **6** — Checagens antes da tese. LP, mint, freeze, concentração, bundles e liquidez de saída. A peneira do Módulo 3 aplicada à decisão.
 - **1** — Respostas ruins que derrubam a operação. Qualquer uma delas. Por melhor que a narrativa esteja, o contrato precisa resistir primeiro.
-- **Um bloco** — Duração de um hard rug. Com a liquidez livre, o criador remove a LP e o preço vira pó no mesmo bloco. Nenhuma outra checagem sobrevive a essa.
+- **Um bloco** — Duração de um hard rug. Com a liquidez livre, o criador remove a LP e o preço vira pó no mesmo bloco. No pump.fun a pool pós-graduação é do protocolo; lá, o golpe que sobra é o criador vender.
 
 ## MATERIAL-FONTE (copiado do app — a base do vídeo; não vá além dele)
 
@@ -62,10 +62,10 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 Tese e catálise só importam se o contrato por trás resistir a uma checagem. Estas seis perguntas são a peneira do Módulo 3 aplicada à decisão: qualquer resposta ruim aqui derruba a operação, por melhor que a narrativa esteja.
 
-1. **A LP está bloqueada ou queimada?**
-   - Por quê: Com a liquidez livre, o criador pode removê-la e o preço vira pó no mesmo bloco — o hard rug. Nenhuma outra checagem sobrevive a essa.
-   - Onde olhar: RugCheck; e o explorer para ver quem detém os tokens de LP.
-   - Alerta: LP livre, ou lock com vencimento próximo.
+1. **Alguém consegue tirar a liquidez da pool?**
+   - Por quê: Com a liquidez livre, o criador pode removê-la e o preço vira pó no mesmo bloco — o hard rug. No pump.fun, depois da graduação, a pool é do protocolo e isso não acontece; o golpe que sobra lá é o criador vender a própria compra (Módulo 6).
+   - Onde olhar: RugCheck (Lockers & LP); e o explorer para ver quem detém os tokens de LP.
+   - Alerta: Tokens de LP numa carteira do criador. Mas trava não aprova token: num estudo, 97,3% dos tokens com liquidez travada eram maliciosos, contra 97,7% no geral (Mazorra et al., 2022).
 2. **A mint authority foi revogada?**
    - Por quê: Mint authority ativa significa que ainda dá para criar tokens novos, diluindo quem já comprou sem aviso nenhum.
    - Onde olhar: RugCheck ou a página do token no Solscan.

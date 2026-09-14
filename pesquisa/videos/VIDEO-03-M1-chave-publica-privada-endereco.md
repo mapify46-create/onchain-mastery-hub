@@ -1,4 +1,4 @@
-# Vídeo 3 de 33 — Chave pública, chave privada e endereço
+# Vídeo 3 de 46 — Chave pública, chave privada e endereço
 
 **Módulo 1 — Fundamentos & Segurança · Aba "Fundamentos" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

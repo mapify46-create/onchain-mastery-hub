@@ -466,6 +466,11 @@ export const modulo3 = {
             'moeda sai de 12 a 24 horas antes do sinal público (Ardia & Bluteau, International ' +
             'Review of Financial Analysis, 2024). Quem vê o sinal na rede aberta chegou depois de ' +
             'quem organizou.',
+          'As cópias vêm depois, e confirmam o desenho. O mesmo estudo do pump.fun contou 1,5 ' +
+            'milhão de tokens que copiam nome, símbolo, descrição e imagem de outro — mais de 10% ' +
+            'de tudo. Entre os originais que ganharam cópia, 9,2% graduaram; entre as cópias, ' +
+            '0,86%. A cópia é sintoma de uma narrativa que já está andando, não a origem dela. E ' +
+            'o número alto dos originais tem um viés: só ganha cópia quem já chamou atenção.',
         ],
       },
       {
@@ -475,7 +480,11 @@ export const modulo3 = {
           'Uma parte grande. Num levantamento de três meses com mais de 50 milhões de mensagens no ' +
             'X, no Telegram e no Discord, mais de 56% das contas do X que espalhavam convites para ' +
             'grupos eram bots ou foram suspensas, e 93% dos links postados por bots levavam a ' +
-            'canais de pump-and-dump no Telegram (Nizzoli et al., IEEE Access, 2020).',
+            'canais de pump-and-dump no Telegram (Nizzoli et al., IEEE Access, 2020). No Discord, ' +
+            'o mesmo levantamento achou um único canal de pump-and-dump, contra 296 no Telegram.',
+          'A escala é grande: o estudo do pump.fun achou 800 mil canais públicos e 236 mil ' +
+            'privados do Telegram ligados a tokens da plataforma, e 17% das negociações eram wash ' +
+            'trading. O top 1% dos grupos de criadores criou 58,6% de todos os tokens.',
           'Some a isso os calls pagos da aba "Pilar social na prática": a narrativa que você vê ' +
             'chegando pode ser campanha.',
         ],
@@ -516,6 +525,17 @@ export const modulo3 = {
             'influenciador, o preço sobe 1,83% no dia e cai 6,53% em 30 dias (Merkley et al., ' +
             '2024). Em grupos de pump no Telegram, os sinais vêm segundos antes do preço (Moura et ' +
             'al., preprint de 2026) — quem lê o sinal chega depois.',
+          'Em cripto grande, onde há mais estudo, o quadro é o mesmo. A atenção nas redes prevê ' +
+            'melhor quanto vai se negociar e quanto o preço vai oscilar do que para que lado ele ' +
+            'vai (Shen, Urquhart & Wang, 2019). Quando prevê a direção, o efeito dura minutos: com ' +
+            'um milhão de mensagens sobre o Bitcoin, o sinal só valia por 15 minutos, e os autores ' +
+            'escrevem que custos de transação razoáveis tornam impossível lucrar com ele (Guégan & ' +
+            'Renault, Finance Research Letters, 2021). E muitas vezes a seta aponta ao contrário: ' +
+            'o preço sobe primeiro, e aí as pessoas falam dele (Süssmuth, Journal of Forecasting, ' +
+            '2021).',
+          'A conta que nenhum estudo fez para memecoin dá para fazer aqui: se o sinal social ' +
+            'rende, no melhor caso, de 1% a 3% por poucos minutos, e entrar e sair de uma memecoin ' +
+            'custa de 3 a 6 pontos (Módulo 5), o custo come o sinal antes de ele virar lucro.',
           'Um preprint de 2026 achou que tokens com link de Telegram no cadastro graduam cerca de ' +
             '9 vezes mais no pump.fun (Kamat). Não use isso como sinal: ele mede a presença de um ' +
             'link, o sinal mais barato de falsificar que existe, e a coleta cobriu só os primeiros ' +
@@ -531,8 +551,15 @@ export const modulo3 = {
           'Toda lista de "em alta" é feita de atividade de negociação, de pagamento ou das duas ' +
             'coisas. Ela mostra onde a atenção está agora — e atividade é exatamente o que o volume ' +
             'falso do Módulo 6 fabrica.',
-          'A tabela diz o que cada ferramenta mede, segundo a documentação dela conferida em ' +
-            '13/09/2026. O passo a passo de cada uma e os preços ainda não foram pesquisados.',
+          'A tabela diz o que cada ferramenta mede, segundo a documentação dela, conferida em ' +
+            '13 e 14/09/2026. Ler é grátis em quase todas; o que se paga é o dado social ' +
+            '(LunarCrush: o plano grátis só tem dados de mercado, o social começa em US$ 5 por dia), ' +
+            'as APIs (Birdeye a partir de US$ 39 por mês) e as assinaturas (X Premium de US$ 3 a ' +
+            'US$ 40 por mês; Nansen Pro US$ 49 a US$ 69 por mês). O preço dos Boosts do ' +
+            'DexScreener não é publicado em página oficial.',
+          'Nenhuma dessas métricas tem validação publicada como previsão de preço de memecoin. O ' +
+            'Galaxy Score e o AltRank do LunarCrush são descritos só por material do próprio ' +
+            'vendedor.',
         ],
       },
       {
@@ -544,10 +571,12 @@ export const modulo3 = {
         ],
         listaTitulo: 'Uma vez por dia, ou quando um tema chamar atenção:',
         lista: [
-          'Abra duas listas de "em alta" e anote os temas que se repetem entre elas — lembrando ' +
-            'que parte da lista é paga.',
-          'Procure a origem fora de cripto: o post, a notícia, o vídeo. Na busca avançada do X, ' +
-            'from: e since: ajudam a achar quem falou primeiro entre as contas que você acompanha.',
+          'Abra o feed de lançamentos do pump.fun e duas listas de "em alta", e anote os temas que ' +
+            'se repetem — lembrando que parte da lista é paga, e que as cópias seguem a narrativa, ' +
+            'não a criam.',
+          'Procure a origem fora de cripto: o post, a notícia, o vídeo. Na busca avançada do X ' +
+            '(só logado), from: e since: ajudam a achar quem falou primeiro entre as contas que ' +
+            'você acompanha.',
           'Veja há quanto tempo o tema existe e quantos tokens já copiaram. Muitos tokens novos ' +
             'com o valor do tema caindo é o desenho da saturação.',
           'Anote no diário do Módulo 7: data, tema, primeiro token e a fase que você acha que é. ' +
@@ -576,7 +605,9 @@ export const modulo3 = {
         {
           data: '10–11/10/2024',
           titulo: 'IA: nasce o GOAT, empurrado pelo bot Truth Terminal',
-          texto: 'O tema vira "agentes de IA": ai16z, Virtuals, AIXBT.',
+          texto:
+            'O GOAT chegou a cerca de US$ 1,3 bilhão em 17/11/2024. O tema vira "agentes de IA": ' +
+            'ai16z, Virtuals, AIXBT.',
         },
         {
           data: '04–05/12/2024',
@@ -646,7 +677,7 @@ export const modulo3 = {
           titulo: 'Animais virais',
           valores: {
             nascimento: 'MOODENG, 11/09/2024',
-            pico: 'Set. a nov. de 2024',
+            pico: 'Dois picos: 28/09 e 15/11/2024 (~US$ 614 mi)',
             duracao: 'Cerca de 2 meses',
             destino: 'MOODENG −44% do pico até 27/11/2024',
           },
@@ -688,6 +719,7 @@ export const modulo3 = {
       colunas: [
         { chave: 'mede', rotulo: 'O que mede' },
         { chave: 'novo', rotulo: 'Cobre memecoin recém-lançada?' },
+        { chave: 'gratis', rotulo: 'Ler é grátis?' },
         { chave: 'comprado', rotulo: 'Pode ser pago ou fabricado?' },
       ],
       linhas: [
@@ -696,9 +728,10 @@ export const modulo3 = {
           titulo: 'DexScreener',
           subtitulo: 'lista "em alta"',
           valores: {
-            mede: 'Um "Trending Score" próprio, que mistura atividade de mercado e "buzz".',
+            mede: 'Um "Trending Score" próprio: volume, liquidez, transações, carteiras distintas, holders, visitas à página do token e reações (🚀 🔥 💩 🚩). A fórmula não é publicada.',
             novo: 'Sim',
-            comprado: 'Sim: Boosts pagos multiplicam o score.',
+            gratis: 'Sim',
+            comprado: 'Sim: Boosts pagos multiplicam o score por 12 a 24 horas. Visitas e reações também são fabricáveis.',
           },
         },
         {
@@ -708,6 +741,7 @@ export const modulo3 = {
           valores: {
             mede: 'Compras e vendas, volume, variação de preço e crescimento de holders, por minuto; também carteiras "smart money" e de influenciadores.',
             novo: 'Sim',
+            gratis: 'Sim. Operar pede login com a chave privada num bot do Telegram — risco de custódia (Módulo 5).',
             comprado: 'Fabricável: são os números que o wash trading infla.',
           },
         },
@@ -717,6 +751,7 @@ export const modulo3 = {
           valores: {
             mede: 'Tokens que mais se moveram numa janela de tempo; mais vistos e mais negociados.',
             novo: 'Sim',
+            gratis: 'Sim. A API custa de US$ 39 a US$ 499 por mês; o PRO, US$ 45 por mês (não verificado).',
             comprado: 'Fabricável pela mesma via.',
           },
         },
@@ -727,6 +762,7 @@ export const modulo3 = {
           valores: {
             mede: 'A atividade recente de negociação dos tokens da plataforma.',
             novo: 'Sim — é onde eles nascem',
+            gratis: 'Sim. Negociar na curva custa 1,25% por operação.',
             comprado: 'Fabricável.',
           },
         },
@@ -736,7 +772,8 @@ export const modulo3 = {
           valores: {
             mede: 'Sentimento e volume de posts no X, Reddit, YouTube e TikTok.',
             novo: 'Em parte',
-            comprado: 'Posts podem vir de bots.',
+            gratis: 'Não para o social: o plano grátis só tem dados de mercado. O social vai de US$ 5 a US$ 45 por dia.',
+            comprado: 'Sem mecanismo de compra documentado, mas posts podem vir de bots.',
           },
         },
         {
@@ -745,6 +782,7 @@ export const modulo3 = {
           valores: {
             mede: 'Volume social e as palavras que dispararam, a partir de mais de 6.000 canais de cripto.',
             novo: 'Não verificado para token recém-criado',
+            gratis: 'Grátis limitado; o resto é pago.',
             comprado: 'Posts podem vir de bots.',
           },
         },
@@ -754,6 +792,7 @@ export const modulo3 = {
           valores: {
             mede: 'Mindshare de projetos e de temas.',
             novo: 'Não: mede projeto e tema, não memecoin nova',
+            gratis: 'Pago. O programa "Yaps" acabou em 15/01/2026 (não verificado).',
             comprado: 'Não pesquisado.',
           },
         },
@@ -763,7 +802,8 @@ export const modulo3 = {
           valores: {
             mede: 'Interesse de busca relativo, de 0 a 100, por termo, período e região.',
             novo: 'Só se o termo tiver busca suficiente',
-            comprado: 'Não pesquisado.',
+            gratis: 'Sim',
+            comprado: 'Sem mecanismo de compra documentado. O número é relativo (0 a 100) e tem ruído de propósito.',
           },
         },
         {
@@ -773,7 +813,8 @@ export const modulo3 = {
           valores: {
             mede: 'Posts públicos, filtráveis por conta, data e curtidas.',
             novo: 'Sim',
-            comprado: 'Contas e curtidas podem ser de bots.',
+            gratis: 'Sim, mas só logado. O Premium vai de US$ 3 a US$ 40 por mês e não muda a busca.',
+            comprado: 'Contas e curtidas podem ser de bots: de 9% a 15% das contas ativas do X são bots (Varol et al., 2017).',
           },
         },
         {
@@ -782,6 +823,7 @@ export const modulo3 = {
           valores: {
             mede: 'Carteiras rotuladas como traders lucrativos ("smart money").',
             novo: 'Em parte',
+            gratis: 'Nível grátis limitado. Nansen Pro: US$ 49 a US$ 69 por mês.',
             comprado: 'Não pesquisado.',
           },
         },
@@ -1261,11 +1303,12 @@ export const modulo3 = {
 
   // Itens das duas abas práticas que não fecharam em fonte confiável.
   naoVerificadoPratica: [
-    { titulo: 'Aceitação do "Meme Coin Factories" no ACM CCS 2026', texto: 'A página do arXiv diz que foi aceito; não foi conferido na página do evento. O app o trata como preprint.' },
+    { titulo: 'Aceitação do "Meme Coin Factories" no ACM CCS 2026', texto: 'A página do arXiv diz que foi aceito, mas o artigo não aparece na lista de aceitos publicada no site do CCS 2026, conferida em 14/09/2026. O app o trata como preprint.' },
     { titulo: 'Números da linha do tempo das narrativas', texto: 'A queda média de 94% das celebridades (compilação de um pesquisador no X), o MOODENG, as mais de 700 cópias do TRUMP e as 21 mil moedas do Believe vieram de resumo de busca, não da página aberta.' },
-    { titulo: 'Pico do GOAT e data do pico do MOODENG', texto: 'As fontes divergem: US$ 150 milhões × mais de US$ 800 milhões para o GOAT; setembro × novembro de 2024 para o MOODENG.' },
+    { titulo: 'Data dos futuros de MOODENG na Binance', texto: 'A pesquisa 11 diz 15/11/2024; a reconciliação dela diz 25/10/2024. O pico de preço em 15/11/2024 está confirmado na CoinMarketCap e na CoinGecko; o do GOAT, em 17/11/2024, também.' },
     { titulo: 'Nizzoli et al. (2020)', texto: 'Os 56% e os 93% vieram do resumo do artigo, sem abrir o texto completo.' },
-    { titulo: 'Passo a passo e preços das ferramentas de narrativa', texto: 'A pesquisa 9 só confirmou quais existem e o que medem. Os preços dos Boosts do DexScreener apareceram só em resumo de busca.' },
+    { titulo: 'Preço dos Boosts do DexScreener', texto: 'Não é publicado em nenhuma página oficial (documentação, API ou marketplace). Os pacotes que circulam — de 10 por US$ 99 a 500 por US$ 3.999 — são de terceiros. As telas de compra do DexScreener, do Birdeye e do pump.fun não foram vistas ao vivo.' },
+    { titulo: 'Preços do Birdeye PRO, do X Premium e do Nansen', texto: 'Vieram de resumo de busca, não da página aberta. Os da API do Birdeye e do LunarCrush vieram da página de preços.' },
     { titulo: 'Saturação: tokens nascendo com o tema em queda', texto: 'Há registro nos agentes de IA e no Believe; nas outras três narrativas, não há dado.' },
     { titulo: 'Preço da API do X em 2026', texto: 'O valor de US$ 0,005 por post lido vem de guias de terceiros coerentes entre si; a página oficial de preços não foi aberta.' },
     { titulo: 'Custódia da chave em cada bot de Telegram', texto: 'Varia de bot para bot, e alguns se declaram não custodiais. Não foi conferido na documentação de cada um.' },
@@ -1284,7 +1327,15 @@ export const modulo3 = {
     { titulo: 'Kamat, graduação no pump.fun e presença social (arXiv 2607.02823, preprint)', url: 'https://arxiv.org/abs/2607.02823', consultadoEm: '13/09/2026' },
     { titulo: 'CoinGecko, State of Memecoins Report 2025 (US$ 150,6 bi e US$ 47,2 bi; rotação das narrativas)', url: 'link não registrado pela pesquisa 11', consultadoEm: '13/09/2026' },
     { titulo: 'Nansen sobre a LIBRA, via CoinDesk (20/02/2025)', url: 'link não registrado pela pesquisa 11', consultadoEm: '13/09/2026' },
+    { titulo: 'Guégan & Renault, "Does investor sentiment on social media provide robust information for Bitcoin returns predictability?", Finance Research Letters (2021)', url: 'https://doi.org/10.1016/j.frl.2020.101494', consultadoEm: '14/09/2026' },
+    { titulo: 'Süssmuth, Journal of Forecasting (2021) — causalidade do preço para a atenção', url: 'https://doi.org/10.1002/for.2819', consultadoEm: '14/09/2026' },
+    { titulo: 'Shen, Urquhart & Wang, Economics Letters (2019) — tweets preveem volume e volatilidade, não retorno (só resumo)', url: 'https://doi.org/10.1016/j.econlet.2018.11.007', consultadoEm: '14/09/2026' },
+    { titulo: 'Varol et al., "Online Human-Bot Interactions" (2017) — 9% a 15% das contas ativas do X são bots', url: 'https://arxiv.org/abs/1703.03107', consultadoEm: '14/09/2026' },
+    { titulo: 'CoinMarketCap — GOAT (máxima em 17/11/2024) e MOODENG (máxima em 15/11/2024)', url: 'https://coinmarketcap.com/currencies/goatseus-maximus/', consultadoEm: '14/09/2026' },
+    { titulo: 'DexScreener — Trending Score (componentes do ranking)', url: 'https://docs.dexscreener.com/trending', consultadoEm: '14/09/2026' },
     { titulo: 'DexScreener — Boosting', url: 'https://docs.dexscreener.com/boosting', consultadoEm: '13/09/2026' },
+    { titulo: 'LunarCrush — preços (plano grátis só com dados de mercado)', url: 'https://lunarcrush.com/pricing', consultadoEm: '14/09/2026' },
+    { titulo: 'Birdeye — preços da Data API', url: 'https://birdeye.so/data-api/pricing', consultadoEm: '14/09/2026' },
     { titulo: 'GMGN — Trending', url: 'https://gmgn.ai/trend', consultadoEm: '13/09/2026' },
     { titulo: 'LunarCrush', url: 'https://lunarcrush.com', consultadoEm: '13/09/2026' },
     { titulo: 'Santiment Academy — Social Trends', url: 'https://academy.santiment.net/sanbase/social-trends', consultadoEm: '13/09/2026' },
@@ -1318,8 +1369,64 @@ export const modulo3 = {
   ],
 
   // ---------------------------------------------------------------------------
-  // Mini-quiz (aba "Quiz") — 10 perguntas
+  // Mini-quiz (aba "Quiz") — 13 perguntas
   // ---------------------------------------------------------------------------
+
+  // Por que cada alternativa errada não serve (q1 a q10; q11 a q13 trazem o
+  // `porque` dentro da própria alternativa).
+  porqueErradas: {
+    q1: {
+      a: 'O DexScreener não executa ordens; para isso existem os terminais.',
+      c: 'Mint e freeze se checam no RugCheck e no Solscan; o DexScreener é visualização.',
+      d: 'Monitorar o X é pilar social; o DexScreener mostra dados de mercado.',
+    },
+    q2: {
+      a: '"Axon" não existe como terminal relevante — é o erro de nome que a correção aponta.',
+      c: 'Apex Trade não é o terminal citado.',
+      d: 'Axium Finance não é o terminal. Nome parecido é o que um impostor explora.',
+    },
+    q3: {
+      a: 'O Sigma é bot de Telegram só para redes EVM.',
+      c: 'Não suporta Solana para nada, nem para checagem.',
+      d: 'Não há suporte em teste: o Sigma cobre só redes EVM.',
+    },
+    q4: {
+      b: 'Revogar approvals é segurança de carteira (Módulo 1), não pilar social.',
+      c: 'Nenhum pilar substitui o outro: um token oficial pode ter contrato com armadilha.',
+      d: 'Take profit é gestão da posição (Módulo 4).',
+    },
+    q5: {
+      a: 'Selo azul é assinatura Premium; qualquer um compra.',
+      c: 'O X não audita token nenhum.',
+      d: 'O selo não diz nada sobre o endereço estar certo.',
+    },
+    q6: {
+      a: 'O site sozinho não desempata: se ele diverge do post fixado, um dos dois pode ter sido invadido.',
+      b: 'Discord é canal fácil de sequestrar; nunca desempata.',
+      d: 'Volume não diz qual é o oficial; cópia também tem volume.',
+    },
+    q7: {
+      a: 'Verificação legítima não pede assinatura.',
+      c: 'Provar que não é robô não exige conectar carteira nem assinar.',
+      d: 'O nome Collab.Land é justamente o que os golpistas imitam, com outro @.',
+    },
+    q8: {
+      a: 'Um bot só recebe os posts de canal onde é administrador.',
+      c: 'Automatizar a própria conta deixa a conta sob observação e não é o caminho grátis e dentro das regras.',
+      d: 'O Telegram Premium não libera leitura automática de canal alheio.',
+    },
+    q9: {
+      a: 'O score não aprova token: é retrato do momento, com fórmula não publicada.',
+      c: 'O RugCheck não verifica a equipe do projeto.',
+      d: 'O score não garante trava de liquidez — e trava não separa golpe de não golpe.',
+    },
+    q10: {
+      a: 'Uma linha é uma transferência na blockchain; pode ter explicação legítima.',
+      c: 'Mapa recente não transforma ligação em prova.',
+      d: 'O Bubblemaps mostra holders em geral; exchanges e contratos ficam escondidos por padrão.',
+    },
+  },
+
   quiz: [
     {
       id: 'q1',
@@ -1370,7 +1477,7 @@ export const modulo3 = {
         {
           id: 'a',
           texto:
-            'Para detectar cedo quando uma conta grande interage com um projeto — não para provar que o contrato é seguro.',
+            'Para confirmar que o token é quem diz ser e ler de onde vem a atenção — não para provar que o contrato é seguro.',
         },
         { id: 'b', texto: 'Para revogar approvals de carteiras automaticamente.' },
         { id: 'c', texto: 'Para substituir totalmente a checagem técnica antes de comprar.' },
@@ -1378,8 +1485,8 @@ export const modulo3 = {
       ],
       correta: 'a',
       explicacao:
-        'O pilar social (X/Twitter, Discord, Telegram, trackers de tweets) avisa cedo que a ' +
-        'atenção está se formando. Ele não substitui o pilar técnico — os dois se completam.',
+        'O pilar social confirma o endereço oficial e mostra de onde a atenção vem — e quanto ' +
+        'dela é campanha. Ele não substitui o pilar técnico: os dois se completam.',
     },
     {
       id: 'q5',

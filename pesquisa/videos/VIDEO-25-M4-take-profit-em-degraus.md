@@ -1,4 +1,4 @@
-# Vídeo 25 de 33 — Take profit em degraus e o erro de segurar demais
+# Vídeo 25 de 46 — Take profit em degraus e o erro de segurar demais
 
 **Módulo 4 — Gestão & decisão · Aba "Take profit" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

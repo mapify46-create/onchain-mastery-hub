@@ -40,7 +40,8 @@ Seu progresso (checklists, glossário, quizzes, simulador) fica salvo no localSt
 
 ## Estado atual do conteúdo
 Os sete módulos, a página Checklist antes de comprar (com o fluxograma dos dois
-pilares), o Glossário e o simulador estão prontos. As pesquisas dos Módulos 3 (reforma),
+pilares), a Revisão espaçada (perguntas dos quizzes e termos do glossário voltando em 1,
+3, 7, 16 e 35 dias), o Glossário e o simulador estão prontos. As pesquisas dos Módulos 3 (reforma),
 6 e 7 e do Checklist estão em `pesquisa/modulos/`. O conteúdo do Módulo 1
 (Fundamentos & Segurança) foi escrito a partir de duas pesquisas independentes — os
 arquivos `PESQUISA-MODULO-1-A.md` e `PESQUISA-MODULO-1-B.md`, na raiz do projeto,

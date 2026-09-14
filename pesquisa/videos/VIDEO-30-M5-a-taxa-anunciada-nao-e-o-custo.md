@@ -1,4 +1,4 @@
-# Vídeo 30 de 33 — A taxa anunciada não é o que você paga
+# Vídeo 30 de 46 — A taxa anunciada não é o que você paga
 
 **Módulo 5 — A mecânica da execução · Aba "Taxas" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

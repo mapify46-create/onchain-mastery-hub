@@ -1,4 +1,4 @@
-# Vídeo 10 de 33 — Wallet drainers: o golpe que não rouba a sua seed
+# Vídeo 10 de 46 — Wallet drainers: o golpe que não rouba a sua seed
 
 **Módulo 1 — Fundamentos & Segurança · Aba "Golpes" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

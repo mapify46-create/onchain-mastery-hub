@@ -12,6 +12,7 @@ import {
   mostrarToast,
 } from '../ui.js';
 import { obterEstado, atualizar } from '../store.js';
+import { semear } from './revisao.js';
 
 const CLASSE_FILTRO = 'rounded-full border px-3 py-1.5 text-sm transition-colors duration-150';
 const FILTRO_ATIVO = ' border-primaria bg-primaria/15 text-texto';
@@ -31,14 +32,23 @@ function lerEstudados() {
   return obterEstado().glossario ?? {};
 }
 
-// Alterna um termo entre estudado/não estudado e devolve se salvou.
+// Alterna um termo entre estudado/não estudado e devolve se salvou. Ao marcar, o
+// termo entra na fila da Revisão em duas versões — pela definição e por uma
+// situação — a partir de amanhã.
 function alternarEstudado(id) {
-  return atualizar((estado) => {
+  const marcando = !lerEstudados()[id];
+  const salvou = atualizar((estado) => {
     const glossario = { ...(estado.glossario ?? {}) };
     if (glossario[id]) delete glossario[id];
     else glossario[id] = true;
     return { ...estado, glossario };
   });
+  if (salvou && marcando) {
+    semear([{ moduloId: 'glossario', perguntas: [{ id: id + '~def' }, { id: id + '~ex' }] }], {
+      primeiraEmDias: 1,
+    });
+  }
+  return salvou;
 }
 
 // Nome legível de uma categoria a partir do id.

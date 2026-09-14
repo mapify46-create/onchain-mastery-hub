@@ -1,4 +1,4 @@
-# Vídeo 7 de 33 — Onde ficam suas chaves: CEX, hot wallet e cold wallet
+# Vídeo 7 de 46 — Onde ficam suas chaves: CEX, hot wallet e cold wallet
 
 **Módulo 1 — Fundamentos & Segurança · Aba "Carteiras" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

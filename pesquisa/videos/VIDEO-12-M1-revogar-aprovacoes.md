@@ -1,4 +1,4 @@
-# Vídeo 12 de 33 — Revogar aprovações: como fazer, e o que isso não resolve
+# Vídeo 12 de 46 — Revogar aprovações: como fazer, e o que isso não resolve
 
 **Módulo 1 — Fundamentos & Segurança · Aba "Defesa" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

@@ -23,7 +23,7 @@ import {
 } from '../ui.js';
 import { montarChecklist } from '../components/checklist.js';
 import { montarTabelaComparativa } from '../components/comparisonTable.js';
-import { montarQuiz } from '../components/quiz.js';
+import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { montarDiagrama, renderizarDiagrama } from '../components/diagrama.js';
 import { montarGraficoEmpilhado, renderizarGrafico } from '../components/grafico.js';
 import { montarCalculadora } from '../components/calculadora.js';
@@ -571,7 +571,7 @@ function montarAbaQuiz() {
       id: modulo5.id,
       titulo: 'Mini-quiz do Módulo 5',
       descricao: 'As respostas ficam salvas no navegador.',
-      perguntas: modulo5.quiz,
+      perguntas: juntarPorques(modulo5.quiz, modulo5.porqueErradas),
     }),
     montarConclusao(),
     montarFontesEVerificacao(),

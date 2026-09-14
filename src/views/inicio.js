@@ -4,11 +4,27 @@
 // um import circular entre router.js e esta view, já que o router precisa importar
 // daqui para montar a rota "#/inicio".
 
-import { criarElemento, criarTitulo, criarCard, criarBarraProgresso } from '../ui.js';
-import { obterEstado, progressoDoModulo, progressoDoGlossario, progressoGeral } from '../store.js';
+import {
+  criarElemento,
+  criarTitulo,
+  criarCard,
+  criarBarraProgresso,
+  criarBotao,
+  mostrarToast,
+} from '../ui.js';
+import {
+  obterEstado,
+  atualizar,
+  exportarEstado,
+  importarEstado,
+  progressoDoModulo,
+  progressoDoGlossario,
+  progressoGeral,
+} from '../store.js';
 import { glossario } from '../data/glossario.js';
 import { cenarios } from '../data/cenarios.js';
 import { montarGraficoDeBarras, renderizarGrafico } from '../components/grafico.js';
+import { itensVencidos } from '../components/revisao.js';
 
 // Passos de estudo sugeridos. Texto curto de propósito: a tela inicial orienta,
 // o conteúdo mora nos módulos.
@@ -16,6 +32,7 @@ const COMO_ESTUDAR = [
   'Comece pelo Módulo 1 e siga na ordem até o 7 — cada um assume o anterior.',
   'Abra o Glossário sempre que aparecer um termo novo e marque como estudado o que já entendeu.',
   'Responda o mini-quiz no fim de cada módulo antes de marcar o módulo como concluído.',
+  'Volte à página Revisão quando ela avisar: as perguntas retornam em 1, 3, 7, 16 e 35 dias.',
   'Treine a decisão nos 12 cenários do simulador do Módulo 4.',
   'Antes de qualquer compra, passe o token pela página Checklist antes de comprar.',
 ];
@@ -152,6 +169,171 @@ export function montarInicio(rotas = []) {
     criarElemento('div', { class: 'mt-5' }, [graficoDeProgresso]),
   ]);
 
+  // Revisão espaçada: o que venceu hoje. As perguntas entram na fila quando o quiz
+  // é corrigido — ou na primeira visita à página Revisão, para quizzes antigos.
+  const vencidos = itensVencidos().length;
+  const naFila = Object.keys(estado.revisao?.itens ?? {}).length;
+  let textoDaRevisao;
+  if (vencidos > 0) {
+    textoDaRevisao =
+      (vencidos === 1 ? '1 pergunta venceu' : vencidos + ' perguntas venceram') +
+      '. Responder de novo, dias depois, é o que faz o conteúdo ficar.';
+  } else if (naFila > 0) {
+    textoDaRevisao = 'Nada vencido hoje. As perguntas voltam em 1, 3, 7, 16 e 35 dias, conforme você acerta.';
+  } else if (quizzesFeitos > 0) {
+    textoDaRevisao = 'Abra a Revisão uma vez: as perguntas dos quizzes que você já fez entram na fila.';
+  } else {
+    textoDaRevisao = 'Responda o quiz de um módulo e as perguntas dele voltam aqui no dia seguinte.';
+  }
+  const revisao = criarCard(
+    [
+      criarElemento('h2', { class: 'text-lg font-semibold' }, ['Revisão de hoje']),
+      criarElemento('p', { class: 'mt-2 text-sm text-texto-suave' }, [textoDaRevisao]),
+      criarElemento(
+        'a',
+        { href: '#/revisao', class: 'mt-4 inline-block text-sm font-semibold text-acento' },
+        [vencidos > 0 ? 'Revisar agora →' : 'Abrir a Revisão →'],
+      ),
+    ],
+    { class: vencidos > 0 ? 'border-acento/50' : '' },
+  );
+
+  // A próxima ação: um botão só, em vez de ter de decidir por onde continuar. Meta
+  // concreta e única rende mais que meta vaga (Locke & Latham, 2002).
+  function calcularProximaAcao() {
+    if (vencidos > 0) {
+      return {
+        texto: 'Revisar ' + (vencidos === 1 ? '1 pergunta' : vencidos + ' perguntas'),
+        detalhe: 'A revisão de hoje vem antes de conteúdo novo.',
+        href: '#/revisao',
+      };
+    }
+    for (const rota of modulosDisponiveis) {
+      const quiz = estado.quizzes?.[rota.id];
+      const concluido = (estado.modulosConcluidos ?? []).includes(rota.id);
+      if (!quiz) {
+        return {
+          texto: 'Continuar: ' + rota.titulo,
+          detalhe: 'Falta estudar as abas e responder o quiz.',
+          href: rota.hash,
+        };
+      }
+      if (quiz.total && quiz.acertos / quiz.total < 0.8) {
+        return {
+          texto: 'Refazer o quiz do ' + rota.curto,
+          detalhe:
+            'Você acertou ' + quiz.acertos + ' de ' + quiz.total + '. Releia as explicações das que errou e refaça.',
+          href: rota.hash,
+        };
+      }
+      if (!concluido) {
+        return {
+          texto: 'Concluir: ' + rota.titulo,
+          detalhe: 'Quiz feito. Falta marcar o módulo como concluído, no fim da aba Quiz.',
+          href: rota.hash,
+        };
+      }
+    }
+    return {
+      texto: 'Refazer o simulador do Módulo 4',
+      detalhe: 'Todos os módulos concluídos. Refaça os cenários sem olhar os feedbacks antes.',
+      href: '#/modulo-4',
+    };
+  }
+  const acao = calcularProximaAcao();
+  const proximaAcao = criarElemento(
+    'a',
+    {
+      href: acao.href,
+      class:
+        'block rounded-card border border-primaria/60 bg-primaria/15 p-5 transition-colors ' +
+        'duration-150 hover:border-primaria',
+    },
+    [
+      criarElemento('p', { class: 'text-xs font-semibold uppercase tracking-wide text-texto-suave' }, [
+        'Próxima ação',
+      ]),
+      criarElemento('p', { class: 'mt-1 text-lg font-semibold text-texto' }, [acao.texto + ' →']),
+      criarElemento('p', { class: 'mt-1 text-sm text-texto-suave' }, [acao.detalhe]),
+    ],
+  );
+
+  // Plano "quando X, eu faço Y": escrito por você, salvo no navegador. Planos assim
+  // aumentam a chance de cumprir uma meta (meta-análise de Gollwitzer & Sheeran,
+  // 2006, d = 0,65). O único teste grande em curso online achou que o plano não
+  // funcionou quando o obstáculo era "falta de tempo" (Kizilcec & Cohen, 2017).
+  const campoDoPlano = criarElemento('textarea', {
+    class: 'mt-3 w-full rounded-lg border border-borda bg-fundo p-3 text-sm text-texto',
+    rows: '3',
+    'aria-label': 'Seu plano de estudo',
+    placeholder:
+      'Quando [terminar o café], eu [abro a Revisão e leio uma aba]. Se [chegar um call no ' +
+      'Telegram], então [passo o token pelo Checklist antes de qualquer coisa].',
+  });
+  campoDoPlano.value = estado.plano ?? '';
+  const plano = criarCard([
+    criarElemento('h2', { class: 'text-lg font-semibold' }, ['Seu plano: quando, e o quê']),
+    criarElemento('p', { class: 'mt-2 text-sm text-texto-suave' }, [
+      'Escreva "quando X, eu faço Y" e "se surgir o obstáculo Z, então W". Escolha um obstáculo ' +
+        'concreto e superável: "falta de tempo" foi o caso em que esse tipo de plano não funcionou.',
+    ]),
+    campoDoPlano,
+    criarElemento('div', { class: 'mt-3' }, [
+      criarBotao('Salvar o plano', {
+        variante: 'secundario',
+        onclick: () => {
+          const salvou = atualizar((atual) => ({ ...atual, plano: campoDoPlano.value.slice(0, 2000) }));
+          mostrarToast(salvou ? 'Plano salvo' : 'Não consegui salvar o plano');
+        },
+      }),
+    ]),
+  ]);
+
+  // Exportar e importar: sem servidor nem conta, é o único jeito de o progresso
+  // sobreviver a uma limpeza do navegador ou ir para outro computador.
+  function exportar() {
+    const blob = new Blob([exportarEstado()], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = criarElemento('a', {
+      href: url,
+      download: 'omh-progresso-' + new Date().toISOString().slice(0, 10) + '.json',
+    });
+    document.body.append(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  }
+  const entradaDeArquivo = criarElemento('input', {
+    type: 'file',
+    accept: 'application/json,.json',
+    class: 'sr-only',
+    'aria-label': 'Escolher o arquivo de progresso',
+    onchange: (evento) => {
+      const arquivo = evento.target.files?.[0];
+      if (!arquivo) return;
+      arquivo.text().then((texto) => {
+        if (importarEstado(texto)) {
+          mostrarToast('Progresso importado');
+          location.reload();
+        } else {
+          mostrarToast('Esse arquivo não é um progresso válido');
+        }
+      });
+    },
+  });
+  const guardar = criarCard([
+    criarElemento('h2', { class: 'text-lg font-semibold' }, ['Guardar o progresso']),
+    criarElemento('p', { class: 'mt-2 text-sm text-texto-suave' }, [
+      'Tudo fica só neste navegador: limpar os dados dele apaga o progresso. Exporte um ' +
+        'arquivo de vez em quando; ele importa em outro navegador ou computador.',
+    ]),
+    criarElemento('div', { class: 'mt-3 flex flex-wrap gap-3' }, [
+      criarBotao('Exportar', { variante: 'secundario', onclick: exportar }),
+      criarBotao('Importar', { variante: 'secundario', onclick: () => entradaDeArquivo.click() }),
+      entradaDeArquivo,
+    ]),
+  ]);
+
   const comoEstudar = criarCard([
     criarElemento('h2', { class: 'text-lg font-semibold' }, ['Por onde começar']),
     criarElemento(
@@ -186,9 +368,13 @@ export function montarInicio(rotas = []) {
 
   return criarElemento('div', { class: 'mx-auto max-w-5xl space-y-6' }, [
     cabecalho,
+    proximaAcao,
     aviso,
     progresso,
+    revisao,
+    plano,
     comoEstudar,
     grade,
+    guardar,
   ]);
 }

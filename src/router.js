@@ -11,6 +11,7 @@ import { montarModulo5 } from './views/modulo5.js';
 import { montarModulo6 } from './views/modulo6.js';
 import { montarModulo7 } from './views/modulo7.js';
 import { montarViewChecklist } from './views/checklist.js';
+import { montarViewRevisao } from './views/revisao.js';
 import { montarViewGlossario } from './views/glossario.js';
 
 // Catálogo de rotas. É a única lista de páginas do app: a sidebar e a tela de
@@ -113,6 +114,17 @@ export const ROTAS = [
     descricao:
       'Os dois pilares em itens marcáveis, cada um com a força da evidência, e o fluxograma da decisão.',
     montar: montarViewChecklist,
+  },
+  {
+    hash: '#/revisao',
+    id: 'revisao',
+    curto: 'Revisão',
+    titulo: 'Revisão espaçada',
+    tipo: 'pagina',
+    disponivel: true,
+    descricao:
+      'As perguntas dos quizzes que você já fez voltam em 1, 3, 7, 16 e 35 dias — e mostram onde a sua certeza engana.',
+    montar: montarViewRevisao,
   },
   {
     hash: '#/glossario',

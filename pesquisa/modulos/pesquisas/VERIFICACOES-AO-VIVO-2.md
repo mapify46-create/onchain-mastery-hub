@@ -358,3 +358,216 @@ início e o progresso, sem gamificação.
 
 **Não conferi:** Kandemir 2026; a aceitação do "Meme Coin Factories" no CCS'26; o fim do
 Yaps do Kaito; os preços dos Boosts; o d de Ginns 2005; o RCT do Peru (NBER 34173).
+
+---
+
+# Leva 3 — as continuações (14/09/2026)
+
+## Resumo
+
+- Chegaram 9 arquivos num zip, numerados de 1 a 9 na ordem da minha lista. **7 são
+  documentos novos e completos**; o 7 e o 8 são idênticos aos P14 e P15 já guardados
+  (conferido com `diff`). Nenhuma continuação ficou faltando.
+- **Um conflito com o app, resolvido ao vivo a favor do app:** a P10 completa diz que os
+  3,59% da Chainalysis são de 2023 e que 2024 teve 4,52%. A página da Chainalysis diz
+  "3.59% of all launched tokens in 2024" (74.037 tokens). O Módulo 6 está certo; a
+  pesquisa errou.
+- **Construído a partir desta leva:** revisão espaçada (página `#/revisao`), confiança
+  registrada antes da resposta no quiz e na revisão, placar "quando tenho certeza,
+  acerto?", plano "se-então" e exportar/importar do progresso na tela de início; aba
+  Narrativas com os dados da P8, P9, P10 e da reconciliação da P11.
+
+## 1. Inventário
+
+| Arquivo | É | Guardado como |
+|---|---|---|
+| 1 | P8 completa | `P8-narrativas-onde-nasce.md` |
+| 2 | P9 completa | `P9-narrativas-ferramentas.md` |
+| 3 | P10 completa | `P10-narrativa-e-preco.md` |
+| 4 | P11, reconciliação de três dúvidas | `P11-narrativas-ciclo-de-vida-RECONCILIACAO.md` |
+| 5 | P13 etapa 2 | `P13-didatica-quiz-e-revisao-espacada.md` |
+| 6 | P12 completa | `P12-didatica-ciencia-da-aprendizagem.md` |
+| 7 | = P14 | (já estava) |
+| 8 | = P15 | (já estava) |
+| 9 | P16 completa | `P16-didatica-motivacao-e-habito.md` |
+
+## 2. Conferido ao vivo
+
+- **Chainalysis, "Crypto Market Manipulation 2025"** (página aberta em 14/09): "3.59% of all
+  launched tokens in 2024 display patterns that may be linked to pump-and-dump schemes";
+  "Number of suspected pump-and-dump tokens 74,037"; "approximately 94% of DEX pools
+  involved in suspected pump-and-dump schemes appear to be rugged by the address that
+  created the DEX pool". O checkpoint da P10 dizia "~90%"; a página diz 94%. Nada muda no
+  app (o M6 não cita esse 90%).
+
+## 3. Pesquisa por pesquisa
+
+### 3.1 P8 — Onde nasce (completa)
+
+Mapa de 8 fontes com o que cada uma mostra e o que os termos de uso proíbem; a
+conclusão continua: **ordem entre redes não medida**. Números novos, todos do "Meme Coin
+Factories" (preprint; a página do arXiv diz aceito no CCS'26 — **não conferi**):
+1,5 milhão de cópias (mais de 10% dos tokens); originais com cópia graduam 9,20% contra
+0,86% das cópias — com viés de seleção, porque só ganha cópia quem já chamou atenção;
+800.441 canais públicos e 235.850 privados do Telegram ligados a tokens; wash trading em
+17% das transações; ~8.000 vendas coordenadas; o top 1% dos grupos de criadores cria
+58,57% dos tokens. Nizzoli: 1 canal de pump-and-dump no Discord contra 296 no Telegram.
+A planilha de preços do ZachXBT (US$ 50 a US$ 60 mil por post; menos de 5 de 160
+declararam) é fonte fraca e **não entrou no app**. Rotina manual de 6 passos: o app
+absorveu dois (feed do pump.fun como primeira parada; busca do X só logado).
+
+### 3.2 P9 — Ferramentas (completa)
+
+- **Preço dos Boosts do DexScreener: NÃO VERIFICADO em página oficial**, mesmo com
+  subagente. Docs, API e marketplace não publicam valor; os pacotes que circulam (10 por
+  US$ 99 … 500 por US$ 3.999) são de terceiros. O app já dizia isso; agora diz com mais
+  precisão.
+- Componentes do Trending Score (docs.dexscreener.com/trending, página aberta): volume,
+  liquidez, transações, carteiras distintas, holders, **visitas à página e reações** —
+  os dois últimos são fabricáveis sem gastar nada. Entrou na tabela.
+- GMGN: "updated every minute" (página oficial). Operar pede chave privada num bot do
+  Telegram — entrou como aviso na tabela.
+- **LunarCrush: o plano grátis não tem dado social** (página de preços aberta); o social
+  vai de US$ 5 a US$ 45 por dia. O app dizia só "grátis" — corrigido.
+- Birdeye Data API US$ 39 a 499/mês (página aberta); PRO US$ 45/mês (snippet). X Premium
+  US$ 3, 8 e 40/mês (snippet). Nansen Pro US$ 49 a 69/mês (snippet). Kaito: Yaps
+  encerrado em 15/01/2026 (snippet).
+- Validação publicada de métrica social como previsão de preço de memecoin: **nenhuma**.
+  Galaxy Score e AltRank: só material do vendedor.
+- Taxa de graduação: Bitquery (set/2026) ~2,7% por coorte — mais um número para a lista
+  (ver 3.3).
+
+### 3.3 P10 — Narrativa × preço (completa)
+
+Boa. O que entrou no app: em cripto grande, atenção prevê **volume e volatilidade**, não
+direção (Shen 2019, snippet); o sinal de sentimento dura 15 minutos e "custos de
+transação razoáveis tornam impossível lucro anormal" (Guégan & Renault 2021, página
+aberta); a causalidade corre do preço para a atenção (Süssmuth 2021, snippet); a conta
+de break-even que nenhum estudo fez. Também: Ante 2023 (+3,58% em 2 minutos com tweet
+do Musk); TRUMP em jul/2026 pela Nansen — 66% das 1,48 milhão de carteiras no prejuízo,
+−US$ 3,81 bi (snippet) — não entrou, o M2 já tem os números do caso.
+
+**Erro:** Chainalysis 3,59% atribuído a 2023 (é 2024). **Divergência interna:** pico do
+TRUMP US$ 75,35 (CoinMarketCap) × US$ 45,50 (preprint de David) — o app usa o market cap
+de US$ 15 bi, que bate com a CMC. **Taxa de graduação, agora com cinco números:** "menos
+de 2%" (Mancino/The Block), ~1,4% (Dune via Cointelegraph), ~2,7% (Bitquery, set/2026),
+0,63% (Marino, set–out/2025), 0,198% (Kamat, mai–jun/2026, com viés de cobertura). O app
+não afirma nenhum; continua assim.
+
+Checkpoint final ((a) gráfico sobe-e-devolve ou (b) seção de custos): **não precisa** —
+o app já tem a conta de custo no M5 e a frase no M3.
+
+### 3.4 P11 — Reconciliação (completa)
+
+- **GOAT:** máxima em 17/11/2024, US$ 1,36, market cap ~US$ 1,34 bi (CoinMarketCap e
+  CoinGecko, páginas abertas). Os US$ 150 mi e os US$ 800–937 mi eram picos
+  intermediários. Entrou na linha do tempo.
+- **MOODENG:** dois picos, 28/09/2024 (US$ 0,34) e 15/11/2024 (US$ 0,69, ~US$ 614–625 mi).
+  Entrou na tabela. **Divergência nova:** futuros na Binance em 15/11 (P11) × 25/10
+  (reconciliação). Registrada no app como não verificado.
+- **Graduação:** a frase corrigida que a pesquisa propõe ainda diz "~US$ 69 mil, varia com
+  o preço do SOL". **Não importar**: a conferência de 12/09 mostrou que o limiar é em
+  tokens vendidos e que, em dólar, 80% das graduações de ago/2026 ficaram entre US$ 11
+  mil e US$ 101 mil — muito mais largo do que "varia com o SOL". O app está certo.
+- Checkpoint ("atualizo o documento principal?"): **não precisa**.
+
+### 3.5 P12 — Ciência da aprendizagem (completa)
+
+- Mitos com fonte (estilos de aprendizagem, pirâmide, nativos digitais, multitarefa,
+  releitura, fluência, neuromitos). Nada disso está no app; é o que **não** fazer.
+- Aplicou a correção: forward testing effect (Chan 2018) ≠ pré-teste (Pan & Sana 2021;
+  St. Hilaire 2024, g = 0,54 específico, g = 0,65 quando o aluno gera a resposta).
+- **Achado importante:** a falha produtiva exige consolidação guiada por professor; não há
+  evidência para autodidata sozinho. Para este curso: exemplo resolvido primeiro; o
+  "problema antes" barato é a pré-questão. O app já tem os dois.
+- Gancho com número: risco de "detalhe sedutor" **só se o número for irrelevante**; os
+  destaques do app são o conteúdo central de cada aba. Mantidos, atrás da pré-questão.
+- As 5 mudanças: revisão espaçada (**feita**), perguntas espalhadas a cada ~1.500
+  caracteres (não), pré-questão (**feita**), feedback elaborado (**feito** em M6, M7 e
+  nas 3 novas do M3), perguntas de aplicação + intercalar o simulador (não).
+- **Discrepâncias entre as pesquisas de didática, sem efeito no app:** Sundararajan &
+  Adesope 2020, g = −0,16 (P14) × g ≈ −0,33 (P12); D'Angelo 2014, g = 0,67 com 55 estudos
+  (P14) × d ≈ 0,62 com 59 (P12); Adesope 2017, 118 experimentos (P16) × 188 (checkpoint
+  da P12). Direção igual em todos; os números exatos não estão no app.
+
+### 3.6 P13 — Quiz e revisão espaçada (etapa 2)
+
+A mais útil da leva. **Entrou:** feedback elaborado vale g = 0,49 contra 0,05 de "só
+certo/errado" (Van der Kleij 2015) — confirma o "por que a sua não serve"; botão de
+confiança antes de revelar (hipercorreção: erro com certeza é o que mais se corrige);
+escada fixa 1 → 3 → 7 → 16 → 35 dias, errou volta a 1 (derivada de Cepeda 2008, **não
+testada nessa forma exata**); SM-2 e FSRS só preveem melhor a memória — **nenhum
+experimento mostra que ensinem mais que uma escada fixa**; esquema mínimo por item no
+localStorage; export/import em JSON; aviso de que limpar o navegador apaga tudo.
+**Não entrou (ainda):** 3 alternativas por pergunta em vez de 4 (Rodriguez 2005: 3 é o
+ótimo; a 4ª costuma ser enchimento); 2 a 3 variantes por termo (definição, cenário,
+cloze); perguntas de definição reescritas como cenário.
+
+### 3.7 P16 — Motivação (completa)
+
+Conclusão em MOOC abaixo de 10%, mas 19,5% entre quem declarou intenção; para aluno só e
+motivado, o risco é **estudar passivo**, não abandonar. Plano "se-então": d = 0,65
+(Gollwitzer & Sheeran 2006); em curso online, +32% e +15% de conclusão, **nulo quando o
+obstáculo era "falta de tempo"** (Kizilcec & Cohen 2017, RCT com 17.963) — entrou com esse
+aviso. Feedback pode piorar em 38% dos casos quando foca na pessoa e não na tarefa
+(Kluger & DeNisi 1996) — o app só fala da tarefa. **Recomendação que fica para o dono
+decidir:** trocar a barra de progresso de "50% quiz + 50% marquei como concluído" para
+domínio medido pelo quiz — o "marquei" é autorrelato, o que alimenta a ilusão de
+competência. Não mudei porque foi decisão de desenho dele. Também não feito: "próxima ação
+única" na tela de início e a lista "o que você já consegue fazer".
+
+## 4. O que entrou no app nesta leva (local, cache `omh-cache-v13`)
+
+- **Página "Revisão espaçada"** (`src/components/revisao.js`, `src/views/revisao.js`):
+  fila com escada 1/3/7/16/35, perguntas misturadas entre módulos, confiança
+  obrigatória antes de responder, explicação e "por que a sua não serve", placar
+  "quando tenho certeza, acerto?" com pontos cegos, lista das próximas. Quizzes
+  corrigidos antes da página existir entram vencidos na primeira visita.
+- **Quiz dos módulos:** três chips de confiança por pergunta; no resultado, "N erros
+  feitos com certeza — comece por eles"; as perguntas entram na fila para amanhã.
+- **Tela de início:** card "Revisão de hoje"; plano "se-então" salvo no navegador;
+  "Guardar o progresso" com Exportar (JSON) e Importar (passa pela sanitização do boot).
+- **Store:** `revisao.itens`, `plano`, `quizzes[id].confiancas`, `exportarEstado`,
+  `importarEstado`.
+- **Aba Narrativas:** cópias e viés de seleção; Discord × Telegram; escala dos canais;
+  wash trading 17%; três parágrafos em "Narrativa e preço" (volume × direção, 15
+  minutos, causa reversa, break-even); tabela de ferramentas com a coluna "Ler é
+  grátis?", componentes do Trending Score, bots no X (Varol 2017); GOAT e MOODENG
+  corrigidos; 9 fontes novas; não verificados atualizados.
+
+**Verificado no navegador local (14/09):** tela de início salva o plano; quiz do M7
+grava 8 confianças e cria 8 itens vencendo em 24 h; sessão de revisão com 8 perguntas
+até o resumo, placar e fila; aba Narrativas monta sem "NaN" nem erro no console.
+
+## 5. Pendências que vieram desta leva — situação em 14/09 (cache `omh-cache-v14`)
+
+1. "Por que a sua não serve" nos quizzes de M1 a M5 e nas 10 primeiras do M3 — **feito**
+   (183 alternativas erradas, conferido por script).
+2. Perguntas de definição → cenário — **feito** nas duas que eram definição pura (M2 q2,
+   M4 q1). Variantes por termo do glossário — **feito** de outro jeito: duas perguntas
+   geradas na Revisão a partir da definição e do exemplo (sem cloze, que exigiria
+   resposta digitada e correção de texto).
+3. 3 alternativas por pergunta — **não feito, de propósito**: Rodriguez 2005 mostra que a
+   4ª não piora a medida psicométrica, mas não mede ganho de aprendizagem com a troca, e
+   remover alternativas quebraria respostas salvas. A Revisão do glossário já usa 3.
+4. Uma pergunta por segmento — **feito** onde a parte tem pergunta do quiz que casa com
+   ela (9 perguntas em 5 abas), corrigida na hora, sem salvar.
+5. Barra de progresso medindo domínio — **feito** depois do "finalize tudo": metade vem
+   do acerto no quiz.
+6. Embaralhar os cenários do simulador — **feito** (conferido: ordens diferentes entre
+   visitas; escolhas salvas por id).
+7. "Próxima ação única" — **feito**.
+
+**Conferido ao vivo, 14/09:** a lista de artigos aceitos em
+`sigsac.org/ccs/CCS2026/program/accepted-papers.html` (62 mil caracteres) não contém
+"Meme Coin Factories", "pump.fun", "Szwajcok" nem "Christin". O CCS tem mais de um ciclo
+de submissão; a lista pode estar incompleta. O app mantém o estudo como preprint.
+
+**Correção encontrada ao finalizar:** o quiz do M4 (q4) ainda tinha "LP bloqueada ou
+queimada" como parte da resposta certa, e a checagem nº 1 do M4 dizia "nenhuma outra
+checagem sobrevive a essa". Corrigido com Mazorra 2022 e com o fato de a pool
+pós-graduação do pump.fun ser do protocolo. Os cenários do simulador sobre LP ficaram
+como estavam: descrevem a mecânica (LP numa carteira do criador pode ser retirada), que
+continua certa.
+
+Nenhum checkpoint restante precisa de resposta.

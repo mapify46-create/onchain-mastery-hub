@@ -19,6 +19,12 @@ import {
 import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { montarSegmentos, montarPerguntaPrevia, montarTermos } from '../components/didatica.js';
+
+// As perguntas do quiz com o "por que a sua não serve", para usar no fim das partes.
+const PERGUNTAS = juntarPorques(modulo6.quiz, modulo6.porqueErradas);
+function perguntaDoQuiz(id) {
+  return PERGUNTAS.find((pergunta) => pergunta.id === id);
+}
 import { montarDiagrama, renderizarDiagrama } from '../components/diagrama.js';
 import { montarCalculadora } from '../components/calculadora.js';
 import { montarDestaques } from '../components/destaques.js';
@@ -196,6 +202,7 @@ function montarAbaNumeros() {
         },
         {
           titulo: 'Quanto dá para vender',
+          pergunta: perguntaDoQuiz('q2'),
           conteudo: [
             secao('quanto-sai'),
             criarTabela('Quanto sai, por queda de preço', modulo6.tabelaVendaPorQueda),
@@ -211,7 +218,7 @@ function montarAbaNumeros() {
               }),
           ],
         },
-        { titulo: 'Preço e PnL', conteudo: [secao('zeros-compactados'), secao('pnl')] },
+        { titulo: 'Preço e PnL', pergunta: perguntaDoQuiz('q4'), conteudo: [secao('zeros-compactados'), secao('pnl')] },
       ],
     }),
   ]);
@@ -252,6 +259,7 @@ function montarAbaContrato() {
         },
         {
           titulo: 'Extensões e autoridades',
+          pergunta: perguntaDoQuiz('q7'),
           conteudo: [
             secao('extensoes'),
             criarTabela('As extensões, uma a uma', modulo6.tabelaExtensoes),

@@ -1,4 +1,4 @@
-# Vídeo 5 de 33 — O que é um contrato inteligente, em linguagem de leigo
+# Vídeo 5 de 46 — O que é um contrato inteligente, em linguagem de leigo
 
 **Módulo 1 — Fundamentos & Segurança · Aba "Fundamentos" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

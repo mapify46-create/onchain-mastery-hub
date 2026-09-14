@@ -1,4 +1,4 @@
-# Vídeo 21 de 33 — Por que duas checagens, e não uma só
+# Vídeo 21 de 46 — Por que duas checagens, e não uma só
 
 **Módulo 3 — Os dois pilares (social × técnico) · Aba "Visão geral" · Duração-alvo: 4 a 5 minutos (máximo 6)**
 

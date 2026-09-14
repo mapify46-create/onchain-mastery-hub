@@ -50,6 +50,18 @@ function rotuloDaOpcao(cenario, opcao) {
   return cenario.opcoes[opcao.id]?.rotulo ?? opcao.rotulo;
 }
 
+// Embaralha uma cópia da lista (Fisher–Yates). Misturar os tipos de situação, em
+// vez de sempre a mesma ordem, treina a distinguir uma da outra (intercalação:
+// Brunmair & Richter, 2019, g = 0,42). Fica mais difícil — é de propósito.
+function sortear(lista) {
+  const copia = [...lista];
+  for (let i = copia.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
+}
+
 // Etiqueta pequena e neutra (tags de contexto, ferramentas).
 function criarChip(texto, extra = '') {
   return criarElemento(
@@ -62,8 +74,11 @@ function criarChip(texto, extra = '') {
   );
 }
 
-export function montarSimulador({ cenarios = [], aviso = '' } = {}) {
+export function montarSimulador({ cenarios: cenariosDoModulo = [], aviso = '', embaralhar = true } = {}) {
   const container = criarElemento('section', { class: 'space-y-6' });
+  // A ordem é sorteada a cada vez que a aba monta. As escolhas ficam salvas por id,
+  // então sortear de novo não apaga nada.
+  const cenarios = embaralhar ? sortear(cenariosDoModulo) : cenariosDoModulo;
 
   if (cenarios.length === 0) {
     container.append(criarCard([criarElemento('p', {}, ['Nenhum cenário cadastrado.'])]));
@@ -304,7 +319,7 @@ export function montarSimulador({ cenarios = [], aviso = '' } = {}) {
         criarCard([
           criarElemento('div', { class: 'flex flex-wrap items-start justify-between gap-3' }, [
             criarElemento('h3', { class: 'text-lg font-semibold' }, [
-              cenario.numero + '. ' + cenario.titulo,
+              cenario.titulo,
             ]),
             criarBadgeRisco(cenario.risco, rotuloRisco(cenario.risco) + ' na situação'),
           ]),
@@ -382,7 +397,7 @@ export function montarSimulador({ cenarios = [], aviso = '' } = {}) {
       { class: 'flex flex-wrap items-center gap-3 rounded-lg border border-borda bg-fundo p-3' },
       [
         criarElemento('span', { class: 'text-xs text-texto-suave' }, [
-          'Cenário ' + cenario.numero,
+          'Cenário ' + (cenarios.indexOf(cenario) + 1),
         ]),
         criarElemento('span', { class: 'min-w-0 flex-1 text-sm' }, [cenario.titulo]),
         criarElemento('span', { class: 'text-sm text-texto-suave' }, [
@@ -398,7 +413,7 @@ export function montarSimulador({ cenarios = [], aviso = '' } = {}) {
         ),
         criarBotao('Rever', {
           variante: 'fantasma',
-          'aria-label': 'Rever o cenário ' + cenario.numero + ': ' + cenario.titulo,
+          'aria-label': 'Rever o cenário ' + (cenarios.indexOf(cenario) + 1) + ': ' + cenario.titulo,
           onclick: () => irPara(cenarios.indexOf(cenario)),
         }),
       ],
@@ -523,7 +538,11 @@ export function montarSimulador({ cenarios = [], aviso = '' } = {}) {
                 'rounded-card border border-risco-medio/40 bg-risco-medio/10 p-3 text-sm ' +
                 'text-texto-suave',
             },
-            [criarElemento('strong', { class: 'text-texto' }, ['Cenários fictícios: ']), aviso],
+            [
+              criarElemento('strong', { class: 'text-texto' }, ['Cenários fictícios: ']),
+              aviso,
+              ' A ordem é sorteada a cada visita, de propósito: misturar os tipos de situação treina a distinguir uma da outra.',
+            ],
           )
         : null,
       montarCabecalho(),

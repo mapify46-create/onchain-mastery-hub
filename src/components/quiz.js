@@ -26,6 +26,12 @@ export function juntarPorques(perguntas = [], mapa = {}) {
 
 import { criarElemento, criarBarraProgresso, criarBotao, mostrarToast } from '../ui.js';
 import { obterEstado, atualizar } from '../store.js';
+import { semearDoQuiz } from './revisao.js';
+
+// "Quão certo você está?" — registrar a confiança antes de ver a resposta deixa
+// ver depois os erros feitos com certeza, que são os que mais se corrigem quando
+// explicados (hipercorreção: Butterfield & Metcalfe, 2001).
+const ROTULOS_DE_CONFIANCA = { 1: 'Chutei', 2: 'Mais ou menos', 3: 'Tenho certeza' };
 
 // Lê o resultado salvo deste quiz, se existir.
 function lerSalvo(id) {
@@ -50,7 +56,11 @@ export function montarQuiz({ id, titulo = 'Mini-quiz', descricao = '', perguntas
 
   // Estado local do componente. `corrigido` decide se mostramos gabarito ou formulário.
   let respostas = salvo?.respostas ? { ...salvo.respostas } : {};
+  let confiancas = salvo?.confiancas ? { ...salvo.confiancas } : {};
   let corrigido = Boolean(salvo);
+
+  // Só os quizzes dos módulos entram na fila de revisão espaçada.
+  const entraNaRevisao = id.startsWith('modulo-');
 
   function totalRespondidas() {
     return perguntas.filter((pergunta) => respostas[pergunta.id]).length;
@@ -63,7 +73,14 @@ export function montarQuiz({ id, titulo = 'Mini-quiz', descricao = '', perguntas
   function corrigir() {
     corrigido = true;
     const acertos = contarAcertos();
-    const salvou = gravar(id, { acertos, total: perguntas.length, respostas: { ...respostas } });
+    const salvou = gravar(id, {
+      acertos,
+      total: perguntas.length,
+      respostas: { ...respostas },
+      confiancas: { ...confiancas },
+    });
+    // As perguntas entram na fila de revisão: a primeira volta amanhã.
+    if (entraNaRevisao) semearDoQuiz(id, perguntas);
     renderizar();
     mostrarToast(salvou ? 'Progresso salvo' : 'Não consegui salvar o progresso');
     // Leva o foco para o resumo, para quem navega por teclado/leitor de tela.
@@ -72,6 +89,7 @@ export function montarQuiz({ id, titulo = 'Mini-quiz', descricao = '', perguntas
 
   function refazer() {
     respostas = {};
+    confiancas = {};
     corrigido = false;
     gravar(id, null);
     renderizar();
@@ -116,6 +134,57 @@ export function montarQuiz({ id, titulo = 'Mini-quiz', descricao = '', perguntas
     return null;
   }
 
+  // A linha de confiança de cada pergunta. Antes de corrigir, três opções; depois,
+  // o que você disse — e o aviso quando errou com certeza.
+  function montarConfianca(pergunta) {
+    const nome = id + '-' + pergunta.id + '-confianca';
+    const atual = confiancas[pergunta.id];
+
+    if (corrigido) {
+      if (!atual) return null;
+      const acertou = respostas[pergunta.id] === pergunta.correta;
+      return criarElemento('p', { class: 'mt-2 text-xs text-texto-suave' }, [
+        'Você disse: ' + ROTULOS_DE_CONFIANCA[atual].toLowerCase() + '.',
+        atual === 3 && !acertou
+          ? criarElemento('strong', { class: 'text-risco-medio' }, [
+              ' Certeza e erro: é a explicação que mais vale reler.',
+            ])
+          : null,
+      ]);
+    }
+
+    return criarElemento(
+      'div',
+      { class: 'mt-3 flex flex-wrap items-center gap-2 text-xs text-texto-suave' },
+      [
+        criarElemento('span', {}, ['Quão certo você está?']),
+        ...[1, 2, 3].map((nivel) =>
+          criarElemento(
+            'label',
+            {
+              class:
+                'flex cursor-pointer items-center gap-1.5 rounded-full border border-borda ' +
+                'px-2.5 py-1 hover:border-texto-suave',
+            },
+            [
+              criarElemento('input', {
+                type: 'radio',
+                name: nome,
+                value: String(nivel),
+                class: 'h-3 w-3 accent-acento',
+                checked: atual === nivel,
+                onchange: () => {
+                  confiancas[pergunta.id] = nivel;
+                },
+              }),
+              ROTULOS_DE_CONFIANCA[nivel],
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   function montarPergunta(pergunta, indice) {
     const nomeDoGrupo = id + '-' + pergunta.id;
 
@@ -150,6 +219,8 @@ export function montarQuiz({ id, titulo = 'Mini-quiz', descricao = '', perguntas
         ]),
 
         criarElemento('div', { class: 'mt-3 space-y-2' }, alternativas),
+
+        montarConfianca(pergunta),
 
         corrigido &&
           criarElemento(
@@ -196,6 +267,9 @@ export function montarQuiz({ id, titulo = 'Mini-quiz', descricao = '', perguntas
     if (corrigido) {
       const acertos = contarAcertos();
       const percentual = perguntas.length ? (acertos / perguntas.length) * 100 : 0;
+      const errosComCerteza = perguntas.filter(
+        (pergunta) => confiancas[pergunta.id] === 3 && respostas[pergunta.id] !== pergunta.correta,
+      ).length;
 
       return criarElemento(
         'div',
@@ -215,6 +289,16 @@ export function montarQuiz({ id, titulo = 'Mini-quiz', descricao = '', perguntas
               ? 'Gabarito. Leia as explicações mesmo assim: elas trazem os números por trás das respostas.'
               : 'Leia as explicações das que errou e refaça — o objetivo é reconhecer o padrão, não decorar a alternativa.',
           ]),
+          errosComCerteza > 0 &&
+            criarElemento('p', { class: 'mb-3 text-sm font-semibold text-risco-medio' }, [
+              errosComCerteza === 1
+                ? '1 erro feito com certeza — comece por ele.'
+                : errosComCerteza + ' erros feitos com certeza — comece por eles.',
+            ]),
+          entraNaRevisao &&
+            criarElemento('p', { class: 'mb-3 text-sm text-texto-suave' }, [
+              'Estas perguntas voltam amanhã na página Revisão, e depois em 3, 7, 16 e 35 dias.',
+            ]),
           criarBarraProgresso(percentual, 'Acertos no ' + titulo),
           criarElemento('div', { class: 'mt-4' }, [
             criarBotao('Refazer o quiz', { variante: 'secundario', onclick: refazer }),
