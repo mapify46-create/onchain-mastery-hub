@@ -29,7 +29,8 @@ O fluxo de decisão inteiro, uma tela por passo, com DOIS caminhos que terminam 
   3. **Exemplo concreto:** pelo menos um, com número — e só números que estejam no material.
   4. **O que fazer / o que não fazer:** duas listas curtas.
   5. **Recapitulação em 3 frases.**
-  6. **Frase final obrigatória (literal):** "Este vídeo é material de estudo. Não é aconselhamento financeiro, jurídico ou tributário. Memecoin é o ativo de maior risco do mercado — a maioria vai a zero."
+  6. **Frase final obrigatória (literal):** "Este vídeo é material de estudo próprio. Memecoin é o ativo de maior risco do mercado — a maioria vai a zero."
+- **Segmentos:** divida o vídeo em 2 ou 3 partes, cada uma com um título na tela e uma pausa curta entre elas. Dividir em partes com pausa marcada ajuda a reter e a aplicar (meta-análise de Rey et al., 2019).
 
 ### Regras duras — o vídeo é REJEITADO se quebrar qualquer uma
 - **Não inventar número.** Use somente os números do material-fonte. Se faltar um dado, diga "isso não está verificado" em vez de estimar.
@@ -42,7 +43,7 @@ O fluxo de decisão inteiro, uma tela por passo, com DOIS caminhos que terminam 
 
 ### Entregáveis (os três, sempre)
 1. **O vídeo.**
-2. **O roteiro de narração em texto**, em parágrafos corridos, sem timestamps — ele vira a transcrição dentro do app (acessibilidade e modo offline). Mesmo texto que foi narrado, palavra por palavra.
+2. **Um resumo navegável do vídeo, em texto**: o título de cada segmento e, abaixo dele, de 2 a 4 frases curtas com as ideias e os números. Ele aparece ao lado do vídeo no app (acessibilidade e modo offline). **Não é a narração palavra por palavra**: texto idêntico à fala, mostrado junto do vídeo, atrapalha em vez de ajudar (efeito de redundância — Adesope & Nesbit, 2012).
 3. **A lista de números usados**, cada um com a frase do material-fonte de onde veio.
 
 ---
@@ -75,7 +76,7 @@ A ordem dos passos importa, porque cada um deles é uma oportunidade de parar an
 
 1. Abrir o terminal pelo favorito oficial, nunca por link de anúncio ou rede social — existem domínios de phishing imitando plataformas conhecidas.
 2. Buscar pelo endereço do contrato verificado, não pelo nome nem pelo ticker.
-3. Fazer as checagens do Módulo 3: liquidez da pool, LP travada ou queimada, autoridades do contrato, concentração de holders, bundles, histórico de quem criou.
+3. Passar o token pela página Checklist antes de comprar: endereço oficial, extensões e autoridades do contrato, concentração de holders, bundles, histórico de quem criou.
 4. Escrever a tese antes de comprar, e junto com ela o ponto de invalidação — onde você admite que errou e sai.
 5. Definir o tamanho da posição e conferir o valor no campo, com atenção redobrada se o botão de compra rápida estiver ligado.
 6. Configurar slippage, prioridade e proteção de MEV conscientemente, e fazer uma operação-teste com valor mínimo primeiro.
@@ -92,7 +93,7 @@ Cada bloco abaixo é um diagrama que já existe no app, descrito passo a passo. 
 *O trajeto completo, com dois pontos onde o processo termina em "não opero".*
 
 1. Vejo um token novo e decido investigar.
-2. Faço a checagem de segurança: liquidez, LP travada, concentração de holders, contrato. Se falhar, não opero — o processo termina aqui.
+2. Passo o token pelo Checklist antes de comprar: endereço, contrato, concentração de holders. Se falhar, não opero — o processo termina aqui.
 3. Se a checagem passa, defino a tese de entrada e o ponto de invalidação antes de cogitar comprar.
 4. Se não consigo deixar a tese e a invalidação claras e objetivas, também não opero — o processo termina aqui.
 5. Se a tese está clara, defino o tamanho da posição e entro.

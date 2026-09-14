@@ -143,7 +143,7 @@ export const modulo6 = {
       aba: 'volume',
       titulo: 'O que dá para ver de graça — e o que não dá',
       paragrafos: [
-        'Um estudo acadêmico de 34.988 tokens (Midsummer, preprint) começa a caça por ' +
+        'Um estudo revisado por pares, com 34.988 tokens (Midsummer, USENIX Security 2026), começa a caça por ' +
           '"volume subiu mais de 500% com o preço variando menos de 5%". A variação de preço ' +
           'está de graça na tela do DexScreener e do GeckoTerminal. O volume de ontem, para ' +
           'comparar, só dá para aproximar.',
@@ -369,8 +369,8 @@ export const modulo6 = {
       },
       {
         rotulo: 'Tokens que subiram mais de 100% com sinais de crescimento artificial',
-        valor: '82,8%',
-        nota: 'Estudo Midsummer, preprint, em quatro redes (Ethereum, BSC, Solana e Base).',
+        valor: '82,9%',
+        nota: 'Estudo Midsummer (USENIX Security 2026), em quatro redes: Ethereum, BSC, Solana e Base.',
         tom: 'alerta',
       },
     ],
@@ -612,7 +612,7 @@ export const modulo6 = {
         id: 'volume',
         titulo: 'Volume artificial',
         valores: {
-          evidencia: 'Medido: 82,8% dos tokens que subiram mais de 100% tinham sinais (Midsummer).',
+          evidencia: 'Medido: 82,9% dos tokens que subiram mais de 100% tinham sinais (Midsummer, USENIX Security 2026).',
           pumpfun: 'Vale, mas é o sinal mais contornado de propósito.',
         },
       },
@@ -648,6 +648,15 @@ export const modulo6 = {
   // ---------------------------------------------------------------------------
   calculadoraDeSaida: {
     titulo: 'Quanto do seu PnL chega na carteira',
+    exemplo: {
+      passos: [
+        'Posição de US$ 1.000 na tela, numa pool com US$ 20.000 de liquidez anunciada.',
+        'O lado da pool que paga a sua venda é metade disso: US$ 10.000.',
+        'Você recebe 1.000 × 10.000 ÷ (10.000 + 1.000) ≈ US$ 909.',
+        'O preço fica multiplicado por (10.000 ÷ 11.000)² ≈ 0,83 — cai cerca de 17%.',
+        'Agora arraste a liquidez para baixo e veja quanto do número verde some.',
+      ],
+    },
     descricao:
       'Arraste o valor da sua posição na tela e a liquidez anunciada da pool, e veja quanto ' +
       'você recebe vendendo tudo — e quanto a sua venda derruba o preço.',
@@ -710,6 +719,74 @@ export const modulo6 = {
   // ---------------------------------------------------------------------------
   // Quiz
   // ---------------------------------------------------------------------------
+  // Termos de cada aba, mostrados antes do conteúdo (pré-treino).
+  termos: {
+    numeros: [
+      { termo: 'Market cap', definicao: 'Preço vezes os tokens em circulação. É uma conta, não dinheiro que exista.' },
+      { termo: 'Liquidez', definicao: 'O valor dos dois lados da pool — o dinheiro que paga quem vende.' },
+      { termo: 'PnL não realizado', definicao: 'O lucro que a tela mostra enquanto você ainda não vendeu.' },
+    ],
+    volume: [
+      { termo: 'Wash trading', definicao: 'Negociar consigo mesmo, em carteiras diferentes, para fabricar volume.' },
+      { termo: 'Trending', definicao: 'Lista de tokens "em alta", montada por atividade recente e, em alguns sites, por pagamento.' },
+      { termo: 'Bundle', definicao: 'Pacote de transações que entram juntas, no mesmo bloco, ou nenhuma entra.' },
+    ],
+    contrato: [
+      { termo: 'Mint authority', definicao: 'A permissão de criar tokens novos.' },
+      { termo: 'Freeze authority', definicao: 'A permissão de congelar a conta de alguém.' },
+      { termo: 'Extensão', definicao: 'Recurso opcional de um token Token-2022, escolhido quando ele é criado.' },
+    ],
+    deteccao: [
+      { termo: 'Taxa-base', definicao: 'Com que frequência algo acontece na amostra inteira, antes de olhar qualquer sinal.' },
+      { termo: 'F1', definicao: 'Nota de 0 a 1 que mistura quantos rugs o modelo pega e quantos alarmes dele estão certos.' },
+      { termo: 'MCC', definicao: 'Nota de −1 a 1 que não se deixa enganar quando quase tudo é rug.' },
+    ],
+  },
+
+  // Por que cada alternativa errada do quiz não serve (o quiz mostra a da resposta escolhida).
+  porqueErradas: {
+    q1: {
+      a: 'Market cap não é dinheiro disponível: é o último preço vezes o supply. Quem vende esbarra na liquidez, e mesmo dela tira só uma parte.',
+      b: 'Liquidez pequena não diz nada sobre segurança. Diz que qualquer venda grande derruba o preço.',
+      d: 'Market cap é preço vezes supply; liquidez é o valor dos dois lados da pool. Um é conta, o outro é dinheiro na pool.',
+    },
+    q2: {
+      a: 'Metade só sairia se o preço não mudasse durante a venda. Cada token vendido sai por um preço pior que o anterior.',
+      c: 'Para tirar tudo, o preço teria que ir a zero. E a liquidez soma os dois lados: só um deles paga a sua venda.',
+      d: 'A fração não depende do supply nem do tamanho da pool: (1 − √0,5) ÷ 2 vale para qualquer pool de produto constante.',
+    },
+    q3: {
+      b: 'O número verde é preço de agora vezes os seus tokens. Vender mexe no preço, e a tela não desconta isso.',
+      c: 'Imposto não entra na conta da tela, mas o problema maior é outro: o impacto da própria venda.',
+      d: 'A taxa de rede é fração de centavo na Solana. O que come o lucro de verdade é o impacto de preço e a taxa da pool.',
+    },
+    q4: {
+      a: 'É o erro de ler o 5 pequeno como dígito comum: dá cerca de 19 mil vezes o preço real.',
+      b: 'Ainda faltam zeros: o 5 pequeno diz que são cinco zeros depois da vírgula antes do 2786.',
+      d: 'O preço está abaixo de um centavo. O 5 pequeno conta zeros, não milhares.',
+    },
+    q5: {
+      a: 'Serviços de volume espalham as operações justamente para essa razão parecer normal. Razão boa não prova volume real.',
+      c: 'Volume, real ou fabricado, não diz para onde o preço vai. E volume fabricado costuma vir antes da venda de quem organizou.',
+      d: 'Espalhar em muitas carteiras é exatamente o que os bots fazem. Número de carteiras não descarta bot.',
+    },
+    q6: {
+      a: 'Os tokens do pump.fun checados tinham só metadataPointer e tokenMetadata. Taxa de transferência foge do padrão.',
+      b: 'Uma taxa em cada transferência pesa contra quem vende. Não protege quem comprou.',
+      d: 'Extensões são escolhidas na criação do token. Graduar não acrescenta extensão.',
+    },
+    q7: {
+      a: 'O campo junta três autoridades. Com mint e freeze nulas, o endereço pode ser só a de metadados.',
+      c: 'Pelo mesmo motivo: o menu mostra as três juntas. Para saber da freeze, confira a autoridade específica.',
+      d: 'O campo é real e útil: "N/A" quer dizer que as três foram revogadas. Só não diz qual está ativa sem abrir o menu.',
+    },
+    q8: {
+      a: 'Com 82% de rugs na amostra, chutar "rug" para tudo já dá F1 de 0,90. O 0,79 fica abaixo do chute.',
+      c: 'Inútil não é: o MCC de 0,39 mostra algum acerto real. Só não basta para uso.',
+      d: 'F1 é uma nota do modelo, não a taxa de rug. A taxa de rug na amostra era de 81,9%.',
+    },
+  },
+
   quiz: [
     {
       id: 'q1',
@@ -887,7 +964,7 @@ export const modulo6 = {
     { titulo: 'Axiom — Portfolio (PnL não realizado)', url: 'https://docs.axiom.trade/axiom/portfolio', consultadoEm: '12/09/2026' },
     { titulo: 'GMGN — Q&A (taxa de prioridade maior que o valor vendido)', url: 'https://docs.gmgn.ai/index/q-a', consultadoEm: '12/09/2026' },
     { titulo: 'Lehar & Parlour, The Journal of Finance 80(1) (2024) — impacto de preço previsível pela pool', url: 'https://doi.org/10.1111/jofi.13405', consultadoEm: '12/09/2026' },
-    { titulo: '"A Midsummer Meme\'s Dream" (arXiv 2507.01963, preprint)', url: 'https://arxiv.org/html/2507.01963v2', consultadoEm: '13/09/2026' },
+    { titulo: 'Mongardini & Mei, "A Midsummer Meme\'s Dream" (USENIX Security 2026; 82,89% na versão publicada, 82,8% no arXiv 2507.01963v2)', url: 'https://www.usenix.org/conference/usenixsecurity26/presentation/mongardini', consultadoEm: '13/09/2026' },
     { titulo: 'Victor & Weintraud, "Detecting and Quantifying Wash Trading on DEX" (WWW 2021)', url: 'https://arxiv.org/pdf/2102.07001', consultadoEm: '12/09/2026' },
     { titulo: 'MELT / MemeTrans (arXiv 2602.13480, preprint) — bundles', url: 'https://arxiv.org/html/2602.13480v2', consultadoEm: '12/09/2026' },
     { titulo: 'Jito — Low latency transaction send (bundles de até 5 transações)', url: 'https://docs.jito.wtf/lowlatencytxnsend/', consultadoEm: '13/09/2026' },

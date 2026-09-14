@@ -453,6 +453,15 @@ export const modulo7 = {
   // ---------------------------------------------------------------------------
   calculadoraDeSequencia: {
     titulo: 'Quanto sobra depois de uma sequência de perdas totais',
+    exemplo: {
+      passos: [
+        '10% do capital em cada posição, e 5 posições seguidas vão a zero.',
+        'Depois da primeira, sobra 90%. Depois da segunda, 90% de 90%: 81%.',
+        'Depois da quinta: 0,9 × 0,9 × 0,9 × 0,9 × 0,9 ≈ 59%.',
+        'Para voltar ao começo: 1 ÷ 0,59 − 1 ≈ 69% de ganho sobre o que sobrou.',
+        'Agora suba a fração para 25% e compare.',
+      ],
+    },
     descricao:
       'Escolha a fração do capital em cada posição e quantas posições seguidas vão a zero. ' +
       'É a matemática de uma regra, não uma sugestão de fração.',
@@ -518,6 +527,50 @@ export const modulo7 = {
   // ---------------------------------------------------------------------------
   // Quiz
   // ---------------------------------------------------------------------------
+  // Por que cada alternativa errada do quiz não serve (o quiz mostra a da resposta escolhida).
+  porqueErradas: {
+    q1: {
+      a: 'O "23% em 60 dias" vem de blog de plataforma, sem estudo, autor ou método.',
+      c: 'Frequência não transforma registro em lucro. O que tem lastro é monitorar para cumprir a própria regra.',
+      d: 'Monitorar ajuda a cumprir metas de comportamento (efeito de 0,40). Não há evidência de que atrapalhe.',
+    },
+    q2: {
+      a: 'A fórmula é matemática e vale para qualquer ativo — desde que média e variância existam.',
+      b: 'O problema não é apostar demais: com variância infinita, a fórmula nem produz número.',
+      d: 'Não tem relação com regulação. É uma limitação da matemática.',
+    },
+    q3: {
+      a: '50% seria se cada perda fosse sobre o capital inicial. A fração é recalculada sobre o que sobrou: 0,9 elevado a 5 ≈ 0,59.',
+      c: '90% é o que sobra depois de uma perda só.',
+      d: 'Com fração fixa, uma sequência finita de perdas nunca zera a banca: sempre sobra (1 − f) elevado a n.',
+    },
+    q4: {
+      a: 'Foi o contrário: o lembrete não teve efeito, e só a ordem automática reduziu o hábito.',
+      c: 'O experimento mediu o hábito de segurar perdedoras, não se o stop dá prejuízo.',
+      d: 'A ordem automática mudou o comportamento; só o lembrete não mudou.',
+    },
+    q5: {
+      a: 'Olhar o resultado com frequência piora a decisão sob risco (aversão míope à perda).',
+      c: 'Revisar só quando perde é viés de resultado: julgar a decisão pelo desfecho.',
+      d: 'Ninguém mediu uma cadência ideal. Sexta-feira é escolha sua, não evidência.',
+    },
+    q6: {
+      a: 'Com retornos bem-comportados já seriam de 400 a 1.600 operações. Com cauda pesada, pode não haver número que baste.',
+      c: 'Variar os tokens não resolve o tamanho da amostra nem a cauda pesada.',
+      d: 'Lucro total positivo em 30 operações cabe perfeitamente na sorte.',
+    },
+    q7: {
+      a: 'O nome da universidade é o que faz o número colar. O estudo real diz quase o contrário.',
+      c: 'O problema não é o tamanho do número: é que ele não vem do estudo citado.',
+      d: 'O estudo real é de ações nos EUA, mas o erro é outro: ele não fala de diário.',
+    },
+    q8: {
+      a: 'É folclore: não existe um número oficial único por trás do "90-90-90".',
+      c: 'Não: 97% dos que persistiram mais de 300 dias perderam dinheiro.',
+      d: 'Existe, e é o de Chague, De-Losso & Giovannetti, da FGV.',
+    },
+  },
+
   quiz: [
     {
       id: 'q1',

@@ -1,11 +1,28 @@
-// quiz.js — mini-quiz reutilizável por módulo (3 a 5 perguntas).
+// quiz.js — mini-quiz reutilizável por módulo.
 //
 // Fluxo: o usuário marca uma alternativa por pergunta, clica em "Ver resultado" e recebe
 // a correção com explicação em cada pergunta. O resultado fica salvo no store (localStorage),
 // então o F5 não apaga nada — ao voltar, o quiz reabre já corrigido.
 //
+// Se a alternativa escolhida estiver errada e tiver o campo `porque`, a correção
+// também diz por que ela não serve. Feedback que explica rende mais que só
+// "certo/errado" (Wisniewski, Zierer & Hattie, 2020).
+//
 // Uso:
 //   montarQuiz({ id: 'modulo-2', perguntas: modulo2.quiz })
+//   montarQuiz({ id: 'modulo-6', perguntas: juntarPorques(modulo6.quiz, modulo6.porqueErradas) })
+
+// Junta às perguntas as explicações "por que esta alternativa está errada",
+// guardadas à parte no arquivo de dados no formato { q1: { a: '...', b: '...' } }.
+export function juntarPorques(perguntas = [], mapa = {}) {
+  return perguntas.map((pergunta) => ({
+    ...pergunta,
+    alternativas: pergunta.alternativas.map((alternativa) => ({
+      ...alternativa,
+      porque: alternativa.porque ?? mapa?.[pergunta.id]?.[alternativa.id],
+    })),
+  }));
+}
 
 import { criarElemento, criarBarraProgresso, criarBotao, mostrarToast } from '../ui.js';
 import { obterEstado, atualizar } from '../store.js';
@@ -122,6 +139,7 @@ export function montarQuiz({ id, titulo = 'Mini-quiz', descricao = '', perguntas
     );
 
     const acertou = respostas[pergunta.id] === pergunta.correta;
+    const escolhida = pergunta.alternativas.find((alternativa) => alternativa.id === respostas[pergunta.id]);
 
     return criarElemento(
       'fieldset',
@@ -148,6 +166,14 @@ export function montarQuiz({ id, titulo = 'Mini-quiz', descricao = '', perguntas
               pergunta.explicacao,
             ],
           ),
+
+        corrigido &&
+          !acertou &&
+          escolhida?.porque &&
+          criarElemento('p', { class: 'mt-2 rounded-lg border border-borda bg-fundo p-3 text-sm text-texto-suave' }, [
+            criarElemento('strong', { class: 'text-texto' }, ['Por que a sua não serve: ']),
+            escolhida.porque,
+          ]),
       ],
     );
   }

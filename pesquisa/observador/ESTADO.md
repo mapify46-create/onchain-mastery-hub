@@ -81,6 +81,48 @@ o rótulo só é fixado por escrito depois, e ninguém analisa nada antes disso.
 - ~~Regerar os prompts de vídeo~~ → os 33 regerados depois da correção do Jito.
 - ~~Conferir as telas das ferramentas~~ → viraram as anatomias da aba técnica do M3.
 
+**Próxima frente do hub — narrativas no pilar social do Módulo 3 (13/09/2026):**
+- O dono quer que o pilar social ensine a achar narrativas, onde e com que
+  ferramentas rastrear, e se elas movem o preço. Hoje o app não ensina isso.
+- Prompts escritos: `pesquisa/modulos/PROMPTS-PESQUISA-NARRATIVAS.md` (P8 fontes,
+  P9 ferramentas, P10 narrativa × preço, P11 ciclo de vida). Esperando o dono rodar.
+- Depois: aba "Narrativas" no M3, campo de narrativa na ficha do M4, item no
+  Checklist e campo no diário do M7.
+
+**Próxima frente do hub — didática do app (13/09/2026):**
+- O dono pediu para melhorar a didática. Prompts escritos:
+  `pesquisa/modulos/PROMPTS-PESQUISA-DIDATICA.md` (P12 ciência da aprendizagem,
+  P13 quiz/feedback/revisão espaçada, P14 texto/diagrama/calculadora/vídeo,
+  P15 decisão sob risco e calibração, P16 motivação e hábito).
+
+**As 9 pesquisas (P8 a P16) voltaram em 13/09 — leia `VERIFICACOES-AO-VIVO-2.md`:**
+- Só 3 vieram completas (P11, P14, P15). As outras 6 pararam no checkpoint porque o
+  plano do dono acabou; as respostas prontas estão na seção 5, por prioridade (P13 e
+  P9 primeiro).
+- Conferido ao vivo: o Midsummer **é** USENIX Security '26 (82,89% publicado). O app
+  foi corrigido localmente (M6 e checklist, cache `v11`) — **não publicado**.
+- Erros achados: P11 repete o "US$ 69 mil" e afirma tendências sem base na própria
+  tabela; P10 escreve 82,6%; P12 usa a meta-análise errada para pré-teste.
+- Alerta de princípio: calibração com Brier em cenário fictício precisaria de uma
+  "verdade" escrita por mim (= eu escrever a regra). Só sobre fatos conhecidos, ou com
+  taxas-base reais do observatório.
+- **Construído em 13/09 (local, não publicado, cache `omh-cache-v12`), verificado no
+  navegador:**
+  - Aba **"Narrativas"** no M3 (onde nasce, quanto é fabricado, ciclo de vida,
+    rotação 2024–2025, narrativa × preço, tabela de ferramentas, rotina de estudo) e
+    3 perguntas novas no quiz (13 no total).
+  - Didática, em `src/components/didatica.js`: **partes com "Continuar"** nas abas
+    longas (M3 Narrativas, Social, Técnico; M6 Números, Contrato), **pergunta antes de
+    ler** (M3, M6, M7), **termos da aba** (M6 e Narrativas).
+  - Quiz: **"por que a sua não serve"** na alternativa errada (M6, M7 e as novas do
+    M3). Calculadoras do M6 e M7 com **exemplo resolvido**. Checklist com
+    **pré-mortem, argumento contrário e taxa-base** (8 itens na decisão).
+  - Prompts de vídeo: entregável virou **resumo navegável** (não a narração palavra
+    por palavra), vídeo em 2–3 segmentos; frase final sem "aconselhamento". 33 regerados.
+- **Ainda não feito:** "por que a sua não serve" nos quizzes de M1 a M5 e nas 10
+  primeiras do M3; revisão espaçada (espera P13 etapa 2); passo a passo e preços das
+  ferramentas de narrativa (espera P9); embaralhar os cenários do simulador.
+
 **Pendências menores (não bloqueiam publicar):**
 - **Vídeos dos conteúdos novos:** o gerador `scripts/gerar-prompts-de-video.mjs` tem a
   lista fixa dos 33 vídeos dos Módulos 1 a 5. M6, M7, Checklist e as duas abas novas do

@@ -17,12 +17,21 @@ import {
   mostrarToast,
 } from '../ui.js';
 import { montarTabelaComparativa } from '../components/comparisonTable.js';
-import { montarQuiz } from '../components/quiz.js';
+import { montarQuiz, juntarPorques } from '../components/quiz.js';
+import { montarSegmentos, montarPerguntaPrevia, montarTermos } from '../components/didatica.js';
 import { montarDiagrama, renderizarDiagrama } from '../components/diagrama.js';
 import { montarCalculadora } from '../components/calculadora.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarAnatomia } from '../components/anatomia.js';
 import { obterEstado, atualizar } from '../store.js';
+
+// A pergunta do quiz usada antes de ler uma aba.
+function previa(idDaPergunta) {
+  return montarPerguntaPrevia({
+    id: modulo6.id,
+    pergunta: modulo6.quiz.find((pergunta) => pergunta.id === idDaPergunta),
+  });
+}
 
 // Parágrafo de apoio usado no topo de algumas abas.
 function criarIntroducao(texto) {
@@ -173,22 +182,38 @@ function montarAbaNumeros() {
 
   return criarElemento('div', { class: 'space-y-6' }, [
     objetivos,
-    montarDestaques(modulo6.destaques.numeros),
-    secao('tres-numeros'),
-    criarAnatomia('numerosDaTela', 'm6-anatomia-numeros'),
-    secao('quanto-sai'),
-    criarTabela('Quanto sai, por queda de preço', modulo6.tabelaVendaPorQueda),
-    calc &&
-      montarCalculadora({
-        id: 'm6-saida',
-        titulo: calc.titulo,
-        descricao: calc.descricao,
-        controles: calc.controles,
-        nota: calc.nota,
-        calcular: calcularSaida,
-      }),
-    secao('zeros-compactados'),
-    secao('pnl'),
+    previa('q1'),
+    montarTermos(modulo6.termos?.numeros),
+    montarSegmentos({
+      partes: [
+        {
+          titulo: 'Os três números',
+          conteudo: [
+            montarDestaques(modulo6.destaques.numeros),
+            secao('tres-numeros'),
+            criarAnatomia('numerosDaTela', 'm6-anatomia-numeros'),
+          ],
+        },
+        {
+          titulo: 'Quanto dá para vender',
+          conteudo: [
+            secao('quanto-sai'),
+            criarTabela('Quanto sai, por queda de preço', modulo6.tabelaVendaPorQueda),
+            calc &&
+              montarCalculadora({
+                id: 'm6-saida',
+                titulo: calc.titulo,
+                descricao: calc.descricao,
+                controles: calc.controles,
+                nota: calc.nota,
+                exemplo: calc.exemplo,
+                calcular: calcularSaida,
+              }),
+          ],
+        },
+        { titulo: 'Preço e PnL', conteudo: [secao('zeros-compactados'), secao('pnl')] },
+      ],
+    }),
   ]);
 }
 
@@ -197,6 +222,8 @@ function montarAbaNumeros() {
 // ---------------------------------------------------------------------------
 function montarAbaVolume() {
   return criarElemento('div', { class: 'space-y-6' }, [
+    previa('q5'),
+    montarTermos(modulo6.termos?.volume),
     montarDestaques(modulo6.destaques.volume),
     secao('como-fabrica'),
     criarFiguraDoDiagrama('wash-trading'),
@@ -211,15 +238,32 @@ function montarAbaVolume() {
 // ---------------------------------------------------------------------------
 function montarAbaContrato() {
   return criarElemento('div', { class: 'space-y-6' }, [
-    montarDestaques(modulo6.destaques.contrato),
-    secao('spl-ou-2022'),
-    criarAnatomia('contratoNoExplorador', 'm6-anatomia-contrato'),
-    secao('extensoes'),
-    criarTabela('As extensões, uma a uma', modulo6.tabelaExtensoes),
-    secao('autoridades'),
-    secao('metadata'),
-    secao('dev-dump'),
-    secao('evm'),
+    previa('q6'),
+    montarTermos(modulo6.termos?.contrato),
+    montarSegmentos({
+      partes: [
+        {
+          titulo: 'SPL clássico ou Token-2022',
+          conteudo: [
+            montarDestaques(modulo6.destaques.contrato),
+            secao('spl-ou-2022'),
+            criarAnatomia('contratoNoExplorador', 'm6-anatomia-contrato'),
+          ],
+        },
+        {
+          titulo: 'Extensões e autoridades',
+          conteudo: [
+            secao('extensoes'),
+            criarTabela('As extensões, uma a uma', modulo6.tabelaExtensoes),
+            secao('autoridades'),
+          ],
+        },
+        {
+          titulo: 'Metadata, dev dump e redes EVM',
+          conteudo: [secao('metadata'), secao('dev-dump'), secao('evm')],
+        },
+      ],
+    }),
   ]);
 }
 
@@ -228,6 +272,8 @@ function montarAbaContrato() {
 // ---------------------------------------------------------------------------
 function montarAbaDeteccao() {
   return criarElemento('div', { class: 'space-y-6' }, [
+    previa('q8'),
+    montarTermos(modulo6.termos?.deteccao),
     montarDestaques(modulo6.destaques.deteccao),
     secao('o-que-conta'),
     secao('melhor-detector'),
@@ -346,7 +392,7 @@ function montarAbaQuiz() {
       id: modulo6.id,
       titulo: 'Mini-quiz do Módulo 6',
       descricao: 'Oito perguntas. As respostas ficam salvas no navegador.',
-      perguntas: modulo6.quiz,
+      perguntas: juntarPorques(modulo6.quiz, modulo6.porqueErradas),
     }),
     montarConclusao(),
     montarFontesEVerificacao(),

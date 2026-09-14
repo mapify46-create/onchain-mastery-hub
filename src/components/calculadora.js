@@ -38,6 +38,9 @@ const CLASSE_POR_TOM = {
  *                                      `destaques`: [{ rotulo, valor, nota?, tom? }]
  *                                      `barras`:    [{ rotulo, percentual, valor }]
  * @param {string}   [opcoes.nota]      Aviso fixo (ex.: a premissa que a conta assume).
+ * @param {object}   [opcoes.exemplo]   { titulo?, passos: [] } — a conta feita à mão antes de
+ *                                      mexer. Ferramenta com exemplo resolvido ensina; controle
+ *                                      solto distrai (Alfieri et al., 2011).
  */
 export function montarCalculadora({
   id,
@@ -46,6 +49,7 @@ export function montarCalculadora({
   controles = [],
   calcular,
   nota = '',
+  exemplo = null,
 }) {
   // Estado: só os valores dos controles. Nada vai para o localStorage — isto é
   // ferramenta de exploração, não progresso do aluno.
@@ -149,6 +153,14 @@ export function montarCalculadora({
   >
     <h3 id="${id}-titulo" class="text-lg font-semibold">${titulo}</h3>
     ${descricao ? html`<p class="mt-2 text-sm text-texto-suave">${descricao}</p>` : null}
+    ${exemplo?.passos?.length
+      ? html`<div class="mt-4 rounded-card border border-borda bg-fundo p-4">
+          <p class="text-sm font-semibold text-texto">${exemplo.titulo ?? 'Exemplo resolvido'}</p>
+          <ol class="mt-2 list-decimal space-y-1 pl-5 text-sm text-texto-suave">
+            ${exemplo.passos.map((passo) => html`<li>${passo}</li>`)}
+          </ol>
+        </div>`
+      : null}
 
     <div class="mt-5 grid gap-5 sm:grid-cols-2">${controles.map(montarControle)}</div>
 

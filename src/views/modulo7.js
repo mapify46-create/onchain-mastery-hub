@@ -17,7 +17,16 @@ import {
   mostrarToast,
 } from '../ui.js';
 import { montarTabelaComparativa } from '../components/comparisonTable.js';
-import { montarQuiz } from '../components/quiz.js';
+import { montarQuiz, juntarPorques } from '../components/quiz.js';
+import { montarPerguntaPrevia } from '../components/didatica.js';
+
+// A pergunta do quiz usada antes de ler uma aba.
+function previa(idDaPergunta) {
+  return montarPerguntaPrevia({
+    id: modulo7.id,
+    pergunta: modulo7.quiz.find((pergunta) => pergunta.id === idDaPergunta),
+  });
+}
 import { montarDiagrama, renderizarDiagrama } from '../components/diagrama.js';
 import { montarCalculadora } from '../components/calculadora.js';
 import { montarDestaques } from '../components/destaques.js';
@@ -169,6 +178,7 @@ function montarAbaRegra() {
 
   return criarElemento('div', { class: 'space-y-6' }, [
     objetivos,
+    previa('q4'),
     montarDestaques(modulo7.destaques.regra),
     secao('por-que-antes'),
     secao('o-que-a-regra-tem'),
@@ -190,6 +200,7 @@ function montarAbaTamanho() {
   const calc = modulo7.calculadoraDeSequencia;
 
   return criarElemento('div', { class: 'space-y-6' }, [
+    previa('q3'),
     montarDestaques(modulo7.destaques.tamanho),
     secao('fracao-fixa'),
     secao('kelly'),
@@ -201,6 +212,7 @@ function montarAbaTamanho() {
       descricao: calc.descricao,
       controles: calc.controles,
       nota: calc.nota,
+      exemplo: calc.exemplo,
       calcular: calcularSequencia,
     }),
   ]);
@@ -211,6 +223,7 @@ function montarAbaTamanho() {
 // ---------------------------------------------------------------------------
 function montarAbaDiario() {
   return criarElemento('div', { class: 'space-y-6' }, [
+    previa('q1'),
     montarDestaques(modulo7.destaques.diario),
     secao('duas-frases'),
     secao('o-tamanho-do-efeito'),
@@ -224,6 +237,7 @@ function montarAbaDiario() {
 // ---------------------------------------------------------------------------
 function montarAbaRevisao() {
   return criarElemento('div', { class: 'space-y-6' }, [
+    previa('q6'),
     montarDestaques(modulo7.destaques.revisao),
     secao('olhar-pouco'),
     secao('a-pergunta'),
@@ -236,6 +250,7 @@ function montarAbaRevisao() {
 // ---------------------------------------------------------------------------
 function montarAbaMitos() {
   return criarElemento('div', { class: 'space-y-6' }, [
+    previa('q7'),
     montarDestaques(modulo7.destaques.mitos),
     secao('por-que-circulam'),
     criarTabela('O número que circula, e o dado real', modulo7.tabelaMitos),
@@ -342,7 +357,7 @@ function montarAbaQuiz() {
       id: modulo7.id,
       titulo: 'Mini-quiz do Módulo 7',
       descricao: modulo7.quiz.length + ' perguntas. As respostas ficam salvas no navegador.',
-      perguntas: modulo7.quiz,
+      perguntas: juntarPorques(modulo7.quiz, modulo7.porqueErradas),
     }),
     montarConclusao(),
     montarFontesEVerificacao(),

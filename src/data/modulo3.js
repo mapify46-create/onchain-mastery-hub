@@ -14,6 +14,7 @@ export const modulo3 = {
 
   objetivos: [
     'Entender que a decisão de entrada combina sinal social + checagem técnica.',
+    'Reconhecer uma narrativa, situar em que fase ela está e saber o que as listas de "em alta" medem — e o que a pesquisa não sabe.',
     'Confirmar o endereço oficial de um token em 5 minutos, e reconhecer os golpes de X, Discord e Telegram.',
     'Usar RugCheck, Solscan, Bubblemaps e DexScreener sabendo o que cada campo prova — e o que não prova.',
     'Reconhecer o papel de cada ferramenta: visualização, execução, checagem ou monitoramento social.',
@@ -389,6 +390,403 @@ export const modulo3 = {
     conclusao:
       'O líder muda rápido; o hub ensina o conceito e mantém os nomes e números editáveis ' +
       'bem aqui, em src/data/modulo3.js.',
+  },
+
+  // ---------------------------------------------------------------------------
+  // Aba "Narrativas" — pesquisas 8 a 11 dos módulos, com as correções de
+  // pesquisa/modulos/pesquisas/VERIFICACOES-AO-VIVO-2.md (seção 3). Onde a
+  // pesquisa e a conferência divergem, vale a conferência.
+  // ---------------------------------------------------------------------------
+  praticaNarrativas: {
+    introducao:
+      'Uma narrativa é um tema que puxa vários tokens ao mesmo tempo: celebridades, animais ' +
+      'virais, agentes de IA, políticos. Esta aba ensina a reconhecer uma, a situar em que fase ' +
+      'ela está e a rastrear com ferramentas — e diz com todas as letras o que a pesquisa não ' +
+      'sabe: ninguém mediu se ler narrativa ajuda a prever o preço.',
+
+    termos: [
+      { termo: 'Narrativa', definicao: 'Um tema que puxa vários tokens ao mesmo tempo, e não o hype de um token só.' },
+      { termo: 'Esteira', definicao: 'Os tokens que copiam o tema depois que o primeiro chamou atenção.' },
+      { termo: 'Mindshare', definicao: 'A fatia da conversa nas redes que um projeto ou tema ocupa.' },
+    ],
+
+    destaques: [
+      {
+        rotulo: 'Tokens do pump.fun criados logo depois de um post no X ou no Truth Social',
+        valor: '23,5%',
+        nota:
+          '3,5 milhões de 15,2 milhões, de jan/2024 a jan/2026 ("Meme Coin Factories", preprint). ' +
+          'A narrativa nasce fora da blockchain; o token vem depois.',
+      },
+      {
+        rotulo: 'Estudos que mediram em qual rede social a atenção aparece primeiro',
+        valor: 'Nenhum',
+        nota: '"Primeiro no Telegram, depois no X" é observação de mercado, sem medição.',
+        tom: 'alerta',
+      },
+      {
+        rotulo: 'Valor somado das memecoins, do pico ao fim de 2025',
+        valor: 'US$ 150,6 → 47,2 bi',
+        nota:
+          'De dez/2024 a nov/2025 (CoinGecko, State of Memecoins 2025). As narrativas se ' +
+          'revezaram enquanto o setor inteiro encolhia.',
+        tom: 'alerta',
+      },
+    ],
+
+    secoes: [
+      {
+        id: 'o-que-e',
+        titulo: 'O que é uma narrativa, e o que ela não é',
+        paragrafos: [
+          'Uma narrativa é um tema que puxa vários tokens juntos. Quando a atenção vai para ' +
+            '"agentes de IA", sobem ao mesmo tempo vários tokens com esse tema, e aparecem ' +
+            'centenas de cópias. O hype de um token só não é narrativa.',
+          'Ela importa porque memecoin sobe e desce por atenção (Módulo 2), e a narrativa é a ' +
+            'forma que a atenção toma. Mas saber qual é a narrativa do momento não diz qual token ' +
+            'comprar, nem quando. A seção "Narrativa e preço" mostra o que a pesquisa mediu — e é ' +
+            'pouco.',
+        ],
+      },
+      {
+        id: 'onde-nasce',
+        titulo: 'Onde a narrativa nasce',
+        paragrafos: [
+          'Quase sempre fora da blockchain. Um estudo com os 15,2 milhões de tokens do pump.fun em ' +
+            'dois anos achou 23,5% deles criados logo depois de um post no X ou no Truth Social; ' +
+            '31 desses posts renderam pelo menos US$ 1 milhão cada a quem criou o token ("Meme ' +
+            'Coin Factories", preprint de 2026). O token é a reação; o post, a notícia ou o vídeo ' +
+            'vieram antes.',
+          'Os casos confirmam o desenho: o PNUT surgiu na esteira da apreensão e morte do esquilo ' +
+            'Peanut em Nova York, no fim de outubro de 2024; o GOAT nasceu em outubro de 2024 ' +
+            'empurrado pelos posts de um bot de IA, o Truth Terminal.',
+          'Qual rede recebe a atenção primeiro — Telegram, X, TikTok, Discord — ninguém mediu. Os ' +
+            'estudos que existem comparam uma rede com o preço, não uma rede com outra. O que se ' +
+            'sabe de ordem é sobre golpe organizado: em canais VIP de pump-and-dump, o nome da ' +
+            'moeda sai de 12 a 24 horas antes do sinal público (Ardia & Bluteau, International ' +
+            'Review of Financial Analysis, 2024). Quem vê o sinal na rede aberta chegou depois de ' +
+            'quem organizou.',
+        ],
+      },
+      {
+        id: 'fabricada',
+        titulo: 'Quanto da atenção é fabricada',
+        paragrafos: [
+          'Uma parte grande. Num levantamento de três meses com mais de 50 milhões de mensagens no ' +
+            'X, no Telegram e no Discord, mais de 56% das contas do X que espalhavam convites para ' +
+            'grupos eram bots ou foram suspensas, e 93% dos links postados por bots levavam a ' +
+            'canais de pump-and-dump no Telegram (Nizzoli et al., IEEE Access, 2020).',
+          'Some a isso os calls pagos da aba "Pilar social na prática": a narrativa que você vê ' +
+            'chegando pode ser campanha.',
+        ],
+      },
+      {
+        id: 'ciclo',
+        titulo: 'O ciclo de vida de uma narrativa',
+        paragrafos: [
+          'As cinco narrativas de 2024 e 2025 com dados públicos seguiram um desenho parecido com ' +
+            'as quatro fases de um token do Módulo 2. Os sinais abaixo descrevem o que aconteceu; ' +
+            'nenhum foi medido como gatilho de entrada ou de saída.',
+        ],
+        listaTitulo: 'As fases, e o que deu para ver em cada uma:',
+        lista: [
+          'Nascimento: um evento fora de cripto (post, notícia, vídeo viral) e um primeiro token ' +
+            'que chama atenção.',
+          'Crescimento: aparecem vários tokens com o mesmo tema, uma corretora grande lista um ' +
+            'deles, uma figura pública entra na conversa. O PNUT foi listado na Binance em ' +
+            '11/11/2024, com Elon Musk usando o esquilo no X.',
+          'Pico: o valor somado do tema para de subir. A imprensa fora de cripto costuma chegar ' +
+            'aqui ou depois — nos casos PNUT e LIBRA, a cobertura veio no topo, não antes.',
+          'Saturação: continuam nascendo tokens do tema enquanto o valor dele já cai. Há registro ' +
+            'disso nos agentes de IA e no Believe; nos outros três casos, não há dado.',
+          'Morte: as cópias perdem quase tudo. Dos 30 tokens de celebridades lançados na Solana a ' +
+            'partir de maio de 2024, a queda média foi de 94% em cerca de um mês.',
+        ],
+      },
+      {
+        id: 'narrativa-e-preco',
+        titulo: 'Narrativa move o preço? O que está medido',
+        paragrafos: [
+          'Menos do que o mercado repete. Não existe estudo revisado por pares que ligue, com um ' +
+            'número, a atenção nas redes ao preço de memecoins de launchpad. Os revisados que ' +
+            'chegam perto medem outra coisa: um compara o sentimento no X com a quantidade de ' +
+            'negociações, não com o preço (Li et al., ACM Web Science 2025); outro só descreve ' +
+            'médias (Long, Wong & Cai, WWW 2025).',
+          'Fora dos launchpads, o que existe aponta para o lado ruim: depois do tweet de um ' +
+            'influenciador, o preço sobe 1,83% no dia e cai 6,53% em 30 dias (Merkley et al., ' +
+            '2024). Em grupos de pump no Telegram, os sinais vêm segundos antes do preço (Moura et ' +
+            'al., preprint de 2026) — quem lê o sinal chega depois.',
+          'Um preprint de 2026 achou que tokens com link de Telegram no cadastro graduam cerca de ' +
+            '9 vezes mais no pump.fun (Kamat). Não use isso como sinal: ele mede a presença de um ' +
+            'link, o sinal mais barato de falsificar que existe, e a coleta cobriu só os primeiros ' +
+            'minutos de cada token.',
+          'A frase honesta: saber a narrativa ajuda a entender por que um token está chamando ' +
+            'atenção. Não há evidência de que ajude a prever o preço dele.',
+        ],
+      },
+      {
+        id: 'ferramentas',
+        titulo: 'Rastrear: o que cada ferramenta mede',
+        paragrafos: [
+          'Toda lista de "em alta" é feita de atividade de negociação, de pagamento ou das duas ' +
+            'coisas. Ela mostra onde a atenção está agora — e atividade é exatamente o que o volume ' +
+            'falso do Módulo 6 fabrica.',
+          'A tabela diz o que cada ferramenta mede, segundo a documentação dela conferida em ' +
+            '13/09/2026. O passo a passo de cada uma e os preços ainda não foram pesquisados.',
+        ],
+      },
+      {
+        id: 'rotina',
+        titulo: 'Uma rotina de estudo de narrativa',
+        paragrafos: [
+          'Não é método de entrada: é um jeito de treinar o olho. Nenhum destes passos foi medido ' +
+            'como capaz de melhorar resultado.',
+        ],
+        listaTitulo: 'Uma vez por dia, ou quando um tema chamar atenção:',
+        lista: [
+          'Abra duas listas de "em alta" e anote os temas que se repetem entre elas — lembrando ' +
+            'que parte da lista é paga.',
+          'Procure a origem fora de cripto: o post, a notícia, o vídeo. Na busca avançada do X, ' +
+            'from: e since: ajudam a achar quem falou primeiro entre as contas que você acompanha.',
+          'Veja há quanto tempo o tema existe e quantos tokens já copiaram. Muitos tokens novos ' +
+            'com o valor do tema caindo é o desenho da saturação.',
+          'Anote no diário do Módulo 7: data, tema, primeiro token e a fase que você acha que é. ' +
+            'Depois de algumas semanas, confira quantas vezes a sua leitura de fase acertou.',
+          'Qualquer token que chamar sua atenção passa pelo Checklist antes de qualquer outra coisa.',
+        ],
+      },
+    ],
+
+    linhaDoTempo: {
+      titulo: 'A rotação das narrativas, 2024–2025',
+      descricao: 'Cada tema dominou por semanas e deu lugar ao seguinte.',
+      marcos: [
+        {
+          data: '26/05/2024',
+          titulo: 'Celebridades: Caitlyn Jenner lança o JENNER',
+          texto:
+            'Na esteira vieram MOTHER (Iggy Azalea) e DADDY (Andrew Tate). Cerca de um mês depois, ' +
+            'os 30 tokens de celebridades da Solana acumulavam queda média de 94%.',
+        },
+        {
+          data: '11/09/2024',
+          titulo: 'Animais: nasce o MOODENG',
+          texto: 'Depois viria o PNUT, listado na Binance em 11/11/2024.',
+        },
+        {
+          data: '10–11/10/2024',
+          titulo: 'IA: nasce o GOAT, empurrado pelo bot Truth Terminal',
+          texto: 'O tema vira "agentes de IA": ai16z, Virtuals, AIXBT.',
+        },
+        {
+          data: '04–05/12/2024',
+          titulo: 'HAWK, o token da influenciadora Hawk Tuah',
+          texto:
+            'O market cap chegou a US$ 491 milhões e caiu mais de 90% em horas. Virou ação ' +
+            'coletiva nos EUA.',
+          tom: 'atencao',
+        },
+        {
+          data: '~06/01/2025',
+          titulo: 'Pico dos agentes de IA: cerca de US$ 20 bilhões somados',
+          texto: 'Em fevereiro, cerca de US$ 6,5 bilhões.',
+        },
+        {
+          data: '17/01/2025',
+          titulo: 'Políticos: lançamento do TRUMP',
+          texto: 'Em três semanas, mais de 700 memecoins-cópia foram enviadas à carteira dele.',
+        },
+        {
+          data: '14/02/2025',
+          titulo: 'LIBRA, promovida por Javier Milei',
+          texto:
+            'Das 15.430 carteiras que negociaram mais de US$ 1.000, mais de 86% venderam no ' +
+            'prejuízo, somando US$ 251 milhões (Nansen). Fim da onda de memecoins políticas.',
+          tom: 'atencao',
+        },
+        {
+          data: '12–15/05/2025',
+          titulo: '"Internet Capital Markets": pico do LAUNCHCOIN, no app Believe',
+          texto: 'Mais de 21 mil moedas na primeira semana; a queda começou em dias.',
+        },
+        {
+          data: '2026',
+          titulo: 'Nenhuma narrativa dominante confirmada',
+          texto: 'O que os dados mostram é retração do setor.',
+        },
+      ],
+      nota:
+        'Datas e números de imprensa e de relatórios de empresa, vários só por resumo de busca. ' +
+        'Detalhes em "não verificado", na aba Quiz.',
+    },
+
+    tabelaNarrativas: {
+      colunas: [
+        { chave: 'nascimento', rotulo: 'Primeiro token' },
+        { chave: 'pico', rotulo: 'Pico' },
+        { chave: 'duracao', rotulo: 'Até perder a atenção' },
+        { chave: 'destino', rotulo: 'O que aconteceu' },
+      ],
+      linhas: [
+        {
+          id: 'celebridades',
+          titulo: 'Celebridades',
+          valores: {
+            nascimento: 'JENNER, 26/05/2024',
+            pico: 'Junho de 2024',
+            duracao: 'Cerca de 1 mês',
+            destino: '30 tokens: queda média de 94%; metade perdeu mais de 99%',
+          },
+          detalheExtra:
+            'A última das cinco (Believe) foi de longe a mais curta, mas cinco casos não formam ' +
+            'tendência: a de animais durou mais que a de celebridades.',
+        },
+        {
+          id: 'animais',
+          titulo: 'Animais virais',
+          valores: {
+            nascimento: 'MOODENG, 11/09/2024',
+            pico: 'Set. a nov. de 2024',
+            duracao: 'Cerca de 2 meses',
+            destino: 'MOODENG −44% do pico até 27/11/2024',
+          },
+        },
+        {
+          id: 'ia',
+          titulo: 'IA / agentes',
+          valores: {
+            nascimento: 'GOAT, 10–11/10/2024',
+            pico: '~06/01/2025, cerca de US$ 20 bi somados',
+            duracao: 'Cerca de 1 mês de queda',
+            destino: 'Setor −67% até fevereiro de 2025',
+          },
+        },
+        {
+          id: 'politicos',
+          titulo: 'Políticos',
+          valores: {
+            nascimento: 'TRUMP, 17/01/2025',
+            pico: 'Janeiro de 2025',
+            duracao: 'Cerca de 1 mês, até a LIBRA',
+            destino: 'LIBRA: mais de 86% das carteiras acima de US$ 1.000 no prejuízo',
+          },
+        },
+        {
+          id: 'icm',
+          titulo: 'Internet Capital Markets',
+          valores: {
+            nascimento: 'LAUNCHCOIN, 03/05/2025',
+            pico: '15/05/2025',
+            duracao: 'Cerca de 4 dias',
+            destino: 'Receita semanal do Believe −94% do pico, em junho de 2025',
+          },
+        },
+      ],
+    },
+
+    tabelaFerramentas: {
+      colunas: [
+        { chave: 'mede', rotulo: 'O que mede' },
+        { chave: 'novo', rotulo: 'Cobre memecoin recém-lançada?' },
+        { chave: 'comprado', rotulo: 'Pode ser pago ou fabricado?' },
+      ],
+      linhas: [
+        {
+          id: 'dexscreener',
+          titulo: 'DexScreener',
+          subtitulo: 'lista "em alta"',
+          valores: {
+            mede: 'Um "Trending Score" próprio, que mistura atividade de mercado e "buzz".',
+            novo: 'Sim',
+            comprado: 'Sim: Boosts pagos multiplicam o score.',
+          },
+        },
+        {
+          id: 'gmgn',
+          titulo: 'GMGN',
+          subtitulo: 'lista "em alta" e carteiras',
+          valores: {
+            mede: 'Compras e vendas, volume, variação de preço e crescimento de holders, por minuto; também carteiras "smart money" e de influenciadores.',
+            novo: 'Sim',
+            comprado: 'Fabricável: são os números que o wash trading infla.',
+          },
+        },
+        {
+          id: 'birdeye',
+          titulo: 'Birdeye',
+          valores: {
+            mede: 'Tokens que mais se moveram numa janela de tempo; mais vistos e mais negociados.',
+            novo: 'Sim',
+            comprado: 'Fabricável pela mesma via.',
+          },
+        },
+        {
+          id: 'pumpfun',
+          titulo: 'pump.fun',
+          subtitulo: 'board',
+          valores: {
+            mede: 'A atividade recente de negociação dos tokens da plataforma.',
+            novo: 'Sim — é onde eles nascem',
+            comprado: 'Fabricável.',
+          },
+        },
+        {
+          id: 'lunarcrush',
+          titulo: 'LunarCrush',
+          valores: {
+            mede: 'Sentimento e volume de posts no X, Reddit, YouTube e TikTok.',
+            novo: 'Em parte',
+            comprado: 'Posts podem vir de bots.',
+          },
+        },
+        {
+          id: 'santiment',
+          titulo: 'Santiment',
+          valores: {
+            mede: 'Volume social e as palavras que dispararam, a partir de mais de 6.000 canais de cripto.',
+            novo: 'Não verificado para token recém-criado',
+            comprado: 'Posts podem vir de bots.',
+          },
+        },
+        {
+          id: 'kaito',
+          titulo: 'Kaito',
+          valores: {
+            mede: 'Mindshare de projetos e de temas.',
+            novo: 'Não: mede projeto e tema, não memecoin nova',
+            comprado: 'Não pesquisado.',
+          },
+        },
+        {
+          id: 'google-trends',
+          titulo: 'Google Trends',
+          valores: {
+            mede: 'Interesse de busca relativo, de 0 a 100, por termo, período e região.',
+            novo: 'Só se o termo tiver busca suficiente',
+            comprado: 'Não pesquisado.',
+          },
+        },
+        {
+          id: 'x',
+          titulo: 'X',
+          subtitulo: 'busca avançada e listas',
+          valores: {
+            mede: 'Posts públicos, filtráveis por conta, data e curtidas.',
+            novo: 'Sim',
+            comprado: 'Contas e curtidas podem ser de bots.',
+          },
+        },
+        {
+          id: 'arkham-nansen',
+          titulo: 'Arkham e Nansen',
+          valores: {
+            mede: 'Carteiras rotuladas como traders lucrativos ("smart money").',
+            novo: 'Em parte',
+            comprado: 'Não pesquisado.',
+          },
+        },
+      ],
+    },
   },
 
   // ---------------------------------------------------------------------------
@@ -863,6 +1261,12 @@ export const modulo3 = {
 
   // Itens das duas abas práticas que não fecharam em fonte confiável.
   naoVerificadoPratica: [
+    { titulo: 'Aceitação do "Meme Coin Factories" no ACM CCS 2026', texto: 'A página do arXiv diz que foi aceito; não foi conferido na página do evento. O app o trata como preprint.' },
+    { titulo: 'Números da linha do tempo das narrativas', texto: 'A queda média de 94% das celebridades (compilação de um pesquisador no X), o MOODENG, as mais de 700 cópias do TRUMP e as 21 mil moedas do Believe vieram de resumo de busca, não da página aberta.' },
+    { titulo: 'Pico do GOAT e data do pico do MOODENG', texto: 'As fontes divergem: US$ 150 milhões × mais de US$ 800 milhões para o GOAT; setembro × novembro de 2024 para o MOODENG.' },
+    { titulo: 'Nizzoli et al. (2020)', texto: 'Os 56% e os 93% vieram do resumo do artigo, sem abrir o texto completo.' },
+    { titulo: 'Passo a passo e preços das ferramentas de narrativa', texto: 'A pesquisa 9 só confirmou quais existem e o que medem. Os preços dos Boosts do DexScreener apareceram só em resumo de busca.' },
+    { titulo: 'Saturação: tokens nascendo com o tema em queda', texto: 'Há registro nos agentes de IA e no Believe; nas outras três narrativas, não há dado.' },
     { titulo: 'Preço da API do X em 2026', texto: 'O valor de US$ 0,005 por post lido vem de guias de terceiros coerentes entre si; a página oficial de preços não foi aberta.' },
     { titulo: 'Custódia da chave em cada bot de Telegram', texto: 'Varia de bot para bot, e alguns se declaram não custodiais. Não foi conferido na documentação de cada um.' },
     { titulo: 'Data de criação de um canal do Telegram', texto: 'Que ela não aparece para quem é só membro é o comportamento conhecido, sem página oficial que confirme.' },
@@ -871,6 +1275,22 @@ export const modulo3 = {
   ],
 
   fontesPratica: [
+    { titulo: 'Szwajcok et al., "Meme Coin Factories: Uncovering Large-Scale Manipulations on pump.fun" (arXiv 2609.10246, preprint)', url: 'https://arxiv.org/html/2609.10246v1', consultadoEm: '13/09/2026' },
+    { titulo: 'Ardia & Bluteau, "Twitter and cryptocurrency pump-and-dumps", International Review of Financial Analysis (2024)', url: 'https://arxiv.org/pdf/2306.02148v1', consultadoEm: '13/09/2026' },
+    { titulo: 'Nizzoli et al., "Charting the Landscape of Online Cryptocurrency Manipulation", IEEE Access (2020)', url: 'https://arxiv.org/abs/2001.10289', consultadoEm: '13/09/2026' },
+    { titulo: 'Moura et al., manipulação em grupos de Telegram (arXiv 2609.01176, preprint)', url: 'https://arxiv.org/abs/2609.01176', consultadoEm: '13/09/2026' },
+    { titulo: 'Li, Yao, Huo & Cai, "Trust Dynamics and Bot-Driven Responses", ACM Web Science 2025', url: 'https://dl.acm.org/doi/10.1145/3717867.3717922', consultadoEm: '13/09/2026' },
+    { titulo: 'Long, Wong & Cai, "Bridging Culture and Finance", WWW Companion 2025', url: 'https://dl.acm.org/doi/10.1145/3701716.3715561', consultadoEm: '13/09/2026' },
+    { titulo: 'Kamat, graduação no pump.fun e presença social (arXiv 2607.02823, preprint)', url: 'https://arxiv.org/abs/2607.02823', consultadoEm: '13/09/2026' },
+    { titulo: 'CoinGecko, State of Memecoins Report 2025 (US$ 150,6 bi e US$ 47,2 bi; rotação das narrativas)', url: 'link não registrado pela pesquisa 11', consultadoEm: '13/09/2026' },
+    { titulo: 'Nansen sobre a LIBRA, via CoinDesk (20/02/2025)', url: 'link não registrado pela pesquisa 11', consultadoEm: '13/09/2026' },
+    { titulo: 'DexScreener — Boosting', url: 'https://docs.dexscreener.com/boosting', consultadoEm: '13/09/2026' },
+    { titulo: 'GMGN — Trending', url: 'https://gmgn.ai/trend', consultadoEm: '13/09/2026' },
+    { titulo: 'LunarCrush', url: 'https://lunarcrush.com', consultadoEm: '13/09/2026' },
+    { titulo: 'Santiment Academy — Social Trends', url: 'https://academy.santiment.net/sanbase/social-trends', consultadoEm: '13/09/2026' },
+    { titulo: 'Kaito — Kaito Pro', url: 'https://docs.kaito.ai/overview/kaito-pro-ai-platform', consultadoEm: '13/09/2026' },
+    { titulo: 'Google — Trends start', url: 'https://developers.google.com/search/docs/monitor-debug/trends-start', consultadoEm: '13/09/2026' },
+    { titulo: 'Pesquisas 8 a 11 dos módulos e a conferência delas', url: 'pesquisa/modulos/pesquisas/P8… a P11… e VERIFICACOES-AO-VIVO-2.md', consultadoEm: '13/09/2026' },
     { titulo: 'Discord — Channel Following FAQ', url: 'https://support.discord.com/hc/en-us/articles/360028384531', consultadoEm: '12/09/2026' },
     { titulo: 'Discord — Community Guidelines (self-bots)', url: 'https://discord.com/guidelines', consultadoEm: '12/09/2026' },
     { titulo: 'Check Point Research — Inferno Drainer Reloaded (2025)', url: 'https://research.checkpoint.com/2025/inferno-drainer-reloaded-deep-dive-into-the-return-of-the-most-sophisticated-crypto-drainer/', consultadoEm: '12/09/2026' },
@@ -1047,6 +1467,86 @@ export const modulo3 = {
         'A wiki do Bubblemaps apresenta o cluster como algo que vale investigar, não como ' +
         'conclusão. O que muda a leitura é a % do supply somada e o que você descobre abrindo as ' +
         'carteiras.',
+    },
+    {
+      id: 'q11',
+      pergunta: 'Segundo a pesquisa, em qual rede social a atenção sobre um token aparece primeiro?',
+      alternativas: [
+        {
+          id: 'a',
+          texto: 'No Telegram, sempre antes do X.',
+          porque: 'É observação de mercado repetida em blogs. Nenhum estudo mediu a ordem entre redes.',
+        },
+        {
+          id: 'b',
+          texto: 'No X, porque é onde estão os influenciadores.',
+          porque:
+            'Também não foi medido. O que se mediu é que 23,5% dos tokens do pump.fun nascem logo ' +
+            'depois de um post no X ou no Truth Social: a narrativa vem antes do token, não antes de outra rede.',
+        },
+        { id: 'c', texto: 'Ninguém mediu: os estudos comparam uma rede com o preço, não uma rede com outra.' },
+        {
+          id: 'd',
+          texto: 'No TikTok, porque é onde os memes nascem.',
+          porque: 'Não há estudo com TikTok e memecoin que meça ordem.',
+        },
+      ],
+      correta: 'c',
+      explicacao:
+        'A lacuna é a resposta. Quem ensina uma ordem fixa entre redes está repetindo ' +
+        'observação, não dado.',
+    },
+    {
+      id: 'q12',
+      pergunta: 'Um token aparece no topo da lista "em alta" do DexScreener. O que isso mostra?',
+      alternativas: [
+        {
+          id: 'a',
+          texto: 'Que a comunidade escolheu o token.',
+          porque: 'A lista é montada por um score próprio de atividade, e Boosts pagos multiplicam esse score.',
+        },
+        {
+          id: 'b',
+          texto: 'Que o preço vai continuar subindo.',
+          porque: 'Nenhuma lista de "em alta" foi validada como previsão de preço.',
+        },
+        { id: 'c', texto: 'Atividade recente e, possivelmente, pagamento: Boosts pagos multiplicam o score da lista.' },
+        {
+          id: 'd',
+          texto: 'Que o token passou numa auditoria.',
+          porque: 'Estar em alta não tem relação com checagem de contrato. Isso é o pilar técnico.',
+        },
+      ],
+      correta: 'c',
+      explicacao:
+        'Toda lista de "em alta" é feita de atividade de negociação, de pagamento ou das duas ' +
+        'coisas — e atividade é o que o wash trading fabrica.',
+    },
+    {
+      id: 'q13',
+      pergunta: 'Nas narrativas de 2024 e 2025 estudadas, quando a imprensa fora de cripto cobriu o tema?',
+      alternativas: [
+        {
+          id: 'a',
+          texto: 'Antes de o preço subir, dando tempo de entrar.',
+          porque: 'Nos casos com data, como PNUT e LIBRA, a cobertura veio no topo, não antes.',
+        },
+        { id: 'b', texto: 'No topo ou depois dele.' },
+        {
+          id: 'c',
+          texto: 'Nunca: a imprensa geral ignora memecoin.',
+          porque: 'O PNUT saiu em veículos como CBC e NBC; a LIBRA, na Bloomberg e na Reuters.',
+        },
+        {
+          id: 'd',
+          texto: 'Sempre no dia exato do pico, o que serve de sinal de venda.',
+          porque: 'Aconteceu perto do topo, mas cinco casos não formam regra, e ninguém mediu isso como sinal.',
+        },
+      ],
+      correta: 'b',
+      explicacao:
+        'É descrição do que aconteceu, não gatilho: nos casos com data, a imprensa geral chegou no ' +
+        'topo ou depois.',
     },
   ],
 };

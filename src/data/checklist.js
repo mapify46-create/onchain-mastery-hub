@@ -158,7 +158,7 @@ export const checklistPreCompra = {
             'porque você olha isso. Use para triar, não para confiar.',
           onde: 'DexScreener: Volume, Txns e Makers na mesma janela de tempo.',
           evidencia: 'fraco',
-          fonte: 'OpenLiquid (vendedor de volume, autopublicado) e Midsummer (arXiv 2507.01963, preprint)',
+          fonte: 'OpenLiquid (vendedor de volume, autopublicado) e Midsummer (USENIX Security 2026)',
         },
       ],
     },
@@ -293,6 +293,38 @@ export const checklistPreCompra = {
           onde: 'Escada de realização do Módulo 4.',
           evidencia: 'rotina',
           fonte: 'Módulo 4',
+        },
+        {
+          id: 'pre-mortem',
+          texto: 'Imaginei que a operação já deu errado e escrevi três razões',
+          porque:
+            'Imaginar o fracasso como já acontecido faz aparecer cerca de 30% mais razões do ' +
+            'que só perguntar "o que pode dar errado". São mais hipóteses, não necessariamente ' +
+            'melhores.',
+          onde: 'Campo da tese no diário do Módulo 7.',
+          evidencia: 'rotina',
+          fonte: 'Mitchell, Russo & Pennington, J. Behavioral Decision Making (1989) — experimento fora de trading',
+        },
+        {
+          id: 'argumento-contrario',
+          texto: 'Escrevi o melhor argumento de que estou errado',
+          porque:
+            'Pedir para "considerar o oposto" reduziu o viés mais do que pedir para "ser ' +
+            'imparcial", em dois experimentos.',
+          onde: 'Ficha de tese do Módulo 4.',
+          evidencia: 'rotina',
+          fonte: 'Lord, Lepper & Preston, J. Personality and Social Psychology (1984) — experimento fora de trading',
+        },
+        {
+          id: 'taxa-base',
+          texto: 'Pensei em contagem: de cada 100 tokens como este, quantos ainda negociam amanhã?',
+          porque:
+            'Pensar em contagens em vez de porcentagens ajuda a pesar a taxa-base: num ' +
+            'experimento, as respostas corretas subiram de 16% para 46%. No Pump.fun, de cada ' +
+            '100 tokens, cerca de 69 param de negociar no mesmo dia em que nasceram.',
+          onde: 'Mortalidade no Módulo 2; aba Prever o golpe do Módulo 6.',
+          evidencia: 'rotina',
+          fonte: 'Gigerenzer & Hoffrage, Psychological Review (1995); CoinGecko Research (68,67%)',
         },
         {
           id: 'tamanho',

@@ -1,7 +1,7 @@
 // views/modulo3.js — monta a página do Módulo 3 a partir de src/data/modulo3.js.
 //
 // Abas internas (padrão ARIA de tabs, vindo de ui.js):
-//   Visão geral · Pilar social na prática · Pilar técnico na prática ·
+//   Visão geral · Narrativas · Pilar social na prática · Pilar técnico na prática ·
 //   Matriz de ferramentas · Cenário 2025–2026 · Quiz
 
 import { modulo3 } from '../data/modulo3.js';
@@ -20,6 +20,15 @@ import { montarDestaques } from '../components/destaques.js';
 import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
 import { montarAnatomia } from '../components/anatomia.js';
 import { montarTabelaComparativa } from '../components/comparisonTable.js';
+import { montarSegmentos, montarPerguntaPrevia, montarTermos } from '../components/didatica.js';
+
+// A pergunta do quiz usada antes de ler uma aba.
+function previa(idDaPergunta) {
+  return montarPerguntaPrevia({
+    id: modulo3.id,
+    pergunta: modulo3.quiz.find((pergunta) => pergunta.id === idDaPergunta),
+  });
+}
 import { obterEstado, atualizar } from '../store.js';
 
 // ---------------------------------------------------------------------------
@@ -267,7 +276,69 @@ function montarVisaoGeral() {
 }
 
 // ---------------------------------------------------------------------------
-// Aba 2 — Pilar social na prática
+// Aba 2 — Narrativas
+// ---------------------------------------------------------------------------
+function montarAbaNarrativas() {
+  const pratica = modulo3.praticaNarrativas;
+  const secao = (id) => {
+    const dados = pratica.secoes.find((item) => item.id === id);
+    return dados ? criarCardDaSecao(dados) : null;
+  };
+
+  return criarElemento('div', { class: 'space-y-6' }, [
+    previa('q11'),
+    montarTermos(pratica.termos),
+    montarSegmentos({
+      partes: [
+        {
+          titulo: 'O que é e onde nasce',
+          conteudo: [
+            montarDestaques(pratica.destaques),
+            criarIntroducao(pratica.introducao),
+            secao('o-que-e'),
+            secao('onde-nasce'),
+            secao('fabricada'),
+          ],
+        },
+        {
+          titulo: 'O ciclo e a rotação',
+          conteudo: [
+            secao('ciclo'),
+            montarLinhaDoTempo({ id: 'm3-rotacao-narrativas', ...pratica.linhaDoTempo }),
+            criarTabela('As cinco narrativas, lado a lado', pratica.tabelaNarrativas),
+          ],
+        },
+        {
+          titulo: 'Narrativa e preço',
+          conteudo: [secao('narrativa-e-preco')],
+        },
+        {
+          titulo: 'Rastrear',
+          conteudo: [
+            secao('ferramentas'),
+            criarTabela('As ferramentas de "em alta" e de atenção', pratica.tabelaFerramentas),
+            secao('rotina'),
+            criarElemento('div', { class: 'grid gap-4 md:grid-cols-2' }, [
+              criarLink(
+                '#/modulo-2',
+                'Módulo 2 — As 4 fases',
+                'As fases de um token, que o ciclo de uma narrativa espelha.',
+              ),
+              criarLink(
+                '#/checklist',
+                'Checklist antes de comprar',
+                'Onde qualquer token de uma narrativa passa antes de qualquer outra coisa.',
+              ),
+            ]),
+          ],
+        },
+      ],
+    }),
+  ]);
+}
+
+// ---------------------------------------------------------------------------
+// Aba 3 — Pilar social na prática
 // ---------------------------------------------------------------------------
 
 // A rotina de 5 minutos: lista numerada, com a janela de tempo de cada passo.
@@ -316,21 +387,39 @@ function montarAbaSocial() {
   };
 
   return criarElemento('div', { class: 'space-y-6' }, [
-    montarDestaques(pratica.destaques),
-    criarIntroducao(pratica.introducao),
-    criarRotina(pratica.rotina),
-    secao('endereco'),
-    montarAnatomia({ id: 'm3-anatomia-perfil', ...pratica.anatomiaPerfil }),
-    secao('x'),
-    secao('discord'),
-    secao('telegram'),
-    secao('calls'),
-    criarTabela('Cada sinal social: o que prova e o que não prova', pratica.tabela),
-    criarLink(
-      '#/checklist',
-      'Checklist antes de comprar',
-      'O pilar social vira itens marcáveis, na ordem da rotina, junto com o técnico.',
-    ),
+    previa('q6'),
+    montarSegmentos({
+      partes: [
+        {
+          titulo: 'A rotina de 5 minutos',
+          conteudo: [
+            montarDestaques(pratica.destaques),
+            criarIntroducao(pratica.introducao),
+            criarRotina(pratica.rotina),
+          ],
+        },
+        {
+          titulo: 'O endereço oficial',
+          conteudo: [
+            secao('endereco'),
+            montarAnatomia({ id: 'm3-anatomia-perfil', ...pratica.anatomiaPerfil }),
+          ],
+        },
+        { titulo: 'X e Discord', conteudo: [secao('x'), secao('discord')] },
+        { titulo: 'Telegram e calls pagos', conteudo: [secao('telegram'), secao('calls')] },
+        {
+          titulo: 'O que cada sinal prova',
+          conteudo: [
+            criarTabela('Cada sinal social: o que prova e o que não prova', pratica.tabela),
+            criarLink(
+              '#/checklist',
+              'Checklist antes de comprar',
+              'O pilar social vira itens marcáveis, na ordem da rotina, junto com o técnico.',
+            ),
+          ],
+        },
+      ],
+    }),
   ]);
 }
 
@@ -383,23 +472,38 @@ function criarSecaoDaFerramenta(ferramenta, indice) {
 function montarAbaTecnico() {
   const pratica = modulo3.praticaTecnica;
 
-  return criarElemento('div', { class: 'space-y-8' }, [
-    montarDestaques(pratica.destaques),
-    criarIntroducao(pratica.introducao),
-    ...pratica.ferramentas.map(criarSecaoDaFerramenta),
-    criarTabela('O que eu quero checar → onde eu checo', pratica.tabelaOnde),
-    criarElemento('div', { class: 'grid gap-4 md:grid-cols-2' }, [
-      criarLink(
-        '#/modulo-6',
-        'Módulo 6 — Ler a tela',
-        'O que cada número significa, como o volume é fabricado e as extensões de contrato em detalhe.',
-      ),
-      criarLink(
-        '#/checklist',
-        'Checklist antes de comprar',
-        'Os itens técnicos em ordem, com a força da evidência de cada um.',
-      ),
-    ]),
+  return criarElemento('div', { class: 'space-y-6' }, [
+    previa('q9'),
+    montarSegmentos({
+      partes: [
+        {
+          titulo: 'As quatro perguntas',
+          conteudo: [montarDestaques(pratica.destaques), criarIntroducao(pratica.introducao)],
+        },
+        ...pratica.ferramentas.map((ferramenta, indice) => ({
+          titulo: ferramenta.nome,
+          conteudo: [criarSecaoDaFerramenta(ferramenta, indice)],
+        })),
+        {
+          titulo: 'Onde checar cada coisa',
+          conteudo: [
+            criarTabela('O que eu quero checar → onde eu checo', pratica.tabelaOnde),
+            criarElemento('div', { class: 'grid gap-4 md:grid-cols-2' }, [
+              criarLink(
+                '#/modulo-6',
+                'Módulo 6 — Ler a tela',
+                'O que cada número significa, como o volume é fabricado e as extensões de contrato em detalhe.',
+              ),
+              criarLink(
+                '#/checklist',
+                'Checklist antes de comprar',
+                'Os itens técnicos em ordem, com a força da evidência de cada um.',
+              ),
+            ]),
+          ],
+        },
+      ],
+    }),
   ]);
 }
 
@@ -587,6 +691,7 @@ export function montarModulo3() {
     rotulo: 'Seções do Módulo 3',
     abas: [
       { id: 'visao-geral', rotulo: 'Visão geral', montar: montarVisaoGeral },
+      { id: 'narrativas', rotulo: 'Narrativas', montar: montarAbaNarrativas },
       { id: 'social', rotulo: 'Pilar social na prática', montar: montarAbaSocial },
       { id: 'tecnico', rotulo: 'Pilar técnico na prática', montar: montarAbaTecnico },
       { id: 'matriz', rotulo: 'Matriz de ferramentas', montar: montarAbaMatriz },

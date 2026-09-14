@@ -29,7 +29,8 @@ Não-custodial confirmado em fonte oficial: as chaves são suas, e a semente é 
   3. **Exemplo concreto:** pelo menos um, com número — e só números que estejam no material.
   4. **O que fazer / o que não fazer:** duas listas curtas.
   5. **Recapitulação em 3 frases.**
-  6. **Frase final obrigatória (literal):** "Este vídeo é material de estudo. Não é aconselhamento financeiro, jurídico ou tributário. Memecoin é o ativo de maior risco do mercado — a maioria vai a zero."
+  6. **Frase final obrigatória (literal):** "Este vídeo é material de estudo próprio. Memecoin é o ativo de maior risco do mercado — a maioria vai a zero."
+- **Segmentos:** divida o vídeo em 2 ou 3 partes, cada uma com um título na tela e uma pausa curta entre elas. Dividir em partes com pausa marcada ajuda a reter e a aplicar (meta-análise de Rey et al., 2019).
 
 ### Regras duras — o vídeo é REJEITADO se quebrar qualquer uma
 - **Não inventar número.** Use somente os números do material-fonte. Se faltar um dado, diga "isso não está verificado" em vez de estimar.
@@ -42,7 +43,7 @@ Não-custodial confirmado em fonte oficial: as chaves são suas, e a semente é 
 
 ### Entregáveis (os três, sempre)
 1. **O vídeo.**
-2. **O roteiro de narração em texto**, em parágrafos corridos, sem timestamps — ele vira a transcrição dentro do app (acessibilidade e modo offline). Mesmo texto que foi narrado, palavra por palavra.
+2. **Um resumo navegável do vídeo, em texto**: o título de cada segmento e, abaixo dele, de 2 a 4 frases curtas com as ideias e os números. Ele aparece ao lado do vídeo no app (acessibilidade e modo offline). **Não é a narração palavra por palavra**: texto idêntico à fala, mostrado junto do vídeo, atrapalha em vez de ajudar (efeito de redundância — Adesope & Nesbit, 2012).
 3. **A lista de números usados**, cada um com a frase do material-fonte de onde veio.
 
 ---
