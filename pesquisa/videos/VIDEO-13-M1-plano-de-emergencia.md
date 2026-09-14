@@ -52,16 +52,18 @@ Vídeo curto e de ação. A pessoa vai assistir isso com o coração acelerado �
 
 ### Plano de emergência: os primeiros 10 minutos se você descobrir que foi drenado
 
-Aja em ordem de prioridade. Este material não promete recuperação — na prática, a chance de reaver os fundos é baixa.
+Siga a lista na ordem: ela vai do mais urgente ao menos urgente.
 
-1. Assuma que o dispositivo pode estar comprometido e pare de usá-lo. Se houve malware (infostealer ou clipper), continuar usando a mesma máquina/celular espalha o dano. Só volte a operar de um dispositivo limpo.
-2. Migre o que sobrou para uma carteira NOVA, criada num dispositivo limpo. Alerta crítico: não adianta mover para uma carteira "nova" derivada da MESMA frase-semente — se a frase vazou, todas as contas dela estão comprometidas, em todas as redes. Tem que ser uma frase-semente inteiramente nova.
-3. Resgate na ordem de valor. Tire primeiro os ativos de maior valor; garanta que há gas suficiente na carteira para conseguir enviar (sem gas, a transferência não sai).
-4. Cuidado com os "sweeper bots". Se a frase vazou, o atacante costuma deixar um bot automático vigiando a carteira, que esvazia qualquer valor (inclusive o gas) assim que chega, em segundos. Por isso "depositar gas para salvar tokens" costuma fracassar: o bot leva o gas primeiro. A própria central de ajuda da MetaMask recomenda, nesses casos, abandonar a carteira e criar uma nova.
-5. Revogue aprovações SE a frase NÃO foi comprometida. Se o golpe foi apenas uma assinatura/approve malicioso (e não o vazamento da frase), revogar corta o vazamento futuro. Se a frase ou a chave privada vazou, revogar não adianta — o atacante controla tudo.
-6. Registre evidências: hashes das transações, prints de tela, a URL do site do golpe, data e horário. Isso é essencial para qualquer denúncia.
-7. Reporte: faça boletim de ocorrência na delegacia; registre em plataformas de denúncia como Chainabuse e Scam Sniffer; e avise a corretora se os fundos foram parar numa CEX (ela pode conseguir congelar, se você agir rápido).
-8. Desconfie de "serviços de recuperação" que cobram adiantado. É um golpe secundário extremamente comum, que revitimiza quem já perdeu. O FBI, no alerta público IC3 I-072026 (20 de julho de 2026), afirma que "IC3 will never ask for payment to recover lost funds, nor will IC3 refer someone to a company requesting payment for recovering funds" e que "IC3 does not maintain any social media presence". Qualquer pessoa ou serviço que prometa "recuperar seu cripto" mediante taxa adiantada, ou que apareça sozinho no seu Telegram/Discord, é quase sempre um novo golpe.
+Este material não promete recuperação. Na prática, a chance de reaver os fundos é baixa.
+
+1. Pare de usar o aparelho. Ele pode ter um vírus que rouba dados (infostealer) ou que troca endereços copiados (clipper). Continuar nele espalha o dano. Só volte a operar de um aparelho limpo.
+2. Crie uma carteira NOVA, com frase-semente NOVA, num aparelho limpo. Uma conta "nova" dentro da MESMA frase não serve: se a frase vazou, todas as contas dela estão comprometidas, em todas as redes.
+3. Mova o que sobrou, começando pelo que vale mais. Deixe gas suficiente na carteira: sem gas, a transferência não sai.
+4. Cuidado com os "sweeper bots" (robôs varredores). Se a frase vazou, o golpista costuma deixar um robô vigiando a carteira. Ele leva, em segundos, tudo o que chega, inclusive o gas que você depositar.
+5. Revogue as aprovações só se a frase NÃO vazou. Se o golpe foi uma assinatura ou um approve malicioso, revogar corta o roubo futuro. Se a frase ou a chave privada vazou, revogar não adianta: o golpista controla tudo.
+6. Guarde as provas: os hashes (códigos) das transações, prints de tela, a URL do site do golpe, data e horário. Sem isso, a denúncia fica fraca.
+7. Denuncie: faça boletim de ocorrência na delegacia e registre em plataformas como Chainabuse e Scam Sniffer. Se o dinheiro foi para uma corretora (CEX), avise-a rápido: ela pode conseguir congelar.
+8. Desconfie de quem promete "recuperar seu cripto" cobrando adiantado. É um segundo golpe, extremamente comum, contra quem já perdeu. Quem aparece sozinho no seu Telegram ou Discord oferecendo isso é quase sempre golpista.
 
 ## Roteiro visual sugerido (diagramas do app, em texto)
 

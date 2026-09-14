@@ -60,31 +60,43 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Olhe o resultado pouco, e o comportamento muito
 
-Em experimentos, quem via o resultado das apostas com mais frequência assumia menos risco e decidia pior — a aversão míope à perda (Gneezy, Kapteyn & Potters, 2003; Fellner & Sutter, 2009). E as pessoas preferem olhar com frequência, mesmo sendo prejudicadas.
+Em experimentos, quem via o resultado das apostas com mais frequência assumia menos risco e decidia pior.
 
-Isso não contradiz o diário: aquela pesquisa é sobre olhar o dinheiro. Revisar se você seguiu a regra é outra coisa, e é essa que o lastro do diário apoia.
+Isso se chama aversão míope à perda: de tanto olhar de perto, cada perda pesa mais.
 
-Qual a cadência ideal de revisão para quem opera? Ninguém mediu. Semanal é uma escolha razoável para começar — trate como um teste seu, não como verdade.
+E as pessoas preferem olhar com frequência, mesmo sendo prejudicadas.
+
+Qual a cadência ideal de revisão para quem opera? Ninguém mediu.
+
+Semanal é uma escolha razoável para começar. Trate como um teste seu, não como verdade.
 
 ### A pergunta da revisão
 
-Troque "o resultado foi bom?" por "a decisão foi boa, dado o que eu sabia antes?". A primeira convida os vieses abaixo; a segunda só se responde com o diário.
+A primeira pergunta convida os vieses da lista abaixo.
+
+A segunda só se responde com o diário.
 
 **Os vieses de quem revisa o próprio histórico:**
 
-- Retrospectiva: "eu sabia que ia acontecer" (Fischhoff, 1975).
-- Autoatribuição: ganho é habilidade, perda é azar — e isso gera excesso de confiança (Gervais & Odean, 2001).
-- Viés de resultado: julgar a decisão pelo desfecho (Baron & Hershey, 1988).
-- Ilusão de controle: achar que influencia o que é sorte (Langer, 1975).
+- Retrospectiva: "eu sabia que ia acontecer".
+- Autoatribuição: ganho é habilidade, perda é azar. Isso gera excesso de confiança.
+- Viés de resultado: julgar a decisão pelo desfecho.
+- Ilusão de controle: achar que influencia o que é sorte.
 - Padrão no ruído: ver sequência onde há acaso. Num histórico curto de cauda pesada, quase todo padrão é ruído.
 
 ### Quantas operações provam alguma coisa
 
-Se os retornos se comportassem bem, a conta seria n ≈ (2 ÷ SR)², em que SR é o retorno médio por operação dividido pelo desvio-padrão (Lo, 2002). Com SR de 0,1 por operação — um número bom —, são 400 operações para o resultado se distinguir de zero. Com 0,05, são 1.600.
+Para saber se uma regra ganha por habilidade, e não por sorte, é preciso muitas operações.
 
-Em cauda pesada, a média converge muito mais devagar. E se a média nem existe (índice de cauda α ≤ 1), nenhum número de operações distingue habilidade de sorte pela média. Ninguém publicou o índice de cauda das memecoins.
+Se os retornos se comportassem bem, dá para estimar quantas.
 
-Agravante: testar várias versões da própria regra e ficar com a que "funcionou" infla o resultado. Com só três tentativas independentes, a melhor já é provavelmente falsa (Bailey & López de Prado, 2021).
+Em cauda pesada, a média converge muito mais devagar. Converger é ir se firmando num valor conforme as operações se acumulam.
 
-Na prática: 30 operações boas não provam habilidade. O diário serve para saber se você seguiu a regra — não para provar que ela ganha.
+E se a média nem existe, nenhum número de operações distingue habilidade de sorte pela média. Ninguém publicou o índice de cauda das memecoins.
+
+Tem um agravante. Testar várias versões da própria regra e ficar com a que "funcionou" infla o resultado.
+
+Com só três tentativas independentes, a melhor já é provavelmente falsa.
+
+Na prática: o diário serve para saber se você seguiu a regra. Não serve para provar que ela ganha.
 

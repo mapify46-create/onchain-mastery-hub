@@ -60,27 +60,39 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Economia da atenção: o preço é feito de olhos
 
-Uma memecoin não tem produto, receita nem promessa de utilidade. O que sustenta o preço é a atenção coletiva: quantas pessoas estão falando, postando e comprando ao mesmo tempo. Enquanto a atenção cresce, o preço cresce junto.
+Uma memecoin não tem produto, receita nem promessa de utilidade.
 
-O problema é que atenção é um recurso escasso e migratório. Quando a multidão descobre o próximo token, ela leva a atenção embora — e o preço vai atrás. Não existe lucro, caixa ou utilidade segurando um chão embaixo.
+O que sustenta o preço é a atenção coletiva: quantas pessoas estão falando, postando e comprando ao mesmo tempo. Enquanto a atenção cresce, o preço cresce junto.
+
+Só que atenção é escassa e muda de lugar. Quando a multidão descobre o próximo token, leva a atenção embora, e o preço vai atrás.
+
+Não existe lucro, caixa ou utilidade segurando um chão embaixo do preço.
 
 Por isso o mesmo token pode subir 10x em horas e voltar ao ponto de partida no mesmo dia. Isso não é anomalia: é o funcionamento normal desse mercado.
 
 ### Dopamina e reforço intermitente
 
-Cada alta na tela libera dopamina e o cérebro aprende uma regra simples: olhar o gráfico e clicar em comprar traz recompensa. Como a recompensa vem às vezes e não sempre, o comportamento é reforçado por "reforço intermitente" — o mesmo mecanismo que torna máquinas de aposta tão difíceis de largar.
+Dopamina é uma substância do cérebro ligada à sensação de recompensa. Cada alta na tela libera dopamina.
 
-A consequência prática aparece rápido: depois de alguns acertos você passa a operar mais vezes, com posições maiores e com menos checagem. O ganho de ontem financia o erro de amanhã.
+O cérebro aprende uma regra simples: olhar o gráfico e clicar em comprar traz recompensa.
 
-Esse padrão é descrito em literatura de divulgação e em artigos revisados por pares sobre jogo e investimento especulativo (disponíveis no PMC/NCBI). Aqui ele é usado de forma educacional, para você reconhecer o mecanismo — não como material clínico.
+Como a recompensa vem às vezes, e não sempre, o hábito fica reforçado. Isso se chama "reforço intermitente".
+
+É o mesmo mecanismo que torna as máquinas de aposta tão difíceis de largar.
 
 ### O antídoto não é força de vontade
 
-Ninguém vence viés cognitivo no impulso, com o gráfico piscando na frente. O que funciona é decidir antes, por escrito, enquanto você ainda está frio. A regra escrita é o seu "eu calmo" mandando no seu "eu empolgado".
+Ninguém vence um viés cognitivo no impulso, com o gráfico piscando na frente. Viés cognitivo é um atalho do cérebro que erra sempre para o mesmo lado.
+
+O que funciona é decidir antes, por escrito, enquanto você ainda está frio.
+
+A regra escrita é o seu "eu calmo" mandando no seu "eu empolgado".
+
+**Na prática:**
 
 - Escreva a tese e a catálise antes de comprar (Módulo 4). Sem catálise clara, é aposta.
-- Defina os alvos de realização antes de entrar, não depois de já estar no lucro.
+- Defina os alvos de realização antes de entrar. Não depois de já estar no lucro.
 - Imponha um tempo de espera (5, 10, 30 minutos) entre "quero comprar" e "comprei".
-- Estabeleça um teto de perda por operação e por dia — e pare de verdade quando bater.
+- Estabeleça um teto de perda por operação e por dia. Quando bater, pare de verdade.
 - Nunca opere com dinheiro que faz falta. A maioria dos tokens vai a zero.
 

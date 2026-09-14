@@ -52,13 +52,19 @@ Já existe um vídeo deste tema no app (assets/videos/mecanica-do-gas.mp4). Este
 
 ### O que é gas (taxa de rede) e por que o preço varia
 
-Toda ação na blockchain custa uma taxa, chamada gas na EVM. Gas é a unidade que mede o trabalho computacional de uma transação: mandar ETH usa pouco (21.000 unidades de gas para uma transferência simples entre pessoas); interagir com um contrato usa mais. A conta final tem duas partes: o gas limit (o teto de trabalho que você autoriza) e o gas price (o preço por unidade de gas). Você paga apenas pelo trabalho de fato usado, mas o gas limit protege você de uma transação que consuma trabalho sem parar.
+Na Ethereum e nas redes que funcionam como ela (as redes EVM), essa taxa se chama gas. Gas mede quanto trabalho de computador a sua transação exige.
 
-Desde a mudança chamada EIP-1559 (ativada em agosto de 2021), o preço tem dois componentes. A base fee é calculada automaticamente pela rede conforme o congestionamento e é queimada — destruída, some de circulação, não vai para ninguém. A priority fee (gorjeta) é opcional e vai para o validador, para acelerar a inclusão da transação. Quando muita gente disputa espaço no bloco, a base fee sobe; quando a rede esvazia, ela cai — é por isso que a taxa varia minuto a minuto. Existe ainda um max fee (o teto total que você aceita pagar); o que sobrar entre o teto e o custo real é devolvido.
+Ações simples gastam pouco gas. Mandar ETH para outra pessoa usa 21.000 unidades de gas. Mexer com um contrato usa mais.
 
-Ponto crucial para iniciante: uma transação que falha ainda cobra gas. O trabalho computacional foi feito pelos computadores da rede até o ponto em que deu erro, então esse esforço é cobrado do mesmo jeito — vale tanto na EVM quanto na Solana. Não existe "deu errado, não paguei".
+Você paga o gas de fato usado, vezes o preço de cada unidade (gas price). O gas limit é um teto de trabalho que você autoriza. Ele protege você de uma transação que consuma trabalho sem parar.
 
-As ordens de grandeza mudam muito entre redes. Na Ethereum mainnet o preço do gas costuma variar bastante ao longo do dia e do ano, deixando transações simples entre frações de centavo e alguns reais dependendo do congestionamento — confira sempre um "gas tracker" atualizado antes de operar, pois isso muda o tempo todo. Nas redes L2 e alternativas, como Base e BNB Chain, o custo costuma ser uma fração de centavo, porque essas redes empacotam muitas transações e usam a rede principal só como camada de dados. Na Solana o modelo é diferente e mais simples: uma taxa base fixa de 5.000 lamports por assinatura (0,000005 SOL, metade queimada e metade para o validador), mais uma priority fee opcional para furar a fila.
+O preço sobe quando muita gente quer usar a rede ao mesmo tempo. Quando a rede esvazia, ele cai. Por isso a taxa muda minuto a minuto.
+
+Uma parte da taxa é queimada, isto é, destruída. Outra parte, a gorjeta, vai para o validador, o computador que coloca sua transação no bloco.
+
+Ponto crucial: transação que falha também paga. Os computadores da rede trabalharam até o erro, e esse trabalho é cobrado. Vale na EVM e na Solana. Não existe "deu errado, não paguei".
+
+O custo muda muito de uma rede para outra:
 
 - Gas limit = teto de trabalho autorizado; gas price = preço por unidade.
 - Base fee é queimada; a gorjeta (priority fee) vai para o validador.

@@ -24,6 +24,7 @@ import {
 import { montarChecklist } from '../components/checklist.js';
 import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
+import { criarCardDaSecao } from '../components/secao.js';
 import { montarDiagrama, renderizarDiagrama } from '../components/diagrama.js';
 import { montarGraficoEmpilhado, renderizarGrafico } from '../components/grafico.js';
 import { montarCalculadora } from '../components/calculadora.js';
@@ -36,33 +37,8 @@ function criarIntroducao(texto) {
   return criarElemento('p', { class: 'max-w-3xl text-texto-suave' }, [texto]);
 }
 
-// Card de uma seção de texto, no mesmo formato do Módulo 1. Além dos campos de
-// lá, aceita `paragrafosFinais`: parágrafos que vêm DEPOIS da lista. O fluxo
-// operacional precisa disso — a observação sobre "não operar" tem que fechar a
-// seção, não abrir.
-function criarCardDaSecao(secao) {
-  return criarCard([
-    criarElemento('h2', { class: 'text-lg font-semibold' }, [secao.titulo]),
-    ...secao.paragrafos.map((paragrafo) =>
-      criarElemento('p', { class: 'mt-3 text-texto-suave' }, [paragrafo]),
-    ),
-
-    secao.lista &&
-      criarElemento(
-        secao.ordenada ? 'ol' : 'ul',
-        {
-          class:
-            'mt-4 space-y-2 pl-5 text-texto-suave ' +
-            (secao.ordenada ? 'list-decimal' : 'list-disc'),
-        },
-        secao.lista.map((item) => criarElemento('li', {}, [item])),
-      ),
-
-    ...(secao.paragrafosFinais ?? []).map((paragrafo) =>
-      criarElemento('p', { class: 'mt-4 text-texto-suave' }, [paragrafo]),
-    ),
-  ]);
-}
+// O card de seção mora em components/secao.js, igual para todos os módulos
+// (aceita `paragrafosFinais`, que o fluxo operacional usa para fechar a seção).
 
 // Seções de texto que pertencem a uma aba inteira, na ordem em que aparecem em
 // modulo5.secoes.

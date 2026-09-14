@@ -60,33 +60,39 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Tipos de ordem e a pergunta que ninguém responde
 
-A ordem a mercado é o swap padrão: compra ou vende ao preço atual, na hora. É o que acontece quando você clica no botão de comprar. A ordem limite executa só quando o preço atinge o nível que você definiu — a documentação oficial descreve que você pode definir um preço preciso e "se afastar da tela" (docs.axiom.trade/axiom/swap/limit-orders). Há também compras programadas em faixas (DCA, ou ordens em degraus) e, em material de terceiros, menções a stop-loss e take-profit como variações de ordem limite.
+Ao clicar em comprar, você faz uma ordem a mercado. Ela compra ou vende ao preço atual, na hora. É o swap padrão.
 
-Agora a pergunta que decide se você pode confiar numa ordem limite, e que a documentação oficial NÃO responde: a ordem fica registrada na blockchain, ou um servidor da plataforma monitora o preço e dispara a transação quando chega a hora?
+A ordem limite só executa quando o preço chega ao nível que você definiu. A documentação do Axiom diz que você pode definir um preço preciso e "se afastar da tela".
 
-A diferença é enorme. Uma ordem que descansa on-chain executa mesmo que a empresa suma. Uma ordem que depende de um servidor executa enquanto aquele servidor estiver de pé — e você já viu, na aba de custódia, que servidores caem. A narrativa de que existem "monitores on-chain 24/7" aparece apenas em sites clones e afiliados, não na documentação oficial.
+Aí vem a pergunta que decide se dá para confiar nela: quem fica vigiando o preço enquanto você está longe? A documentação oficial NÃO responde.
 
-Enquanto isso não estiver documentado, a postura correta é operacional: não assuma que uma ordem limite dispara com o app fechado. Teste você mesmo, com um valor mínimo, antes de confiar nela para uma posição que importa.
+Até isso estar documentado, não conte com a ordem limite com o app fechado. Teste você mesmo, com um valor mínimo, antes de usá-la numa posição que importa.
 
 ### As três configurações que quebram a operação
 
-Slippage é quanta variação de preço você autoriza entre o momento em que envia a ordem e o momento em que ela executa. Os dois extremos falham de formas diferentes: baixo demais e a transação reverte com "slippage exceeded" — você perde a taxa de rede e a oportunidade; alto demais e você autoriza ser executado a um preço muito pior, o que numa pool rasa vira um convite. A própria documentação da Solana diz que limitar o slippage é a defesa mais eficaz contra ataques de sandwich (solana.com/developers/guides/advanced/mev-protection).
+Antes de comprar, o terminal usa três configurações. Errar qualquer uma quebra a operação, para um lado ou para o outro.
 
-Priority fee é o pagamento extra ao validador para a sua transação ser incluída mais rápido. Baixo demais em momento de congestionamento significa demora ou falha; alto demais significa pagar caro à toa. O default do Axiom é 0,001 SOL, e a plataforma afirma calcular automaticamente valores recomendados com base nas transações do momento.
+A documentação da Solana diz que limitar o slippage é a defesa mais eficaz contra ataques de sandwich. Nesse ataque, um bot compra logo antes de você e vende logo depois.
 
-A proteção de MEV tem três modos na documentação oficial: Off (exposto a front-running), Reduced (roteia via Jito, com algum risco remanescente) e Secure (só validadores da lista, mais protegido e possivelmente mais lento). A própria documentação recomenda usar o modo Secure sempre que possível.
+Na proteção de MEV, a própria documentação do Axiom recomenda usar o modo Secure sempre que possível.
 
-Existe ainda o botão de compra rápida, que executa um valor pré-configurado num clique só, sem tela de revisão. É conveniente e é exatamente por isso que ele aparece na lista de erros comuns. Nenhuma dessas configurações aumenta chance de lucro: todas controlam apenas se a transação executa, falha ou é explorada.
+Cuidado com o botão de compra rápida. Ele executa um valor pré-configurado num clique, sem tela de revisão. É conveniente, e por isso está na lista de erros comuns.
 
 ### Ler a tela — e o que ela não prova
 
-A tela de um token num terminal costuma reunir gráfico de preço, market cap, volume, liquidez da pool, número e distribuição de holders, e um feed de transações recentes com link para o explorador de blocos. É bastante informação de uma vez, e o Módulo 3 já ensinou o que procurar nela.
+A tela de um token junta muita coisa: gráfico de preço, market cap, volume, liquidez da pool, número e distribuição de holders.
 
-As checagens que importam são as mesmas de lá. Liquidez travada ou queimada: se a LP não está travada, quem criou o token pode retirar a liquidez e sumir. Concentração de holders: poucas carteiras com percentual alto significam risco de despejo. E a detecção de bundles — compras coordenadas no mesmo bloco, que simulam demanda orgânica.
+Tem também um feed de transações recentes, com link para o explorador de blocos, o site que mostra tudo o que foi gravado na blockchain.
 
-Sobre bundles, vale notar como a própria documentação do Axiom descreve a limitação da ferramenta: se pelo menos quatro transações acontecem no mesmo bloco, elas são sinalizadas como possível bundle, e a documentação admite que "nenhum método de detecção de bundle é 100% infalível — alguns falsos positivos ou bundles não detectados são inevitáveis" (docs.axiom.trade/faqs).
+É muita informação de uma vez. O Módulo 3 já ensinou o que procurar nela.
 
-Esse é o enquadramento certo para a tela inteira: ler os painéis reduz surpresa, não garante segurança. Nenhum indicador, sinal social ou rastreamento de carteira é prova de que um token é seguro.
+**As três checagens que importam:**
+
+- Liquidez travada ou queimada. Se a LP, o recibo da liquidez, não está travada, quem criou o token pode retirar a liquidez e sumir.
+- Concentração de holders. Poucas carteiras com percentual alto significam risco de despejo, uma venda grande de uma vez.
+- Bundles. São compras coordenadas no mesmo bloco, que simulam demanda orgânica.
+
+Nenhum indicador, sinal social ou rastreamento de carteira é prova de que um token é seguro.
 
 ### Ferramenta interativa do app: Quanto a sua própria ordem empurra o preço
 

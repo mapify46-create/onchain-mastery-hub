@@ -52,11 +52,9 @@ A diferença que importa é quem guarda a chave e quem pode bloquear. Nomes de c
 
 ### Corretora (CEX) x troca on-chain (DEX): o que muda na prática
 
-Numa CEX (corretora centralizada), você negocia dentro da empresa, num livro de ofertas (order book) que casa compradores e vendedores. A empresa faz a custódia (guarda suas moedas), exige KYC (verificação de identidade) e oferece suporte e, às vezes, a chance de reverter internamente um erro. Numa DEX (corretora descentralizada), você negocia direto da sua carteira, sem cadastro, sem suporte e sem reversão — se errar, não há para quem recorrer.
+CEX é a corretora centralizada: uma empresa. DEX é a corretora descentralizada: um programa na blockchain, sem empresa no meio.
 
-A DEX quase sempre usa um AMM (formador de mercado automático, do inglês Automated Market Maker). Em vez de casar comprador e vendedor, existe um pool de liquidez: um par de moedas depositado num contrato (por exemplo, ETH e um token), e uma fórmula matemática (a mais comum é o "produto constante", x × y = k) define o preço pela proporção entre elas. Cada troca muda essa proporção e, portanto, move o preço. Daí surge o slippage (deslizamento de preço): a diferença entre o preço que você viu na tela e o preço pelo qual a ordem de fato executou. Quanto menor o pool e maior a sua ordem em relação a ele, pior o slippage.
+Quase todo token novo e memecoin só existe em DEX. Criar um pool não exige autorização de ninguém. Isso também significa menos proteção e muito mais espaço para golpe.
 
-Quase todo token novo e memecoin só existe em DEX, porque criar um pool não exige autorização de ninguém — o que também significa menos proteção e muito mais espaço para golpe.
-
-Stablecoins, em um parágrafo: são tokens que buscam manter paridade com uma moeda tradicional, quase sempre o dólar. No Brasil, boa parte do saque e da entrada de recursos em cripto passa por elas — segundo nota oficial da Receita Federal (30 de junho de 2026), entre agosto de 2019 e dezembro de 2025 foram declarados cerca de R$ 1,58 trilhão em operações com os principais criptoativos, e a participação das stablecoins no volume mensal saltou de 3,5% em 2019 para 79,7% em 2022 e 91,5% em 2023, com pico mensal de R$ 39,7 bilhões em novembro de 2025; a USDT sozinha respondeu por 88,7% do volume de stablecoins no período. (Citamos as marcas só como retrato do mercado, não como recomendação.)
+Stablecoins são tokens que tentam valer o mesmo que uma moeda tradicional, quase sempre o dólar. No Brasil, boa parte da entrada e do saque de cripto passa por elas.
 

@@ -62,39 +62,53 @@ Uma narrativa é um tema que puxa vários tokens ao mesmo tempo: celebridades, a
 
 ### O que é uma narrativa, e o que ela não é
 
-Uma narrativa é um tema que puxa vários tokens juntos. Quando a atenção vai para "agentes de IA", sobem ao mesmo tempo vários tokens com esse tema, e aparecem centenas de cópias. O hype de um token só não é narrativa.
+Um exemplo: quando a atenção vai para "agentes de IA", vários tokens com esse tema sobem ao mesmo tempo. Logo depois aparecem centenas de cópias.
 
-Ela importa porque memecoin sobe e desce por atenção (Módulo 2), e a narrativa é a forma que a atenção toma. Mas saber qual é a narrativa do momento não diz qual token comprar, nem quando. A seção "Narrativa e preço" mostra o que a pesquisa mediu — e é pouco.
+Isso importa porque memecoin sobe e desce por atenção (Módulo 2). A narrativa é a forma que essa atenção toma.
+
+Mas saber a narrativa do momento não diz qual token comprar, nem quando. A seção "Narrativa e preço" mostra o que a pesquisa mediu, e é pouco.
 
 ### Onde a narrativa nasce
 
-Quase sempre fora da blockchain. Um estudo com os 15,2 milhões de tokens do pump.fun em dois anos achou 23,5% deles criados logo depois de um post no X ou no Truth Social; 31 desses posts renderam pelo menos US$ 1 milhão cada a quem criou o token ("Meme Coin Factories", preprint de 2026). O token é a reação; o post, a notícia ou o vídeo vieram antes.
+Pense no token como uma reação. Um assunto chama atenção nas redes, e alguém cria um token com aquele tema.
 
-Os casos confirmam o desenho: o PNUT surgiu na esteira da apreensão e morte do esquilo Peanut em Nova York, no fim de outubro de 2024; o GOAT nasceu em outubro de 2024 empurrado pelos posts de um bot de IA, o Truth Terminal.
+Um estudo olhou os 15,2 milhões de tokens criados no pump.fun em dois anos. Achou 23,5% deles criados logo depois de um post no X ou no Truth Social.
 
-Qual rede recebe a atenção primeiro — Telegram, X, TikTok, Discord — ninguém mediu. Os estudos que existem comparam uma rede com o preço, não uma rede com outra. O que se sabe de ordem é sobre golpe organizado: em canais VIP de pump-and-dump, o nome da moeda sai de 12 a 24 horas antes do sinal público (Ardia & Bluteau, International Review of Financial Analysis, 2024). Quem vê o sinal na rede aberta chegou depois de quem organizou.
+Para quem cria, isso pode render muito: 31 desses posts renderam pelo menos US$ 1 milhão cada a quem criou o token.
 
-As cópias vêm depois, e confirmam o desenho. O mesmo estudo do pump.fun contou 1,5 milhão de tokens que copiam nome, símbolo, descrição e imagem de outro — mais de 10% de tudo. Entre os originais que ganharam cópia, 9,2% graduaram; entre as cópias, 0,86%. A cópia é sintoma de uma narrativa que já está andando, não a origem dela. E o número alto dos originais tem um viés: só ganha cópia quem já chamou atenção.
+Depois do primeiro token vêm as cópias. Elas são sintoma de uma narrativa que já está andando, não a origem dela.
+
+Em qual rede a atenção aparece primeiro? Telegram, X, TikTok ou Discord: ninguém mediu.
+
+Em golpe organizado, a ordem é conhecida. Em canais VIP de pump-and-dump (grupos que inflam o preço e vendem em cima de quem chega depois), o nome da moeda sai de 12 a 24 horas antes do sinal público.
+
+Ou seja: quem vê o sinal na rede aberta chegou depois de quem organizou.
 
 ### Quanto da atenção é fabricada
 
-Uma parte grande. Num levantamento de três meses com mais de 50 milhões de mensagens no X, no Telegram e no Discord, mais de 56% das contas do X que espalhavam convites para grupos eram bots ou foram suspensas, e 93% dos links postados por bots levavam a canais de pump-and-dump no Telegram (Nizzoli et al., IEEE Access, 2020). No Discord, o mesmo levantamento achou um único canal de pump-and-dump, contra 296 no Telegram.
+Bot é uma conta automática que se passa por pessoa. Um levantamento com mais de 50 milhões de mensagens no X, no Telegram e no Discord mediu o peso deles.
 
-A escala é grande: o estudo do pump.fun achou 800 mil canais públicos e 236 mil privados do Telegram ligados a tokens da plataforma, e 17% das negociações eram wash trading. O top 1% dos grupos de criadores criou 58,6% de todos os tokens.
+Mais de 56% das contas do X que espalhavam convites para grupos eram bots ou foram suspensas.
 
-Some a isso os calls pagos da aba "Pilar social na prática": a narrativa que você vê chegando pode ser campanha.
+E 93% dos links postados por bots levavam a canais de pump-and-dump no Telegram.
+
+No estudo do pump.fun, 17% das negociações eram wash trading. Wash trading é comprar e vender de si mesmo, só para parecer que há movimento.
+
+Some a isso os calls pagos, da aba "Pilar social na prática". Call é quando alguém com público indica um token. A narrativa que você vê chegando pode ser campanha.
 
 ### O ciclo de vida de uma narrativa
 
-As cinco narrativas de 2024 e 2025 com dados públicos seguiram um desenho parecido com as quatro fases de um token do Módulo 2. Os sinais abaixo descrevem o que aconteceu; nenhum foi medido como gatilho de entrada ou de saída.
+As cinco narrativas de 2024 e 2025 com dados públicos seguiram esse desenho.
+
+Os sinais abaixo descrevem o que aconteceu. Nenhum foi medido como aviso de hora de entrar ou de sair.
 
 **As fases, e o que deu para ver em cada uma:**
 
-- Nascimento: um evento fora de cripto (post, notícia, vídeo viral) e um primeiro token que chama atenção.
-- Crescimento: aparecem vários tokens com o mesmo tema, uma corretora grande lista um deles, uma figura pública entra na conversa. O PNUT foi listado na Binance em 11/11/2024, com Elon Musk usando o esquilo no X.
-- Pico: o valor somado do tema para de subir. A imprensa fora de cripto costuma chegar aqui ou depois — nos casos PNUT e LIBRA, a cobertura veio no topo, não antes.
-- Saturação: continuam nascendo tokens do tema enquanto o valor dele já cai. Há registro disso nos agentes de IA e no Believe; nos outros três casos, não há dado.
-- Morte: as cópias perdem quase tudo. Dos 30 tokens de celebridades lançados na Solana a partir de maio de 2024, a queda média foi de 94% em cerca de um mês.
+1. Nascimento: um evento fora de cripto (post, notícia, vídeo viral) e um primeiro token que chama atenção.
+2. Crescimento: aparecem vários tokens com o mesmo tema. Uma corretora grande lista um deles, e uma figura pública entra na conversa. Exemplo: o PNUT foi listado na Binance em 11/11/2024, com Elon Musk usando o esquilo no X.
+3. Pico: o valor somado do tema para de subir. A imprensa fora de cripto costuma chegar aqui ou depois. Nos casos PNUT e LIBRA, a cobertura veio no topo, não antes.
+4. Saturação: continuam nascendo tokens do tema, mas o valor dele já cai. Há registro disso nos agentes de IA e no Believe. Nos outros três casos, não há dado.
+5. Morte: as cópias perdem quase tudo. Dos 30 tokens de celebridades lançados na Solana a partir de maio de 2024, a queda média foi de 94% em cerca de um mês.
 
 ### A rotação das narrativas, 2024–2025
 
@@ -126,25 +140,27 @@ Cada tema dominou por semanas e deu lugar ao seguinte.
 
 ### Narrativa move o preço? O que está medido
 
-Menos do que o mercado repete. Não existe estudo revisado por pares que ligue, com um número, a atenção nas redes ao preço de memecoins de launchpad. Os revisados que chegam perto medem outra coisa: um compara o sentimento no X com a quantidade de negociações, não com o preço (Li et al., ACM Web Science 2025); outro só descreve médias (Long, Wong & Cai, WWW 2025).
+O mercado repete que narrativa move preço. O que foi medido é bem menos do que isso.
 
-Fora dos launchpads, o que existe aponta para o lado ruim: depois do tweet de um influenciador, o preço sobe 1,83% no dia e cai 6,53% em 30 dias (Merkley et al., 2024). Em grupos de pump no Telegram, os sinais vêm segundos antes do preço (Moura et al., preprint de 2026) — quem lê o sinal chega depois.
+Memecoin de launchpad é a criada num site de lançamento, como o pump.fun. Para esse tipo de token, não existe estudo revisado por pares que ligue, com um número, a atenção nas redes ao preço.
 
-Em cripto grande, onde há mais estudo, o quadro é o mesmo. A atenção nas redes prevê melhor quanto vai se negociar e quanto o preço vai oscilar do que para que lado ele vai (Shen, Urquhart & Wang, 2019). Quando prevê a direção, o efeito dura minutos: com um milhão de mensagens sobre o Bitcoin, o sinal só valia por 15 minutos, e os autores escrevem que custos de transação razoáveis tornam impossível lucrar com ele (Guégan & Renault, Finance Research Letters, 2021). E muitas vezes a seta aponta ao contrário: o preço sobe primeiro, e aí as pessoas falam dele (Süssmuth, Journal of Forecasting, 2021).
+Revisado por pares quer dizer conferido por outros cientistas antes de sair. Os estudos que existem, dentro e fora de memecoin, apontam três coisas.
 
-A conta que nenhum estudo fez para memecoin dá para fazer aqui: se o sinal social rende, no melhor caso, de 1% a 3% por poucos minutos, e entrar e sair de uma memecoin custa de 3 a 6 pontos (Módulo 5), o custo come o sinal antes de ele virar lucro.
+Em grupos de pump no Telegram, os sinais vêm segundos antes do preço. Quem lê o sinal chega depois.
 
-Um preprint de 2026 achou que tokens com link de Telegram no cadastro graduam cerca de 9 vezes mais no pump.fun (Kamat). Não use isso como sinal: ele mede a presença de um link, o sinal mais barato de falsificar que existe, e a coleta cobriu só os primeiros minutos de cada token.
+Cuidado com um número que circula: tokens com link de Telegram no cadastro graduam cerca de 9 vezes mais no pump.fun. Não use isso como sinal.
 
-A frase honesta: saber a narrativa ajuda a entender por que um token está chamando atenção. Não há evidência de que ajude a prever o preço dele.
+Esse estudo mede só se existe um link, e link é o sinal mais barato de falsificar que existe. Além disso, a coleta cobriu só os primeiros minutos de cada token.
 
 ### Rastrear: o que cada ferramenta mede
 
-Toda lista de "em alta" é feita de atividade de negociação, de pagamento ou das duas coisas. Ela mostra onde a atenção está agora — e atividade é exatamente o que o volume falso do Módulo 6 fabrica.
+Toda lista de "em alta" é montada com atividade de negociação, com pagamento, ou com as duas coisas.
 
-A tabela diz o que cada ferramenta mede, segundo a documentação dela, conferida em 13 e 14/09/2026. Ler é grátis em quase todas; o que se paga é o dado social (LunarCrush: o plano grátis só tem dados de mercado, o social começa em US$ 5 por dia), as APIs (Birdeye a partir de US$ 39 por mês) e as assinaturas (X Premium de US$ 3 a US$ 40 por mês; Nansen Pro US$ 49 a US$ 69 por mês). O preço dos Boosts do DexScreener não é publicado em página oficial.
+E atividade é exatamente o que o volume falso do Módulo 6 fabrica.
 
-Nenhuma dessas métricas tem validação publicada como previsão de preço de memecoin. O Galaxy Score e o AltRank do LunarCrush são descritos só por material do próprio vendedor.
+Nenhuma dessas métricas tem validação publicada como previsão de preço de memecoin.
+
+A tabela abaixo diz o que cada ferramenta mede, segundo a documentação dela, conferida em 13 e 14/09/2026.
 
 ### Tabela do app: ferramentas de "em alta" e de atenção
 
@@ -164,15 +180,17 @@ Nenhuma dessas métricas tem validação publicada como previsão de preço de m
 
 ### Uma rotina de estudo de narrativa
 
-Não é método de entrada: é um jeito de treinar o olho. Nenhum destes passos foi medido como capaz de melhorar resultado.
+Nenhum destes passos foi medido como capaz de melhorar resultado.
 
 **Uma vez por dia, ou quando um tema chamar atenção:**
 
-- Abra o feed de lançamentos do pump.fun e duas listas de "em alta", e anote os temas que se repetem — lembrando que parte da lista é paga, e que as cópias seguem a narrativa, não a criam.
-- Procure a origem fora de cripto: o post, a notícia, o vídeo. Na busca avançada do X (só logado), from: e since: ajudam a achar quem falou primeiro entre as contas que você acompanha.
-- Veja há quanto tempo o tema existe e quantos tokens já copiaram. Muitos tokens novos com o valor do tema caindo é o desenho da saturação.
-- Anote no diário do Módulo 7: data, tema, primeiro token e a fase que você acha que é. Depois de algumas semanas, confira quantas vezes a sua leitura de fase acertou.
-- Qualquer token que chamar sua atenção passa pelo Checklist antes de qualquer outra coisa.
+1. Abra o feed de lançamentos do pump.fun e duas listas de "em alta". Anote os temas que se repetem.
+2. Ao ler as listas, lembre: parte delas é paga, e as cópias seguem a narrativa, não a criam.
+3. Procure a origem fora de cripto: o post, a notícia, o vídeo. Na busca avançada do X (só logado), from: filtra por conta e since: filtra por data. Isso ajuda a achar quem falou primeiro entre as contas que você acompanha.
+4. Veja há quanto tempo o tema existe e quantos tokens já copiaram. Muitos tokens novos com o valor do tema caindo é o desenho da saturação.
+5. Anote no diário do Módulo 7: data, tema, primeiro token e a fase que você acha que é.
+6. Depois de algumas semanas, confira quantas vezes a sua leitura de fase acertou.
+7. Se um token chamar sua atenção, ele passa pelo Checklist antes de qualquer outra coisa.
 
 ## Itens NÃO VERIFICADOS — o vídeo precisa tratá-los como tal
 

@@ -23,6 +23,7 @@ import {
   montarCardsDeFases,
 } from '../components/phaseFlow.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
+import { criarCardDaSecao } from '../components/secao.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarAnatomia } from '../components/anatomia.js';
 import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
@@ -52,20 +53,7 @@ function montarVisaoGeral() {
     ),
   ]);
 
-  const secoes = modulo2.secoes.map((secao) =>
-    criarCard([
-      criarElemento('h2', { class: 'text-lg font-semibold' }, [secao.titulo]),
-      ...secao.paragrafos.map((paragrafo) =>
-        criarElemento('p', { class: 'mt-3 text-texto-suave' }, [paragrafo]),
-      ),
-      secao.lista &&
-        criarElemento(
-          'ul',
-          { class: 'mt-4 list-disc space-y-2 pl-5 text-texto-suave' },
-          secao.lista.map((item) => criarElemento('li', {}, [item])),
-        ),
-    ]),
-  );
+  const secoes = modulo2.secoes.map((secao) => criarCardDaSecao(secao));
 
   return criarElemento('div', { class: 'space-y-6' }, [
     objetivos,

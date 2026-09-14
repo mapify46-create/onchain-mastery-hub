@@ -60,33 +60,39 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### O que é um terminal de execução
 
-Um terminal de execução on-chain é uma camada de software — um site ou app — que fica entre a sua carteira e a DEX (a exchange descentralizada onde a troca realmente acontece). Ele não substitui a blockchain e não guarda uma lista de preços própria: o que ele faz é montar a transação para você, aplicar as suas configurações (slippage, prioridade, proteção de MEV) e mandar você assinar.
+Quando você clica em "comprar" num terminal, ele não faz a troca sozinho. Ele monta a transação, aplica as suas configurações e pede que você assine.
 
-A confusão mais comum de iniciante é achar que o terminal "é" a exchange. Não é. A troca acontece numa pool de liquidez, num contrato inteligente que existe independentemente dele. Se o terminal sair do ar amanhã, a pool continua lá e seus tokens continuam na sua carteira — desde que as chaves sejam suas, que é exatamente o assunto da próxima aba.
+A troca de verdade acontece na DEX, a exchange descentralizada. Lá, os tokens saem de uma pool de liquidez: um contrato inteligente que guarda os dois lados da troca.
 
-O que você compra ao usar um terminal é conveniência: descoberta de tokens novos, gráficos, dados de holders, botões de compra rápida, rastreamento de carteiras. Você não compra preço melhor. Isso precisa ficar claro desde já, porque é o ponto onde o marketing da categoria mais escorrega.
+O terminal fica no meio, entre a sua carteira e a DEX. Ele não substitui a blockchain e não tem uma lista de preços própria.
+
+Se o terminal sair do ar amanhã, a pool continua lá. Seus tokens continuam na sua carteira, desde que as chaves sejam suas. Esse é o assunto da próxima aba.
+
+O que você paga ao usar um terminal é conveniência: descoberta de tokens novos, gráficos, dados de holders, botões de compra rápida e rastreamento de carteiras.
+
+Você não paga por um preço melhor. É neste ponto que o marketing da categoria mais escorrega.
 
 ### As três camadas — e o que cada uma cobra
 
-Existem três formas de fazer a mesma troca, e cada camada que você acrescenta é uma taxa a mais. Entender isso é o que permite responder à pergunta "por que estou pagando isso?" em vez de simplesmente pagar.
+Toda troca termina numa pool de liquidez. O que muda entre os três jeitos é o que fica entre você e essa pool.
 
-Ir direto na DEX (Raydium, Orca, PumpSwap) significa interagir com a pool de liquidez pela interface dela. Você paga a taxa da pool e mais nada — no padrão da Raydium, 0,25%, dos quais 0,22% vão para quem forneceu a liquidez (docs.raydium.io/ray/protocol-fees).
+Saber isso responde à pergunta "por que estou pagando isso?". Sem essa resposta, você só paga.
 
-Usar um agregador (o Jupiter é o exemplo mais conhecido na Solana) acrescenta uma busca: ele varre dezenas de DEXs procurando a melhor rota para a sua ordem. No modo manual, o Jupiter não cobra taxa de protocolo pelo swap básico — você segue pagando a taxa da DEX por baixo (docs.jup.ag/user-docs/trade/swap/manual-mode).
-
-Usar um terminal (Axiom, Photon, BullX) acrescenta a taxa da plataforma POR CIMA de tudo isso. No Axiom, a documentação oficial lista de 0,95% líquido no nível de entrada a 0,75% no topo (docs.axiom.trade/getting-started/fees/axiom-fees). Essa taxa não compra preço melhor: compra a interface e as ferramentas.
+A taxa do terminal não compra preço melhor. Ela paga a interface e as ferramentas.
 
 ### Não existe uma opção única
 
-O Axiom é usado neste módulo como exemplo concreto porque é preciso mostrar uma interface real, com números reais, para o conteúdo não virar abstração. Ele não é indicação, e não é a única plataforma da categoria. Saber que há alternativas importa por um motivo prático: evita você achar que "operar on-chain" e "usar aquele site" são a mesma coisa.
+O módulo usa o Axiom porque precisa mostrar uma tela real, com números reais. Sem isso, o conteúdo vira abstração.
 
-Uma linha neutra de cada uma que estava ativa na data desta pesquisa, sem ranking e sem comparação de qualidade:
+Saber que existem outras plataformas evita uma confusão: achar que "operar on-chain" e "usar aquele site" são a mesma coisa.
+
+**Outras plataformas ativas na data desta pesquisa, sem ranking e sem comparação de qualidade:**
 
 - Photon — terminal web para Solana, com foco em escanear e executar manualmente.
-- BullX (NEO) — terminal com suporte a mais de uma rede.
-- Trojan — opera dentro do Telegram: rastrear, negociar, copiar operações.
+- BullX (NEO) — terminal que funciona em mais de uma rede.
+- Trojan — funciona dentro do aplicativo Telegram: rastrear, negociar e copiar operações.
 - Bonkbot — bot de Telegram, foco em simplicidade, só Solana.
-- GMGN — web e Telegram, cobertura multi-rede, foco em copy trading e anti-MEV.
+- GMGN — web e Telegram, várias redes, foco em copiar operações de outras carteiras (copy trading) e em proteção contra MEV.
 - Banana Gun, Maestro e Padre — outros nomes ativos na categoria em 2026.
 
 ### Tabela do app: as três camadas

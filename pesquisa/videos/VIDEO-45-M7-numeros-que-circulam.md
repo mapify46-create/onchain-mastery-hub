@@ -60,7 +60,7 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Por que esses números colam
 
-Um número preciso, uma universidade e um prazo curto: é o formato de estatística que vende curso e ferramenta. A defesa é a mesma do checklist — perguntar de onde vem, qual foi a amostra, e comparado com quê.
+A defesa é a mesma do checklist. Pergunte de onde vem o número, qual foi a amostra, e comparado com quê.
 
 Os dados que existem de verdade, com amostra e método, apontam todos para o mesmo lado: a maioria de quem opera com frequência perde.
 

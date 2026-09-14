@@ -60,21 +60,25 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Wallet drainers: o golpe que não rouba a sua seed
 
-Um wallet drainer ("esvaziador de carteira") é um kit de golpe, geralmente hospedado num site de phishing, que induz a vítima a assinar uma transação ou assinatura maliciosa — e então esvazia a carteira, sem precisar da sua seed. É uma mudança de mentalidade importante: você pode ter guardado a frase perfeitamente e ainda assim perder tudo por causa de uma assinatura.
+Um wallet drainer ("esvaziador de carteira") é um kit de golpe. Ele fica num site falso, feito para parecer um site conhecido. Esse tipo de site falso se chama phishing.
 
-Esses golpes viraram uma indústria chamada "drainer-as-a-service" (DaaS, drenador como serviço): um grupo de desenvolvedores cria o kit e o "aluga" para golpistas menores (os "afiliados"), que espalham os sites falsos; quando o roubo acontece, um contrato divide automaticamente o dinheiro entre os dois. Um estudo revisado por pares apresentado na conferência ACM Internet Measurement Conference de 2025 (He et al., Universidade de Zhejiang com a BlockSec) mediu esse mercado no Ethereum entre 1º de março de 2023 e 1º de abril de 2025: US$ 135 milhões roubados de 76.582 vítimas, dos quais US$ 111,9 milhões foram para afiliados e US$ 23,1 milhões para operadores, distribuídos por 1.910 contratos de partilha de lucro, 56 operadores e 6.087 afiliados. Segundo o estudo, os afiliados ficam "tipicamente com 80% a 90%" do roubo — a divisão mais comum é 80% para o afiliado e 20% para o operador, com a fatia do operador variando de 10% a 40% entre os contratos observados. Um piso de 75% para o afiliado também aparece em material de recrutamento de uma dessas operações (relatório da Recorded Future/Insikt Group sobre o grupo "Rublevka Team", que anunciava "starting percentage of 75% and 80% for 'experienced users'"). Um caso concreto documentado pela própria Ledger: no incidente do Angel Drainer associado ao ataque à biblioteca Ledger Connect Kit (dezembro de 2023), a divisão observada foi 85% para o atacante e 15% para o kit.
+O site pede que você assine uma transação ou uma mensagem. Parece rotina. Mas a assinatura dá ao golpista permissão sobre seus tokens, e ele esvazia a carteira sem nunca ver a sua seed.
 
-A boa notícia é que o volume caiu muito. Segundo a Scam Sniffer, as perdas com drainers em redes EVM foram de cerca de US$ 295,5 milhões em 2023 (mais de 324.000 vítimas, maior roubo isolado de US$ 24 milhões), subiram para cerca de US$ 494 milhões em 2024 (mais de 332.000 carteiras, alta de 67% sobre 2023, maior roubo isolado de US$ 55,48 milhões) e caíram 83% em 2025, para cerca de US$ 83,85 milhões (106.106 carteiras, queda de 68% no número de vítimas; maior roubo isolado de US$ 6,5 milhões via assinatura Permit, em setembro; só 11 casos acima de US$ 1 milhão, contra 30 em 2024). A própria Scam Sniffer avisa que a queda acompanhou o mercado como um todo, e que "à medida que drainers antigos saem, novos surgem" — o ecossistema segue ativo.
+Por trás existe um negócio organizado, o "drainer como serviço" (DaaS, do inglês drainer-as-a-service). Um grupo, chamado operador, cria o kit e o aluga para golpistas menores, os afiliados. São os afiliados que espalham os sites falsos.
 
-Para dimensionar um caso concreto de DaaS: o Inferno Drainer, entre novembro de 2022 e novembro de 2023, é estimado pelo Group-IB (citando dados da Scam Sniffer) em mais de US$ 80 milhões roubados de cerca de 137.000 vítimas, usando mais de 16.000 domínios únicos e imitando mais de 100 marcas cripto.
+Quando o roubo acontece, um contrato divide o dinheiro sozinho entre os dois. A divisão mais comum é 80% para o afiliado e 20% para o operador.
+
+A boa notícia: as perdas caíram muito em 2025. Os números abaixo são da Scam Sniffer e contam perdas com drainers em redes EVM (a Ethereum e as redes que funcionam como ela).
+
+A má notícia: o golpe continua ativo. A própria Scam Sniffer avisa que a queda acompanhou o mercado como um todo, e que "à medida que drainers antigos saem, novos surgem".
 
 ### O roteiro do golpe, passo a passo
 
-Entender a sequência desarma o golpe. Primeiro vem a isca: um falso airdrop, um "mint" de NFT, um falso suporte ou um anúncio patrocinado que aparece quando você pesquisa o nome de um site. Você clica e chega a um site que imita o verdadeiro.
+Entender a sequência desarma o golpe. São quatro etapas, e o ponto de virada é a terceira.
 
-Depois você conecta a carteira. Esse passo, sozinho, é inofensivo: conectar só permite que o site veja seus saldos públicos — não move nada. O problema é o passo seguinte. O site pede uma assinatura disfarçada de "claim" ("resgatar"), "login" ou "verificação". É aqui que o golpe acontece: a assinatura, na verdade, concede uma permissão sobre seus tokens.
+O dano não está em conectar, e sim em assinar. A defesa central é ler o que a carteira mostra antes de confirmar.
 
-Com a permissão em mãos, o atacante usa a função transferFrom (uma ordem que diz "transfira daquele endereço para o meu") para levar seus tokens. Como a permissão foi você quem deu, a blockchain considera tudo legítimo e a transferência é irreversível. Repare no ponto de virada: o dano não está em conectar, e sim em assinar. A defesa central é ler o que a carteira mostra antes de confirmar e desconfiar de qualquer "assinar mensagem" vindo de um site que você não abriu digitando o endereço você mesmo.
+Desconfie de qualquer "assinar mensagem" vindo de um site que você não abriu digitando o endereço você mesmo.
 
 ### O roteiro do golpe, passo a passo (o que a vítima vê × o que acontece)
 

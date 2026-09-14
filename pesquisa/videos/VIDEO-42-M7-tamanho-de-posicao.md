@@ -60,31 +60,47 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Fração fixa: o ponto de partida, e por quê
 
-Fração fixa é arriscar sempre a mesma porcentagem do capital de hoje. Duas propriedades explicam por que é o ponto de partida: uma perda sozinha nunca zera a banca, e o tamanho encolhe quando você perde e cresce quando ganha, sem precisar decidir de novo.
+Fração fixa é arriscar sempre a mesma porcentagem do capital que você tem hoje. Duas propriedades explicam por que ela é o ponto de partida.
 
-O número que circula, "arrisque de 1% a 2% por operação", é convenção de mercado. Nenhum estudo revisado por pares o fixa como ótimo. Ele é coerente com a ideia de sobreviver — e é só isso.
+O número que circula, "arrisque de 1% a 2% por operação", é convenção de mercado. Nenhum estudo revisado por pares o fixa como ótimo.
+
+Ele é coerente com a ideia de sobreviver. E é só isso.
 
 ### O critério de Kelly, e por que ele quebra em memecoin
 
-O critério de Kelly responde "que fração apostar para o capital crescer o mais rápido possível no longo prazo". Para um ativo contínuo, a fórmula é f* = μ ÷ σ²: o retorno esperado dividido pela variância.
+O critério de Kelly responde uma pergunta: que fração apostar para o capital crescer o mais rápido possível no longo prazo?
 
-A fórmula precisa que a média e a variância existam. Em distribuições de cauda muito pesada — onde retornos gigantes, para cima e para baixo, aparecem com frequência demais —, a variância pode ser infinita e a média pode nem existir. Estudos sobre estratégias em cripto encontram esse padrão (Grobys & Shahzad, 2025). Aí a fórmula não produz número nenhum.
+Para um ativo contínuo, a fórmula é f* = μ ÷ σ². O μ é o retorno esperado (a média). O σ² é a variância, que mede o quanto os retornos se espalham.
 
-O que a pesquisa diz com segurança é a direção: quanto mais pesada a cauda, menor a fração ótima (Bamberg & Neuhierl, 2012). O valor ótimo para memecoin, ninguém resolveu.
+A fórmula só funciona se a média e a variância existirem.
+
+Cauda é a ponta da distribuição, onde ficam os resultados extremos. Numa cauda muito pesada, retornos gigantes, para cima e para baixo, aparecem com frequência demais.
+
+Aí a variância pode ser infinita, e a média pode nem existir. A fórmula não produz número nenhum.
+
+O que a pesquisa diz com segurança é a direção: quanto mais pesada a cauda, menor a fração ótima.
+
+O valor ótimo para memecoin, ninguém resolveu.
 
 ### A ruína do apostador: sobreviver vem primeiro
 
-Num jogo com uma desvantagem pequena, repetido muitas vezes, a ruína é quase certa. Na roleta americana, apostando no par (18 chances em 38), quem começa com 50 fichas e só para ao chegar a 100 quebra em 99,5% das vezes.
+Num jogo com uma desvantagem pequena, repetido muitas vezes, a ruína é quase certa.
 
-Quando a matemática do crescimento não funciona e a perda total é comum, a pergunta muda de "quanto cresce" para "quanto aguento perder sem ser eliminado". Daí a regra que sobra com fundamento: o tamanho de cada posição é um valor que você pode perder inteiro.
+Em memecoin, a matemática do crescimento não funciona e a perda total é comum. Aí a pergunta muda.
 
-Em memecoin, perder inteiro não é o caso extremo: 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia em que nasceram (CoinGecko Research).
+Sai "quanto cresce?". Entra "quanto aguento perder sem ser eliminado?".
+
+Daí a regra que sobra com fundamento: o tamanho de cada posição é um valor que você pode perder inteiro.
+
+Perder inteiro não é o caso extremo. 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia em que nasceram (CoinGecko Research).
 
 ### A conta que a calculadora faz
 
-Se cada posição perdida vai a zero, depois de n perdas seguidas com a fração f sobra (1 − f)ⁿ do capital. Com 10% por posição, 5 perdas deixam 59%; com 25%, deixam 24%.
+Se cada posição perdida vai a zero, depois de n perdas seguidas com a fração f sobra (1 − f)ⁿ do capital.
 
-E recuperar custa mais do que perder: quem ficou com 59% precisa ganhar 69% sobre o que sobrou para voltar ao começo; quem ficou com 24% precisa ganhar 321%.
+Em palavras: a cada perda, você fica com (1 − f) do que tinha.
+
+Recuperar custa mais do que perder, porque o ganho é calculado sobre um capital menor.
 
 ### Ferramenta interativa do app: Quanto sobra depois de uma sequência de perdas totais
 

@@ -60,33 +60,47 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### A taxa anunciada não é o que você paga
 
-Toda plataforma da categoria anuncia um número — "1%", "a partir de 0,75%". Esse número é honesto no que diz e enganoso no que omite: ele é apenas a fatia da plataforma. Uma compra tem cinco camadas de custo, e a taxa anunciada é uma delas.
+Toda plataforma anuncia um número, como "1%" ou "a partir de 0,75%". Esse número é verdadeiro, mas incompleto.
 
-As outras quatro são: a taxa-base da rede Solana, fixa em 5.000 lamports por assinatura (0,000005 SOL) e cobrada mesmo quando a transação falha (solana.com/docs/core/fees); o priority fee, um pagamento extra ao validador para a transação entrar mais rápido; a gorjeta de MEV (o "bribe", via Jito), que compra proteção contra ser atacado por bots; e a taxa da pool onde a troca acontece.
+Ele mostra só o que a plataforma cobra. As outras quatro camadas saem do seu bolso do mesmo jeito, e não aparecem nele.
 
-Os defaults do próprio Axiom para as duas configuráveis são 0,001 SOL de priority fee e 0,001 SOL de gorjeta (docs.axiom.trade/getting-started/fees/solana-fees). Essas duas não são receita da plataforma — vão para validadores. Mas saem do seu bolso do mesmo jeito, e são justamente as que não aparecem no número anunciado.
+**As cinco camadas de uma compra:**
 
-Repare no que isso significa: numa compra pequena, a taxa da plataforma pode ser a MENOR das camadas. Não a maior. É o contrário do que a intuição sugere, e é por isso que a matriz abaixo existe.
+- Taxa da plataforma: a única anunciada.
+- Taxa-base da rede Solana: 5.000 lamports por assinatura, ou 0,000005 SOL. Lamport é a menor fração do SOL. É cobrada mesmo quando a transação falha.
+- Priority fee: um pagamento extra ao validador, o computador que registra transações na rede, para a sua entrar mais rápido. No Axiom, o padrão é 0,001 SOL.
+- Gorjeta de MEV (o "bribe", via Jito): compra proteção contra ataques de bots. No Axiom, o padrão é 0,001 SOL.
+- Taxa da pool: cobrada pela pool onde a troca acontece.
+
+Numa compra pequena, a taxa da plataforma pode ser a menor das camadas, e não a maior. É o contrário do que a intuição sugere. Por isso a matriz desta aba existe.
 
 ### Por que ordem pequena é mecanicamente penalizada
 
-Parte do custo é percentual e parte é fixa. Essa diferença é o que faz a mesma operação custar percentuais completamente diferentes conforme o tamanho.
+Algumas taxas são percentuais: crescem junto com a ordem. Outras são fixas: custam o mesmo valor em SOL, qualquer que seja o tamanho.
 
-O priority fee e a gorjeta somam 0,002 SOL nos valores padrão. Isso é fixo: custa igual se você move o equivalente a R$50 ou a R$5.000. Numa ordem de R$100, esses mesmos 0,002 SOL representam cerca de 1% do valor. Numa ordem dez vezes maior, representam 0,1%. A conta é a mesma; o peso é dez vezes menor.
+O priority fee e a gorjeta somam 0,002 SOL nos valores padrão. Custam igual se você move o equivalente a R$50 ou a R$5.000.
 
-E vale lembrar de um detalhe que a matriz não mostra: toda operação é ida e volta. Você paga esse conjunto de taxas ao comprar e paga de novo ao vender — inclusive quando a operação dá errado e você sai no prejuízo.
+A matriz não mostra um detalhe: toda operação é ida e volta. Você paga essas taxas ao comprar e paga de novo ao vender, inclusive quando sai no prejuízo.
 
-A conclusão é mecânica e não é conselho de tamanho de posição: existe um valor abaixo do qual o atrito das taxas domina o resultado. Saber calcular onde fica esse ponto é diferente de receber um número pronto de alguém.
+Existe um valor abaixo do qual o atrito das taxas domina o resultado. Isto não é conselho de tamanho de posição.
+
+É saber calcular onde fica esse ponto, em vez de receber um número pronto de alguém.
 
 ### O mesmo terminal cobra diferente conforme onde o token está
 
-A quinta camada — a taxa da pool — não depende do terminal. Depende de onde o token está no ciclo de vida dele, e a variação é grande o bastante para mudar a conta inteira.
+O "venue" é o lugar onde a troca acontece de fato: a pool em que o token está sendo negociado.
 
-Um token ainda na bonding curve do pump.fun paga 1,25% de taxa de pool, decomposta oficialmente em 0,300% para o criador do token e 0,95% para o protocolo (pump.fun/docs/fees). Depois de "graduar" para uma pool canônica do PumpSwap, continua em 1,25% enquanto o market cap é pequeno, e cai por faixas conforme cresce. Numa AMM madura como a Raydium, a taxa padrão é 0,25% (docs.raydium.io/ray/protocol-fees).
+Um token passa por lugares diferentes ao longo da vida. Cada lugar cobra uma taxa de pool diferente, e isso muda a conta inteira.
 
-Ou seja: a mesma ordem, no mesmo terminal, no mesmo dia, custa cinco vezes mais em taxa de pool se o token for novo. Isso não é um defeito do terminal — é onde a troca está acontecendo. Mas é informação que muda a sua conta e que raramente aparece explicada.
+**O caminho de um token do pump.fun, e a taxa de pool em cada etapa:**
 
-Isso não é só taxa anunciada: um estudo da Uniswap Labs sobre 534 mil negociações reais mediu o custo total efetivo (taxa, deslizamento de preço e o que bots de MEV extraem) em 140 pontos-base por dólar negociado numa memecoin popular, contra 22 pontos-base num par entre duas moedas estáveis — 6 vezes mais caro, numa pool mais funda do que a maioria das de memecoin recém-lançada. O mesmo estudo mediu a chance de sofrer deslizamento de preço causado por um bot adversário como cerca de 80% maior ao negociar a memecoin do que ao negociar a moeda madura (Adams, Chan, Markovich & Wan, "Don't Let MEV Slip", Financial Cryptography 2024).
+1. Bonding curve do pump.fun: o token acabou de nascer, e uma fórmula define o preço conforme as pessoas compram. Taxa da pool: 1,25%.
+2. PumpSwap: o token "graduou" e ganhou a sua pool canônica, a pool oficial dele. A taxa continua em 1,25% enquanto o market cap (o valor total do token) é pequeno, e cai por faixas conforme cresce.
+3. AMM madura, como a Raydium: a taxa padrão é 0,25%. AMM é a DEX em que a própria pool calcula o preço.
+
+Isso não é defeito do terminal. É onde a troca acontece. Mas muda a sua conta, e raramente aparece explicado.
+
+E a taxa é só uma parte do custo. Um estudo com 534 mil negociações reais mediu o custo total numa memecoin popular: 6 vezes o de um par entre duas moedas estáveis.
 
 ### Tabela do app: as cinco camadas de custo
 

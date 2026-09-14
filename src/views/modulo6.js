@@ -18,6 +18,7 @@ import {
 } from '../ui.js';
 import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
+import { criarCardDaSecao } from '../components/secao.js';
 import { montarSegmentos, montarPerguntaPrevia, montarTermos } from '../components/didatica.js';
 
 // As perguntas do quiz com o "por que a sua não serve", para usar no fim das partes.
@@ -44,21 +45,7 @@ function criarIntroducao(texto) {
   return criarElemento('p', { class: 'max-w-3xl text-texto-suave' }, [texto]);
 }
 
-// Card de uma seção de texto.
-function criarCardDaSecao(secao) {
-  return criarCard([
-    criarElemento('h2', { class: 'text-lg font-semibold' }, [secao.titulo]),
-    ...secao.paragrafos.map((paragrafo) =>
-      criarElemento('p', { class: 'mt-3 text-texto-suave' }, [paragrafo]),
-    ),
-    secao.lista &&
-      criarElemento(
-        'ul',
-        { class: 'mt-4 list-disc space-y-2 pl-5 text-texto-suave' },
-        secao.lista.map((item) => criarElemento('li', {}, [item])),
-      ),
-  ]);
-}
+// O card de seção mora em components/secao.js, igual para todos os módulos.
 
 // Uma seção pelo id. Devolve null se não existir, para a aba montar sem condicional.
 function secao(id) {

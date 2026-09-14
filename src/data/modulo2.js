@@ -24,46 +24,72 @@ export const modulo2 = {
     {
       id: 'atencao',
       titulo: 'Economia da atenção: o preço é feito de olhos',
+      emUmaFrase:
+        'O preço de uma memecoin é feito de atenção. Quando a atenção vai embora, o preço vai ' +
+        'junto.',
       paragrafos: [
-        'Uma memecoin não tem produto, receita nem promessa de utilidade. O que sustenta ' +
-          'o preço é a atenção coletiva: quantas pessoas estão falando, postando e comprando ' +
-          'ao mesmo tempo. Enquanto a atenção cresce, o preço cresce junto.',
-        'O problema é que atenção é um recurso escasso e migratório. Quando a multidão ' +
-          'descobre o próximo token, ela leva a atenção embora — e o preço vai atrás. Não ' +
-          'existe lucro, caixa ou utilidade segurando um chão embaixo.',
-        'Por isso o mesmo token pode subir 10x em horas e voltar ao ponto de partida no ' +
-          'mesmo dia. Isso não é anomalia: é o funcionamento normal desse mercado.',
+        'Uma memecoin não tem produto, receita nem promessa de utilidade.',
+        'O que sustenta o preço é a atenção coletiva: quantas pessoas estão falando, postando e ' +
+          'comprando ao mesmo tempo. Enquanto a atenção cresce, o preço cresce junto.',
+        'Só que atenção é escassa e muda de lugar. Quando a multidão descobre o próximo token, ' +
+          'leva a atenção embora, e o preço vai atrás.',
+        'Não existe lucro, caixa ou utilidade segurando um chão embaixo do preço.',
+        'Por isso o mesmo token pode subir 10x em horas e voltar ao ponto de partida no mesmo ' +
+          'dia. Isso não é anomalia: é o funcionamento normal desse mercado.',
       ],
     },
     {
       id: 'dopamina',
       titulo: 'Dopamina e reforço intermitente',
+      emUmaFrase:
+        'Ganhar às vezes, e não sempre, é o que mais prende. É o mesmo mecanismo das máquinas ' +
+        'de aposta.',
       paragrafos: [
-        'Cada alta na tela libera dopamina e o cérebro aprende uma regra simples: olhar o ' +
-          'gráfico e clicar em comprar traz recompensa. Como a recompensa vem às vezes e não ' +
-          'sempre, o comportamento é reforçado por "reforço intermitente" — o mesmo mecanismo ' +
-          'que torna máquinas de aposta tão difíceis de largar.',
-        'A consequência prática aparece rápido: depois de alguns acertos você passa a operar ' +
-          'mais vezes, com posições maiores e com menos checagem. O ganho de ontem financia ' +
-          'o erro de amanhã.',
-        'Esse padrão é descrito em literatura de divulgação e em artigos revisados por pares ' +
-          'sobre jogo e investimento especulativo (disponíveis no PMC/NCBI). Aqui ele é usado ' +
-          'de forma educacional, para você reconhecer o mecanismo — não como material clínico.',
+        'Dopamina é uma substância do cérebro ligada à sensação de recompensa. Cada alta na ' +
+          'tela libera dopamina.',
+        'O cérebro aprende uma regra simples: olhar o gráfico e clicar em comprar traz recompensa.',
+        'Como a recompensa vem às vezes, e não sempre, o hábito fica reforçado. Isso se chama ' +
+          '"reforço intermitente".',
+        'É o mesmo mecanismo que torna as máquinas de aposta tão difíceis de largar.',
       ],
+      exemplo: {
+        titulo: 'Como isso aparece na prática',
+        passos: [
+          'Você acerta algumas operações.',
+          'Passa a operar mais vezes.',
+          'Com posições maiores.',
+          'E com menos checagem.',
+          'O ganho de ontem financia o erro de amanhã.',
+        ],
+      },
+      detalhe: {
+        titulo: 'de onde vem essa ideia',
+        paragrafos: [
+          'Esse padrão é descrito em literatura de divulgação e em artigos revisados por pares ' +
+            'sobre jogo e investimento especulativo (disponíveis no PMC/NCBI).',
+          'Aqui ele é usado de forma educacional, para você reconhecer o mecanismo. Não é ' +
+            'material clínico.',
+        ],
+      },
     },
     {
       id: 'antidoto',
       titulo: 'O antídoto não é força de vontade',
+      emUmaFrase:
+        'Decida antes, por escrito, enquanto está calmo. Com o gráfico piscando, a força de ' +
+        'vontade perde.',
       paragrafos: [
-        'Ninguém vence viés cognitivo no impulso, com o gráfico piscando na frente. O que ' +
-          'funciona é decidir antes, por escrito, enquanto você ainda está frio. A regra ' +
-          'escrita é o seu "eu calmo" mandando no seu "eu empolgado".',
+        'Ninguém vence um viés cognitivo no impulso, com o gráfico piscando na frente. Viés ' +
+          'cognitivo é um atalho do cérebro que erra sempre para o mesmo lado.',
+        'O que funciona é decidir antes, por escrito, enquanto você ainda está frio.',
+        'A regra escrita é o seu "eu calmo" mandando no seu "eu empolgado".',
       ],
+      listaTitulo: 'Na prática:',
       lista: [
         'Escreva a tese e a catálise antes de comprar (Módulo 4). Sem catálise clara, é aposta.',
-        'Defina os alvos de realização antes de entrar, não depois de já estar no lucro.',
+        'Defina os alvos de realização antes de entrar. Não depois de já estar no lucro.',
         'Imponha um tempo de espera (5, 10, 30 minutos) entre "quero comprar" e "comprei".',
-        'Estabeleça um teto de perda por operação e por dia — e pare de verdade quando bater.',
+        'Estabeleça um teto de perda por operação e por dia. Quando bater, pare de verdade.',
         'Nunca opere com dinheiro que faz falta. A maioria dos tokens vai a zero.',
       ],
     },
@@ -511,17 +537,16 @@ export const modulo2 = {
   desfechoFases: 'Maioria vai a zero',
 
   observacaoFases:
-    'Modelo didático de ciclo de vida. Serve para você saber que perguntas fazer em cada ' +
-    'momento — não é previsão nem garantia de comportamento. Muitos tokens pulam fases, ' +
-    'e a maioria não passa da primeira. O quanto exatamente muda conforme o que se chama ' +
-    'de "morrer": 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia do ' +
-    'lançamento, 80,37% em até dois dias, e só 4,55% seguiram negociando depois de 90 dias ' +
-    '(CoinGecko Research, 18,67 milhões de tokens, jan/2024–jun/2026). Por outra métrica — ' +
-    'liquidez abaixo de US$ 1.000 —, a Solidus Labs mediu 98,6%; a Pump.fun contestou ' +
-    'publicamente esse número, dizendo que o relatório "carece de entendimento básico de ' +
-    'memecoins" (CoinDesk, 07/05/2025). Nenhuma dessas fontes mede o preço chegando ' +
-    'literalmente a zero — todas medem parar de negociar ou ficar sem liquidez, que é o ' +
-    'que "vai a zero" quer dizer na prática.',
+    'Este é um modelo didático de ciclo de vida. Serve para você saber que perguntas fazer em ' +
+    'cada momento. Não é previsão nem garantia. Muitos tokens pulam fases, e a maioria não ' +
+    'passa da primeira. Quantos, exatamente, depende do que se chama de "morrer". Segundo a ' +
+    'CoinGecko Research (18,67 milhões de tokens, jan/2024–jun/2026), 68,67% dos tokens do ' +
+    'Pump.fun pararam de negociar no mesmo dia do lançamento. Em até dois dias, foram 80,37%. ' +
+    'Só 4,55% seguiram negociando depois de 90 dias. Por outra métrica, a de liquidez abaixo ' +
+    'de US$ 1.000, a Solidus Labs mediu 98,6%. A Pump.fun contestou esse número em público, ' +
+    'dizendo que o relatório "carece de entendimento básico de memecoins" (CoinDesk, ' +
+    '07/05/2025). Nenhuma dessas fontes mede o preço chegando literalmente a zero. Todas medem ' +
+    'parar de negociar ou ficar sem liquidez. É isso que "vai a zero" quer dizer na prática.',
 
   // ---------------------------------------------------------------------------
   // Mini-quiz (aba "Quiz") — 4 perguntas

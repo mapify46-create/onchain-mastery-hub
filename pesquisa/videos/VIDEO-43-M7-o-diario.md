@@ -60,21 +60,29 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### O que o diário faz, e o que não faz
 
-"O registro ajuda você a seguir a sua própria regra" tem lastro. Numa meta-análise de 138 experimentos, monitorar o progresso aumentou o cumprimento de metas de comportamento — perder peso, parar de fumar, tomar remédio (Harkin et al., 2016).
+Duas frases parecem dizer a mesma coisa. Só uma tem evidência.
 
-"O registro faz você ganhar dinheiro" não tem: nenhum estudo revisado por pares mediu isso. Se a regra for ruim, o diário ajuda você a seguir uma regra ruim com mais fidelidade.
+Se a regra for ruim, o diário ajuda você a seguir uma regra ruim com mais fidelidade.
 
-O efeito foi maior quando o registro era escrito de verdade — não conferido de cabeça — e quando o resultado era mostrado a alguém.
+O efeito foi maior quando o registro era escrito de verdade, e não conferido de cabeça.
+
+E foi maior também quando o resultado era mostrado a alguém.
 
 ### Quanto é um efeito de 0,40
 
-O efeito medido foi d = 0,40: quem monitorou ficou, em média, 0,40 desvio-padrão melhor. Na régua usual, 0,2 é pequeno, 0,5 é médio e 0,8 é grande — então é pequeno a médio.
+O efeito medido foi d = 0,40. Quem monitorou ficou, em média, 0,40 desvio-padrão melhor.
 
-Em chances: sorteando uma pessoa que monitorou e uma que não, há 61% de chance de a que monitorou ter cumprido mais a meta, contra 50% se não houvesse efeito. E a pessoa mediana que monitorou supera 66% de quem não monitorou.
+Desvio-padrão é o quanto os resultados costumam variar em torno da média.
+
+Na régua usual, 0,2 é pequeno, 0,5 é médio e 0,8 é grande. Então 0,40 é de pequeno a médio.
 
 ### Os nove campos
 
-Oito campos de comportamento, que está sob o seu controle, e um de resultado, que não está. A peça que amarra tudo é o campo 7: sem a saída executada anotada, "segui a regra?" vira lembrança — e lembrança é o que os vieses corrompem.
+Oito campos são de comportamento, que está sob o seu controle. Um é de resultado, que não está.
+
+A peça que amarra tudo é o campo 7: a saída executada.
+
+Sem ela anotada, "segui a regra?" vira lembrança. E lembrança é o que os vieses corrompem.
 
 ### Tabela do app: os nove campos
 

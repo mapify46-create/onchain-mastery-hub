@@ -60,19 +60,35 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Revogação de aprovações: como e o que ela não resolve
 
-Como o dano dos drainers vem de permissões que ficam ativas para sempre, existe uma higiene simples: revisar e revogar approvals periodicamente. A ferramenta mais usada é o Revoke.cash, que cobre mais de 100 redes (o próprio site se descreve como "the biggest and most popular tool for revoking token approvals") e permite consultar suas permissões digitando o endereço (ou um nome ENS) sem conectar a carteira — mais seguro para só olhar. Para efetivamente revogar, aí sim você conecta a carteira, filtra e clica em "Revoke", o que gera uma transação e custa uma pequena taxa de gas.
+Aprovação (approval) é a permissão que você dá a um contrato para mexer nos seus tokens. Ela fica ativa para sempre, até você cancelar.
 
-Os próprios exploradores também têm essa função: o Token Approval Checker do Etherscan (e os equivalentes no BscScan e no Basescan) lista os contratos aprovados a gastar seus tokens, mostra o "valor em risco" e tem um botão "Revoke" para cada um, navegando entre os padrões ERC-20, ERC-721 e ERC-1155.
+É por essas permissões que os drainers causam dano. Por isso vale revisar e cancelar (revogar) as que você não usa, de tempos em tempos.
 
-O ponto mais importante é o que a revogação NÃO resolve. Ela impede usos futuros da permissão, mas não recupera o que já saiu — nas próprias palavras do FAQ do Revoke.cash: "it cannot be used to recover any stolen funds". Revogar também não desfaz uma frase-semente comprometida (se alguém tem sua seed, a pessoa controla a carteira toda; a única saída é migrar tudo para uma carteira nova) e não protege contra malware ainda instalado na máquina (se há um infostealer ou clipper rodando, ele continua atuando). Regra de ouro: revogar interrompe gastos futuros; não é um botão de "desfazer".
+Para só olhar, não precisa conectar a carteira. No Revoke.cash, a ferramenta mais usada, basta digitar o seu endereço. É o jeito mais seguro de conferir.
+
+Para revogar de fato, você conecta a carteira, filtra e clica em "Revoke". Isso gera uma transação e custa uma pequena taxa de gas.
+
+Se alguém tem a sua seed, controla a carteira toda. A única saída é migrar tudo para uma carteira nova.
+
+Se há um infostealer ou clipper rodando na máquina, ele continua atuando depois da revogação.
+
+Regra de ouro: revogar interrompe gastos futuros. Não é um botão de "desfazer".
 
 ### As duas camadas do Permit2 e o vetor novo (EIP-7702)
 
-O Permit2 tem uma peculiaridade que confunde: ele guarda permissões em duas camadas. A primeira é o approval comum de ERC-20 que você deu ao contrato do Permit2 (geralmente ilimitado). A segunda são as sub-permissões que o Permit2 concede em seu nome, para cada app, já com valor e prazo de expiração (o app da Uniswap, por exemplo, costuma usar aprovação de 30 dias). Para a primeira camada, você revoga o approval normalmente; para a segunda, o Permit2 tem duas funções: lockdown, que revoga várias permissões de uma vez ("batch revoking approvals", nas palavras do próprio código da Uniswap), e invalidateNonces, que anula assinaturas que você já assinou mas que ainda não foram usadas. O Revoke.cash mostra as duas camadas em abas separadas, o que é mais fácil do que chamar o contrato na mão. O lado bom do Permit2 é que as permissões expiram sozinhas, eliminando a "aprovação ilimitada dormente"; o lado ruim é que o risco migra para a assinatura — uma assinatura EIP-712 maliciosa é mais fácil de conseguir porque não custa gas.
+O Permit2 é um contrato que gerencia permissões de tokens para vários apps. Ele guarda essas permissões em duas camadas, e é isso que confunde.
 
-O vetor mais novo que quem começa em 2026 precisa conhecer é o EIP-7702, ativado na atualização "Pectra" do Ethereum em maio de 2025. Ele permite que uma carteira comum passe a agir como um contrato inteligente e execute várias ações numa só transação. O problema: golpistas passaram a embutir, numa única assinatura disfarçada de troca rotineira, uma "delegação" que dá controle do endereço a um contrato do atacante, que então esvazia tudo de uma vez.
+O lado bom do Permit2: as permissões expiram sozinhas. Acaba a "aprovação ilimitada dormente", aquela esquecida que dura para sempre.
 
-Casos reais já apareceram: em 24 de maio de 2025, uma vítima perdeu cerca de US$ 146,5 mil num ataque EIP-7702 ligado ao grupo Inferno Drainer (analisado pela SlowMist); em 24 de agosto de 2025, outra vítima perdeu mais de US$ 1,54 milhão pela mesma técnica (monitorada pela Scam Sniffer). A lição é a mesma de sempre, agora ainda mais forte: uma assinatura pode valer a carteira inteira — leia sempre o que a carteira pede antes de confirmar.
+O lado ruim: o risco passa para a assinatura. Assinar não custa gas, então fica mais fácil enganar a vítima para assinar algo malicioso.
+
+O vetor mais novo, que quem começa em 2026 precisa conhecer, é o EIP-7702. Ele foi ativado na atualização "Pectra" do Ethereum, em maio de 2025.
+
+O EIP-7702 deixa uma carteira comum agir como um contrato inteligente e fazer várias ações numa só transação.
+
+O golpe: uma assinatura disfarçada de troca rotineira esconde uma "delegação". Ela entrega o controle do seu endereço a um contrato do golpista, que esvazia tudo de uma vez.
+
+Já houve casos reais. Em 24 de maio de 2025, uma vítima perdeu cerca de US$ 146,5 mil. Em 24 de agosto de 2025, outra perdeu mais de US$ 1,54 milhão.
 
 ### Tutorial de como revogar uma aprovação, clique a clique
 

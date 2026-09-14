@@ -52,14 +52,15 @@ Um golpe por cena: como chega (WhatsApp, Instagram, "consultor"), qual é o ganc
 
 ### Golpes comuns no Brasil
 
-Falso robô de trade / robô de arbitragem. Prometem rendimento fixo automatizado por um "robô" que compraria e venderia sozinho sempre com lucro — o que é impossível em mercado de risco. O caso emblemático brasileiro é a Atlas Quantum, que dizia ter um robô de arbitragem de Bitcoin chamado "Quantum". A CVM determinou em 2019 que a empresa parasse de ofertar publicamente o serviço (Deliberação CVM nº 826, de 13 de agosto de 2019) e, em julgamento do Colegiado em 21 de maio de 2024, aplicou multas que somaram mais de R$ 55,8 milhões aos envolvidos por operação fraudulenta e embaraço à fiscalização. As estimativas de prejuízo e de número de vítimas variam muito entre as fontes de imprensa (de cerca de R$ 1,1 bilhão e 47 mil investidores até cerca de R$ 7 bilhões e 200 mil pessoas) — não há um número oficial único consolidado.
+Quatro golpes aparecem muito no Brasil. Veja o que cada um promete e onde está a armadilha.
 
-Grupos de sinais. Grupos de Telegram/WhatsApp que vendem "sinais" de compra. Há dois problemas típicos. Primeiro, o pump and dump (inflar e despejar): o organizador compra a moeda barato antes, manda o grupo comprar num dia e horário combinados, o preço sobe com essa enxurrada de ordens, e ele vende no topo — deixando os membros comprados no prejuízo. Segundo, o conflito de interesse: muitas vezes o "trader" ganha comissão por afiliação de uma corretora, ou seja, ele lucra com o seu volume de operações, não com o seu resultado — quanto mais você opera e perde, mais ele fatura.
+**Sinais de alerta comuns aos quatro:**
 
-Pirâmide disfarçada de fundo cripto. É um esquema Ponzi: paga os investidores antigos com o dinheiro dos novos, sem geração real de lucro, até a estrutura desabar. No Brasil, a CVM comunica o mercado por meio de alertas de suspensão (as chamadas stop orders), que podem determinar a interrupção imediata da atividade irregular sob pena de multa; e o Ministério Público atua nas esferas cível e criminal.
+- Promessa de rendimento fixo ou garantido.
+- Pressão por urgência: "é agora ou nunca".
+- Exigência de recrutar outras pessoas.
+- Saque bloqueado até um novo depósito ou o pagamento de uma "taxa".
+- Empresa sem registro ou autorização.
 
-Golpe do falso investimento por WhatsApp (pig butchering). Um "assessor" aborda por mensagem (perfil falso), constrói confiança — às vezes afetiva — por semanas, apresenta uma plataforma falsa que mostra lucros crescentes na tela e induz depósitos cada vez maiores. Quando a vítima tenta sacar, o saque é bloqueado e pedem mais depósitos ou uma "taxa" para liberar. A própria CVM, no Portal do Investidor (6 de outubro de 2025), descreve o golpe e estima que o prejuízo global tenha ultrapassado US$ 75 bilhões entre 2020 e 2024, com parte significativa em criptoativos. No Brasil o esquema já causou perdas milionárias individuais: na Operação Criptoabate, deflagrada pela Polícia Civil do Rio Grande do Sul em 13 de agosto de 2026, uma vítima transferiu R$ 37 milhões ao longo de seis meses para plataformas indicadas por um falso "professor" num grupo de WhatsApp, e a investigação revelou uma estrutura com mais de R$ 30 bilhões em transações suspeitas.
-
-- Sinais de alerta comuns a todos: promessa de rendimento fixo ou garantido; pressão por urgência ("é agora ou nunca"); exigência de recrutar outras pessoas; saque bloqueado até um novo depósito ou o pagamento de uma "taxa"; empresa sem registro/autorização.
-- Como se defender: antes de colocar dinheiro, consulte os alertas e stop orders da CVM (gov.br/investidor) e verifique se a instituição é autorizada a funcionar pelo Banco Central (gov.br/bcb.gov.br). Estar numa lista de alerta, ou não constar entre as autorizadas, é um forte sinal de perigo.
+Como se defender: antes de colocar dinheiro, consulte os alertas e stop orders da CVM (gov.br/investidor) e veja se a instituição é autorizada pelo Banco Central (gov.br/bcb.gov.br). Estar numa lista de alerta, ou fora da lista de autorizadas, é um forte sinal de perigo.
 

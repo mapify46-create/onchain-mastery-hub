@@ -60,15 +60,21 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Take profit: o lucro que você não realizou não é seu
 
-Enquanto a posição está aberta, o lucro é um número na tela — uma promessa que depende de existir comprador na hora em que você quiser sair. Em memecoin, essa promessa some rápido: a liquidez que sustenta o preço na subida é a mesma que desaparece na descida.
+Enquanto a posição está aberta, o lucro é só um número na tela. É uma promessa que depende de existir comprador na hora em que você quiser sair.
 
-Realização parcial é a ferramenta que resolve isso sem exigir acertar o topo. Vendendo uma faixa, você recupera o valor investido e o que sobra passa a correr por conta do lucro. A posição continua na mesa, mas o medo sai dela — e é o medo que faz as decisões piores.
+Em memecoin, essa promessa some rápido. A liquidez que sustenta o preço na subida é a mesma que desaparece na descida.
 
-O ponto que quase ninguém aceita de primeira: alvo de realização se define ANTES de entrar, junto com a tese. Definido depois, com o gráfico piscando, ele já nasce contaminado pela euforia ou pelo medo do momento.
+Realização parcial resolve isso sem exigir que você acerte o topo. Você vende uma faixa e recupera o valor investido. O que sobra passa a correr por conta do lucro.
+
+A posição continua na mesa, mas o medo sai dela. E é o medo que piora as decisões.
+
+O ponto que quase ninguém aceita de primeira: o alvo de realização se define ANTES de entrar, junto com a tese.
+
+Definido depois, com o gráfico piscando, o alvo já nasce contaminado pela euforia ou pelo medo do momento.
 
 #### Escada de realização (exemplo didático — não é recomendação)
 
-Os números abaixo são exemplo para você entender a estrutura, não uma sugestão de onde vender. O que importa é o formato: faixas definidas antes, cada uma com um motivo, e a última com regra de saída — nunca "vou ver na hora".
+Os números abaixo são exemplo para você entender a estrutura. Não são sugestão de onde vender. O que importa é o formato: faixas definidas antes, cada uma com um motivo. E a última com regra de saída, nunca "vou ver na hora".
 
 - **Primeiro alvo** — Vender a fração que recupera o valor investido.. *Por quê:* A partir daqui o pior caso deixa de ser prejuízo. É a mudança que mais reduz o peso emocional da posição.
 - **Segundo alvo** — Vender outra faixa, já como lucro realizado.. *Por quê:* Transforma parte da alta em dinheiro que existe de verdade, sem depender de o movimento continuar.
@@ -78,11 +84,21 @@ Os números abaixo são exemplo para você entender a estrutura, não uma sugest
 
 #### O erro de segurar demais (e por que ele parece racional na hora)
 
-Na fase de Degradação — a última das 4 fases do Módulo 2 — a atenção já migrou para outro token. Não há compradores novos chegando, e cada tentativa de venda encontra um livro mais fino que o do dia anterior. O preço não cai por acaso: cai porque ninguém está mais olhando.
+Degradação é a última das 4 fases do Módulo 2. Nela, a atenção já migrou para outro token.
 
-É exatamente aí que aparece o custo afundado ("sunk cost"): a cabeça diz que vender agora é "assumir o prejuízo", como se não vender mantivesse a operação viva. Mas o dinheiro já foi gasto de qualquer jeito — a única pergunta que importa é se você compraria este token, neste preço, hoje. Se a resposta é não, a posição já está sendo encerrada; só falta executar.
+Não chegam compradores novos. Cada tentativa de venda encontra um livro de ofertas mais fino que o do dia anterior, com menos gente querendo comprar.
 
-Segurar por tempo demais é o que transforma uma perda pequena e planejada num rombo que leva meses para recuperar. E, diferente de quase tudo neste mercado, esse erro não depende do token, da chain nem da sorte: depende só de não ter escrito a regra antes.
+O preço não cai por acaso. Cai porque ninguém está mais olhando.
+
+É exatamente aí que aparece o custo afundado ("sunk cost"). A cabeça diz que vender agora é "assumir o prejuízo", como se não vender mantivesse a operação viva.
+
+Mas o dinheiro já foi gasto de qualquer jeito. A única pergunta que importa: você compraria este token, neste preço, hoje?
+
+Se a resposta é não, a posição já está sendo encerrada. Só falta executar.
+
+Segurar por tempo demais transforma uma perda pequena e planejada num rombo que leva meses para recuperar.
+
+E esse erro, diferente de quase tudo neste mercado, não depende do token, da chain nem da sorte. Depende só de não ter escrito a regra antes.
 
 #### Realizou lucro no Brasil? O que vem depois (informativo)
 

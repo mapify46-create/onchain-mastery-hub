@@ -52,15 +52,12 @@ A metáfora precisa ficar cravada: endereço é o que você mostra, chave privad
 
 ### Chave pública, chave privada e endereço: o que é cada um
 
-Cripto usa criptografia de chave pública (criptografia assimétrica): em vez de uma única senha, você tem um par de chaves ligadas por matemática. A chave privada é um número secreto escolhido ao acaso — na prática, 32 bytes, ou seja, 256 bits de aleatoriedade. Ela é o segredo que assina as transações: é a prova de que você autoriza mover as moedas. Pense nela como uma assinatura de próprio punho que ninguém pode ver nem copiar — quem tiver a sua, assina no seu lugar.
-
-A partir da chave privada, a matemática gera a chave pública. É uma via de mão única: dá para ir da privada para a pública, mas é impossível voltar — não existe conta que descubra a privada a partir da pública. Na Ethereum e redes EVM isso usa a curva elíptica secp256k1; na Solana, usa a curva Ed25519.
-
-O endereço é derivado da chave pública, mas o caminho muda conforme a rede. Na EVM, pega-se o hash Keccak-256 da chave pública e ficam os últimos 20 bytes — é isso que vira o endereço de 42 caracteres começando com "0x". Na Solana o caminho é mais curto: a chave pública tem 32 bytes e é o próprio endereço, apenas escrito em base58 (aquela sequência de 32 a 44 letras e números). Uma confusão comum: muita gente chama o endereço de "chave pública". Na EVM, tecnicamente, não é a mesma coisa — o endereço é um resumo (hash) da chave pública. Na Solana, sim, o endereço É a chave pública, só que codificada em base58.
-
-Como isso se conecta com a seção da frase-semente (mais adiante): a frase é a raiz de tudo. Dela nasce a chave privada, da privada nasce a pública, e da pública nasce o endereço. Por isso o endereço você divulga à vontade (é como o número da conta que você passa para receber um Pix), mas a chave privada e a frase-semente você nunca mostra a ninguém. E, como toda a cadeia é de mão única, saber o seu endereço não permite a ninguém descobrir sua chave.
+Em cripto não existe uma senha só. Você tem um par de chaves ligadas por matemática, mais um endereço. Cada peça tem um papel.
 
 - Endereço = para receber (pode divulgar à vontade).
 - Chave privada e frase-semente = para gastar (segredo absoluto).
-- Curiosidade: ao enviar uma transação, a assinatura expõe a chave pública na rede — mesmo assim, isso não compromete a privada, porque o caminho de volta continua impossível na prática.
+
+Cada passo é de mão única. Por isso, saber o seu endereço não permite a ninguém descobrir a sua chave.
+
+Confusão comum: muita gente chama o endereço de "chave pública". Na Solana, está certo. Na Ethereum, tecnicamente, não é a mesma coisa (veja abaixo).
 

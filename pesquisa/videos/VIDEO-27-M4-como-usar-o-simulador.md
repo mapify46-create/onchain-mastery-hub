@@ -52,7 +52,7 @@ Vídeo de orientação: o que é o simulador, as quatro escolhas, por que os cen
 
 ### Simulador de decisão
 
-Doze situações, quatro escolhas em cada uma. Não existe pontuação de acerto de preço: o que está sendo medido é se a decisão segue a regra ou o impulso. Cada escolha mostra o feedback, o risco daquela decisão e o próximo passo técnico — e o histórico fica salvo no seu navegador.
+Doze situações, quatro escolhas em cada uma. Não existe pontuação de acerto de preço. O que está sendo medido é se a decisão segue a regra ou o impulso. Cada escolha mostra o feedback, o risco daquela decisão e o próximo passo técnico. O histórico fica salvo no seu navegador.
 
 **Aviso do app (repetir no vídeo):** Os cenários são fictícios e os números neles são inventados para o exercício. Nenhum deles descreve um token real, e nada aqui é recomendação de compra ou venda.
 

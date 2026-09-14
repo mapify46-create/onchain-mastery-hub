@@ -52,19 +52,23 @@ Reconhecimento de padrões: cada vetor é "como se parece na tela" + "o que faze
 
 ### Os vetores técnicos que você precisa reconhecer
 
-Os drainers usam alguns truques específicos, e vale conhecer o nome de cada um. O approval ilimitado de ERC-20: ERC-20 é o padrão dos tokens nas redes EVM, e "approval" é a permissão que você dá a um contrato para gastar seus tokens. Sites legítimos pedem approval para funcionar, mas golpistas pedem um approval de valor ilimitado, que deixa o contrato livre para esvaziar aquele token quando quiser — sem nova interação sua. Aprovações "dormentes" e ilimitadas foram, por anos, a maior categoria de perdas em DeFi.
+Saber o nome de cada truque ajuda a reconhecer o pedido quando ele aparecer na sua carteira.
 
-As mensagens Permit e Permit2 são um segundo vetor, mais sutil. Elas são assinaturas "sem gás" (sem taxa) feitas por um padrão chamado EIP-712, e aparecem na carteira como um inofensivo "assinar mensagem", não como uma transação — o que engana a vítima. O Permit2, contrato criado pela Uniswap e hoje muito usado (no mesmo endereço 0x000000000022D473030F116dDEE9F6B43aC78BA3 em várias redes EVM), concentra permissões de vários tokens. Segundo o relatório anual da Scam Sniffer de 2024, os tipos de assinatura de phishing se dividiram em Permit (56,7% dos roubos), setOwner (31,9%), Transfer (4,5%) e increaseAllowance (3,5%), com a rede Ethereum concentrando 85,3% das perdas (cerca de US$ 152 milhões). Em 2025, Permit/Permit2 seguiram como as ferramentas mais eficazes dos golpistas, respondendo por 38% das perdas nos casos acima de US$ 1 milhão.
+Sites legítimos também pedem approval para funcionar. O perigo é o valor ilimitado. Aprovações ilimitadas e esquecidas ("dormentes") foram, por anos, a maior categoria de perdas em DeFi (finanças descentralizadas).
 
-Ainda há o setApprovalForAll de NFT (ERC-721/ERC-1155): essa função dá a um "operador" o direito de gerenciar todos os seus NFTs de uma coleção de uma só vez. É o que faz um marketplace legítimo funcionar — e é também o primitivo por trás de quase toda drenagem de NFT por phishing. Um único clique pode entregar a coleção inteira.
+O Permit engana porque não parece uma transação. O Permit2, contrato criado pela Uniswap e hoje muito usado, concentra permissões de vários tokens.
 
-Um vetor novo, surgido em 2025 e que merece atenção redobrada, é o EIP-7702 — tratado em detalhe na aba "Defesa", junto com as duas camadas do Permit2.
+O setApprovalForAll é o que faz um marketplace legítimo funcionar. E é também o mecanismo por trás de quase toda drenagem de NFT por phishing.
+
+Há ainda um vetor novo, surgido em 2025, que merece atenção redobrada: o EIP-7702. Ele é tratado na aba "Defesa", junto com as duas camadas do Permit2.
 
 ### Address poisoning e clipper: quando o alvo é o endereço
 
-Nem todo golpe passa por assinatura. O address poisoning ("envenenamento de endereço") explora um hábito: como os endereços são enormes, a gente confere só os primeiros e últimos caracteres. O golpista gera um endereço parecido (mesmo começo e mesmo fim) e envia para você uma transação minúscula, só para "sujar" o seu histórico. Depois, quando você for enviar de novo e copiar um endereço do histórico, pode copiar o do golpista sem perceber. Um estudo acadêmico da Carnegie Mellon University ("Blockchain Address Poisoning", apresentado no USENIX Security Symposium de 2025) mediu Ethereum e BNB Chain de julho de 2022 a junho de 2024 e identificou 270 milhões de tentativas de ataque contra 17 milhões de vítimas, com 6.633 incidentes bem-sucedidos e ao menos US$ 83,8 milhões em perdas.
+Nem todo golpe passa por assinatura. Nestes dois, o golpista faz você mandar o dinheiro para o endereço errado. Como a transação é irreversível, o dinheiro se perde.
 
-O clipper malware é um vírus no seu aparelho que vigia a área de transferência (o "copiar e colar"). Quando ele detecta que você copiou um endereço de cripto, troca silenciosamente pelo endereço do atacante no momento em que você cola. Você copiou o endereço certo, mas cola o errado — e, como a transação é irreversível, o dinheiro se perde. Variantes sofisticadas usam endereços parecidos com o seu de verdade, para enganar quem confere só os primeiros caracteres depois de colar.
+A defesa contra os dois é a mesma: nunca confiar só no começo e no fim. Confira a linha inteira do endereço.
 
-A defesa contra os dois é a mesma disciplina: nunca confiar no começo-e-fim do endereço, conferir a linha inteira e, acima de tudo, enviar sempre uma transação-teste de valor baixo antes de mandar um valor alto. Uma carteira fria ajuda muito aqui, porque mostra o endereço de destino na telinha do próprio aparelho, fora do alcance do clipper.
+Acima de tudo, envie sempre uma transação-teste de valor baixo antes de mandar um valor alto.
+
+Uma carteira fria ajuda muito. Ela mostra o endereço de destino na telinha do próprio aparelho, fora do alcance do clipper.
 

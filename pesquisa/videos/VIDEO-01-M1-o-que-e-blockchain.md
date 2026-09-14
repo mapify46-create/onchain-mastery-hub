@@ -60,21 +60,31 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### O que é uma blockchain
 
-Uma blockchain é um caderno de registros público e compartilhado. Em vez de um banco guardar sozinho a lista de quem tem o quê, milhares de computadores no mundo guardam cópias idênticas da mesma lista. Cada página desse caderno é chamada de "bloco", e cada bloco guarda um punhado de transações (por exemplo: "o endereço A enviou 2 moedas ao endereço B"). Quando um bloco enche, ele é fechado e um novo começa, formando uma corrente de blocos — daí o nome "block-chain", corrente de blocos.
+No banco, uma empresa guarda sozinha a lista de quem tem o quê. Numa blockchain, milhares de computadores no mundo guardam cópias idênticas da mesma lista.
 
-O que amarra um bloco ao anterior é uma espécie de impressão digital matemática chamada "hash": um código que resume todo o conteúdo do bloco. Cada bloco carrega o hash do bloco anterior. Se alguém tentar mudar uma transação antiga, o hash daquele bloco muda, e isso quebra a ligação com todos os blocos seguintes — a fraude fica evidente para toda a rede. Mudar uma transação antiga exigiria refazer tudo em todas as cópias ao mesmo tempo, na prática impossível.
+Cada página desse caderno se chama bloco. Um bloco guarda um punhado de transações, como "o endereço A enviou 2 moedas ao endereço B".
 
-Você não precisa de permissão nem de conta para "ler" a blockchain. Qualquer pessoa pode consultar qualquer transação ou endereço. Essa transparência é a base de tudo o que vem adiante: é ela que permite auditar golpes, conferir se um pagamento chegou e revisar permissões dadas a contratos.
+Quando um bloco enche, ele é fechado e um novo começa. Os blocos formam uma corrente, daí o nome: block-chain, corrente de blocos.
+
+Cada bloco carrega o hash do bloco anterior. Hash é uma impressão digital matemática: um código que resume todo o conteúdo do bloco.
 
 - Bloco: uma "página" do caderno, com várias transações.
 - Hash: a impressão digital que resume um bloco e o liga ao anterior.
 - Rede: os milhares de computadores que guardam cópias iguais.
 
+Você não precisa de permissão nem de conta para "ler" a blockchain. Qualquer pessoa pode consultar qualquer transação ou endereço.
+
+Essa transparência é a base de tudo o que vem adiante. É ela que permite auditar golpes, conferir se um pagamento chegou e revisar permissões dadas a contratos.
+
 ### Imutabilidade e "confirmações"
 
-Imutável quer dizer "que não pode ser alterado depois de gravado". Numa blockchain, uma transação, depois de confirmada, fica registrada para sempre — não há botão de "desfazer", não há suporte que estorna. Isso é ótimo (ninguém apaga o seu saldo) e perigoso (se você mandar para o endereço errado, ou cair num golpe, o dinheiro se foi).
+Imutável quer dizer "que não pode ser alterado depois de gravado". Na blockchain, não há suporte que estorne uma transação confirmada.
 
-"Confirmação" é o número de blocos que já foram fechados em cima do bloco onde a sua transação entrou. Uma transação com 1 confirmação já está na corrente; com 12, 30 ou mais confirmações, fica cada vez mais impossível de reverter, porque um atacante teria de reescrever todos aqueles blocos ao mesmo tempo. Por isso as corretoras esperam um número mínimo de confirmações antes de liberar um depósito.
+Isso tem dois lados. É ótimo, porque ninguém apaga o seu saldo. E é perigoso: se você mandar para o endereço errado ou cair num golpe, o dinheiro se foi.
 
-Uma consequência importante para iniciantes: uma transação que falhou também fica registrada para sempre. Você pode ver na blockchain tentativas que não se completaram. Errar o destino, cair num golpe ou assinar algo indevido são ações que a rede executa e grava — a irreversibilidade não distingue acerto de erro.
+"Confirmação" é o número de blocos já fechados em cima do bloco onde a sua transação entrou.
+
+Atenção: uma transação que falhou também fica registrada para sempre. Dá para ver na blockchain tentativas que não se completaram.
+
+Errar o destino, cair num golpe ou assinar algo indevido são ações que a rede executa e grava. A irreversibilidade não distingue acerto de erro.
 

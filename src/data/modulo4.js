@@ -25,20 +25,23 @@ export const modulo4 = {
   teseVsCatalise: {
     titulo: 'Tese vs. catálise: as duas frases que faltam antes de comprar',
     paragrafos: [
-      'A tese responde "por que este token?". É a razão pela qual ele deveria chamar atenção: ' +
-        'a narrativa que ele monta, a comunidade que já existe, o nicho que ele ocupa, o ' +
-        'momento do mercado que ele aproveita.',
+      'A tese responde "por que este token?". É a razão para ele chamar atenção.',
+      'Essa razão pode ser a narrativa que ele monta, a comunidade que já existe, o nicho que ' +
+        'ele ocupa ou o momento do mercado que ele aproveita.',
       'A catálise responde "por que agora?". É o evento concreto que precisa acontecer para ' +
-        'trazer compradores novos: uma listagem, uma campanha grande, a graduação para a DEX, ' +
-        'um anúncio marcado, uma narrativa que está claramente crescendo esta semana.',
-      'As duas são necessárias e nenhuma sozinha basta. Tese sem catálise é um token que pode ' +
-        'ficar meses parado enquanto o seu capital envelhece. Catálise sem tese é correr atrás ' +
-        'de barulho: quando o evento passa, não sobra nada que segure o preço.',
+        'trazer compradores novos.',
+      'Exemplos de catálise: uma listagem, uma campanha grande, a graduação para a DEX, um ' +
+        'anúncio marcado, uma narrativa claramente crescendo esta semana.',
+      'Você precisa das duas. Tese sem catálise é um token que pode ficar meses parado, ' +
+        'enquanto o seu capital envelhece.',
+      'Catálise sem tese é correr atrás de barulho. Quando o evento passa, não sobra nada que ' +
+        'segure o preço.',
       'Escrever as duas frases antes de comprar tem um efeito prático que nada mais tem: elas ' +
-        'viram o critério de saída. Se a catálise aconteceu e o preço não reagiu, a tese ' +
-        'estava errada. Se a catálise foi cancelada, o motivo da posição sumiu. Nos dois ' +
-        'casos, a decisão já está tomada — e tomada por você frio, não por você às três da ' +
-        'manhã com o gráfico caindo.',
+        'viram o seu critério de saída.',
+      'Se a catálise aconteceu e o preço não reagiu, a tese estava errada. Se a catálise foi ' +
+        'cancelada, o motivo da posição sumiu.',
+      'Nos dois casos, a decisão já está tomada. Tomada por você com a cabeça fria, e não às ' +
+        'três da manhã com o gráfico caindo.',
     ],
 
     regraDeOuro: {
@@ -120,19 +123,19 @@ export const modulo4 = {
           nome: 'Listagem em corretora',
           descricao: 'Um evento com data, que traz compradores que antes não tinham acesso.',
           alerta:
-            'O anúncio muitas vezes movimenta mais o preço do que a listagem em si; quem ' +
-            'comprou pelo rumor costuma vender no fato.',
+            'O anúncio muitas vezes mexe mais no preço do que a listagem em si. Quem comprou ' +
+            'pelo rumor costuma vender no fato.',
         },
         {
           nome: 'Graduação para a DEX',
           descricao:
-            'O token sai da bonding curve e ganha um pool com liquidez mais profunda ' +
-            '(no Pump.fun, cerca de 85 SOL arrecadados, em dados de set/2025; em dólar não há ' +
-            'limiar fixo — numa amostra de ago/2026, 80% das graduações ficaram entre US$ 11 ' +
-            'mil e US$ 101 mil).',
+            'O token sai da bonding curve (a curva de preço do lançamento) e ganha um pool com ' +
+            'liquidez mais profunda. No Pump.fun, isso acontece com cerca de 85 SOL arrecadados ' +
+            '(dados de set/2025). Em dólar não há limiar fixo: numa amostra de ago/2026, 80% das ' +
+            'graduações ficaram entre US$ 11 mil e US$ 101 mil.',
           alerta:
-            'É também o momento em que quem comprou na curva finalmente consegue vender ' +
-            'volume — a liquidez que te atrai é a mesma que dá saída para eles.',
+            'É também quando quem comprou na curva finalmente consegue vender volume. A ' +
+            'liquidez que atrai você é a mesma que dá saída para eles.',
         },
         {
           nome: 'Atenção de figura pública',
@@ -146,14 +149,14 @@ export const modulo4 = {
           descricao:
             'Um tema puxa vários tokens ao mesmo tempo, e a atenção do setor migra para lá.',
           alerta:
-            'A narrativa é a catálise mais difícil de datar: entra-se cedo demais e fica-se ' +
-            'segurando, ou tarde demais e compra-se o topo.',
+            'É a catálise mais difícil de datar. Se você entra cedo demais, fica segurando. Se ' +
+            'entra tarde demais, compra o topo.',
         },
         {
           nome: 'Evento do projeto com data marcada',
-          descricao: 'Lançamento, parceria anunciada, campanha, migração — com dia definido.',
+          descricao: 'Lançamento, parceria anunciada, campanha ou migração, com dia definido.',
           alerta:
-            'A melhor catálise para estudar, porque tem prazo. Cuidado com datas que vão ' +
+            'É a melhor catálise para estudar, porque tem prazo. Cuidado com datas que vão ' +
             'sendo adiadas: adiamento é sinal, não detalhe.',
         },
       ],
@@ -166,24 +169,25 @@ export const modulo4 = {
   takeProfit: {
     titulo: 'Take profit: o lucro que você não realizou não é seu',
     paragrafos: [
-      'Enquanto a posição está aberta, o lucro é um número na tela — uma promessa que depende ' +
-        'de existir comprador na hora em que você quiser sair. Em memecoin, essa promessa some ' +
-        'rápido: a liquidez que sustenta o preço na subida é a mesma que desaparece na descida.',
-      'Realização parcial é a ferramenta que resolve isso sem exigir acertar o topo. Vendendo ' +
-        'uma faixa, você recupera o valor investido e o que sobra passa a correr por conta do ' +
-        'lucro. A posição continua na mesa, mas o medo sai dela — e é o medo que faz as ' +
-        'decisões piores.',
-      'O ponto que quase ninguém aceita de primeira: alvo de realização se define ANTES de ' +
-        'entrar, junto com a tese. Definido depois, com o gráfico piscando, ele já nasce ' +
-        'contaminado pela euforia ou pelo medo do momento.',
+      'Enquanto a posição está aberta, o lucro é só um número na tela. É uma promessa que ' +
+        'depende de existir comprador na hora em que você quiser sair.',
+      'Em memecoin, essa promessa some rápido. A liquidez que sustenta o preço na subida é a ' +
+        'mesma que desaparece na descida.',
+      'Realização parcial resolve isso sem exigir que você acerte o topo. Você vende uma faixa ' +
+        'e recupera o valor investido. O que sobra passa a correr por conta do lucro.',
+      'A posição continua na mesa, mas o medo sai dela. E é o medo que piora as decisões.',
+      'O ponto que quase ninguém aceita de primeira: o alvo de realização se define ANTES de ' +
+        'entrar, junto com a tese.',
+      'Definido depois, com o gráfico piscando, o alvo já nasce contaminado pela euforia ou ' +
+        'pelo medo do momento.',
     ],
 
     escada: {
       titulo: 'Escada de realização (exemplo didático — não é recomendação)',
       introducao:
-        'Os números abaixo são exemplo para você entender a estrutura, não uma sugestão de ' +
+        'Os números abaixo são exemplo para você entender a estrutura. Não são sugestão de ' +
         'onde vender. O que importa é o formato: faixas definidas antes, cada uma com um ' +
-        'motivo, e a última com regra de saída — nunca "vou ver na hora".',
+        'motivo. E a última com regra de saída, nunca "vou ver na hora".',
       faixas: [
         {
           alvo: 'Primeiro alvo',
@@ -215,19 +219,20 @@ export const modulo4 = {
     erroDeSegurar: {
       titulo: 'O erro de segurar demais (e por que ele parece racional na hora)',
       paragrafos: [
-        'Na fase de Degradação — a última das 4 fases do Módulo 2 — a atenção já migrou para ' +
-          'outro token. Não há compradores novos chegando, e cada tentativa de venda encontra ' +
-          'um livro mais fino que o do dia anterior. O preço não cai por acaso: cai porque ' +
-          'ninguém está mais olhando.',
-        'É exatamente aí que aparece o custo afundado ("sunk cost"): a cabeça diz que vender ' +
-          'agora é "assumir o prejuízo", como se não vender mantivesse a operação viva. Mas o ' +
-          'dinheiro já foi gasto de qualquer jeito — a única pergunta que importa é se você ' +
-          'compraria este token, neste preço, hoje. Se a resposta é não, a posição já está ' +
-          'sendo encerrada; só falta executar.',
-        'Segurar por tempo demais é o que transforma uma perda pequena e planejada num rombo ' +
-          'que leva meses para recuperar. E, diferente de quase tudo neste mercado, esse erro ' +
-          'não depende do token, da chain nem da sorte: depende só de não ter escrito a regra ' +
-          'antes.',
+        'Degradação é a última das 4 fases do Módulo 2. Nela, a atenção já migrou para outro ' +
+          'token.',
+        'Não chegam compradores novos. Cada tentativa de venda encontra um livro de ofertas ' +
+          'mais fino que o do dia anterior, com menos gente querendo comprar.',
+        'O preço não cai por acaso. Cai porque ninguém está mais olhando.',
+        'É exatamente aí que aparece o custo afundado ("sunk cost"). A cabeça diz que vender ' +
+          'agora é "assumir o prejuízo", como se não vender mantivesse a operação viva.',
+        'Mas o dinheiro já foi gasto de qualquer jeito. A única pergunta que importa: você ' +
+          'compraria este token, neste preço, hoje?',
+        'Se a resposta é não, a posição já está sendo encerrada. Só falta executar.',
+        'Segurar por tempo demais transforma uma perda pequena e planejada num rombo que leva ' +
+          'meses para recuperar.',
+        'E esse erro, diferente de quase tudo neste mercado, não depende do token, da chain nem ' +
+          'da sorte. Depende só de não ter escrito a regra antes.',
       ],
     },
 
@@ -289,9 +294,9 @@ export const modulo4 = {
       {
         pergunta: 'Alguém consegue tirar a liquidez da pool?',
         porque:
-          'Com a liquidez livre, o criador pode removê-la e o preço vira pó no mesmo bloco — ' +
-          'o hard rug. No pump.fun, depois da graduação, a pool é do protocolo e isso não ' +
-          'acontece; o golpe que sobra lá é o criador vender a própria compra (Módulo 6).',
+          'Com a liquidez livre, o criador pode removê-la, e o preço vira pó no mesmo bloco. ' +
+          'Esse é o hard rug. No pump.fun, depois da graduação, a pool é do protocolo e isso não ' +
+          'acontece. O golpe que sobra lá é o criador vender a própria compra (Módulo 6).',
         onde: 'RugCheck (Lockers & LP); e o explorer para ver quem detém os tokens de LP.',
         alerta:
           'Tokens de LP numa carteira do criador. Mas trava não aprova token: num estudo, 97,3% ' +
@@ -308,7 +313,7 @@ export const modulo4 = {
       {
         pergunta: 'A freeze authority foi revogada?',
         porque:
-          'Freeze authority ativa permite congelar contas do token: você compra e pode não ' +
+          'Freeze authority ativa permite congelar contas do token. Você compra e pode não ' +
           'conseguir vender. É o sinal clássico de possível honeypot. Nota técnica ' +
           'verificada: na Solana, DEXs como a Raydium exigem freeze authority revogada para ' +
           'criar o pool.',
@@ -348,10 +353,10 @@ export const modulo4 = {
   simulador: {
     titulo: 'Simulador de decisão',
     introducao:
-      'Doze situações, quatro escolhas em cada uma. Não existe pontuação de acerto de preço: ' +
-      'o que está sendo medido é se a decisão segue a regra ou o impulso. Cada escolha mostra ' +
-      'o feedback, o risco daquela decisão e o próximo passo técnico — e o histórico fica ' +
-      'salvo no seu navegador.',
+      'Doze situações, quatro escolhas em cada uma. Não existe pontuação de acerto de preço. ' +
+      'O que está sendo medido é se a decisão segue a regra ou o impulso. Cada escolha mostra ' +
+      'o feedback, o risco daquela decisão e o próximo passo técnico. O histórico fica salvo ' +
+      'no seu navegador.',
     aviso:
       'Os cenários são fictícios e os números neles são inventados para o exercício. Nenhum ' +
       'deles descreve um token real, e nada aqui é recomendação de compra ou venda.',

@@ -60,17 +60,25 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### SPL clássico ou Token-2022: o programa que manda no token
 
-Todo token da Solana é administrado por um de dois programas. O SPL clássico é o original: não tem taxa de transferência nem extensões. O Token-2022 é o novo e aceita "extensões" opcionais, escolhidas na criação — metadados, taxa, delegado permanente, gancho de transferência.
+Programa, na Solana, é o código que administra o token. Existem dois para isso.
 
-O pump.fun passou a criar tokens em Token-2022 com a instrução create_v2, ativada em 12/11/2025. Numa checagem na blockchain em 12/09/2026, 24 de 24 tokens do pump.fun eram Token-2022, todos com só duas extensões: metadataPointer e tokenMetadata. A LetsBonk e a LaunchLab da Raydium seguem criando SPL clássico.
+O pump.fun passou a criar tokens em Token-2022. Numa checagem na blockchain em 12/09/2026, 24 de 24 tokens do pump.fun eram Token-2022.
 
-Token-2022 não é sinal de perigo. Perigosa é a extensão a mais. Quem diz qual é o programa é o campo "Owner Program" do Solscan: Tokenkeg… é SPL clássico, Tokenz… é Token-2022.
+Todos tinham só duas extensões, as de metadados. Por isso, o alerta num token do pump.fun é aparecer qualquer extensão além dessas duas.
+
+A LetsBonk e a LaunchLab da Raydium seguem criando SPL clássico.
 
 ### As extensões que mudam o jogo
 
-A taxa de transferência só pode ser configurada na criação do token: um token criado sem ela não ganha taxa depois. Quando existe, ela tem uma trava — mudar o valor só vale duas epochs depois, cerca de 4 dias. Mas o teto é 100%, e uma taxa alta pode vir desde o lançamento.
+Extensão é um recurso extra ligado no token na hora em que ele é criado.
 
-Delegado permanente e gancho de transferência são as extensões que mais pesam contra quem comprou: o primeiro permite mover ou queimar seus tokens sem a sua assinatura; o segundo roda um programa do criador a cada transferência, que pode recusar a sua venda.
+A taxa de transferência é outra extensão. O teto dela é 100%.
+
+Ela só pode ser configurada na criação do token. Um token criado sem ela não ganha taxa depois.
+
+Quando existe, ela tem uma trava: mudar o valor só vale duas epochs depois, cerca de 4 dias. Epoch é um ciclo de tempo da rede Solana.
+
+Mas a trava não protege de tudo. Uma taxa alta pode vir desde o lançamento.
 
 ### Tabela do app: as extensões, uma a uma
 
@@ -84,31 +92,43 @@ Delegado permanente e gancho de transferência são as extensões que mais pesam
 
 ### Autoridades: o que o dono ainda pode fazer
 
-Mint authority é a permissão de criar tokens novos: ativa, dilui quem comprou. Freeze authority é a de congelar a conta de alguém: ativa, você compra e pode não conseguir vender — é o "honeypot" da Solana, sem código esperto nenhum.
+Autoridade, na Solana, é uma permissão especial sobre o token. Duas importam mais para quem compra.
 
-No pump.fun, as duas vêm revogadas em todo token. Isso é bom e inútil ao mesmo tempo: se estão sempre nulas, não separam um token do outro lá dentro. Fora do pump.fun, são a primeira coisa a olhar.
+A freeze ativa é o "honeypot" da Solana: o token deixa comprar e pode não deixar vender. Não precisa de código esperto nenhum.
 
-No Solscan, o campo "Authority" é um menu que junta três autoridades — de mint, de freeze e de metadados — e mostra "N/A" quando todas foram revogadas. Um endereço ali não quer dizer que o dono ainda emite tokens: pode ser só a autoridade de metadados.
+No pump.fun, as duas vêm revogadas (desligadas) em todo token. Isso é bom, mas não ajuda a escolher: se estão sempre desligadas, não separam um token do outro.
+
+Fora do pump.fun, são a primeira coisa a olhar.
+
+Cuidado no Solscan: um endereço no campo "Authority" pode ser só a autoridade de metadados. Veja abaixo.
 
 ### Metadata mutável
 
-Se a autoridade de metadados continua ativa, o dono pode trocar nome, símbolo e imagem depois da sua compra — e o token passa a se parecer com outro. Num token SPL clássico isso aparece como "Mutable: true" na aba Metadata do Solscan; num Token-2022, é a update authority do tokenMetadata.
+Metadados são o nome, o símbolo e a imagem do token.
 
-Nos tokens do pump.fun checados, as duas portas estavam fechadas: a autoridade do tokenMetadata e a do metadataPointer eram nulas em 11 de 11. O risco mora nos tokens criados fora dele.
+Se a autoridade de metadados continua ativa, o dono pode trocá-los depois da sua compra. E o token passa a se parecer com outro.
+
+Nos tokens do pump.fun checados, essa porta estava fechada. O risco mora nos tokens criados fora dele.
 
 ### Dev dump: o golpe que sobra no pump.fun
 
-Depois da graduação, a pool do pump.fun pertence ao protocolo: o criador não consegue retirar a liquidez. O que ele consegue é comprar barato no lançamento — muitas vezes em várias carteiras, no mesmo bloco — e vender tudo em cima de quem chegou depois.
+Depois da graduação, a pool do pump.fun pertence ao protocolo. O criador não consegue retirar a liquidez.
 
-A trilha fica visível: a carteira que criou o token aparece como "Creator" no Solscan, e o histórico dela mostra quanto comprou e quando vendeu. Um guia de ferramenta, sem medição, descreve o padrão como as carteiras do primeiro bloco vendendo nos primeiros 30 minutos.
+A trilha fica visível. A carteira que criou o token aparece como "Creator" no Solscan.
 
-Dois limites: nenhum estudo revisado por pares isolou "o criador vendeu" como preditor de rug, e quem monta o golpe usa carteiras intermediárias para esconder o vínculo.
+O histórico dessa carteira mostra quanto ela comprou e quando vendeu.
+
+Um guia de ferramenta descreve o padrão: as carteiras do primeiro bloco vendendo nos primeiros 30 minutos. É descrição, sem medição.
 
 ### Fora da Solana: a taxa mora no código
 
-Em Ethereum, BSC e Base, a taxa de venda e o bloqueio da venda ficam no próprio código do contrato. Ali a checagem que funciona é simular uma compra e uma venda antes: o honeypot.is faz isso de graça.
+Nessas redes, a taxa de venda e o bloqueio da venda ficam no próprio código do contrato.
 
-A simulação é um retrato do momento. Contrato atualizável — o dono troca a lógica por trás — pode mudar a taxa ou bloquear vendas depois que você comprou.
+A checagem que funciona é simular uma compra e uma venda antes de comprar de verdade. O honeypot.is faz isso de graça.
+
+Mas a simulação é só um retrato do momento.
+
+Num contrato atualizável, o dono pode trocar a lógica por trás. Aí ele pode mudar a taxa ou bloquear vendas depois que você comprou.
 
 ## Anatomia de tela (o que mostrar e apontar)
 

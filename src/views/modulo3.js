@@ -16,6 +16,7 @@ import {
 } from '../ui.js';
 import { montarMatrizDeFerramentas } from '../components/toolMatrix.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
+import { criarCardDaSecao } from '../components/secao.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
 import { montarAnatomia } from '../components/anatomia.js';
@@ -183,23 +184,7 @@ function criarIntroducao(texto) {
   return criarElemento('p', { class: 'max-w-3xl text-texto-suave' }, [texto]);
 }
 
-// Card de uma seção de texto: título, parágrafos e, se houver, uma lista com título.
-function criarCardDaSecao(secao) {
-  return criarCard([
-    criarElemento('h2', { class: 'text-lg font-semibold' }, [secao.titulo]),
-    ...secao.paragrafos.map((paragrafo) =>
-      criarElemento('p', { class: 'mt-3 text-texto-suave' }, [paragrafo]),
-    ),
-    secao.listaTitulo &&
-      criarElemento('p', { class: 'mt-4 text-sm font-semibold text-texto' }, [secao.listaTitulo]),
-    secao.lista &&
-      criarElemento(
-        'ul',
-        { class: 'mt-2 list-disc space-y-2 pl-5 text-texto-suave' },
-        secao.lista.map((item) => criarElemento('li', {}, [item])),
-      ),
-  ]);
-}
+// O card de seção mora em components/secao.js, igual para todos os módulos.
 
 // Card-link para outra página do hub.
 function criarLink(href, titulo, texto) {

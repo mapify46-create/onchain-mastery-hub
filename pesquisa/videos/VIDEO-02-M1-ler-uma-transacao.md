@@ -52,11 +52,13 @@ Vídeo PROCEDIMENTAL. Mostrar, campo a campo, o que significa cada linha de uma 
 
 ### Explorador de blocos: como ler uma transação
 
-Um explorador de blocos (block explorer) é um site que funciona como um "Google da blockchain": você cola um endereço, um código de transação ou um contrato e ele mostra, de forma organizada, o que a rede registrou. Cada rede tem o seu: Solscan para a Solana, Etherscan para Ethereum, BscScan para a BNB Chain e Basescan para a Base. Eles são só de leitura: não guardam suas chaves, não fazem trocas e não conseguem mexer no seu dinheiro.
+Pense num "Google da blockchain". Você cola um endereço, o código de uma transação ou um contrato. O site mostra, organizado, o que a rede registrou.
 
-Numa transação de Ethereum (e redes EVM parecidas), os campos que mais importam para um iniciante são: Transaction Hash (identificador único de 66 caracteres, começando com "0x"); Status (Success/verde = deu certo, Failed/vermelho = falhou — e atenção: mesmo falhando você pagou a taxa de gas); Block (em qual bloco entrou, mais o número de confirmações); Timestamp (data e hora, em UTC); From/To (quem enviou e quem recebeu — em transações de token, o "To" costuma ser o contrato do token, não uma pessoa; se aparecer a palavra "Contract" em vez de um endereço comum, o destino é um contrato inteligente); Value (quanto da moeda nativa foi enviado — pode ser 0 numa transferência de token); Transaction Fee/Gas (o custo pago para processar); e as abas Tokens Transferred e Logs de eventos, que mostram o que de fato se moveu. Um erro comum de iniciante é olhar "Value: 0 ETH" e achar que nada aconteceu, quando na verdade tokens se moveram na aba "Token Transfers".
+Ele só mostra. Não guarda suas chaves, não faz trocas e não consegue mexer no seu dinheiro.
 
-No Solscan (Solana) os campos equivalentes são: Signature (o identificador, equivalente ao hash), Block/Slot, Timestamp, Result (Success/Failed), Signer (a carteira que iniciou e pagou), Fee (em SOL, geralmente frações de centavo), Main Actions (a transação quebrada em uma ou mais transferências) e Balance Changes (SOL Balance Change e Token Balance Change, mostrando o saldo antes e depois). A lógica é a mesma do Etherscan; muda o layout e alguns nomes — inclusive, o próprio Solscan foi adquirido pela Etherscan, o que aproximou as duas ferramentas.
+Cada rede tem o seu explorador: Solscan para a Solana, Etherscan para a Ethereum, BscScan para a BNB Chain e Basescan para a Base.
+
+Ao abrir uma transação, procure três respostas: deu certo? Quanto custou? O que se moveu?
 
 - Explorador = janela de auditoria; a carteira mostra o que você fez, o explorador confirma o que de fato aconteceu na rede.
 - Um explorador é só de leitura: ele não envia nem recebe cripto por você.

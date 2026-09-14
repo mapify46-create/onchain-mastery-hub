@@ -52,11 +52,17 @@ Contrato = programa que roda sozinho na blockchain. O ponto que precisa ficar: q
 
 ### O que é um contrato inteligente, em linguagem de leigo
 
-Um contrato inteligente (smart contract) é um programa que roda na própria blockchain. Ele executa sozinho quando as condições programadas são atendidas, sem precisar de uma empresa no meio para "apertar o botão". É público (qualquer um pode ler) e, em geral, imutável depois de publicado: o código fica ali, naquele endereço, para sempre.
+Um contrato inteligente (smart contract) é um programa que mora na blockchain. Quando as condições programadas acontecem, ele executa sozinho, sem uma empresa no meio para "apertar o botão".
 
-No Etherscan/Solscan você às vezes vê um selo de "código verificado" (verified). Isso significa que o autor publicou o código-fonte e ele confere com o que está de fato rodando na rede — então você (ou alguém técnico) pode ler o que o contrato faz. Um contrato sem código verificado é uma caixa-preta: você não sabe o que ele executa, então merece cuidado redobrado.
+Ele é público: qualquer um pode ler. E, em geral, é imutável: depois de publicado, o código fica naquele endereço para sempre.
 
-Atenção, porque este é o ponto que engana iniciante: "imutável" e "verificado" não significam "seguro". O código pode ter um bug, ou pode ter sido feito malicioso de propósito e ainda assim estar verificado — verificado só quer dizer "dá para ler", não "é confiável". Além disso, existem contratos atualizáveis via proxy: uma "porta da frente" com endereço fixo que aponta para uma lógica que pode ser trocada depois pelo dono, inclusive por um código malicioso. E existem funções administrativas de um "owner" (dono): se o dono pode pausar transferências, emitir novas moedas ou trocar a lógica, ele tem poder sobre o seu dinheiro. Por isso vale a pena, num contrato, checar se ele é um proxy, ler a lógica de implementação e ver quem é o owner (e se o controle foi renunciado ou está numa carteira multisig).
+Você usa contratos sem perceber. Ao dar um "approve", você chama uma função de um contrato e o autoriza a mexer nos seus tokens. Se o contrato for malicioso, esse approve inocente vira a chave da sua carteira.
 
-Conexão direta com os golpes de drainer: quando você dá um "approve", está justamente chamando uma função de um contrato para autorizá-lo a mexer nos seus tokens. Se o contrato por trás for malicioso, esse approve inocente vira a chave da sua carteira.
+No Etherscan e no Solscan, alguns contratos têm o selo "código verificado" (verified):
+
+Este é o ponto que engana iniciante: "imutável" e "verificado" não significam "seguro". Verificado só quer dizer "dá para ler", não "é confiável".
+
+O código pode ter um bug. Ou pode ser malicioso de propósito e, mesmo assim, estar verificado.
+
+Outro risco é o dono do contrato (owner). Se ele pode pausar transferências, emitir novas moedas ou trocar a lógica, ele tem poder sobre o seu dinheiro.
 

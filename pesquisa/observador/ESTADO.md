@@ -81,6 +81,19 @@ o rótulo só é fixado por escrito depois, e ninguém analisa nada antes disso.
 - ~~Regerar os prompts de vídeo~~ → os 33 regerados depois da correção do Jito.
 - ~~Conferir as telas das ferramentas~~ → viraram as anatomias da aba técnica do M3.
 
+**Didática do texto (14/09/2026) — local, não publicado:**
+- O dono apontou a seção "Market cap, FDV e liquidez" como exemplo de explicação
+  confusa (definições + exceções site a site no mesmo parágrafo).
+- Novo `src/components/secao.js`: card único de seção para os Módulos 1, 2, 3, 5, 6 e 7,
+  com `emUmaFrase` (ideia central), `quadro` (comparação lado a lado), `exemplo`
+  (passo a passo) e `detalhe` (recolhido, "Para ir mais fundo"). O M4 segue com
+  `criarSecaoDeTexto` e só teve a redação encurtada.
+- Reescritas as seções de texto de todos os módulos, sem remover nem mudar número.
+  Auditoria de legibilidade (frases, parênteses, travessões): textos longos de 251 →
+  ~70; pesados (score ≥ 90) de 79 → ~12. Resta pesado: resumos dos módulos, detalheExtra
+  das tabelas, jTracker do M3, nota da calculadora do M4.
+- Cache do service worker em v15; prompts de vídeo regerados.
+
 **Próxima frente do hub — narrativas no pilar social do Módulo 3 (13/09/2026):**
 - O dono quer que o pilar social ensine a achar narrativas, onde e com que
   ferramentas rastrear, e se elas movem o preço. Hoje o app não ensina isso.

@@ -60,21 +60,23 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Market cap, FDV e liquidez: três números, três perguntas
 
-Market cap é o preço multiplicado pelos tokens em circulação. FDV (valor totalmente diluído) é o preço multiplicado pelo supply total. Num token do pump.fun o supply é de 1 bilhão, todo criado no lançamento — por isso os dois costumam dar o mesmo número.
+Na tela de qualquer memecoin aparecem três números grandes. Eles parecem medir a mesma coisa, mas cada um responde a uma pergunta diferente.
 
-Nenhum dos dois é dinheiro. Eles respondem "quanto valeria tudo, se todo mundo aceitasse o último preço". Esse preço foi feito por uma negociação pequena, e ninguém consegue vender o supply inteiro nele.
+Por que o market cap engana: ele supõe que todo mundo conseguiria vender pelo último preço. Esse preço foi feito por uma negociação pequena. Se muita gente vender junto, o preço despenca muito antes.
 
-Cada site conta "circulante" do seu jeito. Para o DexScreener, FDV é o supply total menos o queimado, vezes o preço; o market cap só muda quando o projeto informa o circulante ou a CoinGecko tem o dado. Para token ainda na bonding curve, DexScreener e GeckoTerminal não descontam nada — o GeckoTerminal nem mostra market cap, só FDV. E no Solscan o campo chamado "Market Cap" é, pela documentação dele, totalmente diluído.
-
-A liquidez é outra coisa: o valor dos dois lados da pool, somados. É o único dos três números que fala do dinheiro que existe para pagar quem vende — e mesmo ele não é o que você consegue sacar.
+Regra prática: olhe primeiro a liquidez. Market cap de milhões com liquidez de milhares é número de vitrine.
 
 ### Quanto dá para vender antes de derrubar o preço
 
-Numa pool de produto constante — a fórmula x · y = k das AMMs, que a curva do pump.fun também usa —, cada venda empurra o preço para baixo. A pergunta útil não é "quanto de liquidez tem", é "quanto eu tiro antes de o preço cair X%".
+A liquidez anunciada não é o quanto você consegue tirar. Cada venda empurra o preço para baixo, e a parte seguinte da venda sai mais barata.
 
-A conta tem uma surpresa: a fração não depende do tamanho da pool. Para derrubar o preço em 10%, você vende cerca de 5,4% dos tokens da reserva e recebe 2,57% da liquidez anunciada. Para derrubar pela metade, recebe 14,64%.
+Por isso a pergunta útil não é "quanto de liquidez tem?". É "quanto eu tiro antes de o preço cair X%?".
 
-Por isso market cap de milhões com liquidez de milhares é número de fantasia: a liquidez limita quanto qualquer pessoa consegue sair, e a sua venda é parte desse limite. Nenhuma pesquisa revisada por pares publica uma proporção "saudável" entre liquidez e market cap — quem cita uma está usando regra de bolso.
+A conta tem uma surpresa: a resposta, em porcentagem, não depende do tamanho da pool.
+
+Por isso market cap de milhões com liquidez de milhares é número de fantasia. A liquidez limita quanto qualquer pessoa consegue sair.
+
+E a sua própria venda também entra nesse limite.
 
 ### Tabela do app: quanto sai, por queda de preço
 
@@ -104,19 +106,19 @@ No vídeo, mostre a ideia da ferramenta com um ou dois exemplos numéricos — e
 
 ### Zeros compactados: o preço que se lê errado
 
-Preços minúsculos aparecem com os zeros compactados: $0.0₅2786. O 5 pequeno diz quantos zeros vêm depois da vírgula antes do 2786 — o preço real é US$ 0,000002786.
+Preços minúsculos têm zeros demais para caber na tela. Por isso aparecem com os zeros compactados.
 
-O problema é quando esse número vira texto: copiado para uma planilha, lido às pressas ou lido por um leitor de tela. O 5 pequeno vira um 5 comum, e o preço aparece como "$0.052786" — cerca de 19 mil vezes o real.
-
-Nenhuma das ferramentas documenta essa notação. No DexScreener, o valor inteiro fica guardado na dica que aparece ao passar o mouse, e a API entrega o preço completo.
+O erro acontece quando o número vira texto: copiado para uma planilha, lido às pressas ou lido por um leitor de tela (programa que lê a tela em voz alta).
 
 ### PnL: o lucro que a tela mostra
 
-PnL realizado é o que você já travou vendendo. PnL não realizado é "preço de agora vezes os tokens que você tem" — e é aí que mora a ilusão.
+PnL quer dizer lucro ou prejuízo (do inglês "profit and loss"). A tela mostra dois tipos.
 
-O não realizado não desconta o impacto da sua própria venda, e a documentação dos terminais consultados não diz que desconta as taxas. Em memecoin de pouca liquidez, o número verde quase nunca é o que chega na carteira. A calculadora acima mostra quanto chega.
+O não realizado não desconta o impacto da sua própria venda.
 
-Também existe o erro de leitura ao contrário: a central de ajuda da GMGN registra casos de quem vendeu 0,12 SOL pagando 0,2 SOL de taxa de prioridade e achou que a venda não tinha caído na carteira.
+E a documentação dos terminais consultados não diz que ele desconta as taxas.
+
+Em memecoin de pouca liquidez, o número verde quase nunca é o que chega na carteira. A calculadora acima mostra quanto chega.
 
 ## Anatomia de tela (o que mostrar e apontar)
 

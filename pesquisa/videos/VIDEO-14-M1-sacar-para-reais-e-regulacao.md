@@ -60,23 +60,45 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Sacar para reais no Brasil: Pix, KYC e P2P
 
-Para virar reais, o caminho mais comum é uma corretora centralizada (CEX) que aceita Pix e faz KYC (Know Your Customer, a verificação de identidade obrigatória). Você vende a cripto, o valor vira reais e você saca via Pix para sua conta. O outro caminho é o P2P (pessoa para pessoa), em que você negocia direto com outra pessoa. O P2P tem risco de contraparte sério: a outra pessoa pode não pagar, pode pagar e depois pedir estorno, ou o dinheiro recebido pode ter origem em fraude — e sua conta bancária pode ser bloqueada se receber valores "sujos". Sistemas de garantia (escrow) das plataformas reduzem, mas não eliminam esse risco. Regra prática: nunca libere a cripto antes de confirmar que o Pix caiu de fato na sua conta.
+Existem dois caminhos para transformar cripto em reais.
 
-Sobre o arranjo Binance + Z.ro Bank (Pix): o lançamento oficial foi anunciado em 20 de maio de 2025, integrando o Binance Pay ao Pix — segundo a empresa, a primeira vez que o Binance Pay foi integrado a um sistema nacional de pagamentos no mundo; a operacionalização foi anunciada como feita pelo Z.ro Bank, instituição de pagamento autorizada pelo Banco Central. Se esse arranjo continua idêntico em setembro de 2026: NÃO VERIFICADO (ver a seção de fontes no fim do módulo).
+No P2P, a outra pessoa pode não pagar. Pode pagar e depois pedir estorno. Ou o dinheiro pode ter origem em fraude.
+
+Nesse último caso, sua conta bancária pode ser bloqueada por receber valores "sujos".
+
+As plataformas têm sistemas de garantia (escrow), que reduzem esse risco, mas não eliminam.
+
+Regra prática: nunca libere a cripto antes de confirmar que o Pix caiu de fato na sua conta.
 
 ### O novo marco regulatório: PSAVs e a saída de corretoras do varejo
 
-Depois de anos de espera, o Banco Central publicou em 10 de novembro de 2025 as Resoluções BCB 519, 520 e 521, que regulamentam as PSAVs (Prestadoras de Serviços de Ativos Virtuais — as corretoras, intermediárias e custodiantes), fruto das Consultas Públicas 109, 110 e 111 de 2024. As três entraram em vigor em 2 de fevereiro de 2026. Elas estendem às empresas de cripto regras de prevenção à lavagem de dinheiro, governança, segurança, transparência e segregação de recursos de clientes, e classificam as PSAVs em modalidades (intermediária, custodiante e corretora). Empresas já em operação têm prazo até 30 de outubro de 2026 para pedir autorização.
+PSAV quer dizer Prestadora de Serviços de Ativos Virtuais. Na prática, são as corretoras, as intermediárias e as custodiantes (empresas que guardam cripto para os clientes).
 
-O efeito prático já é visível: em 2026, corretoras como Bitso, Coinext, NovaDAX, Digitra e Bitnuvem anunciaram o encerramento das operações de varejo no Brasil, citando o custo de se adequar à nova regulação — a Bitso transferindo sua base de clientes para o Mercado Bitcoin (setembro de 2026) e a Coinext anunciando o fim das atividades em 3 de setembro de 2026. Mercado Bitcoin e Foxbit seguiam operando na data desta pesquisa. Por isso, os nomes de corretoras citados neste módulo são sempre exemplos de categoria, nunca recomendação — e qualquer lista de "quais operam" envelhece rápido; antes de usar uma corretora, verifique se ela é uma PSAV autorizada pelo Banco Central.
+O Banco Central publicou as regras das PSAVs em 10 de novembro de 2025, depois de anos de espera. Elas entraram em vigor em 2 de fevereiro de 2026.
 
-Em 30 de abril de 2026, o BC publicou a Resolução BCB 561, que veda o uso de ativos virtuais/stablecoins como meio de liquidação em operações de câmbio eletrônico (eFX) — pagamentos internacionais —, com entrada em vigor em 1º de outubro de 2026. Atenção: essa norma não proíbe stablecoins no Brasil; ela restringe seu uso na "canalização" de pagamentos internacionais por prestadores de eFX. Comprar, vender e guardar cripto internamente segue permitido.
+As regras levam às empresas de cripto exigências de prevenção à lavagem de dinheiro, governança, segurança e transparência. Também exigem separar o dinheiro dos clientes do dinheiro da empresa (segregação).
+
+Empresas que já operavam têm até 30 de outubro de 2026 para pedir autorização.
+
+O efeito já apareceu. Em 2026, corretoras como Bitso, Coinext, NovaDAX, Digitra e Bitnuvem anunciaram o fim das operações de varejo no Brasil. Varejo é o atendimento a pessoas comuns. Elas citaram o custo de se adequar.
+
+Antes de usar uma corretora, verifique se ela é uma PSAV autorizada pelo Banco Central. Os nomes de corretoras deste módulo são só exemplos de categoria, nunca recomendação.
+
+Uma outra regra, a Resolução BCB 561, vale a partir de 1º de outubro de 2026. Ela proíbe usar stablecoins para liquidar pagamentos internacionais feitos por empresas de câmbio eletrônico.
+
+Atenção: ela não proíbe stablecoins no Brasil. Comprar, vender e guardar cripto internamente segue permitido.
 
 ### Impostos: a obrigação existe (e este módulo não ensina a calcular)
 
-Este material não dá orientação tributária — o objetivo aqui é só deixar claro que a obrigação existe. No Brasil, cripto é tratada como bem sujeito a tributação sobre ganho de capital, e há também obrigações de declaração. As regras mudaram nos últimos anos com a Lei 14.754/2023 (a "Lei das Offshores") e com novas normas da Receita Federal — a partir de julho de 2026, a plataforma DeCripto (instituída pela IN RFB nº 2.291/2025, alinhada ao padrão internacional CARF da OCDE) amplia a fiscalização, exigindo que plataformas informem as operações à Receita Federal.
+Este material não dá orientação tributária. O objetivo é só deixar claro que a obrigação existe.
 
-A mensagem para quem está começando é dupla: primeiro, vender ou trocar cripto pode gerar imposto e ter prazo; segundo, guardar registro de todas as operações (datas, valores, taxas) é o que permite calcular corretamente. Como qualquer erro pode levar à malha fina, consulte um contador para o seu caso concreto.
+No Brasil, cripto é tratada como um bem. O lucro está sujeito a imposto sobre ganho de capital, e há também obrigações de declaração.
+
+Primeiro recado: vender ou trocar cripto pode gerar imposto, e esse imposto pode ter prazo.
+
+Segundo recado: guarde o registro de todas as operações, com datas, valores e taxas. É isso que permite calcular corretamente.
+
+As regras mudaram nos últimos anos, e a Receita Federal passou a receber mais informações. Como qualquer erro pode levar à malha fina, consulte um contador para o seu caso concreto.
 
 ### Cripto no Brasil: a cronologia que importa
 

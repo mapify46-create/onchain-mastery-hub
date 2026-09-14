@@ -73,20 +73,22 @@ Na ordem em que você abre cada coisa. Qualquer divergência de endereço, em qu
 
 ### O endereço: a checagem que sozinha evita a perda total
 
-Nome e ticker qualquer um copia; o endereço do contrato é a identidade do token na blockchain. Em 12/09/2026, dois tokens diferentes do pump.fun usavam o ticker SATOSHI ao mesmo tempo, e um terceiro tinha o ticker "Usdt", imitando uma stablecoin.
+O endereço do contrato é uma sequência longa de letras e números. Ele é a identidade do token na blockchain.
 
-O projeto publica o endereço em três lugares, em ordem de confiança: o site oficial (aberto por um link confiável, não por anúncio ou busca), a bio ou o post fixado do X oficial, e o canal oficial de anúncios no Discord ou no Telegram.
+Ticker é o apelido curto do token. Em 12/09/2026, dois tokens diferentes do pump.fun usavam o ticker SATOSHI ao mesmo tempo.
 
-Quando as fontes divergem, vale a mais controlada pelo projeto: site e post fixado batendo entre si. Um canal fácil de sequestrar — resposta de post, DM, link curto do Discord — nunca desempata. Divergência, por si só, é motivo para não comprar.
+No mesmo dia, um terceiro token tinha o ticker "Usdt", imitando uma stablecoin (moeda feita para acompanhar o dólar).
 
-Compare o endereço inteiro. Golpistas geram endereços com os mesmos primeiros e últimos caracteres do original, para enganar quem só olha as pontas.
+O projeto publica o endereço em três lugares. Do mais confiável para o menos: o site oficial, a bio ou o post fixado do X oficial, e o canal oficial de anúncios no Discord ou no Telegram.
 
 **Nunca pegue o endereço de:**
 
-- DM ou mensagem de desconhecido.
+- DM (mensagem direta) ou mensagem de desconhecido.
 - Resposta embaixo de post viral.
 - Site que veio de anúncio ou de busca.
 - QR code ou link encurtado.
+
+Um canal fácil de sequestrar nunca desempata. Resposta de post, DM e link curto do Discord estão nesse grupo.
 
 ### Anatomia de tela: O que olhar num perfil que se diz oficial
 
@@ -103,11 +105,9 @@ Mockup desenhado, não captura do X. Clique num item da legenda para localizar.
 
 ### X: o que o selo prova, e como achar conta falsa
 
-O selo azul, hoje, quer dizer assinatura Premium ativa — a central de ajuda do X diz que essas contas não passam por revisão de identidade. O selo dourado é de organização verificada, o cinza é de governo, e o badge de afiliação (a foto da organização ao lado do selo) liga a conta a uma organização verificada.
+O selo azul, hoje, quer dizer assinatura Premium ativa. A central de ajuda do X diz que essas contas não passam por revisão de identidade.
 
-A busca avançada funciona de graça, logado. from:conta mostra só os posts dela; since:2026-09-01 filtra por data; min_faves:100 corta posts sem curtidas; e aspas buscam o endereço exato. Os operadores near:, source: e geocode: foram removidos e devolvem página vazia, sem aviso de erro.
-
-Automatizar isso de graça não existe: raspar o X fora da API é proibido pelos termos, e a API é paga.
+Existe também o badge de afiliação: a foto da organização ao lado do selo. Ele liga a conta a uma organização verificada.
 
 **Sinais grátis de conta falsa imitando um projeto:**
 
@@ -116,36 +116,42 @@ Automatizar isso de graça não existe: raspar o X fora da API é proibido pelos
 - Selo azul sem badge de afiliação num "perfil oficial".
 - Muitos seguidores com pouco engajamento, e respostas repetitivas de bots.
 
+Automatizar essa checagem de graça não existe. Raspar o X (copiar os dados com um programa) fora da API é proibido pelos termos, e a API, o acesso oficial para programas, é paga.
+
 ### Discord: os quatro golpes, e a defesa de cada um
 
-Servidores de memecoin costumam ter canais de anúncios, verificação, conversa, calls e um canal com o endereço. Não dá para ler o histórico sem entrar no servidor, e automatizar a leitura com a sua conta (self-bot) é proibido pelas regras do Discord, com risco de perder a conta.
+Servidores de memecoin costumam ter canais de anúncios, verificação, conversa, calls (indicações de tokens) e um canal com o endereço.
 
-A única automação grátis e permitida: seguir um canal de anúncios (o do ícone de megafone). Os anúncios passam a cair num canal do seu próprio servidor. Só funciona se o projeto usar esse tipo de canal, e só chega o que o admin escolher publicar.
+Assinar é aprovar uma mensagem com a sua carteira. Em golpe, uma assinatura pode autorizar a saída dos seus ativos sem você perceber.
 
-**Os golpes, em ordem de frequência nos alertas de segurança:**
+**Os golpes, do mais frequente nos alertas de segurança para o menos:**
 
-- Servidor falso: o golpista assume o link curto (discord.gg/nome) que o projeto deixou de pagar e recria um servidor idêntico. Defesa: entre sempre pelo link do site ou do X oficial.
-- Bot falso de verificação: parece o Collab.Land, mas o @ é outro, e ele leva a um site que pede para conectar a carteira e assinar. Foi o caminho do Inferno Drainer. Defesa: verificação legítima não pede assinatura.
-- "Conecte a carteira": depois de conectar, uma assinatura autoriza a transferência silenciosa dos seus ativos. Defesa: não assine nada que veio de link de comunidade, e use uma carteira separada para projetos novos (Módulo 1).
-- DM de "suporte" e admin invadido: suporte de verdade não chama primeiro, e até um anúncio oficial pode vir de conta sequestrada. Defesa: desligue DMs de membros do servidor e trate anúncio urgente com link como suspeito até conferir no site.
+1. Servidor falso. O projeto deixa de pagar o link curto (discord.gg/nome), o golpista assume esse link e recria um servidor idêntico. Defesa: entre sempre pelo link do site ou do X oficial.
+2. Bot falso de verificação. Ele parece o Collab.Land, mas o @ é outro. Leva a um site que pede para conectar a carteira e assinar. Foi o caminho do Inferno Drainer. Defesa: verificação legítima não pede assinatura.
+3. "Conecte a carteira". Depois de conectar, uma assinatura autoriza a transferência silenciosa dos seus ativos. Defesa: não assine nada que veio de link de comunidade, e use uma carteira separada para projetos novos (Módulo 1).
+4. DM de "suporte" e admin invadido. Suporte de verdade não chama primeiro, e até um anúncio oficial pode vir de conta sequestrada. Defesa: desligue DMs de membros do servidor. Trate anúncio urgente com link como suspeito até conferir no site.
 
 ### Telegram: ler sem entrar, e o risco dos bots de compra
 
-Para ler um canal público sem app e sem conta, abra t.me/s/nomedocanal no navegador: o /s/ mostra o histórico de posts. Como membro, você vê posts, visualizações, fixados e, se houver grupo vinculado, os comentários.
+Para ler um canal público, abra t.me/s/nomedocanal no navegador. O /s/ mostra o histórico de posts, sem app e sem conta.
 
-Automatizar também não dá num canal alheio: um bot só recebe os posts de um canal se for administrador dele.
+Bot de compra é um robô dentro do Telegram que compra e vende tokens por você.
 
-O risco maior do Telegram são os bots de compra. Muitos geram a carteira e guardam a chave privada no servidor deles: se o bot for comprometido, a perda pode ser total. Em outubro de 2023, falhas no Maestro (24/10) e no Unibot (31/10) somaram US$ 1,1 milhão roubados. Em 19/09/2024, uma falha no Banana Gun drenou cerca de US$ 3 milhões de 11 usuários — reembolsados pelo próprio bot.
+Muitos desses bots criam a carteira e guardam a chave privada no servidor deles. Chave privada é a senha mestra da carteira: quem tem a chave mexe no dinheiro.
 
-Bot falso com nome parecido drena quem cola a seed. O @ do bot se confere no site oficial dele, e a conta do Telegram precisa de verificação em duas etapas.
+Por isso, se o bot for comprometido, a perda pode ser total.
+
+Existe também o bot falso, com nome parecido com o verdadeiro. Ele drena quem cola a seed (as palavras que recuperam a carteira).
+
+Duas defesas: confira o @ do bot no site oficial dele, e ative a verificação em duas etapas na sua conta do Telegram.
 
 ### Calls pagos: a regra, os números e como perceber
 
-Nos EUA, a FTC exige que pagamento a quem recomenda seja declarado de forma clara. Para ativos que sejam valores mobiliários, a SEC exige mais: declarar o fato e o valor. Kim Kardashian pagou US$ 1,26 milhão em 2022 por promover o token EMAX sem dizer que tinha recebido US$ 250 mil — ela pôs #AD, e não bastou.
+Call é quando um influenciador indica um token. Call pago é quando ele recebeu para fazer essa indicação.
 
-No Brasil, o Código de Defesa do Consumidor proíbe publicidade disfarçada, o guia do CONAR para influenciadores (nova versão de maio de 2026) pede identificação clara já na primeira visualização, e a CVM reserva a recomendação de valores mobiliários a analistas registrados.
+Nos EUA e no Brasil existem regras contra publicidade paga disfarçada.
 
-Os números: num estudo com 36 mil tweets de 180 influenciadores sobre mais de 1.600 criptoativos, o preço subia 1,83% no primeiro dia e caía 2,24% em 10 dias e 6,53% em 30. Quem pôs US$ 1.000 em tokens fora do top 100 no dia do tweet e segurou 30 dias perdeu US$ 79, em média. Os autores dizem que o padrão combina com pump-and-dump, mas que a prova é inconclusiva.
+Um caso real: Kim Kardashian pagou US$ 1,26 milhão em 2022 por promover o token EMAX sem dizer que tinha recebido US$ 250 mil. Ela pôs #AD, e não bastou.
 
 **Sinais de call pago não declarado, de graça:**
 

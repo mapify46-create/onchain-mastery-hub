@@ -60,21 +60,19 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Onde ficam suas chaves: CEX, hot wallet e cold wallet
 
-Suas moedas não ficam "dentro" da carteira como dinheiro numa carteira de couro — elas vivem na blockchain. O que você realmente possui é a chave privada, o segredo que autoriza mover as moedas. Quem controla a chave privada controla o dinheiro. A frase que resume tudo é: "not your keys, not your coins" (se as chaves não são suas, as moedas não são suas).
+Suas moedas não ficam "dentro" da carteira, como notas numa carteira de couro. Elas vivem na blockchain.
 
-Existem três categorias. Uma CEX (corretora centralizada, do inglês Centralized Exchange) — como Binance ou Mercado Bitcoin, citadas aqui só como exemplos da categoria — é uma empresa que guarda as chaves por você, como um banco. É a porta de entrada mais fácil: aceita Pix, converte para reais e faz o KYC (a checagem de identidade com CPF e documento). O preço dessa comodidade é o risco de contraparte: se a empresa quebrar, for hackeada ou congelar saques, você depende dela — como se viu nos colapsos da FTX, Celsius e Mt. Gox.
-
-Uma hot wallet (carteira quente) — como Phantom, na Solana, ou MetaMask, nas redes EVM, também citadas só como exemplos — é um programa no seu celular ou navegador em que você guarda as chaves, mas o aparelho está conectado à internet. É grátis, conecta em aplicativos descentralizados e é o que se usa para negociar on-chain. Como vive on-line, fica exposta a phishing, a drainers e a vírus.
-
-Uma cold wallet (carteira fria) — os aparelhos da Ledger e outros fabricantes de hardware — guarda as chaves num dispositivo físico que fica offline. As chaves nunca tocam a internet, o que a torna a melhor opção para guardar valores por muito tempo. Em troca, custa dinheiro e é menos prática para trocas rápidas.
+O que você possui de fato é a chave privada, o segredo que autoriza mover as moedas. Daí o ditado "not your keys, not your coins": se as chaves não são suas, as moedas não são suas.
 
 ### Em que situação cada carteira faz sentido
 
-Não existe "a melhor" carteira; existe a certa para cada uso. Para o primeiro contato — comprar cripto com Pix e experimentar — a corretora costuma ser o ponto de partida, porque resolve conversão, KYC e suporte num só lugar. A regra prática que muita gente adota é não deixar na corretora mais do que se está disposto a perder num eventual bloqueio ou incidente.
+Muitos usuários combinam as três categorias, cada uma com uma função. Veja como elas se encaixam.
 
-Para usar aplicativos on-chain e negociar memecoins, a carteira quente é a ferramenta, porque conecta nos sites e assina transações. Uma prática de segurança muito citada é manter uma carteira quente separada só para trade, com pouco saldo, isolada da carteira onde você guarda o grosso do patrimônio.
+Regra prática que muita gente adota: não deixar na corretora mais do que se está disposto a perder num eventual bloqueio ou incidente.
 
-Para guardar valor por muito tempo ("hodl"), a carteira fria é a categoria indicada, justamente porque tira as chaves da internet. Muitos usuários combinam as três: corretora para entrar e sair em reais, carteira quente com pouco dinheiro para operar, e carteira fria para o que não vai ser mexido tão cedo. Nada disso é recomendação — é a descrição de como as categorias se encaixam.
+Outra prática de segurança muito citada: ter uma carteira quente só para trade, com pouco saldo. Ela fica separada da carteira onde está o grosso do patrimônio.
+
+Nada disso é recomendação. É a descrição de como as categorias se encaixam.
 
 ### Tabela comparativa do app: CEX × hot wallet × cold wallet
 

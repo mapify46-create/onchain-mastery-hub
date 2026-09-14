@@ -60,37 +60,54 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Como o volume é fabricado
 
-Wash trading é negociar consigo mesmo para parecer movimento: a carteira A compra, a carteira B vende quase a mesma quantidade, e as duas são da mesma pessoa. Cada operação aparece na tela como se fosse de gente diferente.
+O nome disso é wash trading: negociar consigo mesmo para parecer movimento.
 
-Numa DEX isso custa de verdade, porque cada troca paga a taxa da pool e a rede. Por US$ 1 milhão de volume, a conta fica perto de US$ 13 mil num token grande (taxa de pool de 0,30%) e de US$ 23 mil num recém-graduado (1,25%), somando o 1% que um serviço de volume anuncia cobrar.
+Numa DEX, isso custa dinheiro de verdade. Cada troca paga a taxa da pool e a taxa da rede.
 
-Por que alguém paga: volume compra lugar nas listas de "em alta", e a lista traz compradores de verdade. O DexScreener vende "Boosts" que turbinam o trending por 12 a 24 horas e não publica os pesos do algoritmo.
+Fabricar US$ 1 milhão de volume custa perto de US$ 13 mil num token grande, com taxa de pool de 0,30%.
 
-Uma ironia que vale guardar: a taxa da pool é mais alta justamente no token pequeno e recém-graduado, onde a manipulação de trending é mais usada.
+Num token recém-graduado, com taxa de pool de 1,25%, custa perto de US$ 23 mil. As duas contas já somam o 1% que um serviço de volume anuncia cobrar.
+
+Por que alguém paga: volume compra lugar nas listas de "em alta". E a lista traz compradores de verdade.
+
+Uma ironia que vale guardar: a taxa da pool é mais alta justamente no token pequeno e recém-graduado. É ali que a manipulação das listas de "em alta" é mais usada.
 
 ### Todo sinal público é otimizado contra
 
-Um vendedor de volume publica, com todas as letras, que espalha as operações em mais de 100 carteiras porque um token com US$ 300 mil de volume e só 50 carteiras "é imediatamente suspeito". Ele também sorteia tamanho e horário de cada operação, deixa algumas carteiras só comprando e usa carteiras novas a cada campanha.
+Um vendedor de volume publica, com todas as letras, como engana quem olha a tela.
 
-A consequência vale para a tela inteira: qualquer número único que você aprenda a olhar já foi, ou pode ser, calibrado contra você. Isso não torna os sinais inúteis. Torna cada um uma triagem, nunca um veredito.
+**O que ele diz que faz:**
 
-A defesa é cruzar sinais que custa caro falsificar ao mesmo tempo: volume, makers, concentração de holders, carteiras ligadas entre si, idade do token.
+- Espalha as operações em mais de 100 carteiras. O motivo, nas palavras dele: um token com US$ 300 mil de volume e só 50 carteiras "é imediatamente suspeito".
+- Sorteia o tamanho e o horário de cada operação.
+- Deixa algumas carteiras só comprando.
+- Usa carteiras novas a cada campanha.
+
+A lição vale para a tela inteira. Qualquer número único que você aprenda a olhar já foi, ou pode ser, calibrado contra você.
+
+Isso não torna os sinais inúteis. Torna cada um uma triagem (um primeiro filtro), nunca um veredito.
+
+A defesa é cruzar vários sinais que custa caro falsificar ao mesmo tempo: volume, makers (carteiras diferentes que negociaram), concentração de holders, carteiras ligadas entre si e idade do token.
 
 ### O que dá para ver de graça — e o que não dá
 
-Um estudo revisado por pares, com 34.988 tokens (Midsummer, USENIX Security 2026), começa a caça por "volume subiu mais de 500% com o preço variando menos de 5%". A variação de preço está de graça na tela do DexScreener e do GeckoTerminal. O volume de ontem, para comparar, só dá para aproximar.
+Um estudo revisado por pares analisou 34.988 tokens em busca de crescimento artificial. Ele trabalha em dois passos.
 
-O mesmo estudo fecha o diagnóstico com "volume circular": 99% ou mais do volume do dia vindo de carteiras que compraram e venderam no mesmo dia. Isso exige cruzar milhares de operações carteira por carteira — não sai no plano gratuito de ferramenta nenhuma.
+E as razões populares, como "volume por carteira" ou "volume por liquidez", não têm limiar publicado com método e taxa de erro.
 
-Nenhuma razão do tipo "volume por carteira" ou "volume por liquidez" tem limiar publicado com método e taxa de erro. Os números que circulam são regra de bolso.
+Os números que circulam para elas são regra de bolso.
 
 ### Bundles: a compra coordenada do lançamento
 
-Um bundle é um pacote de até 5 transações que entram juntas, em ordem, no mesmo bloco — ou nenhuma entra. O Jito, usado por quase toda a rede, é a infraestrutura. No lançamento, o uso é o criador comprando uma fatia grande em várias carteiras antes de o token aparecer para o público.
+Um bundle é um pacote de até 5 transações que entram juntas, em ordem, no mesmo bloco. Ou entram todas, ou nenhuma entra.
 
-Numa amostra de 41.470 tokens que graduaram, 36,5% do supply estava em carteiras de bundle na hora da migração (MELT, preprint). Juntando essas carteiras, a fatia do top 10 sobe 24 pontos nos tokens de alto risco, contra 6 nos de baixo risco.
+Bloco é o lote de transações que a rede grava de uma vez.
 
-Bundle não é prova de golpe: há quem use para se proteger de snipers. O que muda o sinal é quanto essas carteiras AINDA seguram. O trench.bot mostra isso como "Current held %"; o "Total bundled %" sozinho engana, porque o criador pode comprar, vender e recomprar.
+No lançamento, o bundle serve para o criador comprar uma fatia grande em várias carteiras. Tudo antes de o token aparecer para o público.
+
+O peso disso é grande. Numa amostra de 41.470 tokens que graduaram, 36,5% do supply estava em carteiras de bundle na hora da migração para a DEX.
+
+Bundle não é prova de golpe. Há quem use para se proteger de snipers (robôs que compram nos primeiros instantes de um token).
 
 ## Roteiro visual sugerido (diagramas do app, em texto)
 

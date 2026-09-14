@@ -52,11 +52,17 @@ Social e técnico são perguntas diferentes: "quem está falando" e "o que o con
 
 ### Por que duas checagens, e não uma só
 
-O pilar social cobre X/Twitter, Discord e Telegram: é onde a atenção nasce, antes de virar preço. Ver uma conta grande interagir com um projeto é um sinal cedo — mas sinal social nenhum prova que o contrato por trás é seguro.
+O pilar social é o que as pessoas estão falando. Ele cobre X/Twitter, Discord e Telegram. É ali que a atenção nasce, antes de virar preço.
 
-O pilar técnico cobre gráfico, contrato, liquidez e holders: mostra se o que está por trás do hype resiste a uma checagem. Um contrato limpo sem nenhuma atenção também não vale nada — sem atenção não há comprador.
+Ver uma conta grande interagir com um projeto é um sinal cedo. Mas nenhum sinal social prova que o contrato por trás é seguro.
 
-Os dois pilares se completam. Uma tese de entrada (Módulo 4) só fica de pé quando apoiada nos dois ao mesmo tempo: "este token é quem diz ser, e por que está chamando atenção agora" (social) e "o que o contrato e as carteiras ainda permitem fazer contra mim" (técnico). Passar nas duas checagens não torna um token seguro: só quer dizer que ele não mostrou os problemas que dá para ver.
+O pilar técnico é o que dá para conferir por conta própria. Ele cobre gráfico, contrato (o programa que cria o token e define as regras dele), liquidez (o dinheiro disponível para comprar e vender) e holders (as carteiras que têm o token).
+
+Um contrato limpo sem nenhuma atenção também não vale nada. Sem atenção, não aparece comprador.
+
+Os dois pilares se completam. Uma tese de entrada (Módulo 4) só fica de pé quando está apoiada nos dois ao mesmo tempo.
+
+Atenção: passar nas duas checagens não torna um token seguro. Só quer dizer que ele não mostrou os problemas que dá para ver.
 
 ### Correção: "Axon" não existe — o nome certo é Axiom
 

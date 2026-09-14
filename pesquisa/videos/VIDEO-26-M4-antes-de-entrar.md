@@ -63,7 +63,7 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 Tese e catálise só importam se o contrato por trás resistir a uma checagem. Estas seis perguntas são a peneira do Módulo 3 aplicada à decisão: qualquer resposta ruim aqui derruba a operação, por melhor que a narrativa esteja.
 
 1. **Alguém consegue tirar a liquidez da pool?**
-   - Por quê: Com a liquidez livre, o criador pode removê-la e o preço vira pó no mesmo bloco — o hard rug. No pump.fun, depois da graduação, a pool é do protocolo e isso não acontece; o golpe que sobra lá é o criador vender a própria compra (Módulo 6).
+   - Por quê: Com a liquidez livre, o criador pode removê-la, e o preço vira pó no mesmo bloco. Esse é o hard rug. No pump.fun, depois da graduação, a pool é do protocolo e isso não acontece. O golpe que sobra lá é o criador vender a própria compra (Módulo 6).
    - Onde olhar: RugCheck (Lockers & LP); e o explorer para ver quem detém os tokens de LP.
    - Alerta: Tokens de LP numa carteira do criador. Mas trava não aprova token: num estudo, 97,3% dos tokens com liquidez travada eram maliciosos, contra 97,7% no geral (Mazorra et al., 2022).
 2. **A mint authority foi revogada?**
@@ -71,7 +71,7 @@ Tese e catálise só importam se o contrato por trás resistir a uma checagem. E
    - Onde olhar: RugCheck ou a página do token no Solscan.
    - Alerta: Authority ativa numa carteira ligada ao criador.
 3. **A freeze authority foi revogada?**
-   - Por quê: Freeze authority ativa permite congelar contas do token: você compra e pode não conseguir vender. É o sinal clássico de possível honeypot. Nota técnica verificada: na Solana, DEXs como a Raydium exigem freeze authority revogada para criar o pool.
+   - Por quê: Freeze authority ativa permite congelar contas do token. Você compra e pode não conseguir vender. É o sinal clássico de possível honeypot. Nota técnica verificada: na Solana, DEXs como a Raydium exigem freeze authority revogada para criar o pool.
    - Onde olhar: RugCheck ou Solscan.
    - Alerta: Authority ativa — trate como token potencialmente sem saída.
 4. **Como está a concentração dos maiores holders?**

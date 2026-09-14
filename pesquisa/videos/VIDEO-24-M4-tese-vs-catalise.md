@@ -60,13 +60,23 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Tese vs. catálise: as duas frases que faltam antes de comprar
 
-A tese responde "por que este token?". É a razão pela qual ele deveria chamar atenção: a narrativa que ele monta, a comunidade que já existe, o nicho que ele ocupa, o momento do mercado que ele aproveita.
+A tese responde "por que este token?". É a razão para ele chamar atenção.
 
-A catálise responde "por que agora?". É o evento concreto que precisa acontecer para trazer compradores novos: uma listagem, uma campanha grande, a graduação para a DEX, um anúncio marcado, uma narrativa que está claramente crescendo esta semana.
+Essa razão pode ser a narrativa que ele monta, a comunidade que já existe, o nicho que ele ocupa ou o momento do mercado que ele aproveita.
 
-As duas são necessárias e nenhuma sozinha basta. Tese sem catálise é um token que pode ficar meses parado enquanto o seu capital envelhece. Catálise sem tese é correr atrás de barulho: quando o evento passa, não sobra nada que segure o preço.
+A catálise responde "por que agora?". É o evento concreto que precisa acontecer para trazer compradores novos.
 
-Escrever as duas frases antes de comprar tem um efeito prático que nada mais tem: elas viram o critério de saída. Se a catálise aconteceu e o preço não reagiu, a tese estava errada. Se a catálise foi cancelada, o motivo da posição sumiu. Nos dois casos, a decisão já está tomada — e tomada por você frio, não por você às três da manhã com o gráfico caindo.
+Exemplos de catálise: uma listagem, uma campanha grande, a graduação para a DEX, um anúncio marcado, uma narrativa claramente crescendo esta semana.
+
+Você precisa das duas. Tese sem catálise é um token que pode ficar meses parado, enquanto o seu capital envelhece.
+
+Catálise sem tese é correr atrás de barulho. Quando o evento passa, não sobra nada que segure o preço.
+
+Escrever as duas frases antes de comprar tem um efeito prático que nada mais tem: elas viram o seu critério de saída.
+
+Se a catálise aconteceu e o preço não reagiu, a tese estava errada. Se a catálise foi cancelada, o motivo da posição sumiu.
+
+Nos dois casos, a decisão já está tomada. Tomada por você com a cabeça fria, e não às três da manhã com o gráfico caindo.
 
 #### Regra de ouro
 
@@ -90,9 +100,9 @@ Copie estes cinco campos para o seu caderno de trades e preencha antes de cada e
 
 #### Catálises comuns — e o que costuma dar errado em cada uma
 
-- **Listagem em corretora** — Um evento com data, que traz compradores que antes não tinham acesso. *Alerta:* O anúncio muitas vezes movimenta mais o preço do que a listagem em si; quem comprou pelo rumor costuma vender no fato.
-- **Graduação para a DEX** — O token sai da bonding curve e ganha um pool com liquidez mais profunda (no Pump.fun, cerca de 85 SOL arrecadados, em dados de set/2025; em dólar não há limiar fixo — numa amostra de ago/2026, 80% das graduações ficaram entre US$ 11 mil e US$ 101 mil). *Alerta:* É também o momento em que quem comprou na curva finalmente consegue vender volume — a liquidez que te atrai é a mesma que dá saída para eles.
+- **Listagem em corretora** — Um evento com data, que traz compradores que antes não tinham acesso. *Alerta:* O anúncio muitas vezes mexe mais no preço do que a listagem em si. Quem comprou pelo rumor costuma vender no fato.
+- **Graduação para a DEX** — O token sai da bonding curve (a curva de preço do lançamento) e ganha um pool com liquidez mais profunda. No Pump.fun, isso acontece com cerca de 85 SOL arrecadados (dados de set/2025). Em dólar não há limiar fixo: numa amostra de ago/2026, 80% das graduações ficaram entre US$ 11 mil e US$ 101 mil. *Alerta:* É também quando quem comprou na curva finalmente consegue vender volume. A liquidez que atrai você é a mesma que dá saída para eles.
 - **Atenção de figura pública** — Um perfil grande interage e traz uma multidão de olhos de uma vez. *Alerta:* Costuma ser catálise curta, e o risco de contrato impostor é alto. Confirme o endereço oficial na fonte antes de qualquer coisa.
-- **Narrativa em crescimento** — Um tema puxa vários tokens ao mesmo tempo, e a atenção do setor migra para lá. *Alerta:* A narrativa é a catálise mais difícil de datar: entra-se cedo demais e fica-se segurando, ou tarde demais e compra-se o topo.
-- **Evento do projeto com data marcada** — Lançamento, parceria anunciada, campanha, migração — com dia definido. *Alerta:* A melhor catálise para estudar, porque tem prazo. Cuidado com datas que vão sendo adiadas: adiamento é sinal, não detalhe.
+- **Narrativa em crescimento** — Um tema puxa vários tokens ao mesmo tempo, e a atenção do setor migra para lá. *Alerta:* É a catálise mais difícil de datar. Se você entra cedo demais, fica segurando. Se entra tarde demais, compra o topo.
+- **Evento do projeto com data marcada** — Lançamento, parceria anunciada, campanha ou migração, com dia definido. *Alerta:* É a melhor catálise para estudar, porque tem prazo. Cuidado com datas que vão sendo adiadas: adiamento é sinal, não detalhe.
 

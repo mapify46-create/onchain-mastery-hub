@@ -19,6 +19,7 @@ import {
 import { montarChecklist } from '../components/checklist.js';
 import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
+import { criarCardDaSecao } from '../components/secao.js';
 import { montarDiagrama, renderizarDiagrama } from '../components/diagrama.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarAnatomia } from '../components/anatomia.js';
@@ -31,43 +32,7 @@ function criarIntroducao(texto) {
   return criarElemento('p', { class: 'max-w-3xl text-texto-suave' }, [texto]);
 }
 
-// Card de uma seção de texto, no formato de src/data/modulo2.js. Quando a seção
-// marca `ordenada: true` (passo a passo, como "criar a primeira carteira" ou o
-// "plano de emergência"), a lista vira <ol> — sem isso, ela ganharia ao mesmo
-// tempo o marcador de bullet do <ul> e o número que já está escrito no texto.
-function criarCardDaSecao(secao) {
-  return criarCard([
-    criarElemento('h2', { class: 'text-lg font-semibold' }, [secao.titulo]),
-    ...secao.paragrafos.map((paragrafo) =>
-      criarElemento('p', { class: 'mt-3 text-texto-suave' }, [paragrafo]),
-    ),
-
-    // Duas sequências de passos numeradas de forma independente (ex.: "no
-    // Revoke.cash" e "no Etherscan") — cada uma com o próprio <ol>, para a
-    // numeração não continuar de uma para a outra.
-    ...(secao.subListas ?? []).map((sub) =>
-      criarElemento('div', { class: 'mt-4' }, [
-        criarElemento('h3', { class: 'text-sm font-semibold text-acento' }, [sub.titulo]),
-        criarElemento(
-          'ol',
-          { class: 'mt-2 list-decimal space-y-2 pl-5 text-texto-suave' },
-          sub.passos.map((passo) => criarElemento('li', {}, [passo])),
-        ),
-      ]),
-    ),
-
-    secao.lista &&
-      criarElemento(
-        secao.ordenada ? 'ol' : 'ul',
-        {
-          class:
-            'mt-4 space-y-2 pl-5 text-texto-suave ' +
-            (secao.ordenada ? 'list-decimal' : 'list-disc'),
-        },
-        secao.lista.map((item) => criarElemento('li', {}, [item])),
-      ),
-  ]);
-}
+// O card de seção mora em components/secao.js, igual para todos os módulos.
 
 // Seções de texto que pertencem a uma aba inteira, na ordem em que aparecem em
 // modulo1.secoes.

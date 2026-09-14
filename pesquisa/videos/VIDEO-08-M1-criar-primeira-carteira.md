@@ -52,13 +52,15 @@ Vídeo PROCEDIMENTAL. Passo a passo genérico (vale para qualquer carteira da ca
 
 ### Como criar sua primeira carteira, passo a passo
 
-Antes de tudo, prepare o terreno: atualize o sistema operacional, remova extensões de navegador que você não reconhece, tenha papel e caneta à mão e evite Wi-Fi público. Este é um passo a passo genérico por categoria (carteira de navegador/celular e carteira de hardware); nomes de produtos aparecem só como exemplos da categoria, nunca como recomendação de uso.
+Antes de começar: atualize o sistema operacional e remova extensões de navegador que você não reconhece. Evite Wi-Fi público e tenha papel e caneta à mão.
 
-1. Baixe apenas da fonte oficial e confira a URL. Para carteira de navegador/celular, use o site oficial ou a loja oficial do aparelho, conferindo a URL letra por letra. Para carteira de hardware, compre no site do fabricante ou revendedor autorizado, evitando aparelho usado e inspecionando se a embalagem não foi violada. NUNCA baixe a partir de anúncio patrocinado em buscador: golpistas já compraram anúncios do Google mirando quem procurava carteiras conhecidas e levaram vítimas a domínios falsos que roubaram a frase-semente e esvaziaram as carteiras.
-2. Crie carteira nova, não importe. Escolha "criar nova carteira", não "importar" — a opção importar é para quem já tem uma frase, e é justamente ela que os sites falsos exploram para capturar sua frase. NUNCA importe nada num site que você não digitou você mesmo.
-3. Anote a frase-semente no papel. O app mostra as 12/24 palavras uma a uma; escreva na ordem e numeradas (1, 2, 3...). NUNCA fotografe, faça print ou salve em nuvem/bloco de notas.
-4. Confirme a frase. O app pede para você reinserir palavras em posições específicas ("qual é a palavra 9? e a 3?"). Isso prova que você anotou certo. NUNCA pule esta etapa achando que "depois anoto".
-5. Defina senha/PIN local. Essa senha (ou PIN) destranca o app naquele aparelho — é diferente da frase-semente. Se você perder o aparelho, é a frase (não a senha) que recupera tudo em outro dispositivo. NUNCA confunda as duas nem reutilize uma senha de outro serviço.
-6. Faça um teste com valor pequeno. Antes de mover quantia relevante, envie um valor mínimo, confira que chegou e envie de volta. NUNCA transfira tudo de uma vez sem o teste.
-7. Verifique o endereço recebido no explorador. Cole seu endereço no explorador de blocos e confirme que a transação de teste aparece com o valor certo. NUNCA confie só na tela do app — a blockchain é a fonte da verdade.
+Os passos abaixo são genéricos, por categoria. Nomes de produtos aparecem só como exemplos, nunca como recomendação de uso.
+
+1. Baixe só da fonte oficial. Use o site oficial ou a loja oficial do aparelho e confira a URL letra por letra. NUNCA baixe a partir de anúncio patrocinado no buscador.
+2. Escolha "criar nova carteira", não "importar". Importar é para quem já tem uma frase, e é justamente essa opção que sites falsos usam para capturar a sua. NUNCA importe nada num site que você não digitou você mesmo.
+3. Anote a frase-semente no papel. O app mostra as 12 ou 24 palavras uma a uma. Escreva na ordem e numeradas (1, 2, 3...). NUNCA fotografe, faça print ou salve na nuvem ou no bloco de notas.
+4. Confirme a frase. O app pede palavras de posições específicas ("qual é a palavra 9? e a 3?"). Isso prova que você anotou certo. NUNCA pule esta etapa achando que "depois anoto".
+5. Crie a senha ou PIN do app. Ela só destranca o app naquele aparelho e é diferente da frase-semente. Se você perder o aparelho, é a frase, não a senha, que recupera tudo em outro. NUNCA confunda as duas nem reutilize senha de outro serviço.
+6. Faça um teste com valor pequeno. Envie um valor mínimo, confira que chegou e envie de volta. NUNCA transfira tudo de uma vez sem o teste.
+7. Confira no explorador de blocos. Cole seu endereço e veja se a transação de teste aparece com o valor certo. NUNCA confie só na tela do app: a blockchain é a fonte da verdade.
 

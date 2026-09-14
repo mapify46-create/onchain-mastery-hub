@@ -60,33 +60,45 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Por que a regra vem antes da compra
 
-Depois que o resultado chega, a memória reescreve o que você pensava. Se deu certo, "eu sabia" (viés de retrospectiva) e "foi habilidade" (viés de autoatribuição). Se deu errado, "foi azar". Escrita antes, a regra guarda o que você de fato pensou.
+Depois que o resultado chega, a cabeça muda a história. Veja o que ela costuma dizer.
 
-Planos do tipo "se acontecer X, eu faço Y", formados antes, aumentam a chance de a pessoa executar o que planejou — um resultado repetido da psicologia do comportamento (Gollwitzer & Sheeran, 2006).
+Escrita antes, a regra guarda o que você de fato pensou.
 
-Este módulo não escreve a sua regra. Ele mostra o que ela precisa ter para ser testada depois. Quando comprar é decisão sua, e fica no papel antes de você ver o próximo token.
+Planos do tipo "se acontecer X, eu faço Y", feitos antes, aumentam a chance de a pessoa cumprir o que planejou. É um resultado repetido da psicologia do comportamento.
+
+Este módulo não escreve a sua regra. Ele mostra o que ela precisa ter para ser testada depois.
+
+Quando comprar é decisão sua. E fica no papel antes de você ver o próximo token.
 
 ### O que uma regra testável precisa ter
 
-Uma regra que não dá para conferir depois não é regra, é intenção. São cinco partes, cada uma escrita de um jeito que outra pessoa conseguiria verificar olhando o diário.
+Uma regra testável tem cinco partes. Cada uma é escrita de um jeito que outra pessoa conseguiria verificar olhando o seu diário.
 
-- Gatilho de entrada: o que precisa acontecer, em termos observáveis, para você comprar. O checklist é o filtro mínimo; o gatilho é seu.
-- Tamanho: quanto entra, em porcentagem do capital, decidido antes de ver o gráfico.
-- Saída por perda: o nível ou a condição em que você sai — e que já fica programada.
-- Saída por ganho e por tempo: quando realizar (a escada do Módulo 4) e quanto tempo esperar sem nada acontecer.
-- O que invalida a regra: o que precisaria acontecer, na revisão, para você parar de usá-la.
+1. Gatilho de entrada: o que precisa acontecer, de um jeito que dá para ver, para você comprar. O checklist é o filtro mínimo. O gatilho é seu.
+2. Tamanho: quanto entra, em porcentagem do capital. Decidido antes de ver o gráfico.
+3. Saída por perda: o nível ou a condição em que você sai. Já fica programada.
+4. Saída por ganho e por tempo: quando realizar (a escada do Módulo 4) e quanto tempo esperar sem nada acontecer.
+5. O que invalida a regra: o que precisaria acontecer, na revisão, para você parar de usá-la.
 
 ### Pré-compromisso: funciona, e falha com frequência
 
-Decidir agora e tornar caro mudar depois funciona. Nas Filipinas, uma conta que travava saques até uma data aumentou a poupança em cerca de 82% em um ano (Ashraf, Karlan & Yin, 2006). Mas só 28% das pessoas aceitaram abrir a conta, e outros estudos mostram muita gente abandonando o compromisso antes do prazo.
+Pré-compromisso é decidir agora e tornar caro mudar de ideia depois.
 
-A lição para a rotina: o compromisso precisa ser rígido o bastante para valer e simples o bastante para você manter. Regra que você quebra toda semana não protege nada.
+A lição para a rotina: o compromisso precisa ser rígido o bastante para valer. E simples o bastante para você manter.
+
+Regra que você quebra toda semana não protege nada.
 
 ### Saída automática, não lembrete
 
-Num experimento, investidores com uma ordem de venda automática (stop-loss) seguraram menos as posições perdedoras — o efeito disposição, de vender o que ganha e segurar o que perde. Um lembrete para "considerar vender" não mudou nada (Fischbacher, Hoffmann & Schudy, 2017).
+Stop-loss é uma ordem de venda automática: você programa um nível, e a venda acontece sozinha quando o preço chega lá.
 
-Em memecoin, a ordem automática também tem limite: numa queda rápida, ela pode executar bem abaixo do nível programado (slippage, Módulo 5). Mesmo assim, é o único pré-compromisso de saída com efeito medido.
+Efeito disposição é o hábito de vender rápido o que ganha e segurar o que perde.
+
+Num experimento (Fischbacher, Hoffmann & Schudy, 2017), investidores receberam uma de duas saídas.
+
+Em memecoin, a ordem automática também tem limite. Numa queda rápida, ela pode executar bem abaixo do nível programado (slippage, Módulo 5).
+
+Mesmo assim, é o único pré-compromisso de saída com efeito medido.
 
 ## Roteiro visual sugerido (diagramas do app, em texto)
 

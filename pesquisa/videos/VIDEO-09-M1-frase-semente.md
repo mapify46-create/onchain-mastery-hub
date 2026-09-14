@@ -60,21 +60,23 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Frase-semente: por que 12 ou 24 palavras SÃO a carteira
 
-A frase-semente (também chamada seed phrase, frase de recuperação ou mnemônica) é uma lista de 12 ou 24 palavras que a carteira gera quando você a cria. Ela segue um padrão chamado BIP-39, que usa uma lista fixa de 2.048 palavras. O aparelho pega uma quantidade de aleatoriedade (entropia), acrescenta uns bits de verificação (checksum, para detectar erros de digitação) e mapeia cada pedaço de 11 bits para uma palavra da lista. 128 bits de entropia viram 12 palavras; 256 bits viram 24 palavras.
+Quando você cria uma carteira, ela mostra uma lista de 12 ou 24 palavras. Essa lista tem vários nomes: frase-semente, seed phrase, frase de recuperação.
 
-O ponto mais importante: as palavras não são só um backup — elas geram a carteira inteira. A frase passa por uma função de embaralhamento (PBKDF2-HMAC-SHA512) e produz uma "semente" de 512 bits. A partir dela, o padrão BIP-32 cria uma árvore de chaves (carteira determinística hierárquica, ou HD), e o BIP-44 organiza essa árvore por moeda e conta. Por isso a mesma frase recria a mesma carteira, com todas as contas e endereços, em qualquer aplicativo compatível. Consequência prática: quem tem as 12/24 palavras tem todo o seu dinheiro, para sempre, em qualquer dispositivo — não precisa da sua senha nem do seu aparelho.
+Todas as suas chaves e todos os seus endereços são calculados a partir dessas palavras. Por isso a mesma frase recria a mesma carteira em qualquer aplicativo compatível.
 
-A outra face da mesma moeda: se você perder as palavras e o aparelho quebrar, ninguém no mundo recupera o seu dinheiro — não há "esqueci minha senha". Guardar a seed com segurança é, portanto, a habilidade de segurança número um de todo o módulo.
+Guardar a frase-semente com segurança é a habilidade número um de todo este módulo.
 
 ### As formas concretas de perder tudo pela seed
 
-A regra de ouro é curta: ninguém legítimo jamais pede a sua seed phrase. Nenhum suporte, nenhuma corretora, nenhum airdrop, nenhum "verificador de carteira". Todo pedido de seed é golpe, sem exceção. Digitar as 12/24 palavras num site é entregar a carteira de mão beijada.
+Nenhum suporte, nenhuma corretora, nenhum airdrop, nenhum "verificador de carteira". Digitar as 12 ou 24 palavras num site é entregar a carteira.
 
-- Tirar foto da frase no celular, fazer print de tela, ou salvá-la na nuvem (Google Drive, iCloud, e-mail, WhatsApp) — se a nuvem ou o celular for invadido, a frase vai junto.
-- Salvar num arquivo de texto no PC ou no gerenciador de senhas do navegador.
-- Digitar a frase num site de phishing que imita a sua carteira, prometendo um airdrop ou "resgate" — nunca se digita a frase-semente em site nenhum.
-- Cair em falso "suporte" (por Discord, Telegram, X/Twitter, e-mail) que pede a frase — suporte legítimo nunca pede a frase-semente.
-- Malware infostealer (ladrão de informações), que varre a máquina atrás de arquivos, dados de extensões de carteira e da área de transferência. Famílias como RedLine e Lumma copiam arquivos de carteira (wallet.dat), dados de extensões de navegador (por exemplo MetaMask) e monitoram o clipboard atrás de frases e endereços.
+**As cinco formas mais comuns de perder a frase:**
+
+- Foto, print de tela ou cópia na nuvem (Google Drive, iCloud, e-mail, WhatsApp). Se a nuvem ou o celular for invadido, a frase vai junto.
+- Arquivo de texto no PC, ou o gerenciador de senhas do navegador.
+- Site de phishing que imita a sua carteira e promete um airdrop ou um "resgate". A frase-semente não se digita em site nenhum.
+- Falso "suporte" no Discord, Telegram, X ou e-mail que pede a frase. Suporte de verdade nunca pede.
+- Malware infostealer, um programa "ladrão de informações" que vasculha o computador atrás de carteiras.
 
 ### Checklist de segurança do app (20 itens)
 

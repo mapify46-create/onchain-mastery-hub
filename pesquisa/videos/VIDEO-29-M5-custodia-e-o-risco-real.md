@@ -60,29 +60,52 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Quem guarda as chaves
 
-Esta é a primeira pergunta a fazer sobre qualquer plataforma, e a resposta muda completamente o seu risco. O Módulo 1 já estabeleceu a regra: "not your keys, not your coins" — se as chaves não são suas, as moedas não são suas.
+Antes de usar qualquer plataforma, pergunte: quem guarda as chaves? A resposta muda o seu risco por completo.
 
-No caso do Axiom, a documentação oficial afirma que o modelo é não-custodial. A FAQ diz, textualmente, que os ativos que você tem "estão sempre sob o seu controle e de mais ninguém", e que os fundos e transações são inteiramente on-chain (docs.axiom.trade/faqs). A infraestrutura de chaves é operada por uma empresa terceirizada, a Turnkey, que gera e usa as chaves dentro de ambientes isolados e declara que nenhuma chave privada é exposta nem a ela nem ao operador do app (turnkey.com/case-studies/axiom-global-defi-trading-platform).
+A regra vem do Módulo 1: "not your keys, not your coins". Se as chaves não são suas, as moedas também não são.
 
-A prova prática mais importante está na página oficial de cadastro: ela instrui o usuário a acessar a frase de recuperação a qualquer momento nas configurações e recomenda importá-la numa carteira comum como Phantom, Rabby ou Solflare, "para garantir que você sempre tenha acesso direto aos seus fundos sob quaisquer circunstâncias" (docs.axiom.trade/getting-started/signup). Uma plataforma que te entrega a semente não está guardando o seu dinheiro.
+**O que a documentação oficial do Axiom diz:**
 
-Na prática isso significa duas coisas ao mesmo tempo. A boa: não existe risco de contraparte no trading spot — não há um saldo depositado dentro da empresa que possa sumir com ela. A pesada: a responsabilidade de segurança é 100% sua. Não há suporte que recupere fundos perdidos, reverta uma assinatura ou desfaça uma operação ruim. A primeira coisa a fazer ao usar qualquer terminal não-custodial é exportar a semente e guardá-la offline, como o Módulo 1 ensinou.
+- A FAQ afirma que os seus ativos "estão sempre sob o seu controle e de mais ninguém".
+- A FAQ também diz que fundos e transações são inteiramente on-chain, ou seja, registrados na própria blockchain.
+- A página de cadastro ensina a ver a frase de recuperação (a semente, as palavras que recriam a carteira) nas configurações, a qualquer momento.
+- A mesma página recomenda importar a semente numa carteira comum, como Phantom, Rabby ou Solflare, "para garantir que você sempre tenha acesso direto aos seus fundos sob quaisquer circunstâncias".
+
+Essa última é a prova prática mais forte. Uma plataforma que te entrega a semente não está guardando o seu dinheiro.
+
+A parte boa: no trading spot, que é comprar e vender o próprio token, não existe saldo depositado na empresa que possa sumir com ela. Isso elimina o risco de contraparte.
+
+A parte pesada: a segurança é 100% sua. Nenhum suporte recupera fundos perdidos, reverte uma assinatura ou desfaz uma operação ruim.
+
+Por isso, o primeiro passo em qualquer terminal não-custodial é exportar a semente e guardá-la offline, como o Módulo 1 ensinou.
 
 ### O risco real não é a custódia, é o app sair do ar
 
-Se as chaves são suas, qual é o risco então? É operacional. O terminal é o seu painel de controle, e um painel de controle pode travar exatamente no minuto em que você precisa dele.
+Se as chaves são suas, a empresa não pode sumir com o seu dinheiro. O risco que sobra é operacional: o terminal parar de funcionar.
 
-Aconteceu de forma documentada em 28 e 29 de agosto de 2025: o pump.fun publicou uma mudança na API sem avisar as ferramentas que dependiam dela, e usuários do Axiom ficaram horas sem conseguir vender, até a mudança ser revertida. Traders relataram perdas concretas no chat da plataforma. Quem tinha a semente exportada conseguiu contornar: abriu a carteira em outro lugar e vendeu direto no site do pump.fun ou no Jupiter.
+O terminal é o seu painel de controle. E um painel pode travar justo no minuto em que você precisa dele.
 
-Essa é a lição inteira, e ela é mecânica, não moral: exportar a semente não é burocracia de segurança, é o seu plano B operacional. Um terminal fora do ar com a sua semente guardada é um inconveniente. Um terminal fora do ar sem ela é uma posição que você não consegue encerrar.
+A lição é mecânica, não moral. Exportar a semente não é burocracia de segurança. É o seu plano B operacional.
+
+Terminal fora do ar, com a semente guardada: um inconveniente.
+
+Terminal fora do ar, sem a semente: uma posição que você não consegue encerrar.
 
 ### O incidente de fevereiro de 2026 e o que ele ensina
 
-Em 26 de fevereiro de 2026, o investigador on-chain ZachXBT publicou uma investigação alegando que funcionários do Axiom abusaram de ferramentas internas de suporte para consultar carteiras e histórico de usuários ao longo de cerca de dez meses. Em poucas horas a própria empresa confirmou publicamente: disse estar "chocada e decepcionada" ao saber que membros da equipe usaram indevidamente as ferramentas internas de suporte para consultar carteiras de usuários, removeu o acesso e prometeu investigar (CoinDesk, 26/02/2026).
+Em 26 de fevereiro de 2026, o investigador on-chain ZachXBT publicou uma investigação sobre o Axiom.
 
-A distinção mecânica aqui é o que interessa para o módulo, e ela é sutil: isso NÃO foi invasão de contrato, roubo de chaves nem saque de fundos. O painel interno dava visibilidade, não controle. Nenhum fundo de usuário foi reportado como roubado e nenhuma chave privada como exposta. A arquitetura não-custodial continuou fazendo o que promete.
+Ela alegava que funcionários abusaram de ferramentas internas de suporte para consultar carteiras e histórico de usuários, ao longo de cerca de dez meses.
 
-Mas é justamente por isso que o caso é útil. Ele mostra que "não-custodial" protege o seu dinheiro e não protege a sua privacidade. Existe uma classe inteira de risco — abuso de privilégio interno — que a autocustódia não resolve, e que não aparece em nenhuma página de marketing. A conclusão prática não é "fuja desta plataforma": é não tratar nenhum terminal como seguro por desenho, e assumir que o que você faz numa plataforma é visível para quem a opera.
+Em poucas horas, a empresa confirmou em público. Disse estar "chocada e decepcionada" com o uso indevido das ferramentas, removeu o acesso e prometeu investigar (CoinDesk, 26/02/2026).
+
+A arquitetura não-custodial continuou fazendo o que promete. É justamente por isso que o caso é útil.
+
+Ele mostra um tipo de risco que a autocustódia não resolve: o abuso de privilégio interno. E esse risco não aparece em nenhuma página de marketing.
+
+A conclusão prática não é "fuja desta plataforma". É não tratar nenhum terminal como seguro por desenho.
+
+Assuma que o que você faz numa plataforma é visível para quem a opera.
 
 ## Itens NÃO VERIFICADOS — o vídeo precisa tratá-los como tal
 

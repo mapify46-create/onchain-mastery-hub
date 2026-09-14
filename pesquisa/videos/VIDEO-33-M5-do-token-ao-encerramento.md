@@ -60,29 +60,41 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### Guardar registro desde a primeira operação
 
-A obrigação de registrar nasce na primeira operação, não quando aparece lucro. Isso conecta diretamente com a seção de impostos do Módulo 1 (IN RFB 2.291/2025 e o programa DeCripto).
+Isso liga direto com a seção de impostos do Módulo 1 (IN RFB 2.291/2025 e o programa DeCripto).
 
-Sobre exportação de histórico pelo próprio terminal: NÃO VERIFICADO. A documentação oficial do Axiom descreve visualizar o histórico de operações no app e dá links para o Solscan, mas não há nenhuma página oficial sobre exportar CSV ou gerar relatório fiscal. Não conte com isso sem confirmar você mesmo no app.
+**Guarde o seu próprio registro de cada compra e venda:**
 
-A boa notícia mecânica é que não depende do terminal. Como todas as transações ficam on-chain, o histórico é sempre recuperável pelo endereço da carteira num explorador de blocos, que permite exportar. Guarde o seu próprio registro — data, valor em reais e custo de aquisição de cada compra e venda.
+- Data.
+- Valor em reais.
+- Custo de aquisição, ou seja, quanto custou comprar.
 
-E o de sempre: isto não é orientação tributária. Guarde o registro e procure um contador.
+Exportar o histórico pelo próprio terminal: NÃO VERIFICADO. Não conte com isso sem confirmar você mesmo no app.
+
+A boa notícia é que você não depende do terminal. Todas as transações ficam on-chain, gravadas na blockchain.
+
+O histórico sempre pode ser recuperado pelo endereço da carteira num explorador de blocos, que permite exportar.
+
+Isto não é orientação tributária. Guarde o registro e procure um contador.
 
 ### Do "vi um token" ao "encerrei a posição"
 
-Este é o fluxo que amarra o módulo inteiro com o Módulo 4. Ele é um processo de disciplina operacional, não um método de achar oportunidade — e a diferença mais importante entre os dois é que este tem saídas pelo caminho.
+Este fluxo amarra este módulo com o Módulo 4. É disciplina operacional, não um método para achar oportunidade.
 
-A ordem dos passos importa, porque cada um deles é uma oportunidade de parar antes de gastar dinheiro:
+A grande diferença é que este processo tem saídas pelo caminho. Por isso a ordem dos passos importa.
 
-1. Abrir o terminal pelo favorito oficial, nunca por link de anúncio ou rede social — existem domínios de phishing imitando plataformas conhecidas.
-2. Buscar pelo endereço do contrato verificado, não pelo nome nem pelo ticker.
-3. Passar o token pela página Checklist antes de comprar: endereço oficial, extensões e autoridades do contrato, concentração de holders, bundles, histórico de quem criou.
-4. Escrever a tese antes de comprar, e junto com ela o ponto de invalidação — onde você admite que errou e sai.
-5. Definir o tamanho da posição e conferir o valor no campo, com atenção redobrada se o botão de compra rápida estiver ligado.
-6. Configurar slippage, prioridade e proteção de MEV conscientemente, e fazer uma operação-teste com valor mínimo primeiro.
-7. Sair em degraus, conforme o plano definido antes da entrada — não conforme o que você está sentindo durante.
+1. Abra o terminal pelo favorito oficial. Nunca por link de anúncio ou rede social: existem sites falsos (phishing) imitando plataformas conhecidas.
+2. Busque pelo endereço do contrato verificado. Nunca pelo nome ou pelo ticker.
+3. Passe o token pela página Checklist antes de comprar: endereço oficial, extensões e autoridades do contrato, concentração de holders, bundles e histórico de quem criou.
+4. Escreva a tese antes de comprar. Junto com ela, escreva o ponto de invalidação: onde você admite que errou e sai.
+5. Defina o tamanho da posição e confira o valor no campo. Atenção redobrada se o botão de compra rápida estiver ligado.
+6. Configure slippage, prioridade e proteção de MEV com consciência. Faça primeiro uma operação-teste com valor mínimo.
+7. Saia em degraus, conforme o plano feito antes da entrada. Não conforme o que você sente durante.
 
-E o passo que não é passo: decidir NÃO operar é um resultado legítimo e frequente do processo, não uma falha dele. Se as checagens acendem alerta ou se você não consegue escrever a tese de forma clara, o movimento certo é não clicar. Como o Módulo 2 estabeleceu, a maioria das memecoins vai a zero — passar na maioria das vezes é o comportamento esperado de quem está seguindo o processo, não sinal de que ele está travado.
+E o passo que não é passo: decidir NÃO operar. É um resultado legítimo e frequente do processo, não uma falha dele.
+
+Se as checagens acendem alerta, ou se você não consegue escrever a tese com clareza, o certo é não clicar.
+
+Como o Módulo 2 mostrou, a maioria das memecoins vai a zero. Passar na maioria das vezes é o esperado de quem segue o processo, não sinal de que ele travou.
 
 ## Roteiro visual sugerido (diagramas do app, em texto)
 

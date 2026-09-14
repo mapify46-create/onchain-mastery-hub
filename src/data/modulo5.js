@@ -61,64 +61,108 @@ export const modulo5 = {
       id: 'o-que-e-terminal',
       aba: 'terminal',
       titulo: 'O que é um terminal de execução',
+      emUmaFrase: 'O terminal é um site que monta a sua ordem e a manda para a DEX. Ele não é a exchange.',
       paragrafos: [
-        'Um terminal de execução on-chain é uma camada de software — um site ou app — ' +
-          'que fica entre a sua carteira e a DEX (a exchange descentralizada onde a troca ' +
-          'realmente acontece). Ele não substitui a blockchain e não guarda uma lista de ' +
-          'preços própria: o que ele faz é montar a transação para você, aplicar as suas ' +
-          'configurações (slippage, prioridade, proteção de MEV) e mandar você assinar.',
-        'A confusão mais comum de iniciante é achar que o terminal "é" a exchange. Não é. ' +
-          'A troca acontece numa pool de liquidez, num contrato inteligente que existe ' +
-          'independentemente dele. Se o terminal sair do ar amanhã, a pool continua lá e ' +
-          'seus tokens continuam na sua carteira — desde que as chaves sejam suas, que é ' +
-          'exatamente o assunto da próxima aba.',
-        'O que você compra ao usar um terminal é conveniência: descoberta de tokens novos, ' +
-          'gráficos, dados de holders, botões de compra rápida, rastreamento de carteiras. ' +
-          'Você não compra preço melhor. Isso precisa ficar claro desde já, porque é o ' +
-          'ponto onde o marketing da categoria mais escorrega.',
+        'Quando você clica em "comprar" num terminal, ele não faz a troca sozinho. Ele ' +
+          'monta a transação, aplica as suas configurações e pede que você assine.',
+        'A troca de verdade acontece na DEX, a exchange descentralizada. Lá, os tokens saem ' +
+          'de uma pool de liquidez: um contrato inteligente que guarda os dois lados da troca.',
+        'O terminal fica no meio, entre a sua carteira e a DEX. Ele não substitui a ' +
+          'blockchain e não tem uma lista de preços própria.',
       ],
+      quadro: [
+        {
+          rotulo: 'O terminal (site ou app)',
+          texto:
+            'Monta a transação, aplica slippage, prioridade e proteção de MEV, e pede a sua ' +
+            'assinatura.',
+        },
+        {
+          rotulo: 'A pool da DEX (contrato)',
+          texto: 'Faz a troca de fato. Continua existindo mesmo se o terminal sair do ar.',
+        },
+      ],
+      paragrafosFinais: [
+        'Se o terminal sair do ar amanhã, a pool continua lá. Seus tokens continuam na sua ' +
+          'carteira, desde que as chaves sejam suas. Esse é o assunto da próxima aba.',
+        'O que você paga ao usar um terminal é conveniência: descoberta de tokens novos, ' +
+          'gráficos, dados de holders, botões de compra rápida e rastreamento de carteiras.',
+        'Você não paga por um preço melhor. É neste ponto que o marketing da categoria mais ' +
+          'escorrega.',
+      ],
+      detalhe: {
+        titulo: 'as palavras desta seção',
+        lista: [
+          'Slippage: quanto o preço pode mudar entre enviar a ordem e ela executar. Está na aba Configurações.',
+          'Prioridade (priority fee): um pagamento extra para a transação entrar mais rápido.',
+          'Proteção de MEV: defesa contra bots que tentam lucrar se posicionando em volta da sua ordem.',
+          'Holders: as carteiras que têm aquele token.',
+        ],
+      },
     },
     {
       id: 'as-tres-camadas',
       aba: 'terminal',
       titulo: 'As três camadas — e o que cada uma cobra',
+      emUmaFrase:
+        'A mesma troca pode ser feita de três jeitos. Só o terminal soma uma taxa própria por cima.',
       paragrafos: [
-        'Existem três formas de fazer a mesma troca, e cada camada que você acrescenta é ' +
-          'uma taxa a mais. Entender isso é o que permite responder à pergunta "por que ' +
-          'estou pagando isso?" em vez de simplesmente pagar.',
-        'Ir direto na DEX (Raydium, Orca, PumpSwap) significa interagir com a pool de ' +
-          'liquidez pela interface dela. Você paga a taxa da pool e mais nada — no padrão ' +
-          'da Raydium, 0,25%, dos quais 0,22% vão para quem forneceu a liquidez ' +
-          '(docs.raydium.io/ray/protocol-fees).',
-        'Usar um agregador (o Jupiter é o exemplo mais conhecido na Solana) acrescenta uma ' +
-          'busca: ele varre dezenas de DEXs procurando a melhor rota para a sua ordem. No ' +
-          'modo manual, o Jupiter não cobra taxa de protocolo pelo swap básico — você ' +
-          'segue pagando a taxa da DEX por baixo (docs.jup.ag/user-docs/trade/swap/manual-mode).',
-        'Usar um terminal (Axiom, Photon, BullX) acrescenta a taxa da plataforma POR CIMA ' +
-          'de tudo isso. No Axiom, a documentação oficial lista de 0,95% líquido no nível ' +
-          'de entrada a 0,75% no topo (docs.axiom.trade/getting-started/fees/axiom-fees). ' +
-          'Essa taxa não compra preço melhor: compra a interface e as ferramentas.',
+        'Toda troca termina numa pool de liquidez. O que muda entre os três jeitos é o que ' +
+          'fica entre você e essa pool.',
+        'Saber isso responde à pergunta "por que estou pagando isso?". Sem essa resposta, ' +
+          'você só paga.',
       ],
+      quadro: [
+        {
+          rotulo: 'DEX direto',
+          texto:
+            'Você usa o site da própria DEX, como Raydium, Orca ou PumpSwap. Paga só a taxa ' +
+            'da pool: 0,25% no padrão da Raydium.',
+        },
+        {
+          rotulo: 'Agregador',
+          texto:
+            'Um site como o Jupiter procura a melhor rota entre dezenas de DEXs. No modo ' +
+            'manual, não cobra taxa própria no swap básico.',
+        },
+        {
+          rotulo: 'Terminal',
+          texto:
+            'Um site como Axiom, Photon ou BullX. Cobra a taxa da plataforma POR CIMA de ' +
+            'tudo: no Axiom, de 0,95% a 0,75%.',
+        },
+      ],
+      paragrafosFinais: [
+        'A taxa do terminal não compra preço melhor. Ela paga a interface e as ferramentas.',
+      ],
+      detalhe: {
+        titulo: 'as letras miúdas de cada camada',
+        lista: [
+          'Raydium: dos 0,25%, 0,22% vão para quem forneceu a liquidez (docs.raydium.io/ray/protocol-fees).',
+          'Jupiter: a taxa que ele não cobra se chama taxa de protocolo. Você segue pagando a taxa da DEX por baixo (docs.jup.ag/user-docs/trade/swap/manual-mode).',
+          'Axiom: 0,95% líquido é o nível de entrada e 0,75% é o topo (docs.axiom.trade/getting-started/fees/axiom-fees).',
+        ],
+      },
     },
     {
       id: 'alternativas-da-categoria',
       aba: 'terminal',
       titulo: 'Não existe uma opção única',
+      emUmaFrase: 'O Axiom é só o exemplo deste módulo. Não é indicação, e não é a única opção.',
       paragrafos: [
-        'O Axiom é usado neste módulo como exemplo concreto porque é preciso mostrar uma ' +
-          'interface real, com números reais, para o conteúdo não virar abstração. Ele não ' +
-          'é indicação, e não é a única plataforma da categoria. Saber que há alternativas ' +
-          'importa por um motivo prático: evita você achar que "operar on-chain" e "usar ' +
-          'aquele site" são a mesma coisa.',
-        'Uma linha neutra de cada uma que estava ativa na data desta pesquisa, sem ranking ' +
-          'e sem comparação de qualidade:',
+        'O módulo usa o Axiom porque precisa mostrar uma tela real, com números reais. Sem ' +
+          'isso, o conteúdo vira abstração.',
+        'Saber que existem outras plataformas evita uma confusão: achar que "operar ' +
+          'on-chain" e "usar aquele site" são a mesma coisa.',
       ],
+      listaTitulo:
+        'Outras plataformas ativas na data desta pesquisa, sem ranking e sem comparação de qualidade:',
       lista: [
         'Photon — terminal web para Solana, com foco em escanear e executar manualmente.',
-        'BullX (NEO) — terminal com suporte a mais de uma rede.',
-        'Trojan — opera dentro do Telegram: rastrear, negociar, copiar operações.',
+        'BullX (NEO) — terminal que funciona em mais de uma rede.',
+        'Trojan — funciona dentro do aplicativo Telegram: rastrear, negociar e copiar operações.',
         'Bonkbot — bot de Telegram, foco em simplicidade, só Solana.',
-        'GMGN — web e Telegram, cobertura multi-rede, foco em copy trading e anti-MEV.',
+        'GMGN — web e Telegram, várias redes, foco em copiar operações de outras carteiras (copy trading) e em proteção contra MEV.',
         'Banana Gun, Maestro e Padre — outros nomes ativos na categoria em 2026.',
       ],
     },
@@ -128,74 +172,123 @@ export const modulo5 = {
       id: 'custodia-do-axiom',
       aba: 'custodia',
       titulo: 'Quem guarda as chaves',
+      emUmaFrase:
+        'No Axiom, segundo a documentação oficial, as chaves ficam com você. O dinheiro fica ' +
+        'protegido, e a segurança fica toda nas suas mãos.',
       paragrafos: [
-        'Esta é a primeira pergunta a fazer sobre qualquer plataforma, e a resposta muda ' +
-          'completamente o seu risco. O Módulo 1 já estabeleceu a regra: "not your keys, ' +
-          'not your coins" — se as chaves não são suas, as moedas não são suas.',
-        'No caso do Axiom, a documentação oficial afirma que o modelo é não-custodial. A ' +
-          'FAQ diz, textualmente, que os ativos que você tem "estão sempre sob o seu ' +
-          'controle e de mais ninguém", e que os fundos e transações são inteiramente ' +
-          'on-chain (docs.axiom.trade/faqs). A infraestrutura de chaves é operada por uma ' +
-          'empresa terceirizada, a Turnkey, que gera e usa as chaves dentro de ambientes ' +
-          'isolados e declara que nenhuma chave privada é exposta nem a ela nem ao ' +
-          'operador do app (turnkey.com/case-studies/axiom-global-defi-trading-platform).',
-        'A prova prática mais importante está na página oficial de cadastro: ela instrui o ' +
-          'usuário a acessar a frase de recuperação a qualquer momento nas configurações e ' +
-          'recomenda importá-la numa carteira comum como Phantom, Rabby ou Solflare, "para ' +
-          'garantir que você sempre tenha acesso direto aos seus fundos sob quaisquer ' +
-          'circunstâncias" (docs.axiom.trade/getting-started/signup). Uma plataforma que ' +
-          'te entrega a semente não está guardando o seu dinheiro.',
-        'Na prática isso significa duas coisas ao mesmo tempo. A boa: não existe risco de ' +
-          'contraparte no trading spot — não há um saldo depositado dentro da empresa que ' +
-          'possa sumir com ela. A pesada: a responsabilidade de segurança é 100% sua. Não ' +
-          'há suporte que recupere fundos perdidos, reverta uma assinatura ou desfaça uma ' +
-          'operação ruim. A primeira coisa a fazer ao usar qualquer terminal não-custodial ' +
-          'é exportar a semente e guardá-la offline, como o Módulo 1 ensinou.',
+        'Antes de usar qualquer plataforma, pergunte: quem guarda as chaves? A resposta muda ' +
+          'o seu risco por completo.',
+        'A regra vem do Módulo 1: "not your keys, not your coins". Se as chaves não são ' +
+          'suas, as moedas também não são.',
       ],
+      quadro: [
+        {
+          rotulo: 'Custodial',
+          texto:
+            'A empresa guarda as chaves. Você deposita, e o saldo fica dentro dela. Se ela ' +
+            'cair ou sumir, o saldo vai junto.',
+        },
+        {
+          rotulo: 'Não-custodial',
+          texto:
+            'As chaves ficam com você. O dinheiro fica na sua carteira, na blockchain. É o ' +
+            'modelo que a documentação do Axiom afirma usar.',
+        },
+      ],
+      listaTitulo: 'O que a documentação oficial do Axiom diz:',
+      lista: [
+        'A FAQ afirma que os seus ativos "estão sempre sob o seu controle e de mais ninguém".',
+        'A FAQ também diz que fundos e transações são inteiramente on-chain, ou seja, registrados na própria blockchain.',
+        'A página de cadastro ensina a ver a frase de recuperação (a semente, as palavras que recriam a carteira) nas configurações, a qualquer momento.',
+        'A mesma página recomenda importar a semente numa carteira comum, como Phantom, Rabby ou Solflare, "para garantir que você sempre tenha acesso direto aos seus fundos sob quaisquer circunstâncias".',
+      ],
+      paragrafosFinais: [
+        'Essa última é a prova prática mais forte. Uma plataforma que te entrega a semente ' +
+          'não está guardando o seu dinheiro.',
+        'A parte boa: no trading spot, que é comprar e vender o próprio token, não existe ' +
+          'saldo depositado na empresa que possa sumir com ela. Isso elimina o risco de ' +
+          'contraparte.',
+        'A parte pesada: a segurança é 100% sua. Nenhum suporte recupera fundos perdidos, ' +
+          'reverte uma assinatura ou desfaz uma operação ruim.',
+        'Por isso, o primeiro passo em qualquer terminal não-custodial é exportar a semente ' +
+          'e guardá-la offline, como o Módulo 1 ensinou.',
+      ],
+      detalhe: {
+        titulo: 'quem opera as chaves por trás do Axiom',
+        paragrafos: [
+          'A infraestrutura de chaves é operada por uma empresa terceirizada, a Turnkey. Ela ' +
+            'gera e usa as chaves dentro de ambientes isolados.',
+          'A Turnkey declara que nenhuma chave privada fica exposta, nem a ela nem ao ' +
+            'operador do app (turnkey.com/case-studies/axiom-global-defi-trading-platform).',
+          'Risco de contraparte é o risco de quem guarda o seu dinheiro falhar. Fontes do ' +
+            'Axiom: docs.axiom.trade/faqs e docs.axiom.trade/getting-started/signup.',
+        ],
+      },
     },
     {
       id: 'o-risco-real-e-o-frontend',
       aba: 'custodia',
       titulo: 'O risco real não é a custódia, é o app sair do ar',
+      emUmaFrase:
+        'Com as chaves na sua mão, o maior risco é o app travar na hora em que você precisa vender.',
       paragrafos: [
-        'Se as chaves são suas, qual é o risco então? É operacional. O terminal é o seu ' +
-          'painel de controle, e um painel de controle pode travar exatamente no minuto em ' +
+        'Se as chaves são suas, a empresa não pode sumir com o seu dinheiro. O risco que ' +
+          'sobra é operacional: o terminal parar de funcionar.',
+        'O terminal é o seu painel de controle. E um painel pode travar justo no minuto em ' +
           'que você precisa dele.',
-        'Aconteceu de forma documentada em 28 e 29 de agosto de 2025: o pump.fun publicou ' +
-          'uma mudança na API sem avisar as ferramentas que dependiam dela, e usuários do ' +
-          'Axiom ficaram horas sem conseguir vender, até a mudança ser revertida. Traders ' +
-          'relataram perdas concretas no chat da plataforma. Quem tinha a semente exportada ' +
-          'conseguiu contornar: abriu a carteira em outro lugar e vendeu direto no site do ' +
-          'pump.fun ou no Jupiter.',
-        'Essa é a lição inteira, e ela é mecânica, não moral: exportar a semente não é ' +
-          'burocracia de segurança, é o seu plano B operacional. Um terminal fora do ar com ' +
-          'a sua semente guardada é um inconveniente. Um terminal fora do ar sem ela é uma ' +
-          'posição que você não consegue encerrar.',
+      ],
+      exemplo: {
+        titulo: 'O que aconteceu em 28 e 29 de agosto de 2025',
+        passos: [
+          'O pump.fun publicou uma mudança na API sem avisar as ferramentas que dependiam dela. API é a porta pela qual um sistema conversa com outro.',
+          'Usuários do Axiom ficaram horas sem conseguir vender, até a mudança ser revertida.',
+          'Traders relataram perdas concretas no chat da plataforma.',
+          'Quem tinha a semente exportada contornou o problema: abriu a carteira em outro lugar e vendeu direto no site do pump.fun ou no Jupiter.',
+        ],
+      },
+      paragrafosFinais: [
+        'A lição é mecânica, não moral. Exportar a semente não é burocracia de segurança. É ' +
+          'o seu plano B operacional.',
+        'Terminal fora do ar, com a semente guardada: um inconveniente.',
+        'Terminal fora do ar, sem a semente: uma posição que você não consegue encerrar.',
       ],
     },
     {
       id: 'incidente-fevereiro-2026',
       aba: 'custodia',
       titulo: 'O incidente de fevereiro de 2026 e o que ele ensina',
+      emUmaFrase: '"Não-custodial" protege o seu dinheiro. Não protege a sua privacidade.',
       paragrafos: [
         'Em 26 de fevereiro de 2026, o investigador on-chain ZachXBT publicou uma ' +
-          'investigação alegando que funcionários do Axiom abusaram de ferramentas internas ' +
-          'de suporte para consultar carteiras e histórico de usuários ao longo de cerca de ' +
-          'dez meses. Em poucas horas a própria empresa confirmou publicamente: disse estar ' +
-          '"chocada e decepcionada" ao saber que membros da equipe usaram indevidamente as ' +
-          'ferramentas internas de suporte para consultar carteiras de usuários, removeu o ' +
-          'acesso e prometeu investigar (CoinDesk, 26/02/2026).',
-        'A distinção mecânica aqui é o que interessa para o módulo, e ela é sutil: isso ' +
-          'NÃO foi invasão de contrato, roubo de chaves nem saque de fundos. O painel ' +
-          'interno dava visibilidade, não controle. Nenhum fundo de usuário foi reportado ' +
-          'como roubado e nenhuma chave privada como exposta. A arquitetura não-custodial ' +
-          'continuou fazendo o que promete.',
-        'Mas é justamente por isso que o caso é útil. Ele mostra que "não-custodial" ' +
-          'protege o seu dinheiro e não protege a sua privacidade. Existe uma classe ' +
-          'inteira de risco — abuso de privilégio interno — que a autocustódia não resolve, ' +
-          'e que não aparece em nenhuma página de marketing. A conclusão prática não é ' +
-          '"fuja desta plataforma": é não tratar nenhum terminal como seguro por desenho, e ' +
-          'assumir que o que você faz numa plataforma é visível para quem a opera.',
+          'investigação sobre o Axiom.',
+        'Ela alegava que funcionários abusaram de ferramentas internas de suporte para ' +
+          'consultar carteiras e histórico de usuários, ao longo de cerca de dez meses.',
+        'Em poucas horas, a empresa confirmou em público. Disse estar "chocada e ' +
+          'decepcionada" com o uso indevido das ferramentas, removeu o acesso e prometeu ' +
+          'investigar (CoinDesk, 26/02/2026).',
+      ],
+      quadro: [
+        {
+          rotulo: 'O que NÃO foi',
+          texto:
+            'Invasão de contrato, roubo de chaves ou saque de fundos. Nenhum fundo foi ' +
+            'reportado como roubado e nenhuma chave privada como exposta.',
+        },
+        {
+          rotulo: 'O que foi',
+          texto:
+            'Abuso de privilégio interno: gente de dentro olhando dados de usuários. O painel ' +
+            'dava visibilidade, não controle.',
+        },
+      ],
+      paragrafosFinais: [
+        'A arquitetura não-custodial continuou fazendo o que promete. É justamente por isso ' +
+          'que o caso é útil.',
+        'Ele mostra um tipo de risco que a autocustódia não resolve: o abuso de privilégio ' +
+          'interno. E esse risco não aparece em nenhuma página de marketing.',
+        'A conclusão prática não é "fuja desta plataforma". É não tratar nenhum terminal como ' +
+          'seguro por desenho.',
+        'Assuma que o que você faz numa plataforma é visível para quem a opera.',
       ],
     },
 
@@ -204,72 +297,123 @@ export const modulo5 = {
       id: 'a-taxa-anunciada-nao-e-o-custo',
       aba: 'taxas',
       titulo: 'A taxa anunciada não é o que você paga',
+      emUmaFrase:
+        'O número anunciado é só a fatia da plataforma. Uma compra tem cinco camadas de custo.',
       paragrafos: [
-        'Toda plataforma da categoria anuncia um número — "1%", "a partir de 0,75%". Esse ' +
-          'número é honesto no que diz e enganoso no que omite: ele é apenas a fatia da ' +
-          'plataforma. Uma compra tem cinco camadas de custo, e a taxa anunciada é uma ' +
-          'delas.',
-        'As outras quatro são: a taxa-base da rede Solana, fixa em 5.000 lamports por ' +
-          'assinatura (0,000005 SOL) e cobrada mesmo quando a transação falha ' +
-          '(solana.com/docs/core/fees); o priority fee, um pagamento extra ao validador ' +
-          'para a transação entrar mais rápido; a gorjeta de MEV (o "bribe", via Jito), que ' +
-          'compra proteção contra ser atacado por bots; e a taxa da pool onde a troca ' +
-          'acontece.',
-        'Os defaults do próprio Axiom para as duas configuráveis são 0,001 SOL de priority ' +
-          'fee e 0,001 SOL de gorjeta (docs.axiom.trade/getting-started/fees/solana-fees). ' +
-          'Essas duas não são receita da plataforma — vão para validadores. Mas saem do seu ' +
-          'bolso do mesmo jeito, e são justamente as que não aparecem no número anunciado.',
-        'Repare no que isso significa: numa compra pequena, a taxa da plataforma pode ser ' +
-          'a MENOR das camadas. Não a maior. É o contrário do que a intuição sugere, e é ' +
-          'por isso que a matriz abaixo existe.',
+        'Toda plataforma anuncia um número, como "1%" ou "a partir de 0,75%". Esse número é ' +
+          'verdadeiro, mas incompleto.',
+        'Ele mostra só o que a plataforma cobra. As outras quatro camadas saem do seu bolso ' +
+          'do mesmo jeito, e não aparecem nele.',
       ],
+      listaTitulo: 'As cinco camadas de uma compra:',
+      lista: [
+        'Taxa da plataforma: a única anunciada.',
+        'Taxa-base da rede Solana: 5.000 lamports por assinatura, ou 0,000005 SOL. Lamport é a menor fração do SOL. É cobrada mesmo quando a transação falha.',
+        'Priority fee: um pagamento extra ao validador, o computador que registra transações na rede, para a sua entrar mais rápido. No Axiom, o padrão é 0,001 SOL.',
+        'Gorjeta de MEV (o "bribe", via Jito): compra proteção contra ataques de bots. No Axiom, o padrão é 0,001 SOL.',
+        'Taxa da pool: cobrada pela pool onde a troca acontece.',
+      ],
+      exemplo: {
+        titulo: 'Uma compra de R$100 num token na bonding curve (a primeira linha da matriz)',
+        passos: [
+          'Taxa da plataforma, a anunciada: ≈ R$0,94.',
+          'Custos fixos (rede, priority fee e gorjeta): ≈ R$1,03.',
+          'Taxa da pool: ≈ R$1,24.',
+          'Total: ≈ R$3,20, ou 3,2% do valor. A taxa anunciada foi a MENOR das três partes.',
+        ],
+      },
+      paragrafosFinais: [
+        'Numa compra pequena, a taxa da plataforma pode ser a menor das camadas, e não a ' +
+          'maior. É o contrário do que a intuição sugere. Por isso a matriz desta aba existe.',
+      ],
+      detalhe: {
+        titulo: 'quem recebe o priority fee e a gorjeta',
+        paragrafos: [
+          'Essas duas não são receita da plataforma. Vão para validadores. Mas são ' +
+            'justamente as que não aparecem no número anunciado.',
+          'Fontes: padrões do Axiom em docs.axiom.trade/getting-started/fees/solana-fees. ' +
+            'Taxa-base cobrada mesmo em falha em solana.com/docs/core/fees.',
+        ],
+      },
     },
     {
       id: 'custo-fixo-pesa-mais-em-ordem-pequena',
       aba: 'taxas',
       titulo: 'Por que ordem pequena é mecanicamente penalizada',
+      emUmaFrase: 'Parte do custo é fixa. Por isso, quanto menor a ordem, maior o peso das taxas.',
       paragrafos: [
-        'Parte do custo é percentual e parte é fixa. Essa diferença é o que faz a mesma ' +
-          'operação custar percentuais completamente diferentes conforme o tamanho.',
-        'O priority fee e a gorjeta somam 0,002 SOL nos valores padrão. Isso é fixo: custa ' +
-          'igual se você move o equivalente a R$50 ou a R$5.000. Numa ordem de R$100, esses ' +
-          'mesmos 0,002 SOL representam cerca de 1% do valor. Numa ordem dez vezes maior, ' +
-          'representam 0,1%. A conta é a mesma; o peso é dez vezes menor.',
-        'E vale lembrar de um detalhe que a matriz não mostra: toda operação é ida e volta. ' +
-          'Você paga esse conjunto de taxas ao comprar e paga de novo ao vender — inclusive ' +
-          'quando a operação dá errado e você sai no prejuízo.',
-        'A conclusão é mecânica e não é conselho de tamanho de posição: existe um valor ' +
-          'abaixo do qual o atrito das taxas domina o resultado. Saber calcular onde fica ' +
-          'esse ponto é diferente de receber um número pronto de alguém.',
+        'Algumas taxas são percentuais: crescem junto com a ordem. Outras são fixas: custam ' +
+          'o mesmo valor em SOL, qualquer que seja o tamanho.',
+        'O priority fee e a gorjeta somam 0,002 SOL nos valores padrão. Custam igual se você ' +
+          'move o equivalente a R$50 ou a R$5.000.',
+      ],
+      exemplo: {
+        titulo: 'Os mesmos 0,002 SOL em duas ordens',
+        passos: [
+          'Ordem de R$100: os 0,002 SOL pesam cerca de 1% do valor.',
+          'Ordem dez vezes maior: os mesmos 0,002 SOL pesam cerca de 0,1%.',
+          'A taxa é a mesma. O peso ficou dez vezes menor.',
+        ],
+      },
+      paragrafosFinais: [
+        'A matriz não mostra um detalhe: toda operação é ida e volta. Você paga essas taxas ' +
+          'ao comprar e paga de novo ao vender, inclusive quando sai no prejuízo.',
+        'Existe um valor abaixo do qual o atrito das taxas domina o resultado. Isto não é ' +
+          'conselho de tamanho de posição.',
+        'É saber calcular onde fica esse ponto, em vez de receber um número pronto de alguém.',
       ],
     },
     {
       id: 'o-venue-muda-o-custo',
       aba: 'taxas',
       titulo: 'O mesmo terminal cobra diferente conforme onde o token está',
+      emUmaFrase:
+        'A taxa da pool depende de onde o token está, não do terminal. Na bonding curve, ela é ' +
+        'cinco vezes a de uma AMM madura (1,25% contra 0,25%).',
       paragrafos: [
-        'A quinta camada — a taxa da pool — não depende do terminal. Depende de onde o ' +
-          'token está no ciclo de vida dele, e a variação é grande o bastante para mudar a ' +
-          'conta inteira.',
-        'Um token ainda na bonding curve do pump.fun paga 1,25% de taxa de pool, decomposta ' +
-          'oficialmente em 0,300% para o criador do token e 0,95% para o protocolo ' +
-          '(pump.fun/docs/fees). Depois de "graduar" para uma pool canônica do PumpSwap, ' +
-          'continua em 1,25% enquanto o market cap é pequeno, e cai por faixas conforme ' +
-          'cresce. Numa AMM madura como a Raydium, a taxa padrão é 0,25% ' +
-          '(docs.raydium.io/ray/protocol-fees).',
-        'Ou seja: a mesma ordem, no mesmo terminal, no mesmo dia, custa cinco vezes mais em ' +
-          'taxa de pool se o token for novo. Isso não é um defeito do terminal — é onde a ' +
-          'troca está acontecendo. Mas é informação que muda a sua conta e que raramente ' +
-          'aparece explicada.',
-        'Isso não é só taxa anunciada: um estudo da Uniswap Labs sobre 534 mil negociações ' +
-          'reais mediu o custo total efetivo (taxa, deslizamento de preço e o que bots de ' +
-          'MEV extraem) em 140 pontos-base por dólar negociado numa memecoin popular, contra ' +
-          '22 pontos-base num par entre duas moedas estáveis — 6 vezes mais caro, numa pool ' +
-          'mais funda do que a maioria das de memecoin recém-lançada. O mesmo estudo mediu ' +
-          'a chance de sofrer deslizamento de preço causado por um bot adversário como ' +
-          'cerca de 80% maior ao negociar a memecoin do que ao negociar a moeda madura ' +
-          '(Adams, Chan, Markovich & Wan, "Don\'t Let MEV Slip", Financial Cryptography 2024).',
+        'O "venue" é o lugar onde a troca acontece de fato: a pool em que o token está sendo ' +
+          'negociado.',
+        'Um token passa por lugares diferentes ao longo da vida. Cada lugar cobra uma taxa ' +
+          'de pool diferente, e isso muda a conta inteira.',
       ],
+      listaTitulo: 'O caminho de um token do pump.fun, e a taxa de pool em cada etapa:',
+      ordenada: true,
+      lista: [
+        'Bonding curve do pump.fun: o token acabou de nascer, e uma fórmula define o preço conforme as pessoas compram. Taxa da pool: 1,25%.',
+        'PumpSwap: o token "graduou" e ganhou a sua pool canônica, a pool oficial dele. A taxa continua em 1,25% enquanto o market cap (o valor total do token) é pequeno, e cai por faixas conforme cresce.',
+        'AMM madura, como a Raydium: a taxa padrão é 0,25%. AMM é a DEX em que a própria pool calcula o preço.',
+      ],
+      exemplo: {
+        titulo: 'A mesma ordem de R$512, no mesmo terminal (linhas 2 e 3 da matriz)',
+        passos: [
+          'Token na bonding curve: taxa da pool ≈ R$6,39. Custo total ≈ 2,4%.',
+          'Token já numa AMM madura: taxa da pool ≈ R$1,28. Custo total ≈ 1,4%.',
+          'Só mudou o lugar onde o token está.',
+        ],
+      },
+      paragrafosFinais: [
+        'Isso não é defeito do terminal. É onde a troca acontece. Mas muda a sua conta, e ' +
+          'raramente aparece explicado.',
+        'E a taxa é só uma parte do custo. Um estudo com 534 mil negociações reais mediu o ' +
+          'custo total numa memecoin popular: 6 vezes o de um par entre duas moedas estáveis.',
+      ],
+      detalhe: {
+        titulo: 'a divisão da taxa e o estudo da Uniswap Labs',
+        paragrafos: [
+          'Na bonding curve, os 1,25% se dividem oficialmente em 0,300% para o criador do ' +
+            'token e 0,95% para o protocolo (pump.fun/docs/fees). A taxa da Raydium está em ' +
+            'docs.raydium.io/ray/protocol-fees.',
+          'O estudo: Adams, Chan, Markovich & Wan, "Don\'t Let MEV Slip", Financial ' +
+            'Cryptography 2024, feito pela Uniswap Labs.',
+          'Ele mediu o custo total efetivo: taxa, deslizamento de preço e o que bots de MEV ' +
+            'extraem. Deu 140 pontos-base por dólar negociado na memecoin, contra 22 no par ' +
+            'de moedas estáveis. Um ponto-base é 0,01%.',
+          'A pool da memecoin estudada era mais funda, ou seja, tinha mais liquidez, do que a ' +
+            'maioria das de memecoin recém-lançada.',
+          'O mesmo estudo mediu a chance de sofrer deslizamento causado por um bot adversário: ' +
+            'cerca de 80% maior na memecoin do que na moeda madura.',
+        ],
+      },
     },
 
     // ============================== CONFIGURAÇÕES ==============================
@@ -277,78 +421,139 @@ export const modulo5 = {
       id: 'tipos-de-ordem',
       aba: 'configuracoes',
       titulo: 'Tipos de ordem e a pergunta que ninguém responde',
+      emUmaFrase:
+        'Não assuma que uma ordem limite dispara com o app fechado. A documentação oficial não diz.',
       paragrafos: [
-        'A ordem a mercado é o swap padrão: compra ou vende ao preço atual, na hora. É o ' +
-          'que acontece quando você clica no botão de comprar. A ordem limite executa só ' +
-          'quando o preço atinge o nível que você definiu — a documentação oficial descreve ' +
-          'que você pode definir um preço preciso e "se afastar da tela" ' +
-          '(docs.axiom.trade/axiom/swap/limit-orders). Há também compras programadas em ' +
-          'faixas (DCA, ou ordens em degraus) e, em material de terceiros, menções a ' +
-          'stop-loss e take-profit como variações de ordem limite.',
-        'Agora a pergunta que decide se você pode confiar numa ordem limite, e que a ' +
-          'documentação oficial NÃO responde: a ordem fica registrada na blockchain, ou um ' +
-          'servidor da plataforma monitora o preço e dispara a transação quando chega a ' +
-          'hora?',
-        'A diferença é enorme. Uma ordem que descansa on-chain executa mesmo que a empresa ' +
-          'suma. Uma ordem que depende de um servidor executa enquanto aquele servidor ' +
-          'estiver de pé — e você já viu, na aba de custódia, que servidores caem. A ' +
-          'narrativa de que existem "monitores on-chain 24/7" aparece apenas em sites ' +
-          'clones e afiliados, não na documentação oficial.',
-        'Enquanto isso não estiver documentado, a postura correta é operacional: não assuma ' +
-          'que uma ordem limite dispara com o app fechado. Teste você mesmo, com um valor ' +
-          'mínimo, antes de confiar nela para uma posição que importa.',
+        'Ao clicar em comprar, você faz uma ordem a mercado. Ela compra ou vende ao preço ' +
+          'atual, na hora. É o swap padrão.',
+        'A ordem limite só executa quando o preço chega ao nível que você definiu. A ' +
+          'documentação do Axiom diz que você pode definir um preço preciso e "se afastar da ' +
+          'tela".',
+        'Aí vem a pergunta que decide se dá para confiar nela: quem fica vigiando o preço ' +
+          'enquanto você está longe? A documentação oficial NÃO responde.',
       ],
+      quadro: [
+        {
+          rotulo: 'Se a ordem fica registrada na blockchain',
+          texto: 'Ela executa mesmo que a empresa suma.',
+        },
+        {
+          rotulo: 'Se um servidor da plataforma vigia o preço',
+          texto:
+            'Ela só executa enquanto esse servidor estiver de pé. E servidores caem, como a ' +
+            'aba Custódia mostrou.',
+        },
+      ],
+      paragrafosFinais: [
+        'Até isso estar documentado, não conte com a ordem limite com o app fechado. Teste ' +
+          'você mesmo, com um valor mínimo, antes de usá-la numa posição que importa.',
+      ],
+      detalhe: {
+        titulo: 'outros tipos de ordem e os "monitores 24/7"',
+        paragrafos: [
+          'Existem também compras programadas em faixas: DCA, que é comprar aos poucos, ou ' +
+            'ordens em degraus. Página oficial: docs.axiom.trade/axiom/swap/limit-orders.',
+          'Material de terceiros menciona stop-loss (vender se cair até um preço) e ' +
+            'take-profit (vender se subir até um preço) como variações de ordem limite.',
+          'A promessa de "monitores on-chain 24/7" aparece só em sites clones e afiliados, ' +
+            'não na documentação oficial.',
+        ],
+      },
     },
     {
       id: 'slippage-priority-mev',
       aba: 'configuracoes',
       titulo: 'As três configurações que quebram a operação',
+      emUmaFrase:
+        'Estas configurações só decidem se a transação executa, falha ou é explorada. ' +
+        'Nenhuma aumenta chance de lucro.',
       paragrafos: [
-        'Slippage é quanta variação de preço você autoriza entre o momento em que envia a ' +
-          'ordem e o momento em que ela executa. Os dois extremos falham de formas ' +
-          'diferentes: baixo demais e a transação reverte com "slippage exceeded" — você ' +
-          'perde a taxa de rede e a oportunidade; alto demais e você autoriza ser executado ' +
-          'a um preço muito pior, o que numa pool rasa vira um convite. A própria ' +
-          'documentação da Solana diz que limitar o slippage é a defesa mais eficaz contra ' +
-          'ataques de sandwich (solana.com/developers/guides/advanced/mev-protection).',
-        'Priority fee é o pagamento extra ao validador para a sua transação ser incluída ' +
-          'mais rápido. Baixo demais em momento de congestionamento significa demora ou ' +
-          'falha; alto demais significa pagar caro à toa. O default do Axiom é 0,001 SOL, e ' +
-          'a plataforma afirma calcular automaticamente valores recomendados com base nas ' +
-          'transações do momento.',
-        'A proteção de MEV tem três modos na documentação oficial: Off (exposto a ' +
-          'front-running), Reduced (roteia via Jito, com algum risco remanescente) e Secure ' +
-          '(só validadores da lista, mais protegido e possivelmente mais lento). A própria ' +
-          'documentação recomenda usar o modo Secure sempre que possível.',
-        'Existe ainda o botão de compra rápida, que executa um valor pré-configurado num ' +
-          'clique só, sem tela de revisão. É conveniente e é exatamente por isso que ele ' +
-          'aparece na lista de erros comuns. Nenhuma dessas configurações aumenta chance de ' +
-          'lucro: todas controlam apenas se a transação executa, falha ou é explorada.',
+        'Antes de comprar, o terminal usa três configurações. Errar qualquer uma quebra a ' +
+          'operação, para um lado ou para o outro.',
       ],
+      quadro: [
+        {
+          rotulo: 'Slippage',
+          texto:
+            'Quanto o preço pode mudar entre enviar a ordem e ela executar. Baixo demais: a ' +
+            'transação falha. Alto demais: você aceita um preço muito pior.',
+        },
+        {
+          rotulo: 'Priority fee',
+          texto:
+            'Pagamento extra ao validador para entrar mais rápido. Baixo demais no ' +
+            'congestionamento: demora ou falha. Alto demais: paga caro à toa.',
+        },
+        {
+          rotulo: 'Proteção de MEV',
+          texto:
+            'Defesa contra bots que se posicionam em volta da sua ordem. No Axiom há três ' +
+            'modos: Off, Reduced e Secure.',
+        },
+      ],
+      exemplo: {
+        titulo: 'Slippage na prática (valores hipotéticos, só para ilustrar)',
+        passos: [
+          'Você aceita slippage de 1%. O preço piora mais que 1% antes de a ordem executar.',
+          'A rede cancela a transação com "slippage exceeded". Você perde a taxa de rede e a oportunidade, mas não compra caro.',
+          'Agora você aceita 50%. A ordem quase sempre passa, mas pode executar a um preço muito pior. Numa pool rasa, isso vira um convite para bots.',
+        ],
+      },
+      paragrafosFinais: [
+        'A documentação da Solana diz que limitar o slippage é a defesa mais eficaz contra ' +
+          'ataques de sandwich. Nesse ataque, um bot compra logo antes de você e vende logo ' +
+          'depois.',
+        'Na proteção de MEV, a própria documentação do Axiom recomenda usar o modo Secure ' +
+          'sempre que possível.',
+        'Cuidado com o botão de compra rápida. Ele executa um valor pré-configurado num ' +
+          'clique, sem tela de revisão. É conveniente, e por isso está na lista de erros ' +
+          'comuns.',
+      ],
+      detalhe: {
+        titulo: 'os três modos de MEV e o priority fee automático',
+        lista: [
+          'Off: exposto a front-running, que é alguém passar na frente da sua ordem.',
+          'Reduced: roteia via Jito, com algum risco remanescente.',
+          'Secure: só validadores da lista. Mais protegido e possivelmente mais lento.',
+          'O priority fee padrão do Axiom é 0,001 SOL. A plataforma afirma calcular valores recomendados automaticamente, com base nas transações do momento.',
+          'Fonte sobre slippage como defesa: solana.com/developers/guides/advanced/mev-protection.',
+        ],
+      },
     },
     {
       id: 'ler-a-tela-de-operacao',
       aba: 'configuracoes',
       titulo: 'Ler a tela — e o que ela não prova',
+      emUmaFrase: 'Ler os painéis reduz surpresa. Não garante segurança.',
       paragrafos: [
-        'A tela de um token num terminal costuma reunir gráfico de preço, market cap, ' +
-          'volume, liquidez da pool, número e distribuição de holders, e um feed de ' +
-          'transações recentes com link para o explorador de blocos. É bastante informação ' +
-          'de uma vez, e o Módulo 3 já ensinou o que procurar nela.',
-        'As checagens que importam são as mesmas de lá. Liquidez travada ou queimada: se a ' +
-          'LP não está travada, quem criou o token pode retirar a liquidez e sumir. ' +
-          'Concentração de holders: poucas carteiras com percentual alto significam risco de ' +
-          'despejo. E a detecção de bundles — compras coordenadas no mesmo bloco, que ' +
-          'simulam demanda orgânica.',
-        'Sobre bundles, vale notar como a própria documentação do Axiom descreve a ' +
-          'limitação da ferramenta: se pelo menos quatro transações acontecem no mesmo ' +
-          'bloco, elas são sinalizadas como possível bundle, e a documentação admite que ' +
-          '"nenhum método de detecção de bundle é 100% infalível — alguns falsos positivos ' +
-          'ou bundles não detectados são inevitáveis" (docs.axiom.trade/faqs).',
-        'Esse é o enquadramento certo para a tela inteira: ler os painéis reduz surpresa, ' +
-          'não garante segurança. Nenhum indicador, sinal social ou rastreamento de carteira ' +
-          'é prova de que um token é seguro.',
+        'A tela de um token junta muita coisa: gráfico de preço, market cap, volume, liquidez ' +
+          'da pool, número e distribuição de holders.',
+        'Tem também um feed de transações recentes, com link para o explorador de blocos, o ' +
+          'site que mostra tudo o que foi gravado na blockchain.',
+        'É muita informação de uma vez. O Módulo 3 já ensinou o que procurar nela.',
       ],
+      listaTitulo: 'As três checagens que importam:',
+      lista: [
+        'Liquidez travada ou queimada. Se a LP, o recibo da liquidez, não está travada, quem criou o token pode retirar a liquidez e sumir.',
+        'Concentração de holders. Poucas carteiras com percentual alto significam risco de despejo, uma venda grande de uma vez.',
+        'Bundles. São compras coordenadas no mesmo bloco, que simulam demanda orgânica.',
+      ],
+      paragrafosFinais: [
+        'Nenhum indicador, sinal social ou rastreamento de carteira é prova de que um token é ' +
+          'seguro.',
+      ],
+      detalhe: {
+        titulo: 'como o Axiom marca bundles, e onde isso falha',
+        paragrafos: [
+          'Pela documentação do Axiom, se pelo menos quatro transações acontecem no mesmo ' +
+            'bloco, elas são sinalizadas como possível bundle.',
+          'A própria documentação admite: "nenhum método de detecção de bundle é 100% ' +
+            'infalível — alguns falsos positivos ou bundles não detectados são inevitáveis" ' +
+            '(docs.axiom.trade/faqs).',
+          'Falso positivo é alertar sem haver bundle. Bundle não detectado é o contrário: ' +
+            'haver bundle e não alertar.',
+        ],
+      },
     },
 
     // ================================== ERROS ==================================
@@ -356,48 +561,77 @@ export const modulo5 = {
       id: 'erros-de-execucao',
       aba: 'erros',
       titulo: 'Os erros que custam dinheiro sem envolver o mercado',
+      emUmaFrase: 'Dá para perder dinheiro sem o preço se mexer: basta errar na operação.',
       paragrafos: [
-        'Existe uma classe de prejuízo que não tem nada a ver com o token ter subido ou ' +
-          'caído. São erros de operação, e a característica deles é que a pessoa sabia a ' +
-          'regra e errou mesmo assim, por pressa ou por reflexo.',
-        'O mais caro é comprar o token errado. Nomes e tickers podem ser duplicados à ' +
-          'vontade — qualquer um cria um token chamado igual ao que está em alta. A regra ' +
-          'mecânica que resolve é buscar sempre pelo endereço do contrato verificado, nunca ' +
-          'pelo nome. Ticker é apelido; endereço é identidade.',
-        'Os outros aparecem na aba de erros com detalhe. Em resumo: slippage alto numa pool ' +
-          'rasa, em que a sua própria compra move o preço; quantia errada digitada ou botão ' +
-          'de compra rápida ainda configurado no valor da operação anterior; assinar sem ler ' +
-          'o que a transação autoriza (o Módulo 1 já mostrou onde isso termina); e perseguir ' +
-          'uma vela que já subiu, que é erro de disciplina disfarçado de decisão.',
-        'Um erro de fundo, que precede todos os outros: operar na carteira principal. Uma ' +
-          'carteira separada só para operar limita o estrago se o dispositivo ou o app forem ' +
-          'comprometidos, e não custa nada criar.',
+        'Alguns prejuízos não têm nada a ver com o token subir ou cair. São erros de operação.',
+        'Neles, a pessoa sabia a regra e errou mesmo assim, por pressa ou por reflexo.',
+        'O mais caro é comprar o token errado. Qualquer um pode criar um token com o mesmo ' +
+          'nome e o mesmo ticker, a sigla curta, do que está em alta.',
+      ],
+      quadro: [
+        {
+          rotulo: 'Nome e ticker',
+          texto: 'São apelidos. Podem ser repetidos à vontade.',
+        },
+        {
+          rotulo: 'Endereço do contrato',
+          texto: 'É a identidade. Busque sempre pelo endereço verificado, nunca pelo nome.',
+        },
+      ],
+      listaTitulo: 'Os outros erros comuns, em resumo:',
+      lista: [
+        'Slippage alto numa pool rasa, em que a sua própria compra move o preço.',
+        'Quantia digitada errada, ou botão de compra rápida ainda no valor da operação anterior.',
+        'Assinar sem ler o que a transação autoriza. O Módulo 1 já mostrou onde isso termina.',
+        'Perseguir uma vela que já subiu. É erro de disciplina disfarçado de decisão.',
+      ],
+      paragrafosFinais: [
+        'E um erro que vem antes de todos: operar na carteira principal.',
+        'Uma carteira separada só para operar limita o estrago se o dispositivo ou o app ' +
+          'forem comprometidos. E não custa nada criar.',
       ],
     },
     {
       id: 'bots-de-sniping',
       aba: 'erros',
       titulo: 'Por que velocidade não é uma disputa que você vença',
+      emUmaFrase:
+        'Um bot reage em milissegundos. Você leva de 30 a 60 segundos. Essa corrida não é sua.',
       paragrafos: [
-        'Bots de sniping são programas que monitoram a blockchain e compram tokens novos ' +
-          'em frações de segundo depois que a liquidez é criada. Esta seção não ensina a ' +
-          'usar bot: ela existe para calibrar expectativa, porque a expectativa errada aqui ' +
-          'custa dinheiro real.',
-        'A conta é simples. Um slot na Solana passou de 400 ms para 350 ms em 21 de agosto ' +
-          'de 2026, na primeira redução desde o lançamento da rede (SIMD-0525, ' +
-          'solana.com/upgrades/reduced-slot-times). Bots reagem na casa das dezenas de ' +
-          'milissegundos, com transações pré-assinadas e infraestrutura colada à produção de ' +
-          'blocos. Um humano leva de 30 a 60 segundos entre ver a informação e ter a ' +
-          'transação confirmada.',
-        'O diferencial deles não é inteligência, é infraestrutura. E a consequência prática ' +
-          'é desconfortável: quando você vê um token "novo" já subindo, os bots já entraram. ' +
-          'Qualquer preço que você consegue no instante do lançamento é um preço que um bot ' +
-          'mais rápido decidiu recusar.',
-        'Isso vale também para a ideia de automatizar a sua própria reação com inteligência ' +
-          'artificial. Uma chamada de modelo leva segundos; a disputa se decide em ' +
-          'milissegundos. Colocar uma camada de IA no meio do caminho te deixa mais lento, ' +
-          'não mais rápido.',
+        'Bots de sniping são programas que vigiam a blockchain. Eles compram tokens novos ' +
+          'frações de segundo depois que a liquidez é criada.',
+        'Esta seção não ensina a usar bot. Ela existe para ajustar a sua expectativa, porque ' +
+          'expectativa errada aqui custa dinheiro real.',
       ],
+      quadro: [
+        {
+          rotulo: 'O bot',
+          texto:
+            'Reage na casa das dezenas de milissegundos, com transações pré-assinadas e ' +
+            'infraestrutura colada à produção de blocos.',
+        },
+        {
+          rotulo: 'Você',
+          texto: 'Leva de 30 a 60 segundos entre ver a informação e ter a transação confirmada.',
+        },
+      ],
+      paragrafosFinais: [
+        'O diferencial deles não é inteligência. É infraestrutura.',
+        'Quando você vê um token "novo" já subindo, os bots já entraram. O preço que você ' +
+          'consegue no lançamento é um preço que um bot mais rápido decidiu recusar.',
+        'Pôr inteligência artificial para reagir por você não resolve. Uma chamada de modelo ' +
+          'leva segundos, e a disputa se decide em milissegundos. A IA te deixa mais lento.',
+      ],
+      detalhe: {
+        titulo: 'o tamanho de um slot na Solana',
+        paragrafos: [
+          'Slot é a janela de tempo em que a rede produz um bloco novo. Um milissegundo (ms) ' +
+            'é um milésimo de segundo.',
+          'Em 21 de agosto de 2026, o slot passou de 400 ms para 350 ms. Foi a primeira ' +
+            'redução desde o lançamento da rede (SIMD-0525, ' +
+            'solana.com/upgrades/reduced-slot-times).',
+        ],
+      },
     },
 
     // ================================= PROCESSO =================================
@@ -405,51 +639,66 @@ export const modulo5 = {
       id: 'registro-para-imposto',
       aba: 'processo',
       titulo: 'Guardar registro desde a primeira operação',
+      emUmaFrase:
+        'A obrigação de registrar começa na primeira operação, não quando aparece lucro.',
       paragrafos: [
-        'A obrigação de registrar nasce na primeira operação, não quando aparece lucro. ' +
-          'Isso conecta diretamente com a seção de impostos do Módulo 1 (IN RFB 2.291/2025 ' +
-          'e o programa DeCripto).',
-        'Sobre exportação de histórico pelo próprio terminal: NÃO VERIFICADO. A ' +
-          'documentação oficial do Axiom descreve visualizar o histórico de operações no ' +
-          'app e dá links para o Solscan, mas não há nenhuma página oficial sobre exportar ' +
-          'CSV ou gerar relatório fiscal. Não conte com isso sem confirmar você mesmo no ' +
-          'app.',
-        'A boa notícia mecânica é que não depende do terminal. Como todas as transações ' +
-          'ficam on-chain, o histórico é sempre recuperável pelo endereço da carteira num ' +
-          'explorador de blocos, que permite exportar. Guarde o seu próprio registro — data, ' +
-          'valor em reais e custo de aquisição de cada compra e venda.',
-        'E o de sempre: isto não é orientação tributária. Guarde o registro e procure um ' +
-          'contador.',
+        'Isso liga direto com a seção de impostos do Módulo 1 (IN RFB 2.291/2025 e o ' +
+          'programa DeCripto).',
       ],
+      listaTitulo: 'Guarde o seu próprio registro de cada compra e venda:',
+      lista: [
+        'Data.',
+        'Valor em reais.',
+        'Custo de aquisição, ou seja, quanto custou comprar.',
+      ],
+      paragrafosFinais: [
+        'Exportar o histórico pelo próprio terminal: NÃO VERIFICADO. Não conte com isso sem ' +
+          'confirmar você mesmo no app.',
+        'A boa notícia é que você não depende do terminal. Todas as transações ficam ' +
+          'on-chain, gravadas na blockchain.',
+        'O histórico sempre pode ser recuperado pelo endereço da carteira num explorador de ' +
+          'blocos, que permite exportar.',
+        'Isto não é orientação tributária. Guarde o registro e procure um contador.',
+      ],
+      detalhe: {
+        titulo: 'o que a documentação do Axiom diz sobre histórico',
+        paragrafos: [
+          'A documentação oficial descreve ver o histórico de operações no app e dá links ' +
+            'para o Solscan, um explorador de blocos.',
+          'Mas não há nenhuma página oficial sobre exportar CSV, o arquivo de planilha, nem ' +
+            'sobre gerar relatório fiscal.',
+        ],
+      },
     },
     {
       id: 'do-token-ao-encerramento',
       aba: 'processo',
       titulo: 'Do "vi um token" ao "encerrei a posição"',
+      emUmaFrase:
+        'Cada passo é uma chance de parar antes de gastar dinheiro. "Não opero" é um resultado válido.',
       paragrafos: [
-        'Este é o fluxo que amarra o módulo inteiro com o Módulo 4. Ele é um processo de ' +
-          'disciplina operacional, não um método de achar oportunidade — e a diferença mais ' +
-          'importante entre os dois é que este tem saídas pelo caminho.',
-        'A ordem dos passos importa, porque cada um deles é uma oportunidade de parar antes ' +
-          'de gastar dinheiro:',
+        'Este fluxo amarra este módulo com o Módulo 4. É disciplina operacional, não um ' +
+          'método para achar oportunidade.',
+        'A grande diferença é que este processo tem saídas pelo caminho. Por isso a ordem dos ' +
+          'passos importa.',
       ],
       ordenada: true,
       lista: [
-        'Abrir o terminal pelo favorito oficial, nunca por link de anúncio ou rede social — existem domínios de phishing imitando plataformas conhecidas.',
-        'Buscar pelo endereço do contrato verificado, não pelo nome nem pelo ticker.',
-        'Passar o token pela página Checklist antes de comprar: endereço oficial, extensões e autoridades do contrato, concentração de holders, bundles, histórico de quem criou.',
-        'Escrever a tese antes de comprar, e junto com ela o ponto de invalidação — onde você admite que errou e sai.',
-        'Definir o tamanho da posição e conferir o valor no campo, com atenção redobrada se o botão de compra rápida estiver ligado.',
-        'Configurar slippage, prioridade e proteção de MEV conscientemente, e fazer uma operação-teste com valor mínimo primeiro.',
-        'Sair em degraus, conforme o plano definido antes da entrada — não conforme o que você está sentindo durante.',
+        'Abra o terminal pelo favorito oficial. Nunca por link de anúncio ou rede social: existem sites falsos (phishing) imitando plataformas conhecidas.',
+        'Busque pelo endereço do contrato verificado. Nunca pelo nome ou pelo ticker.',
+        'Passe o token pela página Checklist antes de comprar: endereço oficial, extensões e autoridades do contrato, concentração de holders, bundles e histórico de quem criou.',
+        'Escreva a tese antes de comprar. Junto com ela, escreva o ponto de invalidação: onde você admite que errou e sai.',
+        'Defina o tamanho da posição e confira o valor no campo. Atenção redobrada se o botão de compra rápida estiver ligado.',
+        'Configure slippage, prioridade e proteção de MEV com consciência. Faça primeiro uma operação-teste com valor mínimo.',
+        'Saia em degraus, conforme o plano feito antes da entrada. Não conforme o que você sente durante.',
       ],
       paragrafosFinais: [
-        'E o passo que não é passo: decidir NÃO operar é um resultado legítimo e frequente ' +
-          'do processo, não uma falha dele. Se as checagens acendem alerta ou se você não ' +
-          'consegue escrever a tese de forma clara, o movimento certo é não clicar. Como o ' +
-          'Módulo 2 estabeleceu, a maioria das memecoins vai a zero — passar na maioria das ' +
-          'vezes é o comportamento esperado de quem está seguindo o processo, não sinal de ' +
-          'que ele está travado.',
+        'E o passo que não é passo: decidir NÃO operar. É um resultado legítimo e frequente do ' +
+          'processo, não uma falha dele.',
+        'Se as checagens acendem alerta, ou se você não consegue escrever a tese com clareza, ' +
+          'o certo é não clicar.',
+        'Como o Módulo 2 mostrou, a maioria das memecoins vai a zero. Passar na maioria das ' +
+          'vezes é o esperado de quem segue o processo, não sinal de que ele travou.',
       ],
     },
   ],

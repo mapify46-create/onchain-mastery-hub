@@ -29,18 +29,35 @@ export const modulo3 = {
     {
       id: 'dois-pilares',
       titulo: 'Por que duas checagens, e não uma só',
+      emUmaFrase:
+        'Antes de comprar, você precisa de duas respostas: por que o token chama atenção, e se ' +
+        'o contrato por trás dele merece confiança.',
       paragrafos: [
-        'O pilar social cobre X/Twitter, Discord e Telegram: é onde a atenção nasce, antes ' +
-          'de virar preço. Ver uma conta grande interagir com um projeto é um sinal cedo — ' +
-          'mas sinal social nenhum prova que o contrato por trás é seguro.',
-        'O pilar técnico cobre gráfico, contrato, liquidez e holders: mostra se o que está ' +
-          'por trás do hype resiste a uma checagem. Um contrato limpo sem nenhuma atenção ' +
-          'também não vale nada — sem atenção não há comprador.',
-        'Os dois pilares se completam. Uma tese de entrada (Módulo 4) só fica de pé quando ' +
-          'apoiada nos dois ao mesmo tempo: "este token é quem diz ser, e por que está ' +
-          'chamando atenção agora" (social) e "o que o contrato e as carteiras ainda permitem ' +
-          'fazer contra mim" (técnico). Passar nas duas checagens não torna um token seguro: ' +
-          'só quer dizer que ele não mostrou os problemas que dá para ver.',
+        'O pilar social é o que as pessoas estão falando. Ele cobre X/Twitter, Discord e ' +
+          'Telegram. É ali que a atenção nasce, antes de virar preço.',
+        'Ver uma conta grande interagir com um projeto é um sinal cedo. Mas nenhum sinal ' +
+          'social prova que o contrato por trás é seguro.',
+        'O pilar técnico é o que dá para conferir por conta própria. Ele cobre gráfico, ' +
+          'contrato (o programa que cria o token e define as regras dele), liquidez (o dinheiro ' +
+          'disponível para comprar e vender) e holders (as carteiras que têm o token).',
+        'Um contrato limpo sem nenhuma atenção também não vale nada. Sem atenção, não aparece ' +
+          'comprador.',
+      ],
+      quadro: [
+        {
+          rotulo: 'Pilar social pergunta',
+          texto: 'Este token é quem diz ser? Por que está chamando atenção agora?',
+        },
+        {
+          rotulo: 'Pilar técnico pergunta',
+          texto: 'O que o contrato e as carteiras ainda permitem fazer contra mim?',
+        },
+      ],
+      paragrafosFinais: [
+        'Os dois pilares se completam. Uma tese de entrada (Módulo 4) só fica de pé quando está ' +
+          'apoiada nos dois ao mesmo tempo.',
+        'Atenção: passar nas duas checagens não torna um token seguro. Só quer dizer que ele não ' +
+          'mostrou os problemas que dá para ver.',
       ],
     },
   ],
@@ -438,76 +455,122 @@ export const modulo3 = {
       {
         id: 'o-que-e',
         titulo: 'O que é uma narrativa, e o que ela não é',
+        emUmaFrase: 'Narrativa é um tema que puxa vários tokens juntos, e não o hype de um token só.',
         paragrafos: [
-          'Uma narrativa é um tema que puxa vários tokens juntos. Quando a atenção vai para ' +
-            '"agentes de IA", sobem ao mesmo tempo vários tokens com esse tema, e aparecem ' +
-            'centenas de cópias. O hype de um token só não é narrativa.',
-          'Ela importa porque memecoin sobe e desce por atenção (Módulo 2), e a narrativa é a ' +
-            'forma que a atenção toma. Mas saber qual é a narrativa do momento não diz qual token ' +
-            'comprar, nem quando. A seção "Narrativa e preço" mostra o que a pesquisa mediu — e é ' +
-            'pouco.',
+          'Um exemplo: quando a atenção vai para "agentes de IA", vários tokens com esse tema sobem ' +
+            'ao mesmo tempo. Logo depois aparecem centenas de cópias.',
+          'Isso importa porque memecoin sobe e desce por atenção (Módulo 2). A narrativa é a forma ' +
+            'que essa atenção toma.',
+        ],
+        quadro: [
+          { rotulo: 'É narrativa', texto: 'Um tema, como "agentes de IA", que puxa vários tokens ao mesmo tempo.' },
+          { rotulo: 'Não é narrativa', texto: 'O hype de um token só.' },
+        ],
+        paragrafosFinais: [
+          'Mas saber a narrativa do momento não diz qual token comprar, nem quando. A seção ' +
+            '"Narrativa e preço" mostra o que a pesquisa mediu, e é pouco.',
         ],
       },
       {
         id: 'onde-nasce',
         titulo: 'Onde a narrativa nasce',
+        emUmaFrase:
+          'A narrativa quase sempre nasce fora da blockchain: primeiro vem o post, a notícia ou o ' +
+          'vídeo, e só depois o token.',
         paragrafos: [
-          'Quase sempre fora da blockchain. Um estudo com os 15,2 milhões de tokens do pump.fun em ' +
-            'dois anos achou 23,5% deles criados logo depois de um post no X ou no Truth Social; ' +
-            '31 desses posts renderam pelo menos US$ 1 milhão cada a quem criou o token ("Meme ' +
-            'Coin Factories", preprint de 2026). O token é a reação; o post, a notícia ou o vídeo ' +
-            'vieram antes.',
-          'Os casos confirmam o desenho: o PNUT surgiu na esteira da apreensão e morte do esquilo ' +
-            'Peanut em Nova York, no fim de outubro de 2024; o GOAT nasceu em outubro de 2024 ' +
-            'empurrado pelos posts de um bot de IA, o Truth Terminal.',
-          'Qual rede recebe a atenção primeiro — Telegram, X, TikTok, Discord — ninguém mediu. Os ' +
-            'estudos que existem comparam uma rede com o preço, não uma rede com outra. O que se ' +
-            'sabe de ordem é sobre golpe organizado: em canais VIP de pump-and-dump, o nome da ' +
-            'moeda sai de 12 a 24 horas antes do sinal público (Ardia & Bluteau, International ' +
-            'Review of Financial Analysis, 2024). Quem vê o sinal na rede aberta chegou depois de ' +
-            'quem organizou.',
-          'As cópias vêm depois, e confirmam o desenho. O mesmo estudo do pump.fun contou 1,5 ' +
-            'milhão de tokens que copiam nome, símbolo, descrição e imagem de outro — mais de 10% ' +
-            'de tudo. Entre os originais que ganharam cópia, 9,2% graduaram; entre as cópias, ' +
-            '0,86%. A cópia é sintoma de uma narrativa que já está andando, não a origem dela. E ' +
-            'o número alto dos originais tem um viés: só ganha cópia quem já chamou atenção.',
+          'Pense no token como uma reação. Um assunto chama atenção nas redes, e alguém cria um ' +
+            'token com aquele tema.',
+          'Um estudo olhou os 15,2 milhões de tokens criados no pump.fun em dois anos. Achou 23,5% ' +
+            'deles criados logo depois de um post no X ou no Truth Social.',
+          'Para quem cria, isso pode render muito: 31 desses posts renderam pelo menos US$ 1 milhão ' +
+            'cada a quem criou o token.',
         ],
+        exemplo: {
+          titulo: 'Dois casos reais',
+          passos: [
+            'Fim de outubro de 2024: o esquilo Peanut é apreendido e morto em Nova York. Na esteira ' +
+              'do caso, surge o token PNUT.',
+            'Outubro de 2024: o token GOAT nasce empurrado pelos posts de um bot de IA, o Truth ' +
+              'Terminal.',
+          ],
+        },
+        paragrafosFinais: [
+          'Depois do primeiro token vêm as cópias. Elas são sintoma de uma narrativa que já está ' +
+            'andando, não a origem dela.',
+          'Em qual rede a atenção aparece primeiro? Telegram, X, TikTok ou Discord: ninguém mediu.',
+          'Em golpe organizado, a ordem é conhecida. Em canais VIP de pump-and-dump (grupos que ' +
+            'inflam o preço e vendem em cima de quem chega depois), o nome da moeda sai de 12 a 24 ' +
+            'horas antes do sinal público.',
+          'Ou seja: quem vê o sinal na rede aberta chegou depois de quem organizou.',
+        ],
+        detalhe: {
+          titulo: 'os estudos e os números das cópias',
+          paragrafos: [
+            'O estudo dos 15,2 milhões de tokens é o "Meme Coin Factories", um preprint de 2026. ' +
+              'Preprint é um estudo divulgado antes de passar pela revisão de outros cientistas.',
+            'O mesmo estudo contou 1,5 milhão de tokens que copiam nome, símbolo, descrição e ' +
+              'imagem de outro. Isso é mais de 10% de tudo.',
+            'Entre os originais que ganharam cópia, 9,2% graduaram. Entre as cópias, só 0,86%. ' +
+              'Graduar é completar a fase inicial do pump.fun e passar a ser negociado fora dela.',
+            'O número alto dos originais tem um viés: só ganha cópia quem já chamou atenção.',
+            'Por que ninguém sabe qual rede vem primeiro: os estudos que existem comparam uma rede ' +
+              'com o preço, não uma rede com outra.',
+            'O dado dos canais VIP é de Ardia & Bluteau, International Review of Financial ' +
+              'Analysis, 2024.',
+          ],
+        },
       },
       {
         id: 'fabricada',
         titulo: 'Quanto da atenção é fabricada',
+        emUmaFrase:
+          'Uma parte grande da atenção que você vê é fabricada, por bots, por grupos organizados e ' +
+          'por divulgação paga.',
         paragrafos: [
-          'Uma parte grande. Num levantamento de três meses com mais de 50 milhões de mensagens no ' +
-            'X, no Telegram e no Discord, mais de 56% das contas do X que espalhavam convites para ' +
-            'grupos eram bots ou foram suspensas, e 93% dos links postados por bots levavam a ' +
-            'canais de pump-and-dump no Telegram (Nizzoli et al., IEEE Access, 2020). No Discord, ' +
-            'o mesmo levantamento achou um único canal de pump-and-dump, contra 296 no Telegram.',
-          'A escala é grande: o estudo do pump.fun achou 800 mil canais públicos e 236 mil ' +
-            'privados do Telegram ligados a tokens da plataforma, e 17% das negociações eram wash ' +
-            'trading. O top 1% dos grupos de criadores criou 58,6% de todos os tokens.',
-          'Some a isso os calls pagos da aba "Pilar social na prática": a narrativa que você vê ' +
-            'chegando pode ser campanha.',
+          'Bot é uma conta automática que se passa por pessoa. Um levantamento com mais de 50 ' +
+            'milhões de mensagens no X, no Telegram e no Discord mediu o peso deles.',
+          'Mais de 56% das contas do X que espalhavam convites para grupos eram bots ou foram ' +
+            'suspensas.',
+          'E 93% dos links postados por bots levavam a canais de pump-and-dump no Telegram.',
+          'No estudo do pump.fun, 17% das negociações eram wash trading. Wash trading é comprar e ' +
+            'vender de si mesmo, só para parecer que há movimento.',
+          'Some a isso os calls pagos, da aba "Pilar social na prática". Call é quando alguém com ' +
+            'público indica um token. A narrativa que você vê chegando pode ser campanha.',
         ],
+        detalhe: {
+          titulo: 'a escala e as fontes',
+          paragrafos: [
+            'O levantamento das mensagens durou três meses (Nizzoli et al., IEEE Access, 2020). No ' +
+              'Discord, ele achou um único canal de pump-and-dump, contra 296 no Telegram.',
+            'O estudo do pump.fun achou 800 mil canais públicos e 236 mil privados do Telegram ' +
+              'ligados a tokens da plataforma.',
+            'No mesmo estudo, o top 1% dos grupos de criadores criou 58,6% de todos os tokens.',
+          ],
+        },
       },
       {
         id: 'ciclo',
         titulo: 'O ciclo de vida de uma narrativa',
+        emUmaFrase:
+          'Uma narrativa nasce, cresce, chega ao pico, satura e morre, parecido com as fases de um ' +
+          'token do Módulo 2.',
         paragrafos: [
-          'As cinco narrativas de 2024 e 2025 com dados públicos seguiram um desenho parecido com ' +
-            'as quatro fases de um token do Módulo 2. Os sinais abaixo descrevem o que aconteceu; ' +
-            'nenhum foi medido como gatilho de entrada ou de saída.',
+          'As cinco narrativas de 2024 e 2025 com dados públicos seguiram esse desenho.',
+          'Os sinais abaixo descrevem o que aconteceu. Nenhum foi medido como aviso de hora de ' +
+            'entrar ou de sair.',
         ],
         listaTitulo: 'As fases, e o que deu para ver em cada uma:',
+        ordenada: true,
         lista: [
           'Nascimento: um evento fora de cripto (post, notícia, vídeo viral) e um primeiro token ' +
             'que chama atenção.',
-          'Crescimento: aparecem vários tokens com o mesmo tema, uma corretora grande lista um ' +
-            'deles, uma figura pública entra na conversa. O PNUT foi listado na Binance em ' +
-            '11/11/2024, com Elon Musk usando o esquilo no X.',
+          'Crescimento: aparecem vários tokens com o mesmo tema. Uma corretora grande lista um ' +
+            'deles, e uma figura pública entra na conversa. Exemplo: o PNUT foi listado na Binance ' +
+            'em 11/11/2024, com Elon Musk usando o esquilo no X.',
           'Pico: o valor somado do tema para de subir. A imprensa fora de cripto costuma chegar ' +
-            'aqui ou depois — nos casos PNUT e LIBRA, a cobertura veio no topo, não antes.',
-          'Saturação: continuam nascendo tokens do tema enquanto o valor dele já cai. Há registro ' +
-            'disso nos agentes de IA e no Believe; nos outros três casos, não há dado.',
+            'aqui ou depois. Nos casos PNUT e LIBRA, a cobertura veio no topo, não antes.',
+          'Saturação: continuam nascendo tokens do tema, mas o valor dele já cai. Há registro ' +
+            'disso nos agentes de IA e no Believe. Nos outros três casos, não há dado.',
           'Morte: as cópias perdem quase tudo. Dos 30 tokens de celebridades lançados na Solana a ' +
             'partir de maio de 2024, a queda média foi de 94% em cerca de um mês.',
         ],
@@ -515,73 +578,129 @@ export const modulo3 = {
       {
         id: 'narrativa-e-preco',
         titulo: 'Narrativa move o preço? O que está medido',
+        emUmaFrase:
+          'A narrativa explica por que um token chama atenção, mas não há evidência de que ela ' +
+          'ajude a prever o preço.',
         paragrafos: [
-          'Menos do que o mercado repete. Não existe estudo revisado por pares que ligue, com um ' +
-            'número, a atenção nas redes ao preço de memecoins de launchpad. Os revisados que ' +
-            'chegam perto medem outra coisa: um compara o sentimento no X com a quantidade de ' +
-            'negociações, não com o preço (Li et al., ACM Web Science 2025); outro só descreve ' +
-            'médias (Long, Wong & Cai, WWW 2025).',
-          'Fora dos launchpads, o que existe aponta para o lado ruim: depois do tweet de um ' +
-            'influenciador, o preço sobe 1,83% no dia e cai 6,53% em 30 dias (Merkley et al., ' +
-            '2024). Em grupos de pump no Telegram, os sinais vêm segundos antes do preço (Moura et ' +
-            'al., preprint de 2026) — quem lê o sinal chega depois.',
-          'Em cripto grande, onde há mais estudo, o quadro é o mesmo. A atenção nas redes prevê ' +
-            'melhor quanto vai se negociar e quanto o preço vai oscilar do que para que lado ele ' +
-            'vai (Shen, Urquhart & Wang, 2019). Quando prevê a direção, o efeito dura minutos: com ' +
-            'um milhão de mensagens sobre o Bitcoin, o sinal só valia por 15 minutos, e os autores ' +
-            'escrevem que custos de transação razoáveis tornam impossível lucrar com ele (Guégan & ' +
-            'Renault, Finance Research Letters, 2021). E muitas vezes a seta aponta ao contrário: ' +
-            'o preço sobe primeiro, e aí as pessoas falam dele (Süssmuth, Journal of Forecasting, ' +
-            '2021).',
-          'A conta que nenhum estudo fez para memecoin dá para fazer aqui: se o sinal social ' +
-            'rende, no melhor caso, de 1% a 3% por poucos minutos, e entrar e sair de uma memecoin ' +
-            'custa de 3 a 6 pontos (Módulo 5), o custo come o sinal antes de ele virar lucro.',
-          'Um preprint de 2026 achou que tokens com link de Telegram no cadastro graduam cerca de ' +
-            '9 vezes mais no pump.fun (Kamat). Não use isso como sinal: ele mede a presença de um ' +
-            'link, o sinal mais barato de falsificar que existe, e a coleta cobriu só os primeiros ' +
-            'minutos de cada token.',
-          'A frase honesta: saber a narrativa ajuda a entender por que um token está chamando ' +
-            'atenção. Não há evidência de que ajude a prever o preço dele.',
+          'O mercado repete que narrativa move preço. O que foi medido é bem menos do que isso.',
+          'Memecoin de launchpad é a criada num site de lançamento, como o pump.fun. Para esse ' +
+            'tipo de token, não existe estudo revisado por pares que ligue, com um número, a ' +
+            'atenção nas redes ao preço.',
+          'Revisado por pares quer dizer conferido por outros cientistas antes de sair. Os estudos ' +
+            'que existem, dentro e fora de memecoin, apontam três coisas.',
         ],
+        quadro: [
+          {
+            rotulo: 'Aponta para perda',
+            texto:
+              'Depois do tweet de um influenciador, o preço sobe 1,83% no dia e cai 6,53% em 30 ' +
+              'dias.',
+          },
+          {
+            rotulo: 'Dura minutos',
+            texto:
+              'A atenção prevê melhor quanto se negocia e quanto o preço oscila do que para que ' +
+              'lado ele vai. Quando acerta o lado, o efeito dura minutos.',
+          },
+          {
+            rotulo: 'Muitas vezes é ao contrário',
+            texto: 'O preço sobe primeiro, e só depois as pessoas falam dele.',
+          },
+        ],
+        exemplo: {
+          titulo: 'A conta que nenhum estudo fez para memecoin',
+          passos: [
+            'No melhor caso, o sinal social rende de 1% a 3%, e só por poucos minutos.',
+            'Entrar e sair de uma memecoin custa de 3 a 6 pontos (Módulo 5).',
+            'Resultado: o custo come o sinal antes de ele virar lucro.',
+          ],
+        },
+        paragrafosFinais: [
+          'Em grupos de pump no Telegram, os sinais vêm segundos antes do preço. Quem lê o sinal ' +
+            'chega depois.',
+          'Cuidado com um número que circula: tokens com link de Telegram no cadastro graduam ' +
+            'cerca de 9 vezes mais no pump.fun. Não use isso como sinal.',
+          'Esse estudo mede só se existe um link, e link é o sinal mais barato de falsificar que ' +
+            'existe. Além disso, a coleta cobriu só os primeiros minutos de cada token.',
+        ],
+        detalhe: {
+          titulo: 'quais estudos dizem o quê',
+          lista: [
+            'Revisados que chegam perto, mas medem outra coisa: Li et al. (ACM Web Science 2025) ' +
+              'compara o sentimento no X com a quantidade de negociações, não com o preço. Long, ' +
+              'Wong & Cai (WWW 2025) só descreve médias.',
+            'Tweet de influenciador, +1,83% no dia e −6,53% em 30 dias: Merkley et al., 2024. É um ' +
+              'dado de fora dos launchpads.',
+            'Sinais segundos antes do preço em grupos de pump no Telegram: Moura et al., preprint ' +
+              'de 2026.',
+            'Atenção prevê negociação e oscilação melhor do que direção: Shen, Urquhart & Wang, ' +
+              '2019. É cripto grande, onde há mais estudo, e o quadro é o mesmo.',
+            'Efeito de minutos: com um milhão de mensagens sobre o Bitcoin, o sinal só valia por 15 ' +
+              'minutos. Os autores escrevem que custos de transação razoáveis tornam impossível ' +
+              'lucrar com ele (Guégan & Renault, Finance Research Letters, 2021).',
+            'Preço subindo antes da conversa: Süssmuth, Journal of Forecasting, 2021.',
+            'Link de Telegram e graduação cerca de 9 vezes maior: Kamat, preprint de 2026.',
+          ],
+        },
       },
       {
         id: 'ferramentas',
         titulo: 'Rastrear: o que cada ferramenta mede',
+        emUmaFrase:
+          'Uma lista de "em alta" mostra onde a atenção está agora. Não mostra se essa atenção é ' +
+          'real.',
         paragrafos: [
-          'Toda lista de "em alta" é feita de atividade de negociação, de pagamento ou das duas ' +
-            'coisas. Ela mostra onde a atenção está agora — e atividade é exatamente o que o volume ' +
-            'falso do Módulo 6 fabrica.',
-          'A tabela diz o que cada ferramenta mede, segundo a documentação dela, conferida em ' +
-            '13 e 14/09/2026. Ler é grátis em quase todas; o que se paga é o dado social ' +
-            '(LunarCrush: o plano grátis só tem dados de mercado, o social começa em US$ 5 por dia), ' +
-            'as APIs (Birdeye a partir de US$ 39 por mês) e as assinaturas (X Premium de US$ 3 a ' +
-            'US$ 40 por mês; Nansen Pro US$ 49 a US$ 69 por mês). O preço dos Boosts do ' +
-            'DexScreener não é publicado em página oficial.',
-          'Nenhuma dessas métricas tem validação publicada como previsão de preço de memecoin. O ' +
-            'Galaxy Score e o AltRank do LunarCrush são descritos só por material do próprio ' +
-            'vendedor.',
+          'Toda lista de "em alta" é montada com atividade de negociação, com pagamento, ou com as ' +
+            'duas coisas.',
+          'E atividade é exatamente o que o volume falso do Módulo 6 fabrica.',
+          'Nenhuma dessas métricas tem validação publicada como previsão de preço de memecoin.',
+          'A tabela abaixo diz o que cada ferramenta mede, segundo a documentação dela, conferida ' +
+            'em 13 e 14/09/2026.',
         ],
+        quadro: [
+          { rotulo: 'Grátis', texto: 'Ler as listas e as páginas, em quase todas as ferramentas.' },
+          {
+            rotulo: 'Pago',
+            texto:
+              'O dado social, as APIs (o acesso aos dados feito por programas) e as assinaturas.',
+          },
+        ],
+        detalhe: {
+          titulo: 'quanto custa cada coisa',
+          lista: [
+            'LunarCrush: o plano grátis só tem dados de mercado. O dado social começa em US$ 5 por dia.',
+            'Birdeye: API a partir de US$ 39 por mês.',
+            'X Premium: de US$ 3 a US$ 40 por mês.',
+            'Nansen Pro: de US$ 49 a US$ 69 por mês.',
+            'DexScreener: o preço dos Boosts (pagamento para aparecer em alta) não é publicado em ' +
+              'página oficial.',
+            'O Galaxy Score e o AltRank do LunarCrush são descritos só por material do próprio ' +
+              'vendedor.',
+          ],
+        },
       },
       {
         id: 'rotina',
         titulo: 'Uma rotina de estudo de narrativa',
+        emUmaFrase: 'Esta rotina serve para treinar o olho. Não é método de entrada.',
         paragrafos: [
-          'Não é método de entrada: é um jeito de treinar o olho. Nenhum destes passos foi medido ' +
-            'como capaz de melhorar resultado.',
+          'Nenhum destes passos foi medido como capaz de melhorar resultado.',
         ],
         listaTitulo: 'Uma vez por dia, ou quando um tema chamar atenção:',
+        ordenada: true,
         lista: [
-          'Abra o feed de lançamentos do pump.fun e duas listas de "em alta", e anote os temas que ' +
-            'se repetem — lembrando que parte da lista é paga, e que as cópias seguem a narrativa, ' +
-            'não a criam.',
+          'Abra o feed de lançamentos do pump.fun e duas listas de "em alta". Anote os temas que ' +
+            'se repetem.',
+          'Ao ler as listas, lembre: parte delas é paga, e as cópias seguem a narrativa, não a ' +
+            'criam.',
           'Procure a origem fora de cripto: o post, a notícia, o vídeo. Na busca avançada do X ' +
-            '(só logado), from: e since: ajudam a achar quem falou primeiro entre as contas que ' +
-            'você acompanha.',
+            '(só logado), from: filtra por conta e since: filtra por data. Isso ajuda a achar quem ' +
+            'falou primeiro entre as contas que você acompanha.',
           'Veja há quanto tempo o tema existe e quantos tokens já copiaram. Muitos tokens novos ' +
             'com o valor do tema caindo é o desenho da saturação.',
-          'Anote no diário do Módulo 7: data, tema, primeiro token e a fase que você acha que é. ' +
-            'Depois de algumas semanas, confira quantas vezes a sua leitura de fase acertou.',
-          'Qualquer token que chamar sua atenção passa pelo Checklist antes de qualquer outra coisa.',
+          'Anote no diário do Módulo 7: data, tema, primeiro token e a fase que você acha que é.',
+          'Depois de algumas semanas, confira quantas vezes a sua leitura de fase acertou.',
+          'Se um token chamar sua atenção, ele passa pelo Checklist antes de qualquer outra coisa.',
         ],
       },
     ],
@@ -941,41 +1060,61 @@ export const modulo3 = {
       {
         id: 'endereco',
         titulo: 'O endereço: a checagem que sozinha evita a perda total',
+        emUmaFrase:
+          'Nome e ticker qualquer um copia. O que identifica um token de verdade é o endereço do ' +
+          'contrato.',
         paragrafos: [
-          'Nome e ticker qualquer um copia; o endereço do contrato é a identidade do token na ' +
-            'blockchain. Em 12/09/2026, dois tokens diferentes do pump.fun usavam o ticker ' +
-            'SATOSHI ao mesmo tempo, e um terceiro tinha o ticker "Usdt", imitando uma stablecoin.',
-          'O projeto publica o endereço em três lugares, em ordem de confiança: o site oficial ' +
-            '(aberto por um link confiável, não por anúncio ou busca), a bio ou o post fixado do ' +
-            'X oficial, e o canal oficial de anúncios no Discord ou no Telegram.',
-          'Quando as fontes divergem, vale a mais controlada pelo projeto: site e post fixado ' +
-            'batendo entre si. Um canal fácil de sequestrar — resposta de post, DM, link curto do ' +
-            'Discord — nunca desempata. Divergência, por si só, é motivo para não comprar.',
-          'Compare o endereço inteiro. Golpistas geram endereços com os mesmos primeiros e ' +
-            'últimos caracteres do original, para enganar quem só olha as pontas.',
+          'O endereço do contrato é uma sequência longa de letras e números. Ele é a identidade do ' +
+            'token na blockchain.',
+          'Ticker é o apelido curto do token. Em 12/09/2026, dois tokens diferentes do pump.fun ' +
+            'usavam o ticker SATOSHI ao mesmo tempo.',
+          'No mesmo dia, um terceiro token tinha o ticker "Usdt", imitando uma stablecoin (moeda ' +
+            'feita para acompanhar o dólar).',
+          'O projeto publica o endereço em três lugares. Do mais confiável para o menos: o site ' +
+            'oficial, a bio ou o post fixado do X oficial, e o canal oficial de anúncios no Discord ' +
+            'ou no Telegram.',
         ],
         listaTitulo: 'Nunca pegue o endereço de:',
         lista: [
-          'DM ou mensagem de desconhecido.',
+          'DM (mensagem direta) ou mensagem de desconhecido.',
           'Resposta embaixo de post viral.',
           'Site que veio de anúncio ou de busca.',
           'QR code ou link encurtado.',
+        ],
+        exemplo: {
+          titulo: 'Como conferir, na prática',
+          passos: [
+            'Copie o endereço do site oficial, aberto por um link confiável. Nunca por anúncio ou ' +
+              'busca.',
+            'Compare com o endereço da bio ou do post fixado do X oficial.',
+            'Compare o endereço inteiro, caractere por caractere. Golpistas geram endereços com os ' +
+              'mesmos primeiros e últimos caracteres do original, para enganar quem só olha as pontas.',
+            'Site e post fixado batendo entre si confirmam a identidade. São as fontes mais ' +
+              'controladas pelo projeto.',
+            'Se eles não batem, não compre. A divergência, por si só, é motivo para não comprar.',
+          ],
+        },
+        paragrafosFinais: [
+          'Um canal fácil de sequestrar nunca desempata. Resposta de post, DM e link curto do ' +
+            'Discord estão nesse grupo.',
         ],
       },
       {
         id: 'x',
         titulo: 'X: o que o selo prova, e como achar conta falsa',
+        emUmaFrase:
+          'No X, o selo azul só quer dizer que a conta paga uma assinatura. Ele não prova que a ' +
+          'conta é do projeto.',
         paragrafos: [
-          'O selo azul, hoje, quer dizer assinatura Premium ativa — a central de ajuda do X diz ' +
-            'que essas contas não passam por revisão de identidade. O selo dourado é de ' +
-            'organização verificada, o cinza é de governo, e o badge de afiliação (a foto da ' +
-            'organização ao lado do selo) liga a conta a uma organização verificada.',
-          'A busca avançada funciona de graça, logado. from:conta mostra só os posts dela; ' +
-            'since:2026-09-01 filtra por data; min_faves:100 corta posts sem curtidas; e aspas ' +
-            'buscam o endereço exato. Os operadores near:, source: e geocode: foram removidos e ' +
-            'devolvem página vazia, sem aviso de erro.',
-          'Automatizar isso de graça não existe: raspar o X fora da API é proibido pelos termos, ' +
-            'e a API é paga.',
+          'O selo azul, hoje, quer dizer assinatura Premium ativa. A central de ajuda do X diz que ' +
+            'essas contas não passam por revisão de identidade.',
+          'Existe também o badge de afiliação: a foto da organização ao lado do selo. Ele liga a ' +
+            'conta a uma organização verificada.',
+        ],
+        quadro: [
+          { rotulo: 'Selo azul', texto: 'Assinatura Premium ativa. Sem revisão de identidade.' },
+          { rotulo: 'Selo dourado', texto: 'Organização verificada.' },
+          { rotulo: 'Selo cinza', texto: 'Governo.' },
         ],
         listaTitulo: 'Sinais grátis de conta falsa imitando um projeto:',
         lista: [
@@ -984,71 +1123,142 @@ export const modulo3 = {
           'Selo azul sem badge de afiliação num "perfil oficial".',
           'Muitos seguidores com pouco engajamento, e respostas repetitivas de bots.',
         ],
+        paragrafosFinais: [
+          'Automatizar essa checagem de graça não existe. Raspar o X (copiar os dados com um ' +
+            'programa) fora da API é proibido pelos termos, e a API, o acesso oficial para ' +
+            'programas, é paga.',
+        ],
+        detalhe: {
+          titulo: 'a busca avançada do X',
+          paragrafos: ['Funciona de graça, desde que você esteja logado.'],
+          lista: [
+            'from:conta mostra só os posts dela.',
+            'since:2026-09-01 filtra por data.',
+            'min_faves:100 mostra só os posts com pelo menos 100 curtidas.',
+            'Aspas buscam o endereço exato.',
+            'Os operadores near:, source: e geocode: foram removidos. Eles devolvem página vazia, ' +
+              'sem aviso de erro.',
+          ],
+        },
       },
       {
         id: 'discord',
         titulo: 'Discord: os quatro golpes, e a defesa de cada um',
+        emUmaFrase:
+          'No Discord, os golpes chegam por link e por bot falso. A defesa é entrar pelo site ' +
+          'oficial e não assinar nada que veio da comunidade.',
         paragrafos: [
-          'Servidores de memecoin costumam ter canais de anúncios, verificação, conversa, calls e ' +
-            'um canal com o endereço. Não dá para ler o histórico sem entrar no servidor, e ' +
-            'automatizar a leitura com a sua conta (self-bot) é proibido pelas regras do Discord, ' +
-            'com risco de perder a conta.',
-          'A única automação grátis e permitida: seguir um canal de anúncios (o do ícone de ' +
-            'megafone). Os anúncios passam a cair num canal do seu próprio servidor. Só funciona ' +
-            'se o projeto usar esse tipo de canal, e só chega o que o admin escolher publicar.',
+          'Servidores de memecoin costumam ter canais de anúncios, verificação, conversa, calls ' +
+            '(indicações de tokens) e um canal com o endereço.',
+          'Assinar é aprovar uma mensagem com a sua carteira. Em golpe, uma assinatura pode ' +
+            'autorizar a saída dos seus ativos sem você perceber.',
         ],
-        listaTitulo: 'Os golpes, em ordem de frequência nos alertas de segurança:',
+        listaTitulo: 'Os golpes, do mais frequente nos alertas de segurança para o menos:',
+        ordenada: true,
         lista: [
-          'Servidor falso: o golpista assume o link curto (discord.gg/nome) que o projeto deixou ' +
-            'de pagar e recria um servidor idêntico. Defesa: entre sempre pelo link do site ou do ' +
-            'X oficial.',
-          'Bot falso de verificação: parece o Collab.Land, mas o @ é outro, e ele leva a um site ' +
-            'que pede para conectar a carteira e assinar. Foi o caminho do Inferno Drainer. ' +
-            'Defesa: verificação legítima não pede assinatura.',
-          '"Conecte a carteira": depois de conectar, uma assinatura autoriza a transferência ' +
-            'silenciosa dos seus ativos. Defesa: não assine nada que veio de link de comunidade, ' +
-            'e use uma carteira separada para projetos novos (Módulo 1).',
-          'DM de "suporte" e admin invadido: suporte de verdade não chama primeiro, e até um ' +
+          'Servidor falso. O projeto deixa de pagar o link curto (discord.gg/nome), o golpista ' +
+            'assume esse link e recria um servidor idêntico. Defesa: entre sempre pelo link do site ' +
+            'ou do X oficial.',
+          'Bot falso de verificação. Ele parece o Collab.Land, mas o @ é outro. Leva a um site que ' +
+            'pede para conectar a carteira e assinar. Foi o caminho do Inferno Drainer. Defesa: ' +
+            'verificação legítima não pede assinatura.',
+          '"Conecte a carteira". Depois de conectar, uma assinatura autoriza a transferência ' +
+            'silenciosa dos seus ativos. Defesa: não assine nada que veio de link de comunidade, e ' +
+            'use uma carteira separada para projetos novos (Módulo 1).',
+          'DM de "suporte" e admin invadido. Suporte de verdade não chama primeiro, e até um ' +
             'anúncio oficial pode vir de conta sequestrada. Defesa: desligue DMs de membros do ' +
-            'servidor e trate anúncio urgente com link como suspeito até conferir no site.',
+            'servidor. Trate anúncio urgente com link como suspeito até conferir no site.',
         ],
+        detalhe: {
+          titulo: 'ler e automatizar o Discord',
+          paragrafos: [
+            'Não dá para ler o histórico sem entrar no servidor.',
+            'Automatizar a leitura com a sua própria conta (o chamado self-bot) é proibido pelas ' +
+              'regras do Discord, com risco de perder a conta.',
+            'A única automação grátis e permitida é seguir um canal de anúncios, o do ícone de ' +
+              'megafone. Os anúncios passam a cair num canal do seu próprio servidor.',
+            'Isso só funciona se o projeto usar esse tipo de canal. E só chega o que o admin ' +
+              'escolher publicar.',
+          ],
+        },
       },
       {
         id: 'telegram',
         titulo: 'Telegram: ler sem entrar, e o risco dos bots de compra',
+        emUmaFrase:
+          'Dá para ler um canal do Telegram sem entrar nele. O perigo maior está nos bots de compra.',
         paragrafos: [
-          'Para ler um canal público sem app e sem conta, abra t.me/s/nomedocanal no navegador: ' +
-            'o /s/ mostra o histórico de posts. Como membro, você vê posts, visualizações, ' +
-            'fixados e, se houver grupo vinculado, os comentários.',
-          'Automatizar também não dá num canal alheio: um bot só recebe os posts de um canal se ' +
-            'for administrador dele.',
-          'O risco maior do Telegram são os bots de compra. Muitos geram a carteira e guardam a ' +
-            'chave privada no servidor deles: se o bot for comprometido, a perda pode ser total. ' +
-            'Em outubro de 2023, falhas no Maestro (24/10) e no Unibot (31/10) somaram US$ 1,1 ' +
-            'milhão roubados. Em 19/09/2024, uma falha no Banana Gun drenou cerca de US$ 3 ' +
-            'milhões de 11 usuários — reembolsados pelo próprio bot.',
-          'Bot falso com nome parecido drena quem cola a seed. O @ do bot se confere no site ' +
-            'oficial dele, e a conta do Telegram precisa de verificação em duas etapas.',
+          'Para ler um canal público, abra t.me/s/nomedocanal no navegador. O /s/ mostra o ' +
+            'histórico de posts, sem app e sem conta.',
+          'Bot de compra é um robô dentro do Telegram que compra e vende tokens por você.',
+          'Muitos desses bots criam a carteira e guardam a chave privada no servidor deles. Chave ' +
+            'privada é a senha mestra da carteira: quem tem a chave mexe no dinheiro.',
+          'Por isso, se o bot for comprometido, a perda pode ser total.',
         ],
+        exemplo: {
+          titulo: 'Quando os bots falharam',
+          passos: [
+            '24/10/2023: falha no Maestro.',
+            '31/10/2023: falha no Unibot. Somadas, as duas falhas de outubro de 2023 tiveram US$ ' +
+              '1,1 milhão roubados.',
+            '19/09/2024: uma falha no Banana Gun drenou cerca de US$ 3 milhões de 11 usuários. O ' +
+              'próprio bot reembolsou.',
+          ],
+        },
+        paragrafosFinais: [
+          'Existe também o bot falso, com nome parecido com o verdadeiro. Ele drena quem cola a ' +
+            'seed (as palavras que recuperam a carteira).',
+          'Duas defesas: confira o @ do bot no site oficial dele, e ative a verificação em duas ' +
+            'etapas na sua conta do Telegram.',
+        ],
+        detalhe: {
+          titulo: 'o que dá e o que não dá para ver',
+          paragrafos: [
+            'Como membro do canal, você vê posts, visualizações, fixados e, se houver grupo ' +
+              'vinculado, os comentários.',
+            'Automatizar a leitura de um canal alheio não dá. Um bot só recebe os posts de um canal ' +
+              'se for administrador dele.',
+          ],
+        },
       },
       {
         id: 'calls',
         titulo: 'Calls pagos: a regra, os números e como perceber',
+        emUmaFrase:
+          'Um call mostra que houve atenção naquele momento. Na média, o preço caiu nos 30 dias ' +
+          'seguintes.',
         paragrafos: [
-          'Nos EUA, a FTC exige que pagamento a quem recomenda seja declarado de forma clara. ' +
-            'Para ativos que sejam valores mobiliários, a SEC exige mais: declarar o fato e o ' +
-            'valor. Kim Kardashian pagou US$ 1,26 milhão em 2022 por promover o token EMAX sem ' +
-            'dizer que tinha recebido US$ 250 mil — ela pôs #AD, e não bastou.',
-          'No Brasil, o Código de Defesa do Consumidor proíbe publicidade disfarçada, o guia do ' +
-            'CONAR para influenciadores (nova versão de maio de 2026) pede identificação clara já ' +
-            'na primeira visualização, e a CVM reserva a recomendação de valores mobiliários a ' +
-            'analistas registrados.',
-          'Os números: num estudo com 36 mil tweets de 180 influenciadores sobre mais de 1.600 ' +
-            'criptoativos, o preço subia 1,83% no primeiro dia e caía 2,24% em 10 dias e 6,53% em ' +
-            '30. Quem pôs US$ 1.000 em tokens fora do top 100 no dia do tweet e segurou 30 dias ' +
-            'perdeu US$ 79, em média. Os autores dizem que o padrão combina com pump-and-dump, mas ' +
-            'que a prova é inconclusiva.',
+          'Call é quando um influenciador indica um token. Call pago é quando ele recebeu para ' +
+            'fazer essa indicação.',
+          'Nos EUA e no Brasil existem regras contra publicidade paga disfarçada.',
+          'Um caso real: Kim Kardashian pagou US$ 1,26 milhão em 2022 por promover o token EMAX ' +
+            'sem dizer que tinha recebido US$ 250 mil. Ela pôs #AD, e não bastou.',
         ],
+        exemplo: {
+          titulo: 'O que um estudo mediu',
+          passos: [
+            'Foram 36 mil tweets de 180 influenciadores, sobre mais de 1.600 criptoativos.',
+            'No primeiro dia depois do tweet, o preço subia 1,83%.',
+            'Em 10 dias, caía 2,24%. Em 30 dias, caía 6,53%.',
+            'Quem pôs US$ 1.000 em tokens fora do top 100 no dia do tweet e segurou 30 dias ' +
+              'perdeu US$ 79, em média.',
+          ],
+          paragrafos: [
+            'Os autores dizem que o padrão combina com pump-and-dump, mas que a prova é inconclusiva.',
+          ],
+        },
+        detalhe: {
+          titulo: 'as regras nos EUA e no Brasil',
+          lista: [
+            'EUA, FTC: pagamento a quem recomenda tem que ser declarado de forma clara.',
+            'EUA, SEC: para ativos que sejam valores mobiliários (investimentos regulados, como ' +
+              'ações), a exigência é maior. É preciso declarar o fato e o valor.',
+            'Brasil, Código de Defesa do Consumidor: proíbe publicidade disfarçada.',
+            'Brasil, CONAR: o guia para influenciadores (nova versão de maio de 2026) pede ' +
+              'identificação clara já na primeira visualização.',
+            'Brasil, CVM: reserva a recomendação de valores mobiliários a analistas registrados.',
+          ],
+        },
         listaTitulo: 'Sinais de call pago não declarado, de graça:',
         lista: [
           'Posts quase idênticos em várias contas, na mesma janela de horário.',

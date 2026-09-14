@@ -60,27 +60,39 @@ São os três números do app para esta parte. Abra o vídeo com o mais surpreen
 
 ### O que conta como rug, para quem mede
 
-O maior estudo de detecção de rug na Solana acompanhou 6,4 milhões de tokens do PumpFun e da Raydium, de 30/11/2024 a 30/06/2025, e chamou de rug o token cuja liquidez caiu 99% desde o pico, ou que ficou parado por mais de 80% da própria vida.
+Rug vem de "rug pull", puxar o tapete: o token desaba e quem comprou fica sem saída.
 
-Por essa régua, 81,9% dos tokens de teste do PumpFun e 60,8% dos da Raydium deram rug. O número muda com a régua. A Chainalysis contou 3,59% dos tokens de 2024 como suspeitos de pump-and-dump; a Solidus Labs contou 98,6% dos tokens do pump.fun com a liquidez abaixo de US$ 1.000 — colapso de liquidez, não fraude provada, e a pump.fun contestou publicamente o número.
+Não existe uma definição única. Cada estudo escolhe a sua régua, e o número muda com ela.
+
+A Chainalysis usou outra régua. Contou 3,59% dos tokens de 2024 como suspeitos de pump-and-dump (inflar o preço e vender em cima de quem chega).
+
+A Solidus Labs contou 98,6% dos tokens do pump.fun com a liquidez abaixo de US$ 1.000. Isso é colapso de liquidez, não fraude provada.
+
+A pump.fun contestou publicamente o número da Solidus Labs.
 
 ### O melhor detector, em linguagem simples
 
-O modelo que se saiu melhor (XGBoost) olha só os 5 primeiros minutos de negociação: quantidade de compras e vendas, carteiras únicas, valores, variação de preço. Nenhuma das 23 características é de holders, bundles, autoridades ou redes sociais.
+O modelo que se saiu melhor se chama XGBoost. É um tipo de programa que aprende padrões a partir de exemplos.
 
-Ele teve F1 de 0,79. Parece bom até comparar com o chute "tudo é rug", que dá 0,90 no mesmo teste, porque quase tudo é rug. O MCC — uma medida de −1 a 1 que não se deixa enganar por isso — foi de 0,39: acerto modesto.
+Ele olha só os 5 primeiros minutos de negociação: quantidade de compras e vendas, carteiras únicas, valores e variação de preço.
 
-Reconstruindo pelas contagens do teste, de cada 100 tokens que o modelo marca como rug, cerca de 95 são; de cada 100 rugs reais, ele pega uns 68. É estimativa: o artigo não publica esses dois números. Os próprios autores dizem que o resultado ainda não serve para uso real.
+Nenhuma das 23 características que ele usa é de holders, bundles, autoridades ou redes sociais.
 
-E o que ele aprende num lugar não vale no outro: treinado na Raydium e testado no PumpFun, o MCC cai para perto de zero. Os autores também reconhecem que o golpe muda com o tempo.
+A nota mais citada dele é o F1, que vai de 0 a 1. O problema: quase todo token do teste era rug, e aí até um chute burro tira nota alta.
+
+Os próprios autores dizem que o resultado ainda não serve para uso real.
+
+E o que o modelo aprende num lugar não vale no outro. Treinado na Raydium e testado no PumpFun, o MCC cai para perto de zero.
+
+Os autores também reconhecem que o golpe muda com o tempo.
 
 ### O que a pesquisa diz sobre os sinais
 
-Estudos independentes, em redes diferentes, concordam numa família de sinais: quem controla o token no minuto zero, e como disfarça isso. Concentração de holders depois de juntar as carteiras ligadas, compra coordenada no lançamento e negociação artificial.
+Estudos independentes, em redes diferentes, concordam numa família de sinais: quem controla o token no minuto zero, e como disfarça isso.
 
-O que o mercado mais repete tem menos apoio. LP travada não separa golpe de não golpe. Mint e freeze authority são mecânica certa, mas vêm sempre revogadas no pump.fun. Ausência de redes sociais nunca foi medida como preditor.
+No pump.fun, o que sobra é o criador vendendo e a concentração de insiders (gente de dentro, que entrou antes do público).
 
-No pump.fun, o que sobra é o criador vendendo e a concentração de insiders — justamente onde a medição revisada por pares é mais fraca.
+É justamente aí que a medição revisada por pares é mais fraca.
 
 ### Tabela do app: os sinais, pela força da evidência
 
@@ -96,9 +108,11 @@ No pump.fun, o que sobra é o criador vendendo e a concentração de insiders �
 
 ### Como ler qualquer promessa de detecção
 
-Um detector de rug vale tanto quanto a régua que define rug e a comparação com o chute mais burro possível. Quando alguém anunciar "95% de precisão", pergunte: quantos por cento eram golpe na amostra? Se eram 82%, chutar "golpe" para tudo já acertava 82%.
+Um detector de rug vale tanto quanto duas coisas: a régua que define rug e a comparação com o chute mais burro possível.
 
-Por isso o checklist deste hub não aprova token nenhum. Ele reprova pelo que dá para ver, e separa cada item pela força da evidência.
+Por isso o checklist deste hub não aprova token nenhum.
+
+Ele reprova pelo que dá para ver, e separa cada item pela força da evidência.
 
 ## Itens NÃO VERIFICADOS — o vídeo precisa tratá-los como tal
 
