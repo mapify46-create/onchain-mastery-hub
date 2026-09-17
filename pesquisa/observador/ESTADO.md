@@ -93,15 +93,15 @@ o rótulo já está escrito, e ninguém analisa nada antes de a coleta existir.
 **Redesenho visual (17/09/2026) — desenhos no Claude Design, implantação no app:**
 - Claude Design entregou: 9 componentes, os 7 módulos (desktop e celular), 5 telas gerais
   (Início, Checklist, Glossário, Revisão, Quiz/Simulador) e 6 animações. Handoff com README
-  em . A Fase 5 (folhas-resumo A4) foi cancelada pelo dono.
-- Implantado no app:  (mapa mental, barras na mesma escala,
+  em pesquisa/design/. A Fase 5 (folhas-resumo A4) foi cancelada pelo dono.
+- Implantado no app: src/components/visuais.js (mapa mental, barras na mesma escala,
   grade de 100, sequência, ciclo, curva deslizante), mapa do módulo nos 7 módulos,
   barras e curva no M6, grades da mortalidade no M2, ciclo da narrativa no M3,
   sequência do drainer no M1, grades da ruína e do diário e barras da amostra no M7.
 - Falta implantar: telas gerais, as 6 animações e a troca dos fluxogramas do Mermaid.
 - Cache do service worker em v16.
 - Armadilha nova: o painel do navegador guarda os módulos por URL e ignora cache:reload.
-  Portas alternativas (8081-8083) em  servem para ver a versão nova.
+  Portas alternativas (8081-8083) em .claude/launch.json servem para ver a versão nova.
 
 **Didática do texto (14/09/2026) — local, não publicado:**
 - O dono apontou a seção "Market cap, FDV e liquidez" como exemplo de explicação
