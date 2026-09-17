@@ -64,7 +64,7 @@ function moldura({ titulo, conteudo, nota, rolavel = true }) {
  * @param {string} p.centro  nome do módulo
  * @param {Array}  p.ramos   [{ titulo, folhas: [], aoAbrir?: () => void }]
  */
-export function criarMapaMental({ centro, ramos = [], nota = null }) {
+export function criarMapaMental({ centro, ramos = [], nota = null, titulo = null }) {
   const lista = criarElemento(
     'ul',
     { class: 'grid gap-3 sm:grid-cols-2 xl:grid-cols-3' },
@@ -90,7 +90,7 @@ export function criarMapaMental({ centro, ramos = [], nota = null }) {
   );
 
   return moldura({
-    titulo: 'Mapa do módulo: ' + centro,
+    titulo: titulo ?? 'Mapa do módulo: ' + centro,
     rolavel: false,
     conteudo: lista,
     nota,
@@ -188,10 +188,10 @@ export function criarGradeDe100({ titulo, grupos = [], frase, nota = null }) {
  * @param {object} p
  * @param {Array} p.passos  [{ titulo, texto, tom? }]
  */
-export function criarSequencia({ titulo, passos = [], nota = null }) {
+export function criarSequencia({ titulo, passos = [], nota = null, comReproducao = false, segundosPorPasso = 4 }) {
   const itens = passos.map(
     (passo, indice) => html`
-      <li class="flex min-w-[13rem] flex-1 flex-col rounded-lg border p-3"
+      <li class="flex min-w-[13rem] flex-1 flex-col rounded-lg border p-3 transition-colors duration-150"
           style="border-color: ${corDoTom(passo.tom ?? 'suave')}40; background: var(--omh-superficie)">
         <span class="font-mono text-xs" style="color: ${corDoTom(passo.tom ?? 'acento')}">passo ${indice + 1}</span>
         <span class="mt-1 text-sm font-semibold text-texto">${passo.titulo}</span>
@@ -200,9 +200,86 @@ export function criarSequencia({ titulo, passos = [], nota = null }) {
     `,
   );
 
+  const lista = html`<ol class="flex min-w-max gap-3 md:min-w-0 md:flex-wrap">${itens}</ol>`;
+
+  if (!comReproducao) return moldura({ titulo, conteudo: lista, nota });
+
+  // Passo a passo "tocável": os mesmos passos, um de cada vez. Não é vídeo — é a
+  // mesma lista, com um destaque que anda. Quem prefere ler tudo de uma vez só
+  // ignora os botões, porque todos os passos continuam visíveis e legíveis.
+  let atual = 0;
+  let timer = null;
+
+  const legenda = criarElemento('p', {
+    class: 'mt-3 text-sm text-texto',
+    role: 'status',
+    'aria-live': 'polite',
+  });
+
+  const botaoTocar = html`<button type="button"
+    class="rounded-lg border border-acento/60 bg-acento/10 px-3 py-1 text-sm text-texto hover:border-acento">Tocar</button>`;
+  const botaoVoltar = html`<button type="button" aria-label="Passo anterior"
+    class="rounded-lg border border-borda bg-superficie px-3 py-1 text-sm text-texto-suave hover:border-texto-suave hover:text-texto">←</button>`;
+  const botaoAvancar = html`<button type="button" aria-label="Próximo passo"
+    class="rounded-lg border border-borda bg-superficie px-3 py-1 text-sm text-texto-suave hover:border-texto-suave hover:text-texto">→</button>`;
+
+  function pintar() {
+    itens.forEach((item, indice) => {
+      const ativo = indice === atual;
+      item.style.borderColor = ativo ? COR.primaria : corDoTom(passos[indice].tom ?? 'suave') + '40';
+      item.style.background = ativo ? 'rgba(124, 58, 237, 0.15)' : 'var(--omh-superficie)';
+    });
+    const passo = passos[atual];
+    legenda.textContent = 'Passo ' + (atual + 1) + ' de ' + passos.length + ': ' + passo.titulo;
+  }
+
+  function parar() {
+    clearInterval(timer);
+    timer = null;
+    botaoTocar.textContent = 'Tocar';
+  }
+
+  function andar(passosParaFrente) {
+    atual = (atual + passosParaFrente + passos.length) % passos.length;
+    pintar();
+  }
+
+  botaoVoltar.addEventListener('click', () => {
+    parar();
+    andar(-1);
+  });
+  botaoAvancar.addEventListener('click', () => {
+    parar();
+    andar(1);
+  });
+  botaoTocar.addEventListener('click', () => {
+    if (timer) {
+      parar();
+      return;
+    }
+    botaoTocar.textContent = 'Pausar';
+    timer = setInterval(() => {
+      if (atual === passos.length - 1) {
+        parar();
+        return;
+      }
+      andar(1);
+    }, segundosPorPasso * 1000);
+  });
+
+  pintar();
+
+  const controles = html`
+    <div class="mt-3 flex flex-wrap items-center gap-2">
+      ${botaoVoltar}${botaoTocar}${botaoAvancar}
+      <span class="text-xs text-texto-suave">Os passos ficam todos na tela: os botões só movem o destaque.</span>
+    </div>
+  `;
+
   return moldura({
     titulo,
-    conteudo: html`<ol class="flex min-w-max gap-3 md:min-w-0 md:flex-wrap">${itens}</ol>`,
+    rolavel: false,
+    conteudo: html`<div><div class="overflow-x-auto" tabindex="0">${lista}</div>${controles}${legenda}</div>`,
     nota,
   });
 }

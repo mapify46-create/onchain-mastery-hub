@@ -25,7 +25,7 @@ import { montarChecklist } from '../components/checklist.js';
 import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
-import { criarMapaDoModulo } from '../components/visuais.js';
+import { criarMapaDoModulo, criarSequencia } from '../components/visuais.js';
 import { montarDiagrama, renderizarDiagrama } from '../components/diagrama.js';
 import { montarGraficoEmpilhado, renderizarGrafico } from '../components/grafico.js';
 import { montarCalculadora } from '../components/calculadora.js';
@@ -275,6 +275,44 @@ function montarAbaCustodia() {
 // A aba segue um arco de propósito: gancho (os três números) → explicação →
 // detalhe → visualização da proporção → ferramenta para o leitor sentir o efeito
 // acumulado. Cada etapa responde uma pergunta que a anterior levanta.
+
+// O caminho do token, passo a passo: a taxa da pool muda conforme o lugar, e é
+// isso que muda a conta. Os passos vêm da lista da própria seção.
+function criarSequenciaDoCaminho() {
+  const secao = modulo5.secoes.find((item) => item.id === 'o-venue-muda-o-custo');
+  if (!secao?.lista?.length) return null;
+
+  return criarSequencia({
+    titulo: secao.listaTitulo ?? secao.titulo,
+    comReproducao: true,
+    passos: secao.lista.map((item) => {
+      const corte = item.indexOf(':');
+      return corte === -1
+        ? { titulo: item }
+        : { titulo: item.slice(0, corte), texto: item.slice(corte + 1).trim() };
+    }),
+    nota: 'Mesma ordem, mesmo terminal: só muda onde o token está.',
+  });
+}
+
+// O sanduíche, passo a passo. Cada passo só junta o que a seção já diz: a fila é
+// pública, o bot paga prioridade para passar na frente, e o slippage alto é o
+// espaço que ele usa. Nenhum valor de lucro do bot: o arquivo não publica nenhum.
+function criarSequenciaDoSanduiche() {
+  return criarSequencia({
+    titulo: 'O sanduíche: por que o slippage alto atrai bot',
+    comReproducao: true,
+    passos: [
+      { titulo: 'Você envia a ordem', texto: 'Ela fica visível antes de entrar no bloco, com o tamanho e o limite de slippage que você aceitou.' },
+      { titulo: 'O bot passa na frente', texto: 'Ele paga prioridade para ser processado primeiro. O slot da Solana dura 350 ms.', tom: 'medio' },
+      { titulo: 'O preço sobe', texto: 'A compra do bot move o preço antes de a sua executar.', tom: 'medio' },
+      { titulo: 'A sua ordem executa mais cara', texto: 'Ela não falha: o preço pior ainda cabe dentro do limite que você aceitou.', tom: 'alto' },
+      { titulo: 'O bot vende em seguida', texto: 'Ele fica com a diferença. Quanto maior o seu limite de slippage, maior o espaço para isso.', tom: 'alto' },
+      { titulo: 'A defesa', texto: 'Slippage no menor valor que ainda executa, prioridade ajustada e o modo de proteção de MEV do terminal — que reduz, mas não elimina.', tom: 'baixo' },
+    ],
+    nota: 'Os modos de proteção do Axiom são Off, Reduced e Secure. Nenhum deles zera o risco.',
+  });
+}
 function montarAbaTaxas() {
   const matriz = modulo5.matrizDeCusto;
   const grafico = modulo5.graficoDeCamadas;
@@ -287,6 +325,7 @@ function montarAbaTaxas() {
     // 2. Explicação.
     ...criarSecoesDaAba('taxas'),
     criarFiguraDoDiagrama('caminho-do-dinheiro'),
+    criarSequenciaDoCaminho(),
 
     // 3. Detalhe camada por camada.
     criarIntroducao('As cinco camadas de custo de uma compra, uma a uma.'),
@@ -362,6 +401,7 @@ function montarAbaConfiguracoes() {
     criarAnatomia('telaDoTerminal', 'm5-anatomia-terminal'),
 
     criarFiguraDoDiagrama('slippage-mal-configurado'),
+    criarSequenciaDoSanduiche(),
 
     // Depois de ver o slippage dar errado no diagrama, sentir o impacto no controle.
     calc &&

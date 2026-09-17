@@ -4,6 +4,7 @@
 // um import circular entre router.js e esta view, já que o router precisa importar
 // daqui para montar a rota "#/inicio".
 
+import { criarCiclo } from '../components/visuais.js';
 import {
   criarElemento,
   criarTitulo,
@@ -334,6 +335,19 @@ export function montarInicio(rotas = []) {
     ]),
   ]);
 
+  // O laço do estudo desenhado: ler, responder e revisar, voltando ao começo.
+  // Os intervalos são os mesmos da página Revisão.
+  const cicloDoEstudo = criarCiclo({
+    titulo: 'O laço que faz o conteúdo ficar',
+    etapas: [
+      { titulo: 'Ler a aba', texto: 'uma aba por vez, sem correr' },
+      { titulo: 'Responder o quiz', texto: 'com a confiança marcada antes de ver a resposta' },
+      { titulo: 'Revisar', texto: 'as perguntas voltam em 1, 3, 7, 16 e 35 dias' },
+    ],
+    centro: 'estudo',
+    nota: 'Errou, a pergunta volta amanhã. Reler não produz o mesmo efeito que responder de novo.',
+  });
+
   const comoEstudar = criarCard([
     criarElemento('h2', { class: 'text-lg font-semibold' }, ['Por onde começar']),
     criarElemento(
@@ -341,6 +355,7 @@ export function montarInicio(rotas = []) {
       { class: 'mt-3 list-decimal space-y-2 pl-5 text-texto-suave' },
       COMO_ESTUDAR.map((passo) => criarElemento('li', {}, [passo])),
     ),
+    cicloDoEstudo,
   ]);
 
   const grade = criarElemento('section', { class: 'space-y-4' }, [

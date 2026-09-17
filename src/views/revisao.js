@@ -5,6 +5,7 @@
 // hoje, a sessão pergunta a pergunta, o placar de "quando tenho certeza, acerto?"
 // e a lista do que vem depois.
 
+import { criarCiclo } from '../components/visuais.js';
 import { modulo1 } from '../data/modulo1.js';
 import { modulo2 } from '../data/modulo2.js';
 import { modulo3 } from '../data/modulo3.js';
@@ -442,11 +443,24 @@ export function montarViewRevisao() {
     ],
   );
 
+  // A escada desenhada: cada degrau é um intervalo, e a seta tracejada mostra
+  // que errar devolve a pergunta para o começo.
+  const escadaDesenhada = criarCiclo({
+    titulo: 'A escada dos intervalos',
+    etapas: ESCADA_DIAS.map((dias, indice) => ({
+      titulo: dias + (dias === 1 ? ' dia' : ' dias'),
+      texto: indice === 0 ? 'primeira volta, ou depois de errar' : 'acertou de novo, sobe um degrau',
+    })),
+    centro: 'acertou?',
+    nota: 'Acertou, sobe um degrau. Errou, volta para o primeiro. A escada é fixa e derivada da teoria, não testada nessa forma exata.',
+  });
+
   renderizar();
 
   return criarElemento('div', { class: 'mx-auto max-w-5xl space-y-6' }, [
     cabecalho,
     comoFunciona,
+    escadaDesenhada,
     areaDeHoje,
     areaDeCalibracao,
     areaDeProximas,

@@ -68,6 +68,90 @@
         "8083"
       ],
       "port": 8083
+    },
+    {
+      "name": "onchain-mastery-hub-8084",
+      "//": "Mesma pasta, outra porta (ver a versao mais recente no painel do navegador).",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "http-server",
+        ".",
+        "-c-1",
+        "--silent",
+        "-p",
+        "8084"
+      ],
+      "port": 8084
+    },
+    {
+      "name": "onchain-mastery-hub-8085",
+      "//": "Mesma pasta, outra porta (ver a versao mais recente no painel do navegador).",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "http-server",
+        ".",
+        "-c-1",
+        "--silent",
+        "-p",
+        "8085"
+      ],
+      "port": 8085
+    },
+    {
+      "name": "onchain-mastery-hub-8086",
+      "//": "Mesma pasta, outra porta (ver a versao mais recente no painel do navegador).",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "http-server",
+        ".",
+        "-c-1",
+        "--silent",
+        "-p",
+        "8086"
+      ],
+      "port": 8086
+    },
+    {
+      "name": "onchain-mastery-hub-8087",
+      "//": "Mesma pasta, outra porta (ver a versao mais recente no painel do navegador).",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "http-server",
+        ".",
+        "-c-1",
+        "--silent",
+        "-p",
+        "8087"
+      ],
+      "port": 8087
+    },
+    {
+      "name": "onchain-mastery-hub-8088",
+      "//": "Mesma pasta, outra porta (ver a versao mais recente no painel do navegador).",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "http-server",
+        ".",
+        "-c-1",
+        "--silent",
+        "-p",
+        "8088"
+      ],
+      "port": 8088
+    },
+    {
+      "name": "onchain-mastery-hub-8089",
+      "//": "Mesma pasta, outra porta (ver a versao mais recente no painel do navegador).",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "http-server",
+        ".",
+        "-c-1",
+        "--silent",
+        "-p",
+        "8089"
+      ],
+      "port": 8089
     }
   ]
 }

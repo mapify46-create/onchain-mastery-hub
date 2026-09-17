@@ -210,6 +210,7 @@ function montarAbaGolpes() {
     criarAnatomia('sitePhishing', 'm1-anatomia-phishing'),
     figura,
     criarSequenciaDoDrainer(),
+    criarSequenciaDoEnvenenamento(),
     criarElemento(
       'ol',
       { class: 'space-y-4' },
@@ -226,7 +227,27 @@ function criarSequenciaDoDrainer() {
   return criarSequencia({
     titulo: 'O golpe, do anúncio à carteira vazia',
     passos: modulo1.roteiroDrainer.map((passo) => ({ titulo: passo.titulo, texto: passo.oQueVeem })),
+    comReproducao: true,
     nota: 'A frase-semente não aparece em nenhum passo: o golpe inteiro vive de uma assinatura.',
+  });
+}
+
+// O envenenamento de endereço, passo a passo. Os passos são os do exemplo que já
+// está na seção — aqui eles ganham o destaque que anda, para a ordem ficar clara.
+function criarSequenciaDoEnvenenamento() {
+  const secao = modulo1.secoes.find((item) => item.id === 'address-poisoning-e-clipper');
+  const passos = secao?.exemplo?.passos ?? [];
+  if (!passos.length) return null;
+
+  return criarSequencia({
+    titulo: secao.exemplo.titulo,
+    comReproducao: true,
+    passos: passos.map((texto, indice) => ({
+      titulo: 'Passo ' + (indice + 1),
+      texto,
+      tom: indice === passos.length - 1 ? 'alto' : 'suave',
+    })),
+    nota: 'A defesa é a mesma dos dois golpes: conferir a linha inteira do endereço e mandar uma transação-teste antes.',
   });
 }
 // ---------------------------------------------------------------------------

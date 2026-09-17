@@ -98,8 +98,16 @@ o rótulo já está escrito, e ninguém analisa nada antes de a coleta existir.
   grade de 100, sequência, ciclo, curva deslizante), mapa do módulo nos 7 módulos,
   barras e curva no M6, grades da mortalidade no M2, ciclo da narrativa no M3,
   sequência do drainer no M1, grades da ruína e do diário e barras da amostra no M7.
-- Falta implantar: telas gerais, as 6 animações e a troca dos fluxogramas do Mermaid.
-- Cache do service worker em v16.
+- Implantado também: src/components/fluxograma.js — os fluxogramas passaram a ser desenhados
+  pelo próprio app (leitor do subconjunto de Mermaid usado nos dados: 12 de 12 diagramas
+  lidos). O Mermaid do CDN continua só como reserva.
+- Telas gerais: ciclo do estudo no Início, escada 1-3-7-16-35 na Revisão, mapa por categoria
+  no Glossário.
+- Passo a passo tocável (Tocar/Pausar/setas, tudo visível o tempo todo): drainer e
+  envenenamento de endereço no M1, caminho do token e sanduíche no M5.
+- Falta implantar: as animações mais elaboradas do Claude Design (cenas desenhadas) e os
+  ajustes finos das telas de Quiz e Simulador.
+- Cache do service worker em v17.
 - Armadilha nova: o painel do navegador guarda os módulos por URL e ignora cache:reload.
   Portas alternativas (8081-8083) em .claude/launch.json servem para ver a versão nova.
 

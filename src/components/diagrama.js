@@ -20,6 +20,7 @@
 // quem chama; aqui só mora a mecânica de carregar, desenhar e recuperar de erro.
 
 import { criarElemento } from '../ui.js';
+import { criarFluxograma } from './fluxograma.js';
 
 const URL_MERMAID = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
 
@@ -115,6 +116,22 @@ export function montarDiagrama({
   legenda = '',
   mensagemErroSintaxe = 'no diagrama',
 }) {
+  // Caminho novo (17/09/2026): desenhar aqui mesmo, com as cores e a tipografia do
+  // app, sem baixar nada. Só cai no Mermaid quando o texto do diagrama usa alguma
+  // sintaxe que o nosso leitor ainda não entende.
+  const proprio = criarFluxograma({ diagrama, rotuloAcessivel });
+  if (proprio) {
+    return criarElemento(
+      'figure',
+      { 'data-diagrama': '', 'data-diagrama-proprio': '', class: 'rounded-card border border-borda bg-superficie p-4 sm:p-5' },
+      [
+        proprio,
+        legenda &&
+          criarElemento('figcaption', { class: 'mt-3 text-center text-xs text-texto-suave' }, [legenda]),
+      ],
+    );
+  }
+
   const alvoMermaid = criarElemento('div', {
     'data-diagrama-mermaid': '',
     class: 'flex min-w-fit justify-center',
@@ -190,6 +207,9 @@ function mostrarReserva(figura, mensagem) {
  */
 export async function renderizarDiagrama(figura) {
   if (!figura) return 'reserva';
+
+  // Fluxograma desenhado pelo próprio app: já está pronto, não há o que redesenhar.
+  if (figura.hasAttribute('data-diagrama-proprio')) return 'proprio';
 
   const alvo = figura.querySelector('[data-diagrama-mermaid]');
   const reserva = figura.querySelector('[data-diagrama-reserva]');
