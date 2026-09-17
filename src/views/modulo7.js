@@ -19,6 +19,7 @@ import {
 import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
+import { criarMapaDoModulo, criarGradeDe100, criarBarrasNaMesmaEscala } from '../components/visuais.js';
 import { montarPerguntaPrevia } from '../components/didatica.js';
 
 // A pergunta do quiz usada antes de ler uma aba.
@@ -148,6 +149,45 @@ function calcularSequencia({ fracao, perdas }) {
   };
 }
 
+
+// Os três visuais deste módulo. Cada um só traduz um número que já está no
+// arquivo: a grade arredonda, então o exato e a fonte vêm sempre na nota.
+function criarGradeDaRuina() {
+  return criarGradeDe100({
+    titulo: 'A ruína do apostador, em 100 jogadores',
+    grupos: [
+      { quantidade: 99, tom: 'alto', rotulo: 'quebram antes de chegar a 100 fichas' },
+      { quantidade: 1, tom: 'baixo', rotulo: 'chegam à meta' },
+    ],
+    frase: 'De cada 100 que jogam sempre no par, praticamente todos quebram antes da meta.',
+    nota: 'Exato: 99,5%. Roleta americana, 18 chances em 38, começando com 50 fichas e parando em 100. A grade arredonda: menos de 1 em 100 chega lá.',
+  });
+}
+
+function criarGradeDoDiario() {
+  return criarGradeDe100({
+    titulo: 'O que um efeito de 0,40 quer dizer',
+    grupos: [
+      { quantidade: 61, tom: 'acento', rotulo: 'vezes em que quem monitorou cumpriu mais a meta' },
+      { quantidade: 39, tom: 'suave', rotulo: 'vezes em que não' },
+    ],
+    frase: 'Comparando duas pessoas ao acaso, em 61 de 100 vezes a que monitorou foi melhor.',
+    nota: 'd = 0,40 na meta-análise de Harkin (2016). Na régua usual, 0,2 é pequeno e 0,5 é médio: 0,40 é de pequeno a médio, não milagre.',
+  });
+}
+
+function criarBarrasDaAmostra() {
+  return criarBarrasNaMesmaEscala({
+    titulo: 'Quantas operações provam alguma coisa',
+    itens: [
+      { rotulo: 'O que costumam achar que basta', valor: 30, exibicao: '30 operações', tom: 'alto',
+        nota: 'Lucro total positivo em 30 operações cabe perfeitamente na sorte.' },
+      { rotulo: 'Com SR de 0,1 por operação (um número bom)', valor: 400, exibicao: '400 operações', tom: 'medio' },
+      { rotulo: 'Com SR de 0,05', valor: 1600, exibicao: '1.600 operações', tom: 'acento' },
+    ],
+    nota: 'Conta do arquivo: n ≈ (2 ÷ SR)². E isso é o melhor caso: com cauda pesada, precisa de mais.',
+  });
+}
 // ---------------------------------------------------------------------------
 // Aba 1 — A regra
 // ---------------------------------------------------------------------------
@@ -190,6 +230,7 @@ function montarAbaTamanho() {
     secao('fracao-fixa'),
     secao('kelly'),
     secao('ruina'),
+    criarGradeDaRuina(),
     secao('a-conta'),
     montarCalculadora({
       id: 'm7-sequencia',
@@ -212,6 +253,7 @@ function montarAbaDiario() {
     montarDestaques(modulo7.destaques.diario),
     secao('duas-frases'),
     secao('o-tamanho-do-efeito'),
+    criarGradeDoDiario(),
     secao('nove-campos'),
     montarTabelaComparativa(modulo7.tabelaCampos),
   ]);
@@ -227,6 +269,7 @@ function montarAbaRevisao() {
     secao('olhar-pouco'),
     secao('a-pergunta'),
     secao('amostra'),
+    criarBarrasDaAmostra(),
   ]);
 }
 
@@ -370,6 +413,19 @@ export function montarModulo7() {
     ),
   ]);
 
+  // O mapa do módulo abre a página: o todo antes das partes.
+  const mapa = criarMapaDoModulo({
+    nome: "A rotina",
+    secoes: modulo7.secoes,
+    abas: [
+    { id: 'regra', rotulo: 'A regra' },
+    { id: 'tamanho', rotulo: 'Tamanho' },
+    { id: 'diario', rotulo: 'O diário' },
+    { id: 'revisao', rotulo: 'A revisão' },
+    { id: 'mitos', rotulo: 'Números que circulam' },
+    ],
+  });
+
   const abas = criarAbas({
     id: 'modulo-7',
     rotulo: 'Seções do Módulo 7',
@@ -389,5 +445,5 @@ export function montarModulo7() {
     ],
   });
 
-  return criarElemento('div', { class: 'mx-auto max-w-5xl' }, [cabecalho, abas]);
+  return criarElemento('div', { class: 'mx-auto max-w-5xl' }, [cabecalho, mapa, abas]);
 }

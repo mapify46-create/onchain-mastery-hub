@@ -17,6 +17,7 @@ import {
 import { montarMatrizDeFerramentas } from '../components/toolMatrix.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
+import { criarMapaMental, criarCiclo } from '../components/visuais.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
 import { montarAnatomia } from '../components/anatomia.js';
@@ -179,6 +180,27 @@ function criarMapaDosPilares() {
   ]);
 }
 
+
+// O ciclo da narrativa desenhado, a partir da MESMA lista da seção: cada item
+// vem como "Fase: explicação", então o título é o que vem antes dos dois pontos.
+function criarCicloDaNarrativa() {
+  const secaoDoCiclo = modulo3.praticaNarrativas.secoes.find((item) => item.id === 'ciclo');
+  if (!secaoDoCiclo?.lista?.length) return null;
+
+  const etapas = secaoDoCiclo.lista.map((item) => {
+    const corte = item.indexOf(':');
+    return corte === -1
+      ? { titulo: item }
+      : { titulo: item.slice(0, corte), texto: item.slice(corte + 1).trim().split(/(?<=.)s/)[0] };
+  });
+
+  return criarCiclo({
+    titulo: 'O ciclo, em círculo',
+    etapas,
+    centro: 'atenção',
+    nota: 'A seta tracejada fecha o ciclo: quando uma narrativa morre, a atenção já está em outra. Reconhecer a fase não prevê o preço.',
+  });
+}
 // Parágrafo de apoio usado no topo de várias abas.
 function criarIntroducao(texto) {
   return criarElemento('p', { class: 'max-w-3xl text-texto-suave' }, [texto]);
@@ -296,6 +318,7 @@ function montarAbaNarrativas() {
           pergunta: perguntaDoQuiz('q13'),
           conteudo: [
             secao('ciclo'),
+            criarCicloDaNarrativa(),
             montarLinhaDoTempo({ id: 'm3-rotacao-narrativas', ...pratica.linhaDoTempo }),
             criarTabela('As cinco narrativas, lado a lado', pratica.tabelaNarrativas),
           ],
@@ -685,6 +708,19 @@ export function montarModulo3() {
     ),
   ]);
 
+  // O mapa do módulo abre a página: o todo antes das partes. Cada ramo é uma aba,
+  // e as folhas saem dos títulos das próprias seções.
+  const mapa = criarMapaMental({
+    centro: 'Os dois pilares',
+    ramos: [
+      { titulo: 'Visão geral', folhas: modulo3.secoes.map((secao) => secao.titulo) },
+      { titulo: 'Narrativas', folhas: modulo3.praticaNarrativas.secoes.map((s) => s.titulo).slice(0, 3) },
+      { titulo: 'Pilar social', folhas: modulo3.praticaSocial.secoes.map((s) => s.titulo).slice(0, 3) },
+      { titulo: 'Pilar técnico', folhas: modulo3.praticaTecnica.ferramentas.map((f) => f.nome).slice(0, 4) },
+      { titulo: 'Matriz de ferramentas', folhas: ['Filtrar por pilar, rede e papel', modulo3.ferramentas.length + ' ferramentas catalogadas'] },
+      { titulo: 'Cenário 2025–2026', folhas: ['A liderança entre launchpads muda rápido'] },
+    ],
+  });
   const abas = criarAbas({
     id: 'modulo-3',
     rotulo: 'Seções do Módulo 3',
@@ -699,5 +735,5 @@ export function montarModulo3() {
     ],
   });
 
-  return criarElemento('div', { class: 'mx-auto max-w-5xl' }, [cabecalho, abas]);
+  return criarElemento('div', { class: 'mx-auto max-w-5xl' }, [cabecalho, mapa, abas]);
 }

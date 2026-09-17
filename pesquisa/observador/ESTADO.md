@@ -51,14 +51,23 @@ histórica — nunca acurácia, porque com taxa-base altíssima de rug a acurác
 responde "rug" para tudo. No paper de referência, o chute "tudo é rug" tem F1 de 0,90 e o
 melhor modelo, 0,79.
 
-**O rótulo de rug ainda não está escrito — de propósito.** O paper de referência
+**O rótulo de rug foi fixado em 16/09/2026, antes da coleta** (ver `ROTULO-PRE-REGISTRO.md`). O paper de referência
 ("Catching the Rug", arXiv:2608.20271, preprint) define rug como **queda de 99% do TVL
 desde o pico** OU **token parado por mais de 80% da própria vida** (seção V-B). Serve de
 ponto de partida. *(Corrigido em 13/09: antes este arquivo dizia que esses limiares não
 tinham sido publicados.)* A metade de liquidez **não é reconstruível** (o
 `reserve_in_usd` do GeckoTerminal só tem o valor de agora); a de inatividade e a de preço
 são. Instrução do dono: começar a fotografar liquidez e a reconstruir 6 meses de preço já;
-o rótulo só é fixado por escrito depois, e ninguém analisa nada antes disso.
+o rótulo já está escrito, e ninguém analisa nada antes de a coleta existir.
+
+**Observatório — decisões do dono em 16/09/2026:**
+- Como funciona, no detalhe: `COMO-FUNCIONA.md` (quatro relógios, tabelas, relatório).
+- **Onde roda:** PC do dono agora; VPS 24 h só se os buracos de coleta atrapalharem.
+- **Rótulo de rug:** fixado ANTES da coleta, em `ROTULO-PRE-REGISTRO.md` (queda de 99% da
+  liquidez desde o pico OU parado por mais de 80% da vida, em até 30 dias da graduação).
+- **Ordem:** primeiro terminar o redesenho visual do hub; o código do observatório vem depois.
+- **Falta do dono:** gerar a chave da GMGN OpenAPI e confirmar o GeckoTerminal como fonte
+  única de preço e liquidez.
 
 ## Pendências
 
@@ -80,6 +89,19 @@ o rótulo só é fixado por escrito depois, e ninguém analisa nada antes disso.
   mil, amostra de ago/2026" no glossário, no M4 e no cenário 3.
 - ~~Regerar os prompts de vídeo~~ → os 33 regerados depois da correção do Jito.
 - ~~Conferir as telas das ferramentas~~ → viraram as anatomias da aba técnica do M3.
+
+**Redesenho visual (17/09/2026) — desenhos no Claude Design, implantação no app:**
+- Claude Design entregou: 9 componentes, os 7 módulos (desktop e celular), 5 telas gerais
+  (Início, Checklist, Glossário, Revisão, Quiz/Simulador) e 6 animações. Handoff com README
+  em . A Fase 5 (folhas-resumo A4) foi cancelada pelo dono.
+- Implantado no app:  (mapa mental, barras na mesma escala,
+  grade de 100, sequência, ciclo, curva deslizante), mapa do módulo nos 7 módulos,
+  barras e curva no M6, grades da mortalidade no M2, ciclo da narrativa no M3,
+  sequência do drainer no M1, grades da ruína e do diário e barras da amostra no M7.
+- Falta implantar: telas gerais, as 6 animações e a troca dos fluxogramas do Mermaid.
+- Cache do service worker em v16.
+- Armadilha nova: o painel do navegador guarda os módulos por URL e ignora cache:reload.
+  Portas alternativas (8081-8083) em  servem para ver a versão nova.
 
 **Didática do texto (14/09/2026) — local, não publicado:**
 - O dono apontou a seção "Market cap, FDV e liquidez" como exemplo de explicação

@@ -20,6 +20,7 @@ import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
 import { montarSegmentos, montarPerguntaPrevia, montarTermos } from '../components/didatica.js';
+import { criarBarrasNaMesmaEscala, criarCurvaDeSaida, criarMapaDoModulo } from '../components/visuais.js';
 
 // As perguntas do quiz com o "por que a sua não serve", para usar no fim das partes.
 const PERGUNTAS = juntarPorques(modulo6.quiz, modulo6.porqueErradas);
@@ -184,6 +185,19 @@ function montarAbaNumeros() {
           conteudo: [
             montarDestaques(modulo6.destaques.numeros),
             secao('tres-numeros'),
+            // O exemplo do texto, desenhado: a barra do market cap é a maior, e a
+            // única que não existe em lugar nenhum. Números iguais aos da seção.
+            criarBarrasNaMesmaEscala({
+              titulo: 'O exemplo da seção, em barras na mesma escala',
+              itens: [
+                { rotulo: 'Market cap = FDV (no papel)', valor: 50000, exibicao: 'US$ 50.000', tom: 'suave',
+                  nota: 'US$ 0,00005 × 1 bilhão de tokens. Exemplo inventado.' },
+                { rotulo: 'Liquidez da pool', valor: 8000, exibicao: 'US$ 8.000', tom: 'acento',
+                  partes: [{ fracao: 0.5, tom: 'acento' }, { fracao: 0.5, tom: 'suave' }],
+                  nota: 'Metade em SOL (US$ 4.000, o dinheiro que paga quem vende) e metade em tokens.' },
+              ],
+              nota: 'Barras na mesma escala. A de cima é o número que a tela mostra; a de baixo é o dinheiro que existe.',
+            }),
             criarAnatomia('numerosDaTela', 'm6-anatomia-numeros'),
           ],
         },
@@ -192,6 +206,8 @@ function montarAbaNumeros() {
           pergunta: perguntaDoQuiz('q2'),
           conteudo: [
             secao('quanto-sai'),
+            // A curva do texto, para mexer: mesma conta da pool de produto constante.
+            criarCurvaDeSaida({ liquidez: 8000 }),
             criarTabela('Quanto sai, por queda de preço', modulo6.tabelaVendaPorQueda),
             calc &&
               montarCalculadora({
@@ -415,6 +431,15 @@ export function montarModulo6() {
     ),
   ]);
 
+  // O mapa do módulo abre a página: o todo antes das partes.
+  const ABAS = [
+    { id: 'numeros', rotulo: 'Os números' },
+    { id: 'volume', rotulo: 'Volume falso' },
+    { id: 'contrato', rotulo: 'O contrato' },
+    { id: 'deteccao', rotulo: 'Prever o golpe' },
+  ];
+  const mapa = criarMapaDoModulo({ nome: 'Ler a tela', secoes: modulo6.secoes, abas: ABAS });
+
   const abas = criarAbas({
     id: 'modulo-6',
     rotulo: 'Seções do Módulo 6',
@@ -433,5 +458,5 @@ export function montarModulo6() {
     ],
   });
 
-  return criarElemento('div', { class: 'mx-auto max-w-5xl' }, [cabecalho, abas]);
+  return criarElemento('div', { class: 'mx-auto max-w-5xl' }, [cabecalho, mapa, abas]);
 }

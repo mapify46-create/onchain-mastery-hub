@@ -20,6 +20,7 @@ import { montarChecklist } from '../components/checklist.js';
 import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
+import { criarMapaDoModulo, criarSequencia } from '../components/visuais.js';
 import { montarDiagrama, renderizarDiagrama } from '../components/diagrama.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarAnatomia } from '../components/anatomia.js';
@@ -208,6 +209,7 @@ function montarAbaGolpes() {
     // O site de phishing é a "isca" do roteiro que vem logo abaixo.
     criarAnatomia('sitePhishing', 'm1-anatomia-phishing'),
     figura,
+    criarSequenciaDoDrainer(),
     criarElemento(
       'ol',
       { class: 'space-y-4' },
@@ -216,6 +218,17 @@ function montarAbaGolpes() {
   ]);
 }
 
+
+// O roteiro do drainer em cinco passos, antes do detalhe. A sequência mostra a
+// ORDEM (é isso que o texto não faz bem); os cards abaixo mantêm o "o que você
+// vê" e o "o que acontece" de cada passo.
+function criarSequenciaDoDrainer() {
+  return criarSequencia({
+    titulo: 'O golpe, do anúncio à carteira vazia',
+    passos: modulo1.roteiroDrainer.map((passo) => ({ titulo: passo.titulo, texto: passo.oQueVeem })),
+    nota: 'A frase-semente não aparece em nenhum passo: o golpe inteiro vive de uma assinatura.',
+  });
+}
 // ---------------------------------------------------------------------------
 // Aba 5 — Defesa (revogação, duas camadas do Permit2, plano de emergência)
 // ---------------------------------------------------------------------------
@@ -392,6 +405,20 @@ export function montarModulo1() {
     ),
   ]);
 
+  // O mapa do módulo abre a página: o todo antes das partes.
+  const mapa = criarMapaDoModulo({
+    nome: "Fundamentos & Segurança",
+    secoes: modulo1.secoes,
+    abas: [
+    { id: 'fundamentos', rotulo: 'Fundamentos' },
+    { id: 'carteiras', rotulo: 'Carteiras' },
+    { id: 'seed', rotulo: 'Seed phrase' },
+    { id: 'golpes', rotulo: 'Golpes' },
+    { id: 'defesa', rotulo: 'Defesa' },
+    { id: 'brasil', rotulo: 'Brasil' },
+    ],
+  });
+
   const abas = criarAbas({
     id: 'modulo-1',
     rotulo: 'Seções do Módulo 1',
@@ -430,5 +457,5 @@ export function montarModulo1() {
     ],
   });
 
-  return criarElemento('div', { class: 'mx-auto max-w-5xl' }, [cabecalho, abas]);
+  return criarElemento('div', { class: 'mx-auto max-w-5xl' }, [cabecalho, mapa, abas]);
 }

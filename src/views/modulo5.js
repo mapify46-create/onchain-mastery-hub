@@ -25,6 +25,7 @@ import { montarChecklist } from '../components/checklist.js';
 import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
+import { criarMapaDoModulo } from '../components/visuais.js';
 import { montarDiagrama, renderizarDiagrama } from '../components/diagrama.js';
 import { montarGraficoEmpilhado, renderizarGrafico } from '../components/grafico.js';
 import { montarCalculadora } from '../components/calculadora.js';
@@ -577,6 +578,20 @@ export function montarModulo5() {
     ),
   ]);
 
+  // O mapa do módulo abre a página: o todo antes das partes.
+  const mapa = criarMapaDoModulo({
+    nome: "A mecânica da execução",
+    secoes: modulo5.secoes,
+    abas: [
+    { id: 'terminal', rotulo: 'Terminal' },
+    { id: 'custodia', rotulo: 'Custódia' },
+    { id: 'taxas', rotulo: 'Taxas' },
+    { id: 'configuracoes', rotulo: 'Configurações' },
+    { id: 'erros', rotulo: 'Erros' },
+    { id: 'processo', rotulo: 'Processo' },
+    ],
+  });
+
   const abas = criarAbas({
     id: 'modulo-5',
     rotulo: 'Seções do Módulo 5',
@@ -615,5 +630,5 @@ export function montarModulo5() {
     ],
   });
 
-  return criarElemento('div', { class: 'mx-auto max-w-5xl' }, [cabecalho, abas]);
+  return criarElemento('div', { class: 'mx-auto max-w-5xl' }, [cabecalho, mapa, abas]);
 }

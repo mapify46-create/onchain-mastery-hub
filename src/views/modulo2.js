@@ -24,6 +24,7 @@ import {
 } from '../components/phaseFlow.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
+import { criarMapaMental, criarGradeDe100 } from '../components/visuais.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarAnatomia } from '../components/anatomia.js';
 import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
@@ -401,6 +402,32 @@ function montarCasos() {
   ]);
 }
 
+
+// "A maioria vai a zero" em quadradinhos. Duas grades, porque o número muda
+// conforme a régua — e é essa a lição. Os exatos e as fontes ficam ao lado,
+// já que a grade arredonda; a contestação da Pump.fun vem junto do 98,6%.
+function criarGradesDaMortalidade() {
+  return criarElemento('div', { class: 'grid gap-4 xl:grid-cols-2' }, [
+    criarGradeDe100({
+      titulo: 'Régua 1: parou de negociar no mesmo dia',
+      grupos: [
+        { quantidade: 69, tom: 'alto', rotulo: 'pararam de negociar no dia do lançamento' },
+        { quantidade: 31, tom: 'suave', rotulo: 'seguiram negociando pelo menos mais um dia' },
+      ],
+      frase: 'De cada 100 tokens do Pump.fun, 69 pararam de negociar no mesmo dia.',
+      nota: 'Exato: 68,67%. Fonte: CoinGecko Research, 18,67 milhões de tokens, jan/2024 a jun/2026. A grade arredonda.',
+    }),
+    criarGradeDe100({
+      titulo: 'Régua 2: liquidez abaixo de US$ 1.000',
+      grupos: [
+        { quantidade: 99, tom: 'alto', rotulo: 'ficaram com liquidez abaixo de US$ 1.000' },
+        { quantidade: 1, tom: 'suave', rotulo: 'seguiram acima disso' },
+      ],
+      frase: 'Pela liquidez, 99 de cada 100 — mas essa medida é contestada.',
+      nota: 'Exato: 98,6%. Fonte: Solidus Labs. A Pump.fun contestou o relatório em público, dizendo que ele "carece de entendimento básico de memecoins" (CoinDesk, 07/05/2025).',
+    }),
+  ]);
+}
 // ---------------------------------------------------------------------------
 // Aba 5 — As 4 fases (Mermaid, com cards Tailwind de reserva)
 // ---------------------------------------------------------------------------
@@ -423,6 +450,7 @@ function montarFases() {
     ),
     figuraDoFluxo,
     montarCardsDeFases(modulo2.fases),
+    criarGradesDaMortalidade(),
     criarElemento(
       'p',
       { class: 'rounded-card border border-borda bg-superficie p-4 text-sm text-texto-suave' },
@@ -509,6 +537,18 @@ export function montarModulo2() {
     ),
   ]);
 
+  // O mapa do módulo abre a página: o todo antes das partes. Os ramos saem
+  // dos próprios dados, então acrescentar um viés ou um caso atualiza o mapa.
+  const mapa = criarMapaMental({
+    centro: 'Psicologia das memecoins',
+    ramos: [
+      { titulo: 'Visão geral', folhas: modulo2.secoes.map((secao) => secao.titulo) },
+      { titulo: 'Vieses', folhas: modulo2.vieses.map((vies) => vies.nome) },
+      { titulo: 'Tipos de token', folhas: modulo2.categoriasDeToken.map((c) => c.nome).slice(0, 3) },
+      { titulo: 'Casos reais', folhas: modulo2.casos.map((caso) => caso.nome) },
+      { titulo: 'As 4 fases', folhas: modulo2.fases.map((fase) => fase.nome) },
+    ],
+  });
   const abas = criarAbas({
     id: 'modulo-2',
     rotulo: 'Seções do Módulo 2',
@@ -539,5 +579,5 @@ export function montarModulo2() {
     ],
   });
 
-  return criarElemento('div', { class: 'mx-auto max-w-5xl' }, [cabecalho, abas]);
+  return criarElemento('div', { class: 'mx-auto max-w-5xl' }, [cabecalho, mapa, abas]);
 }

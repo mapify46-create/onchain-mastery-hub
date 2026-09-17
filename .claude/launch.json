@@ -5,8 +5,69 @@
       "name": "onchain-mastery-hub",
       "//": "-c-1 desliga o cache HTTP. Sem isso o navegador guarda os ES modules e continua rodando a versao antiga depois de uma edicao — o que ja custou tempo de depuracao mais de uma vez. Vale so para o servidor local de desenvolvimento; em producao quem cuida disso e o service-worker.js com o CACHE_VERSAO.",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["http-server", ".", "-c-1", "--silent"],
+      "runtimeArgs": [
+        "http-server",
+        ".",
+        "-c-1",
+        "--silent"
+      ],
       "port": 8080
+    },
+    {
+      "name": "omh-design-system",
+      "//": "Serve o design system exportado do Claude Design (pasta temporaria) so para visualizar os UI kits.",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "http-server",
+        "C:/Users/dreis/AppData/Local/Temp/claude/C--Users-dreis-Documents-onchain-mastery-hub/fc910449-3608-4023-8644-b72b7f3fa0f3/scratchpad/omh-ds2",
+        "-c-1",
+        "--silent",
+        "-p",
+        "8090"
+      ],
+      "port": 8090
+    },
+    {
+      "name": "onchain-mastery-hub-8081",
+      "//": "Mesma pasta, outra porta. O painel do navegador guarda os modulos por URL e ignora cache:reload; trocar de porta e a forma de ver a edicao mais recente.",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "http-server",
+        ".",
+        "-c-1",
+        "--silent",
+        "-p",
+        "8081"
+      ],
+      "port": 8081
+    },
+    {
+      "name": "onchain-mastery-hub-8082",
+      "//": "Mesma pasta, outra porta. O painel do navegador guarda os modulos por URL e ignora cache:reload; trocar de porta e a forma de ver a edicao mais recente.",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "http-server",
+        ".",
+        "-c-1",
+        "--silent",
+        "-p",
+        "8082"
+      ],
+      "port": 8082
+    },
+    {
+      "name": "onchain-mastery-hub-8083",
+      "//": "Mesma pasta, outra porta. O painel do navegador guarda os modulos por URL e ignora cache:reload; trocar de porta e a forma de ver a edicao mais recente.",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "http-server",
+        ".",
+        "-c-1",
+        "--silent",
+        "-p",
+        "8083"
+      ],
+      "port": 8083
     }
   ]
 }

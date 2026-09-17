@@ -20,6 +20,7 @@ import { montarSimulador } from '../components/simulator.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarCalculadora } from '../components/calculadora.js';
+import { criarMapaMental } from '../components/visuais.js';
 import { obterEstado, atualizar } from '../store.js';
 
 // Parágrafo de apoio usado no topo de várias abas.
@@ -609,6 +610,16 @@ export function montarModulo4() {
     ),
   ]);
 
+  // O mapa do módulo abre a página: o todo antes das partes.
+  const mapa = criarMapaMental({
+    centro: 'Gestão, catálises e decisão',
+    ramos: [
+      { titulo: 'Tese vs. catálise', folhas: ['O que cada uma é, e o que falta quando vem sozinha', 'A ficha de tese, campo a campo', 'Os tipos de catálise'] },
+      { titulo: 'Take profit', folhas: ['A escada de realização', 'O erro de segurar', 'Tributação'] },
+      { titulo: 'Antes de entrar', folhas: modulo4.checagens.itens.map((item) => item.titulo ?? item.pergunta).slice(0, 3) },
+      { titulo: 'Simulador', folhas: [cenarios.length + ' cenários fictícios para treinar a decisão'] },
+    ],
+  });
   const abas = criarAbas({
     id: 'modulo-4',
     rotulo: 'Seções do Módulo 4',
@@ -621,5 +632,5 @@ export function montarModulo4() {
     ],
   });
 
-  return criarElemento('div', { class: 'mx-auto max-w-5xl' }, [cabecalho, abas]);
+  return criarElemento('div', { class: 'mx-auto max-w-5xl' }, [cabecalho, mapa, abas]);
 }
