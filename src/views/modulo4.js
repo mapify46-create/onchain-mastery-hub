@@ -20,7 +20,7 @@ import { montarSimulador } from '../components/simulator.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarCalculadora } from '../components/calculadora.js';
-import { criarMapaMental } from '../components/visuais.js';
+import { criarMapaMental, criarSequencia, criarBarrasNaMesmaEscala } from '../components/visuais.js';
 import { obterEstado, atualizar } from '../store.js';
 
 // Parágrafo de apoio usado no topo de várias abas.
@@ -347,6 +347,47 @@ function montarAbaTese() {
 }
 
 // ---------------------------------------------------------------------------
+
+// A escada de realização como degraus: a ordem das faixas é o conteúdo, e ela
+// se perde numa lista. Os textos são os do arquivo, que já avisa serem exemplo
+// didático, não recomendação de onde vender.
+function criarEscadaEmDegraus() {
+  const faixas = modulo4.takeProfit?.escada?.faixas ?? [];
+  if (!faixas.length) return null;
+
+  return criarSequencia({
+    titulo: 'A escada, degrau a degrau',
+    comReproducao: true,
+    passos: faixas.map((faixa, indice) => ({
+      titulo: faixa.alvo,
+      texto: faixa.acao,
+      tom: indice === 0 ? 'baixo' : indice === faixas.length - 1 ? 'medio' : 'acento',
+    })),
+    nota: 'Exemplo didático, não recomendação de onde vender. O que vale é o formato: faixas definidas antes, cada uma com um motivo.',
+  });
+}
+
+// Perder e recuperar não são simétricos. A calculadora já mostra isso ponto a
+// ponto; as barras mostram a forma da curva de uma vez só. Os pares vêm da
+// fórmula do arquivo: ganho = 1 ÷ (1 − perda) − 1.
+function criarBarrasDaRecuperacao() {
+  const perdas = [10, 25, 50, 75, 90];
+  const emBr = (n) => n.toLocaleString('pt-BR', { maximumFractionDigits: 0 });
+
+  return criarBarrasNaMesmaEscala({
+    titulo: 'O ganho que cada perda exige só para voltar ao começo',
+    itens: perdas.map((perda) => {
+      const ganho = (1 / (1 - perda / 100) - 1) * 100;
+      return {
+        rotulo: 'Perdeu ' + perda + '%',
+        valor: ganho,
+        exibicao: '+' + emBr(ganho) + '%',
+        tom: ganho >= 100 ? 'alto' : 'medio',
+      };
+    }),
+    nota: 'Fórmula do arquivo: ganho necessário = 1 ÷ (1 − perda) − 1. Perder metade pede dobrar; perder 90% pede dez vezes.',
+  });
+}
 // Aba 2 — Take profit (escada de realização, custo afundado e tributação)
 // ---------------------------------------------------------------------------
 function montarAbaTakeProfit() {
@@ -408,6 +449,7 @@ function montarAbaTakeProfit() {
     montarDestaques(modulo4.destaques.takeProfit),
     explicacao,
     escada,
+    criarEscadaEmDegraus(),
     calc &&
       montarCalculadora({
         id: 'm4-degraus',
@@ -444,6 +486,7 @@ function montarAbaChecagens() {
         nota: calculadoraDeRecuperacao.nota,
         calcular: calcularRecuperacao,
       }),
+    criarBarrasDaRecuperacao(),
     calculadoraDeTamanho &&
       montarCalculadora({
         id: 'm4-tamanho',
