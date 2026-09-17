@@ -20,7 +20,7 @@ import { montarSimulador } from '../components/simulator.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarCalculadora } from '../components/calculadora.js';
-import { criarMapaMental, criarSequencia, criarBarrasNaMesmaEscala } from '../components/visuais.js';
+import { criarMapaMental, criarSequencia, criarBarrasNaMesmaEscala, abrirAba } from '../components/visuais.js';
 import { obterEstado, atualizar } from '../store.js';
 
 // Parágrafo de apoio usado no topo de várias abas.
@@ -357,7 +357,6 @@ function criarEscadaEmDegraus() {
 
   return criarSequencia({
     titulo: 'A escada, degrau a degrau',
-    comReproducao: true,
     passos: faixas.map((faixa, indice) => ({
       titulo: faixa.alvo,
       texto: faixa.acao,
@@ -655,12 +654,12 @@ export function montarModulo4() {
 
   // O mapa do módulo abre a página: o todo antes das partes.
   const mapa = criarMapaMental({
-    centro: 'Gestão, catálises e decisão',
+    centro: { rotulo: 'Módulo 4', titulo: 'Gestão & decisão', subtitulo: 'Tese, catálise e a saída escrita antes' },
     ramos: [
-      { titulo: 'Tese vs. catálise', folhas: ['O que cada uma é, e o que falta quando vem sozinha', 'A ficha de tese, campo a campo', 'Os tipos de catálise'] },
-      { titulo: 'Take profit', folhas: ['A escada de realização', 'O erro de segurar', 'Tributação'] },
-      { titulo: 'Antes de entrar', folhas: modulo4.checagens.itens.map((item) => item.titulo ?? item.pergunta).slice(0, 3) },
-      { titulo: 'Simulador', folhas: [cenarios.length + ' cenários fictícios para treinar a decisão'] },
+      { titulo: 'Tese vs. catálise', folhas: ['O que cada uma é, e o que falta quando vem sozinha', 'A ficha de tese, campo a campo', 'Os tipos de catálise'] , aoAbrir: () => abrirAba('modulo-4-aba-tese') },
+      { titulo: 'Take profit', folhas: ['A escada de realização', 'O erro de segurar', 'Tributação'] , aoAbrir: () => abrirAba('modulo-4-aba-take-profit') },
+      { titulo: 'Antes de entrar', folhas: modulo4.checagens.itens.map((item) => item.titulo ?? item.pergunta).slice(0, 3) , aoAbrir: () => abrirAba('modulo-4-aba-checagens') },
+      { titulo: 'Simulador', folhas: [cenarios.length + ' cenários fictícios para treinar a decisão'] , aoAbrir: () => abrirAba('modulo-4-aba-simulador') },
     ],
   });
   const abas = criarAbas({

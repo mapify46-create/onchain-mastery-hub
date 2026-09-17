@@ -21,6 +21,7 @@ import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
 import { criarMapaDoModulo, criarSequencia } from '../components/visuais.js';
+import { criarAnimacaoDrainer, criarAnimacaoEnvenenamento } from '../components/animacoes.js';
 import { montarDiagrama, renderizarDiagrama } from '../components/diagrama.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarAnatomia } from '../components/anatomia.js';
@@ -210,7 +211,9 @@ function montarAbaGolpes() {
     criarAnatomia('sitePhishing', 'm1-anatomia-phishing'),
     figura,
     criarSequenciaDoDrainer(),
+    criarAnimacaoDrainer(),
     criarSequenciaDoEnvenenamento(),
+    criarAnimacaoEnvenenamento(),
     criarElemento(
       'ol',
       { class: 'space-y-4' },
@@ -227,7 +230,6 @@ function criarSequenciaDoDrainer() {
   return criarSequencia({
     titulo: 'O golpe, do anúncio à carteira vazia',
     passos: modulo1.roteiroDrainer.map((passo) => ({ titulo: passo.titulo, texto: passo.oQueVeem })),
-    comReproducao: true,
     nota: 'A frase-semente não aparece em nenhum passo: o golpe inteiro vive de uma assinatura.',
   });
 }
@@ -241,7 +243,6 @@ function criarSequenciaDoEnvenenamento() {
 
   return criarSequencia({
     titulo: secao.exemplo.titulo,
-    comReproducao: true,
     passos: passos.map((texto, indice) => ({
       titulo: 'Passo ' + (indice + 1),
       texto,
@@ -428,6 +429,8 @@ export function montarModulo1() {
 
   // O mapa do módulo abre a página: o todo antes das partes.
   const mapa = criarMapaDoModulo({
+    numero: 1,
+    idDasAbas: 'modulo-1',
     nome: "Fundamentos & Segurança",
     secoes: modulo1.secoes,
     abas: [

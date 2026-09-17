@@ -17,7 +17,8 @@ import {
 import { montarMatrizDeFerramentas } from '../components/toolMatrix.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
-import { criarMapaMental, criarCiclo, criarBarrasNaMesmaEscala } from '../components/visuais.js';
+import { criarMapaMental, criarCiclo, criarBarrasNaMesmaEscala, abrirAba } from '../components/visuais.js';
+import { criarAnimacaoNarrativa } from '../components/animacoes.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
 import { montarAnatomia } from '../components/anatomia.js';
@@ -350,6 +351,7 @@ function montarAbaNarrativas() {
           conteudo: [
             secao('ciclo'),
             criarCicloDaNarrativa(),
+            criarAnimacaoNarrativa(),
             montarLinhaDoTempo({ id: 'm3-rotacao-narrativas', ...pratica.linhaDoTempo }),
             criarTabela('As cinco narrativas, lado a lado', pratica.tabelaNarrativas),
           ],
@@ -742,14 +744,14 @@ export function montarModulo3() {
   // O mapa do módulo abre a página: o todo antes das partes. Cada ramo é uma aba,
   // e as folhas saem dos títulos das próprias seções.
   const mapa = criarMapaMental({
-    centro: 'Os dois pilares',
+    centro: { rotulo: 'Módulo 3', titulo: 'Os dois pilares', subtitulo: 'Social e técnico: duas checagens, não uma' },
     ramos: [
-      { titulo: 'Visão geral', folhas: modulo3.secoes.map((secao) => secao.titulo) },
-      { titulo: 'Narrativas', folhas: modulo3.praticaNarrativas.secoes.map((s) => s.titulo).slice(0, 3) },
-      { titulo: 'Pilar social', folhas: modulo3.praticaSocial.secoes.map((s) => s.titulo).slice(0, 3) },
-      { titulo: 'Pilar técnico', folhas: modulo3.praticaTecnica.ferramentas.map((f) => f.nome).slice(0, 4) },
-      { titulo: 'Matriz de ferramentas', folhas: ['Filtrar por pilar, rede e papel', modulo3.ferramentas.length + ' ferramentas catalogadas'] },
-      { titulo: 'Cenário 2025–2026', folhas: ['A liderança entre launchpads muda rápido'] },
+      { titulo: 'Visão geral', folhas: modulo3.secoes.map((secao) => secao.titulo) , aoAbrir: () => abrirAba('modulo-3-aba-visao-geral') },
+      { titulo: 'Narrativas', folhas: modulo3.praticaNarrativas.secoes.map((s) => s.titulo).slice(0, 3) , aoAbrir: () => abrirAba('modulo-3-aba-narrativas') },
+      { titulo: 'Pilar social', folhas: modulo3.praticaSocial.secoes.map((s) => s.titulo).slice(0, 3) , aoAbrir: () => abrirAba('modulo-3-aba-social') },
+      { titulo: 'Pilar técnico', folhas: modulo3.praticaTecnica.ferramentas.map((f) => f.nome).slice(0, 4) , aoAbrir: () => abrirAba('modulo-3-aba-tecnico') },
+      { titulo: 'Matriz de ferramentas', folhas: ['Filtrar por pilar, rede e papel', modulo3.ferramentas.length + ' ferramentas catalogadas'] , aoAbrir: () => abrirAba('modulo-3-aba-matriz') },
+      { titulo: 'Cenário 2025–2026', folhas: ['A liderança entre launchpads muda rápido'] , aoAbrir: () => abrirAba('modulo-3-aba-cenario') },
     ],
   });
   const abas = criarAbas({

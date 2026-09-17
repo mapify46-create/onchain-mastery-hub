@@ -22,7 +22,7 @@ function criarMapaDoGlossario() {
 
   return criarMapaMental({
     titulo: 'Mapa do glossário',
-    centro: glossario.length + ' termos, em ' + ramos.length + ' categorias',
+    centro: { rotulo: 'Glossário', titulo: glossario.length + ' termos', subtitulo: ramos.length + ' categorias' },
     ramos,
     nota: 'Alguns termos aparecem em mais de uma categoria: é o caso de quem cruza segurança com outra área.',
   });

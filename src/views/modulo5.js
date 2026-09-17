@@ -26,6 +26,7 @@ import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
 import { criarMapaDoModulo, criarSequencia } from '../components/visuais.js';
+import { criarAnimacaoSanduiche, criarAnimacaoCaminhoDoToken } from '../components/animacoes.js';
 import { montarDiagrama, renderizarDiagrama } from '../components/diagrama.js';
 import { montarGraficoEmpilhado, renderizarGrafico } from '../components/grafico.js';
 import { montarCalculadora } from '../components/calculadora.js';
@@ -284,7 +285,6 @@ function criarSequenciaDoCaminho() {
 
   return criarSequencia({
     titulo: secao.listaTitulo ?? secao.titulo,
-    comReproducao: true,
     passos: secao.lista.map((item) => {
       const corte = item.indexOf(':');
       return corte === -1
@@ -301,7 +301,6 @@ function criarSequenciaDoCaminho() {
 function criarSequenciaDoSanduiche() {
   return criarSequencia({
     titulo: 'O sanduíche: por que o slippage alto atrai bot',
-    comReproducao: true,
     passos: [
       { titulo: 'Você envia a ordem', texto: 'Ela fica visível antes de entrar no bloco, com o tamanho e o limite de slippage que você aceitou.' },
       { titulo: 'O bot passa na frente', texto: 'Ele paga prioridade para ser processado primeiro. O slot da Solana dura 350 ms.', tom: 'medio' },
@@ -326,6 +325,7 @@ function montarAbaTaxas() {
     ...criarSecoesDaAba('taxas'),
     criarFiguraDoDiagrama('caminho-do-dinheiro'),
     criarSequenciaDoCaminho(),
+    criarAnimacaoCaminhoDoToken(),
 
     // 3. Detalhe camada por camada.
     criarIntroducao('As cinco camadas de custo de uma compra, uma a uma.'),
@@ -402,6 +402,7 @@ function montarAbaConfiguracoes() {
 
     criarFiguraDoDiagrama('slippage-mal-configurado'),
     criarSequenciaDoSanduiche(),
+    criarAnimacaoSanduiche(),
 
     // Depois de ver o slippage dar errado no diagrama, sentir o impacto no controle.
     calc &&
@@ -620,6 +621,8 @@ export function montarModulo5() {
 
   // O mapa do módulo abre a página: o todo antes das partes.
   const mapa = criarMapaDoModulo({
+    numero: 5,
+    idDasAbas: 'modulo-5',
     nome: "A mecânica da execução",
     secoes: modulo5.secoes,
     abas: [

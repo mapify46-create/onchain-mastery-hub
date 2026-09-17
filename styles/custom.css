@@ -340,3 +340,157 @@ summary.list-none::-webkit-details-marker {
     transform: none;
   }
 }
+
+/* ===========================================================================
+   Vocabulário visual didático (src/components/visuais.js, fluxograma.js e
+   animacoes.js) — o que não dá para escrever inline: pseudo-elementos, telas
+   estreitas e "reduzir movimento".
+   =========================================================================== */
+
+/* Mapa mental: o conector de cada ramo até o tronco. */
+.omh-mapa {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+}
+.omh-mapa-tronco {
+  flex: 0 0 32px;
+  height: 2px;
+  background: var(--omh-borda);
+}
+.omh-mapa-ramos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 2px solid var(--omh-borda);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1 1 auto;
+  min-width: 420px;
+}
+.omh-mapa-ramo {
+  position: relative;
+  padding-left: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.omh-mapa-ramo::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 18px;
+  width: 28px;
+  height: 2px;
+  background: var(--omh-borda);
+}
+@media (max-width: 640px) {
+  .omh-mapa {
+    flex-direction: column;
+    align-items: stretch;
+    overflow-x: visible;
+  }
+  .omh-mapa-tronco {
+    flex-basis: 20px;
+    width: 2px;
+    height: 20px;
+    margin-left: 24px;
+  }
+  .omh-mapa-ramos {
+    min-width: 0;
+    margin-left: 24px;
+    gap: 12px;
+  }
+  .omh-mapa-ramo {
+    padding-left: 20px;
+  }
+  .omh-mapa-ramo::before {
+    width: 20px;
+    top: 16px;
+  }
+  .omh-mapa-ramo > a,
+  .omh-mapa-ramo > button {
+    flex: 1 1 100%;
+    min-height: 44px;
+  }
+}
+
+/* Sequência: horizontal com rolagem interna; vertical no celular. */
+.omh-sequencia {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  gap: 0;
+}
+.omh-sequencia > li {
+  display: flex;
+  align-items: flex-start;
+  flex: 1 1 0;
+  min-width: 140px;
+}
+.omh-sequencia-ligacao {
+  flex: 0 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  color: var(--omh-texto-suave);
+}
+@media (max-width: 640px) {
+  .omh-sequencia {
+    flex-direction: column;
+    overflow-x: visible;
+  }
+  .omh-sequencia > li {
+    flex-direction: column;
+    min-width: 0;
+  }
+  .omh-sequencia-ligacao {
+    height: 16px;
+    width: 2px;
+    margin-left: 23px;
+    background: var(--omh-borda);
+    color: transparent;
+    flex-basis: 16px;
+  }
+}
+
+/* Fluxograma: os ramos ficam lado a lado no desktop e empilham no celular. */
+.omh-fluxo-ramos {
+  display: grid;
+  grid-template-columns: repeat(var(--omh-fluxo-colunas, 2), minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+@media (max-width: 640px) {
+  .omh-fluxo-ramos {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .omh-fluxo-ramo {
+    align-items: stretch !important;
+  }
+}
+
+/* Animação: as transições do palco (altura, largura, opacidade) — e nada disso
+   quando o sistema pediu menos movimento; o motor também não toca sozinho. */
+.omh-anim-transicao {
+  transition:
+    height var(--omh-anim-dur, 400ms) ease,
+    width var(--omh-anim-dur, 400ms) ease,
+    opacity var(--omh-anim-dur, 400ms) ease,
+    transform var(--omh-anim-dur, 400ms) ease,
+    background-color var(--omh-anim-dur, 400ms) ease,
+    border-color var(--omh-anim-dur, 400ms) ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .omh-anim-transicao {
+    transition: none;
+  }
+}

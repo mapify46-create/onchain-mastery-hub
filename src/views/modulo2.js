@@ -24,7 +24,7 @@ import {
 } from '../components/phaseFlow.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
-import { criarMapaMental, criarGradeDe100, criarCiclo, criarSequencia } from '../components/visuais.js';
+import { criarMapaMental, criarGradeDe100, criarCiclo, criarSequencia, abrirAba } from '../components/visuais.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarAnatomia } from '../components/anatomia.js';
 import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
@@ -451,7 +451,6 @@ function criarCicloDaDopamina() {
 function criarFasesTocaveis() {
   return criarSequencia({
     titulo: 'As quatro fases, uma de cada vez',
-    comReproducao: true,
     passos: modulo2.fases.map((fase) => ({
       titulo: fase.nome,
       texto: fase.resumo,
@@ -573,13 +572,13 @@ export function montarModulo2() {
   // O mapa do módulo abre a página: o todo antes das partes. Os ramos saem
   // dos próprios dados, então acrescentar um viés ou um caso atualiza o mapa.
   const mapa = criarMapaMental({
-    centro: 'Psicologia das memecoins',
+    centro: { rotulo: 'Módulo 2', titulo: 'Psicologia das memecoins', subtitulo: 'Por que a cabeça erra antes do mercado' },
     ramos: [
-      { titulo: 'Visão geral', folhas: modulo2.secoes.map((secao) => secao.titulo) },
-      { titulo: 'Vieses', folhas: modulo2.vieses.map((vies) => vies.nome) },
-      { titulo: 'Tipos de token', folhas: modulo2.categoriasDeToken.map((c) => c.nome).slice(0, 3) },
-      { titulo: 'Casos reais', folhas: modulo2.casos.map((caso) => caso.nome) },
-      { titulo: 'As 4 fases', folhas: modulo2.fases.map((fase) => fase.nome) },
+      { titulo: 'Visão geral', folhas: modulo2.secoes.map((secao) => secao.titulo), aoAbrir: () => abrirAba('modulo-2-aba-visao-geral') },
+      { titulo: 'Vieses', folhas: modulo2.vieses.map((vies) => vies.nome), aoAbrir: () => abrirAba('modulo-2-aba-vieses') },
+      { titulo: 'Tipos de token', folhas: modulo2.categoriasDeToken.map((c) => c.nome).slice(0, 3), aoAbrir: () => abrirAba('modulo-2-aba-tipos') },
+      { titulo: 'Casos reais', folhas: modulo2.casos.map((caso) => caso.nome), aoAbrir: () => abrirAba('modulo-2-aba-casos') },
+      { titulo: 'As 4 fases', folhas: modulo2.fases.map((fase) => fase.nome), aoAbrir: () => abrirAba('modulo-2-aba-fases') },
     ],
   });
   const abas = criarAbas({

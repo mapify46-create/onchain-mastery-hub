@@ -415,6 +415,8 @@ export function montarModulo7() {
 
   // O mapa do módulo abre a página: o todo antes das partes.
   const mapa = criarMapaDoModulo({
+    numero: 7,
+    idDasAbas: 'modulo-7',
     nome: "A rotina",
     secoes: modulo7.secoes,
     abas: [

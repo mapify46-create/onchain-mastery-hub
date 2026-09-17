@@ -111,7 +111,17 @@ o rótulo já está escrito, e ninguém analisa nada antes de a coleta existir.
   e barras dos calls; M2 ciclo da dopamina e 4 fases tocáveis; M6 grades do detector (95/68) e
   vai e volta do wash trading; Início com o mapa da trilha. Quiz e Simulador já tinham o
   feedback que o desenho pedia (placar, erro com certeza, aviso da revisão).
-- Cache do service worker em v19.
+- 17/09 (tarde): refeito no traço do handoff, sem simplificar. visuais.js: mapa mental com centro
+  roxo, tronco e ramos que abrem a aba; sequência como tablist com teclado (← → Home End);
+  ciclo em SVG 320px com arcos, ponta de seta e retorno tracejado ciano; grade de 100 em grid
+  10×10 com número exato e fonte; barras sólido/tracejado/listrado com legenda e pílula
+  "exemplo inventado"; curva deslizante com atalhos e "pool 10×". fluxograma.js: árvore de
+  cima para baixo, nós de 4 tipos, rótulos Sim/Não, ramos lado a lado (empilham no celular),
+  fim "Não compro" repetido por ramo e ↩ para laços. animacoes.js: motor (palco, legenda
+  aria-live, Voltar/Tocar/Avançar, barra de cenas, teclado, reduzir movimento, "Ler como
+  texto", cenas paradas) + as 6 animações portadas cena a cena (pool, drainer, sanduíche,
+  caminho do token, narrativa, address poisoning), nos módulos 6, 1, 5, 5, 3 e 1.
+- Cache do service worker em v20.
 - Armadilha nova: o painel do navegador guarda os módulos por URL e ignora cache:reload.
   Portas alternativas (8081-8083) em .claude/launch.json servem para ver a versão nova.
 

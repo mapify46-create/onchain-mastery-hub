@@ -21,6 +21,7 @@ import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
 import { montarSegmentos, montarPerguntaPrevia, montarTermos } from '../components/didatica.js';
 import { criarBarrasNaMesmaEscala, criarCurvaDeSaida, criarMapaDoModulo, criarGradeDe100, criarSequencia } from '../components/visuais.js';
+import { criarAnimacaoPool } from '../components/animacoes.js';
 
 // As perguntas do quiz com o "por que a sua não serve", para usar no fim das partes.
 const PERGUNTAS = juntarPorques(modulo6.quiz, modulo6.porqueErradas);
@@ -233,12 +234,14 @@ function montarAbaNumeros() {
             // única que não existe em lugar nenhum. Números iguais aos da seção.
             criarBarrasNaMesmaEscala({
               titulo: 'O exemplo da seção, em barras na mesma escala',
+              exemploInventado: true,
+              legenda: { tracejado: 'no papel', solido: 'dinheiro na pool', listrado: 'o lado que paga quem vende' },
               itens: [
-                { rotulo: 'Market cap = FDV (no papel)', valor: 50000, exibicao: 'US$ 50.000', tom: 'suave',
-                  nota: 'US$ 0,00005 × 1 bilhão de tokens. Exemplo inventado.' },
-                { rotulo: 'Liquidez da pool', valor: 8000, exibicao: 'US$ 8.000', tom: 'acento',
-                  partes: [{ fracao: 0.5, tom: 'acento' }, { fracao: 0.5, tom: 'suave' }],
-                  nota: 'Metade em SOL (US$ 4.000, o dinheiro que paga quem vende) e metade em tokens.' },
+                { rotulo: 'Market cap = FDV', valor: 50000, exibicao: 'US$ 50 mil', estilo: 'tracejado',
+                  nota: 'Preço da última negociação × 1 bilhão de tokens. Ninguém tem esse dinheiro.' },
+                { rotulo: 'Liquidez na pool', valor: 8000, exibicao: 'US$ 8 mil',
+                  partes: [{ rotulo: 'tokens', valor: 4000, estilo: 'solido' }, { rotulo: 'SOL', valor: 4000, estilo: 'listrado' }],
+                  nota: 'Só a metade em SOL (US$ 4 mil) paga quem vende.' },
               ],
               nota: 'Barras na mesma escala. A de cima é o número que a tela mostra; a de baixo é o dinheiro que existe.',
             }),
@@ -252,6 +255,7 @@ function montarAbaNumeros() {
             secao('quanto-sai'),
             // A curva do texto, para mexer: mesma conta da pool de produto constante.
             criarCurvaDeSaida({ liquidez: 8000 }),
+            criarAnimacaoPool(),
             criarTabela('Quanto sai, por queda de preço', modulo6.tabelaVendaPorQueda),
             calc &&
               montarCalculadora({
@@ -484,7 +488,14 @@ export function montarModulo6() {
     { id: 'contrato', rotulo: 'O contrato' },
     { id: 'deteccao', rotulo: 'Prever o golpe' },
   ];
-  const mapa = criarMapaDoModulo({ nome: 'Ler a tela', secoes: modulo6.secoes, abas: ABAS });
+  const mapa = criarMapaDoModulo({
+    numero: 6,
+    nome: 'Ler a tela',
+    subtitulo: 'O que os números escondem',
+    secoes: modulo6.secoes,
+    abas: ABAS,
+    idDasAbas: 'modulo-6',
+  });
 
   const abas = criarAbas({
     id: 'modulo-6',

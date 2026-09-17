@@ -152,6 +152,48 @@
         "8089"
       ],
       "port": 8089
+    },
+    {
+      "name": "onchain-mastery-hub-8091",
+      "//": "Mesma pasta, outra porta (ver a versao mais recente no painel do navegador).",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "http-server",
+        ".",
+        "-c-1",
+        "--silent",
+        "-p",
+        "8091"
+      ],
+      "port": 8091
+    },
+    {
+      "name": "onchain-mastery-hub-8092",
+      "//": "Mesma pasta, outra porta (ver a versao mais recente no painel do navegador).",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "http-server",
+        ".",
+        "-c-1",
+        "--silent",
+        "-p",
+        "8092"
+      ],
+      "port": 8092
+    },
+    {
+      "name": "onchain-mastery-hub-8093",
+      "//": "Mesma pasta, outra porta (ver a versao mais recente no painel do navegador).",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "http-server",
+        ".",
+        "-c-1",
+        "--silent",
+        "-p",
+        "8093"
+      ],
+      "port": 8093
     }
   ]
 }
