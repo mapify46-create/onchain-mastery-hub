@@ -20,7 +20,7 @@ import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
 import { montarSegmentos, montarPerguntaPrevia, montarTermos } from '../components/didatica.js';
-import { criarBarrasNaMesmaEscala, criarCurvaDeSaida, criarMapaDoModulo } from '../components/visuais.js';
+import { criarBarrasNaMesmaEscala, criarCurvaDeSaida, criarMapaDoModulo, criarGradeDe100, criarSequencia } from '../components/visuais.js';
 
 // As perguntas do quiz com o "por que a sua não serve", para usar no fim das partes.
 const PERGUNTAS = juntarPorques(modulo6.quiz, modulo6.porqueErradas);
@@ -159,6 +159,50 @@ function calcularSaida({ posicao, liquidez }) {
   };
 }
 
+
+// As duas perguntas que o F1 junta, separadas em duas grades: do que o modelo
+// acusou, quanto era rug? E dos rugs reais, quantos ele achou? Os dois números
+// são a estimativa que a própria seção marca como reconstruída.
+function criarGradesDoDetector() {
+  return criarElemento('div', { class: 'grid gap-4 xl:grid-cols-2' }, [
+    criarGradeDe100({
+      titulo: 'Do que o modelo marcou como rug',
+      grupos: [
+        { quantidade: 95, tom: 'acento', rotulo: 'eram rug mesmo' },
+        { quantidade: 5, tom: 'suave', rotulo: 'não eram' },
+      ],
+      frase: 'De cada 100 tokens marcados, cerca de 95 eram rug.',
+      nota: 'Estimativa reconstruída pelas contagens do teste. O artigo não publica este número.',
+    }),
+    criarGradeDe100({
+      titulo: 'Dos rugs que existiam',
+      grupos: [
+        { quantidade: 68, tom: 'acento', rotulo: 'o modelo pegou' },
+        { quantidade: 32, tom: 'alto', rotulo: 'passaram sem ser marcados' },
+      ],
+      frase: 'De cada 100 rugs reais, ele pega uns 68.',
+      nota: 'Mesma estimativa. Os próprios autores dizem que o resultado ainda não serve para uso real.',
+    }),
+  ]);
+}
+
+// O vai e volta do volume fabricado: as duas carteiras são da mesma pessoa, e a
+// tela soma tudo como se fosse gente diferente.
+function criarSequenciaDoWashTrading() {
+  return criarSequencia({
+    titulo: 'Como o volume aparece do nada',
+    comReproducao: true,
+    passos: [
+      { titulo: 'A carteira A compra', texto: 'É a mesma pessoa que controla a carteira B.' },
+      { titulo: 'A carteira B vende', texto: 'Quase a mesma quantidade, logo em seguida.' },
+      { titulo: 'A tela soma as duas', texto: 'O volume aparece como se fossem duas pessoas negociando.', tom: 'medio' },
+      { titulo: 'O token sobe nas listas de em alta', texto: 'É isso que o volume compra.', tom: 'medio' },
+      { titulo: 'Compradores de verdade chegam', texto: 'A lista traz gente que não sabe de nada disso.', tom: 'alto' },
+      { titulo: 'O grupo vende para eles', texto: 'O dinheiro novo paga quem fabricou o volume.', tom: 'alto' },
+    ],
+    nota: 'Cada troca dessas paga taxa: por US$ 1 milhão de volume, perto de US$ 13 mil num token grande e de US$ 23 mil num recém-graduado.',
+  });
+}
 // ---------------------------------------------------------------------------
 // Aba 1 — Os números
 // ---------------------------------------------------------------------------
@@ -236,6 +280,7 @@ function montarAbaVolume() {
     montarTermos(modulo6.termos?.volume),
     montarDestaques(modulo6.destaques.volume),
     secao('como-fabrica'),
+    criarSequenciaDoWashTrading(),
     criarFiguraDoDiagrama('wash-trading'),
     secao('otimizado-contra'),
     secao('o-que-da-para-ver'),
@@ -288,6 +333,7 @@ function montarAbaDeteccao() {
     montarDestaques(modulo6.destaques.deteccao),
     secao('o-que-conta'),
     secao('melhor-detector'),
+    criarGradesDoDetector(),
     secao('sinais'),
     criarTabela('Os sinais, pela força da evidência', modulo6.tabelaSinais),
     secao('por-que-importa'),

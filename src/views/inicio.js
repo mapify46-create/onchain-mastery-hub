@@ -4,7 +4,7 @@
 // um import circular entre router.js e esta view, já que o router precisa importar
 // daqui para montar a rota "#/inicio".
 
-import { criarCiclo } from '../components/visuais.js';
+import { criarCiclo, criarSequencia } from '../components/visuais.js';
 import {
   criarElemento,
   criarTitulo,
@@ -241,6 +241,25 @@ export function montarInicio(rotas = []) {
       href: '#/modulo-4',
     };
   }
+
+  // O mapa da trilha: os módulos na ordem, com o estado de cada um e "você está
+  // aqui" no próximo. O percentual vem do mesmo cálculo das barras de progresso.
+  const mapaDaTrilha = criarSequencia({
+    titulo: 'A trilha, do começo ao fim',
+    passos: modulosDisponiveis.map((rota) => {
+      const percentual = progressoDoModulo(rota.id, estado);
+      const concluido = (estado.modulosConcluidos ?? []).includes(rota.id);
+      const estadoTexto = concluido
+        ? 'concluído'
+        : percentual > 0 ? 'começado, ' + Math.round(percentual) + '%' : 'a fazer';
+      return {
+        titulo: rota.titulo,
+        texto: estadoTexto,
+        tom: concluido ? 'baixo' : percentual > 0 ? 'medio' : 'suave',
+      };
+    }),
+    nota: 'Cada módulo assume o anterior. O Checklist e a Revisão não se concluem: são rotina.',
+  });
   const acao = calcularProximaAcao();
   const proximaAcao = criarElemento(
     'a',
@@ -385,6 +404,7 @@ export function montarInicio(rotas = []) {
     cabecalho,
     proximaAcao,
     aviso,
+    mapaDaTrilha,
     progresso,
     revisao,
     plano,

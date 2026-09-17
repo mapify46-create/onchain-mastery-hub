@@ -107,7 +107,11 @@ o rótulo já está escrito, e ninguém analisa nada antes de a coleta existir.
   envenenamento de endereço no M1, caminho do token e sanduíche no M5.
 - Falta implantar: as animações mais elaboradas do Claude Design (cenas desenhadas) e os
   ajustes finos das telas de Quiz e Simulador.
-- Cache do service worker em v17.
+- Lote de 17/09 (noite): M4 escada em degraus e barras da recuperação; M3 barras sinal x custo
+  e barras dos calls; M2 ciclo da dopamina e 4 fases tocáveis; M6 grades do detector (95/68) e
+  vai e volta do wash trading; Início com o mapa da trilha. Quiz e Simulador já tinham o
+  feedback que o desenho pedia (placar, erro com certeza, aviso da revisão).
+- Cache do service worker em v19.
 - Armadilha nova: o painel do navegador guarda os módulos por URL e ignora cache:reload.
   Portas alternativas (8081-8083) em .claude/launch.json servem para ver a versão nova.
 

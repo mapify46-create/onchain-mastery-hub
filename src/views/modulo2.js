@@ -24,7 +24,7 @@ import {
 } from '../components/phaseFlow.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
-import { criarMapaMental, criarGradeDe100 } from '../components/visuais.js';
+import { criarMapaMental, criarGradeDe100, criarCiclo, criarSequencia } from '../components/visuais.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarAnatomia } from '../components/anatomia.js';
 import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
@@ -60,6 +60,7 @@ function montarVisaoGeral() {
     objetivos,
     montarDestaques(modulo2.destaques.visaoGeral),
     ...secoes,
+    criarCicloDaDopamina(),
   ]);
 }
 
@@ -428,6 +429,37 @@ function criarGradesDaMortalidade() {
     }),
   ]);
 }
+
+// O laço da dopamina: os passos são os do exemplo da própria seção, fechados em
+// círculo porque é exatamente isso que o texto descreve — um ciclo que se
+// alimenta sozinho.
+function criarCicloDaDopamina() {
+  const secao = modulo2.secoes.find((item) => item.id === 'dopamina');
+  const passos = secao?.exemplo?.passos ?? [];
+  if (passos.length < 3) return null;
+
+  return criarCiclo({
+    titulo: 'O laço, em círculo',
+    etapas: passos.slice(0, -1).map((texto) => ({ titulo: texto })),
+    centro: 'recompensa',
+    nota: passos[passos.length - 1],
+  });
+}
+
+// As 4 fases como passo a passo: a ordem é o conteúdo, e o resumo de cada fase
+// vem do arquivo. O risco de cada fase dá a cor.
+function criarFasesTocaveis() {
+  return criarSequencia({
+    titulo: 'As quatro fases, uma de cada vez',
+    comReproducao: true,
+    passos: modulo2.fases.map((fase) => ({
+      titulo: fase.nome,
+      texto: fase.resumo,
+      tom: fase.risco === 'alto' ? 'alto' : fase.risco === 'medio' ? 'medio' : 'baixo',
+    })),
+    nota: 'Depois da última fase vem o desfecho que o próprio módulo registra: ' + modulo2.desfechoFases + '.',
+  });
+}
 // ---------------------------------------------------------------------------
 // Aba 5 — As 4 fases (Mermaid, com cards Tailwind de reserva)
 // ---------------------------------------------------------------------------
@@ -449,6 +481,7 @@ function montarFases() {
         'catálise e depois se apaga. Saber em que fase você está muda a pergunta que você faz.',
     ),
     figuraDoFluxo,
+    criarFasesTocaveis(),
     montarCardsDeFases(modulo2.fases),
     criarGradesDaMortalidade(),
     criarElemento(

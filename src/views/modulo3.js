@@ -17,7 +17,7 @@ import {
 import { montarMatrizDeFerramentas } from '../components/toolMatrix.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
-import { criarMapaMental, criarCiclo } from '../components/visuais.js';
+import { criarMapaMental, criarCiclo, criarBarrasNaMesmaEscala } from '../components/visuais.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
 import { montarAnatomia } from '../components/anatomia.js';
@@ -201,6 +201,37 @@ function criarCicloDaNarrativa() {
     nota: 'A seta tracejada fecha o ciclo: quando uma narrativa morre, a atenção já está em outra. Reconhecer a fase não prevê o preço.',
   });
 }
+
+// A conta que decide o pilar social: o sinal, no melhor caso, é menor que o
+// pedágio de entrar e sair. Os dois números vêm do exemplo da própria seção.
+function criarBarrasDoSinalContraCusto() {
+  return criarBarrasNaMesmaEscala({
+    titulo: 'O sinal social contra o custo de operar',
+    itens: [
+      { rotulo: 'Sinal social, no melhor caso', valor: 3, exibicao: '1% a 3%', tom: 'acento',
+        nota: 'E só por poucos minutos.' },
+      { rotulo: 'Custo de entrar e sair de uma memecoin', valor: 6, exibicao: '3 a 6 pontos', tom: 'alto',
+        nota: 'As cinco camadas de custo do Módulo 5.' },
+    ],
+    nota: 'As barras estão na mesma escala. O custo come o sinal antes de ele virar lucro.',
+  });
+}
+
+// O que aconteceu com o preço depois do tweet de um influenciador. As barras
+// mostram o tamanho da variação; o sinal fica no número, porque barra não tem
+// lado. Os três valores são do estudo citado na seção.
+function criarBarrasDosCalls() {
+  return criarBarrasNaMesmaEscala({
+    titulo: 'Depois do tweet: o primeiro dia e os trinta',
+    itens: [
+      { rotulo: 'No primeiro dia', valor: 1.83, exibicao: '+1,83%', tom: 'baixo' },
+      { rotulo: 'Em 10 dias', valor: 2.24, exibicao: '−2,24%', tom: 'medio' },
+      { rotulo: 'Em 30 dias', valor: 6.53, exibicao: '−6,53%', tom: 'alto' },
+    ],
+    descricao: 'Variação de preço depois do tweet: mais 1,83% no primeiro dia, menos 2,24% em 10 dias e menos 6,53% em 30 dias.',
+    nota: '36 mil tweets de 180 influenciadores, sobre mais de 1.600 criptoativos. A barra mostra o tamanho; o sinal está no número. Quem pôs US$ 1.000 em tokens fora do top 100 no dia do tweet e segurou 30 dias perdeu US$ 79, em média.',
+  });
+}
 // Parágrafo de apoio usado no topo de várias abas.
 function criarIntroducao(texto) {
   return criarElemento('p', { class: 'max-w-3xl text-texto-suave' }, [texto]);
@@ -325,7 +356,7 @@ function montarAbaNarrativas() {
         },
         {
           titulo: 'Narrativa e preço',
-          conteudo: [secao('narrativa-e-preco')],
+          conteudo: [secao('narrativa-e-preco'), criarBarrasDoSinalContraCusto()],
         },
         {
           titulo: 'Rastrear',
@@ -426,7 +457,7 @@ function montarAbaSocial() {
         {
           titulo: 'Telegram e calls pagos',
           pergunta: perguntaDoQuiz('q8'),
-          conteudo: [secao('telegram'), secao('calls')],
+          conteudo: [secao('telegram'), secao('calls'), criarBarrasDosCalls()],
         },
         {
           titulo: 'O que cada sinal prova',
