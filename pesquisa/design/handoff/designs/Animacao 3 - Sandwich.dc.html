@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}button:focus-visible,[tabindex]:focus-visible{outline:2px solid #22D3EE;outline-offset:2px;border-radius:4px}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}</style></helmet>
+<main id="conteudo" style="max-width:868px;margin:0 auto;padding:32px 24px;display:flex;flex-direction:column;gap:24px">
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Animação 3 · Módulo 5 · {{ duracaoTexto }}</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">Sandwich: o robô compra antes e vende depois</h1>
+<p style="margin:8px 0 0;color:#9AA7B4;text-wrap:pretty">Oito cenas. Fonte: modulo5.js › slippage-priority-mev. Os preços da ilustração são inventados de propósito e aparecem marcados — o arquivo não publica lucro de robô, e esta animação também não.</p>
+</header>
+
+<section aria-label="Animação" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
+<span style="flex:0 0 auto;white-space:nowrap;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#9AA7B4">cena {{ numero }} de {{ total }}</span>
+<label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#9AA7B4;cursor:pointer"><input type="checkbox" checked="{{ reduzir }}" onChange="{{ alternarReduzir }}" style="width:16px;height:16px;accent-color:#7C3AED">Reduzir movimento: cenas paradas, lado a lado</label>
+</div>
+
+<sc-if value="{{ modoAnimado }}" hint-placeholder-val="{{ true }}">
+<div tabindex="0" role="group" aria-label="Palco da animação. Espaço toca ou pausa; setas trocam a cena." onKeyDown="{{ tecla }}" style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div role="img" aria-label="{{ cena.alt }}" style="display:flex;flex-direction:column;gap:16px">
+<!-- fila / bloco -->
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">{{ cena.faseRotulo }}</p>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#9AA7B4">slot da Solana: 350 ms</span>
+</div>
+<div style="margin-top:8px;border-radius:8px;border:1px solid {{ cena.blocoBorda }};background:#10151E;padding:10px;display:flex;flex-direction:column;gap:6px;transition:border-color {{ dur }} ease">
+<sc-for list="{{ cena.fila }}" as="t" hint-placeholder-count="3">
+<div style="border-radius:6px;border:1px solid {{ t.borda }};background:{{ t.fundo }};padding:8px 10px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline;margin-left:{{ t.recuo }};transition:margin-left {{ dur }} ease,border-color {{ dur }} ease,background {{ dur }} ease">
+<span style="font-size:13px;font-weight:600;color:{{ t.cor }}">{{ t.rotulo }}</span>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#9AA7B4">{{ t.detalhe }}</span>
+</div>
+</sc-for>
+<p style="margin:2px 0 0;font-size:12px;color:#9AA7B4">{{ cena.filaNota }}</p>
+</div>
+</div>
+<!-- preço + slippage -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+<figure style="margin:0">
+<p style="margin:0 0 6px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Preço do token <span style="border-radius:999px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);color:#F59E0B;padding:0 6px;font-size:10px;font-weight:600">exemplo inventado</span></p>
+<div style="display:flex;align-items:flex-end;gap:10px;height:96px">
+<sc-for list="{{ cena.barras }}" as="b" hint-placeholder-count="3">
+<div style="flex:1 1 0;display:flex;flex-direction:column;justify-content:flex-end;height:100%;gap:4px;align-items:center">
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:{{ b.cor }};opacity:{{ b.op }};transition:opacity {{ dur }} ease">{{ b.valor }}</span>
+<div style="width:100%;height:{{ b.altura }}%;border-radius:4px 4px 0 0;background:{{ b.fundo }};opacity:{{ b.op }};transition:height {{ dur }} ease,opacity {{ dur }} ease"></div>
+<span style="font-size:11px;color:#9AA7B4;text-align:center">{{ b.rotulo }}</span>
+</div>
+</sc-for>
+</div>
+</figure>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="border-radius:8px;border:1px solid {{ cena.slipBorda }};background:#141A24;padding:10px 12px;transition:border-color {{ dur }} ease">
+<div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><span style="font-size:12px;color:#9AA7B4">Slippage que você aceita</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:700">{{ cena.slippage }}</span></div>
+<div aria-hidden="true" style="margin-top:6px;height:14px;background:#0B0F17;border:1px solid #1F2733;border-radius:4px;overflow:hidden;position:relative">
+<div style="height:100%;width:{{ cena.slipLargura }}%;background:{{ cena.slipCor }};transition:width {{ dur }} ease,background {{ dur }} ease"></div>
+</div>
+<p style="margin:6px 0 0;font-size:12px;color:#9AA7B4">{{ cena.slipNota }}</p>
+</div>
+<div style="border-radius:8px;border:1px solid {{ cena.roboBorda }};background:{{ cena.roboFundo }};padding:10px 12px;transition:border-color {{ dur }} ease,background {{ dur }} ease">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:{{ cena.roboCor }}">O robô</p>
+<p style="margin:4px 0 0;font-size:13px;color:#E6EDF3">{{ cena.robo }}</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p aria-live="polite" style="margin:0;min-height:48px;font-size:1.0625rem;font-weight:600;text-align:center;text-wrap:pretty">{{ cena.legenda }}</p>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+<button type="button" onClick="{{ voltar }}" style="min-height:44px;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">← Voltar cena</button>
+<button type="button" aria-pressed="{{ tocando }}" onClick="{{ tocar }}" style="min-height:44px;min-width:110px;border-radius:8px;border:1px solid #7C3AED;background:#7C3AED;color:#FFFFFF;padding:8px 16px;font-size:14px;font-weight:600;cursor:pointer" style-hover="opacity:.85">{{ rotuloTocar }}</button>
+<button type="button" onClick="{{ avancar }}" style="min-height:44px;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">Avançar cena →</button>
+</div>
+<ol aria-label="Cenas" style="list-style:none;margin:0;padding:0;display:flex;gap:6px">
+<sc-for list="{{ barra }}" as="c" hint-placeholder-count="8">
+<li style="flex:1 1 0;min-width:0"><button type="button" aria-label="{{ c.rotulo }}" aria-current="{{ c.atual }}" data-indice="{{ c.indice }}" onClick="{{ ir }}" style="display:flex;flex-direction:column;gap:4px;width:100%;min-height:44px;border:0;padding:6px 0;background:transparent;cursor:pointer;align-items:stretch"><span aria-hidden="true" style="display:block;height:6px;border-radius:999px;background:{{ c.cor }};transition:background {{ dur }} ease"></span><span aria-hidden="true" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:{{ c.numCor }};text-align:center">{{ c.numero }}</span></button></li>
+</sc-for>
+</ol>
+</sc-if>
+
+<sc-if value="{{ modoParado }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px">
+<sc-for list="{{ cenas }}" as="c" hint-placeholder-count="8">
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;display:flex;flex-direction:column;gap:8px" role="img" aria-label="{{ c.alt }}">
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:#9AA7B4">cena {{ c.numero }}</span>
+<div style="border-radius:6px;border:1px solid {{ c.blocoBorda }};background:#10151E;padding:8px;display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ c.fila }}" as="t" hint-placeholder-count="3">
+<span style="border-radius:4px;border:1px solid {{ t.borda }};background:{{ t.fundo }};padding:3px 6px;font-size:11px;color:{{ t.cor }};margin-left:{{ t.recuo }}">{{ t.rotulo }}</span>
+</sc-for>
+</div>
+<div style="display:flex;align-items:flex-end;gap:6px;height:48px">
+<sc-for list="{{ c.barras }}" as="b" hint-placeholder-count="3"><div style="flex:1 1 0;height:{{ b.altura }}%;border-radius:3px 3px 0 0;background:{{ b.fundo }};opacity:{{ b.op }}"></div></sc-for>
+</div>
+<figcaption style="font-size:13px;font-weight:600">{{ c.legenda }}</figcaption>
+</figure>
+</sc-for>
+</div>
+</sc-if>
+
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Ler como texto</summary>
+<ol style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4;display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ cenas }}" as="c" hint-placeholder-count="8"><li>{{ c.legenda }} {{ c.alt }}</li></sc-for>
+</ol></details>
+</section>
+
+<details style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Dados desta animação (para a implementação)</summary>
+<pre style="margin:12px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.6;color:#9AA7B4;white-space:pre-wrap">montarAnimacao({ id: 'sandwich', duracaoPorCena: 4000, transicao: 450,
+  elementos: ['fila', 'blocoBorda', 'barrasPreco', 'slippage', 'robo'],
+  cenas: [{ legenda, estados: { fila[], barras[], slippage, robo } } × 8] })
+Fonte: modulo5.js › slippage-priority-mev (slippage, priority fee, modos Off/Reduced/Secure) e o slot de 350 ms desde 21/08/2026.
+Preços (0,0100 / 0,0112 / 0,0106) e o slippage de 40% são exemplo inventado, marcado na tela. O arquivo não publica lucro de robô — a animação mostra a mecânica, não o valor.</pre></details>
+<p style="margin:0;font-size:13px;color:#9AA7B4">Material de estudo, não é recomendação de investimento · OMH Hub · Animação 3</p>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:960,&quot;height&quot;:860}}">
+class Component extends DCLogic {
+  state = { cena: 0, tocando: false, reduzir: false };
+  componentDidMount() { const mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)'); if (mq && mq.matches) this.setState({ reduzir: true }); }
+  componentWillUnmount() { clearInterval(this.timer); }
+  parar() { clearInterval(this.timer); this.timer = null; }
+  renderVals() {
+    const S = this.state, POR_CENA = 4000, TRANS = 450;
+    const T = {
+      voce: { borda: '#7C3AED', fundo: 'rgba(124,58,237,.15)', cor: '#E6EDF3' },
+      roboC: { borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' },
+      roboV: { borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#F59E0B' },
+      vazio: { borda: '#1F2733', fundo: '#0B0F17', cor: '#9AA7B4' },
+      feito: { borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#22C55E' },
+    };
+    const tx = (tipo, rotulo, detalhe, recuo) => Object.assign({ rotulo, detalhe, recuo: (recuo || 0) + 'px' }, T[tipo]);
+    // Preços do exemplo inventado, marcado na tela
+    const P0 = '0,0100', P1 = '0,0112', P2 = '0,0106';
+    const bar = (valor, altura, tipo, op) => ({ valor, altura, op: op === undefined ? 1 : op, rotulo: tipo === 'antes' ? 'antes' : (tipo === 'depois' ? 'depois do robô' : 'sua execução'),
+      fundo: tipo === 'antes' ? '#7C3AED' : (tipo === 'depois' ? '#EF4444' : '#F59E0B'), cor: tipo === 'antes' ? '#E6EDF3' : (tipo === 'depois' ? '#F87171' : '#F59E0B') });
+    const C = [
+      { rotulo: 'Você envia a compra', fase: 'A fila de transações, antes do bloco',
+        fila: [tx('voce', 'Sua compra', 'enviada agora'), tx('vazio', '—', 'fila aberta'), tx('vazio', '—', 'fila aberta')],
+        filaNota: 'A transação vai para a fila pública antes de entrar no bloco.',
+        barras: [bar(P0, 70, 'antes'), bar(P1, 0, 'depois', 0), bar(P2, 0, 'meio', 0)], slip: '40%', slipLarg: 80, slipCor: '#EF4444', slipNota: 'Exemplo inventado: um limite folgado.',
+        robo: 'Ainda não fez nada. Está olhando a fila.', roboTom: 'neutro',
+        legenda: 'Você envia a ordem de compra. Ela vai para a fila.', alt: 'A sua compra aparece na fila pública; o preço está em 0,0100 e o slippage aceito é de 40% (exemplo inventado).' },
+      { rotulo: 'A fila é pública', fase: 'A fila de transações, antes do bloco',
+        fila: [tx('voce', 'Sua compra', 'visível na fila'), tx('vazio', 'qualquer um pode ler', 'fila pública'), tx('vazio', '—', 'fila aberta')],
+        filaNota: 'Quem observa a fila vê tamanho, token e o slippage que você aceitou.',
+        barras: [bar(P0, 70, 'antes'), bar(P1, 0, 'depois', 0), bar(P2, 0, 'meio', 0)], slip: '40%', slipLarg: 80, slipCor: '#EF4444', slipNota: 'O limite folgado também é público.',
+        robo: 'Leu a sua ordem: sabe o tamanho e o seu limite.', roboTom: 'alerta',
+        legenda: 'Antes de entrar no bloco, a sua ordem fica visível na fila.', alt: 'A mesma fila, agora destacando que ela é pública: o robô leu o tamanho da ordem e o limite de slippage.' },
+      { rotulo: 'O robô paga prioridade', fase: 'A fila de transações, antes do bloco',
+        fila: [tx('roboC', 'Compra do robô', 'priority fee maior', 0), tx('voce', 'Sua compra', 'mesmo slot, depois', 16), tx('vazio', '—', 'fila aberta')],
+        filaNota: 'Priority fee é pagamento extra ao validador para entrar antes.',
+        barras: [bar(P0, 70, 'antes'), bar(P1, 0, 'depois', 0), bar(P2, 0, 'meio', 0)], slip: '40%', slipLarg: 80, slipCor: '#EF4444', slipNota: 'Quanto maior o limite, mais espaço o robô tem.',
+        robo: 'Paga prioridade para passar na frente. O slot dura 350 ms.', roboTom: 'alerta',
+        legenda: 'O robô paga prioridade e passa na frente da sua ordem.', alt: 'A compra do robô entra acima da sua na fila, por ter pago um priority fee maior; o slot da Solana dura 350 ms.' },
+      { rotulo: 'O robô compra primeiro', fase: 'Dentro do bloco',
+        fila: [tx('feito', 'Compra do robô', 'executada'), tx('voce', 'Sua compra', 'a seguir', 16), tx('vazio', '—', '')],
+        filaNota: 'A compra do robô move a pool antes de a sua tocar nela.',
+        barras: [bar(P0, 70, 'antes', 0.5), bar(P1, 88, 'depois'), bar(P2, 0, 'meio', 0)], slip: '40%', slipLarg: 80, slipCor: '#EF4444', slipNota: 'O novo preço ainda cabe dentro do seu limite.',
+        robo: 'Comprou. O preço da pool subiu.', roboTom: 'alerta',
+        legenda: 'Ele compra primeiro, e o preço da pool sobe.', alt: 'A compra do robô executa e o preço sobe de 0,0100 para 0,0112 (exemplo inventado).' },
+      { rotulo: 'A sua ordem executa mais cara', fase: 'Dentro do bloco',
+        fila: [tx('feito', 'Compra do robô', 'executada'), tx('feito', 'Sua compra', 'executada — mais cara', 16), tx('vazio', '—', '')],
+        filaNota: 'Ela não falhou: o preço pior cabia no limite que você autorizou.',
+        barras: [bar(P0, 70, 'antes', 0.5), bar(P1, 88, 'depois'), bar(P2, 83, 'meio')], slip: '40%', slipLarg: 80, slipCor: '#EF4444', slipNota: 'Foi o seu limite que deixou passar.',
+        robo: 'Espera a sua ordem executar.', roboTom: 'alerta',
+        legenda: 'A sua ordem executa depois, e mais caro que o cotado.', alt: 'A sua compra executa a um preço pior que o cotado, porque a alta causada pelo robô cabia no seu limite de slippage.' },
+      { rotulo: 'O robô vende depois', fase: 'Dentro do bloco',
+        fila: [tx('feito', 'Compra do robô', 'executada'), tx('feito', 'Sua compra', 'executada', 16), tx('roboV', 'Venda do robô', 'logo depois', 0)],
+        filaNota: 'Compra antes, venda depois: a sua ordem fica no meio do sanduíche.',
+        barras: [bar(P0, 70, 'antes', 0.5), bar(P1, 88, 'depois'), bar(P2, 83, 'meio')], slip: '40%', slipLarg: 80, slipCor: '#EF4444', slipNota: 'A diferença que o robô captura veio do seu limite.',
+        robo: 'Vende no preço que a sua compra sustentou.', roboTom: 'alerta',
+        legenda: 'Ele vende logo depois, no preço que você sustentou.', alt: 'A venda do robô entra depois da sua compra, fechando o sanduíche. O arquivo não publica quanto ele ganha.' },
+      { rotulo: 'O papel do slippage', fase: 'A margem que você autoriza',
+        fila: [tx('voce', 'Sua compra', 'limite apertado'), tx('vazio', 'menos espaço para o robô', ''), tx('vazio', '—', '')],
+        filaNota: 'Com o limite apertado, a alta do robô não caberia: a sua ordem reverteria.',
+        barras: [bar(P0, 70, 'antes'), bar(P1, 88, 'depois', 0.35), bar(P2, 74, 'meio')], slip: '2%', slipLarg: 12, slipCor: '#22C55E', slipNota: 'Exemplo inventado: o mínimo que ainda executa.',
+        robo: 'Sem margem, o ataque deixa de compensar.', roboTom: 'ok',
+        legenda: 'Quanto maior o limite que você aceita, mais espaço o robô tem.', alt: 'Com slippage de 2% em vez de 40% (exemplo inventado), a alta do robô não cabe no limite e o ataque perde o sentido econômico.' },
+      { rotulo: 'O que reduz a exposição', fase: 'O que fazer',
+        fila: [tx('feito', 'Slippage no mínimo que ainda executa', 'a defesa mais eficaz'), tx('feito', 'Priority fee ajustado', 'entra a tempo, sem pagar à toa'), tx('feito', 'Proteção de MEV: modo Secure', 'só validadores da lista')],
+        filaNota: 'Secure é mais protegido e possivelmente mais lento. Nenhum modo elimina o risco.',
+        barras: [bar(P0, 70, 'antes'), bar(P1, 88, 'depois', 0.25), bar(P2, 72, 'meio')], slip: '2%', slipLarg: 12, slipCor: '#22C55E', slipNota: 'A documentação da Solana: limitar o slippage é a defesa mais eficaz.',
+        robo: 'Continua na fila. O que muda é a margem que ele encontra.', roboTom: 'ok',
+        legenda: 'Limite o slippage, ajuste a prioridade, use o modo Secure.', alt: 'A defesa: slippage no mínimo que ainda executa, priority fee ajustado e proteção de MEV no modo Secure — que reduz a exposição, sem eliminá-la.' },
+    ];
+    const ROBO = { neutro: { b: '#1F2733', f: '#141A24', c: '#9AA7B4' }, alerta: { b: 'rgba(239,68,68,.5)', f: 'rgba(239,68,68,.12)', c: '#F87171' }, ok: { b: 'rgba(34,197,94,.5)', f: 'rgba(34,197,94,.12)', c: '#22C55E' } };
+    const cenas = C.map((c, i) => { const r = ROBO[c.roboTom] || ROBO.neutro;
+      return { numero: i + 1, legenda: c.legenda, alt: c.alt, faseRotulo: c.fase, fila: c.fila, filaNota: c.filaNota, barras: c.barras,
+        blocoBorda: c.fase === 'Dentro do bloco' ? '#22D3EE' : '#1F2733',
+        slippage: c.slip, slipLargura: c.slipLarg, slipCor: c.slipCor, slipNota: c.slipNota, slipBorda: c.slipCor === '#22C55E' ? 'rgba(34,197,94,.5)' : 'rgba(239,68,68,.5)',
+        robo: c.robo, roboBorda: r.b, roboFundo: r.f, roboCor: r.c }; });
+    const cena = cenas[S.cena], total = C.length;
+    const barra = C.map((c, i) => ({ indice: i, numero: i + 1, rotulo: 'Cena ' + (i + 1) + ': ' + c.legenda, atual: i === S.cena, cor: i < S.cena ? '#7C3AED' : (i === S.cena ? '#22D3EE' : '#1F2733'), numCor: i === S.cena ? '#E6EDF3' : '#9AA7B4' }));
+    const ir = (n) => { this.parar(); this.setState({ cena: Math.max(0, Math.min(total - 1, n)), tocando: false }); };
+    const iniciarTimer = () => { this.timer = setInterval(() => this.setState((st) => { if (st.cena >= total - 1) { this.parar(); return { tocando: false }; } return { cena: st.cena + 1 }; }), POR_CENA); };
+    return {
+      cena, cenas, barra, numero: S.cena + 1, total, dur: TRANS + 'ms', duracaoTexto: Math.round(total * POR_CENA / 1000) + ' s',
+      tocando: S.tocando, reduzir: S.reduzir, modoAnimado: !S.reduzir, modoParado: S.reduzir, rotuloTocar: S.tocando ? 'Pausar' : (S.cena === total - 1 ? 'Tocar de novo' : 'Tocar'),
+      voltar: () => ir(this.state.cena - 1), avancar: () => ir(this.state.cena + 1), ir: (e) => ir(Number(e.currentTarget.dataset.indice)),
+      tocar: () => { if (this.state.tocando) { this.parar(); this.setState({ tocando: false }); return; } const inicio = this.state.cena === total - 1 ? 0 : this.state.cena; this.setState({ tocando: true, cena: inicio }); iniciarTimer(); },
+      tecla: (e) => { if (e.key === ' ') { e.preventDefault(); if (this.state.tocando) { this.parar(); this.setState({ tocando: false }); } else { this.setState({ tocando: true }); iniciarTimer(); } }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); ir(this.state.cena + 1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); ir(this.state.cena - 1); } else if (e.key === 'Home') { e.preventDefault(); ir(0); } else if (e.key === 'End') { e.preventDefault(); ir(total - 1); } },
+      alternarReduzir: (e) => { this.parar(); this.setState({ reduzir: e.target.checked, tocando: false }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

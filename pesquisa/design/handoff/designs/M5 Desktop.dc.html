@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}h1,h2,h3,p,li,dd,dt,td,th{overflow-wrap:break-word}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}.omh-range{-webkit-appearance:none;appearance:none;width:100%;height:24px;background:transparent;cursor:pointer}.omh-range::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:#10151E;border:1px solid #1F2733}.omh-range::-moz-range-track{height:6px;border-radius:999px;background:#10151E;border:1px solid #1F2733}.omh-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;margin-top:-8px;border-radius:50%;background:#7C3AED;border:2px solid #E6EDF3}.omh-range::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#7C3AED;border:2px solid #E6EDF3}.omh-range:focus-visible{outline:none}.omh-range:focus-visible::-webkit-slider-thumb{outline:2px solid #22D3EE;outline-offset:2px}.omh-range:focus-visible::-moz-range-thumb{outline:2px solid #22D3EE;outline-offset:2px}</style></helmet>
+<div style="display:flex;min-height:100vh;align-items:flex-start">
+<sc-if value="{{ mostrarSidebar }}" hint-placeholder-val="{{ true }}">
+<aside aria-label="Rotas do hub" style="position:sticky;top:0;width:16rem;flex:0 0 16rem;height:100vh;box-sizing:border-box;border-right:1px solid #1F2733;background:#141A24;padding:20px 16px;display:flex;flex-direction:column;gap:4px;font-size:14px">
+<p style="margin:0 0 12px;font-weight:600;font-size:14px">onchain-mastery-hub</p>
+<a href="#/inicio" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Início</a>
+<a href="#/modulo-1" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M1 Fundamentos &amp; Segurança</a>
+<a href="#/modulo-2" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M2 Psicologia</a>
+<a href="#/modulo-3" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M3 Os dois pilares</a>
+<a href="#/modulo-4" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M4 Gestão &amp; decisão</a>
+<a href="#/modulo-5" aria-current="page" style="display:block;border-radius:8px;padding:8px 12px;color:#E6EDF3;background:rgba(124,58,237,.15);border:1px solid #7C3AED;text-decoration:none;font-weight:600">M5 Execução</a>
+<a href="#/modulo-6" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M6 Ler a tela</a>
+<a href="#/modulo-7" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M7 A rotina</a>
+<div style="height:1px;background:#1F2733;margin:8px 0"></div>
+<a href="#/glossario" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Glossário</a>
+<a href="#/checklist" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Checklist antes de comprar</a>
+<a href="#/revisao" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Revisão</a>
+</aside>
+</sc-if>
+<main id="conteudo" style="flex:1 1 auto;min-width:0">
+<div style="max-width:868px;margin:0 auto;padding:{{ paddingMain }};display:flex;flex-direction:column;gap:24px">
+
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Módulo 5</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">A mecânica da execução</h1>
+<p style="margin:8px 0 0;color:#9AA7B4;text-wrap:pretty">A tela onde a ordem é efetivamente enviada: o que cada botão faz, quem guarda as chaves, onde o dinheiro vaza em taxas que ninguém anuncia, e quais erros de operação são comuns. Nada aqui aumenta chance de lucro; tudo aqui existe para você não perder dinheiro por desatenção.</p>
+<p style="margin:16px 0 0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:12px 16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">O Axiom é o exemplo deste módulo, não indicação. </strong>Ele aparece porque o conteúdo precisa de uma tela real, com números reais. Photon, BullX (NEO), Trojan, Bonkbot, GMGN, Banana Gun, Maestro e Padre eram outras plataformas ativas na data da pesquisa — sem ranking e sem comparação de qualidade.</p>
+</header>
+
+<section aria-label="Mapa do módulo" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<p style="margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">O módulo inteiro numa olhada</p>
+<div style="display:flex;flex-direction:{{ dirMapa }};align-items:{{ alinhaMapa }};border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px">
+<div style="flex:0 0 auto;border-radius:12px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:14px 18px;max-width:220px">
+<p style="margin:0;font-size:1.125rem;font-weight:600;line-height:1.3">A execução</p>
+<p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">Onde o dinheiro vaza sem o preço se mexer</p>
+</div>
+<div aria-hidden="true" style="flex:0 0 auto;width:{{ trunkW }};height:{{ trunkH }};background:#1F2733;margin-left:{{ trunkML }}"></div>
+<ul style="list-style:none;margin:0;padding:0;border-left:2px solid #1F2733;display:flex;flex-direction:column;gap:12px;flex:1 1 auto;min-width:0;margin-left:{{ trunkML }}">
+<sc-for list="{{ mapa }}" as="r" hint-placeholder-count="7">
+<li style="position:relative;padding-left:24px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px" style-before="content:'';position:absolute;left:0;top:19px;width:24px;height:2px;background:#1F2733">
+<button type="button" data-aba="{{ r.aba }}" onClick="{{ irParaAba }}" style="min-height:40px;border-radius:8px;border:1px solid {{ r.borda }};background:{{ r.fundo }};padding:6px 12px;font-size:14px;font-weight:600;color:#E6EDF3;cursor:pointer;text-align:left" style-hover="border-color:#9AA7B4">{{ r.titulo }} →</button>
+<sc-for list="{{ r.folhas }}" as="f" hint-placeholder-count="3"><span style="border-radius:999px;border:1px solid #1F2733;padding:2px 10px;font-size:13px;color:#9AA7B4">{{ f }}</span></sc-for>
+</li>
+</sc-for>
+</ul>
+</div>
+</section>
+
+<div role="tablist" aria-label="Seções do Módulo 5" onKeyDown="{{ teclaAba }}" style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ abas }}" as="a" hint-placeholder-count="7">
+<button type="button" role="tab" id="aba-{{ a.id }}" aria-selected="{{ a.ativa }}" aria-controls="painel-{{ a.id }}" tabindex="{{ a.tabindex }}" data-aba="{{ a.id }}" onClick="{{ irParaAba }}" style="min-height:44px;border-radius:8px;border:1px solid {{ a.borda }};background:{{ a.fundo }};padding:8px 16px;font-size:14px;font-weight:600;color:#E6EDF3;cursor:pointer" style-hover="border-color:#9AA7B4">{{ a.rotulo }}</button>
+</sc-for>
+</div>
+
+<!-- ============ TERMINAL ============ -->
+<sc-if value="{{ eh.terminal }}" hint-placeholder-val="{{ true }}">
+<div id="painel-terminal" role="tabpanel" aria-labelledby="aba-terminal" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.terminal }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">As três camadas entre a carteira e a pool</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Toda troca termina numa pool de liquidez. O que muda entre os três jeitos é o que fica entre você e essa pool — e só o terminal soma uma taxa própria por cima.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ pilha.alt }}" style="display:flex;flex-direction:column;gap:0;align-items:center">
+<sc-for list="{{ pilha.camadas }}" as="c" hint-placeholder-count="4">
+<div style="width:100%;max-width:520px;box-sizing:border-box;border-radius:8px;border:1px solid {{ c.borda }};background:{{ c.fundo }};padding:12px 16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<span style="font-size:15px;font-weight:600">{{ c.rotulo }}<span style="display:block;font-size:13px;font-weight:400;color:#9AA7B4">{{ c.detalhe }}</span></span>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.125rem;font-weight:700;color:{{ c.cor }}">{{ c.taxa }}</span>
+</div>
+<sc-if value="{{ c.seta }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></span><span aria-hidden="true" style="width:8px;height:8px;border-right:2px solid #9AA7B4;border-bottom:2px solid #9AA7B4;transform:rotate(45deg);margin-top:-10px"></span></sc-if>
+</sc-for>
+<div style="margin-top:12px;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 16px;font-size:14px;text-align:center;max-width:520px">O token volta para a sua carteira</div>
+</div>
+<figcaption style="margin:16px 0 0;font-size:13px;color:#9AA7B4">A ordem sai da carteira, passa pelo terminal e pelo agregador, até chegar à pool. Se o terminal sair do ar amanhã, a pool continua lá — e seus tokens continuam na sua carteira, desde que as chaves sejam suas.</figcaption>
+</figure>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;overflow-x:auto" tabindex="0" role="group" aria-label="As três camadas, lado a lado (role na horizontal se preciso)">
+<table style="border-collapse:collapse;width:100%;min-width:680px;font-size:14px">
+<thead><tr><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Camada</th><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">O que faz</th><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733;border-left:2px solid #22D3EE">O que cobra</th><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Observação</th></tr></thead>
+<tbody>
+<sc-for list="{{ tabelaCamadas }}" as="l" hint-placeholder-count="3">
+<tr><th scope="row" style="text-align:left;padding:10px 12px;font-weight:600;border-bottom:1px solid #1F2733;vertical-align:top">{{ l.titulo }}<span style="display:block;font-size:12px;font-weight:400;color:#9AA7B4">{{ l.subtitulo }}</span></th><td style="padding:10px 12px;border-bottom:1px solid #1F2733;color:#9AA7B4;vertical-align:top">{{ l.oQueFaz }}</td><td style="padding:10px 12px;border-bottom:1px solid #1F2733;vertical-align:top;border-left:2px solid #22D3EE"><span style="display:inline-block;border-radius:6px;border:1px solid {{ l.borda }};background:{{ l.fundo }};color:{{ l.cor }};padding:4px 8px;font-weight:600">{{ l.cobra }}</span></td><td style="padding:10px 12px;border-bottom:1px solid #1F2733;color:#9AA7B4;vertical-align:top">{{ l.observacao }}</td></tr>
+</sc-for>
+</tbody></table>
+</div>
+<p style="margin:0;color:#9AA7B4">O que você paga ao usar um terminal é conveniência: descoberta de tokens novos, gráficos, dados de holders, botões de compra rápida e rastreamento de carteiras. Você não paga por um preço melhor — é neste ponto que o marketing da categoria mais escorrega.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: as letras miúdas de cada camada</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>Raydium: dos 0,25%, 0,22% vão para quem forneceu a liquidez e 0,03% para recompra de RAY.</li><li style="margin-top:4px">Jupiter: a taxa que ele não cobra se chama taxa de protocolo. Você segue pagando a taxa da DEX por baixo.</li><li style="margin-top:4px">Axiom: 0,95% líquido é o nível de entrada e 0,75% é o topo, com devolução em SOL de 0,05% a 0,25%. Os limiares de volume para subir de nível não são publicados — não dá para calcular quanto operar para chegar ao mais barato.</li><li style="margin-top:4px">Um terminal normalmente usa um agregador por baixo: você já paga por essa camada mesmo sem saber que ela existe.</li></ul></details>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Anatomia da tela de um terminal</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">O que cada painel mostra, e o que cada um não prova. Ler os painéis reduz surpresa; não garante segurança.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div style="display:grid;grid-template-columns:{{ colsAnatomia }};gap:20px;align-items:start">
+<div role="img" aria-label="{{ telaTerminal.alt }}" style="border-radius:10px;border:1px solid #1F2733;background:#10151E;padding:14px;display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ telaTerminal.linhas }}" as="l" hint-placeholder-count="3">
+<div style="display:grid;grid-template-columns:{{ l.cols }};gap:8px">
+<sc-for list="{{ l.paineis }}" as="p" hint-placeholder-count="2">
+<div style="border-radius:6px;border:1px solid {{ p.borda }};background:{{ p.fundo }};padding:8px;min-height:{{ p.altura }};display:flex;gap:8px;align-items:flex-start">
+<span aria-hidden="true" style="flex:0 0 20px;width:20px;height:20px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ p.marcador }}</span>
+<span style="min-width:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;line-height:1.35;color:{{ p.cor }};overflow-wrap:break-word">{{ p.rotulo }}</span>
+</div>
+</sc-for>
+</div>
+</sc-for>
+<p style="margin:4px 0 0;font-size:12px;color:#9AA7B4">Ilustração esquemática, não é a tela de nenhuma plataforma específica. Os painéis aparecem sem valores: o que se aprende é onde olhar.</p>
+</div>
+<ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ telaTerminal.itens }}" as="c" hint-placeholder-count="6">
+<li style="display:flex;gap:10px;align-items:flex-start;font-size:14px"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ c.n }}</span><span><strong>{{ c.titulo }}.</strong> <span style="color:#9AA7B4">{{ c.texto }}</span></span></li>
+</sc-for>
+</ol>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Nenhum indicador, sinal social ou rastreamento de carteira é prova de que um token é seguro.</figcaption>
+</figure>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ CUSTÓDIA ============ -->
+<sc-if value="{{ eh.custodia }}" hint-placeholder-val="{{ false }}">
+<div id="painel-custodia" role="tabpanel" aria-labelledby="aba-custodia" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.custodia }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Custodial × não-custodial: os sinais na tela</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Antes de usar qualquer plataforma, pergunte: quem guarda as chaves? A resposta muda o seu risco por completo.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ custodia.alt }}" style="display:grid;grid-template-columns:{{ colsDois }};gap:16px">
+<sc-for list="{{ custodia.modelos }}" as="m" hint-placeholder-count="2">
+<div style="border-radius:8px;border:1px solid {{ m.borda }};background:{{ m.fundo }};padding:16px;display:flex;flex-direction:column;gap:10px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:{{ m.cor }}">{{ m.nome }}</p>
+<sc-for list="{{ m.sinais }}" as="s" hint-placeholder-count="3">
+<div style="border-radius:6px;border:1px solid #1F2733;background:#10151E;padding:8px 10px"><p style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#22D3EE">{{ s.painel }}</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">{{ s.texto }}</p></div>
+</sc-for>
+<p style="margin:auto 0 0;padding-top:8px;font-size:14px;font-weight:600;color:{{ m.cor }}">{{ m.consequencia }}</p>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin:16px 0 0;font-size:13px;color:#9AA7B4">Mockup esquemático, não é captura de plataforma nenhuma. O Axiom, exemplo deste módulo, está no modelo da direita segundo a documentação oficial; vários bots de Telegram estão no da esquerda. Confira antes de depositar qualquer coisa.</figcaption>
+</figure>
+<ul style="margin:0;padding-left:20px;color:#9AA7B4;display:flex;flex-direction:column;gap:6px">
+<li>A FAQ do Axiom afirma que os seus ativos "estão sempre sob o seu controle e de mais ninguém", e que fundos e transações são inteiramente on-chain.</li>
+<li>A página de cadastro ensina a ver a frase de recuperação nas configurações, a qualquer momento.</li>
+<li>A mesma página recomenda importar a semente numa carteira comum, como Phantom, Rabby ou Solflare, "para garantir que você sempre tenha acesso direto aos seus fundos sob quaisquer circunstâncias".</li>
+</ul>
+<p style="margin:0;color:#9AA7B4">Essa última é a prova prática mais forte: uma plataforma que te entrega a semente não está guardando o seu dinheiro. A parte pesada é que a segurança passa a ser 100% sua — nenhum suporte recupera fundos perdidos, reverte uma assinatura ou desfaz uma operação ruim.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m5-check-q1" titulo="Pergunta rápida" perguntas="{{ quiz.q1 }}" hint-size="100%,340px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Se o app sair do ar</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Com as chaves na sua mão, o maior risco é o terminal travar na hora em que você precisa vender.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ foraDoAr.alt }}" style="display:flex;flex-direction:column;align-items:center">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 16px;font-size:14px;font-weight:600;text-align:center;max-width:420px">O terminal está fora do ar e eu preciso vender</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 16px;font-size:14px;font-weight:600;text-align:center;max-width:420px">A semente está exportada e guardada offline?</div>
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:16px;width:100%;max-width:620px">
+<sc-for list="{{ foraDoAr.ramos }}" as="r" hint-placeholder-count="2">
+<div style="display:flex;flex-direction:column;align-items:center">
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+<span style="border-radius:999px;border:1px solid {{ r.borda }};background:{{ r.fundo }};color:{{ r.cor }};padding:1px 10px;font-size:12px;font-weight:600">{{ r.rotulo }}</span>
+<sc-for list="{{ r.nos }}" as="n" hint-placeholder-count="2">
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+<div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid {{ n.borda }};background:{{ n.fundo }};padding:10px 14px;font-size:14px;text-align:center;color:{{ n.cor }};font-weight:{{ n.peso }}">{{ n.texto }}</div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</div>
+<figcaption style="margin:16px 0 0;font-size:13px;color:#9AA7B4">Em 28 e 29 de agosto de 2025, o pump.fun publicou uma mudança na API sem avisar as ferramentas que dependiam dela: usuários do Axiom ficaram horas sem conseguir vender, com perdas relatadas no chat da plataforma. Quem tinha a semente exportada abriu a carteira em outro lugar e vendeu direto no pump.fun ou no Jupiter.</figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">A lição é mecânica, não moral. Exportar a semente não é burocracia de segurança: é o seu plano B operacional.</p>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O incidente de fevereiro de 2026 e o que ele ensina</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">"Não-custodial" protege o seu dinheiro. Não protege a sua privacidade.</p>
+<div role="img" aria-label="O que não foi: invasão de contrato, roubo de chaves ou saque de fundos — nenhum fundo reportado como roubado e nenhuma chave privada como exposta. O que foi: abuso de privilégio interno, gente de dentro olhando dados de usuários. O painel dava visibilidade, não controle." style="display:grid;grid-template-columns:{{ colsDois }};gap:12px">
+<div style="border-radius:8px;border:2px solid #22C55E;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22C55E">O que NÃO foi</p><p style="margin:6px 0 0;font-size:14px">Invasão de contrato, roubo de chaves ou saque de fundos. Nenhum fundo foi reportado como roubado e nenhuma chave privada como exposta.</p></div>
+<div style="border-radius:8px;border:2px solid #EF4444;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">O que foi</p><p style="margin:6px 0 0;font-size:14px">Abuso de privilégio interno: gente de dentro olhando dados de usuários. O painel dava visibilidade, não controle.</p></div>
+</div>
+<p style="margin:0;color:#9AA7B4">Em 26 de fevereiro de 2026, o investigador on-chain ZachXBT publicou uma investigação alegando que funcionários abusaram de ferramentas internas de suporte para consultar carteiras e histórico de usuários, ao longo de cerca de dez meses. Em poucas horas a empresa confirmou em público, disse estar "chocada e decepcionada", removeu o acesso e prometeu investigar (CoinDesk, 26/02/2026).</p>
+<p style="margin:0;color:#9AA7B4">A conclusão prática não é "fuja desta plataforma". É não tratar nenhum terminal como seguro por desenho: assuma que o que você faz numa plataforma é visível para quem a opera.</p>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ TAXAS ============ -->
+<sc-if value="{{ eh.taxas }}" hint-placeholder-val="{{ false }}">
+<div id="painel-taxas" role="tabpanel" aria-labelledby="aba-taxas" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.taxas }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">A taxa anunciada é a menor das camadas</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">O número anunciado é só a fatia da plataforma. Uma compra tem cinco camadas de custo, e as outras quatro saem do seu bolso do mesmo jeito.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">O caminho do dinheiro numa compra de R$100 num token na bonding curve</p>
+<ol role="img" aria-label="{{ caminho.alt }}" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0">
+<sc-for list="{{ caminho.passos }}" as="p" hint-placeholder-count="6">
+<li style="display:flex;flex-direction:column">
+<div style="border-radius:8px;border:1px solid {{ p.borda }};background:{{ p.fundo }};padding:10px 14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<span style="font-size:14px;font-weight:{{ p.peso }}">{{ p.rotulo }}<sc-if value="{{ p.anunciada }}" hint-placeholder-val="{{ false }}"><span style="margin-left:8px;border-radius:999px;border:1px solid rgba(124,58,237,.5);background:rgba(124,58,237,.15);padding:1px 8px;font-size:11px;font-weight:600;white-space:nowrap">a única anunciada</span></sc-if><span style="display:block;font-size:13px;font-weight:400;color:#9AA7B4">{{ p.detalhe }}</span></span>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:600;color:{{ p.cor }};white-space:nowrap">{{ p.valor }}</span>
+</div>
+<sc-if value="{{ p.liga }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="width:2px;height:12px;background:#1F2733;margin-left:24px"></span></sc-if>
+</li>
+</sc-for>
+</ol>
+<div style="margin-top:14px;border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:12px 16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<span style="font-size:14px;font-weight:600">Total, sem contar o slippage</span>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.25rem;font-weight:700;color:#F87171">≈ R$3,20 · 3,2%</span>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">A taxa anunciada (R$0,94) foi a MENOR das três partes — menor que os custos fixos (R$1,03) e que a taxa da pool (R$1,24). O slippage é custo à parte e não entra nesta conta. {{ cotacao }}</figcaption>
+</figure>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: quem recebe o priority fee e a gorjeta</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Essas duas não são receita da plataforma: vão para validadores. Mas são justamente as que não aparecem no número anunciado. A taxa-base da rede (0,000005 SOL por assinatura) é cobrada mesmo quando a transação falha.</p></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m5-check-q4" titulo="Pergunta rápida" perguntas="{{ quiz.q4 }}" hint-size="100%,340px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">A matriz: a mesma plataforma, três custos diferentes</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Não existe um número único para "quanto custa operar". O tamanho da ordem e o lugar onde o token está mudam a conta inteira.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<div role="img" aria-label="{{ empilhado.alt }}" style="display:flex;flex-direction:column;gap:18px">
+<sc-for list="{{ empilhado.grupos }}" as="g" hint-placeholder-count="3">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span style="font-size:14px;font-weight:600">{{ g.rotulo }}</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:600">{{ g.total }}</span></div>
+<div style="margin-top:6px;height:28px;display:flex;width:{{ g.largura }}%;border-radius:4px;overflow:hidden">
+<sc-for list="{{ g.partes }}" as="p" hint-placeholder-count="3"><span title="{{ p.rotulo }}" style="height:100%;width:{{ p.largura }}%;background:{{ p.cor }}"></span></sc-for>
+</div>
+<p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">{{ g.nota }}</p>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin-top:14px;display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:#9AA7B4">
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:#22D3EE"></span>custos fixos (rede, prioridade, gorjeta)</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:#7C3AED"></span>taxa da plataforma (a anunciada)</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:#F59E0B"></span>taxa da pool</span>
+<span style="width:100%">Cada barra é uma compra, repartida nas camadas, em porcentagem da ordem — todas na mesma escala. Repare que a faixa roxa, a única anunciada, é quase do mesmo tamanho nas três.</span>
+</figcaption>
+</figure>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;overflow-x:auto" tabindex="0" role="group" aria-label="A matriz de custo, cenário a cenário (role na horizontal se preciso)">
+<table style="border-collapse:collapse;width:100%;min-width:640px;font-size:14px">
+<thead><tr><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Cenário</th><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Taxa da pool</th><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Peso dos custos fixos</th><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733;border-left:2px solid #22D3EE">Custo total</th></tr></thead>
+<tbody>
+<sc-for list="{{ matriz }}" as="l" hint-placeholder-count="3">
+<tr><th scope="row" style="text-align:left;padding:10px 12px;font-weight:600;border-bottom:1px solid #1F2733;vertical-align:top">{{ l.titulo }}<span style="display:block;font-size:12px;font-weight:400;color:#9AA7B4">{{ l.subtitulo }}</span></th><td style="padding:10px 12px;border-bottom:1px solid #1F2733;color:#9AA7B4;vertical-align:top;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">{{ l.pool }}</td><td style="padding:10px 12px;border-bottom:1px solid #1F2733;color:#9AA7B4;vertical-align:top;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">{{ l.fixos }}</td><td style="padding:10px 12px;border-bottom:1px solid #1F2733;vertical-align:top;border-left:2px solid #22D3EE"><span style="display:inline-block;border-radius:6px;border:1px solid {{ l.borda }};background:{{ l.fundo }};color:{{ l.cor }};padding:4px 8px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:600">{{ l.total }}</span></td></tr>
+</sc-for>
+</tbody></table>
+<p style="margin:12px 0 0;font-size:13px;color:#9AA7B4">{{ cotacao }}</p>
+</div>
+<p style="margin:0;color:#9AA7B4">Parte do custo é fixa: o priority fee e a gorjeta somam 0,002 SOL nos valores padrão, e custam igual se você move o equivalente a R$100 ou a R$1.000. Numa ordem de R$100 isso pesa cerca de 1%; numa ordem dez vezes maior, cerca de 0,1%. A taxa é a mesma — o peso ficou dez vezes menor.</p>
+<p style="margin:0;color:#9AA7B4">E a matriz não mostra um detalhe: toda operação é ida e volta. Você paga essas taxas ao comprar e paga de novo ao vender, inclusive quando sai no prejuízo.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: o caminho do token e o estudo da Uniswap Labs</summary>
+<ol style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>Bonding curve do pump.fun: taxa da pool de 1,25% — oficialmente 0,300% para o criador do token e 0,95% para o protocolo.</li><li style="margin-top:4px">PumpSwap: o token graduou e ganhou a pool canônica. A taxa continua em 1,25% enquanto o market cap é pequeno, e cai por faixas conforme cresce.</li><li style="margin-top:4px">AMM madura, como a Raydium: taxa padrão de 0,25%.</li></ol>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Um estudo com 534 mil negociações reais (Adams, Chan, Markovich &amp; Wan, "Don't Let MEV Slip", Financial Cryptography 2024, da Uniswap Labs) mediu o custo total efetivo — taxa, deslizamento e o que bots de MEV extraem: 140 pontos-base por dólar negociado numa memecoin popular, contra 22 num par de moedas estáveis. Seis vezes mais. A chance de sofrer deslizamento causado por um bot adversário foi cerca de 80% maior na memecoin. E a pool estudada era mais funda que a maioria das de memecoin recém-lançada.</p></details>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Quanto o atrito come, com o mercado parado</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Cada operação cobra o pedágio na ida e na volta. Isto é aritmética de custo, não previsão: o preço fica parado justamente para isolar o atrito.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:grid;grid-template-columns:{{ colsDois }};gap:20px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><label for="m5-operacoes" style="font-size:14px;color:#9AA7B4">Operações completas (comprar e vender)</label><output for="m5-operacoes" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:600">{{ atrito.opsTexto }}</output></div>
+<input id="m5-operacoes" class="omh-range" type="range" min="1" max="100" step="1" value="{{ operacoes }}" aria-valuetext="{{ atrito.opsTexto }}" onInput="{{ mudarOperacoes }}" onChange="{{ mudarOperacoes }}" style="width:100%;margin-top:4px">
+</div>
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><label for="m5-custo" style="font-size:14px;color:#9AA7B4">Custo de cada ida e volta</label><output for="m5-custo" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:600">{{ atrito.custoTexto }}</output></div>
+<input id="m5-custo" class="omh-range" type="range" min="0.5" max="8" step="0.1" value="{{ custo }}" aria-valuetext="{{ atrito.custoTexto }}" onInput="{{ mudarCusto }}" onChange="{{ mudarCusto }}" style="width:100%;margin-top:4px">
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ atalhosCusto }}" as="a" hint-placeholder-count="3">
+<button type="button" data-valor="{{ a.valor }}" aria-pressed="{{ a.ativo }}" onClick="{{ atalhoCusto }}" style="min-height:40px;border-radius:8px;border:1px solid {{ a.borda }};background:{{ a.fundo }};color:#E6EDF3;padding:8px 12px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">{{ a.rotulo }}</button>
+</sc-for>
+</div>
+<p style="margin:0;font-size:13px;color:#9AA7B4">No mundo real o preço também se move, para os dois lados, e o atrito continua acontecendo por cima disso.</p>
+</div>
+<figure style="margin:0">
+<div aria-live="polite" style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Sobra do capital, com o preço parado</p><p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:2rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums;color:{{ atrito.cor }}">{{ atrito.sobraTexto }}</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">{{ atrito.nota }}</p></div>
+<div role="img" aria-label="{{ atrito.alt }}" style="margin-top:14px;display:flex;align-items:flex-end;gap:2px;height:120px" tabindex="0">
+<sc-for list="{{ atrito.barras }}" as="b" hint-placeholder-count="21">
+<div style="flex:1 1 0;min-width:2px;display:flex;flex-direction:column;justify-content:flex-end;height:100%"><span aria-hidden="true" style="display:block;height:{{ b.altura }}%;border-radius:2px 2px 0 0;background:{{ b.cor }}"></span></div>
+</sc-for>
+</div>
+<figcaption style="margin-top:8px;font-size:13px;color:#9AA7B4">Cada barra é o capital depois de uma ida e volta, da esquerda para a direita. Fórmula: sobra = (1 − custo) elevado ao número de operações.</figcaption>
+</figure>
+</div>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ CONFIGURAÇÕES ============ -->
+<sc-if value="{{ eh.configuracoes }}" hint-placeholder-val="{{ false }}">
+<div id="painel-configuracoes" role="tabpanel" aria-labelledby="aba-configuracoes" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.configuracoes }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">As três configurações que quebram a operação</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Elas só decidem se a transação executa, falha ou é explorada. Nenhuma aumenta chance de lucro.</p>
+<div role="img" aria-label="{{ configsAlt }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+<sc-for list="{{ configs }}" as="c" hint-placeholder-count="3">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+<p style="margin:0;font-size:15px;font-weight:600">{{ c.nome }}</p>
+<p style="margin:0;font-size:13px;color:#9AA7B4">{{ c.oQueE }}</p>
+<div style="border-radius:6px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:6px 10px;font-size:13px"><strong style="color:#F87171">Baixo demais: </strong>{{ c.baixo }}</div>
+<div style="border-radius:6px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:6px 10px;font-size:13px"><strong style="color:#F59E0B">Alto demais: </strong>{{ c.alto }}</div>
+</div>
+</sc-for>
+</div>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">O que acontece quando o slippage está mal configurado</p>
+<div role="img" aria-label="{{ slippage.alt }}" style="display:flex;flex-direction:column;align-items:center">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 16px;font-size:14px;font-weight:600;text-align:center;max-width:420px">Configuro um slippage muito alto</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 16px;font-size:14px;font-weight:600;text-align:center;max-width:420px">A pool tem liquidez rasa?</div>
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:16px;width:100%;max-width:620px">
+<sc-for list="{{ slippage.ramos }}" as="r" hint-placeholder-count="2">
+<div style="display:flex;flex-direction:column;align-items:center">
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+<span style="border-radius:999px;border:1px solid {{ r.borda }};background:{{ r.fundo }};color:{{ r.cor }};padding:1px 10px;font-size:12px;font-weight:600">{{ r.rotulo }}</span>
+<sc-for list="{{ r.nos }}" as="n" hint-placeholder-count="3">
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+<div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid {{ n.borda }};background:{{ n.fundo }};padding:10px 14px;font-size:14px;text-align:center;color:{{ n.cor }};font-weight:{{ n.peso }}">{{ n.texto }}</div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4;margin-top:8px"></div>
+<div style="border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:10px 16px;font-size:14px;text-align:center;max-width:520px">No outro extremo, slippage baixo demais numa memecoin volátil faz a transação reverter com "slippage exceeded": você perde a taxa de rede e a oportunidade, mas não compra caro.</div>
+</div>
+</figure>
+<p style="margin:0;color:#9AA7B4">A documentação da Solana diz que limitar o slippage é a defesa mais eficaz contra ataques de sandwich — o bot que compra logo antes de você e vende logo depois. Na proteção de MEV, a própria documentação do Axiom recomenda o modo Secure sempre que possível.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: os três modos de MEV e o botão de compra rápida</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li><strong style="color:#E6EDF3">Off: </strong>exposto a front-running, que é alguém passar na frente da sua ordem.</li><li style="margin-top:4px"><strong style="color:#E6EDF3">Reduced: </strong>roteia via Jito, com algum risco remanescente.</li><li style="margin-top:4px"><strong style="color:#E6EDF3">Secure: </strong>só validadores da lista. Mais protegido e possivelmente mais lento.</li><li style="margin-top:4px">O priority fee padrão do Axiom é 0,001 SOL, e a plataforma afirma calcular valores recomendados automaticamente com base nas transações do momento.</li><li style="margin-top:4px">Cuidado com o botão de compra rápida: ele executa um valor pré-configurado num clique, sem tela de revisão. É conveniente, e por isso está na lista de erros comuns.</li></ul></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m5-check-q2" titulo="Pergunta rápida" perguntas="{{ quiz.q2 }}" hint-size="100%,340px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Quanto a sua própria ordem empurra o preço</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">"Pool rasa" é adjetivo até virar número. Arraste e veja quanto do preço cotado você de fato recebe.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:grid;grid-template-columns:{{ colsDois }};gap:20px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><label for="m5-ordem" style="font-size:14px;color:#9AA7B4">Tamanho da sua ordem</label><output for="m5-ordem" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:600">{{ impacto.ordemTexto }}</output></div>
+<input id="m5-ordem" class="omh-range" type="range" min="0.1" max="20" step="0.1" value="{{ ordem }}" aria-valuetext="{{ impacto.ordemTexto }}" onInput="{{ mudarOrdem }}" onChange="{{ mudarOrdem }}" style="width:100%;margin-top:4px">
+</div>
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><label for="m5-pool" style="font-size:14px;color:#9AA7B4">Liquidez da pool (lado do SOL)</label><output for="m5-pool" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:600">{{ impacto.poolTexto }}</output></div>
+<input id="m5-pool" class="omh-range" type="range" min="1" max="500" step="1" value="{{ pool }}" aria-valuetext="{{ impacto.poolTexto }}" onInput="{{ mudarPool }}" onChange="{{ mudarPool }}" style="width:100%;margin-top:4px">
+</div>
+<div aria-live="polite" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 12px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Você recebe</p><p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.5rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums">{{ impacto.recebeTexto }}</p><p style="margin:4px 0 0;font-size:12px;color:#9AA7B4">do que o preço cotado sugeria</p></div>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 12px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Impacto da sua ordem</p><p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.5rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums;color:{{ impacto.cor }}">{{ impacto.impactoTexto }}</p><p style="margin:4px 0 0;font-size:12px;color:#9AA7B4">a sua ordem vale {{ impacto.razaoTexto }} da pool</p></div>
+</div>
+<p style="margin:0;font-size:13px;color:#9AA7B4">Modelo de produto constante (x · y = k). Pools reais anunciam liquidez somando os dois lados, então uma pool "de 100 SOL" tem cerca de 50 SOL deste lado. Não inclui a taxa da pool nem o slippage configurado — os dois vêm por cima.</p>
+</div>
+<figure style="margin:0">
+<svg viewBox="0 0 320 220" width="100%" style="max-width:360px;display:block" role="img" aria-label="{{ impacto.alt }}">
+<line x1="40" y1="180" x2="300" y2="180" stroke="#1F2733"></line>
+<line x1="40" y1="20" x2="40" y2="180" stroke="#1F2733"></line>
+<path d="{{ impacto.caminho }}" fill="none" stroke="#9AA7B4" stroke-width="2"></path>
+<line x1="{{ impacto.mx }}" y1="{{ impacto.my }}" x2="{{ impacto.mx }}" y2="180" stroke="#22D3EE" stroke-dasharray="3 3"></line>
+<line x1="40" y1="{{ impacto.my }}" x2="{{ impacto.mx }}" y2="{{ impacto.my }}" stroke="#22D3EE" stroke-dasharray="3 3"></line>
+<circle cx="40" cy="20" r="5" fill="#0B0F17" stroke="#9AA7B4" stroke-width="2"></circle>
+<text x="50" y="18" fill="#9AA7B4" font-size="11" font-family="Inter, sans-serif">preço cotado</text>
+<circle cx="{{ impacto.mx }}" cy="{{ impacto.my }}" r="7" fill="{{ impacto.marcadorCor }}" stroke="#E6EDF3" stroke-width="2"></circle>
+<text x="170" y="204" fill="#9AA7B4" font-size="11" text-anchor="middle" font-family="Inter, sans-serif">SOL que entra na pool →</text>
+<text x="300" y="216" fill="#9AA7B4" font-size="11" text-anchor="end" font-family="JetBrains Mono, monospace">x · y = k</text>
+</svg>
+<figcaption style="margin-top:8px;font-size:13px;color:#9AA7B4">{{ impacto.escala }}</figcaption>
+</figure>
+</div>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Tipos de ordem e a pergunta que ninguém responde</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Não assuma que uma ordem limite dispara com o app fechado. A documentação oficial não diz.</p>
+<div role="img" aria-label="Se a ordem fica registrada na blockchain, ela executa mesmo que a empresa suma. Se um servidor da plataforma vigia o preço, ela só executa enquanto esse servidor estiver de pé." style="display:grid;grid-template-columns:{{ colsDois }};gap:12px">
+<div style="border-radius:8px;border:2px solid #22C55E;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22C55E">Se a ordem fica na blockchain</p><p style="margin:6px 0 0;font-size:15px;font-weight:600">Ela executa mesmo que a empresa suma.</p></div>
+<div style="border-radius:8px;border:2px dashed #EF4444;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">Se um servidor vigia o preço</p><p style="margin:6px 0 0;font-size:15px;font-weight:600">Ela só executa enquanto esse servidor estiver de pé.</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">E servidores caem, como a aba Custódia mostrou.</p></div>
+</div>
+<p style="margin:0;border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:12px 16px;font-size:14px"><strong style="color:#E6EDF3">Não verificado: </strong>qual dos dois modelos o Axiom usa não está documentado oficialmente. Até isso estar documentado, não conte com a ordem limite com o app fechado — teste você mesmo, com um valor mínimo, antes de usá-la numa posição que importa.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m5-check-q3" titulo="Pergunta rápida" perguntas="{{ quiz.q3 }}" hint-size="100%,340px"></x-import>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ ERROS ============ -->
+<sc-if value="{{ eh.erros }}" hint-placeholder-val="{{ false }}">
+<div id="painel-erros" role="tabpanel" aria-labelledby="aba-erros" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.erros }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O token impostor</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">O erro mais caro é comprar o token errado. Nome e ticker são apelidos; endereço do contrato é identidade.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><p style="margin:0;font-size:14px;font-weight:600">Dois resultados para a mesma busca pelo nome</p><span style="border-radius:999px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);color:#F59E0B;padding:1px 10px;font-size:12px;font-weight:600">mockup esquemático</span></div>
+<div role="img" aria-label="{{ impostor.alt }}" style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#10151E;padding:10px 14px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#9AA7B4">Buscar: nome do token</div>
+<sc-for list="{{ impostor.resultados }}" as="r" hint-placeholder-count="2">
+<div style="border-radius:8px;border:1px solid {{ r.borda }};background:{{ r.fundo }};padding:12px 14px;display:flex;gap:10px;align-items:flex-start">
+<span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ r.n }}</span>
+<span style="min-width:0"><span style="display:block;font-size:14px;font-weight:600;color:{{ r.cor }}">{{ r.rotulo }}</span><span style="display:block;margin-top:4px;font-size:13px;color:#9AA7B4">{{ r.texto }}</span></span>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">A única identidade de um token é o endereço do contrato. Copie o endereço de uma fonte confiável e busque por ele — nunca pelo nome.</figcaption>
+</figure>
+<ul style="margin:0;padding-left:20px;color:#9AA7B4;display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ errosLista }}" as="e" hint-placeholder-count="5"><li>{{ e }}</li></sc-for>
+</ul>
+<p style="margin:0;color:#9AA7B4">E um erro que vem antes de todos: operar na carteira principal. Uma carteira separada só para operar limita o estrago se o dispositivo ou o app forem comprometidos. E não custa nada criar.</p>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Por que velocidade não é uma disputa que você vença</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Um bot reage em dezenas de milissegundos. Você leva de 30 a 60 segundos. Essa corrida não é sua.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">Na mesma escala de tempo, até 60 segundos</p>
+<div role="img" aria-label="{{ velocidade.alt }}" style="display:flex;flex-direction:column;gap:16px">
+<sc-for list="{{ velocidade.barras }}" as="b" hint-placeholder-count="3">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span style="font-size:14px;font-weight:600">{{ b.rotulo }}</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;color:{{ b.cor }}">{{ b.valorTexto }}</span></div>
+<div style="margin-top:6px;height:22px;background:#141A24;border-radius:4px;overflow:hidden"><div style="height:100%;width:{{ b.largura }}%;min-width:2px;background:{{ b.barra }}"></div></div>
+<p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">{{ b.nota }}</p>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin-top:12px;font-size:13px;color:#9AA7B4">O slot da Solana — a janela em que a rede produz um bloco — passou de 400 ms para 350 ms em 21/08/2026, a primeira redução desde o lançamento da rede. As duas primeiras barras são tão curtas nesta escala que quase não aparecem: é exatamente o ponto.</figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">O diferencial deles não é inteligência: é infraestrutura, com transações pré-assinadas rodando colado à produção de blocos. Quando você vê um token "novo" já subindo, os bots já entraram — o preço que você consegue no lançamento é um preço que um bot mais rápido decidiu recusar.</p>
+<p style="margin:0;color:#9AA7B4">Pôr inteligência artificial para reagir por você não resolve: uma chamada de modelo leva segundos, e a disputa se decide em milissegundos. A IA te deixa mais lento.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m5-check-q6" titulo="Pergunta rápida" perguntas="{{ quiz.q6 }}" hint-size="100%,340px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">A venda não caiu na carteira?</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Duas falhas parecidas, com causas diferentes. Saber qual é diz o que fazer em seguida.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ diagnostico.alt }}" style="display:flex;flex-direction:column;align-items:center">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 16px;font-size:14px;font-weight:600;text-align:center;max-width:420px">Vendi e o valor não caiu na carteira</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 16px;font-size:14px;font-weight:600;text-align:center;max-width:460px">A transação aparece no explorador de blocos?</div>
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:16px;width:100%;max-width:640px">
+<sc-for list="{{ diagnostico.ramos }}" as="r" hint-placeholder-count="2">
+<div style="display:flex;flex-direction:column;align-items:center">
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+<span style="border-radius:999px;border:1px solid {{ r.borda }};background:{{ r.fundo }};color:{{ r.cor }};padding:1px 10px;font-size:12px;font-weight:600">{{ r.rotulo }}</span>
+<sc-for list="{{ r.nos }}" as="n" hint-placeholder-count="3">
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+<div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid {{ n.borda }};background:{{ n.fundo }};padding:10px 14px;font-size:14px;text-align:center;color:{{ n.cor }};font-weight:{{ n.peso }}">{{ n.texto }}</div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</div>
+<figcaption style="margin:16px 0 0;font-size:13px;color:#9AA7B4">Reverter com "slippage exceeded" é diferente de não ser incluída por priority fee baixo: na primeira, a transação chegou e foi recusada pelo limite que você definiu; na segunda, ela não entrou a tempo. Nos dois casos você perde a taxa de rede, não o valor da compra.</figcaption>
+</figure>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m5-check-q7" titulo="Pergunta rápida" perguntas="{{ quiz.q7 }}" hint-size="100%,340px"></x-import>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ PROCESSO ============ -->
+<sc-if value="{{ eh.processo }}" hint-placeholder-val="{{ false }}">
+<div id="painel-processo" role="tabpanel" aria-labelledby="aba-processo" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.processo }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Do "vi um token" ao "encerrei a posição"</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Cada passo é uma chance de parar antes de gastar dinheiro. "Não opero" é um resultado válido — e frequente.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ processo.alt }}" style="display:flex;flex-direction:column;gap:0">
+<sc-for list="{{ processo.passos }}" as="p" hint-placeholder-count="7">
+<div style="display:grid;grid-template-columns:{{ colsProcesso }};gap:12px;align-items:start">
+<div style="display:flex;flex-direction:column;align-items:stretch">
+<div style="border-radius:8px;border:1px solid {{ p.borda }};background:{{ p.fundo }};padding:10px 14px;display:flex;gap:10px;align-items:flex-start">
+<span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ p.n }}</span>
+<span style="min-width:0;font-size:14px">{{ p.texto }}</span>
+</div>
+<sc-if value="{{ p.liga }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4;margin-left:24px"></span></sc-if>
+</div>
+<sc-if value="{{ p.saida }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;align-items:flex-start;gap:8px">
+<span aria-hidden="true" style="color:#9AA7B4;flex:0 0 auto;padding-top:10px">→</span>
+<div style="flex:1 1 auto;min-width:0;border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:10px 14px;font-size:14px;color:#F87171;font-weight:600"><span style="display:block;font-size:11px;letter-spacing:.05em;text-transform:uppercase">Saída do processo</span>{{ p.saida }}</div>
+</div>
+</sc-if>
+</div>
+</sc-for>
+<div style="border-radius:8px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);padding:10px 14px;font-size:14px;font-weight:600;max-width:{{ larguraFim }}">Encerrei a posição</div>
+</div>
+<figcaption style="margin:16px 0 0;font-size:13px;color:#9AA7B4">Duas saídas em "não opero": checagem reprovada, ou tese que não fica clara. Como o Módulo 2 mostrou, a maioria das memecoins vai a zero — passar na maioria das vezes é o esperado de quem segue o processo, não sinal de que ele travou.</figcaption>
+</figure>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Guardar registro desde a primeira operação</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">A obrigação de registrar começa na primeira operação, não quando aparece lucro.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">O que guardar de cada compra e venda</p>
+<div role="img" aria-label="De cada compra e venda, guarde a data, o valor em reais e o custo de aquisição." style="display:grid;grid-template-columns:{{ colsTres }};gap:12px">
+<sc-for list="{{ registro }}" as="r" hint-placeholder-count="3">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:12px 14px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22D3EE">{{ r.campo }}</p><p style="margin:6px 0 0;font-size:14px;color:#9AA7B4">{{ r.texto }}</p></div>
+</sc-for>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Isto liga direto com a seção de impostos do Módulo 1 (IN RFB 2.291/2025 e o programa DeCripto). Não é orientação tributária: guarde o registro e procure um contador.</figcaption>
+</figure>
+<p style="margin:0;border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:12px 16px;font-size:14px"><strong style="color:#E6EDF3">Não verificado: </strong>exportar o histórico pelo próprio terminal. Nenhuma página oficial trata disso — não conte com isso sem confirmar você mesmo no app. A boa notícia é que você não depende do terminal: todas as transações ficam on-chain, e o histórico sempre pode ser recuperado pelo endereço da carteira num explorador de blocos, que permite exportar.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m5-check-q8" titulo="Pergunta rápida" perguntas="{{ quiz.q8 }}" hint-size="100%,340px"></x-import>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ QUIZ ============ -->
+<sc-if value="{{ eh.quiz }}" hint-placeholder-val="{{ false }}">
+<div id="painel-quiz" role="tabpanel" aria-labelledby="aba-quiz" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="modulo-5" titulo="Mini-quiz do Módulo 5" descricao="Oito perguntas. As respostas ficam salvas no navegador." perguntas="{{ quiz.todas }}" hint-size="100%,1100px"></x-import>
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Terminou o módulo?</h2>
+<p style="margin:8px 0 16px;font-size:14px;color:#9AA7B4">Marcar aqui faz a barra de progresso do topo avançar. Dá para desmarcar depois.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Botao" variante="primario" hint-size="auto,40px">Marcar módulo como concluído</x-import>
+</section>
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O que você leva deste módulo</h2>
+<ul style="margin:12px 0 0;padding-left:20px;color:#9AA7B4;display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ objetivos }}" as="o" hint-placeholder-count="7"><li>{{ o }}</li></sc-for>
+</ul>
+</section>
+<details style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Fontes e itens não verificados</summary>
+<h3 style="margin:16px 0 0;font-size:14px;font-weight:600">Não verificado</h3>
+<ul style="list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ naoVerificado }}" as="n" hint-placeholder-count="3"><li style="border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.1);padding:12px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">{{ n.titulo }}: </strong>{{ n.texto }}</li></sc-for>
+</ul>
+<p style="margin:16px 0 0;font-size:14px;color:#9AA7B4">Fontes consultadas: a lista completa está em <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">src/data/modulo5.js › fontes</span> e é exibida integralmente pelo componente atual — sem mudança nesta tela.</p>
+</details>
+</div>
+</sc-if>
+
+<p style="margin:0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Aviso: </strong>material de estudo próprio, não é recomendação de investimento. Memecoin é o ativo de maior risco do mercado: 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia em que nasceram (CoinGecko Research).</p>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;compacto&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { aba: 'terminal', operacoes: 20, custo: 3.2, ordem: 1, pool: 50 };
+  n0(v) { return String(Math.round(v)); }
+  n1(v) { return Number(v).toFixed(1).replace('.', ','); }
+  n2(v) { return Number(v).toFixed(2).replace('.', ','); }
+  renderVals() {
+    const S = this.state, compacto = !!this.props.compacto;
+    const ABAS = [
+      { id: 'terminal', rotulo: 'Terminal', folhas: ['3 camadas em pilha', 'anatomia da tela'] },
+      { id: 'custodia', rotulo: 'Custódia', folhas: ['quem guarda as chaves', 'se o app sair do ar', 'fev/2026'] },
+      { id: 'taxas', rotulo: 'Taxas', folhas: ['as 5 camadas', 'a matriz 3,2 / 2,4 / 1,4%', 'atrito'] },
+      { id: 'configuracoes', rotulo: 'Configurações', folhas: ['slippage', 'prioridade', 'MEV', 'impacto de preço'] },
+      { id: 'erros', rotulo: 'Erros', folhas: ['token impostor', 'velocidade', 'a venda não caiu?'] },
+      { id: 'processo', rotulo: 'Processo', folhas: ['do token ao encerramento', 'registro'] },
+      { id: 'quiz', rotulo: 'Quiz', folhas: ['8 perguntas'] },
+    ];
+    const ativo = (id) => id === S.aba;
+    const abas = ABAS.map((a) => ({ id: a.id, rotulo: a.rotulo, ativa: ativo(a.id), tabindex: ativo(a.id) ? 0 : -1, borda: ativo(a.id) ? '#7C3AED' : '#1F2733', fundo: ativo(a.id) ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    const mapa = ABAS.map((a) => ({ aba: a.id, titulo: a.rotulo, folhas: a.folhas, borda: ativo(a.id) ? '#7C3AED' : '#1F2733', fundo: ativo(a.id) ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    const eh = {}; ABAS.forEach((a) => { eh[a.id] = ativo(a.id); });
+    const cotacao = 'Contas feitas com SOL ≈ R$512, obtido por SOL→USD (mercado) × USD→BRL (Banco Central, 5,1253 em 04/09/2026). A cotação é suposição declarada e muda o peso das taxas fixas: reconfira antes de usar os valores em reais.';
+
+    const objetivos = [
+      'Explicar o que é um terminal de execução e o que ele acrescenta (e cobra) em cima de uma DEX.',
+      'Descobrir, na documentação oficial de uma plataforma, se as chaves ficam com você ou com ela.',
+      'Somar as cinco camadas de custo de uma compra e calcular quanto sobra de fato para virar token.',
+      'Explicar por que a mesma ordem custa percentuais diferentes conforme o tamanho e conforme o venue.',
+      'Configurar slippage, priority fee e proteção de MEV entendendo o que cada erro de configuração quebra.',
+      'Reconhecer os erros de execução mais comuns antes de cometê-los, e por que velocidade não é uma disputa que você vença.',
+      'Percorrer o processo do "vi um token" até "encerrei a posição" sabendo onde ele deve terminar em "não opero".',
+    ];
+    const destaques = {
+      terminal: [
+        { rotulo: 'Camadas entre você e a pool', valor: '3', nota: 'Carteira → terminal → agregador → pool. Cada camada que você acrescenta é uma taxa a mais.' },
+        { rotulo: 'O que o agregador cobra', valor: '0%', nota: 'No modo manual do Jupiter, sem taxa de protocolo no swap básico. Você paga a DEX por baixo e a rede.', tom: 'ok' },
+        { rotulo: 'A camada mais cara', valor: '0,95%', nota: 'O terminal. Não compra preço melhor — compra a interface, a descoberta e os botões.', tom: 'alerta' },
+      ],
+      custodia: [
+        { rotulo: 'Depósito na empresa, no trading spot', valor: '0', nota: 'Não-custodial: o dinheiro fica na sua carteira, na blockchain. Confirmado na FAQ oficial.', tom: 'ok' },
+        { rotulo: 'Chaves privadas expostas no incidente de fev/2026', valor: '0', nota: 'Foi abuso de ferramenta interna de suporte — visibilidade, não controle. Nenhum fundo reportado como roubado.' },
+        { rotulo: 'O risco que sobra', valor: 'App fora do ar', nota: 'Em 28–29/08/2025 usuários ficaram horas sem conseguir vender. Quem tinha a semente exportada vendeu por outro caminho.', tom: 'alerta' },
+      ],
+      taxas: [
+        { rotulo: 'A fatia que é anunciada', valor: '0,95%', nota: 'A taxa da plataforma no nível de entrada. É a única que aparece no marketing.' },
+        { rotulo: 'O custo real de uma compra pequena', valor: '3,2%', nota: 'Somando as cinco camadas, numa ordem de R$100 em token na bonding curve. Mais de três vezes o número anunciado.', tom: 'alerta' },
+        { rotulo: 'Quantas vezes você paga isso', valor: '2×', nota: 'Comprar é uma transação, vender é outra. O pedágio é cobrado nas duas pontas — inclusive quando a operação dá errado.' },
+      ],
+      configuracoes: [
+        { rotulo: 'Modos de proteção de MEV', valor: '3', nota: 'Off, Reduced e Secure. A própria documentação recomenda o Secure sempre que possível.' },
+        { rotulo: 'Priority fee e gorjeta, no padrão', valor: '0,001 SOL', nota: 'Cada um. Somam 0,002 SOL por transação — cerca de 1% numa ordem de R$100.' },
+        { rotulo: 'Ordem limite dispara com o app fechado?', valor: 'Não verificado', nota: 'A documentação oficial não diz se a ordem fica on-chain ou depende do servidor. Teste com valor mínimo antes de confiar.', tom: 'alerta' },
+      ],
+      erros: [
+        { rotulo: 'Duração de um slot na Solana', valor: '350 ms', nota: 'Desde 21/08/2026. Um bot reage em dezenas de milissegundos, com transação pré-assinada.' },
+        { rotulo: 'Você, do "vi" ao "confirmado"', valor: '30–60 s', nota: 'Quando você vê um token novo já subindo, os bots já entraram. O preço que sobra é o que eles recusaram.', tom: 'alerta' },
+        { rotulo: 'Tokens que podem ter o mesmo ticker', valor: 'Ilimitado', nota: 'Nome e ticker são apelido; endereço do contrato é identidade. Busque sempre pelo endereço.', tom: 'alerta' },
+      ],
+      processo: [
+        { rotulo: 'Saídas em "não opero" no fluxo', valor: '2', nota: 'Checagem reprovada, ou tese que não fica clara. Passar na maioria das vezes é o comportamento esperado.', tom: 'ok' },
+        { rotulo: 'Quando nasce a obrigação de registrar', valor: '1ª operação', nota: 'Não quando aparece lucro. Data, valor em reais e custo de aquisição de cada compra e venda.' },
+        { rotulo: 'Exportação de histórico pelo terminal', valor: 'Não verificado', nota: 'Nenhuma página oficial sobre isso. O histórico on-chain sempre pode ser exportado do explorador.', tom: 'alerta' },
+      ],
+    };
+
+    // Terminal: pilha de camadas
+    const camadasBase = [
+      { rotulo: 'Carteira', detalhe: 'Você autoriza cada transação', taxa: 'assina', cor: '#9AA7B4', borda: '#1F2733', fundo: '#141A24' },
+      { rotulo: 'Terminal', detalhe: 'Interface, descoberta e ferramentas', taxa: '0,95%', cor: '#F87171', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)' },
+      { rotulo: 'Agregador', detalhe: 'Busca a melhor rota entre DEXs', taxa: '0%', cor: '#22C55E', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)' },
+      { rotulo: 'Pool da DEX', detalhe: 'Onde a troca acontece de fato', taxa: '0,25–1,25%', cor: '#F59E0B', borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)' },
+    ];
+    const pilha = { camadas: camadasBase.map((c, i, arr) => Object.assign({ seta: i < arr.length - 1 }, c)),
+      alt: 'A ordem passa por quatro camadas: ' + camadasBase.map((c) => c.rotulo + ' (' + c.taxa + ') — ' + c.detalhe).join('; ') + '. Depois o token volta para a sua carteira.' };
+    const TAXA = { alerta: { borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' }, ok: { borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#E6EDF3' }, medio: { borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#E6EDF3' } };
+    const tabelaCamadas = [
+      Object.assign({ titulo: 'DEX direto', subtitulo: 'Raydium, Orca, PumpSwap — exemplos de categoria', oQueFaz: 'É a pool de liquidez onde a troca acontece de fato, no contrato inteligente.', cobra: 'Só a taxa da pool — 0,25% na Raydium, 1,25% na bonding curve do pump.fun.', observacao: 'Camada mais barata e a menos confortável: sem descoberta de token, sem gráfico integrado, sem dados de holders.' }, TAXA.medio),
+      Object.assign({ titulo: 'Agregador de liquidez', subtitulo: 'Jupiter — exemplo de categoria', oQueFaz: 'Varre várias DEXs procurando a melhor rota e divide entre pools se compensar.', cobra: 'No modo manual, sem taxa de protocolo no swap básico.', observacao: 'Acrescenta busca de preço sem acrescentar custo de plataforma. É a camada que pode melhorar o seu preço de execução.' }, TAXA.ok),
+      Object.assign({ titulo: 'Terminal de execução', subtitulo: 'Axiom, Photon, BullX — exemplos de categoria', oQueFaz: 'Interface, descoberta de tokens, gráficos, dados de holders, botões de compra rápida, rastreamento.', cobra: 'Taxa da plataforma POR CIMA de tudo — 0,95% líquido no nível de entrada.', observacao: 'Você paga por conveniência e ferramentas, não por preço melhor.' }, TAXA.alerta),
+    ];
+    const montarAnatomia = (paineis, itens, grade) => {
+      const marc = {}; itens.forEach((it, i) => { marc[it.painel] = i + 1; });
+      const cel = (id, altura) => { const p = paineis[id]; return { rotulo: p.rotulo, marcador: marc[id], altura, borda: p.alerta ? 'rgba(245,158,11,.4)' : '#22D3EE', fundo: p.alerta ? 'rgba(245,158,11,.12)' : 'rgba(34,211,238,.08)', cor: '#E6EDF3' }; };
+      return { linhas: grade.map((l) => ({ cols: l.cols, paineis: l.ids.map((id) => cel(id, l.altura)) })), itens: itens.map((it, i) => ({ n: i + 1, titulo: it.titulo, texto: it.texto })),
+        alt: 'Mockup esquemático com ' + itens.length + ' marcadores: ' + itens.map((it, i) => (i + 1) + ' ' + paineis[it.painel].rotulo).join('; ') + '. Os painéis aparecem sem valores.' };
+    };
+    const telaPaineis = { grafico: { rotulo: 'Gráfico de preço' }, numeros: { rotulo: 'Market cap · Volume · Liquidez' }, holders: { rotulo: 'Holders' }, transacoes: { rotulo: 'Transações recentes' }, quantia: { rotulo: 'Quantia' }, comprar: { rotulo: 'Comprar', alerta: true } };
+    const telaItens = [
+      { painel: 'grafico', titulo: 'Gráfico de preço', texto: 'Mostra o passado. A vela que já subiu é exatamente a que você não deveria perseguir — isso é erro de disciplina, não de análise.' },
+      { painel: 'numeros', titulo: 'Market cap, volume e liquidez', texto: 'O que importa para a SUA ordem é a liquidez: pool rasa significa que a sua própria compra move o preço. Conecta direto com o slippage.' },
+      { painel: 'holders', titulo: 'Distribuição de holders', texto: 'Poucas carteiras com percentual alto significam risco de despejo. É a checagem de concentração do Módulo 3.' },
+      { painel: 'transacoes', titulo: 'Feed de transações', texto: 'Quatro ou mais compras no mesmo bloco podem ser bundle — demanda coordenada fingindo ser orgânica. A própria documentação admite falsos positivos.' },
+      { painel: 'quantia', titulo: 'Campo de quantia', texto: 'Confira o valor antes de clicar. O botão de compra rápida executa o preset sem tela de revisão — e o preset pode ser o da operação anterior.' },
+      { painel: 'comprar', titulo: 'O botão', texto: 'Executa com o slippage, a prioridade e a proteção de MEV que estiverem configurados. Se algum estiver errado, é aqui que o erro vira prejuízo.' },
+    ];
+    const telaTerminal = montarAnatomia(telaPaineis, telaItens, [
+      { cols: '2fr 1fr', ids: ['grafico', 'numeros'], altura: '58px' },
+      { cols: '2fr 1fr', ids: ['transacoes', 'holders'], altura: '52px' },
+      { cols: '1fr 1fr', ids: ['quantia', 'comprar'], altura: '44px' },
+    ]);
+
+    // Custódia
+    const custodia = { modelos: [
+      { nome: 'Custodial', consequencia: 'Se a plataforma cair, for hackeada ou agir de má-fé, o saldo vai junto.', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171', sinais: [
+        { painel: 'Saldo na plataforma', texto: 'O dinheiro sai da sua carteira e vira um saldo dentro da empresa.' },
+        { painel: 'Botão "Depositar"', texto: 'Sinal de custódia. Quem tem as chaves tem o dinheiro.' },
+        { painel: 'Chaves: nos servidores', texto: 'É o risco de contraparte do Módulo 1.' },
+      ] },
+      { nome: 'Não-custodial', consequencia: 'Se o app sair do ar, você importa a semente em outra carteira e continua com acesso.', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#22C55E', sinais: [
+        { painel: 'Saldo na sua carteira', texto: 'O dinheiro fica na blockchain, no seu endereço.' },
+        { painel: 'Frase de recuperação exportável', texto: 'Sinal de autocustódia: uma empresa que te entrega a semente não está guardando o seu dinheiro.' },
+        { painel: 'Chaves: com você', texto: 'A responsabilidade de segurança também é 100% sua.' },
+      ] },
+    ], alt: 'Custodial: saldo na plataforma, botão de depositar, chaves nos servidores — se a plataforma cair, o saldo vai junto. Não-custodial: saldo na sua carteira, frase de recuperação exportável, chaves com você — se o app sair do ar, você importa a semente em outra carteira.' };
+    const foraDoAr = { ramos: [
+      { rotulo: 'Sim', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#22C55E', nos: [{ texto: 'Importo a semente numa carteira comum', peso: 600, borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#E6EDF3' }, { texto: 'Vendo direto no site da DEX ou no agregador. Um inconveniente.', peso: 400, borda: '#1F2733', fundo: '#141A24', cor: '#9AA7B4' }] },
+      { rotulo: 'Não', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171', nos: [{ texto: 'Uma posição que você não consegue encerrar', peso: 600, borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' }, { texto: 'Só resta esperar o terminal voltar', peso: 400, borda: '#1F2733', fundo: '#141A24', cor: '#9AA7B4' }] },
+    ], alt: 'O terminal está fora do ar e você precisa vender. A semente está exportada e guardada offline? Se sim: importe a semente numa carteira comum e venda direto no site da DEX ou no agregador — um inconveniente. Se não: é uma posição que você não consegue encerrar, e só resta esperar o terminal voltar.' };
+
+    // Taxas: caminho do dinheiro
+    const caminhoBase = [
+      { rotulo: 'Taxa-base da rede Solana', detalhe: '0,000005 SOL por assinatura — cobrada mesmo se a transação falhar', valor: 'fração de centavo', peso: 400, cor: '#9AA7B4', borda: '#1F2733', fundo: '#141A24' },
+      { rotulo: 'Priority fee', detalhe: 'Para a transação ser incluída mais rápido. Padrão do Axiom', valor: '0,001 SOL', peso: 400, cor: '#E6EDF3', borda: '#1F2733', fundo: '#141A24' },
+      { rotulo: 'Gorjeta de MEV (via Jito)', detalhe: 'Compra proteção contra ataque de sandwich. Padrão do Axiom', valor: '0,001 SOL', peso: 400, cor: '#E6EDF3', borda: '#1F2733', fundo: '#141A24' },
+      { rotulo: 'Taxa da plataforma', detalhe: '0,95% líquido no nível de entrada', valor: '≈ R$0,94', peso: 600, anunciada: true, cor: '#E6EDF3', borda: 'rgba(124,58,237,.6)', fundo: 'rgba(124,58,237,.15)' },
+      { rotulo: 'Taxa da pool', detalhe: '1,25% na bonding curve — normalmente a maior camada num token novo', valor: '≈ R$1,24', peso: 600, cor: '#F59E0B', borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)' },
+    ];
+    const caminho = { passos: caminhoBase.map((p, i, arr) => Object.assign({ liga: i < arr.length - 1, anunciada: !!p.anunciada }, p)),
+      alt: 'Envio o equivalente a R$100 para comprar o token e pago cinco camadas: ' + caminhoBase.map((p) => p.rotulo + ', ' + p.valor).join('; ') + '. Total aproximado de R$3,20, ou 3,2% do valor, sem contar o slippage. Os custos fixos somam R$1,03, e a taxa anunciada (R$0,94) é a menor das três partes.' };
+    const gruposBase = [
+      { rotulo: 'R$100, bonding curve', total: '3,2%', partes: [{ rotulo: 'custos fixos', v: 1.03, cor: '#22D3EE' }, { rotulo: 'plataforma', v: 0.94, cor: '#7C3AED' }, { rotulo: 'pool', v: 1.24, cor: '#F59E0B' }], nota: 'O cenário mais caro dos três. Os custos fixos pesam cerca de 1% da ordem.' },
+      { rotulo: 'R$512, bonding curve', total: '2,4%', partes: [{ rotulo: 'custos fixos', v: 0.2, cor: '#22D3EE' }, { rotulo: 'plataforma', v: 0.95, cor: '#7C3AED' }, { rotulo: 'pool', v: 1.25, cor: '#F59E0B' }], nota: 'Só o tamanho mudou: os mesmos 0,002 SOL agora pesam cerca de 0,2%.' },
+      { rotulo: 'R$512, AMM madura', total: '1,4%', partes: [{ rotulo: 'custos fixos', v: 0.2, cor: '#22D3EE' }, { rotulo: 'plataforma', v: 0.95, cor: '#7C3AED' }, { rotulo: 'pool', v: 0.25, cor: '#F59E0B' }], nota: 'Mesma plataforma, mesmo tamanho, mesmo dia — só o venue mudou.' },
+    ];
+    const maxTotal = 3.21;
+    const empilhado = { grupos: gruposBase.map((g) => { const soma = g.partes.reduce((a, p) => a + p.v, 0);
+      return { rotulo: g.rotulo, total: g.total, nota: g.nota, largura: (soma / maxTotal) * 100, partes: g.partes.map((p) => ({ rotulo: p.rotulo, cor: p.cor, largura: (p.v / soma) * 100 })) }; }),
+      alt: 'Três compras na mesma escala, repartidas em custos fixos, taxa da plataforma e taxa da pool: ' + gruposBase.map((g) => g.rotulo + ' soma ' + g.total + ' (fixos ' + this.n2(g.partes[0].v) + '%, plataforma ' + this.n2(g.partes[1].v) + '%, pool ' + this.n2(g.partes[2].v) + '%)').join('; ') + '. A taxa da plataforma é quase do mesmo tamanho nas três.' };
+    const matriz = [
+      Object.assign({ titulo: 'Ordem de R$100, token na bonding curve', subtitulo: 'O cenário mais caro dos três', pool: '1,25% ≈ R$1,24', fixos: '0,002 SOL ≈ R$1,03 — cerca de 1% da ordem', total: '≈ R$3,20 · 3,2%' }, TAXA.alerta),
+      Object.assign({ titulo: 'Ordem de R$512, mesmo token na bonding curve', subtitulo: 'Só o tamanho mudou', pool: '1,25% ≈ R$6,39', fixos: '0,002 SOL ≈ R$1,03 — cerca de 0,2% da ordem', total: '≈ R$12,27 · 2,4%' }, TAXA.medio),
+      Object.assign({ titulo: 'Ordem de R$512, token já em AMM madura', subtitulo: 'O mesmo terminal, o mesmo tamanho, outro venue', pool: '0,25% ≈ R$1,28', fixos: '0,002 SOL ≈ R$1,03 — cerca de 0,2% da ordem', total: '≈ R$7,16 · 1,4%' }, TAXA.ok),
+    ];
+
+    // Atrito
+    const c = S.custo / 100, ops = S.operacoes;
+    const sobraAtrito = Math.pow(1 - c, ops);
+    const barrasAtrito = []; const passo = Math.max(1, Math.ceil(ops / 20));
+    for (let i = 0; i <= ops; i += passo) barrasAtrito.push({ altura: Math.max(1, Math.pow(1 - c, i) * 100), cor: i === 0 ? '#7C3AED' : '#1F2733' });
+    barrasAtrito.push({ altura: Math.max(1, sobraAtrito * 100), cor: '#EF4444' });
+    const atrito = { opsTexto: String(ops), custoTexto: this.n1(S.custo) + '%', sobraTexto: this.n0(sobraAtrito * 100) + '%',
+      cor: sobraAtrito < 0.5 ? '#F87171' : '#E6EDF3', barras: barrasAtrito,
+      nota: 'Depois de ' + ops + (ops === 1 ? ' ida e volta' : ' idas e voltas') + ' a ' + this.n1(S.custo) + '% cada, sem o preço ter subido nem caído.',
+      alt: 'Com ' + ops + ' operações completas a ' + this.n1(S.custo) + '% cada, sobram ' + this.n0(sobraAtrito * 100) + '% do capital, com o preço parado.' };
+    const atalhosCusto = [{ valor: 3.2, rotulo: '3,2% (R$100, bonding curve)' }, { valor: 2.4, rotulo: '2,4% (R$512, bonding curve)' }, { valor: 1.4, rotulo: '1,4% (R$512, AMM madura)' }]
+      .map((a) => Object.assign({ ativo: Math.abs(S.custo - a.valor) < 0.05 }, a, { borda: Math.abs(S.custo - a.valor) < 0.05 ? '#7C3AED' : '#1F2733', fundo: Math.abs(S.custo - a.valor) < 0.05 ? 'rgba(124,58,237,.15)' : '#141A24' }));
+
+    // Configurações
+    const configs = [
+      { nome: 'Slippage', oQueE: 'Quanto o preço pode mudar entre enviar a ordem e ela executar.', baixo: 'a transação falha com "slippage exceeded" e você perde a taxa de rede.', alto: 'você aceita um preço muito pior — e, numa pool rasa, vira alvo fácil de bots.' },
+      { nome: 'Priority fee', oQueE: 'Pagamento extra ao validador para a sua transação entrar mais rápido.', baixo: 'no congestionamento, demora ou falha por não ser incluída a tempo.', alto: 'paga caro à toa.' },
+      { nome: 'Proteção de MEV', oQueE: 'Defesa contra bots que se posicionam em volta da sua ordem. No Axiom há três modos: Off, Reduced e Secure.', baixo: 'no modo Off, exposto a front-running.', alto: 'o modo Secure é o mais protegido e possivelmente mais lento — a documentação recomenda usá-lo sempre que possível.' },
+    ];
+    const configsAlt = configs.map((x) => x.nome + ': ' + x.oQueE + ' Baixo demais: ' + x.baixo + ' Alto demais: ' + x.alto).join(' ');
+    const slippage = { ramos: [
+      { rotulo: 'Sim, pool rasa', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171', nos: [{ texto: 'Aceito um preço muito pior que o cotado', peso: 600, borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' }, { texto: 'Um bot faz sandwich: compra antes e vende depois de mim', peso: 400, borda: '#1F2733', fundo: '#141A24', cor: '#9AA7B4' }, { texto: 'Recebo bem menos token do que esperava', peso: 600, borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' }] },
+      { rotulo: 'Não, pool funda', borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#F59E0B', nos: [{ texto: 'Impacto menor, mas ainda perco', peso: 600, borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#E6EDF3' }, { texto: 'Slippage folgado continua sendo margem que você autorizou', peso: 400, borda: '#1F2733', fundo: '#141A24', cor: '#9AA7B4' }] },
+    ], alt: 'Configuro um slippage muito alto. A pool tem liquidez rasa? Se sim: aceito um preço muito pior, um bot faz sandwich comprando antes e vendendo depois, e recebo bem menos token. Se não: o impacto é menor, mas ainda perco, porque slippage folgado é margem que você autorizou.' };
+
+    // Impacto de preço (x·y=k)
+    const ordem = S.ordem, poolSol = S.pool;
+    const fracaoRecebida = 1 / (1 + ordem / poolSol);
+    const impactoPct = (1 - fracaoRecebida) * 100;
+    // O marcador sai SEMPRE da mesma razão usada no desenho: uma só limitação de domínio.
+    const X0 = 40, X1 = 300, Y0 = 20, Y1 = 180, xmax = 2;
+    const vmin = 1 / (1 + xmax);
+    const px = (r) => X0 + (r / xmax) * (X1 - X0);
+    const py = (v) => Y1 - ((v - vmin) / (1 - vmin)) * (Y1 - Y0);
+    let caminhoSvg = '';
+    for (let i = 0; i <= 60; i++) { const r = (i / 60) * xmax; caminhoSvg += (i ? ' L' : 'M') + px(r).toFixed(1) + ',' + py(1 / (1 + r)).toFixed(1); }
+    const razao = ordem / poolSol;
+    const rMarcador = Math.min(xmax, razao), foraDaEscala = razao > xmax;
+    const impacto = { ordemTexto: this.n1(ordem) + ' SOL', poolTexto: this.n0(poolSol) + ' SOL', recebeTexto: this.n0(fracaoRecebida * 100) + '%', impactoTexto: '−' + this.n1(impactoPct) + '%',
+      razaoTexto: this.n1(razao * 100) + '%', cor: impactoPct > 10 ? '#F87171' : '#E6EDF3',
+      caminho: caminhoSvg, mx: px(rMarcador).toFixed(1), my: py(1 / (1 + rMarcador)).toFixed(1),
+      marcadorCor: foraDaEscala ? '#F59E0B' : '#7C3AED',
+      escala: foraDaEscala ? 'A sua ordem vale mais que o dobro da pool: o marcador está parado no fim da escala do gráfico (2× a pool). Os números ao lado continuam exatos.' : 'O gráfico vai até uma ordem do tamanho do dobro da pool.',
+      alt: 'Curva x·y = k. Com uma ordem de ' + this.n1(ordem) + ' SOL numa pool de ' + this.n0(poolSol) + ' SOL deste lado, você recebe ' + this.n0(fracaoRecebida * 100) + '% do que o preço cotado sugeria: impacto de ' + this.n1(impactoPct) + '%.' + (foraDaEscala ? ' A razão passou do fim da escala do gráfico, e o marcador ficou na borda.' : '') };
+
+    // Erros
+    const impostor = { resultados: [
+      { n: 1, rotulo: 'Resultado 1 — liquidez alta, milhares de holders', texto: 'O token que você queria. Liquidez, holders e histórico coerentes — mas nada disso é o que o identifica.', cor: '#E6EDF3', borda: '#1F2733', fundo: '#141A24' },
+      { n: 2, rotulo: 'Resultado 2 — mesmo nome, mesmo ticker, liquidez baixa', texto: 'O impostor: contrato diferente. Quem compra aqui comprou um token que ninguém mais vai comprar.', cor: '#F87171', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)' },
+    ], alt: 'Buscando pelo nome, dois resultados aparecem. O primeiro tem liquidez alta e milhares de holders. O segundo tem o mesmo nome e o mesmo ticker, com liquidez baixa e contrato diferente: é o impostor.' };
+    const errosLista = [
+      'Slippage alto numa pool rasa, em que a sua própria compra move o preço.',
+      'Quantia digitada errada, ou botão de compra rápida ainda no valor da operação anterior.',
+      'Assinar sem ler o que a transação autoriza. O Módulo 1 já mostrou onde isso termina.',
+      'Perseguir uma vela que já subiu. É erro de disciplina disfarçado de decisão.',
+    ];
+    const velocidade = { barras: [
+      { rotulo: 'Um slot da Solana', valorTexto: '350 ms', largura: (0.35 / 60) * 100, cor: '#9AA7B4', barra: '#22D3EE', nota: 'A janela em que a rede produz um bloco. Passou de 400 ms para 350 ms em 21/08/2026.' },
+      { rotulo: 'O bot', valorTexto: 'dezenas de ms', largura: (0.05 / 60) * 100, cor: '#F87171', barra: '#EF4444', nota: 'Com transações pré-assinadas e infraestrutura colada à produção de blocos.' },
+      { rotulo: 'Você, do "vi" ao "confirmado"', valorTexto: '30 a 60 s', largura: 100, cor: '#E6EDF3', barra: '#7C3AED', nota: 'Entre ver a informação e ter a transação confirmada.' },
+    ], alt: 'Na mesma escala de até 60 segundos: um slot da Solana dura 350 milissegundos, o bot reage em dezenas de milissegundos, e você leva de 30 a 60 segundos entre ver a informação e ter a transação confirmada.' };
+    const diagnostico = { ramos: [
+      { rotulo: 'Sim, aparece', borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#F59E0B', nos: [{ texto: 'Reverteu com "slippage exceeded"', peso: 600, borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#E6EDF3' }, { texto: 'O preço andou além do limite que você autorizou: a rede cancelou para não entregar preço pior', peso: 400, borda: '#1F2733', fundo: '#141A24', cor: '#9AA7B4' }, { texto: 'Você perde a taxa de rede, não o valor da venda', peso: 600, borda: '#1F2733', fundo: '#141A24', cor: '#E6EDF3' }] },
+      { rotulo: 'Não aparece', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171', nos: [{ texto: 'A transação não foi incluída', peso: 600, borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' }, { texto: 'Priority fee baixo no congestionamento, ou o terminal fora do ar', peso: 400, borda: '#1F2733', fundo: '#141A24', cor: '#9AA7B4' }, { texto: 'Confira pelo endereço da carteira no explorador — a blockchain é a fonte da verdade', peso: 600, borda: '#22D3EE', fundo: 'rgba(34,211,238,.1)', cor: '#E6EDF3' }] },
+    ], alt: 'Vendi e o valor não caiu na carteira. A transação aparece no explorador de blocos? Se sim, ela reverteu com slippage exceeded: o preço andou além do limite autorizado e a rede cancelou, e você perde só a taxa de rede. Se não aparece, ela não foi incluída — priority fee baixo no congestionamento, ou o terminal fora do ar; confira pelo endereço da carteira no explorador.' };
+
+    // Processo
+    const processoBase = [
+      { texto: 'Abra o terminal pelo favorito oficial. Nunca por link de anúncio ou rede social: existem sites falsos imitando plataformas conhecidas.' },
+      { texto: 'Busque pelo endereço do contrato verificado. Nunca pelo nome ou pelo ticker.' },
+      { texto: 'Passe o token pela página Checklist antes de comprar: endereço oficial, extensões e autoridades do contrato, concentração de holders, bundles e histórico de quem criou.', saida: 'Checagem reprovada: não opero.' },
+      { texto: 'Escreva a tese antes de comprar. Junto com ela, escreva o ponto de invalidação: onde você admite que errou e sai.', saida: 'Tese que não fica clara: não opero.' },
+      { texto: 'Defina o tamanho da posição e confira o valor no campo. Atenção redobrada se o botão de compra rápida estiver ligado.' },
+      { texto: 'Configure slippage, prioridade e proteção de MEV com consciência. Faça primeiro uma operação-teste com valor mínimo.' },
+      { texto: 'Saia em degraus, conforme o plano feito antes da entrada. Não conforme o que você sente durante.' },
+    ];
+    const processo = { passos: processoBase.map((p, i) => Object.assign({ n: i + 1, liga: true, saida: p.saida || '', borda: p.saida ? '#22D3EE' : '#1F2733', fundo: p.saida ? 'rgba(34,211,238,.06)' : '#141A24' }, { texto: p.texto })),
+      alt: processoBase.map((p, i) => (i + 1) + '. ' + p.texto + (p.saida ? ' ' + p.saida : '')).join(' ') + ' Encerrei a posição.' };
+    const registro = [
+      { campo: 'Data', texto: 'De cada compra e de cada venda.' },
+      { campo: 'Valor em reais', texto: 'Quanto entrou ou saiu, na moeda da declaração.' },
+      { campo: 'Custo de aquisição', texto: 'Quanto custou comprar. É o que permite apurar o ganho operação por operação.' },
+    ];
+
+    // Quiz
+    const porque = {
+      q1: { a: 'Carteira criada nos servidores da plataforma não é só sua: quem tem as chaves tem o dinheiro.', c: 'A blockchain não trava nada: ela executa o que a chave assina.', d: 'Alguém sempre controla — quem tem as chaves.' },
+      q2: { a: 'Slippage não muda a taxa; muda o preço que você aceita.', b: 'Slippage alto é o contrário de garantia: autoriza um preço pior.', d: 'Muda, e muito: numa pool rasa, 40% abre espaço para um ataque de sandwich.' },
+      q3: { a: 'Ordem guardada num servidor não está na blockchain; se o servidor cai, ninguém dispara.', c: 'A blockchain só executa o que foi assinado e enviado; essa ordem nunca chegou lá.', d: 'Ela não vira ordem de mercado sozinha: simplesmente não dispara.' },
+      q4: { a: 'A taxa anunciada é a menor fatia; rede, prioridade, gorjeta e pool vêm à parte.', b: 'A taxa da pool é cobrada à parte, pela própria pool.', d: 'A taxa de rede da Solana é fração de centavo, e não é a taxa anunciada.' },
+      q5: { a: 'Permissão ilimitada é exatamente o mecanismo dos drainers do Módulo 1.', c: 'Aprovar não altera a taxa de rede das próximas transações.', d: 'Uma aprovação não afeta a velocidade da blockchain.' },
+      q6: { a: 'Não é questão de taxa: é tempo — o bot compra antes de o humano ver o token.', c: 'Não precisa de informação secreta: velocidade basta.', d: 'O humano tem carteira; só chega depois.' },
+      q7: { a: 'A rede não fica com o valor da compra: a transação reverte e você perde só a taxa de rede.', c: 'A plataforma não travou: a transação chegou e foi recusada pelo limite que você definiu.', d: 'Não tem relação com a taxa da plataforma: o preço andou além do seu limite.' },
+      q8: { a: 'Print de lucro não é registro: falta data, valor em reais e custo de aquisição.', c: 'A plataforma não apura o imposto por você.', d: 'O ganho é apurado operação por operação, não pelo saldo do fim do ano.' },
+    };
+    const Q = (id, pergunta, alts, correta, explicacao) => ({ id, pergunta, correta, explicacao, alternativas: alts.map(([aid, texto]) => Object.assign({ id: aid, texto }, porque[id][aid] ? { porque: porque[id][aid] } : {})) });
+    const todas = [
+      Q('q1', 'Você depositou seu dinheiro numa carteira interna criada pela plataforma. Quem controla esse dinheiro na prática?', [['a', 'Só você, sempre'], ['b', 'A plataforma, porque as chaves ficam nos servidores dela'], ['c', 'A blockchain, que trava o dinheiro'], ['d', 'Ninguém controla']], 'b', 'Em modelo custodial, a carteira vive nos servidores da plataforma: quem tem as chaves tem o dinheiro, e um vazamento ou má-fé pode drenar tudo. Em terminal não-custodial é o oposto — a semente é sua e exportável, e é isso que você deve confirmar na documentação oficial antes de depositar qualquer coisa.'),
+      Q('q2', 'Você configurou slippage de 40% numa pool rasa. O que provavelmente acontece?', [['a', 'A transação fica mais barata'], ['b', 'Você garante o melhor preço'], ['c', 'Você aceita um preço muito pior e vira alvo fácil de bots'], ['d', 'Nada muda']], 'c', 'Slippage é quanta variação de preço você autoriza; um número alto numa pool rasa deixa a execução acontecer a um preço muito pior e reduz a proteção contra sandwich, porque é justamente o slippage apertado que corta a margem do atacante. O erro oposto — slippage baixo demais numa memecoin volátil — faz a transação falhar em vez de proteger.'),
+      Q('q3', 'Uma ordem limite que a plataforma segura fora da blockchain até o preço bater: o que acontece se a plataforma cair?', [['a', 'A ordem executa sozinha na blockchain'], ['b', 'A ordem pode não ser executada, porque dependia do servidor'], ['c', 'A blockchain executa por você'], ['d', 'A ordem vira ordem de mercado']], 'b', 'Uma ordem que depende de um servidor para disparar só funciona enquanto aquele servidor estiver de pé — diferente de uma ordem já assinada e postada on-chain. No caso do Axiom especificamente, qual dos dois modelos é usado NÃO está documentado oficialmente, e é por isso que a orientação do módulo é testar com valor mínimo antes de confiar numa ordem limite.'),
+      Q('q4', 'A taxa anunciada de um terminal (por volta de 1%) cobre o quê?', [['a', 'Tudo que você paga na operação'], ['b', 'A taxa da plataforma e a taxa da pool'], ['c', 'Só a fatia da plataforma — rede, prioridade, gorjeta e pool são à parte'], ['d', 'Só a taxa de rede da Solana']], 'c', 'O número anunciado é apenas a fatia da plataforma. Priority fee e gorjeta de MEV (0,001 SOL cada no padrão) e a taxa da pool (0,25% a 1,25%) são cobrados à parte. Numa compra pequena de token novo, a taxa da plataforma chega a ser a MENOR das camadas — o custo total pode passar de três vezes o número anunciado.'),
+      Q('q5', 'Você ligou a aprovação automática com permissão ilimitada para um contrato. Qual é o risco?', [['a', 'Nenhum, é só conveniência'], ['b', 'O contrato pode mover aquele token da sua carteira sem pedir nova assinatura'], ['c', 'A taxa de rede aumenta'], ['d', 'A blockchain fica mais lenta']], 'b', 'Uma aprovação ilimitada dá ao contrato permissão contínua de gastar aquele token, sem precisar de nova autorização sua. Se ele for malicioso ou for comprometido depois, o saldo pode ser drenado — é exatamente o mecanismo dos drainers do Módulo 1, e a defesa é a mesma: revisar e revogar aprovações periodicamente.'),
+      Q('q6', 'Por que um humano não compete com um bot de sniping no lançamento de um token?', [['a', 'O humano paga mais taxa'], ['b', 'O bot age em dezenas de milissegundos, antes de qualquer clique humano'], ['c', 'O bot tem informação secreta sempre'], ['d', 'O humano não tem carteira']], 'b', 'A disputa se decide abaixo de um segundo, com transações pré-assinadas rodando em infraestrutura colada à produção de blocos; um humano leva de 30 a 60 segundos do "vi a informação" até a transação confirmada. E a janela só encolheu: em 21 de agosto de 2026 a Solana reduziu o slot de 400 ms para 350 ms.'),
+      Q('q7', 'Sua transação chegou à blockchain e reverteu com "slippage exceeded". O que aconteceu?', [['a', 'A rede roubou seu dinheiro'], ['b', 'O preço se moveu além do slippage que você aceitou, e a rede cancelou'], ['c', 'A plataforma travou'], ['d', 'Você não pagou a taxa da plataforma']], 'b', 'Quando o preço varia mais que o seu limite entre o envio e a execução, o swap reverte para não te entregar um preço pior que o autorizado — você perde a taxa de rede, não o valor da compra. Vale distinguir do outro problema parecido: falha por priority fee é a transação não ter sido incluída a tempo, que é coisa diferente.'),
+      Q('q8', 'Para o imposto de renda no Brasil, o que você precisa guardar de cada operação?', [['a', 'Só o print do lucro'], ['b', 'Data, valor em reais e o custo de aquisição de cada compra e venda'], ['c', 'Nada, a plataforma faz tudo'], ['d', 'Só o saldo final do ano']], 'b', 'O ganho é apurado operação por operação, então data, valor em reais e custo de aquisição são o mínimo — e a obrigação de registrar nasce na primeira operação, não quando aparece lucro. Como tudo fica on-chain, o histórico é sempre recuperável pelo endereço da carteira num explorador, mesmo que o terminal não exporte nada.'),
+    ];
+    const quiz = { todas }; todas.forEach((q) => { quiz[q.id] = [q]; });
+    const naoVerificado = [
+      { titulo: 'Ordem limite: fica on-chain ou depende do servidor da plataforma?', texto: 'A documentação oficial do Axiom descreve a ordem limite e diz que você pode "se afastar da tela", mas não informa quem vigia o preço. Até isso estar documentado, teste com valor mínimo antes de confiar.' },
+      { titulo: 'Exportar histórico pelo próprio terminal', texto: 'Nenhuma página oficial trata de exportar CSV nem de gerar relatório fiscal. O histórico on-chain sempre pode ser recuperado pelo endereço da carteira num explorador.' },
+      { titulo: 'Número de palavras da frase-semente', texto: 'A documentação oficial fala em "recovery phrase" sem citar o número de palavras — por isso "de 12 palavras" saiu do texto.' },
+      { titulo: 'Limiares de volume dos níveis de taxa', texto: 'A tabela de níveis do Axiom vai de 0,95% a 0,75%, mas os limiares de volume para subir de nível não são publicados: não dá para calcular quanto é preciso operar para chegar ao nível mais barato.' },
+    ];
+
+    const ids = ABAS.map((a) => a.id);
+    return {
+      mostrarSidebar: !compacto, paddingMain: compacto ? '20px 16px' : '32px 24px',
+      dirMapa: compacto ? 'column' : 'row', alinhaMapa: compacto ? 'stretch' : 'center', trunkW: compacto ? '2px' : '32px', trunkH: compacto ? '20px' : '2px', trunkML: compacto ? '24px' : '0',
+      dirSeq: compacto ? 'column' : 'row', colsDois: compacto ? '1fr' : '1fr 1fr', colsTres: compacto ? '1fr' : '1fr 1fr 1fr', colsAnatomia: compacto ? '1fr' : '1fr 1fr', colsProcesso: compacto ? '1fr' : '1fr 1fr', larguraFim: compacto ? '100%' : '50%',
+      abas, mapa, eh, objetivos, destaques, cotacao, pilha, tabelaCamadas, telaTerminal, custodia, foraDoAr,
+      caminho, empilhado, matriz, operacoes: ops, custo: S.custo, atrito, atalhosCusto,
+      configs, configsAlt, slippage, ordem, pool: poolSol, impacto,
+      impostor, errosLista, velocidade, diagnostico, processo, registro, quiz, naoVerificado,
+      irParaAba: (e) => { this.setState({ aba: e.currentTarget.dataset.aba }); },
+      teclaAba: (e) => { const i = ids.indexOf(this.state.aba); let m = i; if (e.key === 'ArrowRight') m = (i + 1) % ids.length; else if (e.key === 'ArrowLeft') m = (i - 1 + ids.length) % ids.length; else if (e.key === 'Home') m = 0; else if (e.key === 'End') m = ids.length - 1; else return; e.preventDefault(); this.setState({ aba: ids[m] }); const btn = e.currentTarget.querySelectorAll('[role="tab"]')[m]; if (btn) btn.focus(); },
+      mudarOperacoes: (e) => this.setState({ operacoes: Number(e.target.value) }),
+      mudarCusto: (e) => this.setState({ custo: Number(e.target.value) }),
+      atalhoCusto: (e) => this.setState({ custo: Number(e.currentTarget.dataset.valor) }),
+      mudarOrdem: (e) => this.setState({ ordem: Number(e.target.value) }),
+      mudarPool: (e) => this.setState({ pool: Number(e.target.value) }),
+    };
+  }
+}
+</script>
+</body>
+</html>

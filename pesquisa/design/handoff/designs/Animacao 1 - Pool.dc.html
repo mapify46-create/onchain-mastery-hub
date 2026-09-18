@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}button:focus-visible,[tabindex]:focus-visible{outline:2px solid #22D3EE;outline-offset:2px;border-radius:4px}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}</style></helmet>
+<main id="conteudo" style="max-width:868px;margin:0 auto;padding:32px 24px;display:flex;flex-direction:column;gap:24px">
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Animação 1 · Módulo 6 · {{ duracaoTexto }}</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">Pool x·y = k: por que cada venda sai mais barata</h1>
+<p style="margin:8px 0 0;color:#9AA7B4;text-wrap:pretty">Oito cenas. Os percentuais (2,57% e 14,64%) são a conta da pool de produto constante, do Módulo 6. A liquidez de US$ 8 mil é o exemplo inventado do arquivo, e aparece marcada.</p>
+</header>
+
+<section aria-label="Animação" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
+<span style="flex:0 0 auto;white-space:nowrap;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#9AA7B4">cena {{ numero }} de {{ total }}</span>
+<label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#9AA7B4;cursor:pointer"><input type="checkbox" checked="{{ reduzir }}" onChange="{{ alternarReduzir }}" style="width:16px;height:16px;accent-color:#7C3AED">Reduzir movimento: cenas paradas, lado a lado</label>
+</div>
+
+<sc-if value="{{ modoAnimado }}" hint-placeholder-val="{{ true }}">
+<div tabindex="0" role="group" aria-label="Palco da animação. Espaço toca ou pausa; setas trocam a cena." onKeyDown="{{ tecla }}" style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;align-items:center">
+<figure style="margin:0" role="img" aria-label="{{ cena.alt }}">
+<svg viewBox="0 0 320 220" width="100%" style="max-width:360px;display:block">
+<line x1="40" y1="180" x2="300" y2="180" stroke="#1F2733"></line>
+<line x1="40" y1="20" x2="40" y2="180" stroke="#1F2733"></line>
+<path d="{{ caminho }}" fill="none" stroke="#9AA7B4" stroke-width="2"></path>
+<g style="transform:translate({{ cena.mx }}px,{{ cena.my }}px);transition:transform {{ dur }} ease">
+<line x1="0" y1="0" x2="0" y2="{{ cena.ateBase }}" stroke="#22D3EE" stroke-dasharray="3 3"></line>
+<line x1="0" y1="0" x2="{{ cena.ateEixo }}" y2="0" stroke="#22D3EE" stroke-dasharray="3 3"></line>
+<circle cx="0" cy="0" r="7" fill="#7C3AED" stroke="#E6EDF3" stroke-width="2"></circle>
+</g>
+<circle cx="40" cy="20" r="5" fill="#0B0F17" stroke="#9AA7B4" stroke-width="2"></circle>
+<text x="50" y="18" fill="#9AA7B4" font-size="11" font-family="Inter, sans-serif">antes da venda</text>
+<text x="170" y="204" fill="#9AA7B4" font-size="11" text-anchor="middle" font-family="Inter, sans-serif">tokens na pool →</text>
+<text x="14" y="100" fill="#9AA7B4" font-size="11" text-anchor="middle" transform="rotate(-90 14 100)" font-family="Inter, sans-serif">SOL na pool →</text>
+<text x="300" y="216" fill="{{ cena.kCor }}" font-size="11" text-anchor="end" font-family="JetBrains Mono, monospace" style="transition:fill {{ dur }} ease">x · y = k</text>
+</svg>
+</figure>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div aria-hidden="true" style="display:flex;align-items:flex-end;justify-content:center;gap:32px;height:120px">
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px;width:72px;height:100%;justify-content:flex-end"><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px">{{ cena.xTexto }}</span><div style="width:100%;height:{{ cena.xAltura }}%;border-radius:6px 6px 0 0;background:#7C3AED;transition:height {{ dur }} ease"></div><span style="font-size:12px;color:#9AA7B4">tokens</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px;width:72px;height:100%;justify-content:flex-end"><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px">{{ cena.yTexto }}</span><div style="width:100%;height:{{ cena.yAltura }}%;border-radius:6px 6px 0 0;background:#22D3EE;transition:height {{ dur }} ease"></div><span style="font-size:12px;color:#9AA7B4">SOL</span></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+<div style="border-radius:8px;border:1px solid {{ cena.b1 }};background:#141A24;padding:8px 10px;transition:border-color {{ dur }} ease"><p style="margin:0;font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Vende</p><p style="margin:2px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.125rem;font-weight:700;font-variant-numeric:tabular-nums">{{ cena.vende }}</p></div>
+<div style="border-radius:8px;border:1px solid {{ cena.b2 }};background:#141A24;padding:8px 10px;transition:border-color {{ dur }} ease"><p style="margin:0;font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Preço cai</p><p style="margin:2px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.125rem;font-weight:700;font-variant-numeric:tabular-nums;color:#F87171">{{ cena.cai }}</p></div>
+<div style="border-radius:8px;border:1px solid {{ cena.b3 }};background:#141A24;padding:8px 10px;transition:border-color {{ dur }} ease"><p style="margin:0;font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Recebe</p><p style="margin:2px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.125rem;font-weight:700;font-variant-numeric:tabular-nums;color:#22D3EE">{{ cena.recebe }}</p></div>
+</div>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:8px 12px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline;opacity:{{ cena.dolarOp }};transition:opacity {{ dur }} ease"><span style="font-size:12px;color:#9AA7B4">Liquidez {{ cena.liquidez }} <span style="border-radius:999px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);color:#F59E0B;padding:0 6px;font-size:10px;font-weight:600">exemplo inventado</span></span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:700">{{ cena.dolar }}</span></div>
+</div>
+</div>
+<p aria-live="polite" style="margin:0;min-height:48px;font-size:1.0625rem;font-weight:600;text-align:center;text-wrap:pretty">{{ cena.legenda }}</p>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+<button type="button" onClick="{{ voltar }}" style="min-height:44px;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">← Voltar cena</button>
+<button type="button" aria-pressed="{{ tocando }}" onClick="{{ tocar }}" style="min-height:44px;min-width:110px;border-radius:8px;border:1px solid #7C3AED;background:#7C3AED;color:#FFFFFF;padding:8px 16px;font-size:14px;font-weight:600;cursor:pointer" style-hover="opacity:.85">{{ rotuloTocar }}</button>
+<button type="button" onClick="{{ avancar }}" style="min-height:44px;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">Avançar cena →</button>
+</div>
+<ol aria-label="Cenas" style="list-style:none;margin:0;padding:0;display:flex;gap:6px">
+<sc-for list="{{ barra }}" as="c" hint-placeholder-count="8">
+<li style="flex:1 1 0;min-width:0"><button type="button" aria-label="{{ c.rotulo }}" aria-current="{{ c.atual }}" data-indice="{{ c.indice }}" onClick="{{ ir }}" style="display:flex;flex-direction:column;gap:4px;width:100%;min-height:44px;border:0;padding:6px 0;background:transparent;cursor:pointer;align-items:stretch"><span aria-hidden="true" style="display:block;height:6px;border-radius:999px;background:{{ c.cor }};transition:background {{ dur }} ease"></span><span aria-hidden="true" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:{{ c.numCor }};text-align:center">{{ c.numero }}</span></button></li>
+</sc-for>
+</ol>
+</sc-if>
+
+<sc-if value="{{ modoParado }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px">
+<sc-for list="{{ cenasParadas }}" as="c" hint-placeholder-count="8">
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;display:flex;flex-direction:column;gap:8px">
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:#9AA7B4">cena {{ c.numero }}</span>
+<svg viewBox="0 0 320 220" width="100%" role="img" aria-label="{{ c.alt }}">
+<path d="{{ caminho }}" fill="none" stroke="#9AA7B4" stroke-width="2"></path>
+<line x1="40" y1="180" x2="300" y2="180" stroke="#1F2733"></line>
+<circle cx="{{ c.mx }}" cy="{{ c.my }}" r="7" fill="#7C3AED" stroke="#E6EDF3" stroke-width="2"></circle>
+<text x="300" y="216" fill="#9AA7B4" font-size="12" text-anchor="end" font-family="JetBrains Mono, monospace">{{ c.resumo }}</text>
+</svg>
+<figcaption style="font-size:13px;font-weight:600">{{ c.legenda }}</figcaption>
+</figure>
+</sc-for>
+</div>
+</sc-if>
+
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Ler como texto</summary>
+<ol style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4;display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ cenasParadas }}" as="c" hint-placeholder-count="8"><li>{{ c.legenda }} {{ c.alt }}</li></sc-for>
+</ol></details>
+</section>
+
+<details style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Dados desta animação (para a implementação)</summary>
+<pre style="margin:12px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.6;color:#9AA7B4;white-space:pre-wrap">montarAnimacao({ id: 'pool-xyk', duracaoPorCena: 4000, transicao: 500,
+  elementos: ['curva', 'marcador', 'barraTokens', 'barraSol', 'vende', 'cai', 'recebe', 'dolar'],
+  cenas: [{ legenda, estados: { x, y, vende, cai, recebe, liquidez, dolar } } × 8] })
+Conta: vende = 1/√(1 − queda) − 1 · recebe = (1 − √(1 − queda)) / 2 (fração da liquidez anunciada). Fonte: modulo6.js › quanto-sai.
+Reduzir movimento: sem autoplay, transição 0, cenas em grade.</pre></details>
+<p style="margin:0;font-size:13px;color:#9AA7B4">Material de estudo, não é recomendação de investimento · OMH Hub · Animação 1</p>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:960,&quot;height&quot;:820}}">
+class Component extends DCLogic {
+  state = { cena: 0, tocando: false, reduzir: false };
+  componentDidMount() { const mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)'); if (mq && mq.matches) this.setState({ reduzir: true }); }
+  componentWillUnmount() { clearInterval(this.timer); }
+  parar() { clearInterval(this.timer); this.timer = null; }
+  renderVals() {
+    const S = this.state, POR_CENA = 4000, TRANS = 500;
+    const px = (x) => 40 + ((x - 1) / 0.6) * 260, py = (y) => 180 - ((y - 0.6) / 0.4) * 160;
+    let caminho = ''; for (let i = 0; i <= 60; i++) { const x = 1 + (i / 60) * 0.6; caminho += (i ? ' L' : 'M') + px(x).toFixed(1) + ',' + py(1 / x).toFixed(1); }
+    // s = 1/√(1−q) − 1 ; recebe = (1 − √(1−q))/2
+    const V10 = '5,41', R10 = '2,57', V50 = '41,42', R50 = '14,64';
+    const C = [
+      { legenda: 'A pool guarda tokens de um lado e SOL do outro.', x: 1, y: 1, vende: '—', cai: '—', recebe: '—', liq: 'US$ 8 mil', dolar: '—', dOp: 0, k: false, alt: 'Duas barras iguais: tokens e SOL. Marcador no início da curva.' },
+      { legenda: 'Trocar muda os dois lados, mas o produto x·y = k fica igual.', x: 1, y: 1, vende: '—', cai: '—', recebe: '—', liq: 'US$ 8 mil', dolar: '—', dOp: 0, k: true, alt: 'A fórmula x·y = k acende. O marcador ainda no início.' },
+      { legenda: 'Você vende 5,41% da reserva. Tokens entram, SOL sai.', x: 1.0541, y: 0.9487, vende: V10 + '%', cai: '−10%', recebe: '—', liq: 'US$ 8 mil', dolar: '—', dOp: 0, k: true, alt: 'Barra de tokens sobe para 1,05; barra de SOL cai para 0,95. O marcador desce pela curva.' },
+      { legenda: 'O preço cai 10%. Você recebe 2,57% da liquidez anunciada.', x: 1.0541, y: 0.9487, vende: V10 + '%', cai: '−10%', recebe: R10 + '%', liq: 'US$ 8 mil', dolar: '≈ US$ 206', dOp: 1, k: true, alt: 'Recebe 2,57%: cerca de US$ 206 numa liquidez de US$ 8 mil (exemplo inventado).' },
+      { legenda: 'Para o preço cair pela metade, você vende 41,42% da reserva.', x: 1.4142, y: 0.7071, vende: V50 + '%', cai: '−50%', recebe: '—', liq: 'US$ 8 mil', dolar: '—', dOp: 0, k: true, alt: 'Barra de tokens sobe para 1,41; SOL cai para 0,71. O marcador está no meio da curva.' },
+      { legenda: 'E recebe só 14,64% da liquidez anunciada.', x: 1.4142, y: 0.7071, vende: V50 + '%', cai: '−50%', recebe: R50 + '%', liq: 'US$ 8 mil', dolar: '≈ US$ 1.171', dOp: 1, k: true, alt: 'Recebe 14,64%: cerca de US$ 1.171 numa liquidez de US$ 8 mil (exemplo inventado).' },
+      { legenda: 'Pool 10× maior: a porcentagem não muda. Só o dólar.', x: 1.0541, y: 0.9487, vende: V10 + '%', cai: '−10%', recebe: R10 + '%', liq: 'US$ 80 mil', dolar: '≈ US$ 2.056', dOp: 1, k: true, alt: 'Mesmo ponto da curva, mesmos 2,57%. Com liquidez de US$ 80 mil, cerca de US$ 2.056.' },
+      { legenda: 'A curva é a mesma. Cada venda seguinte sai mais barata.', x: 1.4142, y: 0.7071, vende: V50 + '%', cai: '−50%', recebe: R50 + '%', liq: 'US$ 80 mil', dolar: '≈ US$ 11.712', dOp: 1, k: true, alt: 'O marcador volta ao meio da curva: 14,64% da liquidez, em qualquer tamanho de pool.' },
+    ];
+    const montar = (c, i) => { const mx = px(c.x), my = py(c.y);
+      return { numero: i + 1, legenda: c.legenda, alt: c.alt, mx: mx.toFixed(1), my: my.toFixed(1), ateBase: (180 - my).toFixed(1), ateEixo: (40 - mx).toFixed(1),
+        xTexto: 'x = ' + c.x.toFixed(2).replace('.', ','), yTexto: 'y = ' + c.y.toFixed(2).replace('.', ','), xAltura: Math.round(c.x * 60), yAltura: Math.round(c.y * 60),
+        vende: c.vende, cai: c.cai, recebe: c.recebe, liquidez: c.liq, dolar: c.dolar, dolarOp: c.dOp, kCor: c.k ? '#22D3EE' : '#1F2733',
+        b1: c.vende !== '—' ? '#7C3AED' : '#1F2733', b2: c.cai !== '—' ? 'rgba(239,68,68,.5)' : '#1F2733', b3: c.recebe !== '—' ? '#22D3EE' : '#1F2733',
+        resumo: c.recebe !== '—' ? 'recebe ' + c.recebe : (c.cai !== '—' ? 'preço ' + c.cai : 'x·y = k') }; };
+    const cenas = C.map(montar), cena = cenas[S.cena];
+    const barra = C.map((c, i) => ({ indice: i, numero: i + 1, rotulo: 'Cena ' + (i + 1) + ': ' + c.legenda, atual: i === S.cena, cor: i < S.cena ? '#7C3AED' : (i === S.cena ? '#22D3EE' : '#1F2733'), numCor: i === S.cena ? '#E6EDF3' : '#9AA7B4' }));
+    const total = C.length, segundos = Math.round(total * POR_CENA / 1000);
+    const ir = (n) => { this.parar(); this.setState({ cena: Math.max(0, Math.min(total - 1, n)), tocando: false }); };
+    return {
+      caminho, cena, cenas, cenasParadas: cenas, barra, numero: S.cena + 1, total, dur: TRANS + 'ms', duracaoTexto: segundos + ' s',
+      tocando: S.tocando, reduzir: S.reduzir, modoAnimado: !S.reduzir, modoParado: S.reduzir, rotuloTocar: S.tocando ? 'Pausar' : (S.cena === total - 1 ? 'Tocar de novo' : 'Tocar'),
+      voltar: () => ir(this.state.cena - 1), avancar: () => ir(this.state.cena + 1), ir: (e) => ir(Number(e.currentTarget.dataset.indice)),
+      tocar: () => { if (this.state.tocando) { this.parar(); this.setState({ tocando: false }); return; }
+        const inicio = this.state.cena === total - 1 ? 0 : this.state.cena; this.setState({ tocando: true, cena: inicio });
+        this.timer = setInterval(() => this.setState((st) => { if (st.cena >= total - 1) { this.parar(); return { tocando: false }; } return { cena: st.cena + 1 }; }), POR_CENA); },
+      tecla: (e) => { if (e.key === ' ') { e.preventDefault(); this.state.tocando ? (this.parar(), this.setState({ tocando: false })) : this.setState({ tocando: true }, () => { this.timer = setInterval(() => this.setState((st) => { if (st.cena >= total - 1) { this.parar(); return { tocando: false }; } return { cena: st.cena + 1 }; }), POR_CENA); }); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); ir(this.state.cena + 1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); ir(this.state.cena - 1); } else if (e.key === 'Home') { e.preventDefault(); ir(0); } else if (e.key === 'End') { e.preventDefault(); ir(total - 1); } },
+      alternarReduzir: (e) => { this.parar(); this.setState({ reduzir: e.target.checked, tocando: false }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

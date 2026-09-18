@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}button:focus-visible,[tabindex]:focus-visible{outline:2px solid #22D3EE;outline-offset:2px;border-radius:4px}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}</style></helmet>
+<main id="conteudo" style="max-width:868px;margin:0 auto;padding:32px 24px;display:flex;flex-direction:column;gap:24px">
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Animação 6 · Módulo 1 · {{ duracaoTexto }}</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">Address poisoning: o endereço quase igual</h1>
+<p style="margin:8px 0 0;color:#9AA7B4;text-wrap:pretty">Sete cenas. Fonte: modulo1.js › address-poisoning-e-clipper. <span style="border-radius:999px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);color:#F59E0B;padding:1px 10px;font-size:12px;font-weight:600">endereços inventados</span> Os dois endereços desta tela foram feitos para o exemplo: mesmo começo, mesmo fim, meio diferente.</p>
+</header>
+
+<section aria-label="Animação" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
+<span style="flex:0 0 auto;white-space:nowrap;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#9AA7B4">cena {{ numero }} de {{ total }}</span>
+<label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#9AA7B4;cursor:pointer"><input type="checkbox" checked="{{ reduzir }}" onChange="{{ alternarReduzir }}" style="width:16px;height:16px;accent-color:#7C3AED">Reduzir movimento: cenas paradas, lado a lado</label>
+</div>
+
+<sc-if value="{{ modoAnimado }}" hint-placeholder-val="{{ true }}">
+<div tabindex="0" role="group" aria-label="Palco da animação. Espaço toca ou pausa; setas trocam a cena." onKeyDown="{{ tecla }}" style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div role="img" aria-label="{{ cena.alt }}" style="display:flex;flex-direction:column;gap:16px">
+<!-- histórico da carteira -->
+<div style="border-radius:8px;border:1px solid {{ cena.histBorda }};background:#10151E;padding:12px;transition:border-color {{ dur }} ease">
+<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">{{ cena.histRotulo }}</p>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#9AA7B4">{{ cena.histNota }}</span>
+</div>
+<ul style="list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;min-height:76px">
+<sc-for list="{{ cena.linhas }}" as="l" hint-placeholder-count="2">
+<li style="border-radius:6px;border:1px solid {{ l.borda }};background:{{ l.fundo }};padding:8px 10px;display:flex;flex-direction:column;gap:4px;transition:border-color {{ dur }} ease,background {{ dur }} ease">
+<div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline">
+<span style="font-size:12px;font-weight:600;color:{{ l.rotuloCor }}">{{ l.rotulo }}</span>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#9AA7B4">{{ l.valor }}</span>
+</div>
+<p style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;line-height:1.5;overflow-wrap:anywhere"><span>{{ l.inicio }}</span><span style="border-radius:4px;background:{{ l.meioFundo }};color:{{ l.meioCor }};padding:1px 3px;transition:background {{ dur }} ease,color {{ dur }} ease">{{ l.meio }}</span><span>{{ l.fim }}</span></p>
+<sc-if value="{{ l.nota }}" hint-placeholder-val="{{ false }}"><p style="margin:0;font-size:12px;color:{{ l.notaCor }}">{{ l.nota }}</p></sc-if>
+</li>
+</sc-for>
+</ul>
+</div>
+<!-- o que você confere × o que muda -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:12px 14px">
+<p style="margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Onde você costuma olhar</p>
+<div role="img" aria-label="{{ cena.pontasAlt }}" style="display:flex;align-items:center;gap:4px">
+<span style="border-radius:4px;border:1px solid {{ cena.pontaBorda }};background:{{ cena.pontaFundo }};padding:4px 8px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;transition:border-color {{ dur }} ease,background {{ dur }} ease">{{ inicio }}</span>
+<span style="flex:1 1 auto;min-width:0;text-align:center;border-radius:4px;border:1px dashed {{ cena.meioBorda }};background:{{ cena.meioFundoFaixa }};padding:4px 6px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:{{ cena.meioTextoCor }};transition:border-color {{ dur }} ease,background {{ dur }} ease,color {{ dur }} ease">{{ cena.meioFaixa }}</span>
+<span style="border-radius:4px;border:1px solid {{ cena.pontaBorda }};background:{{ cena.pontaFundo }};padding:4px 8px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;transition:border-color {{ dur }} ease,background {{ dur }} ease">{{ fim }}</span>
+</div>
+<figcaption style="margin-top:8px;font-size:12px;color:#9AA7B4">{{ cena.pontasNota }}</figcaption>
+</figure>
+<div style="border-radius:8px;border:1px solid {{ cena.notaBorda }};background:{{ cena.notaFundo }};padding:12px 14px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:{{ cena.notaCor }}">{{ cena.notaTitulo }}</p>
+<p style="margin:6px 0 0;font-size:14px">{{ cena.nota }}</p>
+<sc-if value="{{ cena.mostraRegra }}" hint-placeholder-val="{{ false }}">
+<ul style="margin:8px 0 0;padding-left:18px;font-size:14px;display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ cena.regra }}" as="r" hint-placeholder-count="3"><li>{{ r }}</li></sc-for>
+</ul>
+</sc-if>
+</div>
+</div>
+</div>
+</div>
+<p aria-live="polite" style="margin:0;min-height:48px;font-size:1.0625rem;font-weight:600;text-align:center;text-wrap:pretty">{{ cena.legenda }}</p>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+<button type="button" onClick="{{ voltar }}" style="min-height:44px;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">← Voltar cena</button>
+<button type="button" aria-pressed="{{ tocando }}" onClick="{{ tocar }}" style="min-height:44px;min-width:110px;border-radius:8px;border:1px solid #7C3AED;background:#7C3AED;color:#FFFFFF;padding:8px 16px;font-size:14px;font-weight:600;cursor:pointer" style-hover="opacity:.85">{{ rotuloTocar }}</button>
+<button type="button" onClick="{{ avancar }}" style="min-height:44px;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">Avançar cena →</button>
+</div>
+<ol aria-label="Cenas" style="list-style:none;margin:0;padding:0;display:flex;gap:6px">
+<sc-for list="{{ barra }}" as="c" hint-placeholder-count="7">
+<li style="flex:1 1 0;min-width:0"><button type="button" aria-label="{{ c.rotulo }}" aria-current="{{ c.atual }}" data-indice="{{ c.indice }}" onClick="{{ ir }}" style="display:flex;flex-direction:column;gap:4px;width:100%;min-height:44px;border:0;padding:6px 0;background:transparent;cursor:pointer;align-items:stretch"><span aria-hidden="true" style="display:block;height:6px;border-radius:999px;background:{{ c.cor }};transition:background {{ dur }} ease"></span><span aria-hidden="true" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:{{ c.numCor }};text-align:center">{{ c.numero }}</span></button></li>
+</sc-for>
+</ol>
+</sc-if>
+
+<sc-if value="{{ modoParado }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px">
+<sc-for list="{{ cenas }}" as="c" hint-placeholder-count="7">
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;display:flex;flex-direction:column;gap:8px" role="img" aria-label="{{ c.alt }}">
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:#9AA7B4">cena {{ c.numero }}</span>
+<div style="display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ c.linhas }}" as="l" hint-placeholder-count="2">
+<div style="border-radius:4px;border:1px solid {{ l.borda }};background:{{ l.fundo }};padding:5px 8px"><p style="margin:0;font-size:10px;color:{{ l.rotuloCor }}">{{ l.rotulo }}</p><p style="margin:2px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;overflow-wrap:anywhere"><span>{{ l.inicio }}</span><span style="background:{{ l.meioFundo }};color:{{ l.meioCor }};padding:0 2px">{{ l.meio }}</span><span>{{ l.fim }}</span></p></div>
+</sc-for>
+</div>
+<figcaption style="font-size:13px;font-weight:600">{{ c.legenda }}</figcaption>
+</figure>
+</sc-for>
+</div>
+</sc-if>
+
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Ler como texto</summary>
+<ol style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4;display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ cenas }}" as="c" hint-placeholder-count="7"><li>{{ c.legenda }} {{ c.alt }}</li></sc-for>
+</ol></details>
+</section>
+
+<details style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Dados desta animação (para a implementação)</summary>
+<pre style="margin:12px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.6;color:#9AA7B4;white-space:pre-wrap">montarAnimacao({ id: 'address-poisoning', duracaoPorCena: 4500, transicao: 450,
+  elementos: ['historico[]', 'pontas', 'nota', 'regra'],
+  cenas: [{ legenda, estados: { linhas, destaqueMeio, nota } } × 7] })
+Fonte: modulo1.js › address-poisoning-e-clipper. Números do estudo (Carnegie Mellon, USENIX Security 2025): 270 milhões de tentativas, 17 milhões de vítimas, 6.633 incidentes bem-sucedidos, ao menos US$ 83,8 milhões.
+Os dois endereços são inventados para o exemplo e marcados na tela: mesmo início (0x3aF1), mesmo fim (Bf07), meio diferente.
+A regra final é a do arquivo: conferir a linha inteira, transação-teste de valor baixo, copiar da fonte oficial, e a carteira fria mostra o destino na própria telinha.</pre></details>
+<p style="margin:0;font-size:13px;color:#9AA7B4">Material de estudo, não é recomendação de investimento · OMH Hub · Animação 6</p>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:960,&quot;height&quot;:860}}">
+class Component extends DCLogic {
+  state = { cena: 0, tocando: false, reduzir: false };
+  componentDidMount() { const mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)'); if (mq && mq.matches) this.setState({ reduzir: true }); }
+  componentWillUnmount() { clearInterval(this.timer); }
+  parar() { clearInterval(this.timer); this.timer = null; }
+  renderVals() {
+    const S = this.state, POR_CENA = 4500, TRANS = 450;
+    const INICIO = '0x3aF1', FIM = 'Bf07';
+    const MEIO_OK = '9c2e8B7d40a1f6E3c9D2b58A7e14C0f3';
+    const MEIO_MAU = '7D0b3e4C91f2a8B6d5E0c73F1a9e2D48';
+    const TOM = {
+      ok: { borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.08)', rotuloCor: '#22C55E' },
+      mau: { borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.08)', rotuloCor: '#F87171' },
+      neutro: { borda: '#1F2733', fundo: '#0B0F17', rotuloCor: '#9AA7B4' },
+    };
+    const linha = (tom, rotulo, valor, meio, destaque, nota, notaCor) => Object.assign({ rotulo, valor, inicio: INICIO, meio, fim: FIM,
+      meioFundo: destaque === 'mau' ? 'rgba(239,68,68,.25)' : (destaque === 'ok' ? 'rgba(34,197,94,.2)' : 'transparent'),
+      meioCor: destaque === 'mau' ? '#F87171' : (destaque === 'ok' ? '#22C55E' : '#9AA7B4'),
+      nota: nota || '', notaCor: notaCor || '#9AA7B4' }, TOM[tom]);
+    const NOTA = { neutro: { b: '#1F2733', f: '#141A24', c: '#9AA7B4' }, alerta: { b: 'rgba(239,68,68,.5)', f: 'rgba(239,68,68,.12)', c: '#F87171' }, atencao: { b: 'rgba(245,158,11,.4)', f: 'rgba(245,158,11,.12)', c: '#F59E0B' }, ok: { b: 'rgba(34,197,94,.5)', f: 'rgba(34,197,94,.12)', c: '#22C55E' } };
+    const C = [
+      { histRotulo: 'Seu histórico de envios', histNota: '1 endereço conhecido', histBorda: '#1F2733',
+        linhas: [linha('ok', 'Destino que você já usou', 'enviado', MEIO_OK, 'nenhum', 'É o endereço certo, que você conferiu na fonte oficial.', '#9AA7B4')],
+        pontaTom: 'ok', meioFaixa: 'o meio, que quase ninguém confere', meioTom: 'neutro', pontasNota: 'Começo e fim: é por eles que a gente reconhece um endereço.',
+        notaTitulo: 'O ponto de partida', nota: 'Você envia para um endereço conhecido. Ele já está no seu histórico, e foi conferido na fonte oficial.', notaTom: 'ok',
+        legenda: 'Você envia para um endereço conhecido, já conferido.', alt: 'O histórico tem uma linha: o endereço certo, começando em 0x3aF1 e terminando em Bf07 (endereços inventados).' },
+      { histRotulo: 'Seu histórico de envios', histNota: 'o golpista prepara o sósia', histBorda: 'rgba(239,68,68,.5)',
+        linhas: [linha('ok', 'Destino que você já usou', 'enviado', MEIO_OK, 'nenhum', '', ''), linha('mau', 'Endereço gerado pelo golpista', 'fora do seu histórico', MEIO_MAU, 'mau', 'Mesmo começo, mesmo fim. Só o meio é outro.', '#F87171')],
+        pontaTom: 'mau', meioFaixa: 'só o meio muda', meioTom: 'alerta', pontasNota: 'As pontas são idênticas de propósito: é nelas que você confia.',
+        notaTitulo: 'O sósia', nota: 'O golpista gera um endereço com os mesmos primeiros e últimos caracteres do original. Isso é barato e automatizado.', notaTom: 'alerta',
+        legenda: 'O golpista cria um endereço com o mesmo começo e fim.', alt: 'Aparece um segundo endereço, do golpista: início 0x3aF1 e fim Bf07 iguais, e o meio destacado em vermelho porque é a única parte diferente.' },
+      { histRotulo: 'Seu histórico de envios', histNota: 'chegou uma transação', histBorda: 'rgba(245,158,11,.4)',
+        linhas: [linha('ok', 'Destino que você já usou', 'enviado', MEIO_OK, 'nenhum', '', ''), linha('mau', 'Recebido agora', 'valor 0', MEIO_MAU, 'mau', 'Uma transação minúscula, só para o endereço entrar no seu histórico.', '#F87171')],
+        pontaTom: 'mau', meioFaixa: 'só o meio muda', meioTom: 'alerta', pontasNota: 'O envio de valor zero não custa quase nada para quem faz.',
+        notaTitulo: 'O envenenamento', nota: 'Ele manda uma transação de valor zero para você. O objetivo não é o dinheiro: é plantar o endereço na sua lista.', notaTom: 'atencao',
+        legenda: 'Ele manda uma transação de valor zero, só para aparecer.', alt: 'O endereço do golpista entra no histórico por uma transação recebida de valor zero.' },
+      { histRotulo: 'Seu histórico, dias depois', histNota: 'os dois parecem iguais', histBorda: 'rgba(239,68,68,.5)',
+        linhas: [linha('neutro', 'Linha do histórico', '—', MEIO_OK, 'ok', 'O certo.', '#22C55E'), linha('neutro', 'Linha do histórico', '—', MEIO_MAU, 'mau', 'O do golpista.', '#F87171')],
+        pontaTom: 'mau', meioFaixa: 'a única diferença está aqui', meioTom: 'alerta', pontasNota: 'Lado a lado, com as pontas iguais, o olho não separa os dois.',
+        notaTitulo: 'No histórico', nota: 'Os dois aparecem na mesma lista, com o mesmo começo e o mesmo fim. A única diferença são os caracteres do meio.', notaTom: 'alerta',
+        legenda: 'No histórico, os dois endereços parecem iguais.', alt: 'As duas linhas do histórico lado a lado: pontas idênticas e os meios destacados, um em verde e um em vermelho.' },
+      { histRotulo: 'Você vai enviar de novo', histNota: 'copiou do histórico', histBorda: 'rgba(239,68,68,.5)',
+        linhas: [linha('mau', 'Copiado do histórico', 'colado no campo destino', MEIO_MAU, 'mau', 'Conferiu 0x3aF1 no começo e Bf07 no fim: bateu.', '#F87171')],
+        pontaTom: 'mau', meioFaixa: 'ninguém leu esta parte', meioTom: 'alerta', pontasNota: 'Foi a conferência pelas pontas que aprovou o endereço errado.',
+        notaTitulo: 'O envio', nota: 'Você copia do histórico, confere as pontas e envia. A transação é irreversível: não existe estorno na blockchain.', notaTom: 'alerta',
+        legenda: 'Você copia do histórico, confere as pontas e envia.', alt: 'O endereço do golpista foi copiado do histórico e colado no campo de destino; as pontas conferidas bateram.' },
+      { histRotulo: 'O tamanho do problema', histNota: 'Carnegie Mellon · USENIX Security 2025', histBorda: '#1F2733',
+        linhas: [linha('mau', '270 milhões de tentativas', 'Ethereum e BNB Chain, 07/2022 a 06/2024', MEIO_MAU, 'mau', '17 milhões de vítimas visadas, 6.633 incidentes bem-sucedidos, ao menos US$ 83,8 milhões perdidos.', '#F87171')],
+        pontaTom: 'mau', meioFaixa: 'automatizado, em escala', meioTom: 'alerta', pontasNota: 'Gerar sósias em massa é o modelo do ataque, não um caso isolado.',
+        notaTitulo: 'Não é caso raro', nota: 'O estudo cobriu duas redes em dois anos. Variantes de clipper fazem o mesmo pelo outro lado: trocam o endereço na hora de colar.', notaTom: 'alerta',
+        legenda: 'Não é caso raro: são milhões de tentativas automatizadas.', alt: 'Os números do estudo: 270 milhões de tentativas, 17 milhões de vítimas visadas, 6.633 incidentes bem-sucedidos e ao menos US$ 83,8 milhões perdidos.' },
+      { histRotulo: 'A regra', histNota: 'vale para os dois golpes', histBorda: 'rgba(34,197,94,.5)',
+        linhas: [linha('ok', 'Endereço da fonte oficial', 'conferido caractere por caractere', MEIO_OK, 'ok', 'Copiado do site ou do canal oficial, não do histórico.', '#22C55E')],
+        pontaTom: 'ok', meioFaixa: 'leia esta parte também', meioTom: 'ok', pontasNota: 'Conferir a linha inteira é o que separa o certo do sósia.',
+        notaTitulo: 'O que fazer', nota: 'A defesa contra address poisoning e clipper é a mesma: nunca confiar só no começo e no fim.', notaTom: 'ok', mostraRegra: true,
+        regra: ['Confira o endereço inteiro, caractere por caractere — nunca só as pontas.', 'Copie da fonte oficial, não do seu histórico de transações.', 'Antes de um valor alto, envie uma transação-teste de valor baixo.', 'Uma carteira fria mostra o destino na própria telinha, fora do alcance do clipper.'],
+        legenda: 'Confira o endereço inteiro e copie da fonte oficial.', alt: 'A regra final: conferir a linha inteira, copiar da fonte oficial, fazer uma transação-teste de valor baixo e usar a telinha da carteira fria.' },
+    ];
+    const PONTA = { ok: { b: 'rgba(34,197,94,.5)', f: 'rgba(34,197,94,.12)' }, mau: { b: 'rgba(239,68,68,.5)', f: 'rgba(239,68,68,.12)' } };
+    const MEIO = { neutro: { b: '#1F2733', f: '#0B0F17', c: '#9AA7B4' }, alerta: { b: 'rgba(239,68,68,.5)', f: 'rgba(239,68,68,.12)', c: '#F87171' }, ok: { b: 'rgba(34,197,94,.5)', f: 'rgba(34,197,94,.12)', c: '#22C55E' } };
+    const cenas = C.map((c, i) => { const n = NOTA[c.notaTom] || NOTA.neutro, p = PONTA[c.pontaTom] || PONTA.ok, m = MEIO[c.meioTom] || MEIO.neutro;
+      return { numero: i + 1, legenda: c.legenda, alt: c.alt, histRotulo: c.histRotulo, histNota: c.histNota, histBorda: c.histBorda, linhas: c.linhas,
+        pontaBorda: p.b, pontaFundo: p.f, meioFaixa: c.meioFaixa, meioBorda: m.b, meioFundoFaixa: m.f, meioTextoCor: m.c, pontasNota: c.pontasNota,
+        pontasAlt: 'Início ' + INICIO + ' e fim ' + FIM + ' destacados; no meio, ' + c.meioFaixa + '.',
+        notaTitulo: c.notaTitulo, nota: c.nota, notaBorda: n.b, notaFundo: n.f, notaCor: n.c, mostraRegra: !!c.mostraRegra, regra: c.regra || [] }; });
+    const cena = cenas[S.cena], total = C.length;
+    const barra = C.map((c, i) => ({ indice: i, numero: i + 1, rotulo: 'Cena ' + (i + 1) + ': ' + c.legenda, atual: i === S.cena, cor: i < S.cena ? '#7C3AED' : (i === S.cena ? '#22D3EE' : '#1F2733'), numCor: i === S.cena ? '#E6EDF3' : '#9AA7B4' }));
+    const ir = (n) => { this.parar(); this.setState({ cena: Math.max(0, Math.min(total - 1, n)), tocando: false }); };
+    const iniciarTimer = () => { this.timer = setInterval(() => this.setState((st) => { if (st.cena >= total - 1) { this.parar(); return { tocando: false }; } return { cena: st.cena + 1 }; }), POR_CENA); };
+    return {
+      cena, cenas, barra, numero: S.cena + 1, total, dur: TRANS + 'ms', duracaoTexto: Math.round(total * POR_CENA / 1000) + ' s', inicio: INICIO, fim: FIM,
+      tocando: S.tocando, reduzir: S.reduzir, modoAnimado: !S.reduzir, modoParado: S.reduzir, rotuloTocar: S.tocando ? 'Pausar' : (S.cena === total - 1 ? 'Tocar de novo' : 'Tocar'),
+      voltar: () => ir(this.state.cena - 1), avancar: () => ir(this.state.cena + 1), ir: (e) => ir(Number(e.currentTarget.dataset.indice)),
+      tocar: () => { if (this.state.tocando) { this.parar(); this.setState({ tocando: false }); return; } const inicio = this.state.cena === total - 1 ? 0 : this.state.cena; this.setState({ tocando: true, cena: inicio }); iniciarTimer(); },
+      tecla: (e) => { if (e.key === ' ') { e.preventDefault(); if (this.state.tocando) { this.parar(); this.setState({ tocando: false }); } else { this.setState({ tocando: true }); iniciarTimer(); } }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); ir(this.state.cena + 1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); ir(this.state.cena - 1); } else if (e.key === 'Home') { e.preventDefault(); ir(0); } else if (e.key === 'End') { e.preventDefault(); ir(total - 1); } },
+      alternarReduzir: (e) => { this.parar(); this.setState({ reduzir: e.target.checked, tocando: false }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

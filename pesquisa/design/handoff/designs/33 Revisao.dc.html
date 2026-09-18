@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}h1,h2,h3,p,li,dd,dt{overflow-wrap:break-word}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}</style></helmet>
+<div style="display:flex;min-height:100vh;align-items:flex-start">
+<sc-if value="{{ mostrarSidebar }}" hint-placeholder-val="{{ true }}">
+<aside aria-label="Rotas do hub" style="position:sticky;top:0;width:16rem;flex:0 0 16rem;height:100vh;box-sizing:border-box;border-right:1px solid #1F2733;background:#141A24;padding:20px 16px;display:flex;flex-direction:column;gap:4px;font-size:14px">
+<p style="margin:0 0 12px;font-weight:600;font-size:14px">onchain-mastery-hub</p>
+<a href="#/inicio" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Início</a>
+<a href="#/modulo-1" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M1 Fundamentos &amp; Segurança</a>
+<a href="#/modulo-2" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M2 Psicologia</a>
+<a href="#/modulo-3" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M3 Os dois pilares</a>
+<a href="#/modulo-4" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M4 Gestão &amp; decisão</a>
+<a href="#/modulo-5" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M5 Execução</a>
+<a href="#/modulo-6" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M6 Ler a tela</a>
+<a href="#/modulo-7" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M7 A rotina</a>
+<div style="height:1px;background:#1F2733;margin:8px 0"></div>
+<a href="#/glossario" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Glossário</a>
+<a href="#/checklist" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Checklist antes de comprar</a>
+<a href="#/revisao" aria-current="page" style="display:block;border-radius:8px;padding:8px 12px;color:#E6EDF3;background:rgba(124,58,237,.15);border:1px solid #7C3AED;text-decoration:none;font-weight:600">Revisão</a>
+</aside>
+</sc-if>
+<main id="conteudo" style="flex:1 1 auto;min-width:0">
+<div style="max-width:868px;margin:0 auto;padding:{{ paddingMain }};display:flex;flex-direction:column;gap:24px">
+
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Rotina de estudo</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">Revisão espaçada</h1>
+<p style="margin:8px 0 0;color:#9AA7B4;text-wrap:pretty">As perguntas dos quizzes que você já fez, e os termos do glossário marcados como estudados, voltam em 1, 3, 7, 16 e 35 dias, conforme você acerta. Errou, volta amanhã. Responder de novo, dias depois, é o que faz o conteúdo ficar — reler não faz.</p>
+<p style="margin:16px 0 0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:12px 16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">De onde vem: </strong>espaçar as revisões tem uma das evidências mais fortes da ciência da aprendizagem (meta-análises de Cepeda et al., 2006, e Latimier et al., 2021). A escada de dias é derivada da teoria, não testada nessa forma exata. Os algoritmos dos apps de cartões só preveem melhor a memória; nenhum experimento mostrou que ensinem mais que uma escada fixa.</p>
+<p style="margin:12px 0 0;border-radius:12px;border:1px solid rgba(124,58,237,.5);background:rgba(124,58,237,.12);padding:12px 16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Estado de exemplo: </strong>a fila desta tela é fictícia, de propósito, para mostrar cada peça em funcionamento. Use o seletor para ver a fila cheia, a sessão em andamento e o estado vazio — no app, a fila vem do seu navegador.</p>
+<div role="group" aria-label="Situação de exemplo" style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ situacoes }}" as="s" hint-placeholder-count="3">
+<button type="button" data-id="{{ s.id }}" aria-pressed="{{ s.ativo }}" onClick="{{ trocarSituacao }}" style="min-height:40px;border-radius:999px;border:1px solid {{ s.borda }};background:{{ s.fundo }};color:#E6EDF3;padding:6px 14px;font-size:14px;cursor:pointer" style-hover="border-color:#9AA7B4">{{ s.rotulo }}</button>
+</sc-for>
+</div>
+</header>
+
+<!-- 1. CICLO DOS CINCO INTERVALOS -->
+<section aria-label="A escada dos intervalos" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">A escada, e onde cada pergunta está</h2>
+<span style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Relação: o que se repete</span>
+</div>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Acertou, sobe um degrau. Errou, volta ao primeiro — e a pergunta reaparece amanhã.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:flex;justify-content:center">
+<div role="img" aria-label="{{ ciclo.alt }}" style="position:relative;width:360px;max-width:100%;height:360px">
+<svg viewBox="0 0 360 360" width="100%" height="100%" aria-hidden="true" style="position:absolute;inset:0">
+<defs>
+<marker id="rev-seta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9AA7B4"></path></marker>
+<marker id="rev-seta-erro" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#EF4444"></path></marker>
+</defs>
+<sc-for list="{{ ciclo.arcos }}" as="a" hint-placeholder-count="5">
+<path d="{{ a.d }}" fill="none" stroke="{{ a.cor }}" stroke-width="2" stroke-dasharray="{{ a.tracejado }}" marker-end="{{ a.marcador }}"></path>
+</sc-for>
+</svg>
+<sc-for list="{{ ciclo.degraus }}" as="d" hint-placeholder-count="5">
+<div style="position:absolute;left:{{ d.x }}px;top:{{ d.y }}px;transform:translate(-50%,-50%);width:112px;box-sizing:border-box;border-radius:8px;border:1px solid {{ d.borda }};background:{{ d.fundo }};padding:8px;text-align:center">
+<span aria-hidden="true" style="display:inline-flex;width:22px;height:22px;border-radius:50%;background:{{ d.marcaFundo }};color:{{ d.marcaCor }};font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;align-items:center;justify-content:center">{{ d.numero }}</span>
+<p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:600">{{ d.dias }}</p>
+<p style="margin:2px 0 0;font-size:11px;color:{{ d.cor }}">{{ d.quantas }}</p>
+</div>
+</sc-for>
+<p style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0;text-align:center;font-size:11px;color:#F87171;max-width:104px;line-height:1.3">errou: volta ao degrau 1</p>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:#9AA7B4">
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:2px;background:#9AA7B4"></span>acertou: sobe um degrau</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:0;border-top:2px dashed #EF4444"></span>errou: volta ao primeiro</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:3px;border:1px solid #22D3EE;background:rgba(34,211,238,.1)"></span>tem pergunta vencida aqui</span>
+</div>
+<p style="margin:0;font-size:13px;color:#9AA7B4">O primeiro degrau nunca é "hoje": a primeira revisão no mesmo dia vira releitura, e releitura ensina pouco. A fila sai misturada entre os módulos de propósito — intercalar tipos de pergunta ajuda a distinguir conceitos parecidos.</p>
+</section>
+
+<!-- 2. A FILA DE HOJE -->
+<sc-if value="{{ temFila }}" hint-placeholder-val="{{ true }}">
+<section aria-label="Fila de hoje" style="border-radius:12px;border:1px solid rgba(34,211,238,.5);background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">{{ hoje.titulo }}</h2>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#9AA7B4">{{ hoje.contagem }}</span>
+</div>
+<p style="margin:0;color:#9AA7B4">Misturadas entre os módulos, de propósito. Antes de responder, diga quão certo você está: é isso que mostra depois onde a sua certeza engana.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<p style="margin:0 0 10px;font-size:14px;font-weight:600">De onde vêm as perguntas da fila</p>
+<div role="img" aria-label="{{ fontesAlt }}" style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ fontes }}" as="f" hint-placeholder-count="3">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span style="font-size:14px">{{ f.rotulo }}</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#9AA7B4">{{ f.texto }}</span></div>
+<div style="margin-top:4px;height:16px;background:#141A24;border-radius:3px;overflow:hidden"><div style="height:100%;width:{{ f.largura }}%;background:{{ f.cor }}"></div></div>
+<p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">{{ f.nota }}</p>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin-top:10px;font-size:13px;color:#9AA7B4">Mesma escala, sobre as {{ hoje.naFila }} perguntas da fila. Cada termo do glossário marcado como estudado entra com duas perguntas — uma da definição e outra do exemplo — e volta em 1 dia.</figcaption>
+</figure>
+
+<!-- SESSÃO: UMA PERGUNTA POR VEZ -->
+<div style="border-radius:8px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.08);padding:20px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">{{ sessao.passo }}</p>
+<span style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:1px 10px;font-size:12px;color:#9AA7B4">{{ sessao.origem }} · degrau {{ sessao.degrau }}</span>
+</div>
+<p style="margin:0;font-size:1.0625rem;font-weight:600;text-wrap:pretty">{{ sessao.pergunta }}</p>
+<div role="radiogroup" aria-label="Alternativas" style="display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ sessao.alternativas }}" as="a" hint-placeholder-count="4">
+<button type="button" role="radio" aria-checked="{{ a.escolhida }}" data-id="{{ a.id }}" onClick="{{ escolherAlternativa }}" style="min-height:44px;border-radius:8px;border:1px solid {{ a.borda }};background:{{ a.fundo }};color:{{ a.cor }};padding:10px 14px;font-size:14px;text-align:left;cursor:pointer;display:flex;gap:10px;align-items:flex-start" style-hover="border-color:#9AA7B4">
+<span aria-hidden="true" style="flex:0 0 20px;width:20px;height:20px;border-radius:50%;border:2px solid {{ a.radioBorda }};background:{{ a.radioFundo }};margin-top:1px"></span>
+<span style="min-width:0">{{ a.texto }}<sc-if value="{{ a.marca }}" hint-placeholder-val="{{ false }}"><span style="display:block;margin-top:4px;font-size:12px;font-weight:600;color:{{ a.marcaCor }}">{{ a.marca }}</span></sc-if></span>
+</button>
+</sc-for>
+</div>
+<div>
+<p style="margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Quão certo você está? (obrigatório)</p>
+<div role="radiogroup" aria-label="Confiança" style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ sessao.confiancas }}" as="c" hint-placeholder-count="3">
+<button type="button" role="radio" aria-checked="{{ c.escolhida }}" data-nivel="{{ c.nivel }}" onClick="{{ escolherConfianca }}" style="min-height:44px;border-radius:999px;border:1px solid {{ c.borda }};background:{{ c.fundo }};color:#E6EDF3;padding:8px 16px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">{{ c.rotulo }}</button>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+<button type="button" disabled="{{ sessao.bloqueado }}" onClick="{{ responder }}" style="min-height:44px;border-radius:8px;border:1px solid #7C3AED;background:#7C3AED;color:#FFFFFF;padding:10px 20px;font-size:15px;font-weight:600;cursor:{{ sessao.cursor }};opacity:{{ sessao.opacidade }}">{{ sessao.botao }}</button>
+<span style="font-size:13px;color:#9AA7B4">{{ sessao.dica }}</span>
+</div>
+<sc-if value="{{ sessao.corrigido }}" hint-placeholder-val="{{ false }}">
+<div aria-live="polite" style="border-radius:8px;border:1px solid {{ sessao.fbBorda }};background:{{ sessao.fbFundo }};padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+<p style="margin:0;font-size:15px;font-weight:600;color:{{ sessao.fbCor }}">{{ sessao.fbTitulo }}</p>
+<p style="margin:0;font-size:14px">{{ sessao.explicacao }}</p>
+<sc-if value="{{ sessao.pontoCego }}" hint-placeholder-val="{{ false }}">
+<p style="margin:0;border-radius:6px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:8px 10px;font-size:14px"><strong style="color:#E6EDF3">Certeza e erro: </strong>é a explicação que mais vale reler. Esta volta amanhã.</p>
+</sc-if>
+<p style="margin:0;font-size:13px;color:#9AA7B4">{{ sessao.reagendou }}</p>
+</div>
+</sc-if>
+</div>
+</section>
+</sc-if>
+
+<!-- 5. ESTADO VAZIO -->
+<sc-if value="{{ vazio }}" hint-placeholder-val="{{ false }}">
+<section aria-label="Nada vencido hoje" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Nada vencido hoje</h2>
+<p style="margin:0;color:#9AA7B4">{{ vazioTexto }}</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px">
+<a href="#/modulo-1" style="min-height:44px;display:inline-flex;align-items:center;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;color:#E6EDF3;padding:8px 16px;font-size:14px;font-weight:600;text-decoration:none" style-hover="border-color:#9AA7B4">Abrir um módulo →</a>
+<a href="#/glossario" style="min-height:44px;display:inline-flex;align-items:center;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;color:#E6EDF3;padding:8px 16px;font-size:14px;font-weight:600;text-decoration:none" style-hover="border-color:#9AA7B4">Marcar termos no Glossário →</a>
+</div>
+</section>
+</sc-if>
+
+<!-- 3. CALIBRAÇÃO -->
+<sc-if value="{{ temCalibracao }}" hint-placeholder-val="{{ true }}">
+<section aria-label="Calibração" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Quando você tem certeza, acerta?</h2>
+<p style="margin:0;color:#9AA7B4">Conta a última resposta de cada pergunta. Com poucas respostas isso oscila muito; de 50 para cima começa a dizer algo. O que importa é a linha "tenho certeza": se ela ficar longe de 100%, a sua certeza está enganando você.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<div role="img" aria-label="{{ calibAlt }}" style="display:flex;flex-direction:column;gap:16px">
+<sc-for list="{{ calibracao }}" as="c" hint-placeholder-count="3">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span style="font-size:14px">"{{ c.rotulo }}"</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#9AA7B4">{{ c.texto }}</span></div>
+<div style="margin-top:6px;height:22px;background:#141A24;border-radius:4px;overflow:hidden;display:flex">
+<div style="height:100%;width:{{ c.acerto }}%;background:{{ c.cor }}"></div>
+<div style="height:100%;width:{{ c.erro }}%;background:{{ c.corErro }}"></div>
+</div>
+<p style="margin:4px 0 0;font-size:13px;color:{{ c.notaCor }}">{{ c.nota }}</p>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin-top:12px;display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:#9AA7B4">
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:#22C55E"></span>acertou</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:#EF4444"></span>errou</span>
+<span style="width:100%">Cada barra é 100% das respostas daquele nível de confiança. A linha de cima é a que importa.</span>
+</figcaption>
+</figure>
+<sc-if value="{{ pontosCegos.tem }}" hint-placeholder-val="{{ true }}">
+<div style="border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F59E0B">Pontos cegos: erros feitos com certeza</p>
+<p style="margin:0;font-size:14px">{{ pontosCegos.texto }}</p>
+<ul style="margin:0;padding-left:20px;font-size:14px;color:#9AA7B4;display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ pontosCegos.itens }}" as="p" hint-placeholder-count="2"><li><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#E6EDF3">{{ p.origem }}</span> · {{ p.pergunta }}</li></sc-for>
+</ul>
+</div>
+</sc-if>
+</section>
+</sc-if>
+
+<!-- 4. PRÓXIMAS REVISÕES -->
+<sc-if value="{{ temProximas }}" hint-placeholder-val="{{ true }}">
+<section aria-label="Próximas revisões" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Próximas revisões</h2>
+<span style="font-size:14px;color:#9AA7B4">{{ proximas.resumo }}</span>
+</div>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<div role="img" aria-label="{{ proximas.alt }}" style="display:flex;align-items:flex-end;gap:10px">
+<sc-for list="{{ proximas.colunas }}" as="c" hint-placeholder-count="5">
+<div style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:6px">
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;text-align:center">{{ c.quantas }}</span>
+<span aria-hidden="true" style="display:block;height:110px;flex:0 0 110px;display:flex;flex-direction:column;justify-content:flex-end"><span style="display:block;height:{{ c.altura }}%;border-radius:4px 4px 0 0;background:{{ c.cor }}"></span></span>
+<span style="font-size:12px;color:#9AA7B4;text-align:center">{{ c.rotulo }}</span>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin-top:12px;font-size:13px;color:#9AA7B4">Quantas perguntas voltam em cada janela, na mesma escala. Quem sobe de degrau vai para a coluna seguinte; quem erra volta para "amanhã".</figcaption>
+</figure>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ proximas.itens }}" as="i" hint-placeholder-count="8">
+<li style="display:flex;gap:12px;font-size:14px;color:#9AA7B4"><span style="flex:0 0 auto;font-family:'JetBrains Mono',ui-monospace,monospace;color:#E6EDF3">{{ i.data }}</span><span style="min-width:0">{{ i.origem }} · {{ i.pergunta }}</span></li>
+</sc-for>
+</ul>
+</section>
+</sc-if>
+
+<p style="margin:0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Aviso: </strong>material de estudo próprio, não é recomendação de investimento. Memecoin é o ativo de maior risco do mercado: 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia em que nasceram (CoinGecko Research).</p>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;compacto&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { situacao: 'fila', alternativa: null, confianca: null, corrigido: false };
+  renderVals() {
+    const S = this.state, compacto = !!this.props.compacto;
+    const DIAS = [1, 3, 7, 16, 35];
+    const ROTULOS = { 1: 'Chutei', 2: 'Mais ou menos', 3: 'Tenho certeza' };
+    const SIT = [
+      { id: 'fila', rotulo: 'Fila cheia' },
+      { id: 'sessao', rotulo: 'Sessão em andamento' },
+      { id: 'vazio', rotulo: 'Nada vencido' },
+    ].map((s) => ({ id: s.id, rotulo: s.rotulo, ativo: s.id === S.situacao, borda: s.id === S.situacao ? '#7C3AED' : '#1F2733', fundo: s.id === S.situacao ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    const vazio = S.situacao === 'vazio';
+    // Estado de exemplo: distribuição da fila por degrau e por origem.
+    const porDegrau = vazio ? [0, 0, 0, 0, 0] : [9, 7, 5, 3, 2];
+    const vencidasPorDegrau = vazio ? [0, 0, 0, 0, 0] : [4, 2, 1, 0, 0];
+    const naFila = porDegrau.reduce((a, b) => a + b, 0);
+    const vencidas = vencidasPorDegrau.reduce((a, b) => a + b, 0);
+
+    // 1. Ciclo dos cinco intervalos
+    const C = 180, R = 122, n = 5, folga = 26;
+    const ang = (i) => (-90 + (i * 360) / n) * Math.PI / 180;
+    const pt = (a, r) => ({ x: C + r * Math.cos(a), y: C + r * Math.sin(a) });
+    const degraus = DIAS.map((d, i) => { const p = pt(ang(i), R), temVencida = vencidasPorDegrau[i] > 0;
+      return { numero: String(i + 1), dias: d === 1 ? '1 dia' : d + ' dias', x: Math.min(292, Math.max(68, p.x)), y: p.y,
+        quantas: porDegrau[i] === 0 ? 'sem perguntas' : porDegrau[i] + (porDegrau[i] === 1 ? ' pergunta' : ' perguntas') + (temVencida ? ' · ' + vencidasPorDegrau[i] + ' vencida' + (vencidasPorDegrau[i] > 1 ? 's' : '') : ''),
+        borda: temVencida ? '#22D3EE' : '#1F2733', fundo: temVencida ? 'rgba(34,211,238,.1)' : '#141A24',
+        marcaFundo: temVencida ? '#22D3EE' : '#1F2733', marcaCor: temVencida ? '#0B0F17' : '#E6EDF3', cor: temVencida ? '#22D3EE' : '#9AA7B4' }; });
+    const arcos = DIAS.map((d, i) => { const a1 = ang(i) + folga * Math.PI / 180; let a2 = ang((i + 1) % n) - folga * Math.PI / 180; if (a2 < a1) a2 += 2 * Math.PI;
+      const p1 = pt(a1, R), p2 = pt(a2, R), volta = i === n - 1;
+      return { d: 'M' + p1.x.toFixed(1) + ',' + p1.y.toFixed(1) + ' A' + R + ',' + R + ' 0 0 1 ' + p2.x.toFixed(1) + ',' + p2.y.toFixed(1), cor: volta ? '#EF4444' : '#9AA7B4', tracejado: volta ? '6 5' : 'none', marcador: volta ? 'url(#rev-seta-erro)' : 'url(#rev-seta)' }; });
+    const ciclo = { degraus, arcos, alt: 'Escada de cinco degraus: ' + DIAS.map((d, i) => 'degrau ' + (i + 1) + ', ' + d + (d === 1 ? ' dia, ' : ' dias, ') + degraus[i].quantas).join('; ') + '. Acertou sobe um degrau; errou volta ao degrau 1, e a pergunta reaparece amanhã.' };
+
+    // 2. Fila de hoje e origens
+    const fontesBase = vazio ? [] : [
+      { rotulo: 'Perguntas dos quizzes dos módulos', n: 16, cor: '#7C3AED', nota: 'Entram quando o quiz é corrigido, e a primeira volta amanhã.' },
+      { rotulo: 'Termos do glossário marcados como estudados', n: 8, cor: '#22D3EE', nota: 'Cada termo entra com duas perguntas: uma da definição e outra do exemplo.' },
+      { rotulo: 'Já respondidas antes, subindo a escada', n: 2, cor: '#22C55E', nota: 'Reagendadas conforme você acertou.' },
+    ];
+    const fontes = fontesBase.map((f) => ({ rotulo: f.rotulo, cor: f.cor, nota: f.nota, texto: f.n + ' de ' + naFila, largura: (f.n / naFila) * 100 }));
+    const fontesAlt = 'Origem das ' + naFila + ' perguntas da fila: ' + fontesBase.map((f) => f.rotulo + ', ' + f.n).join('; ') + '.';
+    const hoje = { titulo: vencidas === 1 ? '1 pergunta para hoje' : vencidas + ' perguntas para hoje', contagem: vencidas + ' vencidas · ' + naFila + ' na fila', naFila: String(naFila) };
+
+    // Sessão: uma pergunta por vez (pergunta de exemplo, do quiz do Módulo 6)
+    const ALT = [
+      { id: 'a', texto: 'Metade' },
+      { id: 'b', texto: 'Cerca de 14,6%' },
+      { id: 'c', texto: 'Tudo' },
+      { id: 'd', texto: 'Depende de quantos tokens existem' },
+    ];
+    const correta = 'b';
+    const emSessao = S.situacao === 'sessao' || S.corrigido;
+    const escolhida = S.alternativa, conf = S.confianca, corrigido = S.corrigido;
+    const acertou = corrigido && escolhida === correta;
+    const pontoCego = corrigido && !acertou && conf === 3;
+    const alternativas = ALT.map((a) => { const esc = a.id === escolhida;
+      let borda = esc ? '#7C3AED' : '#1F2733', fundo = esc ? 'rgba(124,58,237,.15)' : '#141A24', cor = '#E6EDF3', marca = '', marcaCor = '#9AA7B4', op = 1;
+      if (corrigido) {
+        if (a.id === correta) { borda = 'rgba(34,197,94,.5)'; fundo = 'rgba(34,197,94,.12)'; marca = 'Esta é a certa.'; marcaCor = '#22C55E'; }
+        else if (esc) { borda = 'rgba(239,68,68,.5)'; fundo = 'rgba(239,68,68,.12)'; cor = '#F87171'; marca = 'Foi a sua.'; marcaCor = '#F87171'; }
+      }
+      return { id: a.id, texto: a.texto, escolhida: esc, borda, fundo, cor, marca, marcaCor,
+        radioBorda: esc ? '#7C3AED' : '#9AA7B4', radioFundo: esc ? '#7C3AED' : 'transparent' }; });
+    const confiancas = [1, 2, 3].map((nv) => ({ nivel: String(nv), rotulo: ROTULOS[nv], escolhida: conf === nv, borda: conf === nv ? '#22D3EE' : '#1F2733', fundo: conf === nv ? 'rgba(34,211,238,.12)' : '#141A24' }));
+    const pronto = !!escolhida && !!conf;
+    const sessao = {
+      passo: corrigido ? 'Pergunta 1 de ' + vencidas + ' · corrigida' : 'Pergunta 1 de ' + vencidas,
+      origem: 'Módulo 6', degrau: '2',
+      pergunta: 'Numa pool de produto constante, você vende até o preço cair pela metade. Quanto da liquidez anunciada você recebe?',
+      alternativas, confiancas, corrigido,
+      bloqueado: !pronto || corrigido, cursor: pronto && !corrigido ? 'pointer' : 'not-allowed', opacidade: pronto && !corrigido ? '1' : '0.5',
+      botao: corrigido ? 'Próxima' : 'Responder',
+      dica: corrigido ? 'A próxima vem misturada, de outro módulo.' : (escolhida ? (conf ? 'Pronto: pode responder.' : 'Falta dizer quão certo você está — é obrigatório antes de ver a resposta.') : 'Escolha uma alternativa e diga quão certo você está.'),
+      fbTitulo: acertou ? 'Isso.' : 'Não foi essa.',
+      fbBorda: acertou ? 'rgba(34,197,94,.5)' : 'rgba(239,68,68,.5)', fbFundo: acertou ? 'rgba(34,197,94,.12)' : 'rgba(239,68,68,.12)', fbCor: acertou ? '#22C55E' : '#F87171',
+      explicacao: 'A conta é (1 − √0,5) ÷ 2 ≈ 14,6%, e a fração não depende do tamanho da pool. A liquidez anunciada soma os dois lados; só um deles paga a sua venda, e cada venda recebe um preço pior que a anterior.',
+      pontoCego,
+      reagendou: acertou ? 'Acertou: sobe para o degrau 3 e volta em 7 dias.' : 'Errou: volta ao degrau 1 e reaparece amanhã.',
+    };
+
+    // 3. Calibração (estado de exemplo)
+    const calibBase = vazio ? [{ nivel: 3, n: 0, acertos: 0 }, { nivel: 2, n: 0, acertos: 0 }, { nivel: 1, n: 0, acertos: 0 }]
+      : [{ nivel: 3, n: 18, acertos: 14 }, { nivel: 2, n: 11, acertos: 7 }, { nivel: 1, n: 6, acertos: 2 }];
+    const calibracao = calibBase.map((f) => { const pct = f.n ? Math.round((f.acertos / f.n) * 100) : null;
+      const destaque = f.nivel === 3;
+      return { rotulo: ROTULOS[f.nivel], texto: f.n === 0 ? 'ainda sem resposta' : f.acertos + ' de ' + f.n + ' certas (' + pct + '%)',
+        acerto: f.n ? (f.acertos / f.n) * 100 : 0, erro: f.n ? ((f.n - f.acertos) / f.n) * 100 : 0,
+        cor: destaque ? '#22C55E' : '#22C55E', corErro: destaque ? '#EF4444' : 'rgba(239,68,68,.55)',
+        nota: f.n === 0 ? 'Responda a fila de hoje para esta linha aparecer.' : (destaque ? (pct < 100 ? 'É a linha que importa: longe de 100%, a sua certeza está enganando você.' : 'Certeza e acerto combinam nesta amostra.') : 'Aqui o erro é esperado — o problema é errar com certeza.'),
+        notaCor: destaque && pct !== null && pct < 100 ? '#F59E0B' : '#9AA7B4' }; });
+    const calibAlt = 'Acerto por nível de confiança, cada barra valendo 100% das respostas daquele nível: ' + calibBase.map((f) => '"' + ROTULOS[f.nivel] + '", ' + (f.n === 0 ? 'ainda sem resposta' : f.acertos + ' de ' + f.n + ' certas') + '').join('; ') + '.';
+    const cegosBase = vazio ? [] : [
+      { origem: 'Módulo 6', pergunta: 'Numa pool de produto constante, você vende até o preço cair pela metade. Quanto da liquidez anunciada você recebe?' },
+      { origem: 'Módulo 1', pergunta: 'Você conectou a carteira num site e não assinou nada. O que aconteceu?' },
+      { origem: 'Glossário', pergunta: 'Permit / Permit2 — o que a definição diz?' },
+      { origem: 'Módulo 7', pergunta: 'Com 10% do capital em cada posição, 5 posições seguidas vão a zero. Quanto sobra?' },
+    ];
+    const pontosCegos = { tem: cegosBase.length > 0, itens: cegosBase,
+      texto: cegosBase.length === 1 ? '1 erro feito com certeza. Ele volta amanhã: releia a explicação antes.' : cegosBase.length + ' erros feitos com certeza. Eles voltam amanhã: releia as explicações antes.' };
+
+    // 4. Próximas revisões
+    const proximasPorJanela = vazio ? [0, 0, 0, 0, 0] : [5, 6, 5, 3, 2];
+    const maxJ = Math.max.apply(null, proximasPorJanela.concat([1]));
+    const colunas = DIAS.map((d, i) => ({ rotulo: d === 1 ? 'amanhã' : 'em ' + d + ' dias', quantas: String(proximasPorJanela[i]), altura: Math.max(2, (proximasPorJanela[i] / maxJ) * 100), cor: i === 0 ? '#22D3EE' : '#7C3AED' }));
+    const totalProximas = proximasPorJanela.reduce((a, b) => a + b, 0);
+    const itensProximas = vazio ? [] : [
+      { data: 'amanhã', origem: 'Módulo 6', pergunta: 'Um token mostra market cap de US$ 2 milhões e liquidez de US$ 20 mil. O que isso quer dizer?' },
+      { data: 'amanhã', origem: 'Glossário', pergunta: 'Honeypot — o que o exemplo mostra?' },
+      { data: 'em 3 dias', origem: 'Módulo 1', pergunta: 'O que um "approval" malicioso permite ao atacante?' },
+      { data: 'em 3 dias', origem: 'Módulo 2', pergunta: 'O que sustenta o preço de uma memecoin?' },
+      { data: 'em 7 dias', origem: 'Módulo 5', pergunta: 'A taxa anunciada de um terminal (por volta de 1%) cobre o quê?' },
+      { data: 'em 7 dias', origem: 'Glossário', pergunta: 'Freeze authority — o que a definição diz?' },
+      { data: 'em 16 dias', origem: 'Módulo 3', pergunta: 'Um perfil no X com selo azul posta o endereço de um token. O que o selo prova?' },
+      { data: 'em 35 dias', origem: 'Módulo 4', pergunta: 'Qual destas é uma catálise, no sentido do Módulo 4?' },
+    ];
+    const proximas = { colunas, itens: itensProximas, resumo: totalProximas + (totalProximas === 1 ? ' pergunta agendada' : ' perguntas agendadas'),
+      alt: 'Perguntas agendadas por janela, na mesma escala: ' + DIAS.map((d, i) => (d === 1 ? 'amanhã' : 'em ' + d + ' dias') + ', ' + proximasPorJanela[i]).join('; ') + '.' };
+
+    const vazioTexto = naFila === 0 ? 'Responda o quiz de um módulo. As perguntas dele entram aqui e a primeira volta amanhã.' : 'As perguntas voltam conforme você acerta: 1, 3, 7, 16 e 35 dias. Errou, volta amanhã.';
+
+    return {
+      mostrarSidebar: !compacto, paddingMain: compacto ? '20px 16px' : '32px 24px',
+      situacoes: SIT, ciclo, temFila: !vazio, vazio, vazioTexto, hoje,
+      temCalibracao: calibBase.some((f) => f.n > 0), temProximas: totalProximas > 0, fontes, fontesAlt, sessao, calibracao, calibAlt, pontosCegos, proximas,
+      trocarSituacao: (e) => this.setState({ situacao: e.currentTarget.dataset.id, alternativa: null, confianca: null, corrigido: false }),
+      escolherAlternativa: (e) => { if (this.state.corrigido) return; this.setState({ alternativa: e.currentTarget.dataset.id }); },
+      escolherConfianca: (e) => { if (this.state.corrigido) return; this.setState({ confianca: Number(e.currentTarget.dataset.nivel) }); },
+      responder: () => { if (this.state.corrigido) { this.setState({ alternativa: null, confianca: null, corrigido: false }); return; } if (this.state.alternativa && this.state.confianca) this.setState({ corrigido: true }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}h1,h2,h3,p,li,dd,dt,td,th{overflow-wrap:break-word}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}.omh-range{-webkit-appearance:none;appearance:none;width:100%;height:24px;background:transparent;cursor:pointer}.omh-range::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:#10151E;border:1px solid #1F2733}.omh-range::-moz-range-track{height:6px;border-radius:999px;background:#10151E;border:1px solid #1F2733}.omh-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;margin-top:-8px;border-radius:50%;background:#7C3AED;border:2px solid #E6EDF3}.omh-range::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#7C3AED;border:2px solid #E6EDF3}.omh-range:focus-visible{outline:none}.omh-range:focus-visible::-webkit-slider-thumb{outline:2px solid #22D3EE;outline-offset:2px}.omh-range:focus-visible::-moz-range-thumb{outline:2px solid #22D3EE;outline-offset:2px}.omh-campo{width:100%;box-sizing:border-box;border-radius:6px;border:1px solid #1F2733;background:#10151E;color:#E6EDF3;font-family:inherit;font-size:14px;padding:8px 10px;min-height:44px}.omh-campo::placeholder{color:#9AA7B4}.omh-campo:focus-visible{outline:2px solid #22D3EE;outline-offset:2px}</style></helmet>
+<div style="display:flex;min-height:100vh;align-items:flex-start">
+<sc-if value="{{ mostrarSidebar }}" hint-placeholder-val="{{ true }}">
+<aside aria-label="Rotas do hub" style="position:sticky;top:0;width:16rem;flex:0 0 16rem;height:100vh;box-sizing:border-box;border-right:1px solid #1F2733;background:#141A24;padding:20px 16px;display:flex;flex-direction:column;gap:4px;font-size:14px">
+<p style="margin:0 0 12px;font-weight:600;font-size:14px">onchain-mastery-hub</p>
+<a href="#/inicio" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Início</a>
+<a href="#/modulo-1" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M1 Fundamentos &amp; Segurança</a>
+<a href="#/modulo-2" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M2 Psicologia</a>
+<a href="#/modulo-3" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M3 Os dois pilares</a>
+<a href="#/modulo-4" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M4 Gestão &amp; decisão</a>
+<a href="#/modulo-5" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M5 Execução</a>
+<a href="#/modulo-6" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M6 Ler a tela</a>
+<a href="#/modulo-7" aria-current="page" style="display:block;border-radius:8px;padding:8px 12px;color:#E6EDF3;background:rgba(124,58,237,.15);border:1px solid #7C3AED;text-decoration:none;font-weight:600">M7 A rotina</a>
+<div style="height:1px;background:#1F2733;margin:8px 0"></div>
+<a href="#/glossario" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Glossário</a>
+<a href="#/checklist" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Checklist antes de comprar</a>
+<a href="#/revisao" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Revisão</a>
+</aside>
+</sc-if>
+<main id="conteudo" style="flex:1 1 auto;min-width:0">
+<div style="max-width:868px;margin:0 auto;padding:{{ paddingMain }};display:flex;flex-direction:column;gap:24px">
+
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Módulo 7</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">A rotina</h1>
+<p style="margin:8px 0 0;color:#9AA7B4;text-wrap:pretty">Uma regra escrita antes, um tamanho que aguenta ir a zero, uma saída que executa sozinha, um diário que guarda o que você pensou e uma revisão que olha o comportamento, não o saldo. Este módulo mostra o que cada peça tem de evidência — e o que não tem.</p>
+<p style="margin:16px 0 0;border-radius:12px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:12px 16px;font-size:14px"><strong style="color:#E6EDF3">Este módulo não escreve a sua regra. </strong>Ele mostra o que ela precisa ter para ser testada depois. Quando comprar é decisão sua — e fica no papel antes de você ver o próximo token. Nenhum campo desta tela vem preenchido, e todo exemplo aparece marcado como exemplo.</p>
+</header>
+
+<section aria-label="Mapa do módulo" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<p style="margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">O módulo inteiro numa olhada</p>
+<div style="display:flex;flex-direction:{{ dirMapa }};align-items:{{ alinhaMapa }};border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px">
+<div style="flex:0 0 auto;border-radius:12px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:14px 18px;max-width:220px">
+<p style="margin:0;font-size:1.125rem;font-weight:600;line-height:1.3">A rotina</p>
+<p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">A regra é sua; a forma é daqui</p>
+</div>
+<div aria-hidden="true" style="flex:0 0 auto;width:{{ trunkW }};height:{{ trunkH }};background:#1F2733;margin-left:{{ trunkML }}"></div>
+<ul style="list-style:none;margin:0;padding:0;border-left:2px solid #1F2733;display:flex;flex-direction:column;gap:12px;flex:1 1 auto;min-width:0;margin-left:{{ trunkML }}">
+<sc-for list="{{ mapa }}" as="r" hint-placeholder-count="6">
+<li style="position:relative;padding-left:24px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px" style-before="content:'';position:absolute;left:0;top:19px;width:24px;height:2px;background:#1F2733">
+<button type="button" data-aba="{{ r.aba }}" onClick="{{ irParaAba }}" style="min-height:40px;border-radius:8px;border:1px solid {{ r.borda }};background:{{ r.fundo }};padding:6px 12px;font-size:14px;font-weight:600;color:#E6EDF3;cursor:pointer;text-align:left" style-hover="border-color:#9AA7B4">{{ r.titulo }} →</button>
+<sc-for list="{{ r.folhas }}" as="f" hint-placeholder-count="3"><span style="border-radius:999px;border:1px solid #1F2733;padding:2px 10px;font-size:13px;color:#9AA7B4">{{ f }}</span></sc-for>
+</li>
+</sc-for>
+</ul>
+</div>
+</section>
+
+<div role="tablist" aria-label="Seções do Módulo 7" onKeyDown="{{ teclaAba }}" style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ abas }}" as="a" hint-placeholder-count="6">
+<button type="button" role="tab" id="aba-{{ a.id }}" aria-selected="{{ a.ativa }}" aria-controls="painel-{{ a.id }}" tabindex="{{ a.tabindex }}" data-aba="{{ a.id }}" onClick="{{ irParaAba }}" style="min-height:44px;border-radius:8px;border:1px solid {{ a.borda }};background:{{ a.fundo }};padding:8px 16px;font-size:14px;font-weight:600;color:#E6EDF3;cursor:pointer" style-hover="border-color:#9AA7B4">{{ a.rotulo }}</button>
+</sc-for>
+</div>
+
+<!-- ============ A REGRA ============ -->
+<sc-if value="{{ eh.regra }}" hint-placeholder-val="{{ true }}">
+<div id="painel-regra" role="tabpanel" aria-labelledby="aba-regra" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.regra }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Por que a regra vem antes da compra</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Depois do resultado, a memória reescreve o que você pensava. A regra escrita antes guarda o que você pensou de verdade.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ memoriaAlt }}" style="display:grid;grid-template-columns:{{ colsDois }};gap:16px">
+<sc-for list="{{ memoria }}" as="m" hint-placeholder-count="2">
+<div style="border-radius:8px;border:1px solid {{ m.borda }};background:{{ m.fundo }};padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:{{ m.cor }}">{{ m.quando }}</p>
+<p style="margin:0;font-size:15px;font-weight:600">{{ m.frase }}</p>
+<p style="margin:0;font-size:13px;color:#9AA7B4">{{ m.vies }}</p>
+</div>
+</sc-for>
+</div>
+<div aria-hidden="true" style="display:flex;justify-content:center;margin-top:12px"><span style="color:#9AA7B4">↓</span></div>
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:12px 16px;font-size:14px"><strong style="color:#E6EDF3">A regra escrita antes é a única versão que não muda. </strong>Planos do tipo "se acontecer X, eu faço Y", feitos antes, aumentam a chance de a pessoa cumprir o que planejou — é um resultado repetido da psicologia do comportamento.</div>
+</figure>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: de onde vem, e por que o pré-compromisso falha</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">O resultado dos planos "se acontecer X, eu faço Y" é de Gollwitzer &amp; Sheeran (2006).</p>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Pré-compromisso funciona, e falha com frequência. </strong>Numa conta de poupança das Filipinas que travava os saques até uma data, a poupança aumentou cerca de 82% em um ano — mas só 28% das pessoas aceitaram abrir a conta, e outros estudos mostram muita gente abandonando o compromisso antes do prazo (Ashraf, Karlan &amp; Yin, 2006). A lição: o compromisso precisa ser rígido o bastante para valer e simples o bastante para você manter. Regra que você quebra toda semana não protege nada.</p></details>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">As cinco partes da sua regra</h2>
+<span style="border-radius:999px;border:1px solid rgba(124,58,237,.5);background:rgba(124,58,237,.12);padding:2px 10px;font-size:12px;font-weight:600">em branco: você escreve</span>
+</div>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Uma regra que não dá para conferir depois não é regra: é intenção. Cada parte é escrita de um jeito que outra pessoa conseguiria verificar olhando o seu diário.</p>
+<form onSubmit="{{ naoEnviar }}" style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:flex;flex-direction:column;gap:0">
+<sc-for list="{{ partesRegra }}" as="p" hint-placeholder-count="5">
+<div style="display:flex;flex-direction:column">
+<div style="border-radius:8px;border:1px solid {{ p.borda }};background:#141A24;padding:14px 16px;display:flex;gap:12px;align-items:flex-start">
+<span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ p.n }}</span>
+<div style="flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:6px">
+<label for="m7-regra-{{ p.id }}" style="font-size:14px;font-weight:600">{{ p.rotulo }}</label>
+<p style="margin:0;font-size:13px;color:#9AA7B4">{{ p.oQueTem }}</p>
+<input id="m7-regra-{{ p.id }}" class="omh-campo" type="text" placeholder="{{ p.placeholder }}" autocomplete="off">
+<p style="margin:0;display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;font-size:13px;color:#9AA7B4"><span style="border-radius:999px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);color:#F59E0B;padding:1px 8px;font-size:11px;font-weight:600;white-space:nowrap">exemplo de forma</span>{{ p.exemplo }}</p>
+</div>
+</div>
+<sc-if value="{{ p.liga }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="width:2px;height:12px;background:#1F2733;margin-left:35px"></span></sc-if>
+</div>
+</sc-for>
+<p style="margin:16px 0 0;font-size:13px;color:#9AA7B4">Os exemplos mostram o <strong style="color:#E6EDF3">formato</strong> de uma resposta verificável, nunca um limiar, um percentual ou um gatilho a seguir. O hub não sabe qual é o seu capital, o seu prazo nem o que você aceita perder — e não tem como saber.</p>
+<p style="margin:8px 0 0;font-size:13px;color:#9AA7B4">Nada digitado aqui é salvo: esta tela é a forma, e o lugar da regra é o seu caderno.</p>
+</form>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O ciclo de uma operação</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">A regra só muda na revisão — nunca no meio de uma operação.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ ciclo.alt }}" style="display:flex;flex-direction:column;align-items:center">
+<div style="border-radius:8px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:10px 16px;font-size:14px;font-weight:600;text-align:center">Escrevo a regra</div>
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 16px;font-size:14px;font-weight:600;text-align:center;max-width:380px">Passo o token pelo checklist</div>
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:16px;width:100%;max-width:620px">
+<div style="display:flex;flex-direction:column;align-items:center">
+<div aria-hidden="true" style="width:2px;height:12px;background:#9AA7B4"></div>
+<span style="border-radius:999px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);color:#F87171;padding:1px 10px;font-size:12px;font-weight:600">reprovou</span>
+<div aria-hidden="true" style="width:2px;height:12px;background:#9AA7B4"></div>
+<div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:10px 14px;font-size:14px;color:#F87171;text-align:center;font-weight:600">Não compro e anoto o motivo</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center">
+<div aria-hidden="true" style="width:2px;height:12px;background:#9AA7B4"></div>
+<span style="border-radius:999px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);color:#22C55E;padding:1px 10px;font-size:12px;font-weight:600">passou</span>
+<div aria-hidden="true" style="width:2px;height:12px;background:#9AA7B4"></div>
+<div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 14px;font-size:14px;text-align:center;font-weight:600">O gatilho da minha regra aconteceu?</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%">
+<div style="display:flex;flex-direction:column;align-items:center"><div aria-hidden="true" style="width:2px;height:12px;background:#9AA7B4"></div><span style="border-radius:999px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);color:#F87171;padding:1px 10px;font-size:12px;font-weight:600">não</span><div aria-hidden="true" style="width:2px;height:12px;background:#9AA7B4"></div><div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:8px 10px;font-size:13px;color:#F87171;text-align:center">Não compro e anoto o motivo</div></div>
+<div style="display:flex;flex-direction:column;align-items:center"><div aria-hidden="true" style="width:2px;height:12px;background:#9AA7B4"></div><span style="border-radius:999px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);color:#22C55E;padding:1px 10px;font-size:12px;font-weight:600">sim</span><div aria-hidden="true" style="width:2px;height:12px;background:#9AA7B4"></div><div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:8px 10px;font-size:13px;text-align:center">Entro com o tamanho da regra e a saída já programada</div></div>
+</div>
+</div>
+</div>
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4;margin-top:8px"></div>
+<sc-for list="{{ ciclo.depois }}" as="d" hint-placeholder-count="3">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 16px;font-size:14px;text-align:center;max-width:420px">{{ d }}</div>
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+</sc-for>
+<div style="border-radius:8px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:10px 16px;font-size:14px;font-weight:600;text-align:center;max-width:420px">Revisão: segui a regra?</div>
+<div style="display:flex;align-items:center;gap:8px;margin-top:8px"><span aria-hidden="true" style="color:#22D3EE;font-size:18px">⇢</span><span style="font-size:13px;color:#22D3EE">mudança na regra só aqui, e volta para o começo</span></div>
+</div>
+</figure>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m7-check-q4" titulo="Pergunta rápida" perguntas="{{ quiz.q4 }}" hint-size="100%,340px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Saída automática, não lembrete</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Uma ordem de venda automática mudou o comportamento. Um lembrete para vender não mudou nada.</p>
+<div role="img" aria-label="Num experimento, investidores com ordem de venda automática seguraram menos as posições perdedoras. O lembrete para considerar vender não mudou nada." style="display:grid;grid-template-columns:{{ colsDois }};gap:12px">
+<div style="border-radius:8px;border:2px solid #22C55E;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22C55E">Ordem de venda automática</p><p style="margin:6px 0 0;font-size:15px;font-weight:600">Seguraram menos as posições perdedoras.</p></div>
+<div style="border-radius:8px;border:2px dashed #9AA7B4;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Lembrete para "considerar vender"</p><p style="margin:6px 0 0;font-size:15px;font-weight:600">Não mudou nada.</p></div>
+</div>
+<p style="margin:0;color:#9AA7B4">Stop-loss é uma ordem de venda automática: você programa um nível, e a venda acontece sozinha quando o preço chega lá. Em memecoin ela também tem limite — numa queda rápida, pode executar bem abaixo do nível programado (slippage, Módulo 5). Mesmo assim, é o único pré-compromisso de saída com efeito medido (Fischbacher, Hoffmann &amp; Schudy, 2017).</p>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ TAMANHO ============ -->
+<sc-if value="{{ eh.tamanho }}" hint-placeholder-val="{{ false }}">
+<div id="painel-tamanho" role="tabpanel" aria-labelledby="aba-tamanho" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.tamanho }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Fração fixa: uma perda nunca zera a banca</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Arriscar sempre a mesma porcentagem do capital de hoje. O tamanho encolhe quando você perde e cresce quando ganha, sem precisar decidir de novo.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><p style="margin:0;font-size:14px;font-weight:600">O mecanismo, com 10% por posição</p><span style="border-radius:999px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);color:#F59E0B;padding:1px 10px;font-size:12px;font-weight:600">exemplo do arquivo, não sugestão de fração</span></div>
+<ol role="img" aria-label="Você tem 100 de capital, a posição é 10. A posição vai a zero e sobram 90. A próxima posição é 10% de 90: 9." tabindex="0" style="list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:{{ dirSeq }};align-items:stretch;gap:0;overflow-x:auto">
+<sc-for list="{{ fracaoFixa }}" as="f" hint-placeholder-count="3">
+<li style="flex:1 1 0;display:flex;flex-direction:{{ dirSeq }};align-items:stretch;min-width:{{ minPasso }}">
+<div style="flex:1 1 auto;min-width:0;border-radius:8px;border:1px solid {{ f.borda }};background:{{ f.fundo }};padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">{{ f.momento }}</p>
+<p style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.5rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums">{{ f.capital }}</p>
+<p style="margin:0;font-size:13px;color:#9AA7B4">{{ f.texto }}</p>
+<div aria-hidden="true" style="height:10px;border-radius:3px;background:{{ f.barraCor }};width:{{ f.barra }}%"></div>
+</div>
+<sc-if value="{{ f.seta }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#9AA7B4;padding:2px 6px">→</span></sc-if>
+</li>
+</sc-for>
+</ol>
+</figure>
+<p style="margin:0;color:#9AA7B4">O número que circula, "arrisque de 1% a 2% por operação", é convenção de mercado. Nenhum estudo revisado por pares o fixa como ótimo: ele é coerente com a ideia de sobreviver, e é só isso. Qual fração você usa é decisão sua.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: por que o critério de Kelly quebra aqui</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">O critério de Kelly responde que fração apostar para o capital crescer o mais rápido possível no longo prazo. Para um ativo contínuo, f* = μ ÷ σ², em que μ é o retorno esperado e σ² é a variância. A fórmula só funciona se as duas existirem — e numa cauda muito pesada a variância pode ser infinita e a média pode nem existir, então ela não produz número nenhum.</p>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">O que a pesquisa diz com segurança é a direção: quanto mais pesada a cauda, menor a fração ótima (Bamberg &amp; Neuhierl, 2012; padrão de cauda em cripto em Grobys &amp; Shahzad, 2025). O valor ótimo para memecoin, ninguém resolveu.</p></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m7-check-q2" titulo="Pergunta rápida" perguntas="{{ quiz.q2 }}" hint-size="100%,340px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Quanto sobra depois de uma sequência de perdas totais</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Perder é mais rápido que recuperar, e a diferença cresce com a fração. É a matemática de uma regra, não uma sugestão de fração.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:grid;grid-template-columns:{{ colsDois }};gap:20px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><label for="m7-fracao" style="font-size:14px;color:#9AA7B4">Fração do capital em cada posição</label><output for="m7-fracao" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:600">{{ seq.fracaoTexto }}</output></div>
+<input id="m7-fracao" class="omh-range" type="range" min="1" max="50" step="1" value="{{ fracao }}" aria-valuetext="{{ seq.fracaoTexto }}" onInput="{{ mudarFracao }}" onChange="{{ mudarFracao }}" style="width:100%;margin-top:4px">
+</div>
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><label for="m7-perdas" style="font-size:14px;color:#9AA7B4">Posições seguidas que vão a zero</label><output for="m7-perdas" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:600">{{ seq.perdasTexto }}</output></div>
+<input id="m7-perdas" class="omh-range" type="range" min="1" max="20" step="1" value="{{ perdas }}" aria-valuetext="{{ seq.perdasTexto }}" onInput="{{ mudarPerdas }}" onChange="{{ mudarPerdas }}" style="width:100%;margin-top:4px">
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px" aria-label="Atalhos de comparação">
+<sc-for list="{{ atalhos }}" as="a" hint-placeholder-count="2">
+<button type="button" data-valor="{{ a.valor }}" aria-pressed="{{ a.ativo }}" onClick="{{ atalhoFracao }}" style="min-height:40px;border-radius:8px;border:1px solid {{ a.borda }};background:{{ a.fundo }};color:#E6EDF3;padding:8px 12px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">{{ a.rotulo }}</button>
+</sc-for>
+</div>
+<p style="margin:0;font-size:13px;color:#9AA7B4">Supõe que cada posição perdida vai a zero e que a fração é recalculada sobre o capital que sobrou. Não inclui taxas nem ganhos no meio da sequência.</p>
+</div>
+<figure style="margin:0">
+<p style="margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">O que sobra, e o que exige de volta</p>
+<div aria-live="polite" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:12px 14px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Sobra do capital</p><p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.75rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums">{{ seq.sobraTexto }}</p></div>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:12px 14px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Ganho para voltar ao começo</p><p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.75rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums;color:{{ seq.cor }}">{{ seq.ganhoTexto }}</p></div>
+</div>
+<div role="img" aria-label="{{ seq.alt }}" style="margin-top:14px;display:flex;align-items:flex-end;gap:4px;height:120px" tabindex="0">
+<sc-for list="{{ seq.barras }}" as="b" hint-placeholder-count="6">
+<div style="flex:1 1 0;min-width:6px;display:flex;flex-direction:column;justify-content:flex-end;height:100%">
+<span aria-hidden="true" style="display:block;height:{{ b.altura }}%;border-radius:3px 3px 0 0;background:{{ b.cor }}"></span>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin-top:8px;font-size:13px;color:#9AA7B4">Cada barra é o capital depois de uma perda, da esquerda para a direita. A primeira é o capital inteiro. Fórmula: sobra = (1 − f) elevado a n.</figcaption>
+</figure>
+</div>
+<p style="margin:0;color:#9AA7B4">Recuperar custa mais do que perder, porque o ganho é calculado sobre um capital menor.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m7-check-q3" titulo="Pergunta rápida" perguntas="{{ quiz.q3 }}" hint-size="100%,320px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">A ruína do apostador: sobreviver vem primeiro</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Com uma desvantagem pequena repetida muitas vezes, quebrar é quase certo. Aí a pergunta muda.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">Na roleta americana, apostando sempre no par: de cada 100 tentativas</p>
+<div role="img" aria-label="De cada 100 tentativas, cerca de 99 ou 100 quebram antes de chegar a 100 fichas: a chance de quebrar é de 99,5%. Começando com 50 fichas e parando só em 100." style="display:grid;grid-template-columns:repeat(10,1fr);gap:3px;max-width:230px">
+<sc-for list="{{ ruinaCelulas }}" as="c" hint-placeholder-count="100"><span style="aspect-ratio:1;border-radius:3px;background:{{ c }}"></span></sc-for>
+</div>
+<div style="margin-top:10px;display:flex;flex-direction:column;gap:4px">
+<span style="display:flex;align-items:center;gap:8px;font-size:14px;color:#9AA7B4"><span aria-hidden="true" style="width:12px;height:12px;border-radius:3px;background:#EF4444;flex:0 0 12px"></span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#E6EDF3">99,5%</span>quebram (18 chances de ganhar em 38, começando com 50 fichas e parando só em 100)</span>
+<span style="display:flex;align-items:center;gap:8px;font-size:14px;color:#9AA7B4"><span aria-hidden="true" style="width:12px;height:12px;border-radius:3px;background:#1F2733;flex:0 0 12px"></span>menos de 1 em 100 chega a 100 fichas — e é por isso que não há quadrado escuro na grade</span>
+<span style="margin-top:4px;font-size:12px;color:#9AA7B4">Ruína do apostador (Feller). Número exato: 99,5% — a grade desenha 100 quadrados, e por isso o arredondamento aparece.</span>
+</div>
+</figure>
+<div role="img" aria-label="Em memecoin, a pergunta sai de quanto cresce e entra quanto aguento perder sem ser eliminado." style="display:grid;grid-template-columns:{{ colsDois }};gap:12px">
+<div style="border-radius:8px;border:2px dashed #9AA7B4;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Sai a pergunta</p><p style="margin:6px 0 0;font-size:15px;font-weight:600">"Quanto cresce?"</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">A matemática do crescimento não funciona quando a média pode não existir.</p></div>
+<div style="border-radius:8px;border:2px solid #22D3EE;background:rgba(34,211,238,.1);padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22D3EE">Entra a pergunta</p><p style="margin:6px 0 0;font-size:15px;font-weight:600">"Quanto aguento perder sem ser eliminado?"</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">Daí a regra que sobra com fundamento: o tamanho de cada posição é um valor que você pode perder inteiro.</p></div>
+</div>
+<p style="margin:0;color:#9AA7B4">Perder inteiro não é o caso extremo: 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia em que nasceram (CoinGecko Research). Quanto é "um valor que você pode perder inteiro" só você sabe — depende da sua vida, não do mercado.</p>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ O DIÁRIO ============ -->
+<sc-if value="{{ eh.diario }}" hint-placeholder-val="{{ false }}">
+<div id="painel-diario" role="tabpanel" aria-labelledby="aba-diario" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.diario }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O que o diário faz, e o que não faz</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">O diário ajuda você a seguir a sua regra. Ninguém mediu se ele faz ganhar dinheiro.</p>
+<div role="img" aria-label="{{ lastroAlt }}" style="display:grid;grid-template-columns:{{ colsDois }};gap:12px">
+<div style="border-radius:8px;border:2px solid #22C55E;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22C55E">Tem lastro</p><p style="margin:6px 0 0;font-size:15px;font-weight:600">"O registro ajuda você a seguir a sua própria regra."</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">Monitorar o progresso aumentou o cumprimento de metas de comportamento: perder peso, parar de fumar, tomar remédio.</p></div>
+<div style="border-radius:8px;border:2px dashed #EF4444;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">Não tem lastro</p><p style="margin:6px 0 0;font-size:15px;font-weight:600">"O registro faz você ganhar dinheiro."</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">Nenhum estudo revisado por pares mediu isso.</p></div>
+</div>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">Quanto é um efeito de 0,40, em chances</p>
+<div role="img" aria-label="Sorteando uma pessoa que monitorou e uma que não monitorou, há 61 chances em 100 de a que monitorou ter cumprido mais a meta. Se não houvesse efeito nenhum, seriam 50 em 100." style="display:grid;grid-template-columns:repeat(10,1fr);gap:3px;max-width:230px">
+<sc-for list="{{ efeitoCelulas }}" as="c" hint-placeholder-count="100"><span style="aspect-ratio:1;border-radius:3px;background:{{ c }}"></span></sc-for>
+</div>
+<div style="margin-top:10px;display:flex;flex-direction:column;gap:4px">
+<span style="display:flex;align-items:center;gap:8px;font-size:14px;color:#9AA7B4"><span aria-hidden="true" style="width:12px;height:12px;border-radius:3px;background:#7C3AED;flex:0 0 12px"></span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#E6EDF3;min-width:2ch;text-align:right">61</span>de cada 100 sorteios, quem monitorou cumpriu mais a meta</span>
+<span style="display:flex;align-items:center;gap:8px;font-size:14px;color:#9AA7B4"><span aria-hidden="true" style="width:12px;height:12px;border-radius:3px;background:#1F2733;flex:0 0 12px"></span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#E6EDF3;min-width:2ch;text-align:right">39</span>restantes</span>
+<span aria-hidden="true" style="margin-top:2px;display:flex;align-items:center;gap:8px;font-size:13px;color:#9AA7B4"><span style="width:12px;height:12px;border-radius:3px;border:2px dashed #9AA7B4;box-sizing:border-box;flex:0 0 12px"></span>sem efeito nenhum, seriam 50</span>
+<span style="margin-top:4px;font-size:12px;color:#9AA7B4">d = 0,40 — meta-análise de 138 experimentos com 19.951 pessoas (Harkin et al., 2016). Na régua usual, 0,2 é pequeno, 0,5 é médio e 0,8 é grande: 0,40 é de pequeno a médio.</span>
+</div>
+</figure>
+<p style="margin:0;color:#9AA7B4">Se a regra for ruim, o diário ajuda você a seguir uma regra ruim com mais fidelidade. O efeito foi maior quando o registro era escrito de verdade, e não conferido de cabeça — e maior também quando o resultado era mostrado a alguém.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m7-check-q1" titulo="Pergunta rápida" perguntas="{{ quiz.q1 }}" hint-size="100%,320px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O diário, campo a campo</h2>
+<span style="border-radius:999px;border:1px solid rgba(124,58,237,.5);background:rgba(124,58,237,.12);padding:2px 10px;font-size:12px;font-weight:600">em branco: você escreve</span>
+</div>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Oito campos anotam o que você fez. Só um anota quanto ganhou ou perdeu. A peça que amarra tudo é o campo 7.</p>
+<form onSubmit="{{ naoEnviar }}" style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ camposDiario }}" as="c" hint-placeholder-count="9">
+<div style="border-radius:8px;border:1px solid {{ c.borda }};background:{{ c.fundo }};padding:12px 14px;display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<label for="m7-diario-{{ c.n }}" style="font-size:14px;font-weight:600"><span aria-hidden="true" style="display:inline-flex;width:22px;height:22px;border-radius:50%;background:{{ c.marcaFundo }};color:{{ c.marcaCor }};font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;align-items:center;justify-content:center;margin-right:8px">{{ c.n }}</span>{{ c.titulo }}</label>
+<span style="border-radius:999px;border:1px solid {{ c.tipoBorda }};background:{{ c.tipoFundo }};color:{{ c.tipoCor }};padding:1px 10px;font-size:12px;font-weight:600;white-space:nowrap">{{ c.tipo }}</span>
+</div>
+<input id="m7-diario-{{ c.n }}" class="omh-campo" type="text" placeholder="{{ c.placeholder }}" autocomplete="off">
+<p style="margin:0;font-size:13px;color:#9AA7B4">{{ c.porque }}</p>
+</div>
+</sc-for>
+<p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">Sem o campo 7 anotado, "segui a regra?" vira lembrança. E lembrança é o que os vieses corrompem. Nada digitado aqui é salvo: o diário é seu, e mora fora do hub.</p>
+</form>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ A REVISÃO ============ -->
+<sc-if value="{{ eh.revisao }}" hint-placeholder-val="{{ false }}">
+<div id="painel-revisao" role="tabpanel" aria-labelledby="aba-revisao" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.revisao }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Olhe o resultado pouco, e o comportamento muito</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Olhar o dinheiro toda hora piora a decisão. Revisar se você seguiu a regra é outra coisa, e ajuda.</p>
+<div role="img" aria-label="Olhar o dinheiro com frequência piora a decisão — foi isso que os experimentos mediram. Revisar o comportamento, conferindo se você seguiu a regra, é o que o lastro do diário apoia." style="display:grid;grid-template-columns:{{ colsDois }};gap:12px">
+<div style="border-radius:8px;border:2px dashed #EF4444;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">Olhar o dinheiro</p><p style="margin:6px 0 0;font-size:15px;font-weight:600">Com frequência, piora a decisão.</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">Aversão míope à perda: de tanto olhar de perto, cada perda pesa mais. E as pessoas preferem olhar com frequência, mesmo sendo prejudicadas.</p></div>
+<div style="border-radius:8px;border:2px solid #22C55E;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22C55E">Revisar o comportamento</p><p style="margin:6px 0 0;font-size:15px;font-weight:600">Conferir se você seguiu a regra.</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">É isso que o lastro do diário apoia.</p></div>
+</div>
+<p style="margin:0;color:#9AA7B4">Qual a cadência ideal de revisão para quem opera? Ninguém mediu. Semanal é uma escolha razoável para começar — trate como um teste seu, não como verdade (Gneezy, Kapteyn &amp; Potters, 2003; Fellner &amp; Sutter, 2009).</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">A pergunta da revisão</p>
+<div role="img" aria-label="Não pergunte se o resultado foi bom: isso convida os vieses. Pergunte se a decisão foi boa, dado o que você sabia antes — e isso só se responde com o diário." style="display:grid;grid-template-columns:{{ colsDois }};gap:16px">
+<div style="border-radius:8px;border:2px dashed #EF4444;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">Não pergunte</p><p style="margin:6px 0 0;font-size:15px;font-weight:600">"O resultado foi bom?"</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">Essa pergunta convida os cinco vieses abaixo.</p></div>
+<div style="border-radius:8px;border:2px solid #22D3EE;background:rgba(34,211,238,.1);padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22D3EE">Pergunte</p><p style="margin:6px 0 0;font-size:15px;font-weight:600">"A decisão foi boa, dado o que eu sabia antes?"</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">Essa só se responde com o diário.</p></div>
+</div>
+<ul style="margin:16px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ viesesRevisao }}" as="v" hint-placeholder-count="5">
+<li style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 14px;font-size:14px"><strong style="color:#E6EDF3">{{ v.nome }}: </strong><span style="color:#9AA7B4">{{ v.texto }}</span></li>
+</sc-for>
+</ul>
+</figure>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m7-check-q5" titulo="Pergunta rápida" perguntas="{{ quiz.q5 }}" hint-size="100%,340px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Quantas operações provam alguma coisa</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">30 operações boas não provam habilidade. No melhor caso seriam centenas, e em cauda pesada talvez nenhum número baste.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">A conta no melhor caso: n ≈ (2 ÷ SR)²</p>
+<div role="img" aria-label="{{ amostraAlt }}" style="display:flex;flex-direction:column;gap:16px">
+<sc-for list="{{ amostra }}" as="a" hint-placeholder-count="3">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span style="font-size:14px">{{ a.rotulo }}</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:600;color:{{ a.cor }}">{{ a.valorTexto }}</span></div>
+<div style="margin-top:6px;height:24px;display:flex;align-items:stretch"><div style="width:{{ a.largura }}%;background:{{ a.barra }};border-radius:4px;border:{{ a.borda }};box-sizing:border-box"></div></div>
+<p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">{{ a.nota }}</p>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin-top:12px;font-size:13px;color:#9AA7B4">Mesma escala, de 0 a 1.600 operações. SR é o retorno médio por operação dividido pelo desvio-padrão. A conta é de Lo (2002) e vale só com variância finita.</figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">Em cauda pesada, a média converge muito mais devagar. E se a média nem existe, nenhum número de operações distingue habilidade de sorte pela média — ninguém publicou o índice de cauda das memecoins.</p>
+<p style="margin:0;color:#9AA7B4">Tem um agravante: testar várias versões da própria regra e ficar com a que "funcionou" infla o resultado. Com só três tentativas independentes, a melhor já é provavelmente falsa (Bailey &amp; López de Prado, 2021). Na prática: o diário serve para saber se você seguiu a regra, não para provar que ela ganha.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m7-check-q6" titulo="Pergunta rápida" perguntas="{{ quiz.q6 }}" hint-size="100%,340px"></x-import>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ NÚMEROS QUE CIRCULAM ============ -->
+<sc-if value="{{ eh.mitos }}" hint-placeholder-val="{{ false }}">
+<div id="painel-mitos" role="tabpanel" aria-labelledby="aba-mitos" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.mitos }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O que dizem × o que a evidência mostra</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Número preciso, nome de universidade e prazo curto: é o formato da estatística que vende curso e ferramenta.</p>
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:16px">
+<sc-for list="{{ mitos }}" as="m" hint-placeholder-count="6">
+<article style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px;display:flex;flex-direction:column;gap:10px">
+<div style="border-radius:6px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:10px 12px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">O que dizem</p><p style="margin:4px 0 0;font-size:14px">{{ m.titulo }}</p></div>
+<div><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Tem fonte?</p><p style="margin:2px 0 0;font-size:14px;color:#9AA7B4">{{ m.fonte }}</p></div>
+<div style="margin-top:auto;border-radius:6px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);padding:10px 12px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22C55E">O que a evidência mostra</p><p style="margin:4px 0 0;font-size:14px">{{ m.real }}</p></div>
+</article>
+</sc-for>
+</div>
+<p style="margin:0;color:#9AA7B4">A defesa é a mesma do checklist: pergunte de onde vem o número, qual foi a amostra, e comparado com quê. Os dados que existem de verdade, com amostra e método, apontam todos para o mesmo lado: a maioria de quem opera com frequência perde.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m7-check-q7" titulo="Pergunta rápida" perguntas="{{ quiz.q7 }}" hint-size="100%,340px"></x-import>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ QUIZ ============ -->
+<sc-if value="{{ eh.quiz }}" hint-placeholder-val="{{ false }}">
+<div id="painel-quiz" role="tabpanel" aria-labelledby="aba-quiz" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="modulo-7" titulo="Mini-quiz do Módulo 7" descricao="Oito perguntas. As respostas ficam salvas no navegador." perguntas="{{ quiz.todas }}" hint-size="100%,1100px"></x-import>
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Terminou o módulo?</h2>
+<p style="margin:8px 0 16px;font-size:14px;color:#9AA7B4">Marcar aqui faz a barra de progresso do topo avançar. Dá para desmarcar depois.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Botao" variante="primario" hint-size="auto,40px">Marcar módulo como concluído</x-import>
+</section>
+<details style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Fontes e itens não verificados</summary>
+<h3 style="margin:16px 0 0;font-size:14px;font-weight:600">Não verificado</h3>
+<ul style="list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ naoVerificado }}" as="n" hint-placeholder-count="3"><li style="border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.1);padding:12px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">{{ n.titulo }}: </strong>{{ n.texto }}</li></sc-for>
+</ul>
+<p style="margin:16px 0 0;font-size:14px;color:#9AA7B4">Fontes consultadas: a lista completa (consulta em 12/09/2026) está em <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">src/data/modulo7.js › fontes</span> e é exibida integralmente pelo componente atual — sem mudança nesta tela.</p>
+</details>
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O que você leva deste módulo</h2>
+<ul style="margin:12px 0 0;padding-left:20px;color:#9AA7B4;display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ objetivos }}" as="o" hint-placeholder-count="6"><li>{{ o }}</li></sc-for>
+</ul>
+</section>
+</div>
+</sc-if>
+
+<p style="margin:0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Aviso: </strong>material de estudo próprio, não é recomendação de investimento. Memecoin é o ativo de maior risco do mercado: 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia em que nasceram (CoinGecko Research).</p>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;compacto&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { aba: 'regra', fracao: 10, perdas: 5 };
+  n0(v) { return String(Math.round(v)); }
+  renderVals() {
+    const S = this.state, compacto = !!this.props.compacto;
+    const ABAS = [
+      { id: 'regra', rotulo: 'A regra', folhas: ['por que antes', 'as 5 partes em branco', 'o ciclo', 'saída automática'] },
+      { id: 'tamanho', rotulo: 'Tamanho', folhas: ['fração fixa', 'sequência de perdas', 'ruína do apostador'] },
+      { id: 'diario', rotulo: 'O diário', folhas: ['o que tem lastro', 'os 9 campos'] },
+      { id: 'revisao', rotulo: 'A revisão', folhas: ['olhar pouco', 'a pergunta', 'quantas operações'] },
+      { id: 'mitos', rotulo: 'Números que circulam', folhas: ['o que dizem × a evidência'] },
+      { id: 'quiz', rotulo: 'Quiz', folhas: ['8 perguntas'] },
+    ];
+    const ativo = (id) => id === S.aba;
+    const abas = ABAS.map((a) => ({ id: a.id, rotulo: a.rotulo, ativa: ativo(a.id), tabindex: ativo(a.id) ? 0 : -1, borda: ativo(a.id) ? '#7C3AED' : '#1F2733', fundo: ativo(a.id) ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    const mapa = ABAS.map((a) => ({ aba: a.id, titulo: a.rotulo, folhas: a.folhas, borda: ativo(a.id) ? '#7C3AED' : '#1F2733', fundo: ativo(a.id) ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    const eh = {}; ABAS.forEach((a) => { eh[a.id] = ativo(a.id); });
+
+    const objetivos = [
+      'Escrever uma regra que dá para conferir depois — a regra é sua; o módulo mostra a forma.',
+      'Entender por que o critério de Kelly quebra em memecoin e o que sobra: sobreviver.',
+      'Calcular quanto sobra do capital depois de uma sequência de perdas totais.',
+      'Montar um diário de 9 campos que separa comportamento de resultado.',
+      'Revisar sem cair nos vieses, e saber quantas operações provam alguma coisa.',
+      'Reconhecer as estatísticas de trading inventadas que circulam.',
+    ];
+    const destaques = {
+      regra: [
+        { rotulo: 'Day traders da B3 que persistiram mais de 300 dias e perderam dinheiro', valor: '97%', nota: 'De 1.551. Só 1,1% ganhou mais que um salário mínimo. (Chague, De-Losso & Giovannetti, working paper da FGV)', tom: 'alerta' },
+        { rotulo: 'Efeito de uma saída automática sobre segurar perdedoras', valor: 'Reduz', nota: 'Um lembrete para "considerar vender" não teve efeito (Fischbacher, Hoffmann & Schudy, 2017).', tom: 'ok' },
+        { rotulo: 'Quem escreve a regra de entrada', valor: 'Você', nota: 'O módulo mostra a forma de uma regra testável. O conteúdo dela fica no papel antes do próximo token.' },
+      ],
+      tamanho: [
+        { rotulo: 'Fração de Kelly numa aposta com 50% de chance de dobrar e 50% de perder tudo', valor: '0', nota: 'f* = (0,5 × 1 − 0,5) ÷ 1. A possibilidade de perda total domina a conta.' },
+        { rotulo: 'Chance de quebrar com uma desvantagem pequena, repetida', valor: '99,5%', nota: 'Roleta, aposta no par: começando com 50 fichas e parando só em 100 (ruína do apostador, Feller).', tom: 'alerta' },
+        { rotulo: 'Ganho necessário para recuperar uma perda de 50%', valor: '+100%', nota: 'Perder metade exige dobrar o que sobrou só para voltar ao ponto de partida.', tom: 'alerta' },
+      ],
+      diario: [
+        { rotulo: 'Efeito de monitorar o progresso sobre cumprir metas', valor: 'd = 0,40', nota: 'Meta-análise de 138 experimentos com 19.951 pessoas (Harkin et al., 2016). Pequeno a médio.' },
+        { rotulo: 'Chance de quem monitorou ter ido melhor que quem não monitorou', valor: '61%', nota: 'Contra 50% se não houvesse efeito.', tom: 'ok' },
+        { rotulo: 'Estudos revisados por pares mostrando que diário dá lucro', valor: 'Nenhum', nota: 'O diário melhora a aderência à regra, não a qualidade da regra.', tom: 'alerta' },
+      ],
+      revisao: [
+        { rotulo: 'Operações para distinguir habilidade de sorte, no melhor caso', valor: '400–1.600', nota: 'Com variância finita e Sharpe por operação entre 0,1 e 0,05: n ≈ (2 ÷ SR)² (Lo, 2002).' },
+        { rotulo: 'Operações que bastam se a média do retorno não existir', valor: 'Nenhuma', nota: 'Com cauda pesada demais (α ≤ 1), a média da amostra nunca se estabiliza.', tom: 'alerta' },
+        { rotulo: 'Versões testadas para a melhor já ser provavelmente falsa', valor: '3', nota: 'Escolher a melhor entre poucas tentativas infla o resultado (Bailey & López de Prado, 2021).', tom: 'alerta' },
+      ],
+      mitos: [
+        { rotulo: 'Contas de varejo em CFD que perdem dinheiro, na Europa', valor: '74–89%', nota: 'Regulador europeu (ESMA, 2018), com perda média por cliente de € 1.600 a € 29.000.', tom: 'alerta' },
+        { rotulo: 'Retorno anual de quem mais operava, contra o do mercado', valor: '11,4% × 17,9%', nota: '66.465 contas nos EUA (Barber & Odean, 2000) — o verdadeiro "estudo da Califórnia".', tom: 'alerta' },
+        { rotulo: 'Day traders de Taiwan que ganham de forma previsível, depois das taxas', valor: 'Menos de 1%', nota: 'Barber, Lee, Liu & Odean (2014), dados de 1992 a 2006.' },
+      ],
+    };
+
+    // A regra
+    const memoria = [
+      { quando: 'Se deu certo', frase: '"Eu sabia."', vies: 'Viés de retrospectiva. E "foi habilidade": viés de autoatribuição.', borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#F59E0B' },
+      { quando: 'Se deu errado', frase: '"Foi azar."', vies: 'A mesma decisão, contada de outro jeito — porque o resultado mudou.', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' },
+    ];
+    const memoriaAlt = memoria.map((m) => m.quando + ': ' + m.frase + ' ' + m.vies).join(' ') + ' A regra escrita antes é a única versão que não muda.';
+    const partesRegraBase = [
+      { id: 'gatilho', rotulo: 'Gatilho de entrada', oQueTem: 'O que precisa acontecer, de um jeito que dá para ver, para você comprar. O checklist é o filtro mínimo; o gatilho é seu.', placeholder: 'Escreva o seu gatilho, de um jeito verificável', exemplo: 'A forma de um gatilho verificável tem um fato observável e um momento — não "quando parecer bom".' },
+      { id: 'tamanho', rotulo: 'Tamanho', oQueTem: 'Quanto entra, em porcentagem do capital. Decidido antes de ver o gráfico.', placeholder: 'Escreva a sua fração, em % do capital', exemplo: 'A forma é uma porcentagem do capital de hoje, e não um valor em reais que envelhece.' },
+      { id: 'perda', rotulo: 'Saída por perda', oQueTem: 'O nível ou a condição em que você sai. Já fica programada.', placeholder: 'Escreva onde você sai, e como isso fica programado', exemplo: 'A forma diz o nível e quem executa: você programou a ordem, ou vai depender de estar olhando?' },
+      { id: 'ganho', rotulo: 'Saída por ganho e por tempo', oQueTem: 'Quando realizar (a escada do Módulo 4) e quanto tempo esperar sem nada acontecer.', placeholder: 'Escreva os seus alvos e o prazo sem catálise', exemplo: 'A forma tem faixas definidas antes e um prazo — "espero até quando?" precisa ter resposta.' },
+      { id: 'invalida', rotulo: 'O que invalida a regra', oQueTem: 'O que precisaria acontecer, na revisão, para você parar de usá-la.', placeholder: 'Escreva o que faria você abandonar esta regra', exemplo: 'A forma é uma condição que dá para conferir no diário, não uma sensação de que "não está funcionando".' },
+    ];
+    const partesRegra = partesRegraBase.map((p, i) => Object.assign({ n: i + 1, liga: i < partesRegraBase.length - 1, borda: '#1F2733' }, p));
+    const ciclo = { depois: ['Anoto no diário antes de ver o resultado', 'A saída executa', 'Anoto a saída executada'],
+      alt: 'Escrevo a regra. Passo o token pelo checklist: se reprovou, não compro e anoto o motivo. Se passou, confiro se o gatilho da minha regra aconteceu: se não, não compro e anoto o motivo; se sim, entro com o tamanho da regra e a saída já programada. Anoto no diário antes de ver o resultado. A saída executa, e eu anoto a saída executada. Na revisão, pergunto se segui a regra — qualquer mudança na regra acontece só aqui, e volta para o começo.' };
+
+    // Tamanho: fração fixa (exemplo do arquivo, com 10%)
+    const fracaoFixa = [
+      { momento: 'Capital de hoje', capital: '100', texto: 'A posição é 10 — 10% do capital.', barra: 100, barraCor: '#7C3AED', borda: '#1F2733', fundo: '#141A24' },
+      { momento: 'A posição vai a zero', capital: '90', texto: 'Sobram 90. A perda nunca zera a banca, porque você arriscou só uma parte.', barra: 90, barraCor: '#EF4444', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)' },
+      { momento: 'Próxima posição', capital: '9', texto: '10% de 90. O tamanho encolheu sozinho, sem você decidir de novo.', barra: 9, barraCor: '#22D3EE', borda: '#22D3EE', fundo: 'rgba(34,211,238,.1)' },
+    ].map((f, i, arr) => Object.assign(f, { seta: i < arr.length - 1 }));
+
+    const f = S.fracao / 100, n = S.perdas;
+    const sobra = Math.pow(1 - f, n), ganho = (1 / sobra - 1) * 100;
+    const barras = []; for (let i = 0; i <= n; i++) { const v = Math.pow(1 - f, i); barras.push({ altura: Math.max(1, v * 100), cor: i === 0 ? '#7C3AED' : i === n ? '#EF4444' : '#1F2733' }); }
+    const seq = { fracaoTexto: this.n0(S.fracao) + '%', perdasTexto: String(n), sobraTexto: this.n0(sobra * 100) + '%', ganhoTexto: '+' + this.n0(ganho) + '%',
+      cor: ganho > 100 ? '#F87171' : '#E6EDF3', barras,
+      alt: 'Com ' + this.n0(S.fracao) + '% do capital em cada posição e ' + n + (n === 1 ? ' posição' : ' posições') + ' seguidas a zero, sobram ' + this.n0(sobra * 100) + '% do capital, e voltar ao começo exige ganhar ' + this.n0(ganho) + '% sobre o que sobrou.' };
+    const atalhos = [10, 25].map((v) => ({ valor: v, rotulo: v + '% por posição', ativo: S.fracao === v, borda: S.fracao === v ? '#7C3AED' : '#1F2733', fundo: S.fracao === v ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    // 99,5% de 100 quadrados arredonda para 100: a legenda diz o número exato.
+    const ruinaCelulas = []; for (let i = 0; i < 100; i++) ruinaCelulas.push('#EF4444');
+    const efeitoCelulas = []; for (let i = 0; i < 100; i++) efeitoCelulas.push(i < 61 ? '#7C3AED' : '#1F2733');
+
+    // Diário: 9 campos
+    const COMP = { tipo: 'Comportamento', tipoBorda: 'rgba(34,211,238,.5)', tipoFundo: 'rgba(34,211,238,.1)', tipoCor: '#22D3EE' };
+    const RES = { tipo: 'Resultado', tipoBorda: 'rgba(245,158,11,.4)', tipoFundo: 'rgba(245,158,11,.12)', tipoCor: '#F59E0B' };
+    const camposBase = [
+      Object.assign({ titulo: 'A regra, escrita antes da entrada', porque: 'Sem ela, não dá para separar decisão de resultado.', placeholder: 'Cole aqui a regra que você escreveu antes' }, COMP),
+      Object.assign({ titulo: 'Data e hora, token e tamanho em % do capital', porque: 'O tamanho é parte da regra, não do resultado.', placeholder: 'Data, hora, token e % do capital' }, COMP),
+      Object.assign({ titulo: 'Preço de entrada, saída por perda programada e alvo', porque: 'O plano de saída, registrado antes de saber como termina.', placeholder: 'Entrada, saída por perda e alvo' }, COMP),
+      Object.assign({ titulo: 'A tese, em uma frase', porque: 'Congela a narrativa antes do resultado (a ficha do Módulo 4).', placeholder: 'Uma frase, escrita antes' }, COMP),
+      Object.assign({ titulo: 'Convicção, numa escala fixa de 1 a 5', porque: 'Deixa ver depois se convicção alta acerta mais — ou só aposta mais.', placeholder: 'De 1 a 5' }, COMP),
+      Object.assign({ titulo: 'Estado emocional na entrada', porque: 'Pressa, medo de ficar de fora, vontade de recuperar uma perda.', placeholder: 'Como você estava na hora de clicar' }, COMP),
+      Object.assign({ titulo: 'Saída executada: hora, preço e o que disparou', porque: 'Stop, alvo, tempo ou decisão na hora. É o que torna o campo 8 verificável.', placeholder: 'Hora, preço e o que disparou a saída' }, COMP),
+      Object.assign({ titulo: 'Segui a regra?', porque: 'Sai da comparação entre os campos 1 e 3 e o campo 7 — não da memória.', placeholder: 'Sim ou não, comparando os campos 1, 3 e 7' }, COMP),
+      Object.assign({ titulo: 'Resultado em dinheiro', porque: 'O único campo de resultado. Olhe pouco (aba A revisão).', placeholder: 'Quanto entrou ou saiu' }, RES),
+    ];
+    const camposDiario = camposBase.map((c, i) => Object.assign({ n: i + 1,
+      borda: i === 6 ? '#22D3EE' : '#1F2733', fundo: i === 6 ? 'rgba(34,211,238,.06)' : '#141A24',
+      marcaFundo: i === 6 ? '#22D3EE' : '#1F2733', marcaCor: i === 6 ? '#0B0F17' : '#E6EDF3' }, c));
+    const lastroAlt = 'Tem lastro: o registro ajuda você a seguir a sua própria regra — monitorar o progresso aumentou o cumprimento de metas de comportamento. Não tem lastro: o registro faz você ganhar dinheiro — nenhum estudo revisado por pares mediu isso.';
+
+    // Revisão
+    const viesesRevisao = [
+      { nome: 'Retrospectiva', texto: '"eu sabia que ia acontecer".' },
+      { nome: 'Autoatribuição', texto: 'ganho é habilidade, perda é azar. Isso gera excesso de confiança.' },
+      { nome: 'Viés de resultado', texto: 'julgar a decisão pelo desfecho.' },
+      { nome: 'Ilusão de controle', texto: 'achar que influencia o que é sorte.' },
+      { nome: 'Padrão no ruído', texto: 'ver sequência onde há acaso. Num histórico curto de cauda pesada, quase todo padrão é ruído.' },
+    ];
+    const amostra = [
+      { rotulo: 'Você fez', valorTexto: '30 operações', valor: 30, cor: '#9AA7B4', barra: 'transparent', borda: '2px dashed #9AA7B4', nota: 'Não prova nada: 20 lucros em 30 cabem perfeitamente na sorte.' },
+      { rotulo: 'SR de 0,1 por operação — um número bom', valorTexto: '(2 ÷ 0,1)² = 400', valor: 400, cor: '#E6EDF3', barra: '#7C3AED', borda: '0', nota: 'Operações para o resultado se distinguir de zero.' },
+      { rotulo: 'SR de 0,05 por operação', valorTexto: '(2 ÷ 0,05)² = 1.600', valor: 1600, cor: '#E6EDF3', barra: '#22D3EE', borda: '0', nota: 'Metade do SR, quatro vezes a amostra: a conta é quadrática.' },
+    ].map((a) => Object.assign(a, { largura: (a.valor / 1600) * 100 }));
+    const amostraAlt = 'Na mesma escala, de 0 a 1.600 operações: você fez 30, que não provam nada. Com SR de 0,1 por operação seriam 400 operações. Com SR de 0,05, 1.600.';
+
+    // Mitos
+    const mitos = [
+      { titulo: '"Quem mantém diário melhora 23% o desempenho mensal em 60 dias"', fonte: 'Não. Número de blog de plataforma, sem estudo, autor ou método.', real: 'Nenhum estudo revisado por pares mede diário → retorno.' },
+      { titulo: '"Estudo da Universidade da Califórnia: registro sistemático dá 73% de resultados melhores"', fonte: 'Distorção de dois estudos reais.', real: 'O estudo real (Barber & Odean, 2000) mostra que quem mais opera ganha menos. O "73" é a diferença diária, em centésimos de ponto, entre os melhores e os piores day traders de Taiwan — sem relação com diário.' },
+      { titulo: '"Diário reduz o drawdown máximo em 25% a 30%"', fonte: 'Não localizável.', real: 'Sem amostra e sem método publicados.' },
+      { titulo: '"90% dos traders perdem 90% do dinheiro em 90 dias"', fonte: 'Folclore: não existe um número oficial único.', real: 'Na Europa, 74% a 89% das contas de varejo em CFD perdem dinheiro (ESMA, 2018).' },
+      { titulo: '"95% dos traders falham"', fonte: 'Não. Número redondo que muda de blog para blog.', real: 'Na B3, 97% dos day traders que persistiram mais de 300 dias perderam dinheiro.' },
+      { titulo: '"Com prática, você fica lucrativo"', fonte: 'Não sustentado.', real: 'Traders aprendem devagar e de forma custosa, e os menos hábeis "aprendem" saindo do mercado. No estudo da B3, os autores não acharam evidência de aprendizado.' },
+    ];
+
+    // Quiz
+    const porque = {
+      q1: { a: 'O "23% em 60 dias" vem de blog de plataforma, sem estudo, autor ou método.', c: 'Frequência não transforma registro em lucro. O que tem lastro é monitorar para cumprir a própria regra.', d: 'Monitorar ajuda a cumprir metas de comportamento (efeito de 0,40). Não há evidência de que atrapalhe.' },
+      q2: { a: 'A fórmula é matemática e vale para qualquer ativo — desde que média e variância existam.', b: 'O problema não é apostar demais: com variância infinita, a fórmula nem produz número.', d: 'Não tem relação com regulação. É uma limitação da matemática.' },
+      q3: { a: '50% seria se cada perda fosse sobre o capital inicial. A fração é recalculada sobre o que sobrou: 0,9 elevado a 5 ≈ 0,59.', c: '90% é o que sobra depois de uma perda só.', d: 'Com fração fixa, uma sequência finita de perdas nunca zera a banca: sempre sobra (1 − f) elevado a n.' },
+      q4: { a: 'Foi o contrário: o lembrete não teve efeito, e só a ordem automática reduziu o hábito.', c: 'O experimento mediu o hábito de segurar perdedoras, não se o stop dá prejuízo.', d: 'A ordem automática mudou o comportamento; só o lembrete não mudou.' },
+      q5: { a: 'Olhar o resultado com frequência piora a decisão sob risco (aversão míope à perda).', c: 'Revisar só quando perde é viés de resultado: julgar a decisão pelo desfecho.', d: 'Ninguém mediu uma cadência ideal. Sexta-feira é escolha sua, não evidência.' },
+      q6: { a: 'Com retornos bem-comportados já seriam de 400 a 1.600 operações. Com cauda pesada, pode não haver número que baste.', c: 'Variar os tokens não resolve o tamanho da amostra nem a cauda pesada.', d: 'Lucro total positivo em 30 operações cabe perfeitamente na sorte.' },
+      q7: { a: 'O nome da universidade é o que faz o número colar. O estudo real diz quase o contrário.', c: 'O problema não é o tamanho do número: é que ele não vem do estudo citado.', d: 'O estudo real é de ações nos EUA, mas o erro é outro: ele não fala de diário.' },
+      q8: { a: 'É folclore: não existe um número oficial único por trás do "90-90-90".', c: 'Não: 97% dos que persistiram mais de 300 dias perderam dinheiro.', d: 'Existe, e é o de Chague, De-Losso & Giovannetti, da FGV.' },
+    };
+    const Q = (id, pergunta, alts, correta, explicacao) => ({ id, pergunta, correta, explicacao, alternativas: alts.map(([aid, texto]) => Object.assign({ id: aid, texto }, porque[id][aid] ? { porque: porque[id][aid] } : {})) });
+    const todas = [
+      Q('q1', 'Manter um diário de operações faz ganhar dinheiro?', [['a', 'Sim, estudos mostram 23% de melhora em 60 dias.'], ['b', 'Não foi medido. O que tem lastro é que monitorar ajuda a cumprir a própria regra.'], ['c', 'Sim, desde que seja feito todo dia.'], ['d', 'Não, e ainda atrapalha.']], 'b', 'A meta-análise de Harkin (2016) mostra efeito de 0,40 sobre cumprir metas de comportamento. Nenhum estudo revisado por pares liga diário a retorno — o "23%" é de blog, sem fonte.'),
+      Q('q2', 'Por que o critério de Kelly (f* = μ ÷ σ²) não serve para dimensionar posições em memecoin?', [['a', 'Porque ele só funciona para ações.'], ['b', 'Porque ele manda apostar demais.'], ['c', 'Porque precisa de média e variância que existam, e em cauda muito pesada elas podem não existir.'], ['d', 'Porque é proibido pela CVM.']], 'c', 'Com variância infinita, μ ÷ σ² não dá número nenhum; sem média, "crescimento esperado" nem faz sentido. O que a pesquisa garante é a direção: cauda mais pesada, fração menor.'),
+      Q('q3', 'Com 10% do capital em cada posição, 5 posições seguidas vão a zero. Quanto sobra?', [['a', '50%'], ['b', 'Cerca de 59%'], ['c', '90%'], ['d', 'Zero']], 'b', 'A fração é recalculada sobre o que sobrou: 0,9 × 0,9 × 0,9 × 0,9 × 0,9 = 0,59. Para voltar ao começo, é preciso ganhar 69% sobre esse capital.'),
+      Q('q4', 'O que o experimento de Fischbacher, Hoffmann & Schudy mostrou sobre saídas?', [['a', 'Que lembretes para vender funcionam tão bem quanto ordens automáticas.'], ['b', 'Que a ordem de venda automática reduziu o hábito de segurar perdedoras; o lembrete não.'], ['c', 'Que stop-loss sempre dá prejuízo.'], ['d', 'Que nenhum dos dois muda o comportamento.']], 'b', 'O que corrige o viés é a execução, não a intenção. Por isso a regra pede a saída já programada no momento da entrada.'),
+      Q('q5', 'Qual hábito de revisão tem apoio na pesquisa?', [['a', 'Olhar o saldo várias vezes por dia para reagir rápido.'], ['b', 'Revisar se seguiu a regra com frequência, e olhar o resultado em dinheiro com pouca frequência.'], ['c', 'Só revisar quando perder.'], ['d', 'Revisar exatamente toda sexta-feira, que é a cadência ideal medida.']], 'b', 'Olhar o resultado com frequência piora a decisão sob risco (aversão míope à perda). Monitorar o comportamento é o que tem lastro. E a cadência ideal nunca foi medida.'),
+      Q('q6', 'Você fez 30 operações e 20 deram lucro. Isso prova que a sua regra funciona?', [['a', 'Sim, 67% de acerto é estatisticamente forte.'], ['b', 'Não: mesmo no melhor caso seriam necessárias centenas de operações, e com cauda pesada demais nenhum número basta.'], ['c', 'Sim, se as operações foram em tokens diferentes.'], ['d', 'Só se o lucro total for positivo.']], 'b', 'Com retornos bem-comportados, n ≈ (2 ÷ SR)² dá de 400 a 1.600 operações. Em memecoin, onde a média pode nem existir, a amostra não resolve. Além disso, taxa de acerto não diz nada sem o tamanho dos ganhos e das perdas.'),
+      Q('q7', 'Um curso cita "estudo da Universidade da Califórnia: quem documenta as operações tem 73% de resultados melhores". O que dizer?', [['a', 'Que é uma fonte confiável, por ser universidade.'], ['b', 'Que é uma distorção: o estudo real mostra que quem mais opera ganha menos, e o "73" vem de outro estudo, sem relação com diário.'], ['c', 'Que o número é baixo demais.'], ['d', 'Que só vale para ações americanas.']], 'b', 'Barber & Odean (2000): quem mais operava teve 11,4% ao ano, contra 17,9% do mercado. O 73 é a diferença diária entre os melhores e os piores day traders de Taiwan.'),
+      Q('q8', 'Qual é o dado brasileiro mais bem medido sobre day trade?', [['a', '"90% perdem 90% em 90 dias".'], ['b', 'Entre os day traders da B3 que persistiram mais de 300 dias, 97% perderam dinheiro.'], ['c', 'Metade dos day traders da B3 lucra.'], ['d', 'Não existe dado brasileiro.']], 'b', 'Chague, De-Losso & Giovannetti (FGV) acompanharam 1.551 pessoas que insistiram mais de 300 dias: 97% perderam, só 1,1% ganhou mais que um salário mínimo, e não houve evidência de aprendizado.'),
+    ];
+    const quiz = { todas }; todas.forEach((q) => { quiz[q.id] = [q]; });
+    const naoVerificado = [
+      { titulo: 'Originais atrás de paywall', texto: 'Kelly (1956), Fischbacher, Hoffmann & Schudy (2017), Ashraf, Karlan & Yin (2006), Gollwitzer & Sheeran (2006) e os estudos de vieses foram confirmados por artigos revisados por pares que os citam, não pelos textos originais.' },
+      { titulo: 'Índice de cauda das memecoins', texto: 'Nenhum foi publicado. A premissa de cauda muito pesada vem de estudos sobre estratégias em cripto (Grobys & Shahzad, 2025), não de uma medição em memecoin.' },
+      { titulo: 'Diário e trading', texto: 'Toda a evidência de que monitorar ajuda vem de metas de saúde e comportamento. Levar isso para operações é uma inferência razoável, não um fato medido.' },
+    ];
+
+    const ids = ABAS.map((a) => a.id);
+    return {
+      mostrarSidebar: !compacto, paddingMain: compacto ? '20px 16px' : '32px 24px',
+      dirMapa: compacto ? 'column' : 'row', alinhaMapa: compacto ? 'stretch' : 'center', trunkW: compacto ? '2px' : '32px', trunkH: compacto ? '20px' : '2px', trunkML: compacto ? '24px' : '0',
+      dirSeq: compacto ? 'column' : 'row', colsDois: compacto ? '1fr' : '1fr 1fr', minPasso: compacto ? '0' : '160px',
+      abas, mapa, eh, objetivos, destaques, memoria, memoriaAlt, partesRegra, ciclo,
+      fracaoFixa, fracao: S.fracao, perdas: S.perdas, seq, atalhos, ruinaCelulas, efeitoCelulas,
+      camposDiario, lastroAlt, viesesRevisao, amostra, amostraAlt, mitos, quiz, naoVerificado,
+      irParaAba: (e) => { this.setState({ aba: e.currentTarget.dataset.aba }); },
+      teclaAba: (e) => { const i = ids.indexOf(this.state.aba); let m = i; if (e.key === 'ArrowRight') m = (i + 1) % ids.length; else if (e.key === 'ArrowLeft') m = (i - 1 + ids.length) % ids.length; else if (e.key === 'Home') m = 0; else if (e.key === 'End') m = ids.length - 1; else return; e.preventDefault(); this.setState({ aba: ids[m] }); const btn = e.currentTarget.querySelectorAll('[role="tab"]')[m]; if (btn) btn.focus(); },
+      mudarFracao: (e) => this.setState({ fracao: Number(e.target.value) }),
+      mudarPerdas: (e) => this.setState({ perdas: Number(e.target.value) }),
+      atalhoFracao: (e) => this.setState({ fracao: Number(e.currentTarget.dataset.valor) }),
+      naoEnviar: (e) => { e.preventDefault(); },
+    };
+  }
+}
+</script>
+</body>
+</html>

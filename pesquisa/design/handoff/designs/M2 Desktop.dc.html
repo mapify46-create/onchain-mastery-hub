@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}h1,h2,h3,p,li,dd,dt,td,th{overflow-wrap:break-word}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}</style></helmet>
+<div style="display:flex;min-height:100vh;align-items:flex-start">
+<sc-if value="{{ mostrarSidebar }}" hint-placeholder-val="{{ true }}">
+<aside aria-label="Rotas do hub" style="position:sticky;top:0;width:16rem;flex:0 0 16rem;height:100vh;box-sizing:border-box;border-right:1px solid #1F2733;background:#141A24;padding:20px 16px;display:flex;flex-direction:column;gap:4px;font-size:14px">
+<p style="margin:0 0 12px;font-weight:600;font-size:14px">onchain-mastery-hub</p>
+<a href="#/inicio" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Início</a>
+<a href="#/modulo-1" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M1 Fundamentos &amp; Segurança</a>
+<a href="#/modulo-2" aria-current="page" style="display:block;border-radius:8px;padding:8px 12px;color:#E6EDF3;background:rgba(124,58,237,.15);border:1px solid #7C3AED;text-decoration:none;font-weight:600">M2 Psicologia</a>
+<a href="#/modulo-3" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M3 Os dois pilares</a>
+<a href="#/modulo-4" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M4 Gestão &amp; decisão</a>
+<a href="#/modulo-5" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M5 Execução</a>
+<a href="#/modulo-6" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M6 Ler a tela</a>
+<a href="#/modulo-7" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M7 A rotina</a>
+<div style="height:1px;background:#1F2733;margin:8px 0"></div>
+<a href="#/glossario" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Glossário</a>
+<a href="#/checklist" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Checklist antes de comprar</a>
+<a href="#/revisao" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Revisão</a>
+</aside>
+</sc-if>
+<main id="conteudo" style="flex:1 1 auto;min-width:0">
+<div style="max-width:868px;margin:0 auto;padding:{{ paddingMain }};display:flex;flex-direction:column;gap:24px">
+
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Módulo 2</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">Psicologia das memecoins &amp; economia da atenção</h1>
+<p style="margin:8px 0 0;color:#9AA7B4;text-wrap:pretty">Memecoin não tem produto nem receita: o preço é feito de atenção. Este módulo mostra como essa atenção nasce, como ela some, e quais vieses do seu próprio cérebro fazem você comprar no topo e segurar no fundo.</p>
+</header>
+
+<section aria-label="Mapa do módulo" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<p style="margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">O módulo inteiro numa olhada</p>
+<div style="display:flex;flex-direction:{{ dirMapa }};align-items:{{ alinhaMapa }};border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px">
+<div style="flex:0 0 auto;border-radius:12px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:14px 18px;max-width:220px">
+<p style="margin:0;font-size:1.125rem;font-weight:600;line-height:1.3">Psicologia</p>
+<p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">O preço é feito de olhos</p>
+</div>
+<div aria-hidden="true" style="flex:0 0 auto;width:{{ trunkW }};height:{{ trunkH }};background:#1F2733;margin-left:{{ trunkML }}"></div>
+<ul style="list-style:none;margin:0;padding:0;border-left:2px solid #1F2733;display:flex;flex-direction:column;gap:12px;flex:1 1 auto;min-width:0;margin-left:{{ trunkML }}">
+<sc-for list="{{ mapa }}" as="r" hint-placeholder-count="6">
+<li style="position:relative;padding-left:24px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px" style-before="content:'';position:absolute;left:0;top:19px;width:24px;height:2px;background:#1F2733">
+<button type="button" data-aba="{{ r.aba }}" onClick="{{ irParaAba }}" style="min-height:40px;border-radius:8px;border:1px solid {{ r.borda }};background:{{ r.fundo }};padding:6px 12px;font-size:14px;font-weight:600;color:#E6EDF3;cursor:pointer;text-align:left" style-hover="border-color:#9AA7B4">{{ r.titulo }} →</button>
+<sc-for list="{{ r.folhas }}" as="f" hint-placeholder-count="3"><span style="border-radius:999px;border:1px solid #1F2733;padding:2px 10px;font-size:13px;color:#9AA7B4">{{ f }}</span></sc-for>
+</li>
+</sc-for>
+</ul>
+</div>
+</section>
+
+<div role="tablist" aria-label="Seções do Módulo 2" onKeyDown="{{ teclaAba }}" style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ abas }}" as="a" hint-placeholder-count="6">
+<button type="button" role="tab" id="aba-{{ a.id }}" aria-selected="{{ a.ativa }}" aria-controls="painel-{{ a.id }}" tabindex="{{ a.tabindex }}" data-aba="{{ a.id }}" onClick="{{ irParaAba }}" style="min-height:44px;border-radius:8px;border:1px solid {{ a.borda }};background:{{ a.fundo }};padding:8px 16px;font-size:14px;font-weight:600;color:#E6EDF3;cursor:pointer" style-hover="border-color:#9AA7B4">{{ a.rotulo }}</button>
+</sc-for>
+</div>
+
+<!-- ============ VISÃO GERAL ============ -->
+<sc-if value="{{ eh.visao }}" hint-placeholder-val="{{ true }}">
+<div id="painel-visao" role="tabpanel" aria-labelledby="aba-visao" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.visaoGeral }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Economia da atenção: o preço é feito de olhos</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">O preço de uma memecoin é feito de atenção. Quando a atenção vai embora, o preço vai junto.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ atencaoAlt }}" style="display:flex;flex-direction:column;align-items:center">
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:16px;width:100%">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:14px 16px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Ação com empresa</p>
+<p style="margin:6px 0 0;font-size:14px">Produto, receita e caixa ficam embaixo do preço. Eles seguram um chão.</p>
+<div aria-hidden="true" style="margin-top:10px;height:56px;display:flex;flex-direction:column-reverse"><span style="height:20px;border-radius:0 0 4px 4px;background:#7C3AED"></span><span style="flex:1 1 auto;border:2px dashed #1F2733;border-bottom:0;border-radius:4px 4px 0 0"></span></div>
+<p style="margin:6px 0 0;font-size:12px;color:#9AA7B4">O bloco roxo é o chão: lucro e caixa.</p>
+</div>
+<div style="border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:14px 16px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">Memecoin</p>
+<p style="margin:6px 0 0;font-size:14px">Não há produto, receita nem utilidade. Embaixo do preço só tem atenção.</p>
+<div aria-hidden="true" style="margin-top:10px;height:56px;display:flex;flex-direction:column-reverse"><span style="height:20px;border-radius:0 0 4px 4px;border:2px dashed #EF4444"></span><span style="flex:1 1 auto;border:2px dashed #1F2733;border-bottom:0;border-radius:4px 4px 0 0"></span></div>
+<p style="margin:6px 0 0;font-size:12px;color:#9AA7B4">Tracejado: não existe chão nenhum.</p>
+</div>
+</div>
+<div aria-hidden="true" style="width:2px;height:18px;background:#9AA7B4;margin-top:16px"></div>
+<div aria-hidden="true" style="width:8px;height:8px;border-right:2px solid #9AA7B4;border-bottom:2px solid #9AA7B4;transform:rotate(45deg);margin-top:-10px"></div>
+<div style="display:flex;flex-direction:{{ dirSeq }};align-items:center;gap:0;margin-top:8px;width:100%;justify-content:center">
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 14px;font-size:14px;font-weight:600;text-align:center">A atenção cresce</div>
+<span aria-hidden="true" style="color:#9AA7B4;padding:4px 10px">→</span>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 14px;font-size:14px;text-align:center">O preço cresce junto</div>
+<span aria-hidden="true" style="color:#9AA7B4;padding:4px 10px">→</span>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 14px;font-size:14px;text-align:center">A multidão acha o próximo token</div>
+<span aria-hidden="true" style="color:#9AA7B4;padding:4px 10px">→</span>
+<div style="border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:10px 14px;font-size:14px;font-weight:600;text-align:center;color:#F87171">A atenção vai embora, e o preço atrás</div>
+</div>
+</div>
+<figcaption style="margin:16px 0 0;font-size:13px;color:#9AA7B4">Atenção é escassa e muda de lugar. Por isso o mesmo token pode subir 10x em horas e voltar ao ponto de partida no mesmo dia — isso não é anomalia, é o funcionamento normal desse mercado.</figcaption>
+</figure>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m2-check-q1" titulo="Pergunta rápida" perguntas="{{ quiz.q1 }}" hint-size="100%,320px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Dopamina e reforço intermitente</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Ganhar às vezes, e não sempre, é o que mais prende. É o mesmo mecanismo das máquinas de aposta.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">O laço que se fecha: o ganho de ontem financia o erro de amanhã</p>
+<div style="display:flex;justify-content:center">
+<div role="img" aria-label="{{ laco.alternativa }}" style="position:relative;width:340px;max-width:100%;height:340px">
+<svg viewBox="0 0 340 340" width="100%" height="100%" aria-hidden="true" style="position:absolute;inset:0">
+<defs>
+<marker id="m2-seta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9AA7B4"></path></marker>
+<marker id="m2-seta-acento" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22D3EE"></path></marker>
+</defs>
+<sc-for list="{{ laco.arcos }}" as="a" hint-placeholder-count="5">
+<path d="{{ a.d }}" fill="none" stroke="{{ a.cor }}" stroke-width="2" stroke-dasharray="{{ a.tracejado }}" marker-end="{{ a.marcador }}"></path>
+</sc-for>
+</svg>
+<sc-for list="{{ laco.etapas }}" as="e" hint-placeholder-count="5">
+<div style="position:absolute;left:{{ e.x }}px;top:{{ e.y }}px;transform:translate(-50%,-50%);width:112px;box-sizing:border-box;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:8px;text-align:center">
+<span aria-hidden="true" style="display:inline-flex;width:22px;height:22px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;align-items:center;justify-content:center">{{ e.numero }}</span>
+<p style="margin:4px 0 0;font-size:13px;font-weight:600;line-height:1.25">{{ e.titulo }}</p>
+</div>
+</sc-for>
+<p style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0;text-align:center;font-size:12px;color:#22D3EE;max-width:96px;line-height:1.3">e o laço aperta</p>
+</div>
+</div>
+<figcaption style="margin:16px 0 0;font-size:13px;color:#9AA7B4">Como a recompensa vem às vezes, e não sempre, o hábito fica mais reforçado — é o "reforço intermitente". Cada alta na tela libera dopamina, e o cérebro aprende que olhar o gráfico e clicar em comprar traz recompensa.</figcaption>
+</figure>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: de onde vem essa ideia</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Esse padrão é descrito em literatura de divulgação e em artigos revisados por pares sobre jogo e investimento especulativo (disponíveis no PMC/NCBI). Aqui ele é usado de forma educacional, para você reconhecer o mecanismo. Não é material clínico.</p></details>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O antídoto não é força de vontade</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Decida antes, por escrito, enquanto está calmo. Com o gráfico piscando, a força de vontade perde.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ antidotoAlt }}" style="display:grid;grid-template-columns:{{ colsDois }};gap:16px">
+<div style="border-radius:8px;border:2px solid #22C55E;background:#0B0F17;padding:14px 16px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22C55E">Você calmo, antes</p>
+<ul style="margin:8px 0 0;padding-left:18px;font-size:14px;display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ antidoto }}" as="a" hint-placeholder-count="5"><li>{{ a }}</li></sc-for>
+</ul>
+</div>
+<div style="border-radius:8px;border:2px dashed #EF4444;background:#0B0F17;padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">Você empolgado, com o gráfico piscando</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Ninguém vence um viés cognitivo no impulso. Viés cognitivo é um atalho do cérebro que erra sempre para o mesmo lado.</p>
+<p style="margin:auto 0 0;padding-top:8px;font-size:14px;font-weight:600">A regra escrita é o seu "eu calmo" mandando no seu "eu empolgado".</p>
+</div>
+</div>
+</figure>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ VIESES ============ -->
+<sc-if value="{{ eh.vieses }}" hint-placeholder-val="{{ false }}">
+<div id="painel-vieses" role="tabpanel" aria-labelledby="aba-vieses" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.vieses }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Os cinco vieses: o que você pensa → o que acontece → o que fazer</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Cada viés tem um gatilho, um momento em que aparece e um antídoto que só funciona escrito antes.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;overflow-x:auto" tabindex="0" role="group" aria-label="Os cinco vieses (role na horizontal se preciso)">
+<table style="border-collapse:collapse;width:100%;min-width:720px;font-size:14px">
+<thead><tr>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Viés</th>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">O que você pensa</th>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">O que acontece</th>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733;border-left:2px solid #22D3EE">O que fazer</th>
+</tr></thead>
+<tbody>
+<sc-for list="{{ vieses }}" as="v" hint-placeholder-count="5">
+<tr>
+<th scope="row" style="text-align:left;padding:10px 12px;border-bottom:1px solid #1F2733;vertical-align:top;font-weight:600">{{ v.nome }}<span style="display:block;font-size:12px;font-weight:400;color:#9AA7B4">{{ v.subtitulo }}</span><span style="display:block;margin-top:6px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Aparece {{ v.quandoAparece }}</span></th>
+<td style="padding:10px 12px;border-bottom:1px solid #1F2733;color:#9AA7B4;vertical-align:top">{{ v.gatilho }}</td>
+<td style="padding:10px 12px;border-bottom:1px solid #1F2733;vertical-align:top"><span style="display:inline-block;border-radius:6px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);color:#F87171;padding:4px 8px;font-weight:600">{{ v.custo }}</span></td>
+<td style="padding:10px 12px;border-bottom:1px solid #1F2733;color:#9AA7B4;vertical-align:top;border-left:2px solid #22D3EE">{{ v.antidoto }}</td>
+</tr>
+</sc-for>
+</tbody></table>
+</div>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m2-check-q2" titulo="Pergunta rápida" perguntas="{{ quiz.q2 }}" hint-size="100%,320px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Estou em FOMO?</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">O gatilho do FOMO é o preço já ter subido. Se a vontade de comprar nasceu do gráfico, ela não é tese.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ fomo.alt }}" style="display:flex;flex-direction:column;align-items:center">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 16px;font-size:14px;font-weight:600;text-align:center">Quero comprar agora</div>
+<sc-for list="{{ fomo.passos }}" as="p" hint-placeholder-count="3">
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 16px;font-size:14px;font-weight:600;text-align:center;max-width:420px">{{ p.pergunta }}</div>
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:16px;width:100%;max-width:600px">
+<div style="display:flex;flex-direction:column;align-items:center"><div aria-hidden="true" style="width:2px;height:12px;background:#9AA7B4"></div><span style="border-radius:999px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);color:#F87171;padding:1px 10px;font-size:12px;font-weight:600">{{ p.rotuloSim }}</span><div aria-hidden="true" style="width:2px;height:12px;background:#9AA7B4"></div><div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:10px 14px;font-size:14px;color:#F87171;text-align:center">{{ p.sim }}</div></div>
+<div style="display:flex;flex-direction:column;align-items:center"><div aria-hidden="true" style="width:2px;height:12px;background:#9AA7B4"></div><span style="border-radius:999px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);color:#22C55E;padding:1px 10px;font-size:12px;font-weight:600">{{ p.rotuloNao }}</span><div aria-hidden="true" style="width:2px;height:12px;background:#9AA7B4"></div><div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 14px;font-size:14px;color:#9AA7B4;text-align:center">{{ p.nao }}</div></div>
+</div>
+</sc-for>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4;margin-top:8px"></div>
+<div style="border-radius:8px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);padding:10px 16px;font-size:14px;font-weight:600;text-align:center;max-width:460px">Passou nas três: siga a regra escrita, com tamanho reduzido.</div>
+</div>
+<figcaption style="margin:16px 0 0;font-size:13px;color:#9AA7B4">Aceite que perder oportunidade é o custo normal de operar com regra — e que existe token novo toda hora.</figcaption>
+</figure>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Anatomia de um post de hype</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Os seis elementos que quase toda campanha repete — e o viés que cada um está tentando acionar em você.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div style="display:grid;grid-template-columns:{{ colsAnatomia }};gap:20px;align-items:start">
+<div role="img" aria-label="{{ post.alt }}" style="border-radius:10px;border:1px solid #1F2733;background:#10151E;padding:14px;display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ post.linhas }}" as="l" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:{{ l.cols }};gap:8px">
+<sc-for list="{{ l.paineis }}" as="p" hint-placeholder-count="2">
+<div style="border-radius:6px;border:1px solid {{ p.borda }};background:{{ p.fundo }};padding:8px;min-height:{{ p.altura }};display:flex;gap:8px;align-items:flex-start">
+<span aria-hidden="true" style="flex:0 0 20px;width:20px;height:20px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ p.marcador }}</span>
+<span style="min-width:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;line-height:1.35;color:{{ p.cor }};overflow-wrap:break-word">{{ p.rotulo }}</span>
+</div>
+</sc-for>
+</div>
+</sc-for>
+<p style="margin:4px 0 0;font-size:12px;color:#9AA7B4">Post esquemático. Nenhum perfil ou token real foi copiado.</p>
+</div>
+<ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ post.itens }}" as="c" hint-placeholder-count="6">
+<li style="display:flex;gap:10px;align-items:flex-start;font-size:14px"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ c.n }}</span><span><strong>{{ c.titulo }}.</strong> <span style="color:#9AA7B4">{{ c.texto }}</span></span></li>
+</sc-for>
+</ol>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Os elementos são os que se repetem em quase toda campanha de hype. É defensivo, na lógica do módulo: reconhecer, não produzir.</figcaption>
+</figure>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ TIPOS DE TOKEN ============ -->
+<sc-if value="{{ eh.tipos }}" hint-placeholder-val="{{ false }}">
+<div id="painel-tipos" role="tabpanel" aria-labelledby="aba-tipos" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.tipos }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O mapa dos tipos de token</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Saber que tipo você está olhando muda a pergunta que você faz. Cada um tem um motor de atenção diferente — e 8 dos 10 são risco alto.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px;overflow-x:auto" tabindex="0" role="group" aria-label="Mapa dos tipos de token por categoria (role na horizontal se preciso)">
+<div role="img" aria-label="{{ mapaTiposAlt }}" style="display:flex;flex-direction:{{ dirMapa }};align-items:{{ alinhaMapa }};min-width:{{ minMapaTipos }}">
+<div style="flex:0 0 auto;border-radius:12px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:14px 18px;max-width:200px">
+<p style="margin:0;font-size:15px;font-weight:600">Tipos de token</p>
+<p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">5 categorias, 10 tipos</p>
+</div>
+<div aria-hidden="true" style="flex:0 0 auto;width:{{ trunkW }};height:{{ trunkH }};background:#1F2733;margin-left:{{ trunkML }}"></div>
+<ul style="list-style:none;margin:0;padding:0;border-left:2px solid #1F2733;display:flex;flex-direction:column;gap:12px;flex:1 1 auto;min-width:0;margin-left:{{ trunkML }}">
+<sc-for list="{{ mapaTipos }}" as="c" hint-placeholder-count="5">
+<li style="position:relative;padding-left:24px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px" style-before="content:'';position:absolute;left:0;top:19px;width:24px;height:2px;background:#1F2733">
+<button type="button" data-categoria="{{ c.id }}" aria-pressed="{{ c.ativo }}" onClick="{{ escolherCategoria }}" style="min-height:40px;border-radius:8px;border:1px solid {{ c.borda }};background:{{ c.fundo }};padding:6px 12px;font-size:14px;font-weight:600;color:#E6EDF3;cursor:pointer;text-align:left" style-hover="border-color:#9AA7B4">{{ c.nome }}</button>
+<sc-for list="{{ c.folhas }}" as="f" hint-placeholder-count="2"><span style="border-radius:999px;border:1px solid {{ f.borda }};background:{{ f.fundo }};padding:2px 10px;font-size:13px;color:{{ f.cor }}">{{ f.nome }}</span></sc-for>
+</li>
+</sc-for>
+</ul>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:#9AA7B4"><span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:3px;background:#EF4444"></span>risco alto</span><span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:3px;background:#F59E0B"></span>risco médio</span><span style="color:#9AA7B4">Nenhum tipo é risco baixo.</span></div>
+<p aria-live="polite" style="margin:0;font-size:14px;color:#9AA7B4">{{ resultadoTipos }}</p>
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:16px">
+<sc-for list="{{ tiposFiltrados }}" as="t" hint-placeholder-count="4">
+<article style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<p style="margin:0;font-size:15px;font-weight:600">{{ t.nome }}</p>
+<span style="border-radius:999px;border:1px solid {{ t.riscoBorda }};background:{{ t.riscoFundo }};color:{{ t.riscoCor }};padding:1px 10px;font-size:12px;font-weight:600;white-space:nowrap">{{ t.riscoRotulo }}</span>
+</div>
+<p style="margin:0;font-size:14px;color:#9AA7B4">{{ t.descricao }}</p>
+<div><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Como reconhecer</p><p style="margin:2px 0 0;font-size:14px;color:#9AA7B4">{{ t.comoReconhecer }}</p></div>
+<sc-if value="{{ t.temExemplos }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ t.exemplos }}" as="e" hint-placeholder-count="1"><span style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:2px 10px;font-size:12px;color:#9AA7B4">{{ e }}</span></sc-for></div></sc-if>
+<div style="margin-top:auto;border-radius:6px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:8px 10px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F59E0B">Alerta</p><p style="margin:2px 0 0;font-size:13px">{{ t.alerta }}</p></div>
+</article>
+</sc-for>
+</div>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ CASOS REAIS ============ -->
+<sc-if value="{{ eh.casos }}" hint-placeholder-val="{{ false }}">
+<div id="painel-casos" role="tabpanel" aria-labelledby="aba-casos" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.casos }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Os três casos, na ordem em que aconteceram</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Da estreia ao esquecimento, em semanas. Repare na distância entre o pico e a queda.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<ol style="list-style:none;margin:0;padding:0;max-width:620px">
+<sc-for list="{{ linha }}" as="m" hint-placeholder-count="5">
+<li style="position:relative;padding-left:32px;padding-bottom:{{ m.espaco }}px">
+<sc-if value="{{ m.temProximo }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="position:absolute;left:7px;top:16px;bottom:0;width:2px;background:#1F2733"></span></sc-if>
+<span aria-hidden="true" style="position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:50%;border:2px solid #141A24;background:{{ m.cor }}"></span>
+<time style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22D3EE">{{ m.data }}</time>
+<p style="margin:4px 0 0;font-size:14px;font-weight:600">{{ m.titulo }}</p>
+<sc-if value="{{ m.texto }}" hint-placeholder-val="{{ true }}"><p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">{{ m.texto }}</p></sc-if>
+<sc-if value="{{ m.temProximo }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;left:24px;bottom:{{ m.posIntervalo }}px;border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:1px 10px;font-size:12px;color:#9AA7B4;white-space:nowrap">{{ m.intervalo }}</span></sc-if>
+</li>
+</sc-for>
+</ol>
+<p style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Números registrados pelas fontes citadas em cada caso, nas datas indicadas. Fato histórico, não recomendação. Dois marcos têm só o mês no arquivo (01/2025 e 12/2025): o intervalo até eles aparece como "cerca de", ou como "no mesmo mês" quando o arquivo não permite dizer quantos dias passaram.</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
+<sc-for list="{{ casos }}" as="c" hint-placeholder-count="3">
+<article style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px;display:flex;flex-direction:column;gap:10px">
+<div><p style="margin:0;font-size:15px;font-weight:600">{{ c.nome }}</p><p style="margin:2px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#9AA7B4">{{ c.ticker }} · {{ c.chain }} · {{ c.data }}</p></div>
+<p style="margin:0;font-size:14px;color:#9AA7B4">{{ c.resumo }}</p>
+<dl style="margin:0;display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ c.numeros }}" as="n" hint-placeholder-count="4">
+<div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline;border-bottom:1px solid #1F2733;padding-bottom:4px"><dt style="font-size:12px;color:#9AA7B4">{{ n.rotulo }}</dt><dd style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;text-align:right;overflow-wrap:anywhere;min-width:0">{{ n.valor }}</dd></div>
+</sc-for>
+</dl>
+<p style="margin:0;font-size:12px;color:#9AA7B4">Fontes: {{ c.fontes }}</p>
+<div style="margin-top:auto;border-radius:6px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:8px 10px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22D3EE">Lição</p><p style="margin:2px 0 0;font-size:13px">{{ c.licao }}</p></div>
+</article>
+</sc-for>
+</div>
+<p style="margin:0;color:#9AA7B4">Hype e endosso de celebridade não garantem durabilidade. Nos três casos o pico de atenção durou horas, e quem comprou perto do topo ficou com o prejuízo quando a atenção migrou. É o padrão clássico de pump-and-dump — só que com nomes conhecidos no anúncio.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m2-check-q4" titulo="Pergunta rápida" perguntas="{{ quiz.q4 }}" hint-size="100%,340px"></x-import>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ AS 4 FASES ============ -->
+<sc-if value="{{ eh.fases }}" hint-placeholder-val="{{ false }}">
+<div id="painel-fases" role="tabpanel" aria-labelledby="aba-fases" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.fases }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">As 4 fases: clique numa para ver o que checar</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Saber em que fase você está muda o que perguntar. É modelo didático, não previsão: muitos tokens pulam fases, e a maioria não passa da primeira.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<ol role="tablist" aria-label="As quatro fases" tabindex="0" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:{{ dirSeq }};align-items:stretch;gap:0;overflow-x:auto">
+<sc-for list="{{ fases }}" as="f" hint-placeholder-count="4">
+<li style="flex:1 1 0;display:flex;flex-direction:{{ dirSeq }};align-items:stretch;min-width:{{ minPasso }}">
+<button type="button" role="tab" aria-selected="{{ f.atual }}" data-indice="{{ f.indice }}" onClick="{{ escolherFase }}" style="flex:1 1 auto;min-width:0;min-height:44px;border-radius:8px;border:1px solid {{ f.borda }};background:{{ f.fundo }};padding:10px 12px;color:#E6EDF3;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:6px" style-hover="border-color:#9AA7B4">
+<span style="display:flex;gap:8px;align-items:center"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:{{ f.mFundo }};color:{{ f.mCor }};font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ f.numero }}</span><span style="font-size:14px;font-weight:600;line-height:1.3">{{ f.nome }}</span></span>
+<span style="border-radius:999px;border:1px solid {{ f.riscoBorda }};background:{{ f.riscoFundo }};color:{{ f.riscoCor }};padding:0 8px;font-size:11px;font-weight:600;align-self:flex-start">{{ f.riscoRotulo }}</span>
+</button>
+<sc-if value="{{ f.seta }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#9AA7B4;padding:2px 6px">→</span></sc-if>
+</li>
+</sc-for>
+<li style="flex:0 0 auto;display:flex;flex-direction:{{ dirSeq }};align-items:stretch">
+<span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;color:#9AA7B4;padding:2px 6px">⇢</span>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 12px;font-size:14px;color:#9AA7B4;display:flex;align-items:center">{{ desfecho }}</div>
+</li>
+</ol>
+<div role="tabpanel" aria-live="polite" style="margin-top:16px;border-radius:8px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.12);padding:16px;display:flex;flex-direction:column;gap:12px">
+<p style="margin:0;font-size:15px;font-weight:600">{{ fase.numero }}. {{ fase.nome }}</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">{{ fase.resumo }}</p>
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:16px">
+<div><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">O que você vê</p><ul style="margin:6px 0 0;padding-left:18px;font-size:14px;color:#9AA7B4;display:flex;flex-direction:column;gap:4px"><sc-for list="{{ fase.oQueVoceVe }}" as="i" hint-placeholder-count="4"><li>{{ i }}</li></sc-for></ul></div>
+<div><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22D3EE">O que checar</p><ul style="margin:6px 0 0;padding-left:18px;font-size:14px;display:flex;flex-direction:column;gap:4px"><sc-for list="{{ fase.oQueChecar }}" as="i" hint-placeholder-count="4"><li>{{ i }}</li></sc-for></ul></div>
+</div>
+<div style="border-radius:6px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:8px 12px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">Armadilha desta fase</p><p style="margin:2px 0 0;font-size:14px">{{ fase.armadilha }}</p></div>
+</div>
+</div>
+<p style="margin:0;color:#9AA7B4">Segundo a CoinGecko Research (18,67 milhões de tokens, jan/2024–jun/2026), 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia do lançamento. Em até dois dias, foram 80,37%. Só 4,55% seguiram negociando depois de 90 dias.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">"Vai a zero" depende da régua — de cada 100 tokens do Pump.fun</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px">
+<sc-for list="{{ grades }}" as="g" hint-placeholder-count="2">
+<div>
+<p style="margin:0 0 6px;font-size:14px;font-weight:600;text-wrap:pretty">{{ g.frase }}</p>
+<p style="margin:0 0 10px;display:flex;flex-wrap:wrap;gap:8px;align-items:baseline"><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.125rem;font-weight:700;font-variant-numeric:tabular-nums">{{ g.exato }}</span><span style="font-size:12px;color:#9AA7B4">exato · {{ g.credito }}</span></p>
+<div role="img" aria-label="{{ g.alternativa }}" style="display:grid;grid-template-columns:repeat(10,1fr);gap:3px;max-width:230px">
+<sc-for list="{{ g.celulas }}" as="c" hint-placeholder-count="100"><span style="aspect-ratio:1;border-radius:3px;background:{{ c }}"></span></sc-for>
+</div>
+<div style="margin-top:10px;display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ g.grupos }}" as="gr" hint-placeholder-count="2"><span style="display:flex;align-items:center;gap:8px;font-size:14px;color:#9AA7B4"><span aria-hidden="true" style="width:12px;height:12px;border-radius:3px;background:{{ gr.cor }};flex:0 0 12px"></span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#E6EDF3;min-width:2ch;text-align:right">{{ gr.quantidade }}</span>{{ gr.rotulo }}</span></sc-for>
+<span style="margin-top:4px;font-size:12px;color:#9AA7B4">{{ g.fonte }}</span>
+<sc-if value="{{ g.contestacao }}" hint-placeholder-val="{{ false }}"><span style="margin-top:6px;border-radius:6px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:8px 10px;font-size:13px;color:#E6EDF3"><strong style="display:block;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F59E0B">Contestado</strong>{{ g.contestacao }}</span></sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin-top:12px;font-size:13px;color:#9AA7B4">Nenhuma dessas fontes mede o preço chegando literalmente a zero. Todas medem parar de negociar ou ficar sem liquidez. É isso que "vai a zero" quer dizer na prática.</figcaption>
+</figure>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m2-check-q3" titulo="Pergunta rápida" perguntas="{{ quiz.q3 }}" hint-size="100%,340px"></x-import>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ QUIZ ============ -->
+<sc-if value="{{ eh.quiz }}" hint-placeholder-val="{{ false }}">
+<div id="painel-quiz" role="tabpanel" aria-labelledby="aba-quiz" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="modulo-2" titulo="Mini-quiz do Módulo 2" descricao="Quatro perguntas. As respostas ficam salvas no navegador." perguntas="{{ quiz.todas }}" hint-size="100%,700px"></x-import>
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Terminou o módulo?</h2>
+<p style="margin:8px 0 16px;font-size:14px;color:#9AA7B4">Marcar aqui faz a barra de progresso do topo avançar. Dá para desmarcar depois.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Botao" variante="primario" hint-size="auto,40px">Marcar módulo como concluído</x-import>
+</section>
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O que você leva deste módulo</h2>
+<ul style="margin:12px 0 0;padding-left:20px;color:#9AA7B4;display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ objetivos }}" as="o" hint-placeholder-count="4"><li>{{ o }}</li></sc-for>
+</ul>
+</section>
+</div>
+</sc-if>
+
+<p style="margin:0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Aviso: </strong>material de estudo próprio, não é recomendação de investimento. Memecoin é o ativo de maior risco do mercado: 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia em que nasceram (CoinGecko Research).</p>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;compacto&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { aba: 'visao', fase: 0, categoria: 'todas' };
+  parse(d) { const p = d.split('/').map(Number); if (p.length === 3) return new Date(p[2], p[1] - 1, p[0]); if (p.length === 2) return new Date(p[1], p[0] - 1, 1); return new Date(p[0], 6, 1); }
+  meses(a, b) { return (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth()); }
+  intervaloTexto(a, b) { const d = Math.round((b - a) / 86400000); if (d <= 0) return 'no mesmo mês'; if (d < 31) return d + (d === 1 ? ' dia depois' : ' dias depois'); const m = Math.max(1, Math.round(d / 30.4)); return m + (m === 1 ? ' mês depois' : ' meses depois'); }
+  renderVals() {
+    const S = this.state, compacto = !!this.props.compacto;
+    const TOM = { neutro: '#7C3AED', alerta: '#EF4444', ok: '#22C55E', atencao: '#F59E0B' };
+    const RISCO = { baixo: { rotulo: 'Risco baixo', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#22C55E' }, medio: { rotulo: 'Risco médio', borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#F59E0B' }, alto: { rotulo: 'Risco alto', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' } };
+    const ABAS = [
+      { id: 'visao', rotulo: 'Visão geral', folhas: ['preço feito de olhos', 'dopamina', 'o antídoto'] },
+      { id: 'vieses', rotulo: 'Vieses', folhas: ['os 5 vieses', 'estou em FOMO?', 'post de hype'] },
+      { id: 'tipos', rotulo: 'Tipos de token', folhas: ['5 categorias', '10 tipos'] },
+      { id: 'casos', rotulo: 'Casos reais', folhas: ['TRUMP', 'MELANIA', 'LIBRA'] },
+      { id: 'fases', rotulo: 'As 4 fases', folhas: ['o que checar em cada uma', 'o que "vai a zero" quer dizer'] },
+      { id: 'quiz', rotulo: 'Quiz', folhas: ['4 perguntas'] },
+    ];
+    const ativo = (id) => id === S.aba;
+    const abas = ABAS.map((a) => ({ id: a.id, rotulo: a.rotulo, ativa: ativo(a.id), tabindex: ativo(a.id) ? 0 : -1, borda: ativo(a.id) ? '#7C3AED' : '#1F2733', fundo: ativo(a.id) ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    const mapa = ABAS.map((a) => ({ aba: a.id, titulo: a.rotulo, folhas: a.folhas, borda: ativo(a.id) ? '#7C3AED' : '#1F2733', fundo: ativo(a.id) ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    const eh = {}; ABAS.forEach((a) => { eh[a.id] = ativo(a.id); });
+
+    const objetivos = [
+      'Entender por que o preço de uma memecoin depende de atenção, e não de fundamento.',
+      'Reconhecer em você os vieses que fazem comprar no topo e segurar no prejuízo.',
+      'Classificar tipos de token para saber o que você está olhando antes de agir.',
+      'Visualizar as 4 fases do ciclo de vida de uma moeda e onde mora o risco em cada uma.',
+    ];
+    const destaques = {
+      visaoGeral: [
+        { rotulo: 'O que move o preço de uma memecoin', valor: 'Olhos', nota: 'Não fundamento: atenção. "O preço é feito de olhos" — quando a atenção migra, o preço vai junto.' },
+        { rotulo: 'Fases de um ciclo típico', valor: '4', nota: 'Lançamento, consolidação, expansão por catálise, degradação. Muitos tokens pulam fases — e a maioria não passa da primeira.' },
+        { rotulo: 'Desfecho da maioria', valor: 'Zero', nota: 'A tese central do módulo. Não é pessimismo: é a base de qualquer regra de tamanho e de saída.', tom: 'alerta' },
+      ],
+      vieses: [
+        { rotulo: 'Vieses que fazem quase todo o estrago', valor: '5', nota: 'FOMO, prova social, custo afundado, excesso de confiança e efeito disposição. Cada um tem gatilho, momento e antídoto.' },
+        { rotulo: 'Mecanismo nº 1 de compra no topo', valor: 'FOMO', nota: 'Você vê o gráfico subindo sem você e sente que é a última chance. Compra correndo, sem checar nada.', tom: 'alerta' },
+        { rotulo: 'O que o custo afundado faz com uma perda de 30%', valor: '→ 100%', nota: '"Já perdi tanto que agora tenho que esperar voltar." É o viés que transforma perda pequena em perda total.', tom: 'alerta' },
+      ],
+      tipos: [
+        { rotulo: 'Tipos de token catalogados', valor: '10', nota: 'Em 5 categorias: IA, comunidade, memes culturais, narrativas virais e figuras públicas. Cada um com um motor de atenção diferente.' },
+        { rotulo: 'Tipos com risco alto', valor: '8 de 10', nota: 'Só o token de comunidade nativa e o meme cultural de longa duração ficam em risco médio. Nenhum é baixo.', tom: 'alerta' },
+        { rotulo: 'O teste dos 30 segundos', valor: '30 s', nota: '"Se você não consegue usar o produto em 30 segundos, o produto é o token." Vale para toda narrativa "IA" sem produto.' },
+      ],
+      casos: [
+        { rotulo: 'Market cap da TRUMP em cerca de 24 horas', valor: 'US$ 15 bi', nota: 'Lançada em 17/01/2025, virou a 2ª maior memecoin naquele momento. Depois, mais de 96% abaixo do topo.' },
+        { rotulo: 'Queda da MELANIA até dezembro de 2025', valor: '99%+', nota: 'Do pico, segundo a Messari. Em 06/02/2025 já tinha caído cerca de 90% (Bloomberg).', tom: 'alerta' },
+        { rotulo: 'Duração do pico de atenção nos três casos', valor: 'Horas', nota: 'Quem comprou perto do topo ficou com o prejuízo quando a atenção migrou. Pump-and-dump com nomes conhecidos.', tom: 'alerta' },
+      ],
+      fases: [
+        { rotulo: 'Fases com risco alto', valor: '2 de 4', nota: 'Lançamento e degradação — o começo e o fim. É onde a atenção está no extremo, e onde mais se perde.', tom: 'alerta' },
+        { rotulo: 'Tempo de vida de um lançamento', valor: 'Minutos', nota: 'Idade medida em minutos, punhado de holders, volume de bots e snipers. Nenhum histórico para comparar.' },
+        { rotulo: 'O que muda a pergunta certa', valor: 'A fase', nota: 'Saber em que fase você está muda o que perguntar. É modelo didático, não previsão — muitos tokens pulam fases.' },
+      ],
+    };
+    const atencaoAlt = 'Numa ação com empresa, produto, receita e caixa ficam embaixo do preço e seguram um chão. Numa memecoin não há produto, receita nem utilidade: embaixo do preço só tem atenção, e não existe chão. A atenção cresce, o preço cresce junto, a multidão acha o próximo token, a atenção vai embora e o preço vai atrás.';
+
+    // Ciclo da dopamina
+    const lacoBase = [
+      { titulo: 'Alta na tela' }, { titulo: 'Dopamina' }, { titulo: 'Opera mais vezes' }, { titulo: 'Posições maiores' }, { titulo: 'Menos checagem' },
+    ];
+    const C = 170, R = 116, n = lacoBase.length, folga = 30;
+    const ang = (i) => (-90 + (i * 360) / n) * Math.PI / 180;
+    const pt = (a, r) => ({ x: C + r * Math.cos(a), y: C + r * Math.sin(a) });
+    const laco = {
+      etapas: lacoBase.map((e, i) => { const p = pt(ang(i), R); return Object.assign({ numero: i + 1 }, e, { x: Math.min(282, Math.max(58, p.x)), y: p.y }); }),
+      arcos: lacoBase.map((e, i) => { const a1 = ang(i) + folga * Math.PI / 180; let a2 = ang((i + 1) % n) - folga * Math.PI / 180; if (a2 < a1) a2 += 2 * Math.PI;
+        const p1 = pt(a1, R), p2 = pt(a2, R), volta = i === n - 1;
+        return { d: 'M' + p1.x.toFixed(1) + ',' + p1.y.toFixed(1) + ' A' + R + ',' + R + ' 0 0 1 ' + p2.x.toFixed(1) + ',' + p2.y.toFixed(1), cor: volta ? '#22D3EE' : '#9AA7B4', tracejado: volta ? '6 5' : 'none', marcador: volta ? 'url(#m2-seta-acento)' : 'url(#m2-seta)' }; }),
+      alternativa: '1 Alta na tela → 2 Dopamina → 3 Opera mais vezes → 4 Posições maiores → 5 Menos checagem → volta a 1, e o laço aperta. O ganho de ontem financia o erro de amanhã.',
+    };
+    const antidoto = [
+      'Escreva a tese e a catálise antes de comprar (Módulo 4). Sem catálise clara, é aposta.',
+      'Defina os alvos de realização antes de entrar. Não depois de já estar no lucro.',
+      'Imponha um tempo de espera (5, 10, 30 minutos) entre "quero comprar" e "comprei".',
+      'Estabeleça um teto de perda por operação e por dia. Quando bater, pare de verdade.',
+      'Nunca opere com dinheiro que faz falta. A maioria dos tokens vai a zero.',
+    ];
+    const antidotoAlt = 'Você calmo, antes: ' + antidoto.join(' ') + ' Você empolgado, com o gráfico piscando: ninguém vence um viés cognitivo no impulso. A regra escrita é o seu eu calmo mandando no seu eu empolgado.';
+
+    // Vieses
+    const vieses = [
+      { nome: 'FOMO', subtitulo: 'Fear of missing out — medo de ficar de fora', gatilho: 'Você vê o gráfico subindo sem você e sente que esta é a última chance da sua vida. Compra correndo, sem checar contrato, liquidez nem nada.', quandoAparece: 'logo depois de um pump que você assistiu de fora', antidoto: 'Aceite que perder oportunidade é o custo normal de operar com regra — e que existe token novo toda hora. Use o tempo de espera: se depois de 10 minutos a tese ainda fizer sentido por escrito, aí sim considere entrar, com tamanho reduzido.', custo: 'É o mecanismo número 1 de compra no topo.' },
+      { nome: 'Prova social', subtitulo: 'Se todo mundo está comprando, deve estar certo', gatilho: 'Milhares de posts, um grupo eufórico e vários influenciadores repetindo o mesmo ticker. Parece validação — e é só volume de vozes.', quandoAparece: 'quando a timeline e os grupos são inundados pelo mesmo token', antidoto: 'Separe barulho de evidência. Volume de posts não é liquidez, não é número de holders e não é contrato auditável. Antes de dar peso a qualquer post, cheque LP, authorities e concentração dos maiores holders.', custo: 'Prova social é fabricável: bots e calls pagos custam pouco.' },
+      { nome: 'Custo afundado', subtitulo: 'Sunk cost — "já perdi tanto que agora tenho que esperar voltar"', gatilho: 'A posição está −70%. Vender parece assumir a perda, então você segura. O dinheiro já gasto vira argumento para gastar mais tempo (e, muitas vezes, mais dinheiro).', quandoAparece: 'na fase de Degradação, quando a atenção já migrou', antidoto: 'O dinheiro já perdido não volta por você segurar. A pergunta certa não é "quanto eu já perdi?", é "com o preço de hoje, eu compraria este token agora?". Se a resposta for não, a posição não deveria existir.', custo: 'É o que transforma uma perda de 30% numa perda de 100%.' },
+      { nome: 'Excesso de confiança', subtitulo: 'Três acertos seguidos e você acha que pegou o jeito', gatilho: 'A sequência boa vira explicação: "eu tenho olho". O tamanho da posição dobra, a checagem encolhe e o horário de operar se estende madrugada adentro.', quandoAparece: 'depois da sua melhor semana, nunca depois da pior', antidoto: 'Registre todas as operações, não só as boas. Em mercado de altíssima volatilidade, sequência de acertos é estatisticamente esperada mesmo sem habilidade nenhuma. Mantenha o tamanho da posição fixo por regra, não por humor.', custo: 'A operação que quebra a banca costuma ser a maior — feita logo depois da melhor sequência.' },
+      { nome: 'Efeito disposição', subtitulo: 'Vender rápido o que sobe, segurar para sempre o que cai', gatilho: 'Você realiza +20% "para garantir" e segura −60% "para não perder". No fim do mês, os ganhos são pequenos e as perdas são inteiras.', quandoAparece: 'em toda posição aberta, o tempo todo', antidoto: 'Inverta a assimetria por regra: alvos de realização parcial escalonados (parte no 2x, parte no 5x) e um limite de perda definido antes da entrada. A decisão de sair não pode ser tomada no calor do gráfico.', custo: 'Explica por que muita gente acerta mais do que erra e mesmo assim perde dinheiro.' },
+    ];
+    const fomo = { passos: [
+      { pergunta: 'A vontade nasceu do gráfico já ter subido?', rotuloSim: 'Sim', sim: 'É FOMO. Espere 10 minutos antes de qualquer clique.', rotuloNao: 'Não', nao: 'Siga para a próxima pergunta.' },
+      { pergunta: 'Existe tese e catálise escritas, de antes?', rotuloSim: 'Não', sim: 'Sem catálise clara, é aposta. Não entra.', rotuloNao: 'Sim', nao: 'Siga para a próxima pergunta.' },
+      { pergunta: 'Os alvos de realização e o limite de perda já estão definidos?', rotuloSim: 'Não', sim: 'Defina antes de entrar, nunca depois de já estar no lucro.', rotuloNao: 'Sim', nao: 'Checagem técnica feita? (Módulo 3 e Checklist)' },
+    ], alt: 'Quero comprar agora. A vontade nasceu do gráfico já ter subido? Se sim, é FOMO: espere 10 minutos. Se não: existe tese e catálise escritas, de antes? Se não, é aposta: não entra. Se sim: os alvos de realização e o limite de perda já estão definidos? Se não, defina antes de entrar. Passou nas três: siga a regra escrita, com tamanho reduzido.' };
+
+    // Anatomia do post de hype (modulo2.anatomias.postDeHype)
+    const postPaineis = {
+      autor: { rotulo: '@perfil-grande · verificado' }, texto: { rotulo: '"$TICKER vai 100x, ainda dá tempo, não fique de fora"' }, grafico: { rotulo: 'Print do gráfico subindo' },
+      metricas: { rotulo: 'milhares de curtidas · reposts · "eu comprei"' }, contrato: { rotulo: 'CA: 0x… (na bio)', alerta: true }, urgencia: { rotulo: '"Últimas horas antes da listagem"', alerta: true },
+    };
+    const postItens = [
+      { painel: 'texto', titulo: 'A promessa sem tese', texto: '"Vai 100x", "não fique de fora". Nenhum evento concreto, nenhum prazo — só o preço como motivo. É o FOMO sendo fabricado, não descrito.' },
+      { painel: 'grafico', titulo: 'O gráfico que já subiu', texto: 'Print de vela verde é a isca do FOMO: mostra o que você perdeu, não o que vem. Quem posta comprou antes do print.' },
+      { painel: 'metricas', titulo: 'Prova social comprável', texto: 'Milhares de curtidas, dezenas de "eu comprei". Bots e calls pagos custam pouco. Volume de vozes não é liquidez nem contrato auditável.' },
+      { painel: 'autor', titulo: 'O perfil grande', texto: 'Muitas vezes recebe pelo post ou comprou antes. Endosso não é análise — e o Módulo 1 lembra: confirme o endereço oficial na fonte.' },
+      { painel: 'contrato', titulo: 'O contrato na bio', texto: 'Onde o impostor mora. Ticker é apelido; quem busca pelo nome pode comprar o token errado.' },
+      { painel: 'urgencia', titulo: 'A pressa', texto: '"Últimas horas" existe para impedir a espera de 10 minutos que o antídoto do FOMO pede.' },
+    ];
+    const montarAnatomia = (paineis, itens, grade) => {
+      const marc = {}; itens.forEach((it, i) => { marc[it.painel] = i + 1; });
+      const cel = (id, altura) => { const p = paineis[id]; return { rotulo: p.rotulo, marcador: marc[id], altura, borda: p.alerta ? 'rgba(245,158,11,.4)' : '#22D3EE', fundo: p.alerta ? 'rgba(245,158,11,.12)' : 'rgba(34,211,238,.08)', cor: '#E6EDF3' }; };
+      return { linhas: grade.map((l) => ({ cols: l.cols, paineis: l.ids.map((id) => cel(id, l.altura)) })), itens: itens.map((it, i) => ({ n: i + 1, titulo: it.titulo, texto: it.texto })),
+        alt: 'Mockup esquemático com ' + itens.length + ' marcadores: ' + itens.map((it, i) => (i + 1) + ' ' + paineis[it.painel].rotulo).join('; ') + '.' };
+    };
+    const post = montarAnatomia(postPaineis, postItens, [
+      { cols: '2fr 1fr', ids: ['autor', 'grafico'], altura: '46px' },
+      { cols: '1fr', ids: ['texto'], altura: '52px' },
+      { cols: '2fr 1fr', ids: ['metricas', 'contrato'], altura: '46px' },
+      { cols: '1fr', ids: ['urgencia'], altura: '40px' },
+    ]);
+
+    // Tipos de token
+    const CATS = [
+      { id: 'ia', nome: 'IA / agentes de IA' }, { id: 'comunidade', nome: 'Comunidade / CTO' }, { id: 'cultural', nome: 'Memes orgânicos e culturais' },
+      { id: 'narrativa', nome: 'Narrativas virais' }, { id: 'figura-publica', nome: 'Figuras públicas' },
+    ];
+    const TIPOS = [
+      { id: 'agente-ia', nome: 'Token de agente de IA', categoria: 'ia', descricao: 'Um bot com personalidade própria posta sozinho nas redes e tem um token associado. O produto é o próprio personagem: o token vale enquanto o personagem chamar atenção.', comoReconhecer: 'Conta automatizada com identidade fixa, publicando sem parar, e um contrato divulgado na bio do perfil.', exemplos: ['Categoria consolidada desde 2024; os nomes específicos mudam a cada ciclo'], risco: 'alto', alerta: 'Automatizar posts é barato e não exige tecnologia própria. "Ter um agente" não é diferencial técnico nem garantia de nada.' },
+      { id: 'narrativa-ia', nome: 'Token de narrativa "IA" sem produto', categoria: 'ia', descricao: 'Usa a palavra IA no nome, na arte e no texto de divulgação, sem nenhum agente, modelo ou produto por trás. A IA é o marketing.', comoReconhecer: 'Site com jargão genérico, nenhum repositório público, nenhuma demonstração funcionando e roadmap cheio de trimestres vagos.', exemplos: [], risco: 'alto', alerta: 'Se você não consegue usar o produto em 30 segundos, o produto é o token.' },
+      { id: 'cto', nome: 'CTO (community takeover)', categoria: 'comunidade', descricao: 'O criador abandona o projeto e a comunidade assume: novas redes sociais, novo site, novos organizadores. O token continua o mesmo; quem cuida dele é que muda.', comoReconhecer: 'Anúncio público do takeover, contas oficiais transferidas e dev original sumido ou tendo renunciado ao controle.', exemplos: [], risco: 'alto', alerta: 'Nem todo CTO vinga. E o supply que o dev original tinha continua existindo — cheque se ele já vendeu ou se ainda pode vender.' },
+      { id: 'comunidade-nativa', nome: 'Token de comunidade nativa', categoria: 'comunidade', descricao: 'Nasce de um grupo que já existia antes do token: um servidor de Discord, um fórum, uma cena local. A comunidade não foi comprada, ela veio junto.', comoReconhecer: 'Histórico de conversa anterior ao lançamento, membros que se conhecem pelo nome e piadas internas antigas.', exemplos: [], risco: 'medio', alerta: 'Comunidade real reduz o risco de rug, mas não sustenta preço sozinha: atenção de fora ainda precisa chegar.' },
+      { id: 'meme-longa-duracao', nome: 'Meme cultural de longa duração', categoria: 'cultural', descricao: 'O meme existia e já era popular muito antes do token. O token é a expressão financeira de algo que a cultura carrega há anos.', comoReconhecer: 'O meme sobrevive fora do universo cripto — alguém que nunca ouviu falar de blockchain reconhece a imagem.', exemplos: ['DOGE — o meme do Shiba Inu é de 2013 e o token nasceu no mesmo ano'], risco: 'medio', alerta: 'Ser antigo não impede quedas de 90%. Só torna o desaparecimento total um pouco menos provável.' },
+      { id: 'mascote-do-ciclo', nome: 'Mascote do ciclo', categoria: 'cultural', descricao: 'Uma imagem específica viraliza (um chapéu, um bicho, um print) e vira token. Vive do ciclo em que nasceu e raramente sobrevive ao próximo.', comoReconhecer: 'Arte única e reconhecível, sem história anterior fora de cripto.', exemplos: ['WIF (dogwifhat) — memecoin de Solana nascida da imagem de um cão de gorro'], risco: 'alto', alerta: 'Dezenas de cópias com o mesmo nome e a mesma arte aparecem em horas. Confira sempre o contrato, nunca o nome nem a imagem.' },
+      { id: 'evento-noticia', nome: 'Token de evento ou notícia', categoria: 'narrativa', descricao: 'Nasce nas horas seguintes a um acontecimento: uma declaração, um vídeo, um escândalo. Aposta num pico curto de busca e de conversa.', comoReconhecer: 'Lançado poucos minutos depois da notícia; o nome copia a manchete.', exemplos: [], risco: 'alto', alerta: 'Janela de atenção curtíssima e vários tokens disputando o mesmo assunto. Costuma haver mais vendedor do que comprador já na primeira hora.' },
+      { id: 'tendencia-plataforma', nome: 'Token de tendência de plataforma', categoria: 'narrativa', descricao: 'Copia o formato do que está performando no launchpad da vez — mesmo tema, mesma estética, mesma mecânica — para pegar carona no fluxo de quem garimpa ali.', comoReconhecer: 'Vários tokens quase idênticos lançados no mesmo dia, na mesma plataforma.', exemplos: [], risco: 'alto', alerta: 'Você está competindo com bots que enxergam o lançamento antes de você.' },
+      { id: 'figura-oficial', nome: 'Token oficial de figura pública', categoria: 'figura-publica', descricao: 'Lançado, assinado ou publicamente endossado pela própria pessoa. Endosso real, risco real: os casos mais documentados de 2025 são exatamente desse tipo.', comoReconhecer: 'Anúncio nas contas oficiais e verificadas da própria pessoa.', exemplos: ['TRUMP', 'MELANIA', 'LIBRA — veja a aba "Casos reais"'], risco: 'alto', alerta: 'Endosso de celebridade concentra atenção num pico curto e depois a leva embora. Os três casos da aba "Casos reais" caíram mais de 90% do topo.' },
+      { id: 'figura-nao-oficial', nome: 'Token não-oficial com nome de terceiro', categoria: 'figura-publica', descricao: 'Usa nome, rosto ou marca de alguém sem autorização nenhuma, contando com a confusão para atrair compradores.', comoReconhecer: 'Nenhuma menção nas contas oficiais da pessoa; o contrato só circula em grupos e em respostas de posts.', exemplos: [], risco: 'alto', alerta: 'Impersonação é o padrão, não a exceção. Sem anúncio no canal oficial, assuma que é falso.' },
+    ];
+    const mapaTipos = CATS.map((c) => ({ id: c.id, nome: c.nome, ativo: S.categoria === c.id, borda: S.categoria === c.id ? '#7C3AED' : '#1F2733', fundo: S.categoria === c.id ? 'rgba(124,58,237,.15)' : '#141A24',
+      folhas: TIPOS.filter((t) => t.categoria === c.id).map((t) => ({ nome: t.nome, borda: RISCO[t.risco].borda, fundo: RISCO[t.risco].fundo, cor: '#9AA7B4' })) }));
+    const mapaTiposAlt = 'Tipos de token, 5 categorias e 10 tipos. ' + CATS.map((c) => c.nome + ': ' + TIPOS.filter((t) => t.categoria === c.id).map((t) => t.nome + ' (risco ' + t.risco + ')').join(', ')).join('. ');
+    const tiposFiltrados = TIPOS.filter((t) => S.categoria === 'todas' || t.categoria === S.categoria).map((t) => Object.assign({}, t, { temExemplos: t.exemplos.length > 0, riscoRotulo: RISCO[t.risco].rotulo, riscoBorda: RISCO[t.risco].borda, riscoFundo: RISCO[t.risco].fundo, riscoCor: RISCO[t.risco].cor }));
+    const catAtiva = CATS.find((c) => c.id === S.categoria);
+    const resultadoTipos = (S.categoria === 'todas' ? 'Todos os 10 tipos' : tiposFiltrados.length + ' tipo' + (tiposFiltrados.length === 1 ? '' : 's') + ' em "' + catAtiva.nome + '"') + '. Clique numa categoria do mapa para filtrar; clique de novo para ver todas.';
+
+    // Casos reais
+    const casos = [
+      { nome: 'OFFICIAL TRUMP', ticker: 'TRUMP', chain: 'Solana', data: 'Lançada em 17/01/2025', resumo: 'Em cerca de 24 horas virou a segunda maior memecoin do mercado, atrás apenas do Dogecoin. Depois despencou e passou a operar por uma fração do topo.', numeros: [{ rotulo: 'Pico de preço', valor: 'cerca de US$ 73 a US$ 75' }, { rotulo: 'Pico de market cap', valor: 'cerca de US$ 15 bilhões em ~24h' }, { rotulo: 'Posição atingida', valor: '2ª maior memecoin naquele momento' }, { rotulo: 'Queda registrada', valor: 'mais de 96% abaixo do topo (perto de US$ 2,27)' }], fontes: 'CoinGecko', licao: 'A atenção máxima aconteceu no primeiro dia. Quem chegou no segundo dia comprou de quem estava saindo.' },
+      { nome: 'MELANIA MEME', ticker: 'MELANIA', chain: 'Solana', data: 'Lançada em janeiro de 2025', resumo: 'Lançada poucos dias depois da TRUMP, aproveitando a mesma onda de atenção. A queda foi mais rápida e mais profunda.', numeros: [{ rotulo: 'Pico de preço', valor: 'cerca de US$ 13,73' }, { rotulo: 'Market cap: pico e depois', valor: 'de ~US$ 1,73 bilhão para ~US$ 164 milhões' }, { rotulo: 'Queda em 06/02/2025', valor: 'cerca de 90% (Bloomberg)' }, { rotulo: 'Queda acumulada', valor: 'mais de 99% do pico, até dezembro de 2025 (Messari)' }], fontes: 'Bloomberg (06/02/2025), Messari (dezembro de 2025)', licao: 'O segundo token da mesma narrativa aproveita a atenção que sobrou — e ela sobra por muito menos tempo.' },
+      { nome: 'LIBRA', ticker: 'LIBRA', chain: 'Solana', data: '14/02/2025, Argentina', resumo: 'Promovida publicamente pelo presidente argentino Javier Milei. Subiu e desabou no mesmo dia, com evidência on-chain de saques de insiders. Virou investigação de fraude na Argentina.', numeros: [{ rotulo: 'Pico de market cap', valor: 'cerca de US$ 4,56 bilhões em 14/02/2025' }, { rotulo: 'Queda', valor: 'cerca de 94%, para ~US$ 257 milhões, em cerca de 11 horas' }, { rotulo: 'Saques de insiders', valor: '~US$ 107 milhões por ~8 carteiras (Lookonchain)' }, { rotulo: 'Supply desbloqueado', valor: 'cerca de 82% já no lançamento (Bubblemaps)' }], fontes: 'Lookonchain, Bubblemaps', licao: 'Concentração de supply e endosso de autoridade na mesma operação: as duas coisas que você aprende a checar neste hub, falhando juntas em 11 horas.' },
+    ];
+    const marcosBase = [
+      { data: '17/01/2025', titulo: 'OFFICIAL TRUMP é lançada', texto: 'Em cerca de 24 horas vira a 2ª maior memecoin, com pico de market cap perto de US$ 15 bilhões. Quem chegou no segundo dia comprou de quem estava saindo.', tom: 'neutro' },
+      { data: '01/2025', titulo: 'MELANIA MEME é lançada', texto: 'Poucos dias depois da TRUMP. O arquivo registra só o mês.', tom: 'neutro' },
+      { data: '06/02/2025', titulo: 'MELANIA já caiu cerca de 90%', texto: 'Noticiado pela Bloomberg.', tom: 'alerta' },
+      { data: '14/02/2025', titulo: 'LIBRA é lançada na Argentina', texto: 'Pico de market cap de cerca de US$ 4,56 bilhões no mesmo dia. O pico de atenção durou horas.', tom: 'alerta' },
+      { data: '12/2025', titulo: 'MELANIA acumula queda de mais de 99% do pico', texto: 'Segundo a Messari, em dezembro de 2025. A TRUMP, mais de 96% abaixo do topo.', tom: 'alerta' },
+    ];
+    // O rótulo continua como está no arquivo. Para o espaçamento, uma data só com mês
+    // ancora no dia 1 ou, se isso cair antes do marco anterior, no próprio marco anterior —
+    // nunca num dia inventado.
+    const soMes = (d) => d.split('/').length === 2;
+    const ancoras = []; marcosBase.forEach((m, i) => { const d = this.parse(m.data); ancoras.push(i > 0 && d < ancoras[i - 1] ? ancoras[i - 1] : d); });
+    const linha = marcosBase.map((m, i) => { const prox = marcosBase[i + 1];
+      const dias = prox ? Math.round((ancoras[i + 1] - ancoras[i]) / 86400000) : 0;
+      const espaco = prox ? Math.min(96, 24 + dias * 0.22) : 0;
+      let intervalo = '';
+      if (prox) {
+        if (dias <= 0) intervalo = 'no mesmo mês';
+        else intervalo = (soMes(m.data) || soMes(prox.data) ? 'cerca de ' : '') + this.intervaloTexto(ancoras[i], ancoras[i + 1]);
+      }
+      return Object.assign({}, m, { cor: TOM[m.tom], temProximo: !!prox, espaco, intervalo, posIntervalo: Math.max(2, espaco / 2 - 12) }); });
+
+    // As 4 fases
+    const fasesBase = [
+      { numero: 1, nome: 'Lançamento', resumo: 'O token nasce. Liquidez fina, poucos holders, preço definido pela bonding curve ou pelo primeiro pool. Tudo acontece em minutos.', oQueVoceVe: ['Idade medida em minutos', 'Punhado de holders', 'Volume vindo de bots e snipers', 'Nenhum histórico para comparar'], oQueChecar: ['Alguém consegue tirar a liquidez? (No pump.fun, a pool pós-graduação é do protocolo; fora dele, trava não prova que é seguro.)', 'Mint e freeze authority foram revogadas?', 'Quanto os maiores holders detêm juntos?', 'Houve compras em bloco (bundles) no lançamento?'], armadilha: 'Comprar nos primeiros segundos disputando com bots que enxergam o lançamento antes de você e já estão posicionados quando a sua ordem chega.', risco: 'alto' },
+      { numero: 2, nome: 'Consolidação / Acumulação', resumo: 'O preço para de se mexer com violência e lateraliza. Quem estava só pelo pump vai embora; quem fica começa a virar comunidade.', oQueVoceVe: ['Preço lateral por horas ou dias', 'Volume caindo', 'Holders crescendo devagar', 'Conversa mais consistente e menos eufórica'], oQueChecar: ['A comunidade é gente de verdade ou são bots repetindo a mesma frase?', 'O dev continua presente e comunicando?', 'Existe alguma catálise concreta marcada para acontecer?'], armadilha: 'Confundir consolidação com garantia. Muito token lateraliza e morre exatamente ali, sem nunca ter uma fase 3.', risco: 'medio' },
+      { numero: 3, nome: 'Expansão por catálise', resumo: 'Um evento concreto traz atenção nova: uma listagem, um post de conta grande, a graduação para a DEX, uma narrativa que pega. O preço destrava.', oQueVoceVe: ['Salto de volume e de holders ao mesmo tempo', 'Menções aumentando fora do círculo original', 'Sequência de máximas cada vez mais altas'], oQueChecar: ['A catálise é a que você tinha previsto, ou é outra?', 'Seus alvos de realização parcial já estão definidos?', 'A liquidez aguenta você sair sem derrubar o preço?'], armadilha: 'Entrar aqui achando que ainda é a fase 2. Quem entra no meio da expansão está comprando de quem já vai realizar.', risco: 'medio' },
+      { numero: 4, nome: 'Degradação', resumo: 'A atenção migra para o próximo token. Sem atenção não há comprador; sem comprador o preço só tem um caminho.', oQueVoceVe: ['Volume caindo junto com o preço', 'Holders diminuindo', 'Grupo esvaziando ou virando reclamação', 'Máximas cada vez mais baixas'], oQueChecar: ['Eu compraria este token pelo preço de hoje?', 'Se a resposta é não, por que eu ainda estou dentro?'], armadilha: 'Custo afundado: segurar "até voltar". É nesta fase que a maior parte do capital de quem está começando é destruída.', risco: 'alto' },
+    ];
+    const fases = fasesBase.map((f, i) => { const atual = i === S.fase;
+      return { indice: i, numero: f.numero, nome: f.nome, atual, seta: i < fasesBase.length - 1, borda: atual ? '#7C3AED' : '#1F2733', fundo: atual ? 'rgba(124,58,237,.15)' : '#141A24', mFundo: atual ? '#22D3EE' : '#1F2733', mCor: atual ? '#0B0F17' : '#E6EDF3',
+        riscoRotulo: RISCO[f.risco].rotulo, riscoBorda: RISCO[f.risco].borda, riscoFundo: RISCO[f.risco].fundo, riscoCor: RISCO[f.risco].cor }; });
+    const grade = (frase, grupos, fonte, exato, credito, contestacao) => { const celulas = []; grupos.forEach((g) => { for (let i = 0; i < g.quantidade; i++) celulas.push(g.cor); }); while (celulas.length < 100) celulas.push('#1F2733');
+      return { frase, grupos, fonte, exato, credito, contestacao, celulas, alternativa: frase + ' Número exato: ' + exato + ' (' + credito + '). ' + grupos.map((g) => g.quantidade + ' — ' + g.rotulo).join('; ') + (contestacao ? ' ' + contestacao : '') }; };
+    const grades = [
+      grade('Pela régua "parou de negociar": 69 de cada 100 param no mesmo dia em que nasceram.', [{ rotulo: 'param no mesmo dia', quantidade: 69, cor: '#EF4444' }, { rotulo: 'seguem para o dia seguinte', quantidade: 31, cor: '#1F2733' }],
+        'Número exato: 68,67% — 69 de 100 é o arredondamento que a grade desenha. Fonte: CoinGecko Research, 18,67 milhões de tokens, jan/2024–jun/2026. Em até dois dias, 80,37%; só 4,55% seguem negociando depois de 90 dias.',
+        '68,67%', 'CoinGecko Research · 18,67 mi de tokens', ''),
+      grade('Pela régua "liquidez abaixo de US$ 1.000": 99 de cada 100.', [{ rotulo: 'ficam sem liquidez', quantidade: 99, cor: '#EF4444' }, { rotulo: 'restante', quantidade: 1, cor: '#1F2733' }],
+        'Número exato: 98,6% — 99 de 100 é o arredondamento que a grade desenha. Fonte: Solidus Labs, pela liquidez abaixo de US$ 1.000. A régua muda o número: uma mede parar de negociar, a outra mede colapso de liquidez.',
+        '98,6%', 'Solidus Labs · liquidez abaixo de US$ 1.000', 'A pump.fun contestou publicamente este relatório, dizendo que ele "carece de entendimento básico de memecoins" (CoinDesk, 07/05/2025). O número mede colapso de liquidez, não fraude provada.'),
+    ];
+
+    // Quiz
+    const porque = {
+      q1: { a: 'Memecoin não tem produto nem receita por trás.', c: 'Não existe reserva que garanta preço mínimo.', d: 'Desenvolvedor não sustenta preço de memecoin; muitas nem têm código além do próprio token.' },
+      q2: { a: 'Custo afundado é segurar o que já caiu para não "assumir" a perda; aqui você nem tem posição.', b: 'Efeito disposição é vender o que sobe e segurar o que cai; aqui ainda não há posição.', d: 'Excesso de confiança é achar que sabe mais do que sabe; o gatilho aqui é o gráfico subindo sem você.' },
+      q3: { a: 'Nenhuma corretora cobra aluguel por posição aberta em token.', c: 'Tokens não expiram.', d: 'Na maioria das memecoins o preço não volta: a atenção foi embora.' },
+      q4: { a: 'Endosso concentra atenção num pico curto; os três caíram mais de 90%.', b: 'Esperar o anúncio oficial é chegar quando quem entrou antes já está vendendo.', d: 'Não foram proibidas; caíram porque a atenção foi embora.' },
+    };
+    const Q = (id, pergunta, alts, correta, explicacao) => ({ id, pergunta, correta, explicacao, alternativas: alts.map(([aid, texto]) => Object.assign({ id: aid, texto }, porque[id][aid] ? { porque: porque[id][aid] } : {})) });
+    const todas = [
+      Q('q1', 'O que sustenta o preço de uma memecoin?', [['a', 'O lucro e a receita do projeto por trás dela.'], ['b', 'A atenção coletiva: quantas pessoas estão falando e comprando ao mesmo tempo.'], ['c', 'Uma reserva de dólares que garante um valor mínimo.'], ['d', 'O número de desenvolvedores trabalhando no código.']], 'b', 'Memecoin não tem produto nem receita. O preço é função direta da atenção — e atenção migra. Quando ela vai para o próximo token, o preço vai junto.'),
+      Q('q2', 'Um token subiu 300% na última hora. Você nunca tinha ouvido falar dele e sente que precisa comprar agora, antes que suba mais. Qual viés está agindo?', [['a', 'Custo afundado.'], ['b', 'Efeito disposição.'], ['c', 'FOMO: o medo de ficar de fora, disparado justamente pelo preço já ter subido.'], ['d', 'Excesso de confiança.']], 'c', 'FOMO é "fear of missing out". Ele leva à compra no topo, porque o gatilho é o preço já ter subido. O antídoto é o tempo de espera entre querer comprar e comprar.'),
+      Q('q3', 'Por que segurar uma posição por tempo demais na fase de Degradação destrói capital?', [['a', 'Porque a corretora cobra aluguel diário por posição aberta.'], ['b', 'Porque o viés de custo afundado transforma a decisão em "esperar voltar", enquanto a atenção — e o comprador — já foi embora.'], ['c', 'Porque os tokens expiram automaticamente depois de 30 dias.'], ['d', 'Porque o preço sempre volta ao topo se você esperar o suficiente.']], 'b', 'O dinheiro já perdido não volta por você segurar. A pergunta útil é "eu compraria isso pelo preço de hoje?". É assim que uma queda de 30% vira uma perda de 100%.'),
+      Q('q4', 'O que os casos TRUMP, MELANIA e LIBRA ensinam?', [['a', 'Que tokens de figuras públicas são a opção mais segura, por causa do endosso.'], ['b', 'Que basta esperar o anúncio oficial para lucrar com segurança.'], ['c', 'Que endosso de celebridade concentra atenção num pico curto e não garante durabilidade: os três caíram mais de 90% do topo.'], ['d', 'Que memecoins de políticos são proibidas e por isso caem.']], 'c', 'TRUMP passou a operar mais de 96% abaixo do topo (CoinGecko); MELANIA caiu cerca de 99% do pico (Bloomberg, Messari); LIBRA perdeu ~94% em cerca de 11 horas e virou investigação de fraude na Argentina. Atenção que chega de repente também vai embora de repente.'),
+    ];
+    const quiz = { todas }; todas.forEach((p) => { quiz[p.id] = [p]; });
+
+    const ids = ABAS.map((a) => a.id);
+    return {
+      mostrarSidebar: !compacto, paddingMain: compacto ? '20px 16px' : '32px 24px',
+      dirMapa: compacto ? 'column' : 'row', alinhaMapa: compacto ? 'stretch' : 'center', trunkW: compacto ? '2px' : '32px', trunkH: compacto ? '20px' : '2px', trunkML: compacto ? '24px' : '0',
+      dirSeq: compacto ? 'column' : 'row', colsDois: compacto ? '1fr' : '1fr 1fr', colsTres: compacto ? '1fr' : '1fr 1fr 1fr', colsAnatomia: compacto ? '1fr' : '1fr 1fr', minPasso: compacto ? '0' : '150px', minMapaTipos: compacto ? '0' : '640px',
+      abas, mapa, eh, objetivos, destaques, atencaoAlt, laco, antidoto, antidotoAlt, vieses, fomo, post,
+      mapaTipos, mapaTiposAlt, tiposFiltrados, resultadoTipos, casos, linha,
+      fases, fase: fasesBase[S.fase], desfecho: 'Maioria vai a zero', grades, quiz,
+      irParaAba: (e) => { this.setState({ aba: e.currentTarget.dataset.aba }); },
+      teclaAba: (e) => { const i = ids.indexOf(this.state.aba); let n = i; if (e.key === 'ArrowRight') n = (i + 1) % ids.length; else if (e.key === 'ArrowLeft') n = (i - 1 + ids.length) % ids.length; else if (e.key === 'Home') n = 0; else if (e.key === 'End') n = ids.length - 1; else return; e.preventDefault(); this.setState({ aba: ids[n] }); const btn = e.currentTarget.querySelectorAll('[role="tab"]')[n]; if (btn) btn.focus(); },
+      escolherFase: (e) => this.setState({ fase: Number(e.currentTarget.dataset.indice) }),
+      escolherCategoria: (e) => { const c = e.currentTarget.dataset.categoria; this.setState((st) => ({ categoria: st.categoria === c ? 'todas' : c })); },
+    };
+  }
+}
+</script>
+</body>
+</html>

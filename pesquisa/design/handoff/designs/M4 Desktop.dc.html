@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}h1,h2,h3,p,li,dd,dt,td,th{overflow-wrap:break-word}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}.omh-range{-webkit-appearance:none;appearance:none;width:100%;height:24px;background:transparent;cursor:pointer}.omh-range::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:#10151E;border:1px solid #1F2733}.omh-range::-moz-range-track{height:6px;border-radius:999px;background:#10151E;border:1px solid #1F2733}.omh-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;margin-top:-8px;border-radius:50%;background:#7C3AED;border:2px solid #E6EDF3}.omh-range::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#7C3AED;border:2px solid #E6EDF3}.omh-range:focus-visible{outline:none}.omh-range:focus-visible::-webkit-slider-thumb{outline:2px solid #22D3EE;outline-offset:2px}.omh-range:focus-visible::-moz-range-thumb{outline:2px solid #22D3EE;outline-offset:2px}</style></helmet>
+<div style="display:flex;min-height:100vh;align-items:flex-start">
+<sc-if value="{{ mostrarSidebar }}" hint-placeholder-val="{{ true }}">
+<aside aria-label="Rotas do hub" style="position:sticky;top:0;width:16rem;flex:0 0 16rem;height:100vh;box-sizing:border-box;border-right:1px solid #1F2733;background:#141A24;padding:20px 16px;display:flex;flex-direction:column;gap:4px;font-size:14px">
+<p style="margin:0 0 12px;font-weight:600;font-size:14px">onchain-mastery-hub</p>
+<a href="#/inicio" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Início</a>
+<a href="#/modulo-1" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M1 Fundamentos &amp; Segurança</a>
+<a href="#/modulo-2" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M2 Psicologia</a>
+<a href="#/modulo-3" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M3 Os dois pilares</a>
+<a href="#/modulo-4" aria-current="page" style="display:block;border-radius:8px;padding:8px 12px;color:#E6EDF3;background:rgba(124,58,237,.15);border:1px solid #7C3AED;text-decoration:none;font-weight:600">M4 Gestão &amp; decisão</a>
+<a href="#/modulo-5" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M5 Execução</a>
+<a href="#/modulo-6" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M6 Ler a tela</a>
+<a href="#/modulo-7" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M7 A rotina</a>
+<div style="height:1px;background:#1F2733;margin:8px 0"></div>
+<a href="#/glossario" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Glossário</a>
+<a href="#/checklist" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Checklist antes de comprar</a>
+<a href="#/revisao" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Revisão</a>
+</aside>
+</sc-if>
+<main id="conteudo" style="flex:1 1 auto;min-width:0">
+<div style="max-width:868px;margin:0 auto;padding:{{ paddingMain }};display:flex;flex-direction:column;gap:24px">
+
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Módulo 4</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">Gestão, catálises &amp; tomada de decisão</h1>
+<p style="margin:8px 0 0;color:#9AA7B4;text-wrap:pretty">Este módulo é sobre a única parte que depende só de você: decidir antes, por escrito, e cumprir o que decidiu — na entrada e, principalmente, na saída.</p>
+</header>
+
+<section aria-label="Mapa do módulo" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<p style="margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">O módulo inteiro numa olhada</p>
+<div style="display:flex;flex-direction:{{ dirMapa }};align-items:{{ alinhaMapa }};border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px">
+<div style="flex:0 0 auto;border-radius:12px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:14px 18px;max-width:220px">
+<p style="margin:0;font-size:1.125rem;font-weight:600;line-height:1.3">Gestão &amp; decisão</p>
+<p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">Decidir antes, por escrito</p>
+</div>
+<div aria-hidden="true" style="flex:0 0 auto;width:{{ trunkW }};height:{{ trunkH }};background:#1F2733;margin-left:{{ trunkML }}"></div>
+<ul style="list-style:none;margin:0;padding:0;border-left:2px solid #1F2733;display:flex;flex-direction:column;gap:12px;flex:1 1 auto;min-width:0;margin-left:{{ trunkML }}">
+<sc-for list="{{ mapa }}" as="r" hint-placeholder-count="5">
+<li style="position:relative;padding-left:24px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px" style-before="content:'';position:absolute;left:0;top:19px;width:24px;height:2px;background:#1F2733">
+<button type="button" data-aba="{{ r.aba }}" onClick="{{ irParaAba }}" style="min-height:40px;border-radius:8px;border:1px solid {{ r.borda }};background:{{ r.fundo }};padding:6px 12px;font-size:14px;font-weight:600;color:#E6EDF3;cursor:pointer;text-align:left" style-hover="border-color:#9AA7B4">{{ r.titulo }} →</button>
+<sc-for list="{{ r.folhas }}" as="f" hint-placeholder-count="3"><span style="border-radius:999px;border:1px solid #1F2733;padding:2px 10px;font-size:13px;color:#9AA7B4">{{ f }}</span></sc-for>
+</li>
+</sc-for>
+</ul>
+</div>
+</section>
+
+<div role="tablist" aria-label="Seções do Módulo 4" onKeyDown="{{ teclaAba }}" style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ abas }}" as="a" hint-placeholder-count="5">
+<button type="button" role="tab" id="aba-{{ a.id }}" aria-selected="{{ a.ativa }}" aria-controls="painel-{{ a.id }}" tabindex="{{ a.tabindex }}" data-aba="{{ a.id }}" onClick="{{ irParaAba }}" style="min-height:44px;border-radius:8px;border:1px solid {{ a.borda }};background:{{ a.fundo }};padding:8px 16px;font-size:14px;font-weight:600;color:#E6EDF3;cursor:pointer" style-hover="border-color:#9AA7B4">{{ a.rotulo }}</button>
+</sc-for>
+</div>
+
+<!-- ============ TESE VS CATÁLISE ============ -->
+<sc-if value="{{ eh.tese }}" hint-placeholder-val="{{ true }}">
+<div id="painel-tese" role="tabpanel" aria-labelledby="aba-tese" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.tese }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Tese vs. catálise: as duas frases que faltam antes de comprar</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">A tese responde "por que este token?". A catálise responde "por que agora?". Você precisa das duas.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ duasFrasesAlt }}" style="display:grid;grid-template-columns:{{ colsDois }};gap:16px">
+<sc-for list="{{ duasFrases }}" as="f" hint-placeholder-count="2">
+<div style="border-radius:8px;border:1px solid {{ f.borda }};background:{{ f.fundo }};padding:16px;display:flex;flex-direction:column;gap:10px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:{{ f.cor }}">{{ f.nome }}</p>
+<p style="margin:0;font-size:16px;font-weight:600">{{ f.pergunta }}</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">{{ f.oQueE }}</p>
+<div style="margin-top:auto;padding-top:8px;border-top:1px solid #1F2733"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">Sozinha</p><p style="margin:2px 0 0;font-size:13px">{{ f.sozinha }}</p></div>
+</div>
+</sc-for>
+</div>
+<div aria-hidden="true" style="display:flex;justify-content:center;margin-top:12px"><span style="color:#9AA7B4">↓</span></div>
+<div style="border-radius:8px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);padding:12px 16px;font-size:14px"><strong style="color:#E6EDF3">As duas juntas viram o seu critério de saída. </strong>Se a catálise aconteceu e o preço não reagiu, a tese estava errada. Se a catálise foi cancelada, o motivo da posição sumiu. Nos dois casos, a decisão já está tomada — por você com a cabeça fria, e não às três da manhã com o gráfico caindo.</div>
+</figure>
+<div style="border-radius:8px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.12);padding:14px 16px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Regra de ouro</p>
+<p style="margin:6px 0 0;font-size:15px">Antes de entrar, escreva duas frases: (a) a tese — por que este token? e (b) a catálise esperada — qual evento concreto precisa acontecer para ele valorizar. Se você não consegue escrever a segunda frase, não é operação: é aposta.</p>
+</div>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m4-check-q1" titulo="Pergunta rápida" perguntas="{{ quiz.q1 }}" hint-size="100%,320px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">A anatomia de um plano</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Todos os níveis são escritos antes de entrar. Não há gráfico de preço aqui de propósito: o plano não depende de prever o caminho.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ plano.alt }}" style="display:flex;flex-direction:column;gap:0">
+<sc-for list="{{ plano.niveis }}" as="n" hint-placeholder-count="4">
+<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:{{ n.linha }}">
+<span style="flex:0 0 {{ larguraNivel }};font-size:14px;font-weight:600;color:{{ n.cor }}">{{ n.rotulo }}</span>
+<span style="flex:1 1 auto;min-width:0;font-size:14px;color:#9AA7B4">{{ n.detalhe }}</span>
+<span aria-hidden="true" style="flex:0 0 {{ n.marca }};height:6px;border-radius:3px;background:{{ n.barra }}"></span>
+</div>
+</sc-for>
+</div>
+<p style="margin:14px 0 0;border-radius:6px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:8px 12px;font-size:14px">{{ plano.restante }}</p>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">O plano não depende de prever o caminho — depende de ter os níveis decididos por você frio, para serem cumpridos por você sob pressão.</figcaption>
+</figure>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+<sc-for list="{{ fichaCampos }}" as="c" hint-placeholder-count="5">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+<p style="margin:0;font-size:14px;font-weight:600;color:#22D3EE">{{ c.rotulo }}</p>
+<p style="margin:0;font-size:14px">{{ c.pergunta }}</p>
+<div aria-hidden="true" style="height:1px;background:#1F2733;margin:2px 0"></div>
+<p style="margin:0;font-size:13px;color:#9AA7B4">{{ c.exemplo }}</p>
+</div>
+</sc-for>
+</div>
+<p style="margin:0;color:#9AA7B4">Copie estes cinco campos para o seu caderno de trades e preencha antes de cada entrada. Leva dois minutos e é o que separa uma decisão de um impulso.</p>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Tese fraca × tese que dá para invalidar</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">A diferença não é a qualidade da escrita: é existir um evento com data que possa falhar.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;overflow-x:auto" tabindex="0" role="group" aria-label="Três exemplos de tese e catálise (role na horizontal se preciso)">
+<table style="border-collapse:collapse;width:100%;min-width:640px;font-size:14px">
+<thead><tr>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Exemplo</th>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Tese</th>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Catálise</th>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733;border-left:2px solid #22D3EE">Dá para invalidar?</th>
+</tr></thead>
+<tbody>
+<sc-for list="{{ exemplosTese }}" as="e" hint-placeholder-count="3">
+<tr style="background:{{ e.fundoLinha }}">
+<th scope="row" style="text-align:left;padding:10px 12px;border-bottom:1px solid #1F2733;vertical-align:top"><span style="border-radius:999px;border:1px solid {{ e.borda }};background:{{ e.fundo }};color:{{ e.cor }};padding:1px 10px;font-size:12px;font-weight:600;white-space:nowrap">{{ e.rotulo }}</span></th>
+<td style="padding:10px 12px;border-bottom:1px solid #1F2733;color:#9AA7B4;vertical-align:top">{{ e.tese }}</td>
+<td style="padding:10px 12px;border-bottom:1px solid #1F2733;color:#9AA7B4;vertical-align:top">{{ e.catalise }}</td>
+<td style="padding:10px 12px;border-bottom:1px solid #1F2733;vertical-align:top;border-left:2px solid #22D3EE;color:{{ e.veredCor }}">{{ e.veredito }}</td>
+</tr>
+</sc-for>
+</tbody></table>
+</div>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O mapa das catálises — e o que costuma dar errado em cada uma</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Toda catálise tem um lado que trabalha contra você. Saber qual é muda o tamanho e o prazo da posição.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px;overflow-x:auto" tabindex="0" role="group" aria-label="Mapa das catálises (role na horizontal se preciso)">
+<div role="img" aria-label="{{ mapaCatalisesAlt }}" style="display:flex;flex-direction:{{ dirMapa }};align-items:{{ alinhaMapa }};min-width:{{ minMapa }}">
+<div style="flex:0 0 auto;border-radius:12px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:14px 18px;max-width:190px">
+<p style="margin:0;font-size:15px;font-weight:600">Catálise</p>
+<p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">"por que agora?"</p>
+</div>
+<div aria-hidden="true" style="flex:0 0 auto;width:{{ trunkW }};height:{{ trunkH }};background:#1F2733;margin-left:{{ trunkML }}"></div>
+<ul style="list-style:none;margin:0;padding:0;border-left:2px solid #1F2733;display:flex;flex-direction:column;gap:10px;flex:1 1 auto;min-width:0;margin-left:{{ trunkML }}">
+<sc-for list="{{ catalises }}" as="c" hint-placeholder-count="5">
+<li style="position:relative;padding-left:24px" style-before="content:'';position:absolute;left:0;top:22px;width:24px;height:2px;background:#1F2733">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 14px;display:flex;flex-direction:column;gap:6px">
+<p style="margin:0;font-size:14px;font-weight:600">{{ c.nome }}</p>
+<p style="margin:0;font-size:13px;color:#9AA7B4">{{ c.descricao }}</p>
+<p style="margin:0;border-radius:6px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:6px 10px;font-size:13px"><strong style="color:#F59E0B">O que dá errado: </strong>{{ c.alerta }}</p>
+</div>
+</li>
+</sc-for>
+</ul>
+</div>
+</div>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ TAKE PROFIT ============ -->
+<sc-if value="{{ eh.take }}" hint-placeholder-val="{{ false }}">
+<div id="painel-take" role="tabpanel" aria-labelledby="aba-take" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.takeProfit }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">A escada de realização, faixa a faixa</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">O lucro que você não realizou não é seu. Nenhuma faixa depende de prever o topo — a escada existe justamente porque ninguém acerta o topo de forma consistente.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<ol role="img" aria-label="{{ escadaAlt }}" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+<sc-for list="{{ escada }}" as="f" hint-placeholder-count="3">
+<li style="display:flex;flex-direction:column">
+<div style="border-radius:8px;border:1px solid {{ f.borda }};background:{{ f.fundo }};padding:12px 16px;display:flex;gap:12px;align-items:flex-start;margin-left:{{ f.recuo }}">
+<span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ f.n }}</span>
+<span style="min-width:0"><span style="display:block;font-size:14px;font-weight:600">{{ f.alvo }} — {{ f.acao }}</span><span style="display:block;margin-top:4px;font-size:14px;color:#9AA7B4">{{ f.porque }}</span></span>
+</div>
+<sc-if value="{{ f.liga }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="width:2px;height:14px;background:#1F2733;margin-left:calc({{ f.recuo }} + 23px)"></span></sc-if>
+</li>
+</sc-for>
+</ol>
+<figcaption style="margin:14px 0 0;font-size:13px;color:#9AA7B4">Exemplo didático da estrutura — não é sugestão de onde vender. O que importa é o formato: faixas definidas antes, cada uma com um motivo, e a última com regra de saída escrita. <span style="border-radius:999px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);color:#F59E0B;padding:1px 10px;font-size:12px;font-weight:600">exemplo didático</span></figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">Realização parcial resolve o problema sem exigir que você acerte o topo. Você vende uma faixa e recupera o valor investido; o que sobra passa a correr por conta do lucro. A posição continua na mesa, mas o medo sai dela — e é o medo que piora as decisões.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m4-check-q2" titulo="Pergunta rápida" perguntas="{{ quiz.q2 }}" hint-size="100%,340px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Mexa nos alvos e veja onde a posição para</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">A primeira faixa vende exatamente o que recupera o investido — por isso ela não é um controle, é a definição.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:grid;grid-template-columns:{{ colsDois }};gap:20px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:14px">
+<sc-for list="{{ controlesDegraus }}" as="c" hint-placeholder-count="3">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><label for="m4-{{ c.id }}" style="font-size:14px;color:#9AA7B4">{{ c.rotulo }}</label><output for="m4-{{ c.id }}" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:600">{{ c.texto }}</output></div>
+<input id="m4-{{ c.id }}" class="omh-range" type="range" min="{{ c.min }}" max="{{ c.max }}" step="{{ c.passo }}" value="{{ c.valor }}" aria-valuetext="{{ c.texto }}" data-id="{{ c.id }}" onInput="{{ mudarDegrau }}" onChange="{{ mudarDegrau }}" style="width:100%;margin-top:4px">
+</div>
+</sc-for>
+<p style="margin:0;font-size:13px;color:#9AA7B4">Exemplo didático da estrutura — os números são estrutura, não recomendação.</p>
+</div>
+<figure style="margin:0">
+<p style="margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Como a posição se reparte</p>
+<div role="img" aria-label="{{ degraus.alt }}" style="display:flex;flex-direction:column;gap:14px">
+<sc-for list="{{ degraus.barras }}" as="b" hint-placeholder-count="3">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span style="font-size:14px">{{ b.rotulo }}</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-variant-numeric:tabular-nums">{{ b.valorTexto }}</span></div>
+<div style="margin-top:6px;height:22px;background:#141A24;border-radius:4px;overflow:hidden"><div style="height:100%;width:{{ b.largura }}%;background:{{ b.cor }}"></div></div>
+<p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">{{ b.nota }}</p>
+</div>
+</sc-for>
+</div>
+<div aria-live="polite" style="margin-top:14px;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<div><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Realizado ao chegar no 2º alvo</p><p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.25rem;font-weight:700;font-variant-numeric:tabular-nums">{{ degraus.realizadoTexto }}</p><p style="margin:2px 0 0;font-size:12px;color:#9AA7B4">do valor investido</p></div>
+<div><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Pior caso, com o restante a zero</p><p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.25rem;font-weight:700;font-variant-numeric:tabular-nums;color:{{ degraus.piorCor }}">{{ degraus.piorTexto }}</p><p style="margin:2px 0 0;font-size:12px;color:#9AA7B4">{{ degraus.piorNota }}</p></div>
+</div>
+</figure>
+</div>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O que uma perda exige de volta</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Perder e recuperar não são simétricos. Uma perda pequena e planejada custa pouco; um rombo custa um múltiplo.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:grid;grid-template-columns:{{ colsDois }};gap:20px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><label for="m4-perda" style="font-size:14px;color:#9AA7B4">Perda sobre a posição</label><output for="m4-perda" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:600">{{ rec.perdaTexto }}</output></div>
+<input id="m4-perda" class="omh-range" type="range" min="5" max="95" step="5" value="{{ perda }}" aria-valuetext="{{ rec.perdaTexto }}" onInput="{{ mudarPerda }}" onChange="{{ mudarPerda }}" style="width:100%;margin-top:4px">
+</div>
+<div aria-live="polite" style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:12px 14px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Ganho necessário só para voltar ao ponto de partida</p><p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.75rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums;color:{{ rec.cor }}">{{ rec.ganhoTexto }}</p></div>
+<p style="margin:0;font-size:13px;color:#9AA7B4">Fórmula: ganho necessário = 1 ÷ (1 − perda) − 1. É por isso que o ponto de invalidação existe.</p>
+</div>
+<figure style="margin:0">
+<p style="margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Na mesma escala</p>
+<div role="img" aria-label="{{ rec.alt }}" style="display:flex;flex-direction:column;gap:14px">
+<div><div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><span style="font-size:14px">A perda</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">{{ rec.perdaTexto }}</span></div><div style="margin-top:6px;height:22px;background:#141A24;border-radius:4px;overflow:hidden"><div style="height:100%;width:{{ rec.larguraPerda }}%;background:#EF4444"></div></div></div>
+<div><div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><span style="font-size:14px">O ganho para voltar</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">{{ rec.ganhoTexto }}</span></div><div style="margin-top:6px;height:22px;background:#141A24;border-radius:4px;overflow:hidden"><div style="height:100%;width:{{ rec.larguraGanho }}%;background:#7C3AED"></div></div><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">{{ rec.nota }}</p></div>
+</div>
+<figcaption style="margin-top:12px;font-size:13px;color:#9AA7B4">As duas barras usam a mesma escala, de 0 a {{ rec.tetoTexto }} — escolha de escala desta tela, não um número do arquivo. A partir de {{ rec.limiarTexto }} de perda, o ganho necessário passa desse teto e a barra fica no limite; é isso que o custo afundado produz.</figcaption>
+</figure>
+</div>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O erro de segurar demais (e por que ele parece racional na hora)</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">O dinheiro já foi gasto de qualquer jeito. A única pergunta que importa: você compraria este token, neste preço, hoje?</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ segurar.alt }}" style="display:flex;flex-direction:column;align-items:center">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 16px;font-size:14px;font-weight:600;text-align:center">A posição está em prejuízo, na fase de Degradação</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 16px;font-size:14px;font-weight:600;text-align:center;max-width:420px">Você compraria este token, neste preço, hoje?</div>
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:16px;width:100%;max-width:620px">
+<sc-for list="{{ segurar.ramos }}" as="r" hint-placeholder-count="2">
+<div style="display:flex;flex-direction:column;align-items:center">
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+<span style="border-radius:999px;border:1px solid {{ r.borda }};background:{{ r.fundo }};color:{{ r.cor }};padding:1px 10px;font-size:12px;font-weight:600">{{ r.rotulo }}</span>
+<sc-for list="{{ r.nos }}" as="n" hint-placeholder-count="2">
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+<div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid {{ n.borda }};background:{{ n.fundo }};padding:10px 14px;font-size:14px;text-align:center;color:{{ n.cor }};font-weight:{{ n.peso }}">{{ n.texto }}</div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</div>
+<figcaption style="margin:16px 0 0;font-size:13px;color:#9AA7B4">Na Degradação a liquidez seca porque a atenção foi embora: cada tentativa de venda encontra um livro de ofertas mais fino que o do dia anterior. O preço não cai por acaso — cai porque ninguém está mais olhando.</figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">Esse erro, diferente de quase tudo neste mercado, não depende do token, da chain nem da sorte. Depende só de não ter escrito a regra antes.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: realizou lucro no Brasil? O que vem depois (informativo)</summary>
+<p style="margin:8px 0 0;border-radius:6px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:8px 12px;font-size:14px">Esta seção é informativa e NÃO é aconselhamento tributário. Regras mudam com frequência e há divergência entre fontes — confirme tudo com um contador especializado antes de declarar qualquer coisa.</p>
+<dl style="margin:12px 0 0;display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ tributacao }}" as="t" hint-placeholder-count="5"><div><dt style="font-size:14px;font-weight:600">{{ t.rotulo }}</dt><dd style="margin:2px 0 0;font-size:14px;color:#9AA7B4">{{ t.texto }}</dd></div></sc-for>
+</dl></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m4-check-q3" titulo="Pergunta rápida" perguntas="{{ quiz.q3 }}" hint-size="100%,340px"></x-import>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ ANTES DE ENTRAR ============ -->
+<sc-if value="{{ eh.checagens }}" hint-placeholder-val="{{ false }}">
+<div id="painel-checagens" role="tabpanel" aria-labelledby="aba-checagens" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.checagens }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">As seis checagens que vêm antes da tese</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Qualquer resposta ruim aqui derruba a operação, por melhor que a narrativa esteja. Cada "não" leva ao mesmo lugar.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ checagens.alt }}" style="display:flex;flex-direction:column;gap:0">
+<sc-for list="{{ checagens.passos }}" as="c" hint-placeholder-count="6">
+<div style="display:grid;grid-template-columns:{{ colsChecagem }};gap:12px;align-items:start">
+<div style="display:flex;flex-direction:column;align-items:stretch">
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 14px;display:flex;gap:10px;align-items:flex-start">
+<span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ c.n }}</span>
+<span style="min-width:0"><span style="display:block;font-size:14px;font-weight:600">{{ c.pergunta }}</span><span style="display:block;margin-top:4px;font-size:13px;color:#9AA7B4">{{ c.porque }}</span><span style="display:block;margin-top:4px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#22D3EE">{{ c.onde }}</span></span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;padding:4px 0 4px 16px"><span aria-hidden="true" style="width:2px;height:20px;background:#9AA7B4"></span><span style="border-radius:999px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);color:#22C55E;padding:0 8px;font-size:12px;font-weight:600">Resposta boa: siga</span></div>
+</div>
+<div style="display:flex;align-items:flex-start;gap:8px">
+<span aria-hidden="true" style="color:#9AA7B4;flex:0 0 auto;padding-top:10px">→</span>
+<div style="flex:1 1 auto;min-width:0;border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:10px 14px;font-size:14px;color:#F87171"><span style="display:block;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">Alerta: não entra</span>{{ c.alerta }}</div>
+</div>
+</div>
+</sc-for>
+<div style="border-radius:8px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);padding:10px 14px;font-size:14px;font-weight:600;max-width:{{ larguraFim }}">Passou nas seis: agora sim, escreva a tese e a catálise. Passar não aprova o token — só quer dizer que ele não mostrou os problemas que dá para ver.</div>
+</div>
+</figure>
+<p style="margin:0;color:#9AA7B4">Tese e catálise só importam se o contrato por trás resistir a uma checagem. Estas seis perguntas são a peneira do Módulo 3 aplicada à decisão.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m4-check-q4" titulo="Pergunta rápida" perguntas="{{ quiz.q4 }}" hint-size="100%,340px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Quanto da carteira pode ir numa posição</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Quanto mais longe a invalidação, menor a posição — é aritmética, não opinião.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:grid;grid-template-columns:{{ colsDois }};gap:20px;align-items:start">
+<div style="display:flex;flex-direction:column;gap:14px">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><label for="m4-risco" style="font-size:14px;color:#9AA7B4">Risco aceito por operação (% do capital)</label><output for="m4-risco" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:600">{{ tam.riscoTexto }}</output></div>
+<input id="m4-risco" class="omh-range" type="range" min="0.5" max="10" step="0.5" value="{{ risco }}" aria-valuetext="{{ tam.riscoTexto }}" onInput="{{ mudarRisco }}" onChange="{{ mudarRisco }}" style="width:100%;margin-top:4px">
+</div>
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><label for="m4-inval" style="font-size:14px;color:#9AA7B4">Ponto de invalidação (queda desde a entrada)</label><output for="m4-inval" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:600">{{ tam.invalTexto }}</output></div>
+<input id="m4-inval" class="omh-range" type="range" min="5" max="100" step="5" value="{{ invalidacao }}" aria-valuetext="{{ tam.invalTexto }}" onInput="{{ mudarInval }}" onChange="{{ mudarInval }}" style="width:100%;margin-top:4px">
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<button type="button" data-valor="100" onClick="{{ atalhoInval }}" style="min-height:40px;border-radius:8px;border:1px solid {{ tam.bordaZero }};background:{{ tam.fundoZero }};color:#E6EDF3;padding:8px 12px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">Pode ir a zero (100%)</button>
+<button type="button" data-valor="50" onClick="{{ atalhoInval }}" style="min-height:40px;border-radius:8px;border:1px solid #1F2733;background:#141A24;color:#E6EDF3;padding:8px 12px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">Cai pela metade (50%)</button>
+</div>
+<p style="margin:0;font-size:13px;color:#9AA7B4">Fórmula: tamanho = risco ÷ invalidação. A conta não diz quanto risco aceitar — isso é decisão sua e depende da sua vida, não do mercado.</p>
+</div>
+<div aria-live="polite" style="display:flex;flex-direction:column;gap:12px">
+<div style="border-radius:8px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.12);padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">A sua regra implica</p><p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:2rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums">{{ tam.tamanhoTexto }}</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">do capital nesta posição</p></div>
+<figure style="margin:0" role="img" aria-label="{{ tam.alt }}">
+<p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">A posição dentro do capital</p>
+<div style="height:28px;background:#141A24;border-radius:4px;overflow:hidden;border:1px solid #1F2733"><div style="height:100%;width:{{ tam.largura }}%;background:#7C3AED"></div></div>
+<figcaption style="margin-top:8px;font-size:13px;color:#9AA7B4">Em memecoin, invalidação em 100% ("pode ir a zero") é um cenário realista — e é o que produz a posição menor.</figcaption>
+</figure>
+</div>
+</div>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ SIMULADOR ============ -->
+<sc-if value="{{ eh.simulador }}" hint-placeholder-val="{{ false }}">
+<div id="painel-simulador" role="tabpanel" aria-labelledby="aba-simulador" style="display:flex;flex-direction:column;gap:24px">
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Simulador de decisão</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Não existe pontuação de acerto de preço. O que está sendo medido é se a decisão segue a regra ou o impulso.</p>
+<p style="margin:0;border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:12px 16px;font-size:14px"><strong style="color:#E6EDF3">Cenários fictícios: </strong>os números que aparecem neles são inventados de propósito para o exercício. Nenhum deles descreve um token real, e nada aqui é recomendação de compra ou venda.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">Como cada escolha é avaliada</p>
+<div role="img" aria-label="{{ simAlt }}" style="display:flex;flex-direction:{{ dirSeq }};align-items:stretch;gap:0">
+<sc-for list="{{ simPassos }}" as="p" hint-placeholder-count="4">
+<div style="flex:1 1 0;display:flex;flex-direction:{{ dirSeq }};align-items:stretch;min-width:0">
+<div style="flex:1 1 auto;min-width:0;border-radius:8px;border:1px solid {{ p.borda }};background:{{ p.fundo }};padding:12px 14px;display:flex;flex-direction:column;gap:6px">
+<span style="display:flex;gap:8px;align-items:center"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ p.n }}</span><span style="font-size:14px;font-weight:600">{{ p.titulo }}</span></span>
+<span style="font-size:13px;color:#9AA7B4">{{ p.texto }}</span>
+</div>
+<sc-if value="{{ p.seta }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#9AA7B4;padding:2px 6px">→</span></sc-if>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin:14px 0 0;font-size:13px;color:#9AA7B4">Doze situações, quatro escolhas em cada uma. O histórico fica salvo no seu navegador.</figcaption>
+</figure>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">O feedback de uma escolha, em três partes</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+<sc-for list="{{ feedbackPartes }}" as="f" hint-placeholder-count="3">
+<div style="border-radius:8px;border:1px solid {{ f.borda }};background:{{ f.fundo }};padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:{{ f.cor }}">{{ f.rotulo }}</p><p style="margin:6px 0 0;font-size:14px">{{ f.texto }}</p></div>
+</sc-for>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">O simulador não avalia se você ganharia dinheiro, e sim se a decisão seguiu a regra escrita. Quando a sua escolha tem contra-argumento, ele aparece como "Por que a sua não serve".</figcaption>
+</figure>
+<a href="#/modulo-4" style="display:block;border-radius:12px;border:1px solid rgba(124,58,237,.5);background:rgba(124,58,237,.1);padding:16px 20px;text-decoration:none;color:#E6EDF3" style-hover="border-color:#7C3AED"><p style="margin:0;font-weight:600">Abrir o simulador →</p><p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">Os 12 cenários ficam em <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">src/data/cenarios.js</span> e são montados pelo componente atual — sem mudança nesta tela.</p></a>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ QUIZ ============ -->
+<sc-if value="{{ eh.quiz }}" hint-placeholder-val="{{ false }}">
+<div id="painel-quiz" role="tabpanel" aria-labelledby="aba-quiz" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="modulo-4" titulo="Mini-quiz do Módulo 4" descricao="Quatro perguntas. As respostas ficam salvas no navegador." perguntas="{{ quiz.todas }}" hint-size="100%,700px"></x-import>
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Terminou o módulo?</h2>
+<p style="margin:8px 0 16px;font-size:14px;color:#9AA7B4">Marcar aqui faz a barra de progresso do topo avançar. Dá para desmarcar depois.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Botao" variante="primario" hint-size="auto,40px">Marcar módulo como concluído</x-import>
+</section>
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O que você leva deste módulo</h2>
+<ul style="margin:12px 0 0;padding-left:20px;color:#9AA7B4;display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ objetivos }}" as="o" hint-placeholder-count="5"><li>{{ o }}</li></sc-for>
+</ul>
+</section>
+</div>
+</sc-if>
+
+<p style="margin:0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Aviso: </strong>material de estudo próprio, não é recomendação de investimento. Memecoin é o ativo de maior risco do mercado: 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia em que nasceram (CoinGecko Research).</p>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;compacto&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { aba: 'tese', alvo1: 2, alvo2: 4, fracao2: 50, perda: 50, risco: 2, invalidacao: 50 };
+  n1(v) { return Number(v).toFixed(1).replace('.', ','); }
+  n0(v) { return String(Math.round(v)); }
+  renderVals() {
+    const S = this.state, compacto = !!this.props.compacto;
+    const ABAS = [
+      { id: 'tese', rotulo: 'Tese vs. catálise', folhas: ['as duas frases', 'ficha de tese', 'mapa das catálises'] },
+      { id: 'take', rotulo: 'Take profit', folhas: ['escada', 'calculadora', 'recuperação', 'segurar demais'] },
+      { id: 'checagens', rotulo: 'Antes de entrar', folhas: ['as 6 checagens', 'tamanho da posição'] },
+      { id: 'simulador', rotulo: 'Simulador', folhas: ['12 cenários fictícios'] },
+      { id: 'quiz', rotulo: 'Quiz', folhas: ['4 perguntas'] },
+    ];
+    const ativo = (id) => id === S.aba;
+    const abas = ABAS.map((a) => ({ id: a.id, rotulo: a.rotulo, ativa: ativo(a.id), tabindex: ativo(a.id) ? 0 : -1, borda: ativo(a.id) ? '#7C3AED' : '#1F2733', fundo: ativo(a.id) ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    const mapa = ABAS.map((a) => ({ aba: a.id, titulo: a.rotulo, folhas: a.folhas, borda: ativo(a.id) ? '#7C3AED' : '#1F2733', fundo: ativo(a.id) ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    const eh = {}; ABAS.forEach((a) => { eh[a.id] = ativo(a.id); });
+
+    const objetivos = [
+      'Escrever uma tese de entrada e a catálise esperada antes de qualquer compra.',
+      'Reconhecer a diferença entre catálise concreta e narrativa vaga.',
+      'Definir alvos de realização e entender por que realizar parcial tira risco da mesa.',
+      'Identificar o erro de segurar demais na fase de Degradação (custo afundado).',
+      'Treinar a decisão em 12 cenários de simulador e ler o próprio resumo de disciplina.',
+    ];
+    const destaques = {
+      tese: [
+        { rotulo: 'Frases antes de comprar', valor: '2', nota: 'A tese ("por que este token?") e a catálise ("por que agora?"). As duas são necessárias e nenhuma sozinha basta.' },
+        { rotulo: 'Campos da ficha de tese', valor: '5', nota: 'Tese, catálise, prazo, invalidação e alvos. Dois minutos que separam uma decisão de um impulso.' },
+        { rotulo: 'Sem a segunda frase', valor: 'Aposta', nota: 'Se você não consegue escrever qual evento concreto precisa acontecer, não é operação.', tom: 'alerta' },
+      ],
+      takeProfit: [
+        { rotulo: 'Quando o alvo se define', valor: 'Antes', nota: 'Junto com a tese, não com o gráfico piscando. Definido depois, já nasce contaminado pela euforia ou pelo medo.' },
+        { rotulo: 'Faixas na escada', valor: '3', nota: 'Recuperar o investido, realizar lucro, e um restante COM regra escrita. O que não pode existir é restante sem regra.' },
+        { rotulo: 'Restante sem regra', valor: '5× → 0', nota: 'É assim que uma posição que multiplicou por cinco termina valendo nada. Não depende do token nem da sorte.', tom: 'alerta' },
+      ],
+      checagens: [
+        { rotulo: 'Checagens antes da tese', valor: '6', nota: 'LP, mint, freeze, concentração, bundles e liquidez de saída. A peneira do Módulo 3 aplicada à decisão.' },
+        { rotulo: 'Respostas ruins que derrubam a operação', valor: '1', nota: 'Qualquer uma delas. Por melhor que a narrativa esteja, o contrato precisa resistir primeiro.', tom: 'alerta' },
+        { rotulo: 'Duração de um hard rug', valor: 'Um bloco', nota: 'Com a liquidez livre, o criador remove a LP e o preço vira pó no mesmo bloco. No pump.fun a pool pós-graduação é do protocolo; lá, o golpe que sobra é o criador vender.', tom: 'alerta' },
+      ],
+    };
+
+    // Tese × catálise
+    const duasFrases = [
+      { nome: 'Tese', pergunta: 'Por que este token?', oQueE: 'A razão para ele chamar atenção: a narrativa que monta, a comunidade que já existe, o nicho que ocupa ou o momento de mercado que aproveita.', sozinha: 'Tese sem catálise é um token que pode ficar meses parado, enquanto o seu capital envelhece.', borda: 'rgba(124,58,237,.6)', fundo: 'rgba(124,58,237,.15)', cor: '#E6EDF3' },
+      { nome: 'Catálise', pergunta: 'Por que agora?', oQueE: 'O evento concreto que precisa acontecer para trazer compradores novos: uma listagem, uma campanha grande, a graduação para a DEX, um anúncio marcado.', sozinha: 'Catálise sem tese é correr atrás de barulho. Quando o evento passa, não sobra nada que segure o preço.', borda: 'rgba(34,211,238,.5)', fundo: 'rgba(34,211,238,.1)', cor: '#22D3EE' },
+    ];
+    const duasFrasesAlt = duasFrases.map((f) => f.nome + ' — ' + f.pergunta + ' ' + f.oQueE + ' Sozinha: ' + f.sozinha).join(' ') + ' As duas juntas viram o seu critério de saída.';
+    const niveisBase = [
+      { rotulo: '2º alvo', detalhe: 'lucro realizado', cor: '#22C55E', barra: '#22C55E', marca: '96px' },
+      { rotulo: '1º alvo', detalhe: 'recupera o investido', cor: '#22D3EE', barra: '#22D3EE', marca: '64px' },
+      { rotulo: 'Entrada', detalhe: 'tese + catálise escritas', cor: '#E6EDF3', barra: '#9AA7B4', marca: '40px' },
+      { rotulo: 'Invalidação', detalhe: 'onde você admite que errou', cor: '#F87171', barra: '#EF4444', marca: '24px' },
+    ];
+    const plano = { niveis: niveisBase.map((n, i) => Object.assign({}, n, { linha: i < niveisBase.length - 1 ? '1px solid #1F2733' : '0' })),
+      restante: 'Restante: corre com regra escrita — sair se cair X% do topo, ou se a catálise falhar.',
+      alt: 'Quatro níveis escritos antes de entrar, de cima para baixo: ' + niveisBase.map((n) => n.rotulo + ' (' + n.detalhe + ')').join('; ') + '. Restante: corre com regra escrita.' };
+    const fichaCampos = [
+      { rotulo: 'Tese', pergunta: 'Por que este token, e não os outros mil de hoje?', exemplo: 'Ex.: narrativa X em crescimento, com comunidade ativa há semanas.' },
+      { rotulo: 'Catálise', pergunta: 'Que evento concreto precisa acontecer para trazer compradores novos?', exemplo: 'Ex.: graduação para a DEX; campanha anunciada para a semana que vem.' },
+      { rotulo: 'Prazo', pergunta: 'Até quando esse evento deve acontecer?', exemplo: 'Ex.: 7 dias. Passou o prazo sem a catálise, a tese venceu.' },
+      { rotulo: 'Invalidação', pergunta: 'O que faria você admitir que estava errado?', exemplo: 'Ex.: catálise aconteceu e o preço não reagiu; ou LP destravada.' },
+      { rotulo: 'Alvos de realização', pergunta: 'Em que pontos você vende parte, e quanto?', exemplo: 'Ex.: recuperar o investido no primeiro alvo; faixas seguintes definidas.' },
+    ];
+    const FRACA = { borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171', fundoLinha: 'transparent', veredCor: '#F87171' };
+    const FORTE = { borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#22C55E', fundoLinha: 'rgba(34,211,238,.06)', veredCor: '#E6EDF3' };
+    const exemplosTese = [
+      Object.assign({ rotulo: 'Tese fraca', tese: '"O gráfico está bonito e está subindo forte."', catalise: '"Se continuar subindo, vai muito mais."', veredito: 'Não. O motivo da compra é o próprio preço, e não há evento nenhum — se cair, a única regra disponível é a esperança.' }, FRACA),
+      Object.assign({ rotulo: 'Catálise vaga', tese: '"A comunidade é muito ativa e o projeto tem potencial."', catalise: '"Uma hora isso explode."', veredito: 'Não. "Uma hora" não é prazo e "explode" não é evento: sem data e sem gatilho, nunca chega a hora de sair.' }, FRACA),
+      Object.assign({ rotulo: 'Tese + catálise concretas', tese: '"Token com comunidade ativa há semanas, checagens técnicas em ordem."', catalise: '"Evento do projeto anunciado para a próxima semana, com data marcada."', veredito: 'Sim. Dá para verificar, dá para invalidar e dá para sair: se o evento acontecer e o preço não reagir, você sabe no mesmo dia.' }, FORTE),
+    ];
+    const catalises = [
+      { nome: 'Listagem em corretora', descricao: 'Um evento com data, que traz compradores que antes não tinham acesso.', alerta: 'O anúncio muitas vezes mexe mais no preço do que a listagem em si. Quem comprou pelo rumor costuma vender no fato.' },
+      { nome: 'Graduação para a DEX', descricao: 'O token sai da bonding curve e ganha um pool com liquidez mais profunda. No Pump.fun, isso acontece com cerca de 85 SOL arrecadados (dados de set/2025). Em dólar não há limiar fixo: numa amostra de ago/2026, 80% das graduações ficaram entre US$ 11 mil e US$ 101 mil.', alerta: 'É também quando quem comprou na curva finalmente consegue vender volume. A liquidez que atrai você é a mesma que dá saída para eles.' },
+      { nome: 'Atenção de figura pública', descricao: 'Um perfil grande interage e traz uma multidão de olhos de uma vez.', alerta: 'Costuma ser catálise curta, e o risco de contrato impostor é alto. Confirme o endereço oficial na fonte antes de qualquer coisa.' },
+      { nome: 'Narrativa em crescimento', descricao: 'Um tema puxa vários tokens ao mesmo tempo, e a atenção do setor migra para lá.', alerta: 'É a catálise mais difícil de datar. Se você entra cedo demais, fica segurando. Se entra tarde demais, compra o topo.' },
+      { nome: 'Evento do projeto com data marcada', descricao: 'Lançamento, parceria anunciada, campanha ou migração, com dia definido.', alerta: 'É a melhor catálise para estudar, porque tem prazo. Cuidado com datas que vão sendo adiadas: adiamento é sinal, não detalhe.' },
+    ];
+    const mapaCatalisesAlt = 'Cinco catálises comuns. ' + catalises.map((c) => c.nome + ': ' + c.descricao + ' O que dá errado: ' + c.alerta).join(' ');
+
+    // Escada
+    const escadaBase = [
+      { alvo: 'Primeiro alvo', acao: 'vender a fração que recupera o valor investido', porque: 'A partir daqui o pior caso deixa de ser prejuízo. É a mudança que mais reduz o peso emocional da posição.', recuo: '0px', borda: '#22D3EE', fundo: 'rgba(34,211,238,.1)' },
+      { alvo: 'Segundo alvo', acao: 'vender outra faixa, já como lucro realizado', porque: 'Transforma parte da alta em dinheiro que existe de verdade, sem depender de o movimento continuar.', recuo: compacto ? '0px' : '24px', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)' },
+      { alvo: 'Restante', acao: 'deixar correr, com uma regra de saída escrita', porque: 'Ex.: sair se cair X% do topo, ou se a catálise falhar. O que não pode existir é restante sem regra — é assim que 5x vira 0.', recuo: compacto ? '0px' : '48px', borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)' },
+    ];
+    const escada = escadaBase.map((f, i) => Object.assign({ n: i + 1, liga: i < escadaBase.length - 1 }, f));
+    const escadaAlt = escadaBase.map((f, i) => (i + 1) + '. ' + f.alvo + ': ' + f.acao + '. ' + f.porque).join(' ');
+
+    // Calculadora de degraus: 1º alvo vende 1/alvo1 da posição (recupera o investido)
+    const a1 = S.alvo1, a2 = S.alvo2, fr2 = S.fracao2 / 100;
+    const vend1 = 1 / a1;                       // fração da posição vendida no 1º alvo
+    const sobra1 = 1 - vend1;
+    const vend2 = sobra1 * fr2;
+    const restante = sobra1 - vend2;
+    const realizado = vend1 * a1 + vend2 * a2;  // em múltiplos do investido
+    const naMesa = restante * a2;
+    const controlesDegraus = [
+      { id: 'alvo1', rotulo: 'Primeiro alvo (múltiplo da entrada)', min: 1.5, max: 10, passo: 0.5, valor: a1, texto: this.n1(a1) + '×' },
+      { id: 'alvo2', rotulo: 'Segundo alvo (múltiplo da entrada)', min: a1 + 0.5, max: 20, passo: 0.5, valor: a2, texto: this.n1(a2) + '×' },
+      { id: 'fracao2', rotulo: 'Vendido no segundo alvo (do que sobrou)', min: 0, max: 100, passo: 5, valor: S.fracao2, texto: this.n0(S.fracao2) + '%' },
+    ];
+    const degraus = {
+      barras: [
+        { rotulo: 'Vendido no 1º alvo', valorTexto: this.n0(vend1 * 100) + '% da posição', largura: vend1 * 100, cor: '#22D3EE', nota: 'É a fração que, vendida a ' + this.n1(a1) + '×, devolve exatamente o valor investido.' },
+        { rotulo: 'Vendido no 2º alvo', valorTexto: this.n0(vend2 * 100) + '% da posição', largura: vend2 * 100, cor: '#22C55E', nota: 'Lucro que existe de verdade, sem depender de o movimento continuar.' },
+        { rotulo: 'Restante na mesa', valorTexto: this.n0(restante * 100) + '% da posição', largura: restante * 100, cor: '#F59E0B', nota: 'Só pode existir com regra de saída escrita. Vale ' + this.n1(naMesa) + '× o investido a ' + this.n1(a2) + '×.' },
+      ],
+      realizadoTexto: this.n1(realizado) + '×',
+      piorTexto: this.n1(realizado - 1) + '×',
+      piorNota: realizado >= 1 ? 'acima do investido, mesmo se o resto for a zero' : 'ainda abaixo do investido: o 1º alvo não foi atingido na conta',
+      piorCor: realizado >= 1 ? '#22C55E' : '#F87171',
+      alt: 'Com 1º alvo em ' + this.n1(a1) + '× e 2º em ' + this.n1(a2) + '×, vendendo ' + this.n0(S.fracao2) + '% do que sobrou: vendido no 1º alvo ' + this.n0(vend1 * 100) + '% da posição; vendido no 2º alvo ' + this.n0(vend2 * 100) + '%; restante na mesa ' + this.n0(restante * 100) + '%. Realizado ao chegar no 2º alvo: ' + this.n1(realizado) + ' vez o investido.',
+    };
+
+    // Recuperação
+    const p = S.perda / 100, ganho = (1 / (1 - p) - 1) * 100;
+    const teto = 200;
+    const rec = { perdaTexto: this.n0(S.perda) + '%', ganhoTexto: this.n0(ganho) + '%', larguraPerda: Math.min(100, (S.perda / teto) * 100), larguraGanho: Math.min(100, (ganho / teto) * 100),
+      tetoTexto: this.n0(teto) + '%', limiarTexto: this.n0((1 - 1 / (1 + teto / 100)) * 100) + '%', cor: ganho > 100 ? '#F87171' : '#E6EDF3',
+      nota: ganho > teto ? 'Passou de ' + this.n0(teto) + '%: a barra está no limite da escala.' : 'Uma perda de ' + this.n0(S.perda) + '% exige ' + this.n0(ganho) + '% de ganho só para empatar.',
+      alt: 'Na mesma escala, de 0 a ' + this.n0(teto) + '%: a perda é de ' + this.n0(S.perda) + '% e o ganho necessário para voltar ao ponto de partida é de ' + this.n0(ganho) + '%.' };
+
+    // Segurar demais
+    const segurar = { ramos: [
+      { rotulo: 'Sim, compraria', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#22C55E', nos: [{ texto: 'A posição continua, pela tese — não pelo preço médio', peso: 600, borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#E6EDF3' }, { texto: 'Reescreva a tese e a catálise com a data de hoje', peso: 400, borda: '#1F2733', fundo: '#141A24', cor: '#9AA7B4' }] },
+      { rotulo: 'Não compraria', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171', nos: [{ texto: 'A posição já está encerrada. Só falta executar.', peso: 600, borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' }, { texto: '"Assumir o prejuízo" não é o custo de vender: é o custo que já aconteceu', peso: 400, borda: '#1F2733', fundo: '#141A24', cor: '#9AA7B4' }] },
+    ], alt: 'A posição está em prejuízo, na fase de Degradação. Você compraria este token, neste preço, hoje? Se sim, a posição continua pela tese, e você reescreve tese e catálise com a data de hoje. Se não, a posição já está encerrada: só falta executar.' };
+    const tributacao = [
+      { rotulo: 'MP 1.303/2025 — não valeu', texto: 'A medida provisória que propunha alíquota única de 17,5% e o fim da isenção mensal foi rejeitada pela Câmara dos Deputados em outubro de 2025 e perdeu a validade. Ou seja: essa mudança não entrou em vigor.' },
+      { rotulo: 'Isenção de R$ 35 mil no mês', texto: 'Pela regra que segue vigente para o IRPF 2026, ganhos de capital com cripto em corretoras nacionais são isentos se a soma das VENDAS no mês não passar de R$ 35 mil. Repare: o limite é sobre o total vendido, não sobre o lucro.' },
+      { rotulo: 'Acima do limite', texto: 'Passando de R$ 35 mil em vendas no mês, aplicam-se alíquotas progressivas a partir de 15% (até 22,5%), apuradas no programa GCAP, com DARF (código 4600) até o último dia útil do mês seguinte.' },
+      { rotulo: 'Operações no exterior', texto: 'Operações fora do país seguem a Lei 14.754/2023, com regras próprias — outro motivo para ter alguém especializado revisando.' },
+      { rotulo: 'Saque em reais', texto: 'Na prática, sair para real acontece via corretora nacional com Pix (exige KYC/CPF) ou via P2P. No P2P, o risco é a contraparte: nunca libere a cripto antes de confirmar que o Pix caiu de fato na sua conta.' },
+    ];
+
+    // Checagens
+    const checagensBase = [
+      { pergunta: 'Alguém consegue tirar a liquidez da pool?', porque: 'Com a liquidez livre, o criador pode removê-la, e o preço vira pó no mesmo bloco — o hard rug. No pump.fun, depois da graduação, a pool é do protocolo e isso não acontece; o golpe que sobra lá é o criador vender a própria compra (Módulo 6).', onde: 'RugCheck (Lockers & LP); explorer para ver quem detém os tokens de LP', alerta: 'Tokens de LP numa carteira do criador. Mas trava não aprova token: num estudo, 97,3% dos tokens com liquidez travada eram maliciosos, contra 97,7% no geral (Mazorra et al., 2022).' },
+      { pergunta: 'A mint authority foi revogada?', porque: 'Mint authority ativa significa que ainda dá para criar tokens novos, diluindo quem já comprou sem aviso nenhum.', onde: 'RugCheck ou a página do token no Solscan', alerta: 'Authority ativa numa carteira ligada ao criador.' },
+      { pergunta: 'A freeze authority foi revogada?', porque: 'Freeze authority ativa permite congelar contas do token: você compra e pode não conseguir vender. É o sinal clássico de possível honeypot. Na Solana, DEXs como a Raydium exigem freeze authority revogada para criar o pool.', onde: 'RugCheck ou Solscan', alerta: 'Authority ativa — trate como token potencialmente sem saída.' },
+      { pergunta: 'Como está a concentração dos maiores holders?', porque: 'Se poucas carteiras detêm a maior parte do supply, o seu resultado depende da decisão de um punhado de pessoas — que podem ser a mesma pessoa.', onde: 'Solscan/BscScan para a lista; Bubblemaps para clusters ligados', alerta: 'Top 10 com fatia grande, especialmente em carteiras conectadas entre si.' },
+      { pergunta: 'Houve bundles no lançamento?', porque: 'Várias compras no mesmo bloco costumam ser o próprio dev e insiders montando posição antes de todo mundo, com o preço mais baixo que existirá.', onde: 'RugCheck e ferramentas on-chain; explorer para as primeiras transações', alerta: 'Percentual alto do supply comprado no bloco do lançamento.' },
+      { pergunta: 'A liquidez aguenta a sua saída?', porque: 'Market cap alto com liquidez fina quer dizer que o preço na tela não é o preço que você consegue realizar. Compare o tamanho da sua posição com o pool.', onde: 'DexScreener: liquidez do par, volume e profundidade', alerta: 'Posição grande demais para o pool — você derruba o preço ao vender.' },
+    ];
+    const checagens = { passos: checagensBase.map((c, i) => Object.assign({ n: i + 1 }, c)),
+      alt: checagensBase.map((c, i) => (i + 1) + '. ' + c.pergunta + ' Por quê: ' + c.porque + ' Onde: ' + c.onde + ' Alerta, não entra: ' + c.alerta).join(' ') + ' Passou nas seis: escreva a tese e a catálise. Passar não aprova o token.' };
+
+    // Tamanho da posição
+    const tamanho = S.risco / S.invalidacao * 100;
+    const tam = { riscoTexto: this.n1(S.risco) + '%', invalTexto: this.n0(S.invalidacao) + '%', tamanhoTexto: this.n1(tamanho) + '%', largura: Math.min(100, tamanho),
+      bordaZero: S.invalidacao === 100 ? '#7C3AED' : '#1F2733', fundoZero: S.invalidacao === 100 ? 'rgba(124,58,237,.15)' : '#141A24',
+      alt: 'Com risco aceito de ' + this.n1(S.risco) + '% do capital e invalidação em ' + this.n0(S.invalidacao) + '%, a regra implica ' + this.n1(tamanho) + '% do capital nesta posição.' };
+
+    // Simulador
+    const simPassos = [
+      { n: 1, titulo: 'A situação', texto: 'Um cenário fictício, com os números inventados de propósito para o exercício.', borda: '#1F2733', fundo: '#141A24' },
+      { n: 2, titulo: 'Quatro escolhas', texto: 'Você decide o que faria. Não há acerto de preço para adivinhar.', borda: '#22D3EE', fundo: 'rgba(34,211,238,.1)' },
+      { n: 3, titulo: 'O feedback', texto: 'A escolha, o risco daquela decisão e o próximo passo técnico.', borda: '#1F2733', fundo: '#141A24' },
+      { n: 4, titulo: 'O resumo de disciplina', texto: 'Mede processo, não resultado: se a decisão seguiu a regra escrita.', borda: 'rgba(124,58,237,.6)', fundo: 'rgba(124,58,237,.15)' },
+    ].map((p2, i, arr) => Object.assign(p2, { seta: i < arr.length - 1 }));
+    const simAlt = simPassos.map((p2) => p2.n + '. ' + p2.titulo + ': ' + p2.texto).join(' ');
+    const feedbackPartes = [
+      { rotulo: 'A escolha', texto: 'Certa, ou "não foi essa" — sempre com explicação, nunca só o resultado.', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#22C55E' },
+      { rotulo: 'O risco daquela decisão', texto: 'O que aquela escolha expõe: contraparte, liquidez, impulso, ou tese sem invalidação.', borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#F59E0B' },
+      { rotulo: 'O próximo passo técnico', texto: 'O que checar em seguida, e em qual ferramenta — ligando a decisão ao Módulo 3.', borda: '#22D3EE', fundo: 'rgba(34,211,238,.1)', cor: '#22D3EE' },
+    ];
+
+    // Quiz
+    const porque = {
+      q1: { a: 'Gráfico e volume descrevem o que já aconteceu; catálise é um evento que ainda vai trazer compradores novos.', c: 'Animação da comunidade é atenção, não evento com data — e pode ser campanha paga.', d: 'Sensação não é verificável: sem evento, não há como saber quando a tese falhou.' },
+      q2: { a: 'Realizar parcial não muda a regra do imposto: cada venda é apurada.', b: 'Nada garante o preço depois; realizar parcial funciona justamente sem prever o topo.', d: 'Vender não aumenta a liquidez da pool; tira dela.' },
+      q3: { b: 'A rede não cobra por tempo de posição.', c: 'O token não é removido da DEX por ficar parado; ele só fica sem comprador.', d: 'Segurar não é neutro: na Degradação, cada dia sem comprador é preço caindo.' },
+      q4: { a: 'Gráfico e volume não dizem nada sobre o contrato nem sobre quem controla o supply.', c: 'Seguidores e tamanho de grupo são fáceis de comprar e não checam o contrato.', d: 'Canal de call é atenção — muitas vezes paga —, não checagem.' },
+    };
+    const Q = (id, pergunta, alts, correta, explicacao) => ({ id, pergunta, correta, explicacao, alternativas: alts.map(([aid, texto]) => Object.assign({ id: aid, texto }, porque[id][aid] ? { porque: porque[id][aid] } : {})) });
+    const todas = [
+      Q('q1', 'Qual destas é uma catálise, no sentido do Módulo 4?', [['a', 'O gráfico está forte e o volume subiu hoje.'], ['b', 'Uma listagem numa corretora grande, anunciada para sexta-feira.'], ['c', 'A comunidade no Telegram está muito animada.'], ['d', 'Você sente que agora é a hora de entrar.']], 'b', 'Catálise responde "por que agora?": é o evento verificável que traz demanda nova. A tese responde "por que este token?". Sem a catálise, sobra torcida — e sem ela também não existe critério para saber que a tese falhou.'),
+      Q('q2', 'Por que realizar parcial, em vez de segurar tudo até o alvo final?', [['a', 'Porque reduz o imposto devido sobre a operação.'], ['b', 'Porque garante que o preço vai continuar subindo depois.'], ['c', 'Porque tira risco da mesa: recuperado o valor investido, o restante corre por conta do lucro e a decisão deixa de ser tomada pelo medo.'], ['d', 'Porque aumenta a liquidez do pool em que você está.']], 'c', 'Realizar parcial não prevê topo nenhum — e é justamente por isso que funciona. Vendendo uma faixa, o pior caso deixa de ser prejuízo e o resto da posição pode correr sem que o medo assuma o volante.'),
+      Q('q3', 'Qual é o erro de segurar uma posição por tempo demais na fase de Degradação?', [['a', 'Custo afundado: a atenção já migrou e não há compradores novos, mas a cabeça trata vender como "assumir o prejuízo" e a perda pequena vira rombo.'], ['b', 'A rede cobra taxa maior de quem segura o token por muitos dias.'], ['c', 'O token é automaticamente removido da DEX depois de um tempo parado.'], ['d', 'Nenhum: segurar é sempre a decisão mais segura em memecoins.']], 'a', 'Na Degradação a liquidez seca porque a atenção foi embora. O dinheiro gasto já foi gasto; a única pergunta útil é "eu compraria este token, neste preço, hoje?". Se a resposta é não, a posição já acabou — falta só executar.'),
+      Q('q4', 'O que checar antes de entrar, mesmo com tese e catálise bem escritas?', [['a', 'Só o gráfico das últimas 24 horas e o volume do dia.'], ['b', 'Endereço oficial, extensões e autoridades do contrato, concentração real dos holders, bundles no lançamento e se a liquidez aguenta a sua saída.'], ['c', 'Quantos seguidores o projeto tem no X e o tamanho do grupo no Telegram.'], ['d', 'Apenas se o token já apareceu em algum canal de call que você segue.']], 'b', 'A checagem técnica é a peneira que vem antes de tudo: com endereço errado, extensão fora do padrão, authorities ativas ou com supply concentrado, nenhuma tese se sustenta. Ferramentas: RugCheck, Solscan/BscScan, Bubblemaps e DexScreener.'),
+    ];
+    const quiz = { todas }; todas.forEach((q) => { quiz[q.id] = [q]; });
+
+    const ids = ABAS.map((a) => a.id);
+    return {
+      mostrarSidebar: !compacto, paddingMain: compacto ? '20px 16px' : '32px 24px',
+      dirMapa: compacto ? 'column' : 'row', alinhaMapa: compacto ? 'stretch' : 'center', trunkW: compacto ? '2px' : '32px', trunkH: compacto ? '20px' : '2px', trunkML: compacto ? '24px' : '0',
+      dirSeq: compacto ? 'column' : 'row', colsDois: compacto ? '1fr' : '1fr 1fr', colsChecagem: compacto ? '1fr' : '1fr 1fr', larguraFim: compacto ? '100%' : '50%', larguraNivel: compacto ? '96px' : '120px', minMapa: compacto ? '0' : '620px',
+      abas, mapa, eh, objetivos, destaques, duasFrases, duasFrasesAlt, plano, fichaCampos, exemplosTese, catalises, mapaCatalisesAlt,
+      escada, escadaAlt, controlesDegraus, degraus, perda: S.perda, rec, segurar, tributacao, checagens,
+      risco: S.risco, invalidacao: S.invalidacao, tam, simPassos, simAlt, feedbackPartes, quiz,
+      irParaAba: (e) => { this.setState({ aba: e.currentTarget.dataset.aba }); },
+      teclaAba: (e) => { const i = ids.indexOf(this.state.aba); let n = i; if (e.key === 'ArrowRight') n = (i + 1) % ids.length; else if (e.key === 'ArrowLeft') n = (i - 1 + ids.length) % ids.length; else if (e.key === 'Home') n = 0; else if (e.key === 'End') n = ids.length - 1; else return; e.preventDefault(); this.setState({ aba: ids[n] }); const btn = e.currentTarget.querySelectorAll('[role="tab"]')[n]; if (btn) btn.focus(); },
+      // O 2º alvo é sempre maior que o 1º: mover o 1º empurra o 2º, e o 2º nunca desce abaixo dele.
+      mudarDegrau: (e) => { const id = e.currentTarget.dataset.id, v = Number(e.target.value);
+        this.setState((st) => id === 'alvo1' ? { alvo1: v, alvo2: Math.max(st.alvo2, v + 0.5) } : id === 'alvo2' ? { alvo2: Math.max(v, st.alvo1 + 0.5) } : { fracao2: v }); },
+      mudarPerda: (e) => this.setState({ perda: Number(e.target.value) }),
+      mudarRisco: (e) => this.setState({ risco: Number(e.target.value) }),
+      mudarInval: (e) => this.setState({ invalidacao: Number(e.target.value) }),
+      atalhoInval: (e) => this.setState({ invalidacao: Number(e.currentTarget.dataset.valor) }),
+    };
+  }
+}
+</script>
+</body>
+</html>

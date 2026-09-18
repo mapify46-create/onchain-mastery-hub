@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}button:focus-visible,[tabindex]:focus-visible{outline:2px solid #22D3EE;outline-offset:2px;border-radius:4px}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}</style></helmet>
+<main id="conteudo" style="max-width:868px;margin:0 auto;padding:32px 24px;display:flex;flex-direction:column;gap:24px">
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Animação 4 · Módulo 5 · {{ duracaoTexto }}</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">Caminho do token: bonding curve → PumpSwap → AMM madura</h1>
+<p style="margin:8px 0 0;color:#9AA7B4;text-wrap:pretty">Sete cenas. Fonte: modulo5.js › o-venue-muda-o-custo e a matriz de custo. A animação não mostra quanto é preciso arrecadar para graduar: o arquivo marca esse valor como não verificado.</p>
+</header>
+
+<section aria-label="Animação" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
+<span style="flex:0 0 auto;white-space:nowrap;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#9AA7B4">cena {{ numero }} de {{ total }}</span>
+<label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#9AA7B4;cursor:pointer"><input type="checkbox" checked="{{ reduzir }}" onChange="{{ alternarReduzir }}" style="width:16px;height:16px;accent-color:#7C3AED">Reduzir movimento: cenas paradas, lado a lado</label>
+</div>
+
+<sc-if value="{{ modoAnimado }}" hint-placeholder-val="{{ true }}">
+<div tabindex="0" role="group" aria-label="Palco da animação. Espaço toca ou pausa; setas trocam a cena." onKeyDown="{{ tecla }}" style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div role="img" aria-label="{{ cena.alt }}" style="display:flex;flex-direction:column;gap:16px">
+<!-- os três venues -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;align-items:stretch">
+<sc-for list="{{ cena.venues }}" as="v" hint-placeholder-count="3">
+<div style="display:flex;align-items:stretch;min-width:0">
+<div style="flex:1 1 auto;min-width:0;border-radius:8px;border:1px solid {{ v.borda }};background:{{ v.fundo }};padding:12px 14px;display:flex;flex-direction:column;gap:8px;opacity:{{ v.op }};transition:border-color {{ dur }} ease,background {{ dur }} ease,opacity {{ dur }} ease">
+<div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline">
+<span style="font-size:14px;font-weight:600">{{ v.nome }}</span>
+<sc-if value="{{ v.aqui }}" hint-placeholder-val="{{ false }}"><span style="border-radius:999px;border:1px solid #22D3EE;background:rgba(34,211,238,.12);color:#22D3EE;padding:0 8px;font-size:10px;font-weight:600;white-space:nowrap">o token está aqui</span></sc-if>
+</div>
+<p style="margin:0;font-size:12px;color:#9AA7B4">{{ v.detalhe }}</p>
+<div style="margin-top:auto;padding-top:6px;display:flex;justify-content:space-between;gap:8px;align-items:baseline;border-top:1px solid #1F2733">
+<span style="font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Taxa da pool</span>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.125rem;font-weight:700;font-variant-numeric:tabular-nums;color:{{ v.taxaCor }};transition:color {{ dur }} ease">{{ v.taxa }}</span>
+</div>
+</div>
+<sc-if value="{{ v.seta }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:{{ v.setaCor }};padding:0 4px;font-size:18px;transition:color {{ dur }} ease">→</span></sc-if>
+</div>
+</sc-for>
+</div>
+<!-- curva ou custo -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;align-items:center">
+<figure style="margin:0">
+<p style="margin:0 0 6px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">{{ cena.graficoRotulo }}</p>
+<svg viewBox="0 0 320 170" width="100%" style="max-width:340px;display:block" role="img" aria-label="{{ cena.graficoAlt }}">
+<line x1="40" y1="140" x2="300" y2="140" stroke="#1F2733"></line>
+<line x1="40" y1="16" x2="40" y2="140" stroke="#1F2733"></line>
+<path d="{{ cena.caminho }}" fill="none" stroke="{{ cena.curvaCor }}" stroke-width="2" stroke-dasharray="{{ cena.curvaTracejado }}" style="transition:stroke {{ dur }} ease"></path>
+<circle cx="{{ cena.mx }}" cy="{{ cena.my }}" r="6" fill="#7C3AED" stroke="#E6EDF3" stroke-width="2" opacity="{{ cena.marcadorOp }}" style="transition:cx {{ dur }} ease,cy {{ dur }} ease,opacity {{ dur }} ease"></circle>
+<text x="170" y="162" fill="#9AA7B4" font-size="11" text-anchor="middle" font-family="Inter, sans-serif">{{ cena.eixoX }}</text>
+<text x="12" y="78" fill="#9AA7B4" font-size="11" text-anchor="middle" transform="rotate(-90 12 78)" font-family="Inter, sans-serif">{{ cena.eixoY }}</text>
+</svg>
+</figure>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="border-radius:8px;border:1px solid {{ cena.custoBorda }};background:#141A24;padding:10px 12px;transition:border-color {{ dur }} ease">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Uma ordem de R$512, custo total</p>
+<div style="margin-top:8px;display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ cena.custos }}" as="b" hint-placeholder-count="2">
+<div>
+<div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><span style="font-size:13px">{{ b.rotulo }}</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:700;color:{{ b.cor }}">{{ b.valor }}</span></div>
+<div aria-hidden="true" style="margin-top:4px;height:16px;background:#0B0F17;border:1px solid #1F2733;border-radius:4px;overflow:hidden"><div style="height:100%;width:{{ b.largura }}%;background:{{ b.fundo }};transition:width {{ dur }} ease"></div></div>
+</div>
+</sc-for>
+</div>
+<p style="margin:8px 0 0;font-size:12px;color:#9AA7B4">{{ cena.custoNota }}</p>
+</div>
+<sc-if value="{{ cena.aviso }}" hint-placeholder-val="{{ false }}">
+<p style="margin:0;border-radius:8px;border:1px solid {{ cena.avisoBorda }};background:{{ cena.avisoFundo }};padding:10px 12px;font-size:13px;color:#E6EDF3">{{ cena.aviso }}</p>
+</sc-if>
+</div>
+</div>
+</div>
+</div>
+<p aria-live="polite" style="margin:0;min-height:48px;font-size:1.0625rem;font-weight:600;text-align:center;text-wrap:pretty">{{ cena.legenda }}</p>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+<button type="button" onClick="{{ voltar }}" style="min-height:44px;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">← Voltar cena</button>
+<button type="button" aria-pressed="{{ tocando }}" onClick="{{ tocar }}" style="min-height:44px;min-width:110px;border-radius:8px;border:1px solid #7C3AED;background:#7C3AED;color:#FFFFFF;padding:8px 16px;font-size:14px;font-weight:600;cursor:pointer" style-hover="opacity:.85">{{ rotuloTocar }}</button>
+<button type="button" onClick="{{ avancar }}" style="min-height:44px;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">Avançar cena →</button>
+</div>
+<ol aria-label="Cenas" style="list-style:none;margin:0;padding:0;display:flex;gap:6px">
+<sc-for list="{{ barra }}" as="c" hint-placeholder-count="7">
+<li style="flex:1 1 0;min-width:0"><button type="button" aria-label="{{ c.rotulo }}" aria-current="{{ c.atual }}" data-indice="{{ c.indice }}" onClick="{{ ir }}" style="display:flex;flex-direction:column;gap:4px;width:100%;min-height:44px;border:0;padding:6px 0;background:transparent;cursor:pointer;align-items:stretch"><span aria-hidden="true" style="display:block;height:6px;border-radius:999px;background:{{ c.cor }};transition:background {{ dur }} ease"></span><span aria-hidden="true" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:{{ c.numCor }};text-align:center">{{ c.numero }}</span></button></li>
+</sc-for>
+</ol>
+</sc-if>
+
+<sc-if value="{{ modoParado }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px">
+<sc-for list="{{ cenas }}" as="c" hint-placeholder-count="7">
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;display:flex;flex-direction:column;gap:8px" role="img" aria-label="{{ c.alt }}">
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:#9AA7B4">cena {{ c.numero }}</span>
+<div style="display:flex;gap:4px;align-items:stretch">
+<sc-for list="{{ c.venues }}" as="v" hint-placeholder-count="3">
+<div style="flex:1 1 0;border-radius:4px;border:1px solid {{ v.borda }};background:{{ v.fundo }};padding:6px;opacity:{{ v.op }};min-width:0"><p style="margin:0;font-size:10px;line-height:1.2;overflow-wrap:break-word">{{ v.nome }}</p><p style="margin:3px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;font-weight:700;color:{{ v.taxaCor }}">{{ v.taxa }}</p></div>
+</sc-for>
+</div>
+<svg viewBox="0 0 320 170" width="100%" aria-hidden="true"><path d="{{ c.caminho }}" fill="none" stroke="{{ c.curvaCor }}" stroke-width="3" stroke-dasharray="{{ c.curvaTracejado }}"></path><circle cx="{{ c.mx }}" cy="{{ c.my }}" r="8" fill="#7C3AED" stroke="#E6EDF3" stroke-width="2" opacity="{{ c.marcadorOp }}"></circle></svg>
+<figcaption style="font-size:13px;font-weight:600">{{ c.legenda }}</figcaption>
+</figure>
+</sc-for>
+</div>
+</sc-if>
+
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Ler como texto</summary>
+<ol style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4;display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ cenas }}" as="c" hint-placeholder-count="7"><li>{{ c.legenda }} {{ c.alt }}</li></sc-for>
+</ol></details>
+</section>
+
+<details style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Dados desta animação (para a implementação)</summary>
+<pre style="margin:12px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.6;color:#9AA7B4;white-space:pre-wrap">montarAnimacao({ id: 'caminho-do-token', duracaoPorCena: 4500, transicao: 450,
+  elementos: ['venues[3]', 'curva', 'marcador', 'custos[2]', 'aviso'],
+  cenas: [{ legenda, estados: { venueAtivo, taxa, curva, custos } } × 7] })
+Fonte: modulo5.js › o-venue-muda-o-custo e matriz de custo. Taxas 1,25% (bonding curve e PumpSwap com market cap pequeno, caindo por faixas) e 0,25% (AMM madura, padrão Raydium).
+Custo total de uma ordem de R$512: ≈ 2,4% na bonding curve e ≈ 1,4% na AMM madura, com a cotação assumida do arquivo (SOL ≈ R$512).
+NÃO exibir valor em SOL ou em dólar para graduar: o arquivo marca como não verificado.
+Estudo final: 534 mil negociações, Uniswap Labs — custo efetivo de memecoin 6× o de par entre moedas estáveis.</pre></details>
+<p style="margin:0;font-size:13px;color:#9AA7B4">Material de estudo, não é recomendação de investimento · OMH Hub · Animação 4</p>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:960,&quot;height&quot;:860}}">
+class Component extends DCLogic {
+  state = { cena: 0, tocando: false, reduzir: false };
+  componentDidMount() { const mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)'); if (mq && mq.matches) this.setState({ reduzir: true }); }
+  componentWillUnmount() { clearInterval(this.timer); }
+  parar() { clearInterval(this.timer); this.timer = null; }
+  renderVals() {
+    const S = this.state, POR_CENA = 4500, TRANS = 450;
+    // curvas: bonding curve (exponencial) e AMM (produto constante)
+    const px = (t) => 40 + t * 260, py = (v) => 140 - v * 124;
+    const curvaDe = (f) => { let d = ''; for (let i = 0; i <= 60; i++) { const t = i / 60; d += (i ? ' L' : 'M') + px(t).toFixed(1) + ',' + py(f(t)).toFixed(1); } return d; };
+    const CURVA_BONDING = curvaDe((t) => 0.08 + 0.82 * t * t);
+    const CURVA_AMM = curvaDe((t) => 0.12 + 0.78 * (1 - 1 / (1 + 2.6 * t)) / (1 - 1 / 3.6));
+    const NOMES = ['Bonding curve', 'PumpSwap', 'AMM madura'];
+    const DET = ['Uma fórmula define o preço conforme as pessoas compram.', 'A pool oficial do token, depois da graduação.', 'Pool comum de DEX, como a Raydium.'];
+    const v = (i, estado, taxa, taxaCor) => ({ i, estado, taxa, taxaCor });
+    const C = [
+      { legenda: 'O token nasce na bonding curve, sem pool de DEX.', ativo: 0, taxas: ['1,25%', '—', '—'], curva: 'bonding', mt: 0.12, mOp: 1, gRot: 'A bonding curve', gAlt: 'Curva de preço subindo conforme as compras entram. O marcador está no começo.', eixoX: 'compras acumuladas →', eixoY: 'preço →',
+        custos: [], custoOp: 0.25, custoNota: 'O custo total aparece daqui a duas cenas.', alt: 'O token está na bonding curve, com taxa de pool de 1,25%. PumpSwap e AMM madura ainda não se aplicam.' },
+      { legenda: 'Cada compra anda na fórmula. O preço sobe sozinho.', ativo: 0, taxas: ['1,25%', '—', '—'], curva: 'bonding', mt: 0.55, mOp: 1, gRot: 'A bonding curve', gAlt: 'O marcador avançou na curva: mais compras acumuladas, preço mais alto.', eixoX: 'compras acumuladas →', eixoY: 'preço →',
+        custos: [], custoOp: 0.25, custoNota: 'Aqui a taxa da pool é 1,25% — oficialmente 0,300% para o criador e 0,95% para o protocolo.', alt: 'O marcador avança na curva; a taxa segue em 1,25%, repartida entre criador e protocolo.' },
+      { legenda: 'Ele gradua e ganha a pool oficial dele, no PumpSwap.', ativo: 1, taxas: ['1,25%', '1,25%', '—'], curva: 'bonding', mt: 1, mOp: 0.4, gRot: 'A curva fica para trás', gAlt: 'O marcador chega ao fim da curva: o token graduou.', eixoX: 'compras acumuladas →', eixoY: 'preço →',
+        custos: [], custoOp: 0.25, custoNota: 'Quanto é preciso arrecadar para graduar: o arquivo marca como não verificado, e a animação não mostra.', alt: 'O token graduou e passou para o PumpSwap. A taxa continua em 1,25%.' },
+      { legenda: 'No PumpSwap a taxa segue 1,25% enquanto o market cap é pequeno.', ativo: 1, taxas: ['—', '1,25%', '—'], curva: 'amm', mt: 0.35, mOp: 1, gRot: 'Agora é uma pool: x · y = k', gAlt: 'A curva vira a de uma pool de produto constante, com o marcador na parte inicial.', eixoX: 'tokens na pool →', eixoY: 'SOL na pool →',
+        custos: [{ rotulo: 'R$512 no PumpSwap', valor: '≈ 2,4%', largura: 100, cor: '#F59E0B', fundo: '#F59E0B' }], custoOp: 1, custoNota: 'Custo total: taxa da pool, taxa da plataforma e os custos fixos de rede.', alt: 'No PumpSwap, uma ordem de R$512 custa cerca de 2,4% no total. A taxa da pool é 1,25%.' },
+      { legenda: 'Conforme o market cap cresce, a taxa cai por faixas.', ativo: 1, taxas: ['—', '1,25% → faixas', '—'], curva: 'amm', mt: 0.55, mOp: 1, gRot: 'A mesma pool, mais funda', gAlt: 'O marcador avança na curva da pool, que está mais funda.', eixoX: 'tokens na pool →', eixoY: 'SOL na pool →',
+        custos: [{ rotulo: 'R$512 no PumpSwap', valor: '≈ 2,4%', largura: 100, cor: '#F59E0B', fundo: '#F59E0B' }], custoOp: 1, custoNota: 'A queda é por faixas de market cap. Os limiares estão no arquivo, não aqui.', alt: 'A taxa do PumpSwap cai por faixas conforme o market cap cresce; o custo total da ordem de R$512 segue perto de 2,4%.' },
+      { legenda: 'Mais tarde, numa AMM madura, a taxa padrão é 0,25%.', ativo: 2, taxas: ['—', '—', '0,25%'], curva: 'amm', mt: 0.8, mOp: 1, gRot: 'Pool de AMM madura', gAlt: 'A curva da pool, com o marcador na parte mais funda.', eixoX: 'tokens na pool →', eixoY: 'SOL na pool →',
+        custos: [{ rotulo: 'R$512 no PumpSwap', valor: '≈ 2,4%', largura: 100, cor: '#F59E0B', fundo: '#F59E0B' }, { rotulo: 'R$512 na AMM madura', valor: '≈ 1,4%', largura: 58, cor: '#22C55E', fundo: '#22C55E' }], custoOp: 1,
+        custoNota: 'Mesma plataforma, mesmo tamanho, mesmo dia — só mudou onde o token está.', alt: 'Na AMM madura a taxa da pool é 0,25%, e a mesma ordem de R$512 custa cerca de 1,4% em vez de 2,4%.' },
+      { legenda: 'A taxa é só uma parte: memecoin custou 6× um par estável.', ativo: 2, taxas: ['1,25%', '1,25% → faixas', '0,25%'], curva: 'amm', mt: 0.8, mOp: 0.4, gRot: 'O custo efetivo, além da taxa', gAlt: 'A curva ao fundo; o foco sai do desenho e vai para o custo efetivo.', eixoX: 'tokens na pool →', eixoY: 'SOL na pool →',
+        custos: [{ rotulo: 'Par entre moedas estáveis', valor: '22 pb', largura: 16, cor: '#22C55E', fundo: '#22C55E' }, { rotulo: 'Memecoin popular', valor: '140 pb', largura: 100, cor: '#F87171', fundo: '#EF4444' }], custoOp: 1,
+        custoNota: 'Custo efetivo por dólar negociado: taxa, deslizamento e o que bots de MEV extraem. 534 mil negociações (Uniswap Labs).',
+        aviso: 'A chance de sofrer deslizamento causado por um bot foi cerca de 80% maior na memecoin — e a pool estudada era mais funda que a maioria das de memecoin recém-lançada.', avisoTom: 'alerta',
+        alt: 'Num estudo com 534 mil negociações, o custo efetivo de uma memecoin popular foi de 140 pontos-base contra 22 de um par entre moedas estáveis: seis vezes mais.' },
+    ];
+    const cenas = C.map((c, i) => {
+      const venues = NOMES.map((nome, k) => { const ativo = k === c.ativo, usado = c.taxas[k] !== '—';
+        return { nome, detalhe: DET[k], taxa: c.taxas[k], aqui: ativo,
+          borda: ativo ? '#22D3EE' : '#1F2733', fundo: ativo ? 'rgba(34,211,238,.08)' : '#141A24', op: 1,
+          taxaCor: c.taxas[k] === '—' ? '#9AA7B4' : (k === 2 ? '#22C55E' : '#F59E0B'),
+          seta: k < 2, setaCor: k < c.ativo ? '#7C3AED' : '#9AA7B4' }; });
+      const caminho = c.curva === 'bonding' ? CURVA_BONDING : CURVA_AMM;
+      const fy = c.curva === 'bonding' ? (t) => 0.08 + 0.82 * t * t : (t) => 0.12 + 0.78 * (1 - 1 / (1 + 2.6 * t)) / (1 - 1 / 3.6);
+      const AV = { alerta: { b: 'rgba(239,68,68,.5)', f: 'rgba(239,68,68,.12)' } };
+      const av = AV[c.avisoTom] || AV.alerta;
+      return { numero: i + 1, legenda: c.legenda, alt: c.alt, venues, caminho, curvaCor: c.curva === 'bonding' ? '#7C3AED' : '#9AA7B4', curvaTracejado: c.mOp < 1 ? '5 4' : 'none',
+        mx: px(c.mt).toFixed(1), my: py(fy(c.mt)).toFixed(1), marcadorOp: c.mOp,
+        graficoRotulo: c.gRot, graficoAlt: c.gAlt, eixoX: c.eixoX, eixoY: c.eixoY,
+        custos: c.custos, custoNota: c.custoNota, custoBorda: '#1F2733',
+        aviso: c.aviso || '', avisoBorda: av.b, avisoFundo: av.f };
+    });
+    const cena = cenas[S.cena], total = C.length;
+    const barra = C.map((c, i) => ({ indice: i, numero: i + 1, rotulo: 'Cena ' + (i + 1) + ': ' + c.legenda, atual: i === S.cena, cor: i < S.cena ? '#7C3AED' : (i === S.cena ? '#22D3EE' : '#1F2733'), numCor: i === S.cena ? '#E6EDF3' : '#9AA7B4' }));
+    const ir = (n) => { this.parar(); this.setState({ cena: Math.max(0, Math.min(total - 1, n)), tocando: false }); };
+    const iniciarTimer = () => { this.timer = setInterval(() => this.setState((st) => { if (st.cena >= total - 1) { this.parar(); return { tocando: false }; } return { cena: st.cena + 1 }; }), POR_CENA); };
+    return {
+      cena, cenas, barra, numero: S.cena + 1, total, dur: TRANS + 'ms', duracaoTexto: Math.round(total * POR_CENA / 1000) + ' s',
+
+      tocando: S.tocando, reduzir: S.reduzir, modoAnimado: !S.reduzir, modoParado: S.reduzir, rotuloTocar: S.tocando ? 'Pausar' : (S.cena === total - 1 ? 'Tocar de novo' : 'Tocar'),
+      voltar: () => ir(this.state.cena - 1), avancar: () => ir(this.state.cena + 1), ir: (e) => ir(Number(e.currentTarget.dataset.indice)),
+      tocar: () => { if (this.state.tocando) { this.parar(); this.setState({ tocando: false }); return; } const inicio = this.state.cena === total - 1 ? 0 : this.state.cena; this.setState({ tocando: true, cena: inicio }); iniciarTimer(); },
+      tecla: (e) => { if (e.key === ' ') { e.preventDefault(); if (this.state.tocando) { this.parar(); this.setState({ tocando: false }); } else { this.setState({ tocando: true }); iniciarTimer(); } }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); ir(this.state.cena + 1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); ir(this.state.cena - 1); } else if (e.key === 'Home') { e.preventDefault(); ir(0); } else if (e.key === 'End') { e.preventDefault(); ir(total - 1); } },
+      alternarReduzir: (e) => { this.parar(); this.setState({ reduzir: e.target.checked, tocando: false }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

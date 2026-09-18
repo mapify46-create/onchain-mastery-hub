@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}button:focus-visible,[tabindex]:focus-visible{outline:2px solid #22D3EE;outline-offset:2px;border-radius:4px}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}</style></helmet>
+<main id="conteudo" style="max-width:868px;margin:0 auto;padding:32px 24px;display:flex;flex-direction:column;gap:24px">
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Animação 5 · Módulo 3 · {{ duracaoTexto }}</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">Vida de uma narrativa</h1>
+<p style="margin:8px 0 0;color:#9AA7B4;text-wrap:pretty">Oito cenas. Fonte: modulo3.js › praticaNarrativas (o-que-e, onde-nasce, ciclo, narrativa-e-preco) e a tabela da rotação. Não há curva de preço aqui: o que sobe e desce nas barras é atenção, e os exemplos são os casos que já estão no arquivo.</p>
+</header>
+
+<section aria-label="Animação" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
+<span style="flex:0 0 auto;white-space:nowrap;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#9AA7B4">cena {{ numero }} de {{ total }}</span>
+<label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#9AA7B4;cursor:pointer"><input type="checkbox" checked="{{ reduzir }}" onChange="{{ alternarReduzir }}" style="width:16px;height:16px;accent-color:#7C3AED">Reduzir movimento: cenas paradas, lado a lado</label>
+</div>
+
+<sc-if value="{{ modoAnimado }}" hint-placeholder-val="{{ true }}">
+<div tabindex="0" role="group" aria-label="Palco da animação. Espaço toca ou pausa; setas trocam a cena." onKeyDown="{{ tecla }}" style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div role="img" aria-label="{{ cena.alt }}" style="display:flex;flex-direction:column;gap:16px">
+<!-- a fase -->
+<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center">
+<span style="border-radius:999px;border:1px solid {{ cena.faseBorda }};background:{{ cena.faseFundo }};color:{{ cena.faseCor }};padding:2px 12px;font-size:12px;font-weight:600">{{ cena.fase }}</span>
+<span style="font-size:12px;color:#9AA7B4">{{ cena.onde }}</span>
+</div>
+<!-- atenção por canal -->
+<figure style="margin:0">
+<p style="margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Atenção, por onde ela passa</p>
+<div style="display:flex;align-items:flex-end;gap:10px;height:110px">
+<sc-for list="{{ cena.canais }}" as="c" hint-placeholder-count="4">
+<div style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;height:100%;gap:4px;align-items:center">
+<div style="width:100%;height:{{ c.altura }}%;border-radius:4px 4px 0 0;background:{{ c.cor }};transition:height {{ dur }} ease,background {{ dur }} ease"></div>
+<span style="font-size:11px;color:#9AA7B4;text-align:center;line-height:1.2">{{ c.rotulo }}</span>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin-top:8px;font-size:12px;color:#9AA7B4">Barras de atenção, não de preço. Altura relativa, para mostrar a ordem em que os canais acendem.</figcaption>
+</figure>
+<!-- tokens: o primeiro e a esteira -->
+<div style="border-radius:8px;border:1px solid {{ cena.tokensBorda }};background:#10151E;padding:12px;transition:border-color {{ dur }} ease">
+<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">{{ cena.tokensRotulo }}</p>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#9AA7B4">{{ cena.tokensNota }}</span>
+</div>
+<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;min-height:34px;align-items:center">
+<sc-for list="{{ cena.tokens }}" as="t" hint-placeholder-count="4">
+<span style="border-radius:999px;border:1px solid {{ t.borda }};background:{{ t.fundo }};color:{{ t.cor }};padding:4px 12px;font-size:13px;font-weight:{{ t.peso }};transition:border-color {{ dur }} ease,background {{ dur }} ease">{{ t.rotulo }}</span>
+</sc-for>
+<sc-if value="{{ cena.semTokens }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#9AA7B4">Nenhum token ainda: a narrativa nasce antes dele.</span></sc-if>
+</div>
+</div>
+<!-- painel de apoio -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+<div style="border-radius:8px;border:1px solid {{ cena.notaBorda }};background:{{ cena.notaFundo }};padding:12px 14px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:{{ cena.notaCor }}">{{ cena.notaTitulo }}</p>
+<p style="margin:6px 0 0;font-size:14px">{{ cena.nota }}</p>
+</div>
+<sc-if value="{{ cena.mostraCusto }}" hint-placeholder-val="{{ false }}">
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:12px 14px">
+<p style="margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Na mesma escala, em pontos percentuais</p>
+<div role="img" aria-label="O sinal social rende de 1% a 3%, e só por poucos minutos. Entrar e sair de uma memecoin custa de 3 a 6 pontos." style="display:flex;flex-direction:column;gap:10px">
+<div><div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><span style="font-size:13px">O sinal social, no melhor caso</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">1% a 3%</span></div><div style="margin-top:4px;height:16px;background:#0B0F17;border:1px solid #1F2733;border-radius:4px;overflow:hidden"><div style="height:100%;width:50%;background:repeating-linear-gradient(135deg,#22D3EE 0 3px,transparent 3px 6px)"></div></div></div>
+<div><div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><span style="font-size:13px">Entrar e sair (Módulo 5)</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">3 a 6 pontos</span></div><div style="margin-top:4px;height:16px;background:#0B0F17;border:1px solid #1F2733;border-radius:4px;overflow:hidden"><div style="height:100%;width:100%;background:#EF4444"></div></div></div>
+</div>
+<figcaption style="margin-top:8px;font-size:12px;color:#9AA7B4">O custo come o sinal antes de ele virar lucro.</figcaption>
+</figure>
+</sc-if>
+<sc-if value="{{ cena.mostraFazer }}" hint-placeholder-val="{{ false }}">
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:12px 14px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22D3EE">Medir atenção, não adivinhar preço</p>
+<ul style="margin:8px 0 0;padding-left:18px;font-size:14px;display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ cena.fazer }}" as="f" hint-placeholder-count="3"><li>{{ f }}</li></sc-for>
+</ul>
+</div>
+</sc-if>
+</div>
+</div>
+</div>
+<p aria-live="polite" style="margin:0;min-height:48px;font-size:1.0625rem;font-weight:600;text-align:center;text-wrap:pretty">{{ cena.legenda }}</p>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+<button type="button" onClick="{{ voltar }}" style="min-height:44px;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">← Voltar cena</button>
+<button type="button" aria-pressed="{{ tocando }}" onClick="{{ tocar }}" style="min-height:44px;min-width:110px;border-radius:8px;border:1px solid #7C3AED;background:#7C3AED;color:#FFFFFF;padding:8px 16px;font-size:14px;font-weight:600;cursor:pointer" style-hover="opacity:.85">{{ rotuloTocar }}</button>
+<button type="button" onClick="{{ avancar }}" style="min-height:44px;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">Avançar cena →</button>
+</div>
+<ol aria-label="Cenas" style="list-style:none;margin:0;padding:0;display:flex;gap:6px">
+<sc-for list="{{ barra }}" as="c" hint-placeholder-count="8">
+<li style="flex:1 1 0;min-width:0"><button type="button" aria-label="{{ c.rotulo }}" aria-current="{{ c.atual }}" data-indice="{{ c.indice }}" onClick="{{ ir }}" style="display:flex;flex-direction:column;gap:4px;width:100%;min-height:44px;border:0;padding:6px 0;background:transparent;cursor:pointer;align-items:stretch"><span aria-hidden="true" style="display:block;height:6px;border-radius:999px;background:{{ c.cor }};transition:background {{ dur }} ease"></span><span aria-hidden="true" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:{{ c.numCor }};text-align:center">{{ c.numero }}</span></button></li>
+</sc-for>
+</ol>
+</sc-if>
+
+<sc-if value="{{ modoParado }}" hint-placeholder-val="{{ false }}">
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px">
+<sc-for list="{{ cenas }}" as="c" hint-placeholder-count="8">
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;display:flex;flex-direction:column;gap:8px" role="img" aria-label="{{ c.alt }}">
+<div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline"><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:#9AA7B4">cena {{ c.numero }}</span><span style="border-radius:999px;border:1px solid {{ c.faseBorda }};background:{{ c.faseFundo }};color:{{ c.faseCor }};padding:0 8px;font-size:10px;font-weight:600">{{ c.fase }}</span></div>
+<div style="display:flex;align-items:flex-end;gap:5px;height:52px">
+<sc-for list="{{ c.canais }}" as="k" hint-placeholder-count="4"><div style="flex:1 1 0;height:{{ k.altura }}%;border-radius:3px 3px 0 0;background:{{ k.cor }}"></div></sc-for>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:4px">
+<sc-for list="{{ c.tokens }}" as="t" hint-placeholder-count="3"><span style="border-radius:999px;border:1px solid {{ t.borda }};background:{{ t.fundo }};color:{{ t.cor }};padding:1px 8px;font-size:11px">{{ t.rotulo }}</span></sc-for>
+</div>
+<figcaption style="font-size:13px;font-weight:600">{{ c.legenda }}</figcaption>
+</figure>
+</sc-for>
+</div>
+</sc-if>
+
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Ler como texto</summary>
+<ol style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4;display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ cenas }}" as="c" hint-placeholder-count="8"><li>{{ c.legenda }} {{ c.alt }}</li></sc-for>
+</ol></details>
+</section>
+
+<details style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Dados desta animação (para a implementação)</summary>
+<pre style="margin:12px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.6;color:#9AA7B4;white-space:pre-wrap">montarAnimacao({ id: 'vida-da-narrativa', duracaoPorCena: 4500, transicao: 450,
+  elementos: ['fase', 'canais[4]', 'tokens[]', 'nota', 'custo', 'fazer'],
+  cenas: [{ legenda, estados: { fase, canais, tokens, nota } } × 8] })
+Fonte: modulo3.js › praticaNarrativas (o-que-e · onde-nasce · ciclo · narrativa-e-preco) e a tabela da rotação.
+Exemplos usados: só os casos do arquivo (JENNER/MOTHER/DADDY, MOODENG/PNUT, GOAT e os agentes de IA, TRUMP/LIBRA, LAUNCHCOIN).
+As barras são ATENÇÃO, não preço — o arquivo não publica série de preço, e a animação não desenha nenhuma.
+Números: 23,5% dos tokens do pump.fun criados depois de um post; sinal social de 1% a 3%; custo de entrar e sair de 3 a 6 pontos.</pre></details>
+<p style="margin:0;font-size:13px;color:#9AA7B4">Material de estudo, não é recomendação de investimento · OMH Hub · Animação 5</p>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:960,&quot;height&quot;:880}}">
+class Component extends DCLogic {
+  state = { cena: 0, tocando: false, reduzir: false };
+  componentDidMount() { const mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)'); if (mq && mq.matches) this.setState({ reduzir: true }); }
+  componentWillUnmount() { clearInterval(this.timer); }
+  parar() { clearInterval(this.timer); this.timer = null; }
+  renderVals() {
+    const S = this.state, POR_CENA = 4500, TRANS = 450;
+    const FASE = {
+      nasce: { b: 'rgba(34,211,238,.5)', f: 'rgba(34,211,238,.1)', c: '#22D3EE' },
+      cresce: { b: 'rgba(124,58,237,.6)', f: 'rgba(124,58,237,.15)', c: '#E6EDF3' },
+      pico: { b: 'rgba(245,158,11,.4)', f: 'rgba(245,158,11,.12)', c: '#F59E0B' },
+      satura: { b: 'rgba(239,68,68,.5)', f: 'rgba(239,68,68,.12)', c: '#F87171' },
+      limite: { b: 'rgba(245,158,11,.4)', f: 'rgba(245,158,11,.12)', c: '#F59E0B' },
+      fazer: { b: 'rgba(34,197,94,.5)', f: 'rgba(34,197,94,.12)', c: '#22C55E' },
+    };
+    const TOK = {
+      primeiro: { borda: 'rgba(124,58,237,.6)', fundo: 'rgba(124,58,237,.15)', cor: '#E6EDF3', peso: 600 },
+      copia: { borda: '#1F2733', fundo: '#141A24', cor: '#9AA7B4', peso: 400 },
+      morto: { borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171', peso: 400 },
+      novo: { borda: 'rgba(34,211,238,.5)', fundo: 'rgba(34,211,238,.1)', cor: '#22D3EE', peso: 600 },
+    };
+    const tk = (tipo, rotulo) => Object.assign({ rotulo }, TOK[tipo]);
+    const CANAIS = ['fora de cripto', 'X / Twitter', 'grupos', 'listas de "em alta"'];
+    const cn = (alturas, cores) => CANAIS.map((rotulo, i) => ({ rotulo, altura: alturas[i], cor: cores[i] }));
+    const CZ = '#1F2733', CI = '#22D3EE', CR = '#7C3AED', CA = '#F59E0B', CV = '#EF4444';
+    const NOTA = { neutro: { b: '#1F2733', f: '#141A24', c: '#9AA7B4' }, alerta: { b: 'rgba(239,68,68,.5)', f: 'rgba(239,68,68,.12)', c: '#F87171' }, atencao: { b: 'rgba(245,158,11,.4)', f: 'rgba(245,158,11,.12)', c: '#F59E0B' }, ok: { b: 'rgba(34,197,94,.5)', f: 'rgba(34,197,94,.12)', c: '#22C55E' } };
+    const C = [
+      { fase: 'nasce', onde: 'A narrativa quase sempre nasce fora da blockchain', canais: cn([62, 10, 6, 4], [CI, CZ, CZ, CZ]),
+        tokensRotulo: 'Tokens do tema', tokensNota: 'nenhum ainda', tokens: [], semTokens: true,
+        notaTitulo: 'Onde nasce', nota: 'Um post no X ou no Truth Social, uma notícia, um vídeo viral. Primeiro vem o evento; o token vem depois.', notaTom: 'neutro',
+        legenda: 'A narrativa nasce fora da blockchain: post, notícia, vídeo.', alt: 'Só o canal "fora de cripto" está aceso. Nenhum token do tema existe ainda.' },
+      { fase: 'nasce', onde: '23,5% dos tokens do pump.fun nascem depois de um post', canais: cn([70, 34, 10, 6], [CI, CR, CZ, CZ]),
+        tokensRotulo: 'O primeiro token', tokensNota: 'um só', tokens: [tk('primeiro', 'JENNER')],
+        notaTitulo: 'O primeiro token chama atenção', nota: 'Num estudo dos 15,2 milhões de tokens criados em dois anos, 3,5 milhões surgiram logo depois de um post. 31 desses posts renderam pelo menos US$ 1 milhão a quem criou o token.', notaTom: 'neutro',
+        legenda: 'Um primeiro token aparece e chama atenção para o tema.', alt: 'O canal fora de cripto e o X estão acesos. O primeiro token do arquivo, JENNER, aparece sozinho.' },
+      { fase: 'cresce', onde: 'A esteira: 1,5 milhão de tokens copiam outro', canais: cn([66, 58, 32, 14], [CI, CR, CR, CZ]),
+        tokensRotulo: 'A esteira', tokensNota: '+ cópias do tema', tokens: [tk('primeiro', 'JENNER'), tk('copia', 'MOTHER'), tk('copia', 'DADDY')],
+        notaTitulo: 'A esteira', nota: 'Tokens parecidos aparecem em seguida. Mais de 10% de tudo o que se cria copia nome, símbolo, descrição e imagem de outro — e entre as cópias, 0,86% graduam, contra 9,2% dos originais.', notaTom: 'neutro',
+        legenda: 'A esteira: tokens parecidos aparecem em seguida.', alt: 'Três tokens do tema das celebridades: JENNER, MOTHER e DADDY. Os grupos começam a acender.' },
+      { fase: 'cresce', onde: 'Listagem numa corretora grande e figura pública na conversa', canais: cn([58, 78, 70, 54], [CI, CR, CR, CA]),
+        tokensRotulo: 'O tema se espalha', tokensNota: 'outro tema, mesmo desenho', tokens: [tk('primeiro', 'MOODENG'), tk('copia', 'PNUT'), tk('copia', 'GOAT'), tk('copia', 'agentes de IA')],
+        notaTitulo: 'A atenção se espalha', nota: 'O PNUT foi listado na Binance em 11/11/2024, com Elon Musk usando o esquilo no X. Mais de 56% das contas que espalhavam convites para grupos eram bots ou foram suspensas.', notaTom: 'atencao',
+        legenda: 'A atenção cresce e passa por todos os canais.', alt: 'Todos os canais acesos, com as listas de em alta subindo. Aparecem MOODENG, PNUT, GOAT e os agentes de IA.' },
+      { fase: 'pico', onde: 'A imprensa fora de cripto chega no topo, ou depois', canais: cn([76, 84, 66, 80], [CI, CR, CR, CA]),
+        tokensRotulo: 'O tema seguinte já começou', tokensNota: 'rotação', tokens: [tk('copia', 'GOAT'), tk('copia', 'agentes de IA'), tk('novo', 'TRUMP')],
+        notaTitulo: 'Rotação', nota: 'O valor somado do tema para de subir e a atenção migra para outra narrativa. Nos casos com data, como PNUT e LIBRA, a cobertura da imprensa geral veio no topo.', notaTom: 'atencao',
+        legenda: 'Rotação: a atenção migra para a próxima narrativa.', alt: 'As barras estão altas e a atenção começa a migrar: entra o TRUMP, de outro tema, enquanto GOAT e os agentes de IA perdem espaço.' },
+      { fase: 'satura', onde: 'Continuam nascendo tokens do tema, e o valor dele já cai', canais: cn([22, 30, 18, 12], [CZ, CV, CZ, CZ]),
+        tokensRotulo: 'O que sobrou do tema', tokensNota: 'ruído', tokens: [tk('morto', 'JENNER'), tk('morto', 'MOTHER'), tk('morto', 'DADDY'), tk('copia', '+ cópias')],
+        notaTitulo: 'Saturação e fim', nota: 'Dos 30 tokens de celebridades lançados na Solana a partir de maio de 2024, a queda média foi de 94% em cerca de um mês. Sobra ruído, e o interesse some.', notaTom: 'alerta',
+        legenda: 'Saturação: sobra ruído e o interesse some.', alt: 'As barras de atenção caem. Os tokens do tema aparecem marcados como perdidos, com mais cópias no fim.' },
+      { fase: 'limite', onde: 'O ponto que mais se perde na prática', canais: cn([40, 52, 36, 30], [CZ, CR, CZ, CZ]),
+        tokensRotulo: 'Reconhecer o tema', tokensNota: 'não diz qual token, nem quando', tokens: [tk('copia', 'tema identificado'), tk('copia', 'fase identificada')],
+        notaTitulo: 'O limite', nota: 'Reconhecer a narrativa não prevê o preço sozinho. No melhor caso, o sinal social rende de 1% a 3%, e só por poucos minutos — enquanto entrar e sair de uma memecoin custa de 3 a 6 pontos.', notaTom: 'alerta', mostraCusto: true,
+        legenda: 'Reconhecer a narrativa não prevê o preço sozinho.', alt: 'Na mesma escala, o sinal social de 1% a 3% contra o custo de entrar e sair, de 3 a 6 pontos: o custo come o sinal.' },
+      { fase: 'fazer', onde: 'O que dá para fazer com isso', canais: cn([44, 56, 40, 34], [CI, CR, CR, CA]),
+        tokensRotulo: 'A rotina de estudo', tokensNota: 'treinar o olho', tokens: [tk('novo', 'anotar a fase'), tk('copia', 'conferir depois')],
+        notaTitulo: 'Medir atenção, não adivinhar preço', nota: 'A narrativa explica de onde vem a atenção. O que fazer com ela depende do pilar técnico e da sua regra escrita — não desta animação.', notaTom: 'ok', mostraFazer: true,
+        fazer: ['Anote no diário: data, tema, primeiro token e a fase que você acha que é.', 'Depois de algumas semanas, confira quantas vezes a sua leitura de fase acertou.', 'Se um token chamar sua atenção, ele passa pelo Checklist antes de qualquer coisa.'],
+        legenda: 'Sirva-se disso para medir atenção, não para adivinhar preço.', alt: 'A rotina: anotar a fase no diário, conferir o acerto depois de semanas, e passar todo token pelo checklist antes de agir.' },
+    ];
+    const cenas = C.map((c, i) => { const f = FASE[c.fase], n = NOTA[c.notaTom] || NOTA.neutro;
+      return { numero: i + 1, legenda: c.legenda, alt: c.alt, fase: { nasce: 'Nasce', cresce: 'Cresce', pico: 'Pico e rotação', satura: 'Saturação', limite: 'O limite', fazer: 'O que fazer' }[c.fase],
+        faseBorda: f.b, faseFundo: f.f, faseCor: f.c, onde: c.onde, canais: c.canais,
+        tokensRotulo: c.tokensRotulo, tokensNota: c.tokensNota, tokens: c.tokens, semTokens: !!c.semTokens, tokensBorda: c.tokens.length ? '#1F2733' : '#1F2733',
+        notaTitulo: c.notaTitulo, nota: c.nota, notaBorda: n.b, notaFundo: n.f, notaCor: n.c,
+        mostraCusto: !!c.mostraCusto, mostraFazer: !!c.mostraFazer, fazer: c.fazer || [] }; });
+    const cena = cenas[S.cena], total = C.length;
+    const barra = C.map((c, i) => ({ indice: i, numero: i + 1, rotulo: 'Cena ' + (i + 1) + ': ' + c.legenda, atual: i === S.cena, cor: i < S.cena ? '#7C3AED' : (i === S.cena ? '#22D3EE' : '#1F2733'), numCor: i === S.cena ? '#E6EDF3' : '#9AA7B4' }));
+    const ir = (n) => { this.parar(); this.setState({ cena: Math.max(0, Math.min(total - 1, n)), tocando: false }); };
+    const iniciarTimer = () => { this.timer = setInterval(() => this.setState((st) => { if (st.cena >= total - 1) { this.parar(); return { tocando: false }; } return { cena: st.cena + 1 }; }), POR_CENA); };
+    return {
+      cena, cenas, barra, numero: S.cena + 1, total, dur: TRANS + 'ms', duracaoTexto: Math.round(total * POR_CENA / 1000) + ' s',
+      tocando: S.tocando, reduzir: S.reduzir, modoAnimado: !S.reduzir, modoParado: S.reduzir, rotuloTocar: S.tocando ? 'Pausar' : (S.cena === total - 1 ? 'Tocar de novo' : 'Tocar'),
+      voltar: () => ir(this.state.cena - 1), avancar: () => ir(this.state.cena + 1), ir: (e) => ir(Number(e.currentTarget.dataset.indice)),
+      tocar: () => { if (this.state.tocando) { this.parar(); this.setState({ tocando: false }); return; } const inicio = this.state.cena === total - 1 ? 0 : this.state.cena; this.setState({ tocando: true, cena: inicio }); iniciarTimer(); },
+      tecla: (e) => { if (e.key === ' ') { e.preventDefault(); if (this.state.tocando) { this.parar(); this.setState({ tocando: false }); } else { this.setState({ tocando: true }); iniciarTimer(); } }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); ir(this.state.cena + 1); } else if (e.key === 'ArrowLeft') { e.preventDefault(); ir(this.state.cena - 1); } else if (e.key === 'Home') { e.preventDefault(); ir(0); } else if (e.key === 'End') { e.preventDefault(); ir(total - 1); } },
+      alternarReduzir: (e) => { this.parar(); this.setState({ reduzir: e.target.checked, tocando: false }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}h1,h2,h3,p,li,dd,dt{overflow-wrap:break-word}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}</style></helmet>
+<main id="conteudo" style="max-width:868px;margin:0 auto;padding:{{ paddingMain }};display:flex;flex-direction:column;gap:24px">
+
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Fase 3 · feedback visual</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">Quiz e Simulador</h1>
+<p style="margin:8px 0 0;color:#9AA7B4;text-wrap:pretty">O quiz é o mesmo componente nos 7 módulos; o simulador vive no Módulo 4. As duas telas aparecem aqui nos quatro estados: antes de responder, depois de acertar, depois de errar e o resultado final.</p>
+<p style="margin:16px 0 0;border-radius:12px;border:1px solid rgba(124,58,237,.5);background:rgba(124,58,237,.12);padding:12px 16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Estado de exemplo: </strong>a pergunta é a q2 do Módulo 6 e o cenário é o 1 do simulador, os dois vindos dos arquivos de dados. O placar e o resumo usam números fictícios, de propósito, para mostrar cada faixa.</p>
+</header>
+
+<!-- ================= QUIZ ================= -->
+<section aria-label="Quiz" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<h2 style="margin:0;font-size:1.25rem;font-weight:600">Quiz do módulo</h2>
+<span style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Mesmo componente nos 7 módulos</span>
+</div>
+<div role="group" aria-label="Estado do quiz" style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ estadosQuiz }}" as="e" hint-placeholder-count="4">
+<button type="button" data-id="{{ e.id }}" aria-pressed="{{ e.ativo }}" onClick="{{ trocarQuiz }}" style="min-height:40px;border-radius:999px;border:1px solid {{ e.borda }};background:{{ e.fundo }};color:#E6EDF3;padding:6px 14px;font-size:14px;cursor:pointer" style-hover="border-color:#9AA7B4">{{ e.rotulo }}</button>
+</sc-for>
+</div>
+
+<sc-if value="{{ quiz.mostraPergunta }}" hint-placeholder-val="{{ true }}">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Pergunta 2 de 8 · Módulo 6</p>
+<sc-if value="{{ quiz.corrigido }}" hint-placeholder-val="{{ false }}"><span style="border-radius:999px;border:1px solid {{ quiz.badgeBorda }};background:{{ quiz.badgeFundo }};color:{{ quiz.badgeCor }};padding:1px 10px;font-size:12px;font-weight:600">{{ quiz.badge }}</span></sc-if>
+</div>
+<p style="margin:0;font-size:1.0625rem;font-weight:600;text-wrap:pretty">Numa pool de produto constante, você vende até o preço cair pela metade. Quanto da liquidez anunciada você recebe?</p>
+<div role="radiogroup" aria-label="Alternativas" style="display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ quiz.alternativas }}" as="a" hint-placeholder-count="4">
+<button type="button" role="radio" aria-checked="{{ a.escolhida }}" data-id="{{ a.id }}" onClick="{{ escolherAlternativa }}" style="min-height:44px;border-radius:8px;border:1px solid {{ a.borda }};background:{{ a.fundo }};color:{{ a.cor }};opacity:{{ a.opacidade }};padding:10px 14px;font-size:14px;text-align:left;cursor:{{ quiz.cursorAlt }};display:flex;gap:10px;align-items:flex-start" style-hover="border-color:#9AA7B4">
+<span aria-hidden="true" style="flex:0 0 20px;width:20px;height:20px;border-radius:50%;border:2px solid {{ a.radioBorda }};background:{{ a.radioFundo }};margin-top:1px"></span>
+<span style="min-width:0">{{ a.texto }}<sc-if value="{{ a.marca }}" hint-placeholder-val="{{ false }}"><span style="display:block;margin-top:4px;font-size:12px;font-weight:600;color:{{ a.marcaCor }}">{{ a.marca }}</span></sc-if></span>
+</button>
+</sc-for>
+</div>
+<div>
+<p style="margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Quão certo você está? (obrigatório)</p>
+<div role="radiogroup" aria-label="Confiança" style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ quiz.confiancas }}" as="c" hint-placeholder-count="3">
+<button type="button" role="radio" aria-checked="{{ c.escolhida }}" data-nivel="{{ c.nivel }}" onClick="{{ escolherConfianca }}" style="min-height:44px;border-radius:999px;border:1px solid {{ c.borda }};background:{{ c.fundo }};color:#E6EDF3;padding:8px 16px;font-size:14px;font-weight:600;cursor:{{ quiz.cursorAlt }}" style-hover="border-color:#9AA7B4">{{ c.rotulo }}</button>
+</sc-for>
+</div>
+<sc-if value="{{ quiz.corrigido }}" hint-placeholder-val="{{ false }}"><p style="margin:8px 0 0;font-size:13px;color:#9AA7B4">{{ quiz.disse }}</p></sc-if>
+</div>
+<sc-if value="{{ quiz.mostraBotao }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+<button type="button" disabled="{{ quiz.bloqueado }}" onClick="{{ verResultado }}" style="min-height:44px;border-radius:8px;border:1px solid #7C3AED;background:#7C3AED;color:#FFFFFF;padding:10px 20px;font-size:15px;font-weight:600;cursor:{{ quiz.cursorBotao }};opacity:{{ quiz.opacidadeBotao }}">Ver resultado</button>
+<span style="font-size:13px;color:#9AA7B4">{{ quiz.dica }}</span>
+</div>
+</sc-if>
+<sc-if value="{{ quiz.corrigido }}" hint-placeholder-val="{{ false }}">
+<div aria-live="polite" style="border-radius:8px;border:1px solid {{ quiz.fbBorda }};background:{{ quiz.fbFundo }};padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+<p style="margin:0;font-size:14px"><strong style="color:{{ quiz.fbCor }}">{{ quiz.fbTitulo }}</strong>{{ quiz.explicacao }}</p>
+<sc-if value="{{ quiz.porque }}" hint-placeholder-val="{{ false }}">
+<div style="border-radius:6px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:10px 12px">
+<p style="margin:0;font-size:14px"><strong style="color:#E6EDF3">Por que a sua não serve: </strong>{{ quiz.porque }}</p>
+</div>
+</sc-if>
+<sc-if value="{{ quiz.erroComCerteza }}" hint-placeholder-val="{{ false }}">
+<p style="margin:0;border-radius:6px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:10px 12px;font-size:14px"><strong style="color:#E6EDF3">Certeza e erro: </strong>é a explicação que mais vale reler.</p>
+</sc-if>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ quiz.mostraPlacar }}" hint-placeholder-val="{{ false }}">
+<div style="border-radius:8px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.12);padding:20px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<p style="margin:0;font-size:1.125rem;font-weight:600">Você acertou 6 de 8.</p>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;color:#9AA7B4">75%</span>
+</div>
+<figure style="margin:0" role="img" aria-label="6 das 8 perguntas certas; 2 erradas, e 1 delas foi um erro feito com certeza.">
+<div style="height:22px;background:#0B0F17;border-radius:4px;overflow:hidden;display:flex;border:1px solid #1F2733">
+<div style="height:100%;width:75%;background:#22C55E"></div>
+<div style="height:100%;width:12.5%;background:#EF4444"></div>
+<div style="height:100%;width:12.5%;background:#F59E0B"></div>
+</div>
+<figcaption style="margin-top:8px;display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:#9AA7B4">
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:#22C55E"></span>6 certas</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:#EF4444"></span>1 errada</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:#F59E0B"></span>1 errada com "Tenho certeza"</span>
+</figcaption>
+</figure>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Abaixo de 80%: releia as explicações das que errou e refaça o quiz. Com 100%, a mensagem é outra: "Gabarito. Leia as explicações mesmo assim: elas trazem os números por trás das respostas."</p>
+<p style="margin:0;border-radius:6px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:10px 12px;font-size:14px">1 erro feito com certeza — comece por ele.</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Estas perguntas voltam amanhã na página <a href="#/revisao">Revisão</a>, e depois em 3, 7, 16 e 35 dias.</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Botao" variante="secundario" hint-size="auto,40px">Refazer o quiz</x-import>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Botao" variante="primario" hint-size="auto,40px">Marcar módulo como concluído</x-import>
+</div>
+</div>
+</sc-if>
+</section>
+
+<!-- ================= SIMULADOR ================= -->
+<section aria-label="Simulador" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<h2 style="margin:0;font-size:1.25rem;font-weight:600">Simulador de decisão</h2>
+<span style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Módulo 4 · 12 cenários</span>
+</div>
+<p style="margin:0;border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:12px 16px;font-size:14px"><strong style="color:#E6EDF3">Cenários fictícios: </strong>os números que aparecem neles são inventados de propósito para o exercício, e a ordem é sorteada a cada rodada. Nenhum descreve um token real, e nada aqui é recomendação de compra ou venda.</p>
+<p style="margin:0;color:#9AA7B4">Não existe pontuação de acerto de preço: o que está sendo medido é se a decisão segue a regra ou o impulso. As quatro opções são sempre as mesmas — o que muda é a situação.</p>
+<div role="group" aria-label="Estado do simulador" style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ estadosSim }}" as="e" hint-placeholder-count="4">
+<button type="button" data-id="{{ e.id }}" aria-pressed="{{ e.ativo }}" onClick="{{ trocarSim }}" style="min-height:40px;border-radius:999px;border:1px solid {{ e.borda }};background:{{ e.fundo }};color:#E6EDF3;padding:6px 14px;font-size:14px;cursor:pointer" style-hover="border-color:#9AA7B4">{{ e.rotulo }}</button>
+</sc-for>
+</div>
+
+<sc-if value="{{ sim.mostraCenario }}" hint-placeholder-val="{{ true }}">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Cenário 1 de 12 · sem posição</p>
+<span style="border-radius:999px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);color:#F87171;padding:1px 10px;font-size:12px;font-weight:600">Risco alto</span>
+</div>
+<h3 style="margin:0;font-size:1.0625rem;font-weight:600">Token lançado há 10 minutos, sem catálise</h3>
+<div style="display:flex;flex-wrap:wrap;gap:6px">
+<sc-for list="{{ sim.tags }}" as="t" hint-placeholder-count="3"><span style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:2px 10px;font-size:12px;color:#9AA7B4">{{ t }}</span></sc-for>
+</div>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Um token acabou de ser criado num launchpad. O gráfico é uma linha vertical de dez minutos, o chat está eufórico e ninguém sabe dizer por que este token subiria — só que "ainda está cedo". Você não tem posição.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:12px 14px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">O que você vê</p>
+<ul style="margin:6px 0 0;padding-left:18px;font-size:14px;color:#9AA7B4;display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ sim.sinais }}" as="s" hint-placeholder-count="3"><li>{{ s }}</li></sc-for>
+</ul>
+</div>
+<div role="radiogroup" aria-label="Opções" style="display:grid;grid-template-columns:{{ colsDois }};gap:8px">
+<sc-for list="{{ sim.opcoes }}" as="o" hint-placeholder-count="4">
+<button type="button" role="radio" aria-checked="{{ o.escolhida }}" data-id="{{ o.id }}" onClick="{{ escolherOpcao }}" style="min-height:44px;border-radius:8px;border:1px solid {{ o.borda }};background:{{ o.fundo }};color:#E6EDF3;opacity:{{ o.opacidade }};padding:12px 14px;text-align:left;cursor:{{ sim.cursor }};display:flex;flex-direction:column;gap:4px" style-hover="border-color:#9AA7B4">
+<span style="display:flex;justify-content:space-between;gap:8px;align-items:baseline;width:100%"><span style="font-size:15px;font-weight:600">{{ o.rotulo }}</span><sc-if value="{{ o.qualidade }}" hint-placeholder-val="{{ false }}"><span style="border-radius:999px;border:1px solid {{ o.qBorda }};background:{{ o.qFundo }};color:{{ o.qCor }};padding:1px 8px;font-size:11px;font-weight:600;white-space:nowrap">{{ o.qualidade }}</span></sc-if></span>
+<span style="font-size:13px;color:#9AA7B4">{{ o.descricao }}</span>
+</button>
+</sc-for>
+</div>
+<sc-if value="{{ sim.respondido }}" hint-placeholder-val="{{ false }}">
+<div aria-live="polite" style="display:flex;flex-direction:column;gap:12px">
+<div style="border-radius:8px;border:1px solid {{ sim.fbBorda }};background:{{ sim.fbFundo }};padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:baseline">
+<span style="border-radius:999px;border:1px solid {{ sim.qBorda }};background:{{ sim.qFundo }};color:{{ sim.qCor }};padding:1px 10px;font-size:12px;font-weight:600">{{ sim.qualidade }}</span>
+<span style="border-radius:999px;border:1px solid {{ sim.rBorda }};background:{{ sim.rFundo }};color:{{ sim.rCor }};padding:1px 10px;font-size:12px;font-weight:600">Risco desta decisão: {{ sim.riscoDecisao }}</span>
+</div>
+<p style="margin:0;font-size:14px">{{ sim.feedback }}</p>
+</div>
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:12px 14px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22D3EE">Próximo passo técnico</p>
+<p style="margin:6px 0 0;font-size:14px">Antes de qualquer coisa, cole o endereço do token no RugCheck e confira três campos: a LP está bloqueada ou queimada? a mint authority foi revogada? a freeze authority foi revogada? Depois, no Solscan, veja a concentração dos maiores holders.</p>
+<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px">
+<sc-for list="{{ sim.ferramentas }}" as="f" hint-placeholder-count="3"><span style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:2px 10px;font-size:12px;font-family:'JetBrains Mono',ui-monospace,monospace">{{ f }}</span></sc-for>
+</div>
+</div>
+<div style="border-radius:8px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.12);padding:12px 14px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Lição</p>
+<p style="margin:6px 0 0;font-size:15px;font-weight:600">Sem catálise escrita antes da compra, não é operação: é aposta.</p>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Botao" variante="primario" hint-size="auto,40px">Próximo cenário</x-import>
+<span style="font-size:13px;color:#9AA7B4">A ordem é sorteada: o próximo vem de outro tema.</span>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{ sim.semResposta }}" hint-placeholder-val="{{ true }}">
+<p style="margin:0;font-size:13px;color:#9AA7B4">Escolha uma das quatro para ver o feedback. "Realizar parcial" aqui é a única que não se aplica — você não tem posição neste token.</p>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ sim.mostraResumo }}" hint-placeholder-val="{{ false }}">
+<div style="border-radius:8px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.12);padding:20px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<p style="margin:0;font-size:1.125rem;font-weight:600">No caminho, com vazamentos</p>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;color:#9AA7B4">17 de 24 pontos · 71%</span>
+</div>
+<p style="margin:0;font-size:14px;color:#9AA7B4">A base está certa, mas alguns cenários ainda pegaram você no impulso. Releia os feedbacks marcados como "Decisão cara" na lista abaixo: é ali que o capital vaza.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<p style="margin:0 0 10px;font-size:14px;font-weight:600">As 12 decisões, por qualidade</p>
+<div role="img" aria-label="{{ resumo.alt }}" style="display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ resumo.barras }}" as="b" hint-placeholder-count="4">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><span style="font-size:14px">{{ b.rotulo }} <span style="font-size:12px;color:#9AA7B4">{{ b.pontos }}</span></span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#9AA7B4">{{ b.texto }}</span></div>
+<div style="margin-top:4px;height:18px;background:#141A24;border-radius:4px;overflow:hidden"><div style="height:100%;width:{{ b.largura }}%;background:{{ b.cor }}"></div></div>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin-top:10px;font-size:13px;color:#9AA7B4">Mesma escala, sobre os 12 cenários. "Não se aplica" não é erro de mérito: é escolher uma ação impossível na situação — vale 0 e é contada à parte.</figcaption>
+</figure>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<p style="margin:0 0 10px;font-size:14px;font-weight:600">As quatro faixas do resumo</p>
+<ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ resumo.faixas }}" as="f" hint-placeholder-count="4">
+<li style="border-radius:8px;border:1px solid {{ f.borda }};background:{{ f.fundo }};padding:10px 14px;display:flex;flex-direction:column;gap:4px">
+<span style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span style="font-size:14px;font-weight:600;color:{{ f.cor }}">{{ f.titulo }}</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#9AA7B4">{{ f.limiar }}</span></span>
+<span style="font-size:13px;color:#9AA7B4">{{ f.texto }}</span>
+</li>
+</sc-for>
+</ul>
+<figcaption style="margin-top:10px;font-size:13px;color:#9AA7B4">O simulador pega a primeira faixa que couber. A faixa em destaque é a deste resultado de exemplo.</figcaption>
+</figure>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 14px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Os 12 cenários, e a decisão de exemplo em cada um</p>
+<ul style="list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ resumo.lista }}" as="c" hint-placeholder-count="12">
+<li style="display:flex;gap:10px;align-items:baseline;font-size:14px;color:#9AA7B4"><span style="flex:0 0 auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#E6EDF3">{{ c.numero }}</span><span style="min-width:0">{{ c.titulo }}</span><span style="flex:0 0 auto;border-radius:999px;border:1px solid {{ c.qBorda }};background:{{ c.qFundo }};color:{{ c.qCor }};padding:1px 8px;font-size:11px;font-weight:600;white-space:nowrap">{{ c.qualidade }}</span></li>
+</sc-for>
+</ul>
+</div>
+<p style="margin:0;font-size:14px;color:#9AA7B4">O simulador não avalia se você ganharia dinheiro, e sim se a decisão seguiu a regra escrita.</p>
+</div>
+</sc-if>
+</section>
+
+<p style="margin:0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Aviso: </strong>material de estudo próprio, não é recomendação de investimento. Memecoin é o ativo de maior risco do mercado: 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia em que nasceram (CoinGecko Research).</p>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1000,&quot;height&quot;:900},&quot;compacto&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { quizEstado: 'antes', alternativa: null, confianca: null, simEstado: 'antes', opcao: null };
+  renderVals() {
+    const compacto = !!this.props.compacto, S = this.state;
+    const ROTULOS = { 1: 'Chutei', 2: 'Mais ou menos', 3: 'Tenho certeza' };
+    const chip = (ativo) => ({ ativo, borda: ativo ? '#7C3AED' : '#1F2733', fundo: ativo ? 'rgba(124,58,237,.15)' : '#141A24' });
+
+    // ---------- QUIZ ----------
+    const ESTADOS_Q = [
+      { id: 'antes', rotulo: 'Antes de responder' },
+      { id: 'acerto', rotulo: 'Acertou' },
+      { id: 'erro', rotulo: 'Errou com certeza' },
+      { id: 'placar', rotulo: 'Placar do fim' },
+    ];
+    const estadosQuiz = ESTADOS_Q.map((e) => Object.assign({ id: e.id, rotulo: e.rotulo }, chip(e.id === S.quizEstado)));
+    const ALT = [
+      { id: 'a', texto: 'Metade', porque: 'Metade só sairia se o preço não mudasse durante a venda. Cada token vendido sai por um preço pior que o anterior.' },
+      { id: 'b', texto: 'Cerca de 14,6%', porque: '' },
+      { id: 'c', texto: 'Tudo', porque: 'Para tirar tudo, o preço teria que ir a zero. E a liquidez soma os dois lados: só um deles paga a sua venda.' },
+      { id: 'd', texto: 'Depende de quantos tokens existem', porque: 'A fração não depende do supply nem do tamanho da pool: (1 − √0,5) ÷ 2 vale para qualquer pool de produto constante.' },
+    ];
+    const correta = 'b';
+    let escolhida = S.alternativa, conf = S.confianca, corrigido = false;
+    if (S.quizEstado === 'acerto') { escolhida = 'b'; conf = 3; corrigido = true; }
+    if (S.quizEstado === 'erro') { escolhida = 'a'; conf = 3; corrigido = true; }
+    const acertou = corrigido && escolhida === correta;
+    const pronto = !!escolhida && !!conf;
+    const alternativas = ALT.map((a) => { const esc = a.id === escolhida;
+      let borda = esc ? '#7C3AED' : '#1F2733', fundo = esc ? 'rgba(124,58,237,.15)' : '#0B0F17', cor = '#E6EDF3', marca = '', marcaCor = '#9AA7B4', op = '1';
+      if (corrigido) {
+        if (a.id === correta) { borda = 'rgba(34,197,94,.5)'; fundo = 'rgba(34,197,94,.12)'; marca = 'A resposta certa.'; marcaCor = '#22C55E'; }
+        else if (esc) { borda = 'rgba(239,68,68,.5)'; fundo = 'rgba(239,68,68,.12)'; cor = '#F87171'; marca = 'Foi a sua.'; marcaCor = '#F87171'; }
+        else { op = '0.7'; }
+      }
+      return { id: a.id, texto: a.texto, escolhida: esc, borda, fundo, cor, opacidade: op, marca, marcaCor, radioBorda: esc ? '#7C3AED' : '#9AA7B4', radioFundo: esc ? '#7C3AED' : 'transparent' }; });
+    const confiancas = [1, 2, 3].map((nv) => ({ nivel: String(nv), rotulo: ROTULOS[nv], escolhida: conf === nv, borda: conf === nv ? '#22D3EE' : '#1F2733', fundo: conf === nv ? 'rgba(34,211,238,.12)' : '#141A24' }));
+    const escolhidaObj = ALT.find((a) => a.id === escolhida);
+    const quiz = {
+      mostraPergunta: S.quizEstado !== 'placar', mostraPlacar: S.quizEstado === 'placar', corrigido,
+      alternativas, confiancas, mostraBotao: !corrigido, bloqueado: !pronto,
+      cursorAlt: corrigido ? 'default' : 'pointer', cursorBotao: pronto ? 'pointer' : 'not-allowed', opacidadeBotao: pronto ? '1' : '0.5',
+      dica: escolhida ? (conf ? 'Pronto: pode corrigir.' : 'Falta dizer quão certo você está — é obrigatório antes de corrigir.') : 'Marque uma alternativa e diga quão certo você está.',
+      badge: acertou ? 'Certa' : 'Errada', badgeBorda: acertou ? 'rgba(34,197,94,.5)' : 'rgba(239,68,68,.5)', badgeFundo: acertou ? 'rgba(34,197,94,.12)' : 'rgba(239,68,68,.12)', badgeCor: acertou ? '#22C55E' : '#F87171',
+      disse: corrigido ? 'Você disse: ' + ROTULOS[conf].toLowerCase() + '.' + (conf === 3 && !acertou ? ' Certeza e erro: é a explicação que mais vale reler.' : '') : '',
+      fbTitulo: acertou ? 'Você acertou. ' : 'Não foi essa. ',
+      fbBorda: acertou ? 'rgba(34,197,94,.5)' : 'rgba(239,68,68,.5)', fbFundo: acertou ? 'rgba(34,197,94,.12)' : 'rgba(239,68,68,.12)', fbCor: acertou ? '#22C55E' : '#F87171',
+      explicacao: 'A conta é (1 − √0,5) ÷ 2 ≈ 14,6%, e a fração não depende do tamanho da pool. A liquidez anunciada soma os dois lados; só um deles paga a sua venda, e cada venda recebe um preço pior que a anterior.',
+      porque: corrigido && !acertou && escolhidaObj ? escolhidaObj.porque : '',
+      erroComCerteza: corrigido && !acertou && conf === 3,
+    };
+
+    // ---------- SIMULADOR ----------
+    const ESTADOS_S = [
+      { id: 'antes', rotulo: 'Antes de escolher' },
+      { id: 'boa', rotulo: 'Decisão sólida' },
+      { id: 'ruim', rotulo: 'Decisão cara' },
+      { id: 'resumo', rotulo: 'Resultado final' },
+    ];
+    const estadosSim = ESTADOS_S.map((e) => Object.assign({ id: e.id, rotulo: e.rotulo }, chip(e.id === S.simEstado)));
+    const OPCOES = [
+      { id: 'entrar', rotulo: 'Entrar', descricao: 'Comprar agora (ou aumentar a posição que já existe).' },
+      { id: 'esperar', rotulo: 'Esperar', descricao: 'Não agir agora e seguir observando, com um gatilho definido.' },
+      { id: 'ignorar', rotulo: 'Ignorar', descricao: 'Descartar de vez este token e ir para a próxima oportunidade.' },
+      { id: 'parcial', rotulo: 'Realizar parcial', descricao: 'Vender uma parte da posição que você já tem, tirando risco da mesa.' },
+    ];
+    const QUAL = { boa: { rotulo: 'Decisão sólida', pontos: '2 pontos', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#22C55E' },
+      aceitavel: { rotulo: 'Defensável', pontos: '1 ponto', borda: 'rgba(34,211,238,.5)', fundo: 'rgba(34,211,238,.1)', cor: '#22D3EE' },
+      ruim: { rotulo: 'Decisão cara', pontos: '0 ponto', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' },
+      naoSeAplica: { rotulo: 'Não se aplica aqui', pontos: '0 ponto', borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#F59E0B' } };
+    const RISCO = { baixo: { rotulo: 'baixo', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#22C55E' }, medio: { rotulo: 'médio', borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#F59E0B' }, alto: { rotulo: 'alto', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' } };
+    const CEN1 = {
+      entrar: { qualidade: 'ruim', risco: 'alto', feedback: '"Ainda está cedo" não é tese nem catálise: é torcida. Sem um evento concreto que traga compradores novos, você está pagando para descobrir o que acontece — e a maior parte dos lançamentos morre nas primeiras horas, sem nunca graduar.' },
+      esperar: { qualidade: 'boa', risco: 'baixo', feedback: 'Esperar custa zero e compra as duas informações que faltam: a checagem técnica (LP, mint e freeze authority, concentração) e a catálise. Se o token subir sem você, você perdeu uma alta; se for um rug, você não perdeu nada.' },
+      ignorar: { qualidade: 'boa', risco: 'baixo', feedback: 'Ignorar é decisão, não covardia. Aparecem milhares de tokens por dia; a vantagem não vem de olhar todos, vem de descartar rápido os que não têm tese.' },
+      parcial: { qualidade: 'naoSeAplica', risco: 'medio', feedback: 'Não há o que realizar: você não tem posição neste token. Vale notar o reflexo — aqui a decisão real é só entre entrar, esperar e ignorar.' },
+    };
+    let opcaoSel = S.opcao;
+    if (S.simEstado === 'boa') opcaoSel = 'esperar';
+    if (S.simEstado === 'ruim') opcaoSel = 'entrar';
+    const respondido = !!opcaoSel && S.simEstado !== 'antes' || (!!opcaoSel && S.simEstado === 'antes');
+    const sel = opcaoSel ? CEN1[opcaoSel] : null;
+    const opcoes = OPCOES.map((o) => { const esc = o.id === opcaoSel; const q = respondido && esc ? QUAL[CEN1[o.id].qualidade] : null;
+      return { id: o.id, rotulo: o.rotulo, descricao: o.descricao, escolhida: esc,
+        borda: esc ? (q ? q.borda : '#7C3AED') : '#1F2733', fundo: esc ? (q ? q.fundo : 'rgba(124,58,237,.15)') : '#141A24', opacidade: respondido && !esc ? '0.7' : '1',
+        qualidade: q ? q.rotulo : '', qBorda: q ? q.borda : '#1F2733', qFundo: q ? q.fundo : '#141A24', qCor: q ? q.cor : '#9AA7B4' }; });
+    const q = sel ? QUAL[sel.qualidade] : null, r = sel ? RISCO[sel.risco] : null;
+    const sim = {
+      mostraCenario: S.simEstado !== 'resumo', mostraResumo: S.simEstado === 'resumo',
+      tags: ['Solana', 'Lançamento', 'Sem tese'],
+      sinais: ['Idade: 10 minutos, ainda na bonding curve', 'Nenhum evento concreto marcado para acontecer', 'Liquidez fina: qualquer venda média derruba o preço'],
+      ferramentas: ['RugCheck', 'Solscan', 'DexScreener'],
+      opcoes, respondido: !!sel, semResposta: !sel, cursor: sel ? 'default' : 'pointer',
+      qualidade: q ? q.rotulo : '', qBorda: q ? q.borda : '#1F2733', qFundo: q ? q.fundo : '#141A24', qCor: q ? q.cor : '#9AA7B4',
+      riscoDecisao: r ? r.rotulo : '', rBorda: r ? r.borda : '#1F2733', rFundo: r ? r.fundo : '#141A24', rCor: r ? r.cor : '#9AA7B4',
+      fbBorda: q ? q.borda : '#1F2733', fbFundo: '#141A24', feedback: sel ? sel.feedback : '',
+    };
+
+    // Resumo de exemplo: 12 decisões
+    const listaBase = [
+      { numero: '01', titulo: 'Token lançado há 10 minutos, sem catálise', qualidade: 'boa' },
+      { numero: '02', titulo: 'Uma figura pública interagiu com o projeto no X', qualidade: 'boa' },
+      { numero: '03', titulo: 'O token graduou da bonding curve para a DEX', qualidade: 'aceitavel' },
+      { numero: '04', titulo: 'Top 10 carteiras detêm 60% do supply', qualidade: 'boa' },
+      { numero: '05', titulo: 'Você está +300% e a alta desacelerou', qualidade: 'ruim' },
+      { numero: '06', titulo: 'Um site pede assinatura "para reivindicar o airdrop"', qualidade: 'boa' },
+      { numero: '07', titulo: 'A freeze authority ainda está ativa no token', qualidade: 'boa' },
+      { numero: '08', titulo: 'Volume altíssimo, mas quase nenhum holder', qualidade: 'aceitavel' },
+      { numero: '09', titulo: 'Você perdeu a entrada e o token já fez 5x', qualidade: 'ruim' },
+      { numero: '10', titulo: 'Um influenciador fez "call" pago sem declarar', qualidade: 'boa' },
+      { numero: '11', titulo: 'A liquidez não está bloqueada nem queimada', qualidade: 'boa' },
+      { numero: '12', titulo: 'Consolidação há dias, com comunidade ativa', qualidade: 'naoSeAplica' },
+    ];
+    const lista = listaBase.map((c) => Object.assign({ numero: c.numero, titulo: c.titulo }, { qualidade: QUAL[c.qualidade].rotulo, qBorda: QUAL[c.qualidade].borda, qFundo: QUAL[c.qualidade].fundo, qCor: QUAL[c.qualidade].cor }));
+    const ordemQ = ['boa', 'aceitavel', 'ruim', 'naoSeAplica'];
+    const barras = ordemQ.map((k) => { const n = listaBase.filter((c) => c.qualidade === k).length;
+      return { rotulo: QUAL[k].rotulo, pontos: '(' + QUAL[k].pontos + ')', texto: n + ' de 12', largura: (n / 12) * 100, cor: k === 'boa' ? '#22C55E' : (k === 'aceitavel' ? '#22D3EE' : (k === 'ruim' ? '#EF4444' : '#F59E0B')) }; });
+    const faixasBase = [
+      { minimo: 85, titulo: 'Disciplina consistente', texto: 'Você escolheu conforme a regra, não conforme a vontade. Repita o simulador daqui a algumas semanas: disciplina não é traço de personalidade, é hábito que enferruja.' },
+      { minimo: 60, titulo: 'No caminho, com vazamentos', texto: 'A base está certa, mas alguns cenários ainda pegaram você no impulso. Releia os feedbacks marcados como "Decisão cara" na lista abaixo: é ali que o capital vaza.' },
+      { minimo: 35, titulo: 'O impulso ainda manda', texto: 'Em boa parte dos cenários a escolha foi agir, não checar. Esse é exatamente o padrão descrito no Módulo 2: a decisão sai antes da checagem. Vale refazer depois de reler a seção "Tese vs. catálise".' },
+      { minimo: 0, titulo: 'Alto risco de queimar capital', texto: 'Quase toda escolha foi entrar ou segurar, inclusive nos cenários com sinal técnico vermelho na cara. Vale revisar o Módulo 1 (segurança) e este módulo inteiro antes de operar com dinheiro de verdade.' },
+    ];
+    const faixaAtual = 60;
+    const faixas = faixasBase.map((f) => ({ titulo: f.titulo, texto: f.texto, limiar: f.minimo === 0 ? 'abaixo de 35%' : 'de ' + f.minimo + '% para cima',
+      borda: f.minimo === faixaAtual ? '#7C3AED' : '#1F2733', fundo: f.minimo === faixaAtual ? 'rgba(124,58,237,.15)' : '#141A24', cor: f.minimo === faixaAtual ? '#E6EDF3' : '#9AA7B4' }));
+    const resumo = { barras, faixas, lista,
+      alt: 'As 12 decisões por qualidade, na mesma escala: ' + barras.map((b) => b.rotulo + ', ' + b.texto).join('; ') + '.' };
+
+    return {
+      paddingMain: compacto ? '20px 16px' : '32px 24px', colsDois: compacto ? '1fr' : '1fr 1fr',
+      estadosQuiz, quiz, estadosSim, sim, resumo,
+      trocarQuiz: (e) => this.setState({ quizEstado: e.currentTarget.dataset.id, alternativa: null, confianca: null }),
+      escolherAlternativa: (e) => { if (this.state.quizEstado !== 'antes') return; this.setState({ alternativa: e.currentTarget.dataset.id }); },
+      escolherConfianca: (e) => { if (this.state.quizEstado !== 'antes') return; this.setState({ confianca: Number(e.currentTarget.dataset.nivel) }); },
+      verResultado: () => { const st = this.state; if (!st.alternativa || !st.confianca) return; this.setState({ quizEstado: st.alternativa === 'b' ? 'acerto' : 'erro' }); },
+      trocarSim: (e) => this.setState({ simEstado: e.currentTarget.dataset.id, opcao: null }),
+      escolherOpcao: (e) => { if (this.state.simEstado !== 'antes') return; this.setState({ opcao: e.currentTarget.dataset.id }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

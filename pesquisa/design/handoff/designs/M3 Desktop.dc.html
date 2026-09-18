@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}h1,h2,h3,p,li,dd,dt,td,th{overflow-wrap:break-word}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}</style></helmet>
+<div style="display:flex;min-height:100vh;align-items:flex-start">
+<sc-if value="{{ mostrarSidebar }}" hint-placeholder-val="{{ true }}">
+<aside aria-label="Rotas do hub" style="position:sticky;top:0;width:16rem;flex:0 0 16rem;height:100vh;box-sizing:border-box;border-right:1px solid #1F2733;background:#141A24;padding:20px 16px;display:flex;flex-direction:column;gap:4px;font-size:14px">
+<p style="margin:0 0 12px;font-weight:600;font-size:14px">onchain-mastery-hub</p>
+<a href="#/inicio" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Início</a>
+<a href="#/modulo-1" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M1 Fundamentos &amp; Segurança</a>
+<a href="#/modulo-2" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M2 Psicologia</a>
+<a href="#/modulo-3" aria-current="page" style="display:block;border-radius:8px;padding:8px 12px;color:#E6EDF3;background:rgba(124,58,237,.15);border:1px solid #7C3AED;text-decoration:none;font-weight:600">M3 Os dois pilares</a>
+<a href="#/modulo-4" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M4 Gestão &amp; decisão</a>
+<a href="#/modulo-5" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M5 Execução</a>
+<a href="#/modulo-6" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M6 Ler a tela</a>
+<a href="#/modulo-7" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M7 A rotina</a>
+<div style="height:1px;background:#1F2733;margin:8px 0"></div>
+<a href="#/glossario" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Glossário</a>
+<a href="#/checklist" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Checklist antes de comprar</a>
+<a href="#/revisao" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Revisão</a>
+</aside>
+</sc-if>
+<main id="conteudo" style="flex:1 1 auto;min-width:0">
+<div style="max-width:868px;margin:0 auto;padding:{{ paddingMain }};display:flex;flex-direction:column;gap:24px">
+
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Módulo 3</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">Os dois pilares (Social vs. Técnico)</h1>
+<p style="margin:8px 0 0;color:#9AA7B4;text-wrap:pretty">Nenhuma decisão de entrada deveria depender de um sinal só. O pilar social mostra onde a atenção está nascendo; o pilar técnico mostra se o contrato por trás merece confiança.</p>
+<p style="margin:16px 0 0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:12px 16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Correção: "Axon" não existe — o nome certo é Axiom. </strong>O pedido original citava "Axon" como terminal de execução para Solana. Pesquisa dedicada não encontrou nenhum terminal de execução relevante com esse nome. O provável terminal citado é o Axiom Trade: um terminal web não-custodial focado em Solana.</p>
+</header>
+
+<section aria-label="Mapa do módulo" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<p style="margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">O módulo inteiro numa olhada</p>
+<div style="display:flex;flex-direction:{{ dirMapa }};align-items:{{ alinhaMapa }};border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px">
+<div style="flex:0 0 auto;border-radius:12px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:14px 18px;max-width:220px">
+<p style="margin:0;font-size:1.125rem;font-weight:600;line-height:1.3">Os dois pilares</p>
+<p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">Duas perguntas, nunca uma</p>
+</div>
+<div aria-hidden="true" style="flex:0 0 auto;width:{{ trunkW }};height:{{ trunkH }};background:#1F2733;margin-left:{{ trunkML }}"></div>
+<ul style="list-style:none;margin:0;padding:0;border-left:2px solid #1F2733;display:flex;flex-direction:column;gap:12px;flex:1 1 auto;min-width:0;margin-left:{{ trunkML }}">
+<sc-for list="{{ mapa }}" as="r" hint-placeholder-count="7">
+<li style="position:relative;padding-left:24px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px" style-before="content:'';position:absolute;left:0;top:19px;width:24px;height:2px;background:#1F2733">
+<button type="button" data-aba="{{ r.aba }}" onClick="{{ irParaAba }}" style="min-height:40px;border-radius:8px;border:1px solid {{ r.borda }};background:{{ r.fundo }};padding:6px 12px;font-size:14px;font-weight:600;color:#E6EDF3;cursor:pointer;text-align:left" style-hover="border-color:#9AA7B4">{{ r.titulo }} →</button>
+<sc-for list="{{ r.folhas }}" as="f" hint-placeholder-count="3"><span style="border-radius:999px;border:1px solid #1F2733;padding:2px 10px;font-size:13px;color:#9AA7B4">{{ f }}</span></sc-for>
+</li>
+</sc-for>
+</ul>
+</div>
+</section>
+
+<div role="tablist" aria-label="Seções do Módulo 3" onKeyDown="{{ teclaAba }}" style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ abas }}" as="a" hint-placeholder-count="7">
+<button type="button" role="tab" id="aba-{{ a.id }}" aria-selected="{{ a.ativa }}" aria-controls="painel-{{ a.id }}" tabindex="{{ a.tabindex }}" data-aba="{{ a.id }}" onClick="{{ irParaAba }}" style="min-height:44px;border-radius:8px;border:1px solid {{ a.borda }};background:{{ a.fundo }};padding:8px 16px;font-size:14px;font-weight:600;color:#E6EDF3;cursor:pointer" style-hover="border-color:#9AA7B4">{{ a.rotulo }}</button>
+</sc-for>
+</div>
+
+<!-- ============ VISÃO GERAL ============ -->
+<sc-if value="{{ eh.visao }}" hint-placeholder-val="{{ true }}">
+<div id="painel-visao" role="tabpanel" aria-labelledby="aba-visao" style="display:flex;flex-direction:column;gap:24px">
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Por que duas checagens, e não uma só</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Antes de comprar, você precisa de duas respostas: por que o token chama atenção, e se o contrato por trás dele merece confiança.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ pilaresAlt }}" style="display:grid;grid-template-columns:{{ colsDois }};gap:16px">
+<sc-for list="{{ pilares }}" as="p" hint-placeholder-count="2">
+<div style="border-radius:8px;border:1px solid {{ p.borda }};background:{{ p.fundo }};padding:16px;display:flex;flex-direction:column;gap:10px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:{{ p.cor }}">{{ p.nome }}</p>
+<p style="margin:0;font-size:15px;font-weight:600;text-wrap:pretty">{{ p.pergunta }}</p>
+<div style="display:flex;flex-wrap:wrap;gap:6px">
+<sc-for list="{{ p.cobre }}" as="c" hint-placeholder-count="4"><span style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:2px 10px;font-size:13px;color:#9AA7B4">{{ c }}</span></sc-for>
+</div>
+<p style="margin:auto 0 0;padding-top:8px;font-size:13px;color:#9AA7B4">{{ p.sozinho }}</p>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin:16px 0 0;border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:12px 16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Os dois juntos, e nem isso aprova: </strong>passar nas duas checagens não torna um token seguro. Só quer dizer que ele não mostrou os problemas que dá para ver.</figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">Ver uma conta grande interagir com um projeto é um sinal cedo. Mas nenhum sinal social prova que o contrato por trás é seguro. E um contrato limpo sem nenhuma atenção também não vale nada: sem atenção, não aparece comprador.</p>
+<p style="margin:0;color:#9AA7B4">Uma tese de entrada (Módulo 4) só fica de pé quando está apoiada nos dois ao mesmo tempo.</p>
+<p style="margin:0;border-left:2px solid #F59E0B;padding-left:12px;font-size:14px;color:#9AA7B4">Aviso desde já: o pilar social diz de onde vem a atenção. Ele não diz para onde vai o preço.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: o pilar social e o "J7 Tracker"</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Trackers de tweets e de carteiras servem para detectar cedo quando uma conta grande — influenciador, projeto, carteira "smart money" — interage com um token, dando tempo de reação antes de a multidão chegar. Serve só para você não ser o último a saber; o que fazer com isso depende do pilar técnico e da sua tese.</p>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">"J7 Tracker": existe, mas não é o que o nome sugere aqui. </strong>Ele existe (j7tracker.io) — mas é uma ferramenta de sniping e deploy de token ("sub-1ms server-side deploys"), com um rastreador de tweets embutido como recurso auxiliar; acesso por credenciais via Discord. A categoria em si — "tracker de tweets / alertas sociais" — é real e usada no mercado; o hub cita o nome só para deixar claro o que ele de fato é, não como recomendação de uso.</p></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m3-check-q4" titulo="Pergunta rápida" perguntas="{{ quiz.q4 }}" hint-size="100%,320px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O que você leva deste módulo</h2>
+<ul style="margin:0;padding-left:20px;color:#9AA7B4;display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ objetivos }}" as="o" hint-placeholder-count="7"><li>{{ o }}</li></sc-for>
+</ul>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ NARRATIVAS ============ -->
+<sc-if value="{{ eh.narrativas }}" hint-placeholder-val="{{ false }}">
+<div id="painel-narrativas" role="tabpanel" aria-labelledby="aba-narrativas" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.narrativas }}" hint-size="100%,190px"></x-import>
+<aside aria-label="Termos desta aba" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<p style="margin:0;font-size:14px;font-weight:600">Termos desta aba</p>
+<dl style="margin:12px 0 0;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+<sc-for list="{{ termos }}" as="t" hint-placeholder-count="3"><div><dt style="font-size:14px;font-weight:600;color:#22D3EE">{{ t.termo }}</dt><dd style="margin:4px 0 0;font-size:14px;color:#9AA7B4">{{ t.definicao }}</dd></div></sc-for>
+</dl>
+</aside>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O ciclo de vida de uma narrativa</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Uma narrativa nasce, cresce, chega ao pico, satura e morre. Os sinais descrevem o que aconteceu — nenhum foi medido como aviso de entrar ou sair.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:flex;justify-content:center">
+<div role="img" aria-label="{{ ciclo.alternativa }}" style="position:relative;width:360px;max-width:100%;height:360px">
+<svg viewBox="0 0 360 360" width="100%" height="100%" aria-hidden="true" style="position:absolute;inset:0">
+<defs>
+<marker id="m3-seta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9AA7B4"></path></marker>
+<marker id="m3-seta-acento" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22D3EE"></path></marker>
+</defs>
+<sc-for list="{{ ciclo.arcos }}" as="a" hint-placeholder-count="5">
+<path d="{{ a.d }}" fill="none" stroke="{{ a.cor }}" stroke-width="2" stroke-dasharray="{{ a.tracejado }}" marker-end="{{ a.marcador }}"></path>
+</sc-for>
+</svg>
+<sc-for list="{{ ciclo.etapas }}" as="e" hint-placeholder-count="5">
+<div style="position:absolute;left:{{ e.x }}px;top:{{ e.y }}px;transform:translate(-50%,-50%);width:120px;box-sizing:border-box;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:8px;text-align:center">
+<span aria-hidden="true" style="display:inline-flex;width:22px;height:22px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;align-items:center;justify-content:center">{{ e.numero }}</span>
+<p style="margin:4px 0 0;font-size:13px;font-weight:600;line-height:1.25">{{ e.titulo }}</p>
+</div>
+</sc-for>
+<p style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0;text-align:center;font-size:12px;color:#22D3EE;max-width:100px;line-height:1.3">e o tema seguinte começa</p>
+</div>
+</div>
+<ol style="margin:0;padding-left:20px;font-size:14px;color:#9AA7B4;display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ ciclo.etapas }}" as="e" hint-placeholder-count="5"><li><strong style="color:#E6EDF3">{{ e.titulo }}: </strong>{{ e.texto }}</li></sc-for>
+</ol>
+<p style="margin:0;color:#9AA7B4">As cinco narrativas de 2024 e 2025 com dados públicos seguiram esse desenho. A narrativa quase sempre nasce fora da blockchain: primeiro vem o post, a notícia ou o vídeo, e só depois o token.</p>
+<p style="margin:0;border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:12px 16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">O que o ciclo mostra, e o que não mostra: </strong>as cinco fases descrevem a atenção subindo e caindo. Situar a fase não posiciona o preço na mesma linha — nos casos com data, a imprensa chegou no topo, e a saturação só ficou visível depois. A fase é leitura do que já aconteceu, não do próximo passo.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: onde a narrativa nasce, e quanto da atenção é fabricada</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4">
+<li>Um estudo olhou os 15,2 milhões de tokens criados no pump.fun em dois anos e achou 23,5% deles criados logo depois de um post no X ou no Truth Social ("Meme Coin Factories", preprint). 31 desses posts renderam pelo menos US$ 1 milhão cada a quem criou o token.</li>
+<li style="margin-top:4px">Cópias: 1,5 milhão de tokens copiam nome, símbolo, descrição e imagem de outro — mais de 10% de tudo. Entre os originais que ganharam cópia, 9,2% graduaram; entre as cópias, 0,86%.</li>
+<li style="margin-top:4px">Fabricação: mais de 56% das contas do X que espalhavam convites para grupos eram bots ou foram suspensas, e 93% dos links postados por bots levavam a canais de pump-and-dump no Telegram (Nizzoli et al., IEEE Access, 2020). No estudo do pump.fun, 17% das negociações eram wash trading.</li>
+<li style="margin-top:4px">Em canais VIP de pump-and-dump, o nome da moeda sai de 12 a 24 horas antes do sinal público (Ardia &amp; Bluteau, 2024). Quem vê o sinal na rede aberta chegou depois de quem organizou.</li>
+</ul></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m3-check-q13" titulo="Pergunta rápida" perguntas="{{ quiz.q13 }}" hint-size="100%,340px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Narrativa ou hype de um token? E narrativa move preço?</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Narrativa é um tema que puxa vários tokens juntos, e não o hype de um token só. E não há evidência de que ela ajude a prever o preço.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ triagem.alt }}" style="display:flex;flex-direction:column;align-items:center">
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 16px;font-size:14px;font-weight:600;text-align:center;max-width:380px">O tema puxa vários tokens ao mesmo tempo?</div>
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:16px;width:100%;max-width:620px">
+<sc-for list="{{ triagem.ramos }}" as="r" hint-placeholder-count="2">
+<div style="display:flex;flex-direction:column;align-items:center">
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+<span style="border-radius:999px;border:1px solid {{ r.borda }};background:{{ r.fundo }};color:{{ r.cor }};padding:1px 10px;font-size:12px;font-weight:600">{{ r.rotulo }}</span>
+<sc-for list="{{ r.nos }}" as="n" hint-placeholder-count="2">
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+<div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid {{ n.borda }};background:{{ n.fundo }};padding:10px 14px;font-size:14px;text-align:center;color:{{ n.cor }};font-weight:{{ n.peso }}">{{ n.texto }}</div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div style="border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:10px 16px;font-size:14px;font-weight:600;text-align:center;max-width:460px">Nos dois casos: o tema explica a atenção, não a direção do preço. As barras abaixo mostram por quê.</div>
+</div>
+</figure>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">A conta que nenhum estudo fez para memecoin</p>
+<div role="img" aria-label="No melhor caso, o sinal social rende de 1% a 3%, e só por poucos minutos. Entrar e sair de uma memecoin custa de 3 a 6 pontos. O custo come o sinal antes de ele virar lucro." style="display:flex;flex-direction:column;gap:14px">
+<div><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span style="font-size:14px">O sinal social, no melhor caso</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">1% a 3%</span></div><div style="margin-top:6px;height:24px;width:50%;background:#141A24;border-radius:4px;overflow:hidden"><div style="height:100%;width:100%;background:repeating-linear-gradient(135deg,#22D3EE 0 3px,transparent 3px 6px)"></div></div><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">E só por poucos minutos.</p></div>
+<div><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span style="font-size:14px">Custo de entrar e sair (Módulo 5)</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">3 a 6 pontos</span></div><div style="margin-top:6px;height:24px;width:100%;background:#141A24;border-radius:4px;overflow:hidden"><div style="height:100%;width:100%;background:#EF4444"></div></div><p style="margin:4px 0 0;font-size:13px;color:#F87171">O custo come o sinal antes de ele virar lucro.</p></div>
+</div>
+<figcaption style="margin-top:12px;font-size:13px;color:#9AA7B4">Mesma escala, em pontos percentuais. A faixa de 1 a 3% é o teto do que os estudos acharam; nenhum deles é de memecoin de launchpad.</figcaption>
+</figure>
+<div role="img" aria-label="Aponta para perda: depois do tweet de um influenciador, o preço sobe 1,83% no dia e cai 6,53% em 30 dias. Dura minutos: a atenção prevê melhor quanto se negocia e quanto o preço oscila do que para que lado ele vai. Muitas vezes é ao contrário: o preço sobe primeiro, e só depois as pessoas falam dele." style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+<sc-for list="{{ evidencia }}" as="e" hint-placeholder-count="3">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:{{ e.cor }}">{{ e.rotulo }}</p><p style="margin:6px 0 0;font-size:14px;color:#9AA7B4">{{ e.texto }}</p></div>
+</sc-for>
+</div>
+<p style="margin:0;color:#9AA7B4">O mercado repete que narrativa move preço. O que foi medido é bem menos do que isso. Para memecoin de launchpad, não existe estudo revisado por pares que ligue, com um número, a atenção nas redes ao preço.</p>
+<p style="margin:0;color:#9AA7B4">Cuidado com um número que circula: tokens com link de Telegram no cadastro graduam cerca de 9 vezes mais no pump.fun. Não use isso como sinal — o estudo mede só se existe um link, e link é o sinal mais barato de falsificar que existe.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: quais estudos dizem o quê</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4">
+<li>Revisados que chegam perto, mas medem outra coisa: Li et al. (ACM Web Science 2025) compara o sentimento no X com a quantidade de negociações, não com o preço. Long, Wong &amp; Cai (WWW 2025) só descreve médias.</li>
+<li style="margin-top:4px">Tweet de influenciador, +1,83% no dia e −6,53% em 30 dias: Merkley et al., 2024. É um dado de fora dos launchpads.</li>
+<li style="margin-top:4px">Atenção prevê negociação e oscilação melhor do que direção: Shen, Urquhart &amp; Wang, 2019. Efeito de minutos: com um milhão de mensagens sobre o Bitcoin, o sinal só valia por 15 minutos, e os autores escrevem que custos de transação razoáveis tornam impossível lucrar com ele (Guégan &amp; Renault, 2021).</li>
+<li style="margin-top:4px">Preço subindo antes da conversa: Süssmuth, Journal of Forecasting, 2021. Link de Telegram e graduação 9 vezes maior: Kamat, preprint de 2026.</li>
+</ul></details>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">A rotação das narrativas, 2024–2025</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Cada tema dominou por semanas e deu lugar ao seguinte — enquanto o setor inteiro encolhia.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<ol style="list-style:none;margin:0;padding:0;max-width:620px">
+<sc-for list="{{ linha }}" as="m" hint-placeholder-count="9">
+<li style="position:relative;padding-left:32px;padding-bottom:{{ m.espaco }}px">
+<sc-if value="{{ m.temProximo }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="position:absolute;left:7px;top:16px;bottom:0;width:2px;background:#1F2733"></span></sc-if>
+<span aria-hidden="true" style="position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:50%;border:2px solid #141A24;background:{{ m.cor }}"></span>
+<time style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22D3EE">{{ m.data }}</time>
+<p style="margin:4px 0 0;font-size:14px;font-weight:600">{{ m.titulo }}</p>
+<p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">{{ m.texto }}</p>
+<sc-if value="{{ m.temProximo }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;left:24px;bottom:{{ m.posIntervalo }}px;border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:1px 10px;font-size:12px;color:#9AA7B4;white-space:nowrap">{{ m.intervalo }}</span></sc-if>
+</li>
+</sc-for>
+</ol>
+<p style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Datas e números de imprensa e de relatórios de empresa, vários só por resumo de busca. Detalhes em "não verificado", na aba Quiz.</p>
+</div>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;overflow-x:auto" tabindex="0" role="group" aria-label="As cinco narrativas, lado a lado (role na horizontal se preciso)">
+<table style="border-collapse:collapse;width:100%;min-width:640px;font-size:14px">
+<thead><tr><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Narrativa</th>
+<sc-for list="{{ tabelaNarrativas.colunas }}" as="c" hint-placeholder-count="4"><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">{{ c }}</th></sc-for>
+</tr></thead>
+<tbody>
+<sc-for list="{{ tabelaNarrativas.linhas }}" as="l" hint-placeholder-count="5">
+<tr><th scope="row" style="text-align:left;padding:10px 12px;font-weight:600;border-bottom:1px solid #1F2733;vertical-align:top">{{ l.titulo }}</th>
+<sc-for list="{{ l.celulas }}" as="v" hint-placeholder-count="4"><td style="padding:10px 12px;border-bottom:1px solid #1F2733;color:#9AA7B4;vertical-align:top">{{ v }}</td></sc-for>
+</tr>
+</sc-for>
+</tbody></table>
+<p style="margin:12px 0 0;font-size:13px;color:#9AA7B4">A última das cinco (Believe) foi de longe a mais curta, mas cinco casos não formam tendência: a de animais durou mais que a de celebridades.</p>
+</div>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Rastrear: o que cada ferramenta mede</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Uma lista de "em alta" mostra onde a atenção está agora. Não mostra se essa atenção é real.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;overflow-x:auto" tabindex="0" role="group" aria-label="O que cada ferramenta mede (role na horizontal se preciso)">
+<table style="border-collapse:collapse;width:100%;min-width:680px;font-size:14px">
+<thead><tr><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Ferramenta</th><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">O que mede</th><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Memecoin nova</th><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Ler é grátis</th><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733;border-left:2px solid #22D3EE">Pago ou fabricável</th></tr></thead>
+<tbody>
+<sc-for list="{{ tabelaFerramentas }}" as="f" hint-placeholder-count="10">
+<tr><th scope="row" style="text-align:left;padding:10px 12px;font-weight:600;border-bottom:1px solid #1F2733;vertical-align:top">{{ f.titulo }}<sc-if value="{{ f.subtitulo }}" hint-placeholder-val="{{ true }}"><span style="display:block;font-size:12px;font-weight:400;color:#9AA7B4">{{ f.subtitulo }}</span></sc-if></th>
+<td style="padding:10px 12px;border-bottom:1px solid #1F2733;color:#9AA7B4;vertical-align:top">{{ f.mede }}</td>
+<td style="padding:10px 12px;border-bottom:1px solid #1F2733;vertical-align:top"><span style="display:inline-block;white-space:nowrap;border-radius:6px;border:1px solid {{ f.novoBorda }};background:{{ f.novoFundo }};color:{{ f.novoCor }};padding:2px 8px;font-size:13px;font-weight:600">{{ f.novo }}</span></td>
+<td style="padding:10px 12px;border-bottom:1px solid #1F2733;color:#9AA7B4;vertical-align:top">{{ f.gratis }}</td>
+<td style="padding:10px 12px;border-bottom:1px solid #1F2733;color:#9AA7B4;vertical-align:top;border-left:2px solid #22D3EE">{{ f.comprado }}</td></tr>
+</sc-for>
+</tbody></table>
+</div>
+<p style="margin:0;color:#9AA7B4">Toda lista de "em alta" é montada com atividade de negociação, com pagamento, ou com as duas coisas. E atividade é exatamente o que o volume falso do Módulo 6 fabrica. Nenhuma dessas métricas tem validação publicada como previsão de preço de memecoin.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m3-check-q12" titulo="Pergunta rápida" perguntas="{{ quiz.q12 }}" hint-size="100%,340px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Uma rotina de estudo de narrativa</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Esta rotina serve para treinar o olho. Não é método de entrada — nenhum destes passos foi medido como capaz de melhorar resultado.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Uma vez por dia, ou quando um tema chamar atenção</p>
+<ol role="list" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+<sc-for list="{{ rotinaNarrativa }}" as="p" hint-placeholder-count="7">
+<li style="display:flex;flex-direction:column">
+<div style="border-radius:8px;border:1px solid {{ p.borda }};background:{{ p.fundo }};padding:10px 14px;display:flex;gap:10px;align-items:flex-start"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ p.n }}</span><span style="min-width:0;font-size:14px;color:{{ p.cor }}">{{ p.texto }}</span></div>
+<sc-if value="{{ p.liga }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="width:2px;height:12px;background:#1F2733;margin-left:23px"></span></sc-if>
+</li>
+</sc-for>
+</ol>
+</div>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ PILAR SOCIAL ============ -->
+<sc-if value="{{ eh.social }}" hint-placeholder-val="{{ false }}">
+<div id="painel-social" role="tabpanel" aria-labelledby="aba-social" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.social }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">A rotina de 5 minutos, para todo token novo</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Qualquer divergência de endereço, em qualquer etapa, encerra a checagem: não compre.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<ol role="tablist" aria-label="Passos da rotina de 5 minutos" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+<sc-for list="{{ rotina }}" as="p" hint-placeholder-count="6">
+<li style="display:flex;flex-direction:column">
+<button type="button" role="tab" aria-selected="{{ p.atual }}" data-indice="{{ p.indice }}" onClick="{{ escolherPasso }}" style="border-radius:8px;border:1px solid {{ p.borda }};background:{{ p.fundo }};padding:10px 14px;color:#E6EDF3;text-align:left;cursor:pointer;display:flex;gap:10px;align-items:flex-start;min-height:44px" style-hover="border-color:#9AA7B4">
+<span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:{{ p.mFundo }};color:{{ p.mCor }};font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ p.numero }}</span>
+<span style="min-width:0;flex:1 1 auto"><span style="display:block;font-size:14px;font-weight:600">{{ p.titulo }}</span><sc-if value="{{ p.atual }}" hint-placeholder-val="{{ false }}"><span style="display:block;margin-top:4px;font-size:14px;color:#9AA7B4">{{ p.texto }}</span></sc-if></span>
+<span style="flex:0 0 auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#9AA7B4;white-space:nowrap">{{ p.tempo }}</span>
+</button>
+<sc-if value="{{ p.liga }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="width:2px;height:12px;background:#1F2733;margin-left:23px"></span></sc-if>
+</li>
+</sc-for>
+</ol>
+<p style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Na ordem em que você abre cada coisa. O tempo é uma referência, não um cronômetro.</p>
+</div>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><p style="margin:0;font-size:14px;font-weight:600">Endereço oficial × endereço colado numa resposta</p><span style="border-radius:999px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);color:#F59E0B;padding:1px 10px;font-size:12px;font-weight:600">endereços inventados</span></div>
+<div role="img" aria-label="Dois endereços com o mesmo começo e o mesmo fim; só os caracteres do meio mudam. O primeiro vem do site oficial e bate com o post fixado. O segundo veio de uma resposta embaixo de um post viral." style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ enderecos }}" as="e" hint-placeholder-count="2">
+<div style="border-radius:8px;border:1px solid {{ e.borda }};background:{{ e.fundo }};padding:10px 14px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:{{ e.cor }}">{{ e.rotulo }}</p><p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;overflow-wrap:anywhere;line-height:1.5"><span>{{ e.inicio }}</span><span style="border-radius:4px;background:{{ e.meioFundo }};color:{{ e.meioCor }};padding:1px 3px">{{ e.meio }}</span><span>{{ e.fim }}</span></p><p style="margin:6px 0 0;font-size:13px;color:#9AA7B4">{{ e.nota }}</p></div>
+</sc-for>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Golpistas geram endereços com os mesmos primeiros e últimos caracteres do original, para enganar quem só olha as pontas. Compare o endereço inteiro, caractere por caractere.</figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">Nome e ticker qualquer um copia. Em 12/09/2026, dois tokens diferentes do pump.fun usavam o ticker SATOSHI ao mesmo tempo, e um terceiro tinha o ticker "Usdt", imitando uma stablecoin.</p>
+<p style="margin:0;color:#9AA7B4">O projeto publica o endereço em três lugares. Do mais confiável para o menos: o site oficial, a bio ou o post fixado do X oficial, e o canal oficial de anúncios no Discord ou no Telegram. Nunca pegue o endereço de DM, de resposta embaixo de post viral, de site que veio de anúncio ou de busca, nem de QR code ou link encurtado.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m3-check-q6" titulo="Pergunta rápida" perguntas="{{ quiz.q6 }}" hint-size="100%,340px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O que olhar num perfil que se diz oficial</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">No X, o selo azul só quer dizer que a conta paga uma assinatura. Ele não prova que a conta é do projeto.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div style="display:grid;grid-template-columns:{{ colsAnatomia }};gap:20px;align-items:start">
+<div role="img" aria-label="{{ perfil.alt }}" style="border-radius:10px;border:1px solid #1F2733;background:#10151E;padding:14px;display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ perfil.linhas }}" as="l" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:{{ l.cols }};gap:8px">
+<sc-for list="{{ l.paineis }}" as="p" hint-placeholder-count="1">
+<div style="border-radius:6px;border:1px solid {{ p.borda }};background:{{ p.fundo }};padding:8px;min-height:{{ p.altura }};display:flex;gap:8px;align-items:flex-start">
+<span aria-hidden="true" style="flex:0 0 20px;width:20px;height:20px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ p.marcador }}</span>
+<span style="min-width:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;line-height:1.35;color:{{ p.cor }};overflow-wrap:break-word">{{ p.rotulo }}</span>
+</div>
+</sc-for>
+</div>
+</sc-for>
+<p style="margin:4px 0 0;font-size:12px;color:#9AA7B4">Mockup desenhado, não captura do X. Os campos aparecem sem valores: o que se aprende é onde olhar.</p>
+</div>
+<ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ perfil.itens }}" as="c" hint-placeholder-count="6">
+<li style="display:flex;gap:10px;align-items:flex-start;font-size:14px"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ c.n }}</span><span><strong>{{ c.titulo }}.</strong> <span style="color:#9AA7B4">{{ c.texto }}</span></span></li>
+</sc-for>
+</ol>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Selos segundo a central de ajuda do X, consultada em setembro de 2026. Selo azul: assinatura Premium ativa, sem revisão de identidade. Dourado: organização verificada. Cinza: governo.</figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">Sinais grátis de conta falsa: @ com caractere trocado (l por I, 0 por o); conta criada há pouco, ou que trocou de @ recentemente; selo azul sem badge de afiliação num "perfil oficial"; muitos seguidores com pouco engajamento e respostas repetitivas de bots.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: a busca avançada do X</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>Funciona de graça, desde que você esteja logado. <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">from:conta</span> mostra só os posts dela; <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">since:2026-09-01</span> filtra por data; <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">min_faves:100</span> mostra só os posts com pelo menos 100 curtidas; aspas buscam o endereço exato.</li><li style="margin-top:4px">Os operadores <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">near:</span>, <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">source:</span> e <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">geocode:</span> foram removidos. Eles devolvem página vazia, sem aviso de erro.</li><li style="margin-top:4px">Automatizar essa checagem de graça não existe: raspar o X fora da API é proibido pelos termos, e a API é paga.</li></ul></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m3-check-q5" titulo="Pergunta rápida" perguntas="{{ quiz.q5 }}" hint-size="100%,320px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Discord e Telegram: os golpes, e a defesa de cada um</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Os golpes chegam por link e por bot falso. A defesa é entrar pelo site oficial e não assinar nada que veio da comunidade.</p>
+<div role="img" aria-label="{{ golpesAlt }}" style="display:grid;grid-template-columns:{{ colsDois }};gap:12px">
+<sc-for list="{{ golpesDiscord }}" as="g" hint-placeholder-count="4">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+<p style="margin:0;font-size:14px;font-weight:600"><span aria-hidden="true" style="display:inline-flex;width:22px;height:22px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;align-items:center;justify-content:center;margin-right:8px">{{ g.n }}</span>{{ g.titulo }}</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">{{ g.como }}</p>
+<div style="margin-top:auto;border-radius:6px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);padding:8px 10px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22C55E">Defesa</p><p style="margin:2px 0 0;font-size:13px">{{ g.defesa }}</p></div>
+</div>
+</sc-for>
+</div>
+<p style="margin:0;color:#9AA7B4">Assinar é aprovar uma mensagem com a sua carteira. Em golpe, uma assinatura pode autorizar a saída dos seus ativos sem você perceber. O bot falso de verificação foi o caminho do Inferno Drainer: mais de 30 mil carteiras esvaziadas, pelo menos US$ 9 milhões em seis meses.</p>
+<p style="margin:0;color:#9AA7B4">No Telegram, dá para ler um canal público sem entrar: abra <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">t.me/s/nomedocanal</span> no navegador. O perigo maior está nos bots de compra: muitos criam a carteira e guardam a chave privada no servidor deles, então uma falha no bot pode custar tudo. Falhas registradas: Maestro (24/10/2023) e Unibot (31/10/2023), somando US$ 1,1 milhão roubados; Banana Gun (19/09/2024), cerca de US$ 3 milhões de 11 usuários, reembolsados pelo próprio bot.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: o que dá e o que não dá para automatizar</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>Discord: não dá para ler o histórico sem entrar no servidor. Automatizar com a própria conta (self-bot) é proibido, com risco de perder a conta. A única automação grátis e permitida é seguir um canal de anúncios (ícone de megafone) — e só chega o que o admin escolher publicar.</li><li style="margin-top:4px">Telegram: automatizar a leitura de canal alheio não dá. Um bot só recebe os posts de um canal se for administrador dele.</li><li style="margin-top:4px">Bot falso, com nome parecido com o verdadeiro, drena quem cola a seed. Confira o @ do bot no site oficial dele e ative a verificação em duas etapas na sua conta.</li></ul></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m3-check-q7" titulo="Pergunta rápida" perguntas="{{ quiz.q7 }}" hint-size="100%,340px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Calls pagos, e o que cada sinal social prova</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Um call mostra que houve atenção naquele momento. Na média, o preço caiu nos 30 dias seguintes.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">Retorno médio depois do tweet de um influenciador</p>
+<div role="img" aria-label="No primeiro dia depois do tweet, o preço subia 1,83%. Em 10 dias, caía 2,24%. Em 30 dias, caía 6,53%. Quem pôs mil dólares em tokens fora do top 100 no dia do tweet e segurou 30 dias perdeu 79 dólares, em média." style="display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ calls }}" as="c" hint-placeholder-count="3">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span style="font-size:14px">{{ c.quando }}</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;color:{{ c.cor }}">{{ c.valor }}</span></div>
+<div style="margin-top:6px;height:20px;display:flex;align-items:center">
+<div style="width:50%;display:flex;justify-content:flex-end"><div style="height:20px;width:{{ c.larguraNeg }}%;background:#EF4444;border-radius:4px 0 0 4px"></div></div>
+<div style="width:50%"><div style="height:20px;width:{{ c.larguraPos }}%;background:#22C55E;border-radius:0 4px 4px 0"></div></div>
+</div>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin-top:12px;font-size:13px;color:#9AA7B4">Mesma escala, zero no centro. 36 mil tweets de 180 influenciadores, sobre mais de 1.600 criptoativos (Review of Accounting Studies, 2024). Os autores dizem que o padrão combina com pump-and-dump, mas que a prova é inconclusiva.</figcaption>
+</figure>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;overflow-x:auto" tabindex="0" role="group" aria-label="O que cada sinal prova e não prova (role na horizontal se preciso)">
+<table style="border-collapse:collapse;width:100%;min-width:560px;font-size:14px">
+<thead><tr><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Sinal</th><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">O que prova</th><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733;border-left:2px solid #22D3EE">O que não prova</th></tr></thead>
+<tbody>
+<sc-for list="{{ provaTabela }}" as="l" hint-placeholder-count="8">
+<tr><th scope="row" style="text-align:left;padding:10px 12px;font-weight:600;border-bottom:1px solid #1F2733;vertical-align:top">{{ l.titulo }}</th><td style="padding:10px 12px;border-bottom:1px solid #1F2733;vertical-align:top"><span style="display:inline-block;border-radius:6px;border:1px solid {{ l.borda }};background:{{ l.fundo }};color:{{ l.cor }};padding:2px 8px">{{ l.prova }}</span></td><td style="padding:10px 12px;border-bottom:1px solid #1F2733;color:#9AA7B4;vertical-align:top;border-left:2px solid #22D3EE">{{ l.naoProva }}</td></tr>
+</sc-for>
+</tbody></table>
+</div>
+<p style="margin:0;color:#9AA7B4">Sinais de call pago não declarado, de graça: posts quase idênticos em várias contas, na mesma janela de horário; a carteira do influenciador recebe o token antes do post (dá para ver no explorador); post apagado logo depois da alta; link de afiliado; "não é conselho financeiro" seguido do endereço do contrato.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: as regras nos EUA e no Brasil</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>EUA, FTC: pagamento a quem recomenda tem que ser declarado de forma clara. SEC: para ativos que sejam valores mobiliários, é preciso declarar o fato e o valor. Caso real: Kim Kardashian pagou US$ 1,26 milhão em 2022 por promover o token EMAX sem dizer que tinha recebido US$ 250 mil — ela pôs #AD, e não bastou.</li><li style="margin-top:4px">Brasil: o Código de Defesa do Consumidor proíbe publicidade disfarçada; o guia do CONAR para influenciadores (nova versão de maio de 2026) pede identificação clara já na primeira visualização; a CVM reserva a recomendação de valores mobiliários a analistas registrados.</li></ul></details>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ PILAR TÉCNICO ============ -->
+<sc-if value="{{ eh.tecnico }}" hint-placeholder-val="{{ false }}">
+<div id="painel-tecnico" role="tabpanel" aria-labelledby="aba-tecnico" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.tecnico }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Quatro ferramentas, uma pergunta cada — nesta ordem</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Primeiro o que o contrato permite, depois quem controla as carteiras, por fim quanto dinheiro há na pool.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<ol role="img" aria-label="{{ ordemAlt }}" tabindex="0" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:{{ dirSeq }};align-items:stretch;gap:0;overflow-x:auto">
+<sc-for list="{{ ordemFerramentas }}" as="f" hint-placeholder-count="4">
+<li style="flex:1 1 0;display:flex;flex-direction:{{ dirSeq }};align-items:stretch;min-width:{{ minPasso }}">
+<button type="button" data-id="{{ f.id }}" aria-pressed="{{ f.atual }}" onClick="{{ escolherFerramenta }}" style="flex:1 1 auto;min-width:0;border-radius:8px;border:1px solid {{ f.borda }};background:{{ f.fundo }};padding:12px 14px;color:#E6EDF3;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-height:44px" style-hover="border-color:#9AA7B4">
+<span style="display:flex;gap:8px;align-items:center"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:{{ f.mFundo }};color:{{ f.mCor }};font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ f.n }}</span><span style="font-size:14px;font-weight:600">{{ f.nome }}</span></span>
+<span style="font-size:13px;color:#9AA7B4">{{ f.pergunta }}</span>
+</button>
+<sc-if value="{{ f.seta }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#9AA7B4;padding:2px 6px">→</span></sc-if>
+</li>
+</sc-for>
+</ol>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Nenhuma delas pede carteira conectada para ler. O exemplo é o BONK, conferido ao vivo em 12/09/2026.</figcaption>
+</figure>
+</section>
+
+<section aria-live="polite" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">{{ ferramenta.nome }} — {{ ferramenta.pergunta }}</h2>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#22D3EE">{{ ferramenta.endereco }}</span>
+</div>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-size:14px;color:#9AA7B4">{{ ferramenta.gratis }}</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">{{ ferramenta.anatomiaTitulo }}</p>
+<div style="display:grid;grid-template-columns:{{ colsAnatomia }};gap:20px;align-items:start">
+<div role="img" aria-label="{{ ferramenta.alt }}" style="border-radius:10px;border:1px solid #1F2733;background:#10151E;padding:14px;display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ ferramenta.linhas }}" as="l" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:{{ l.cols }};gap:8px">
+<sc-for list="{{ l.paineis }}" as="p" hint-placeholder-count="2">
+<div style="border-radius:6px;border:1px solid {{ p.borda }};background:{{ p.fundo }};padding:8px;min-height:{{ p.altura }};display:flex;gap:8px;align-items:flex-start">
+<span aria-hidden="true" style="flex:0 0 20px;width:20px;height:20px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ p.marcador }}</span>
+<span style="min-width:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;line-height:1.35;color:{{ p.cor }};overflow-wrap:break-word">{{ p.rotulo }}</span>
+</div>
+</sc-for>
+</div>
+</sc-for>
+<p style="margin:4px 0 0;font-size:12px;color:#9AA7B4">Mockup desenhado, não é captura de nenhuma plataforma. Os campos aparecem sem valores: o que se aprende é onde olhar.</p>
+</div>
+<ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ ferramenta.itens }}" as="c" hint-placeholder-count="6">
+<li style="display:flex;gap:10px;align-items:flex-start;font-size:14px"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ c.n }}</span><span><strong>{{ c.titulo }}.</strong> <span style="color:#9AA7B4">{{ c.texto }}</span></span></li>
+</sc-for>
+</ol>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">{{ ferramenta.nota }}</figcaption>
+</figure>
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:16px">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:14px 16px">
+<p style="margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Passo a passo</p>
+<ol style="margin:0;padding-left:20px;font-size:14px;color:#9AA7B4;display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ ferramenta.passos }}" as="p" hint-placeholder-count="5"><li>{{ p }}</li></sc-for>
+</ol>
+</div>
+<div style="border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:14px 16px">
+<p style="margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">Armadilhas</p>
+<ul style="margin:0;padding-left:20px;font-size:14px;display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ ferramenta.armadilhas }}" as="a" hint-placeholder-count="2"><li>{{ a }}</li></sc-for>
+</ul>
+</div>
+</div>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Onde checar cada coisa</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Cada pergunta tem um lugar e um campo. O mesmo nome de campo mede coisas diferentes em sites diferentes.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;overflow-x:auto" tabindex="0" role="group" aria-label="Onde checar cada coisa (role na horizontal se preciso)">
+<table style="border-collapse:collapse;width:100%;min-width:560px;font-size:14px">
+<thead><tr><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">O que você quer saber</th><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Onde checar</th><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Campo</th></tr></thead>
+<tbody>
+<sc-for list="{{ tabelaOnde }}" as="l" hint-placeholder-count="9">
+<tr><th scope="row" style="text-align:left;padding:10px 12px;font-weight:600;border-bottom:1px solid #1F2733;vertical-align:top">{{ l.titulo }}</th><td style="padding:10px 12px;border-bottom:1px solid #1F2733;color:#9AA7B4;vertical-align:top">{{ l.onde }}</td><td style="padding:10px 12px;border-bottom:1px solid #1F2733;vertical-align:top;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;color:#E6EDF3">{{ l.campo }}</td></tr>
+</sc-for>
+</tbody></table>
+</div>
+<p style="margin:0;color:#9AA7B4">No mesmo dia, o BONK mostrou liquidez de US$ 279 mil no DexScreener e US$ 1,69 milhão no Solscan: o primeiro mostrou um par, o segundo somou vários pools. Não compare o mesmo nome de campo entre sites.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m3-check-q9" titulo="Pergunta rápida" perguntas="{{ quiz.q9 }}" hint-size="100%,340px"></x-import>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ MATRIZ ============ -->
+<sc-if value="{{ eh.matriz }}" hint-placeholder-val="{{ false }}">
+<div id="painel-matriz" role="tabpanel" aria-labelledby="aba-matriz" style="display:flex;flex-direction:column;gap:24px">
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Matriz de ferramentas</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Cada ferramenta tem um papel: visualização, execução, checagem ou monitoramento social. Filtre por pilar, rede e papel.</p>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div><p style="margin:0 0 6px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Pilar</p><div role="group" aria-label="Filtrar por pilar" style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ filtros.pilares }}" as="f" hint-placeholder-count="3"><button type="button" aria-pressed="{{ f.ativo }}" data-grupo="pilar" data-valor="{{ f.id }}" onClick="{{ alternarFiltro }}" style="min-height:40px;border-radius:999px;border:1px solid {{ f.borda }};background:{{ f.fundo }};color:#E6EDF3;padding:6px 14px;font-size:14px;cursor:pointer" style-hover="border-color:#9AA7B4">{{ f.nome }}</button></sc-for></div></div>
+<div><p style="margin:0 0 6px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Rede</p><div role="group" aria-label="Filtrar por rede" style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ filtros.chains }}" as="f" hint-placeholder-count="5"><button type="button" aria-pressed="{{ f.ativo }}" data-grupo="chain" data-valor="{{ f.id }}" onClick="{{ alternarFiltro }}" style="min-height:40px;border-radius:999px;border:1px solid {{ f.borda }};background:{{ f.fundo }};color:#E6EDF3;padding:6px 14px;font-size:14px;cursor:pointer" style-hover="border-color:#9AA7B4">{{ f.nome }}</button></sc-for></div></div>
+<div><p style="margin:0 0 6px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Papel</p><div role="group" aria-label="Filtrar por papel" style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ filtros.papeis }}" as="f" hint-placeholder-count="5"><button type="button" aria-pressed="{{ f.ativo }}" data-grupo="papel" data-valor="{{ f.id }}" onClick="{{ alternarFiltro }}" style="min-height:40px;border-radius:999px;border:1px solid {{ f.borda }};background:{{ f.fundo }};color:#E6EDF3;padding:6px 14px;font-size:14px;cursor:pointer" style-hover="border-color:#9AA7B4">{{ f.nome }}</button></sc-for></div></div>
+</div>
+<p aria-live="polite" style="margin:0;font-size:14px;color:#9AA7B4">{{ resultado }}</p>
+<sc-if value="{{ vazio }}" hint-placeholder-val="{{ false }}">
+<div style="border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:16px;font-size:14px">Nenhuma ferramenta bate com esses filtros ao mesmo tempo. Tente afrouxar um deles.</div>
+</sc-if>
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:16px">
+<sc-for list="{{ ferramentasFiltradas }}" as="f" hint-placeholder-count="6">
+<article style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<p style="margin:0;font-size:15px;font-weight:600">{{ f.nome }}</p>
+<span style="border-radius:999px;border:1px solid {{ f.riscoBorda }};background:{{ f.riscoFundo }};color:{{ f.riscoCor }};padding:1px 10px;font-size:12px;font-weight:600;white-space:nowrap">{{ f.riscoRotulo }}</span>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px">
+<span style="border-radius:999px;border:1px solid rgba(124,58,237,.5);background:rgba(124,58,237,.12);padding:2px 10px;font-size:12px">{{ f.pilarNome }}</span>
+<sc-for list="{{ f.etiquetas }}" as="e" hint-placeholder-count="2"><span style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:2px 10px;font-size:12px;color:#9AA7B4">{{ e }}</span></sc-for>
+</div>
+<sc-if value="{{ f.naoSuportaSolana }}" hint-placeholder-val="{{ false }}"><p style="margin:0;border-radius:6px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:6px 10px;font-size:13px;color:#F87171;font-weight:600">Verificado: não suporta Solana.</p></sc-if>
+<sc-if value="{{ f.correcao }}" hint-placeholder-val="{{ false }}"><p style="margin:0;border-radius:6px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:6px 10px;font-size:13px">{{ f.correcao }}</p></sc-if>
+<div><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">O que faz</p><p style="margin:2px 0 0;font-size:14px;color:#9AA7B4">{{ f.oQueFaz }}</p></div>
+<div><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Quando usar</p><p style="margin:2px 0 0;font-size:14px;color:#9AA7B4">{{ f.quandoUsar }}</p></div>
+<details style="margin-top:auto;border-radius:6px;border:1px solid #1F2733;background:#141A24;padding:8px 12px"><summary style="cursor:pointer;font-size:13px;font-weight:600">Observações</summary><p style="margin:6px 0 0;font-size:13px;color:#9AA7B4">{{ f.observacoes }}</p></details>
+</article>
+</sc-for>
+</div>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m3-check-q3" titulo="Pergunta rápida" perguntas="{{ quiz.q3 }}" hint-size="100%,320px"></x-import>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ CENÁRIO ============ -->
+<sc-if value="{{ eh.cenario }}" hint-placeholder-val="{{ false }}">
+<div id="painel-cenario" role="tabpanel" aria-labelledby="aba-cenario" style="display:flex;flex-direction:column;gap:24px">
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">A liderança entre launchpads muda rápido</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">O que fica é o conceito — launchpad + bonding curve + graduação para uma DEX — não o nome de quem lidera hoje.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<ol style="list-style:none;margin:0;padding:0;max-width:620px">
+<sc-for list="{{ cenario }}" as="m" hint-placeholder-count="3">
+<li style="position:relative;padding-left:32px;padding-bottom:{{ m.espaco }}px">
+<sc-if value="{{ m.temProximo }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="position:absolute;left:7px;top:16px;bottom:0;width:2px;background:#1F2733"></span></sc-if>
+<span aria-hidden="true" style="position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:50%;border:2px solid #141A24;background:#7C3AED"></span>
+<time style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22D3EE">{{ m.data }}</time>
+<p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">{{ m.texto }}</p>
+<sc-if value="{{ m.temProximo }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;left:24px;bottom:{{ m.posIntervalo }}px;border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:1px 10px;font-size:12px;color:#9AA7B4;white-space:nowrap">{{ m.intervalo }}</span></sc-if>
+</li>
+</sc-for>
+</ol>
+</div>
+<p style="margin:0;color:#9AA7B4">Verificado, com uma ressalva importante: os números acima mudam de mês em mês. O líder muda rápido; o hub ensina o conceito e mantém os nomes e números editáveis em <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">src/data/modulo3.js</span>.</p>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ QUIZ ============ -->
+<sc-if value="{{ eh.quiz }}" hint-placeholder-val="{{ false }}">
+<div id="painel-quiz" role="tabpanel" aria-labelledby="aba-quiz" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="modulo-3" titulo="Mini-quiz do Módulo 3" descricao="Treze perguntas. As respostas ficam salvas no navegador." perguntas="{{ quiz.todas }}" hint-size="100%,1100px"></x-import>
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Terminou o módulo?</h2>
+<p style="margin:8px 0 16px;font-size:14px;color:#9AA7B4">Marcar aqui faz a barra de progresso do topo avançar. Dá para desmarcar depois.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Botao" variante="primario" hint-size="auto,40px">Marcar módulo como concluído</x-import>
+</section>
+<details style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Fontes e itens não verificados</summary>
+<h3 style="margin:16px 0 0;font-size:14px;font-weight:600">Não verificado</h3>
+<ul style="list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ naoVerificado }}" as="n" hint-placeholder-count="12"><li style="border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.1);padding:12px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">{{ n.titulo }}: </strong>{{ n.texto }}</li></sc-for>
+</ul>
+<p style="margin:16px 0 0;font-size:14px;color:#9AA7B4">Fontes consultadas: a lista completa está em <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">src/data/modulo3.js › fontesPratica</span> e é exibida integralmente pelo componente atual — sem mudança nesta tela.</p>
+</details>
+</div>
+</sc-if>
+
+<p style="margin:0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Aviso: </strong>material de estudo próprio, não é recomendação de investimento. Memecoin é o ativo de maior risco do mercado: 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia em que nasceram (CoinGecko Research).</p>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;compacto&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { aba: 'visao', passo: 0, ferramenta: 'rugcheck', pilar: 'todos', chain: 'todas', papel: 'todos' };
+  parse(d) { const m = d.match(/(\d{2})\/(\d{4})/); if (/^\d{2}\/\d{2}\/\d{4}$/.test(d)) { const p = d.split('/').map(Number); return new Date(p[2], p[1] - 1, p[0]); }
+    const dd = d.replace(/[~]/g, '').trim(); const r = dd.match(/(\d{2})[–-]?\d{0,2}\/(\d{2})\/(\d{4})/); if (r) return new Date(+r[3], +r[2] - 1, +r[1]);
+    if (m) return new Date(+m[2], +m[1] - 1, 1); const ano = dd.match(/(\d{4})/); return ano ? new Date(+ano[1], 6, 1) : new Date(2025, 0, 1); }
+  meses(a, b) { return (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth()); }
+  intervalo(m) { if (m < 1) return 'menos de 1 mês depois'; const anos = Math.floor(m / 12), r = m % 12; if (!anos) return r + (r === 1 ? ' mês depois' : ' meses depois'); let t = anos + (anos === 1 ? ' ano' : ' anos'); if (r) t += ' e ' + r + (r === 1 ? ' mês' : ' meses'); return t + ' depois'; }
+  tempoLinha(marcos) { return marcos.map((m, i) => { const prox = marcos[i + 1]; const ms = prox ? this.meses(this.parse(m.data), this.parse(prox.data)) : 0; const espaco = prox ? Math.min(96, 24 + ms * 8) : 0;
+    return Object.assign({}, m, { temProximo: !!prox, espaco, intervalo: this.intervalo(ms), posIntervalo: Math.max(2, espaco / 2 - 12) }); }); }
+  renderVals() {
+    const S = this.state, compacto = !!this.props.compacto;
+    const TOM = { neutro: '#7C3AED', alerta: '#EF4444', ok: '#22C55E', atencao: '#F59E0B' };
+    const ABAS = [
+      { id: 'visao', rotulo: 'Visão geral', folhas: ['social × técnico', 'o que cada um pergunta'] },
+      { id: 'narrativas', rotulo: 'Narrativas', folhas: ['ciclo', 'narrativa × hype', 'rotação 2024–2025', 'ferramentas'] },
+      { id: 'social', rotulo: 'Pilar social na prática', folhas: ['rotina de 5 min', 'perfil oficial', 'Discord e Telegram', 'calls'] },
+      { id: 'tecnico', rotulo: 'Pilar técnico na prática', folhas: ['RugCheck', 'Solscan', 'Bubblemaps', 'DexScreener'] },
+      { id: 'matriz', rotulo: 'Matriz de ferramentas', folhas: ['filtro por pilar, rede e papel'] },
+      { id: 'cenario', rotulo: 'Cenário 2025–2026', folhas: ['quem liderou quando'] },
+      { id: 'quiz', rotulo: 'Quiz', folhas: ['13 perguntas'] },
+    ];
+    const ativo = (id) => id === S.aba;
+    const abas = ABAS.map((a) => ({ id: a.id, rotulo: a.rotulo, ativa: ativo(a.id), tabindex: ativo(a.id) ? 0 : -1, borda: ativo(a.id) ? '#7C3AED' : '#1F2733', fundo: ativo(a.id) ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    const mapa = ABAS.map((a) => ({ aba: a.id, titulo: a.rotulo, folhas: a.folhas, borda: ativo(a.id) ? '#7C3AED' : '#1F2733', fundo: ativo(a.id) ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    const eh = {}; ABAS.forEach((a) => { eh[a.id] = ativo(a.id); });
+
+    const objetivos = [
+      'Entender que a decisão de entrada combina sinal social + checagem técnica.',
+      'Reconhecer uma narrativa, situar em que fase ela está e saber o que as listas de "em alta" medem — e o que a pesquisa não sabe.',
+      'Confirmar o endereço oficial de um token em 5 minutos, e reconhecer os golpes de X, Discord e Telegram.',
+      'Usar RugCheck, Solscan, Bubblemaps e DexScreener sabendo o que cada campo prova — e o que não prova.',
+      'Reconhecer o papel de cada ferramenta: visualização, execução, checagem ou monitoramento social.',
+      'Saber filtrar ferramentas por chain (Solana, EVM, BNB Chain, multi-chain) e por papel.',
+      'Conhecer a correção "Axon → Axiom" e o caso do Sigma, que não suporta Solana.',
+    ];
+
+    // Visão geral
+    const pilares = [
+      { nome: 'Pilar social', pergunta: 'Este token é quem diz ser? Por que está chamando atenção agora?', cobre: ['X/Twitter', 'Discord', 'Telegram', 'calls'], sozinho: 'Sozinho: nenhum sinal social prova que o contrato por trás é seguro.', borda: 'rgba(34,211,238,.5)', fundo: 'rgba(34,211,238,.1)', cor: '#22D3EE' },
+      { nome: 'Pilar técnico', pergunta: 'O que o contrato e as carteiras ainda permitem fazer contra mim?', cobre: ['gráfico', 'contrato', 'liquidez', 'holders'], sozinho: 'Sozinho: um contrato limpo sem nenhuma atenção não vale nada — sem atenção, não aparece comprador.', borda: 'rgba(124,58,237,.6)', fundo: 'rgba(124,58,237,.15)', cor: '#E6EDF3' },
+    ];
+    const pilaresAlt = pilares.map((p) => p.nome + ' pergunta: ' + p.pergunta + ' Cobre ' + p.cobre.join(', ') + '. ' + p.sozinho).join(' ');
+
+    // Narrativas
+    const destaques = {
+      narrativas: [
+        { rotulo: 'Tokens do pump.fun criados logo depois de um post no X ou no Truth Social', valor: '23,5%', nota: '3,5 milhões de 15,2 milhões, de jan/2024 a jan/2026 ("Meme Coin Factories", preprint). A narrativa nasce fora da blockchain; o token vem depois.' },
+        { rotulo: 'Estudos que mediram em qual rede social a atenção aparece primeiro', valor: 'Nenhum', nota: '"Primeiro no Telegram, depois no X" é observação de mercado, sem medição.', tom: 'alerta' },
+        { rotulo: 'Valor somado das memecoins, do pico ao fim de 2025', valor: 'US$ 150,6 → 47,2 bi', nota: 'De dez/2024 a nov/2025 (CoinGecko, State of Memecoins 2025). As narrativas se revezaram enquanto o setor inteiro encolhia.', tom: 'alerta' },
+      ],
+      social: [
+        { rotulo: 'Jeitos grátis, permitidos e automáticos de monitorar o social', valor: '1', nota: 'Seguir um canal de anúncios do Discord no seu próprio servidor. X, Telegram e o resto do Discord: só à mão, ou com API paga.' },
+        { rotulo: 'Carteiras esvaziadas pelo Inferno Drainer', valor: '30 mil+', nota: 'Pelo menos US$ 9 milhões em seis meses. O caminho: bot falso de verificação → site falso → assinatura. (Check Point Research, 2025)', tom: 'alerta' },
+        { rotulo: 'Retorno médio 30 dias depois do tweet de um influenciador', valor: '−6,53%', nota: '36 mil tweets de 180 influenciadores (Review of Accounting Studies, 2024). Call é atenção, não valor.', tom: 'alerta' },
+      ],
+      tecnico: [
+        { rotulo: 'Ferramentas, uma pergunta cada', valor: '4', nota: 'RugCheck: que riscos aparecem. Solscan: o que o dono ainda pode fazer. Bubblemaps: quem está ligado a quem. DexScreener: quanto dinheiro há na pool.' },
+        { rotulo: 'Liquidez do BONK, no mesmo dia, em dois sites', valor: 'US$ 279 mil × 1,69 mi', nota: 'O DexScreener mostrou um par; o Solscan somou vários pools. O mesmo nome de campo mede coisas diferentes.', tom: 'alerta' },
+        { rotulo: 'Maiores holders no mapa grátis do Bubblemaps', valor: '250', nota: 'O mapa com os 1.000 maiores, o cálculo de lucro e a IA exigem o token BMT.' },
+      ],
+    };
+    const termos = [
+      { termo: 'Narrativa', definicao: 'Um tema que puxa vários tokens ao mesmo tempo, e não o hype de um token só.' },
+      { termo: 'Esteira', definicao: 'Os tokens que copiam o tema depois que o primeiro chamou atenção.' },
+      { termo: 'Mindshare', definicao: 'A fatia da conversa nas redes que um projeto ou tema ocupa.' },
+    ];
+    const etapasBase = [
+      { titulo: 'Nascimento', texto: 'um evento fora de cripto (post, notícia, vídeo viral) e um primeiro token que chama atenção.' },
+      { titulo: 'Crescimento', texto: 'aparecem vários tokens com o mesmo tema. Uma corretora grande lista um deles, e uma figura pública entra na conversa. O PNUT foi listado na Binance em 11/11/2024, com Elon Musk usando o esquilo no X.' },
+      { titulo: 'Pico', texto: 'o valor somado do tema para de subir. A imprensa fora de cripto costuma chegar aqui ou depois — nos casos PNUT e LIBRA, a cobertura veio no topo.' },
+      { titulo: 'Saturação', texto: 'continuam nascendo tokens do tema, mas o valor dele já cai. Há registro disso nos agentes de IA e no Believe; nos outros três casos, não há dado.' },
+      { titulo: 'Morte', texto: 'as cópias perdem quase tudo. Dos 30 tokens de celebridades lançados na Solana a partir de maio de 2024, a queda média foi de 94% em cerca de um mês.' },
+    ];
+    const C = 180, R = 118, n = etapasBase.length, folga = 30;
+    const ang = (i) => (-90 + (i * 360) / n) * Math.PI / 180;
+    const pt = (a, r) => ({ x: C + r * Math.cos(a), y: C + r * Math.sin(a) });
+    const etapas = etapasBase.map((e, i) => { const p = pt(ang(i), R); return Object.assign({ numero: i + 1 }, e, { x: Math.min(298, Math.max(62, p.x)), y: p.y }); });
+    const arcos = etapasBase.map((e, i) => {
+      const a1 = ang(i) + folga * Math.PI / 180; let a2 = ang((i + 1) % n) - folga * Math.PI / 180; if (a2 < a1) a2 += 2 * Math.PI;
+      const p1 = pt(a1, R), p2 = pt(a2, R), volta = i === n - 1;
+      return { d: 'M' + p1.x.toFixed(1) + ',' + p1.y.toFixed(1) + ' A' + R + ',' + R + ' 0 0 1 ' + p2.x.toFixed(1) + ',' + p2.y.toFixed(1), cor: volta ? '#22D3EE' : '#9AA7B4', tracejado: volta ? '6 5' : 'none', marcador: volta ? 'url(#m3-seta-acento)' : 'url(#m3-seta)' };
+    });
+    const ciclo = { etapas, arcos, alternativa: etapasBase.map((e, i) => (i + 1) + ' ' + e.titulo + ': ' + e.texto).join(' ') + ' Depois da morte, o tema seguinte começa.' };
+
+    const triagem = { ramos: [
+      { rotulo: 'Sim', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#22C55E', nos: [{ texto: 'É narrativa', peso: 600, borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#E6EDF3' }, { texto: 'Um tema, como "agentes de IA", que puxa vários tokens ao mesmo tempo', peso: 400, borda: '#1F2733', fundo: '#141A24', cor: '#9AA7B4' }] },
+      { rotulo: 'Não', borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#F59E0B', nos: [{ texto: 'Não é narrativa', peso: 600, borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#E6EDF3' }, { texto: 'É o hype de um token só', peso: 400, borda: '#1F2733', fundo: '#141A24', cor: '#9AA7B4' }] },
+    ], alt: 'O tema puxa vários tokens ao mesmo tempo? Se sim, é narrativa: um tema, como agentes de IA, que puxa vários tokens. Se não, não é narrativa: é o hype de um token só. Nos dois casos, reconhecer o tema não diz qual token comprar, nem quando.' };
+    const evidencia = [
+      { rotulo: 'Aponta para perda', texto: 'Depois do tweet de um influenciador, o preço sobe 1,83% no dia e cai 6,53% em 30 dias.', cor: '#F87171' },
+      { rotulo: 'Dura minutos', texto: 'A atenção prevê melhor quanto se negocia e quanto o preço oscila do que para que lado ele vai. Quando acerta o lado, o efeito dura minutos.', cor: '#F59E0B' },
+      { rotulo: 'Muitas vezes é ao contrário', texto: 'O preço sobe primeiro, e só depois as pessoas falam dele.', cor: '#22D3EE' },
+    ];
+    const linha = this.tempoLinha([
+      { data: '26/05/2024', titulo: 'Celebridades: Caitlyn Jenner lança o JENNER', texto: 'Na esteira vieram MOTHER (Iggy Azalea) e DADDY (Andrew Tate). Cerca de um mês depois, os 30 tokens de celebridades da Solana acumulavam queda média de 94%.', tom: 'neutro' },
+      { data: '11/09/2024', titulo: 'Animais: nasce o MOODENG', texto: 'Depois viria o PNUT, listado na Binance em 11/11/2024.', tom: 'neutro' },
+      { data: '10/10/2024', titulo: 'IA: nasce o GOAT, empurrado pelo bot Truth Terminal', texto: 'O GOAT chegou a cerca de US$ 1,3 bilhão em 17/11/2024. O tema vira "agentes de IA": ai16z, Virtuals, AIXBT.', tom: 'neutro' },
+      { data: '04/12/2024', titulo: 'HAWK, o token da influenciadora Hawk Tuah', texto: 'O market cap chegou a US$ 491 milhões e caiu mais de 90% em horas. Virou ação coletiva nos EUA.', tom: 'atencao' },
+      { data: '06/01/2025', titulo: 'Pico dos agentes de IA: cerca de US$ 20 bilhões somados', texto: 'Em fevereiro, cerca de US$ 6,5 bilhões.', tom: 'neutro' },
+      { data: '17/01/2025', titulo: 'Políticos: lançamento do TRUMP', texto: 'Em três semanas, mais de 700 memecoins-cópia foram enviadas à carteira dele.', tom: 'neutro' },
+      { data: '14/02/2025', titulo: 'LIBRA, promovida por Javier Milei', texto: 'Das 15.430 carteiras que negociaram mais de US$ 1.000, mais de 86% venderam no prejuízo, somando US$ 251 milhões (Nansen). Fim da onda de memecoins políticas.', tom: 'atencao' },
+      { data: '12/05/2025', titulo: '"Internet Capital Markets": pico do LAUNCHCOIN, no app Believe', texto: 'Mais de 21 mil moedas na primeira semana; a queda começou em dias.', tom: 'neutro' },
+      { data: '2026', titulo: 'Nenhuma narrativa dominante confirmada', texto: 'O que os dados mostram é retração do setor.', tom: 'atencao' },
+    ]).map((m) => Object.assign(m, { cor: TOM[m.tom] }));
+    const tabelaNarrativas = { colunas: ['Primeiro token', 'Pico', 'Até perder a atenção', 'O que aconteceu'], linhas: [
+      { titulo: 'Celebridades', celulas: ['JENNER, 26/05/2024', 'Junho de 2024', 'Cerca de 1 mês', '30 tokens: queda média de 94%; metade perdeu mais de 99%'] },
+      { titulo: 'Animais virais', celulas: ['MOODENG, 11/09/2024', 'Dois picos: 28/09 e 15/11/2024 (~US$ 614 mi)', 'Cerca de 2 meses', 'MOODENG −44% do pico até 27/11/2024'] },
+      { titulo: 'IA / agentes', celulas: ['GOAT, 10–11/10/2024', '~06/01/2025, cerca de US$ 20 bi somados', 'Cerca de 1 mês de queda', 'Setor −67% até fevereiro de 2025'] },
+      { titulo: 'Políticos', celulas: ['TRUMP, 17/01/2025', 'Janeiro de 2025', 'Cerca de 1 mês, até a LIBRA', 'LIBRA: mais de 86% das carteiras acima de US$ 1.000 no prejuízo'] },
+      { titulo: 'Internet Capital Markets', celulas: ['LAUNCHCOIN, 03/05/2025', '15/05/2025', 'Cerca de 4 dias', 'Receita semanal do Believe −94% do pico, em junho de 2025'] },
+    ] };
+    const SIM = { borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' };
+    const PARTE = { borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#E6EDF3' };
+    const NAO = { borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#E6EDF3' };
+    const ff = (titulo, subtitulo, mede, novo, tomNovo, gratis, comprado) => Object.assign({ titulo, subtitulo, mede, novo, gratis, comprado }, { novoBorda: tomNovo.borda, novoFundo: tomNovo.fundo, novoCor: tomNovo.cor });
+    const tabelaFerramentas = [
+      ff('DexScreener', 'lista "em alta"', 'Um "Trending Score" próprio: volume, liquidez, transações, carteiras distintas, holders, visitas à página e reações. A fórmula não é publicada.', 'Sim', SIM, 'Sim', 'Sim: Boosts pagos multiplicam o score por 12 a 24 horas. Visitas e reações também são fabricáveis.'),
+      ff('GMGN', 'lista "em alta" e carteiras', 'Compras e vendas, volume, variação de preço e crescimento de holders, por minuto; também carteiras "smart money" e de influenciadores.', 'Sim', SIM, 'Sim. Operar pede login com a chave privada num bot do Telegram — risco de custódia (Módulo 5).', 'Fabricável: são os números que o wash trading infla.'),
+      ff('Birdeye', '', 'Tokens que mais se moveram numa janela de tempo; mais vistos e mais negociados.', 'Sim', SIM, 'Sim. A API custa de US$ 39 a US$ 499 por mês; o PRO, US$ 45 por mês (não verificado).', 'Fabricável pela mesma via.'),
+      ff('pump.fun', 'board', 'A atividade recente de negociação dos tokens da plataforma.', 'Sim — é onde nascem', SIM, 'Sim. Negociar na curva custa 1,25% por operação.', 'Fabricável.'),
+      ff('LunarCrush', '', 'Sentimento e volume de posts no X, Reddit, YouTube e TikTok.', 'Em parte', PARTE, 'Não para o social: o plano grátis só tem dados de mercado. O social vai de US$ 5 a US$ 45 por dia.', 'Sem mecanismo de compra documentado, mas posts podem vir de bots.'),
+      ff('Santiment', '', 'Volume social e as palavras que dispararam, a partir de mais de 6.000 canais de cripto.', 'Não verificado', PARTE, 'Grátis limitado; o resto é pago.', 'Posts podem vir de bots.'),
+      ff('Kaito', '', 'Mindshare de projetos e de temas.', 'Não', NAO, 'Pago. O programa "Yaps" acabou em 15/01/2026 (não verificado).', 'Não pesquisado.'),
+      ff('Google Trends', '', 'Interesse de busca relativo, de 0 a 100, por termo, período e região.', 'Só com busca suficiente', PARTE, 'Sim', 'Sem mecanismo de compra documentado. O número é relativo e tem ruído de propósito.'),
+      ff('X', 'busca avançada e listas', 'Posts públicos, filtráveis por conta, data e curtidas.', 'Sim', SIM, 'Sim, mas só logado. O Premium vai de US$ 3 a US$ 40 por mês e não muda a busca.', 'Contas e curtidas podem ser de bots: de 9% a 15% das contas ativas do X são bots (Varol et al., 2017).'),
+      ff('Arkham e Nansen', '', 'Carteiras rotuladas como traders lucrativos ("smart money").', 'Em parte', PARTE, 'Nível grátis limitado. Nansen Pro: US$ 49 a US$ 69 por mês.', 'Não pesquisado.'),
+    ];
+    const rotinaNarrativa = [
+      'Abra o feed de lançamentos do pump.fun e duas listas de "em alta". Anote os temas que se repetem.',
+      'Ao ler as listas, lembre: parte delas é paga, e as cópias seguem a narrativa, não a criam.',
+      'Procure a origem fora de cripto: o post, a notícia, o vídeo. Na busca avançada do X (só logado), from: filtra por conta e since: filtra por data.',
+      'Veja há quanto tempo o tema existe e quantos tokens já copiaram. Muitos tokens novos com o valor do tema caindo é o desenho da saturação.',
+      'Anote no diário do Módulo 7: data, tema, primeiro token e a fase que você acha que é.',
+      'Depois de algumas semanas, confira quantas vezes a sua leitura de fase acertou.',
+      'Se um token chamar sua atenção, ele passa pelo Checklist antes de qualquer outra coisa.',
+    ].map((texto, i, arr) => ({ n: i + 1, texto, liga: i < arr.length - 1, borda: i === arr.length - 1 ? '#22D3EE' : '#1F2733', fundo: i === arr.length - 1 ? 'rgba(34,211,238,.1)' : '#141A24', cor: '#E6EDF3' }));
+
+    // Pilar social
+    const rotinaBase = [
+      { tempo: '0–45 s', titulo: 'Ache a conta oficial no X', texto: 'Confira o @ letra por letra (l e I, 0 e o), veja se há badge de afiliação e se a bio aponta para um site. Se você só tem um @ que veio de resposta de post ou de DM, pare.' },
+      { tempo: '45 s–1:30', titulo: 'Abra o site oficial pelo link da bio', texto: 'Ache o endereço do contrato no site e copie dali. É a sua fonte de maior confiança.' },
+      { tempo: '1:30–2:00', titulo: 'Compare com o post fixado do X oficial', texto: 'O endereço do site e o do post fixado têm que ser o mesmo, caractere por caractere. Se não forem, pare.' },
+      { tempo: '2:00–3:30', titulo: 'Cole o endereço no explorador', texto: 'Na Solana, o Solscan: extensões, autoridades, idade e holders. Numa rede EVM, o Etherscan: contrato "verified" quer dizer que o código publicado bate com o que roda — não que é seguro ou auditado.' },
+      { tempo: '3:30–4:30', titulo: 'Cole o endereço no DexScreener', texto: 'Olhe liquidez, volume e negociações. Ícone e links da página não provam nada: são preenchidos e pagos pelo próprio projeto.' },
+      { tempo: '4:30–5:00', titulo: 'Sanidade final no canal oficial', texto: 'Abra t.me/s/nomedocanal no navegador e confira se o endereço anunciado bate com o que você já validou. Se o token chegou por um call, procure os sinais de call pago.' },
+    ];
+    const rotina = rotinaBase.map((p, i) => { const atual = i === S.passo; return Object.assign({}, p, { indice: i, numero: i + 1, atual, liga: i < rotinaBase.length - 1, borda: atual ? '#7C3AED' : '#1F2733', fundo: atual ? 'rgba(124,58,237,.15)' : '#141A24', mFundo: atual ? '#22D3EE' : '#1F2733', mCor: atual ? '#0B0F17' : '#E6EDF3' }); });
+    const enderecos = [
+      { rotulo: 'Do site oficial, e igual ao post fixado', inicio: '7xKq', meio: 'Rt4mP9vZ2hLbN6yDcE8sWfJ3aQu5', fim: 'gT1n', nota: 'As duas fontes oficiais batem, caractere por caractere. Identidade confirmada.', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.08)', cor: '#22C55E', meioFundo: 'transparent', meioCor: '#9AA7B4' },
+      { rotulo: 'De uma resposta embaixo do post viral', inicio: '7xKq', meio: 'Bd7wS1kY4jXzM8pFhR2vNc6tLe9o', fim: 'gT1n', nota: 'Mesmo começo, mesmo fim. Só o meio muda. Não compre.', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.08)', cor: '#F87171', meioFundo: 'rgba(239,68,68,.25)', meioCor: '#F87171' },
+    ];
+    const perfilPaineis = {
+      nome: { rotulo: 'Nome e @handle' }, selo: { rotulo: 'Selo · badge de afiliação', alerta: true }, bio: { rotulo: 'Bio com o link do site' },
+      data: { rotulo: 'Entrou em · seguidores' }, fixado: { rotulo: 'Post fixado com o endereço' }, respostas: { rotulo: 'Respostas: "o endereço certo é este…"', alerta: true },
+    };
+    const perfilItens = [
+      { painel: 'nome', titulo: 'Nome e @handle', texto: 'O nome qualquer um copia. O @ é único: compare letra por letra, atrás de caractere trocado.' },
+      { painel: 'selo', titulo: 'Selo', texto: 'Azul é assinatura Premium, não identidade. Dourado é organização verificada; o badge de afiliação liga a conta a uma.' },
+      { painel: 'bio', titulo: 'Bio', texto: 'O link do site sai daqui. Não use site achado por busca ou anúncio.' },
+      { painel: 'data', titulo: 'Data de entrada e seguidores', texto: 'Conta nova para um projeto "antigo", ou muitos seguidores com pouco engajamento, são sinais de conta falsa.' },
+      { painel: 'fixado', titulo: 'Post fixado', texto: 'É onde o projeto costuma deixar o endereço. Tem que bater com o do site.' },
+      { painel: 'respostas', titulo: 'Respostas', texto: 'Endereço colado em resposta é o golpe clássico. Nunca pegue o endereço daqui.' },
+    ];
+    const montarAnatomia = (paineis, itens, grade) => {
+      const marc = {}; itens.forEach((it, i) => { marc[it.painel] = i + 1; });
+      const cel = (id, altura) => { const p = paineis[id]; return { rotulo: p.rotulo, marcador: marc[id], altura, borda: p.alerta ? 'rgba(245,158,11,.4)' : '#22D3EE', fundo: p.alerta ? 'rgba(245,158,11,.12)' : 'rgba(34,211,238,.08)', cor: '#E6EDF3' }; };
+      return { linhas: grade.map((l) => ({ cols: l.cols, paineis: l.ids.map((id) => cel(id, l.altura)) })), itens: itens.map((it, i) => ({ n: i + 1, titulo: it.titulo, texto: it.texto })),
+        alt: 'Mockup esquemático com ' + itens.length + ' marcadores: ' + itens.map((it, i) => (i + 1) + ' ' + paineis[it.painel].rotulo).join('; ') + '. Os campos aparecem sem valores.' };
+    };
+    const perfil = montarAnatomia(perfilPaineis, perfilItens, [
+      { cols: '2fr 1fr', ids: ['nome', 'selo'], altura: '46px' },
+      { cols: '2fr 1fr', ids: ['bio', 'data'], altura: '50px' },
+      { cols: '1fr', ids: ['fixado'], altura: '46px' },
+      { cols: '1fr', ids: ['respostas'], altura: '52px' },
+    ]);
+    const golpesDiscord = [
+      { n: 1, titulo: 'Servidor falso', como: 'O projeto deixa de pagar o link curto (discord.gg/nome), o golpista assume esse link e recria um servidor idêntico.', defesa: 'Entre sempre pelo link do site ou do X oficial.' },
+      { n: 2, titulo: 'Bot falso de verificação', como: 'Parece o Collab.Land, mas o @ é outro. Leva a um site que pede para conectar a carteira e assinar. Foi o caminho do Inferno Drainer.', defesa: 'Verificação legítima não pede assinatura.' },
+      { n: 3, titulo: '"Conecte a carteira"', como: 'Depois de conectar, uma assinatura autoriza a transferência silenciosa dos seus ativos.', defesa: 'Não assine nada que veio de link de comunidade; use uma carteira separada para projetos novos (Módulo 1).' },
+      { n: 4, titulo: 'DM de "suporte" e admin invadido', como: 'Suporte de verdade não chama primeiro, e até um anúncio oficial pode vir de conta sequestrada.', defesa: 'Desligue DMs de membros do servidor. Trate anúncio urgente com link como suspeito até conferir no site.' },
+    ];
+    const golpesAlt = golpesDiscord.map((g) => g.n + '. ' + g.titulo + ': ' + g.como + ' Defesa: ' + g.defesa).join(' ');
+    const calls = [
+      { quando: '1 dia depois do tweet', valor: '+1,83%', cor: '#22C55E', larguraNeg: 0, larguraPos: 28 },
+      { quando: '10 dias depois', valor: '−2,24%', cor: '#F87171', larguraNeg: 34, larguraPos: 0 },
+      { quando: '30 dias depois', valor: '−6,53%', cor: '#F87171', larguraNeg: 100, larguraPos: 0 },
+    ];
+    const OKC = { borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#E6EDF3' };
+    const RUIMC = { borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' };
+    const NEUC = { borda: 'transparent', fundo: 'transparent', cor: '#9AA7B4' };
+    const provaTabela = [
+      { titulo: 'Endereço no site oficial', prova: 'A referência primária do projeto', naoProva: 'Que o site é o oficial — cruze com o X', t: OKC },
+      { titulo: 'Endereço no post fixado do X oficial', prova: 'Coerência com o site: identidade confirmada', naoProva: 'Que o token é bom', t: OKC },
+      { titulo: 'Selo azul no X', prova: 'Assinatura Premium ativa', naoProva: 'Que é a conta do projeto', t: NEUC },
+      { titulo: 'Selo dourado ou badge de afiliação', prova: 'Organização verificada, ou vínculo com uma', naoProva: 'Mérito do token', t: NEUC },
+      { titulo: 'Ícone e links no DexScreener', prova: 'Que alguém pagou para preencher a página', naoProva: 'Identidade oficial', t: NEUC },
+      { titulo: 'Anúncio no canal oficial', prova: 'O que o admin publicou', naoProva: 'Que a conta do admin não foi invadida', t: NEUC },
+      { titulo: 'Call de influenciador', prova: 'Que houve atenção naquele momento', naoProva: 'Valor futuro', t: NEUC },
+      { titulo: 'Verificação pedindo para conectar a carteira', prova: 'Golpe', naoProva: 'Nada legítimo', t: RUIMC },
+    ].map((l) => ({ titulo: l.titulo, prova: l.prova, naoProva: l.naoProva, borda: l.t.borda, fundo: l.t.fundo, cor: l.t.cor }));
+
+    // Pilar técnico
+    const FERR = {
+      rugcheck: { nome: 'RugCheck', endereco: 'rugcheck.xyz', pergunta: 'Que riscos o contrato e as carteiras mostram?',
+        gratis: 'A página do token é grátis, sem cadastro. Só votar em "trending" pede carteira conectada — não conecte.',
+        anatomiaTitulo: 'A página de um token no RugCheck',
+        paineis: { score: { rotulo: 'Score' }, risks: { rotulo: 'Risks' }, markets: { rotulo: 'Markets' }, insiders: { rotulo: 'Insiders', alerta: true }, holders: { rotulo: 'Holders' }, lockers: { rotulo: 'Lockers & LP' } },
+        grade: [{ cols: '1fr 2fr', ids: ['score', 'risks'], altura: '58px' }, { cols: '1fr 1fr 1fr', ids: ['markets', 'insiders', 'holders'], altura: '52px' }, { cols: '1fr', ids: ['lockers'], altura: '44px' }],
+        itens: [
+          { painel: 'score', titulo: 'Score', texto: 'Good, Warning ou Danger. Número maior é risco maior. A fórmula, os pesos e os limiares não são publicados.' },
+          { painel: 'risks', titulo: 'Risks', texto: 'Cada risco que disparou, com nome, descrição e nível. O próprio RugCheck manda ler o score junto com esta lista.' },
+          { painel: 'markets', titulo: 'Markets', texto: 'Os pares do token nas DEXs, com a liquidez de cada um.' },
+          { painel: 'insiders', titulo: 'Insiders', texto: 'Redes de contas que só fazem sentido econômico se forem da mesma pessoa ou grupo. Sugere, não prova.' },
+          { painel: 'holders', titulo: 'Holders', texto: 'A distribuição das maiores carteiras. Concentração alta aparece como risco.' },
+          { painel: 'lockers', titulo: 'Lockers & LP', texto: 'Quanto da liquidez está travada ou queimada. Não separa golpe de não golpe (Módulo 6).' },
+        ],
+        nota: 'Ao vivo, BONK em 12/09/2026: Score "GOOD", 1 risco, Markets US$ 358 mil, Insiders "2 networks", Holders 2,1 milhões, Lockers & LP US$ 54 mil · 21%.',
+        passos: ['Abra rugcheck.xyz e cole o endereço do contrato. Nunca busque pelo nome.', 'Leia o Score junto com a lista de Risks, nunca sozinho.', 'Abra cada item de Risks: o nível diz o peso, a descrição diz o porquê.', 'Olhe Insiders. Num lançamento recente e limpo, o esperado é zero redes de transferência.', 'Clique nas contas de uma rede: o RugCheck leva ao explorador para você conferir.'],
+        armadilhas: ['"GOOD" não aprova token. O score é um retrato do momento, muda com o mercado, e não se sabe como é calculado.', 'Token popular pode ter redes pequenas de insiders sem ser golpe — o BONK mostrou 2. O próprio RugCheck diz que isso é normal.'] },
+      solscan: { nome: 'Solscan', endereco: 'solscan.io', pergunta: 'O que o dono ainda pode fazer, e quem criou o token?',
+        gratis: 'Consulta sem login. O preço só aparece se o token estiver listado na CoinGecko.',
+        anatomiaTitulo: 'A página de um token no Solscan',
+        paineis: { mcap: { rotulo: 'Market Cap' }, holders: { rotulo: 'Holders' }, authority: { rotulo: 'Authority ▾', alerta: true }, creator: { rotulo: 'Creator' }, programa: { rotulo: 'Owner Program · Token Extensions' }, abas: { rotulo: 'Transfers · Activities · Holders · Metadata · Markets' }, transfers: { rotulo: 'Transfers, em ordem "Oldest First"' } },
+        grade: [{ cols: '1fr 1fr 1fr', ids: ['mcap', 'holders', 'authority'], altura: '52px' }, { cols: '1fr 1fr', ids: ['creator', 'programa'], altura: '48px' }, { cols: '1fr', ids: ['abas'], altura: '38px' }, { cols: '1fr', ids: ['transfers'], altura: '52px' }],
+        itens: [
+          { painel: 'mcap', titulo: 'Market Cap', texto: 'Aqui é totalmente diluído — o que o DexScreener chama de FDV.' },
+          { painel: 'holders', titulo: 'Holders', texto: 'Quantas carteiras têm o token. Não diz quantas são da mesma pessoa.' },
+          { painel: 'authority', titulo: 'Authority', texto: 'Um menu com as autoridades de metadados, mint e freeze. "N/A" quando todas foram revogadas. Um endereço aqui não prova que o dono ainda emite tokens.' },
+          { painel: 'creator', titulo: 'Creator', texto: 'A carteira que criou o token, com a transação. Clique para ver o histórico dela.' },
+          { painel: 'programa', titulo: 'Owner Program e Token Extensions', texto: '"Tokenkeg…" é SPL clássico, "Tokenz…" é Token-2022. Extensões além das de metadados são o alerta mais forte (Módulo 6).' },
+          { painel: 'abas', titulo: 'Abas', texto: 'Holders lista as maiores carteiras; Metadata mostra se nome e imagem podem mudar; Markets, os pares.' },
+          { painel: 'transfers', titulo: 'Transfers', texto: 'Vem do mais recente para o mais antigo. Troque para "Oldest First" para ver quem comprou primeiro e se o criador já vendeu.' },
+        ],
+        nota: 'Ao vivo, BONK em 12/09/2026: Holders 1.014.349, "Token Extensions: FALSE", "Owner Program: Token Program TokenkegQ…" — é SPL clássico.',
+        passos: ['Cole o endereço na busca do solscan.io e confira que nome e endereço batem com o que você validou.', 'Owner Program: diz qual programa manda no token. Todo token do pump.fun hoje é Token-2022.', 'Token Extensions: num token do pump.fun, só metadataPointer e tokenMetadata. Qualquer outra, pare.', 'Authority: abra o menu e veja quais autoridades aparecem. Para confirmar mint e freeze, o RugCheck também mostra.', 'Creator: clique na carteira e veja o histórico — outros tokens criados, e se vendeu.', 'Aba Transfers em "Oldest First": as primeiras compras. Não há campo "quanto o criador comprou"; a resposta está nessas linhas.'],
+        armadilhas: ['No BONK, "Authority" mostra um endereço — o mesmo do Creator —, mas mint e freeze estão nulas na blockchain. O endereço é a autoridade de metadados.', 'O "Liquidity" do Solscan soma vários pools. Não compare com o de outro site.'] },
+      bubblemaps: { nome: 'Bubblemaps', endereco: 'bubblemaps.io', pergunta: 'As maiores carteiras estão ligadas entre si?',
+        gratis: 'Grátis, com Magic Nodes, Time Travel e dados em tempo real. O token BMT libera o mapa com 1.000 holders, lucro e prejuízo, análise entre redes e IA.',
+        anatomiaTitulo: 'O mapa de bolhas do Bubblemaps',
+        paineis: { mapa: { rotulo: 'Mapa de bolhas · top 250' }, carteira: { rotulo: 'Detalhe: % do supply', alerta: true }, magic: { rotulo: 'Magic Nodes' }, olho: { rotulo: 'Mostrar contratos e CEX' }, hora: { rotulo: 'Hora do cálculo' } },
+        grade: [{ cols: '2fr 1fr', ids: ['mapa', 'carteira'], altura: '80px' }, { cols: '1fr 1fr', ids: ['magic', 'olho'], altura: '44px' }, { cols: '1fr', ids: ['hora'], altura: '40px' }],
+        itens: [
+          { painel: 'mapa', titulo: 'Bolhas e linhas', texto: 'Cada bolha é um holder; o tamanho é quanto ele tem. Uma linha é uma transferência na blockchain entre os dois. Bolhas ligadas formam um cluster.' },
+          { painel: 'carteira', titulo: 'Detalhe', texto: 'Clicando numa bolha: % do supply, quantidade e valor. Se ela está num cluster, aparece a soma do cluster — é a concentração real.' },
+          { painel: 'magic', titulo: 'Magic Nodes', texto: 'Mostra ligações por intermediários: várias carteiras abastecidas pelo mesmo endereço, ou mandando para o mesmo depósito.' },
+          { painel: 'olho', titulo: 'Contratos e exchanges', texto: 'Ficam escondidos por padrão, para o mapa mostrar holders comuns. O botão de olho revela.' },
+          { painel: 'hora', titulo: 'Hora do cálculo', texto: 'O mapa é atualizado dentro de 6 horas. Num token de poucas horas de vida, isso é muito tempo.' },
+        ],
+        nota: 'Nomes dos recursos segundo a wiki oficial do Bubblemaps, consultada em setembro de 2026.',
+        passos: ['Abra bubblemaps.io e busque pelo endereço do contrato.', 'Olhe se há clusters grandes entre as maiores bolhas.', 'Clique no cluster e leia a % do supply somada — a lista crua de holders do Solscan esconde isso.', 'Ative Magic Nodes para ver ligações por intermediários.', 'Confira a hora do último cálculo antes de concluir qualquer coisa.'],
+        armadilhas: ['Cluster levanta a pergunta "por quê?", não a resposta. Empresa pagando equipe, fundo recebendo tokens ou alguém escondendo o rastro geram o mesmo desenho.', 'Carteiras de altíssima atividade, como exchanges e roteadores, criam ligações que são ruído. Bolha grande de exchange não é baleia insider.'] },
+      dexscreener: { nome: 'DexScreener', endereco: 'dexscreener.com', pergunta: 'Quanto dinheiro há na pool, e como estão negociando?',
+        gratis: 'Tudo o que se lê é grátis. O que é pago é do lado do projeto: "Enhanced Token Info" (a partir de US$ 299) e Boosts para aparecer em alta.',
+        anatomiaTitulo: 'A página de um par no DexScreener',
+        paineis: { grafico: { rotulo: 'Gráfico' }, preco: { rotulo: 'Price USD' }, liquidez: { rotulo: 'Liquidity · FDV · Mkt Cap' }, txns: { rotulo: 'Txns · Volume · Makers', alerta: true }, info: { rotulo: 'Info e socials', alerta: true }, audit: { rotulo: 'Audit' } },
+        grade: [{ cols: '2fr 1fr', ids: ['grafico', 'preco'], altura: '60px' }, { cols: '2fr 1fr', ids: ['liquidez', 'txns'], altura: '52px' }, { cols: '1fr 1fr', ids: ['info', 'audit'], altura: '48px' }],
+        itens: [
+          { painel: 'grafico', titulo: 'Gráfico', texto: 'O preço do par escolhido. Um token pode ter vários pares; confira que é o do endereço certo.' },
+          { painel: 'preco', titulo: 'Price USD', texto: 'Pode vir com zeros compactados. Passe o mouse para ver o valor inteiro.' },
+          { painel: 'liquidez', titulo: 'Liquidity, FDV e Mkt Cap', texto: 'Liquidez é a pool deste par. FDV é o supply total menos o queimado, vezes o preço. Compare a liquidez com o market cap (calculadora do Módulo 6).' },
+          { painel: 'txns', titulo: 'Txns, Volume e Makers', texto: 'Por janela: 5 minutos, 1 hora, 6 horas, 24 horas. É o número mais fácil de fabricar da tela. "Traders", "Buyers" e "Sellers" não têm definição oficial.' },
+          { painel: 'info', titulo: 'Info e socials', texto: 'Preenchidos e pagos pelo próprio projeto. Não provam que o token é o oficial.' },
+          { painel: 'audit', titulo: 'Audit', texto: 'Não é definida na documentação, que também não diz de onde vêm os dados. A própria tela avisa: "Audits may not be 100% accurate!".' },
+        ],
+        nota: 'Ao vivo, BONK em 12/09/2026: Liquidity US$ 279 mil (um par, na Orca), FDV US$ 247,5 milhões, Mkt Cap US$ 245,1 milhões.',
+        passos: ['Busque pelo endereço do contrato e escolha o par com a liquidez principal.', 'Leia Liquidity antes de qualquer outro número.', 'Compare Liquidity com Mkt Cap: é o tamanho da porta de saída perto do tamanho do prédio.', 'Troque as janelas de Txns e Volume (5m, 1h, 24h) e veja se as negociações acompanham o volume.', 'Para mint, freeze, holders e insiders, volte ao RugCheck e ao Solscan — a Audit daqui não substitui.'],
+        armadilhas: ['Aparecer em alta pode ser comprado: os Boosts turbinam o trending por 12 a 24 horas.', 'Ícone bonito, site e redes sociais na página não dizem nada sobre legitimidade.'] },
+    };
+    const ordemIds = ['rugcheck', 'solscan', 'bubblemaps', 'dexscreener'];
+    const ordemFerramentas = ordemIds.map((id, i) => { const f = FERR[id], atual = id === S.ferramenta;
+      return { id, n: i + 1, nome: f.nome, pergunta: f.pergunta, atual, seta: i < ordemIds.length - 1, borda: atual ? '#7C3AED' : '#1F2733', fundo: atual ? 'rgba(124,58,237,.15)' : '#141A24', mFundo: atual ? '#22D3EE' : '#1F2733', mCor: atual ? '#0B0F17' : '#E6EDF3' }; });
+    const ordemAlt = ordemIds.map((id, i) => (i + 1) + '. ' + FERR[id].nome + ': ' + FERR[id].pergunta).join(' ');
+    const atualF = FERR[S.ferramenta];
+    const anat = montarAnatomia(atualF.paineis, atualF.itens, atualF.grade);
+    const ferramenta = Object.assign({ nome: atualF.nome, endereco: atualF.endereco, pergunta: atualF.pergunta, gratis: atualF.gratis, anatomiaTitulo: atualF.anatomiaTitulo, nota: atualF.nota, passos: atualF.passos, armadilhas: atualF.armadilhas }, anat);
+    const tabelaOnde = [
+      { titulo: 'Programa e extensões', onde: 'Solscan', campo: 'Owner Program, Token Extensions' },
+      { titulo: 'Mint e freeze authority', onde: 'Solscan e RugCheck', campo: 'Authority (menu); Risks' },
+      { titulo: 'Nome e imagem podem mudar?', onde: 'Solscan', campo: 'Aba Metadata' },
+      { titulo: 'Quem criou, e se já vendeu', onde: 'Solscan', campo: 'Creator + Transfers em "Oldest First"' },
+      { titulo: 'Concentração real', onde: 'Bubblemaps e RugCheck', campo: 'Clusters e Magic Nodes; Insiders' },
+      { titulo: 'Compra coordenada no lançamento', onde: 'trench.bot (só pump.fun)', campo: 'Current held %' },
+      { titulo: 'Liquidez do par', onde: 'DexScreener', campo: 'Liquidity' },
+      { titulo: 'FDV e market cap', onde: 'DexScreener', campo: 'FDV, Mkt Cap' },
+      { titulo: 'Volume e negociações', onde: 'DexScreener', campo: 'Txns, Volume, Makers' },
+    ];
+
+    // Matriz
+    const CHAINS = [{ id: 'solana', nome: 'Solana' }, { id: 'evm', nome: 'EVM' }, { id: 'bnb', nome: 'BNB Chain' }, { id: 'multi', nome: 'Multi-chain' }];
+    const PAPEIS = [{ id: 'visualizacao', nome: 'Visualização' }, { id: 'execucao', nome: 'Execução' }, { id: 'checagem', nome: 'Checagem' }, { id: 'monitoramento-social', nome: 'Monitoramento social' }];
+    const TODAS = [
+      { id: 'dexscreener', nome: 'DexScreener', pilar: 'tecnico', chains: ['multi'], papeis: ['visualizacao'], oQueFaz: 'Mostra gráfico de preço, liquidez, volume e transações recentes de qualquer par, em praticamente qualquer chain.', quandoUsar: 'É o primeiro lugar para olhar um token que você acabou de ouvir falar.', risco: 'baixo', observacoes: 'Padrão de mercado. Serve para visualizar; não executa ordens.' },
+      { id: 'gmgn', nome: 'GMGN (gmgn.ai)', pilar: 'tecnico', chains: ['multi'], papeis: ['execucao', 'checagem'], oQueFaz: 'Terminal web e bot de Telegram: executa compra/venda, tem um scanner de segurança embutido e permite copy trade.', quandoUsar: 'Quando você já decidiu entrar e quer executar rápido com uma checagem automática na mesma tela.', risco: 'medio', observacoes: 'Nasceu focado em Solana e hoje cobre múltiplas chains. Cobra taxa de execução (~1%, citada por reviews). Copy trade copia também as perdas.' },
+      { id: 'axiom', nome: 'Axiom Trade', pilar: 'tecnico', chains: ['solana'], papeis: ['execucao', 'visualizacao', 'monitoramento-social'], correcao: 'Correção: o pedido original citava "Axon". Não há terminal relevante com esse nome — o correto é Axiom Trade.', oQueFaz: 'Terminal web não-custodial focado em Solana: descoberta de tokens novos ("Pulse"), rastreamento de carteiras, monitoramento de X/Twitter, execução rápida e controles de MEV, slippage e priority fee.', quandoUsar: 'Para acompanhar lançamentos em tempo real e executar direto da mesma tela.', risco: 'medio', observacoes: 'Modelo de taxa em camadas. Apoiado pela Y Combinator.' },
+      { id: 'photon', nome: 'Photon', pilar: 'tecnico', chains: ['solana', 'evm'], papeis: ['execucao'], oQueFaz: 'Terminal web rápido de execução, com foco em velocidade.', quandoUsar: 'Quando velocidade importa mais do que análise — você já fez a checagem.', risco: 'medio', observacoes: 'Cobre Solana e também ETH/Base/Tron/Blast. Taxa de 1% citada por reviews.' },
+      { id: 'bullx', nome: 'BullX (Neo)', pilar: 'tecnico', chains: ['multi'], papeis: ['execucao', 'visualizacao'], oQueFaz: 'Terminal multi-chain com gráficos e execução, também disponível como bot de Telegram.', quandoUsar: 'Quando você opera em mais de uma chain e quer uma única ferramenta.', risco: 'medio', observacoes: 'Multi-chain.' },
+      { id: 'trojan', nome: 'Trojan', pilar: 'tecnico', chains: ['solana'], papeis: ['execucao'], oQueFaz: 'Bot de execução via Telegram para Solana, focado em velocidade.', quandoUsar: 'Snipes pequenos e rápidos, direto do celular.', risco: 'alto', observacoes: 'Rápido, mas executar via bot de Telegram remove a camada visual de checagem que um terminal web mostra antes de confirmar.' },
+      { id: 'bonkbot', nome: 'BonkBot', pilar: 'tecnico', chains: ['solana'], papeis: ['execucao'], oQueFaz: 'Bot de Telegram simples de "tap and trade" para Solana.', quandoUsar: 'Para quem está começando e quer a execução mais simples possível.', risco: 'alto', observacoes: 'Simplicidade não é segurança: continua exigindo checagem manual do contrato antes de comprar.' },
+      { id: 'padre', nome: 'Padre', pilar: 'tecnico', chains: ['solana'], papeis: ['visualizacao', 'execucao'], oQueFaz: 'Terminal web "pro" para Solana, com analytics mais profundos além da execução.', quandoUsar: 'Quando você quer mais dado analítico na mesma tela em que executa.', risco: 'medio', observacoes: 'Foco em analytics.' },
+      { id: 'sigma', nome: 'Sigma', pilar: 'tecnico', chains: ['evm'], papeis: ['execucao', 'checagem'], naoSuportaSolana: true, oQueFaz: 'Bot de Telegram de execução/sniping em chains EVM (Base, Ethereum, BSC, Arbitrum, Avalanche, Blast), com checagem rápida do contrato de deploy ("factory").', quandoUsar: 'Sniping e checagem rápida em redes EVM — nunca em Solana.', risco: 'alto', observacoes: '"Factory" é o contrato que faz o deploy de outros contratos/tokens; checar a factory é padrão conhecido para detectar scam.' },
+      { id: 'rugcheck', nome: 'RugCheck', pilar: 'tecnico', chains: ['solana'], papeis: ['checagem'], oQueFaz: 'Analisa a segurança de um token em Solana: status da LP, mint/freeze authority, concentração de holders e sinais de honeypot.', quandoUsar: 'Sempre, antes de comprar qualquer token novo em Solana.', risco: 'baixo', observacoes: 'Ferramenta de leitura: não executa nada por você.' },
+      { id: 'bubblemaps', nome: 'Bubblemaps', pilar: 'tecnico', chains: ['multi'], papeis: ['visualizacao', 'checagem'], oQueFaz: 'Visualiza clusters de carteiras em bolhas, mostrando concentração e possíveis carteiras de insiders ligadas entre si.', quandoUsar: 'Quando a checagem de holders já mostra concentração alta e você quer ver se essas carteiras estão conectadas.', risco: 'baixo', observacoes: 'Foi a ferramenta usada para apontar ~82% do supply do caso LIBRA já desbloqueado no lançamento (Módulo 2).' },
+      { id: 'explorers', nome: 'Solscan / BscScan / Etherscan / Basescan', pilar: 'tecnico', chains: ['solana', 'evm'], papeis: ['visualizacao', 'checagem'], oQueFaz: 'Block explorers oficiais de cada rede: histórico de transações, holders e as autoridades de um contrato, direto da fonte.', quandoUsar: 'Para conferir sem intermediário as authorities, os holders e o histórico.', risco: 'baixo', observacoes: 'Use o explorer da chain certa: Solscan (Solana), Etherscan (Ethereum), BscScan (BNB Chain), Basescan (Base).' },
+      { id: 'launchpads-solana', nome: 'Pump.fun / LetsBonk / Raydium / Meteora / Jupiter', pilar: 'tecnico', chains: ['solana'], papeis: ['execucao', 'visualizacao'], oQueFaz: 'Launchpads que lançam tokens via bonding curve, e DEX/agregadores para onde o token "gradua" quando junta liquidez de verdade.', quandoUsar: 'Para acompanhar o nascimento de um token e negociar depois que ele tem pool numa DEX.', risco: 'alto', observacoes: 'Veja a aba "Cenário 2025–2026": a liderança entre launchpads muda muito rápido.' },
+      { id: 'bnb-launchpads', nome: 'Four.meme / PancakeSwap', pilar: 'tecnico', chains: ['bnb'], papeis: ['execucao'], oQueFaz: 'Launchpad de fair-launch de baixo custo (Four.meme) e a DEX principal da BNB Chain (PancakeSwap).', quandoUsar: 'Quando o token nasceu ou negocia na BNB Chain.', risco: 'alto', observacoes: 'Custo de lançamento citado em ~0,005 BNB — barato o suficiente para gerar dezenas de milhares de tokens por dia em picos.' },
+      { id: 'uniswap', nome: 'Uniswap', pilar: 'tecnico', chains: ['evm'], papeis: ['execucao'], oQueFaz: 'DEX padrão do ecossistema EVM: troca direta de tokens via pools de liquidez.', quandoUsar: 'Para negociar um token EVM depois de já ter feito a checagem técnica.', risco: 'medio', observacoes: 'Padrão de mercado; sozinho não faz nenhuma checagem de segurança do token.' },
+      { id: 'j7-tracker', nome: 'J7 Tracker', pilar: 'social', chains: ['multi'], papeis: ['monitoramento-social'], oQueFaz: 'Ferramenta de sniping e deploy de token, com um rastreador de tweets embutido como recurso auxiliar. Categoria de fundo: tracker de tweets / alertas sociais.', quandoUsar: 'A categoria serve para não ser o último a saber que uma conta grande interagiu com um token. Esta ferramenta específica é focada em velocidade de execução, não em leitura de narrativa.', risco: 'medio', observacoes: 'Site oficial j7tracker.io, acesso por credenciais via Discord. Preço exato e se expõe API pública: não verificado.' },
+    ];
+    const RISCO = { baixo: { rotulo: 'Risco baixo', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#22C55E' }, medio: { rotulo: 'Risco médio', borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#F59E0B' }, alto: { rotulo: 'Risco alto', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' } };
+    const chip = (ativo) => ({ ativo, borda: ativo ? '#7C3AED' : '#1F2733', fundo: ativo ? 'rgba(124,58,237,.15)' : '#141A24' });
+    const filtros = {
+      pilares: [{ id: 'todos', nome: 'Todos' }, { id: 'social', nome: 'Social' }, { id: 'tecnico', nome: 'Técnico' }].map((f) => Object.assign({}, f, chip(S.pilar === f.id))),
+      chains: [{ id: 'todas', nome: 'Todas' }].concat(CHAINS).map((f) => Object.assign({}, f, chip(S.chain === f.id))),
+      papeis: [{ id: 'todos', nome: 'Todos' }].concat(PAPEIS).map((f) => Object.assign({}, f, chip(S.papel === f.id))),
+    };
+    const ferramentasFiltradas = TODAS.filter((f) => (S.pilar === 'todos' || f.pilar === S.pilar) && (S.chain === 'todas' || f.chains.indexOf(S.chain) >= 0) && (S.papel === 'todos' || f.papeis.indexOf(S.papel) >= 0))
+      .map((f) => Object.assign({}, f, { pilarNome: f.pilar === 'social' ? 'Pilar social' : 'Pilar técnico',
+        etiquetas: f.chains.map((c) => (CHAINS.find((x) => x.id === c) || { nome: c }).nome).concat(f.papeis.map((p) => (PAPEIS.find((x) => x.id === p) || { nome: p }).nome)),
+        riscoRotulo: RISCO[f.risco].rotulo, riscoBorda: RISCO[f.risco].borda, riscoFundo: RISCO[f.risco].fundo, riscoCor: RISCO[f.risco].cor,
+        naoSuportaSolana: !!f.naoSuportaSolana, correcao: f.correcao || '' }));
+
+    const cenario = this.tempoLinha([
+      { data: '07/07/2025', texto: 'O LetsBonk (Bonk.fun) ultrapassou o Pump.fun, com ~54,8–55% de market share e ~US$ 539 mi de volume diário.' },
+      { data: '01/08/2025', texto: 'Início de agosto: o Pump.fun capturou cerca de 98% da receita de launchpad rastreada (~US$ 1,1 mi de receita sobre ~US$ 542 mi de volume).' },
+      { data: '08/10/2025', texto: 'A atividade migrou para a Four.meme (BNB Chain): ~US$ 1,4 mi de receita em 24h contra ~US$ 885 mil do Pump.fun, com mais de 20.000 tokens criados no dia.' },
+    ]);
+
+    // Quiz
+    const porque = {
+      q1: { a: 'O DexScreener não executa ordens; para isso existem os terminais.', c: 'Mint e freeze se checam no RugCheck e no Solscan; o DexScreener é visualização.', d: 'Monitorar o X é pilar social; o DexScreener mostra dados de mercado.' },
+      q2: { a: '"Axon" não existe como terminal relevante — é o erro de nome que a correção aponta.', c: 'Apex Trade não é o terminal citado.', d: 'Axium Finance não é o terminal. Nome parecido é o que um impostor explora.' },
+      q3: { a: 'O Sigma é bot de Telegram só para redes EVM.', c: 'Não suporta Solana para nada, nem para checagem.', d: 'Não há suporte em teste: o Sigma cobre só redes EVM.' },
+      q4: { b: 'Revogar approvals é segurança de carteira (Módulo 1), não pilar social.', c: 'Nenhum pilar substitui o outro: um token oficial pode ter contrato com armadilha.', d: 'Take profit é gestão da posição (Módulo 4).' },
+      q5: { a: 'Selo azul é assinatura Premium; qualquer um compra.', c: 'O X não audita token nenhum.', d: 'O selo não diz nada sobre o endereço estar certo.' },
+      q6: { a: 'O site sozinho não desempata: se ele diverge do post fixado, um dos dois pode ter sido invadido.', b: 'Discord é canal fácil de sequestrar; nunca desempata.', d: 'Volume não diz qual é o oficial; cópia também tem volume.' },
+      q7: { a: 'Verificação legítima não pede assinatura.', c: 'Provar que não é robô não exige conectar carteira nem assinar.', d: 'O nome Collab.Land é justamente o que os golpistas imitam, com outro @.' },
+      q8: { a: 'Um bot só recebe os posts de canal onde é administrador.', c: 'Automatizar a própria conta deixa a conta sob observação e não é o caminho grátis e dentro das regras.', d: 'O Telegram Premium não libera leitura automática de canal alheio.' },
+      q9: { a: 'O score não aprova token: é retrato do momento, com fórmula não publicada.', c: 'O RugCheck não verifica a equipe do projeto.', d: 'O score não garante trava de liquidez — e trava não separa golpe de não golpe.' },
+      q10: { a: 'Uma linha é uma transferência na blockchain; pode ter explicação legítima.', c: 'Mapa recente não transforma ligação em prova.', d: 'O Bubblemaps mostra holders em geral; exchanges e contratos ficam escondidos por padrão.' },
+      q11: { a: 'É observação de mercado repetida em blogs. Nenhum estudo mediu a ordem entre redes.', b: 'Também não foi medido. O que se mediu é que 23,5% dos tokens do pump.fun nascem logo depois de um post no X ou no Truth Social: a narrativa vem antes do token, não antes de outra rede.', d: 'Não há estudo com TikTok e memecoin que meça ordem.' },
+      q12: { a: 'A lista é montada por um score próprio de atividade, e Boosts pagos multiplicam esse score.', b: 'Nenhuma lista de "em alta" foi validada como previsão de preço.', d: 'Estar em alta não tem relação com checagem de contrato. Isso é o pilar técnico.' },
+      q13: { a: 'Nos casos com data, como PNUT e LIBRA, a cobertura veio no topo, não antes.', c: 'O PNUT saiu em veículos como CBC e NBC; a LIBRA, na Bloomberg e na Reuters.', d: 'Aconteceu perto do topo, mas cinco casos não formam regra, e ninguém mediu isso como sinal.' },
+    };
+    const Q = (id, pergunta, alts, correta, explicacao) => ({ id, pergunta, correta, explicacao, alternativas: alts.map(([aid, texto]) => Object.assign({ id: aid, texto }, porque[id][aid] ? { porque: porque[id][aid] } : {})) });
+    const todas = [
+      Q('q1', 'O DexScreener serve para visualizar ou para executar ordens?', [['a', 'Só para executar compra e venda diretamente.'], ['b', 'Para visualizar: gráfico, liquidez, volume e transações.'], ['c', 'Só para checar mint e freeze authority.'], ['d', 'Para monitorar posts no X/Twitter.']], 'b', 'DexScreener é uma ferramenta de visualização: mostra preço, liquidez e volume. Não executa ordens — para isso existem terminais como Axiom, Photon ou GMGN.'),
+      Q('q2', 'Qual é o nome correto do terminal de execução focado em Solana (não "Axon")?', [['a', 'Axon Trade'], ['b', 'Axiom Trade'], ['c', 'Apex Trade'], ['d', 'Axium Finance']], 'b', 'O nome correto é Axiom Trade. "Axon" não corresponde a nenhum terminal de execução relevante encontrado em fontes públicas — é a correção em destaque no topo do módulo.'),
+      Q('q3', 'O Sigma suporta Solana?', [['a', 'Sim, é a chain principal do Sigma.'], ['b', 'Não — o Sigma cobre apenas chains EVM.'], ['c', 'Sim, mas só para checagem, nunca para execução.'], ['d', 'O suporte a Solana está em fase de testes.']], 'b', 'Não. O Sigma é um bot de Telegram para chains EVM (Base, Ethereum, BSC, Arbitrum, Avalanche, Blast) e não suporta Solana — ponto verificado e destacado na matriz.'),
+      Q('q4', 'Para que serve o pilar social?', [['a', 'Para confirmar que o token é quem diz ser e ler de onde vem a atenção — não para provar que o contrato é seguro.'], ['b', 'Para revogar approvals de carteiras automaticamente.'], ['c', 'Para substituir totalmente a checagem técnica antes de comprar.'], ['d', 'Para calcular o take profit ideal de uma posição.']], 'a', 'O pilar social confirma o endereço oficial e mostra de onde a atenção vem — e quanto dela é campanha. Ele não substitui o pilar técnico: os dois se completam.'),
+      Q('q5', 'Um perfil no X com selo azul posta o endereço de um token. O que o selo prova?', [['a', 'Que a conta é do projeto oficial.'], ['b', 'Que a conta tem assinatura Premium ativa — e só isso.'], ['c', 'Que o X auditou o token.'], ['d', 'Que o endereço está correto.']], 'b', 'Pela central de ajuda do X, o selo azul hoje quer dizer assinatura Premium, sem revisão de identidade. Quem liga a conta a uma organização é o selo dourado ou o badge de afiliação — e nem isso diz algo sobre o token.'),
+      Q('q6', 'O endereço no site oficial é diferente do endereço no post fixado do X oficial. O que fazer?', [['a', 'Usar o do site, que é a fonte mais confiável.'], ['b', 'Perguntar no Discord qual é o certo.'], ['c', 'Não comprar: divergência entre as fontes oficiais, por si só, encerra a checagem.'], ['d', 'Usar o endereço que tiver mais volume no DexScreener.']], 'c', 'Site e post fixado precisam bater. Um canal mais fácil de sequestrar, como o Discord ou uma resposta de post, nunca desempata — e volume não diz qual é o oficial.'),
+      Q('q7', 'Ao entrar num Discord, um bot de verificação pede para você conectar a carteira num site e assinar. O que é isso?', [['a', 'O procedimento normal de verificação.'], ['b', 'O roteiro de drainer: foi assim que o Inferno Drainer esvaziou mais de 30 mil carteiras.'], ['c', 'Um jeito de provar que você não é robô.'], ['d', 'Seguro, desde que o bot se chame Collab.Land.']], 'b', 'Verificação legítima não pede assinatura. Os golpistas imitam justamente o Collab.Land, com um @ diferente, e levam a um site que pede a assinatura que esvazia a carteira.'),
+      Q('q8', 'Dá para acompanhar um canal de Telegram de outro projeto de graça, com um robô, dentro das regras?', [['a', 'Sim, qualquer bot recebe os posts de qualquer canal.'], ['b', 'Não: um bot só recebe os posts se for admin do canal. O que existe é ler à mão em t.me/s/nomedocanal.'], ['c', 'Sim, usando a própria conta como robô.'], ['d', 'Só pagando o Telegram Premium.']], 'b', 'A única automação grátis e permitida no pilar social é seguir um canal de anúncios do Discord. No Telegram, a leitura de canal alheio é manual — o /s/ no endereço mostra o histórico no navegador, sem conta.'),
+      Q('q9', 'O RugCheck mostra "GOOD" para um token. O que isso quer dizer?', [['a', 'Que o token foi aprovado e é seguro comprar.'], ['b', 'Que é um retrato do momento, calculado por uma fórmula que não é publicada — e precisa ser lido junto com a lista de riscos.'], ['c', 'Que a equipe do projeto foi verificada.'], ['d', 'Que a liquidez está travada para sempre.']], 'b', 'O score muda com o mercado e não tem fórmula, pesos nem limiares publicados. O próprio RugCheck manda considerar o score e os avisos juntos.'),
+      Q('q10', 'No Bubblemaps, as cinco maiores bolhas estão ligadas num cluster. Isso prova que são da mesma pessoa?', [['a', 'Sim, linha entre bolhas é prova de golpe.'], ['b', 'Não: a ligação é uma transferência na blockchain, e o cluster levanta a pergunta "por quê?" — pode ser equipe, fundo ou exchange.'], ['c', 'Sim, se o mapa tiver sido calculado há menos de 6 horas.'], ['d', 'Não, porque o Bubblemaps só mostra exchanges.']], 'b', 'A wiki do Bubblemaps apresenta o cluster como algo que vale investigar, não como conclusão. O que muda a leitura é a % do supply somada e o que você descobre abrindo as carteiras.'),
+      Q('q11', 'Segundo a pesquisa, em qual rede social a atenção sobre um token aparece primeiro?', [['a', 'No Telegram, sempre antes do X.'], ['b', 'No X, porque é onde estão os influenciadores.'], ['c', 'Ninguém mediu: os estudos comparam uma rede com o preço, não uma rede com outra.'], ['d', 'No TikTok, porque é onde os memes nascem.']], 'c', 'A lacuna é a resposta. Quem ensina uma ordem fixa entre redes está repetindo observação, não dado.'),
+      Q('q12', 'Um token aparece no topo da lista "em alta" do DexScreener. O que isso mostra?', [['a', 'Que a comunidade escolheu o token.'], ['b', 'Que o preço vai continuar subindo.'], ['c', 'Atividade recente e, possivelmente, pagamento: Boosts pagos multiplicam o score da lista.'], ['d', 'Que o token passou numa auditoria.']], 'c', 'Toda lista de "em alta" é feita de atividade de negociação, de pagamento ou das duas coisas — e atividade é o que o wash trading fabrica.'),
+      Q('q13', 'Nas narrativas de 2024 e 2025 estudadas, quando a imprensa fora de cripto cobriu o tema?', [['a', 'Antes de o preço subir, dando tempo de entrar.'], ['b', 'No topo ou depois dele.'], ['c', 'Nunca: a imprensa geral ignora memecoin.'], ['d', 'Sempre no dia exato do pico, o que serve de sinal de venda.']], 'b', 'É descrição do que aconteceu, não gatilho: nos casos com data, a imprensa geral chegou no topo ou depois.'),
+    ];
+    const quiz = { todas }; todas.forEach((p) => { quiz[p.id] = [p]; });
+    const naoVerificado = [
+      { titulo: 'Aceitação do "Meme Coin Factories" no ACM CCS 2026', texto: 'A página do arXiv diz que foi aceito, mas o artigo não aparece na lista de aceitos publicada no site do CCS 2026, conferida em 14/09/2026. O app o trata como preprint.' },
+      { titulo: 'Números da linha do tempo das narrativas', texto: 'A queda média de 94% das celebridades, o MOODENG, as mais de 700 cópias do TRUMP e as 21 mil moedas do Believe vieram de resumo de busca, não da página aberta.' },
+      { titulo: 'Data dos futuros de MOODENG na Binance', texto: 'Uma fonte diz 15/11/2024; a reconciliação dela diz 25/10/2024. O pico de preço em 15/11/2024 está confirmado na CoinMarketCap e na CoinGecko; o do GOAT, em 17/11/2024, também.' },
+      { titulo: 'Nizzoli et al. (2020)', texto: 'Os 56% e os 93% vieram do resumo do artigo, sem abrir o texto completo.' },
+      { titulo: 'Preço dos Boosts do DexScreener', texto: 'Não é publicado em nenhuma página oficial. Os pacotes que circulam — de 10 por US$ 99 a 500 por US$ 3.999 — são de terceiros.' },
+      { titulo: 'Preços do Birdeye PRO, do X Premium e do Nansen', texto: 'Vieram de resumo de busca, não da página aberta. Os da API do Birdeye e do LunarCrush vieram da página de preços.' },
+      { titulo: 'Saturação: tokens nascendo com o tema em queda', texto: 'Há registro nos agentes de IA e no Believe; nas outras três narrativas, não há dado.' },
+      { titulo: 'Preço da API do X em 2026', texto: 'O valor de US$ 0,005 por post lido vem de guias de terceiros coerentes entre si; a página oficial de preços não foi aberta.' },
+      { titulo: 'Custódia da chave em cada bot de Telegram', texto: 'Varia de bot para bot, e alguns se declaram não custodiais. Não foi conferido na documentação de cada um.' },
+      { titulo: 'Data de criação de um canal do Telegram', texto: 'Que ela não aparece para quem é só membro é o comportamento conhecido, sem página oficial que confirme.' },
+      { titulo: '"Traders", "Buyers", "Sellers" e "Audit" do DexScreener', texto: 'Não têm definição na documentação oficial, e a origem dos dados da Audit não é informada.' },
+      { titulo: 'Fórmula do score do RugCheck', texto: 'Não é publicada: a documentação da API mostra só os campos. Tabelas de 0 a 100 que circulam são de terceiros.' },
+    ];
+
+    const ids = ABAS.map((a) => a.id);
+    return {
+      mostrarSidebar: !compacto, paddingMain: compacto ? '20px 16px' : '32px 24px',
+      dirMapa: compacto ? 'column' : 'row', alinhaMapa: compacto ? 'stretch' : 'center', trunkW: compacto ? '2px' : '32px', trunkH: compacto ? '20px' : '2px', trunkML: compacto ? '24px' : '0',
+      dirSeq: compacto ? 'column' : 'row', colsDois: compacto ? '1fr' : '1fr 1fr', colsAnatomia: compacto ? '1fr' : '1fr 1fr', minPasso: compacto ? '0' : '150px',
+      abas, mapa, eh, objetivos, pilares, pilaresAlt, destaques, termos, ciclo, triagem, evidencia, linha, tabelaNarrativas, tabelaFerramentas, rotinaNarrativa,
+      rotina, enderecos, perfil, golpesDiscord, golpesAlt, calls, provaTabela,
+      ordemFerramentas, ordemAlt, ferramenta, tabelaOnde,
+      filtros, ferramentasFiltradas, vazio: ferramentasFiltradas.length === 0,
+      resultado: ferramentasFiltradas.length + (ferramentasFiltradas.length === 1 ? ' ferramenta' : ' ferramentas') + ' de ' + TODAS.length,
+      cenario, quiz, naoVerificado,
+      irParaAba: (e) => { this.setState({ aba: e.currentTarget.dataset.aba }); },
+      teclaAba: (e) => { const i = ids.indexOf(this.state.aba); let n = i; if (e.key === 'ArrowRight') n = (i + 1) % ids.length; else if (e.key === 'ArrowLeft') n = (i - 1 + ids.length) % ids.length; else if (e.key === 'Home') n = 0; else if (e.key === 'End') n = ids.length - 1; else return; e.preventDefault(); this.setState({ aba: ids[n] }); const btn = e.currentTarget.querySelectorAll('[role="tab"]')[n]; if (btn) btn.focus(); },
+      escolherPasso: (e) => this.setState({ passo: Number(e.currentTarget.dataset.indice) }),
+      escolherFerramenta: (e) => this.setState({ ferramenta: e.currentTarget.dataset.id }),
+      alternarFiltro: (e) => { const g = e.currentTarget.dataset.grupo, v = e.currentTarget.dataset.valor; this.setState(g === 'pilar' ? { pilar: v } : g === 'chain' ? { chain: v } : { papel: v }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

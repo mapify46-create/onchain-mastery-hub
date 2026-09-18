@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}h1,h2,h3,p,li,dd,dt{overflow-wrap:break-word}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}.omh-busca{width:100%;box-sizing:border-box;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;color:#E6EDF3;font-family:inherit;font-size:15px;padding:12px 14px;min-height:44px}.omh-busca::placeholder{color:#9AA7B4}.omh-busca:focus-visible{outline:2px solid #22D3EE;outline-offset:2px}</style></helmet>
+<div style="display:flex;min-height:100vh;align-items:flex-start">
+<sc-if value="{{ mostrarSidebar }}" hint-placeholder-val="{{ true }}">
+<aside aria-label="Rotas do hub" style="position:sticky;top:0;width:16rem;flex:0 0 16rem;height:100vh;box-sizing:border-box;border-right:1px solid #1F2733;background:#141A24;padding:20px 16px;display:flex;flex-direction:column;gap:4px;font-size:14px">
+<p style="margin:0 0 12px;font-weight:600;font-size:14px">onchain-mastery-hub</p>
+<a href="#/inicio" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Início</a>
+<a href="#/modulo-1" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M1 Fundamentos &amp; Segurança</a>
+<a href="#/modulo-2" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M2 Psicologia</a>
+<a href="#/modulo-3" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M3 Os dois pilares</a>
+<a href="#/modulo-4" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M4 Gestão &amp; decisão</a>
+<a href="#/modulo-5" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M5 Execução</a>
+<a href="#/modulo-6" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M6 Ler a tela</a>
+<a href="#/modulo-7" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M7 A rotina</a>
+<div style="height:1px;background:#1F2733;margin:8px 0"></div>
+<a href="#/glossario" aria-current="page" style="display:block;border-radius:8px;padding:8px 12px;color:#E6EDF3;background:rgba(124,58,237,.15);border:1px solid #7C3AED;text-decoration:none;font-weight:600">Glossário</a>
+<a href="#/checklist" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Checklist antes de comprar</a>
+<a href="#/revisao" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Revisão</a>
+</aside>
+</sc-if>
+<main id="conteudo" style="flex:1 1 auto;min-width:0">
+<div style="max-width:868px;margin:0 auto;padding:{{ paddingMain }};display:flex;flex-direction:column;gap:24px">
+
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">34 termos</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">Glossário</h1>
+<p style="margin:8px 0 0;color:#9AA7B4;text-wrap:pretty">Todo termo que aparece nos módulos, com definição, exemplo prático e o sinal de risco a observar. Abra aqui sempre que um termo novo aparecer e marque como estudado o que já entendeu.</p>
+</header>
+
+<!-- CONTADOR -->
+<section aria-label="Progresso do glossário" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">{{ contador.texto }}</h2>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;color:#9AA7B4">{{ contador.pct }}</span>
+</div>
+<div style="height:8px;border-radius:999px;background:#1F2733;overflow:hidden" role="img" aria-label="Progresso do glossário: {{ contador.texto }}"><div style="height:100%;width:{{ contador.percentual }}%;border-radius:999px;background:#7C3AED"></div></div>
+<p style="margin:0;border-radius:8px;border:1px solid rgba(124,58,237,.5);background:rgba(124,58,237,.12);padding:10px 14px;font-size:13px;color:#9AA7B4"><strong style="color:#E6EDF3">Estado de exemplo: </strong>esta tela abre com 9 termos marcados, de propósito, para você ver o contador e o card em cada estado. No app, o número vem do seu navegador e começa em zero.</p>
+<p style="margin:0;font-size:13px;color:#9AA7B4">Marcar um termo como estudado coloca as perguntas dele na fila da <a href="#/revisao">Revisão</a>: elas voltam no dia seguinte, e depois em 3, 7, 16 e 35 dias.</p>
+</section>
+
+<!-- 1. MAPA POR CATEGORIA -->
+<section aria-label="Mapa dos termos por categoria" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O mapa dos termos</h2>
+<span style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Relação: o todo e suas partes</span>
+</div>
+<p style="margin:0;color:#9AA7B4">Seis categorias. Clique numa para filtrar a lista abaixo; clique de novo para ver todas. Dois termos pertencem a duas categorias ao mesmo tempo — eles aparecem nas duas, ligados pela cor ciana, e não duplicados em silêncio.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px;overflow-x:auto" tabindex="0" role="group" aria-label="Mapa dos termos por categoria (role na horizontal se preciso)">
+<div role="img" aria-label="{{ mapaAlt }}" style="display:flex;flex-direction:{{ dirMapa }};align-items:{{ alinhaMapa }};min-width:{{ minMapa }}">
+<div style="flex:0 0 auto;border-radius:12px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:14px 18px;max-width:190px">
+<p style="margin:0;font-size:15px;font-weight:600">Glossário</p>
+<p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#9AA7B4">34 termos · 6 categorias</p>
+</div>
+<div aria-hidden="true" style="flex:0 0 auto;width:{{ trunkW }};height:{{ trunkH }};background:#1F2733;margin-left:{{ trunkML }}"></div>
+<ul style="list-style:none;margin:0;padding:0;border-left:2px solid #1F2733;display:flex;flex-direction:column;gap:10px;flex:1 1 auto;min-width:0;margin-left:{{ trunkML }}">
+<sc-for list="{{ mapa }}" as="c" hint-placeholder-count="6">
+<li style="position:relative;padding-left:24px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px" style-before="content:'';position:absolute;left:0;top:19px;width:24px;height:2px;background:#1F2733">
+<button type="button" data-categoria="{{ c.id }}" aria-pressed="{{ c.ativo }}" onClick="{{ escolherCategoria }}" style="min-height:40px;border-radius:8px;border:1px solid {{ c.borda }};background:{{ c.fundo }};padding:6px 12px;font-size:14px;font-weight:600;color:#E6EDF3;cursor:pointer;text-align:left;white-space:nowrap" style-hover="border-color:#9AA7B4">{{ c.nome }} <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#9AA7B4">{{ c.quantos }}</span></button>
+<sc-for list="{{ c.folhas }}" as="f" hint-placeholder-count="4">
+<span style="border-radius:999px;border:1px solid {{ f.borda }};background:{{ f.fundo }};padding:2px 10px;font-size:13px;color:{{ f.cor }}">{{ f.nome }}<sc-if value="{{ f.cruza }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="margin-left:6px;color:#22D3EE">⇢ {{ f.outra }}</span></sc-if></span>
+</sc-for>
+</li>
+</sc-for>
+</ul>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:#9AA7B4">
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:3px;border:1px solid #22D3EE;background:rgba(34,211,238,.1)"></span>termo em duas categorias — a seta diz qual é a outra</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:3px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12)"></span>já estudado</span>
+</div>
+</section>
+
+<!-- 2. BUSCA E FILTRO -->
+<section aria-label="Busca e filtro" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:12px">
+<label for="glo-busca" style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Buscar termo</label>
+<input id="glo-busca" class="omh-busca" type="search" value="{{ busca }}" onInput="{{ mudarBusca }}" placeholder="Buscar por termo, definição, exemplo ou alerta..." aria-label="Buscar no glossário" autocomplete="off">
+<div role="group" aria-label="Filtrar por categoria" style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ chips }}" as="c" hint-placeholder-count="7">
+<button type="button" data-categoria="{{ c.id }}" aria-pressed="{{ c.ativo }}" onClick="{{ escolherCategoria }}" style="min-height:40px;border-radius:999px;border:1px solid {{ c.borda }};background:{{ c.fundo }};color:#E6EDF3;padding:6px 14px;font-size:14px;cursor:pointer" style-hover="border-color:#9AA7B4">{{ c.nome }} <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#9AA7B4">{{ c.quantos }}</span></button>
+</sc-for>
+</div>
+<p aria-live="polite" style="margin:0;font-size:14px;color:#9AA7B4">{{ resultado }}</p>
+</section>
+
+<!-- 3. LISTA DE TERMOS -->
+<sc-if value="{{ vazio }}" hint-placeholder-val="{{ false }}">
+<section aria-label="Nada encontrado" style="border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:20px;display:flex;flex-direction:column;gap:12px">
+<p style="margin:0;font-size:15px;font-weight:600">Nenhum termo bate com essa busca e esse filtro ao mesmo tempo. Tente limpar um dos dois.</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<button type="button" onClick="{{ limparBusca }}" style="min-height:40px;border-radius:8px;border:1px solid #1F2733;background:#141A24;color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">Apagar a busca</button>
+<button type="button" data-categoria="todas" onClick="{{ escolherCategoria }}" style="min-height:40px;border-radius:8px;border:1px solid #1F2733;background:#141A24;color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">Ver todas as categorias</button>
+</div>
+</section>
+</sc-if>
+
+<div style="display:grid;grid-template-columns:{{ colsCards }};gap:16px">
+<sc-for list="{{ termos }}" as="t" hint-placeholder-count="6">
+<article style="border-radius:12px;border:1px solid {{ t.borda }};background:{{ t.fundo }};padding:20px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<h3 style="margin:0;font-size:1.0625rem;font-weight:600;color:{{ t.tituloCor }}">{{ t.termo }}</h3>
+<sc-if value="{{ t.estudado }}" hint-placeholder-val="{{ false }}"><span style="border-radius:999px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);color:#22C55E;padding:1px 10px;font-size:12px;font-weight:600;white-space:nowrap">Estudado ✓</span></sc-if>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px">
+<sc-for list="{{ t.categorias }}" as="c" hint-placeholder-count="1"><span style="border-radius:999px;border:1px solid {{ c.borda }};background:{{ c.fundo }};color:{{ c.cor }};padding:1px 10px;font-size:12px">{{ c.nome }}</span></sc-for>
+<sc-if value="{{ t.cruza }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;color:#22D3EE">aparece nas duas categorias</span></sc-if>
+</div>
+<p style="margin:0;font-size:14px">{{ t.definicao }}</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:10px 12px">
+<p style="margin:0;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Exemplo: </strong>{{ t.exemplo }}</p>
+</div>
+<sc-if value="{{ t.alerta }}" hint-placeholder-val="{{ true }}">
+<div style="border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:10px 12px">
+<p style="margin:0;font-size:14px"><strong style="color:#E6EDF3">Alerta: </strong>{{ t.alerta }}</p>
+</div>
+</sc-if>
+<button type="button" data-id="{{ t.id }}" aria-pressed="{{ t.estudado }}" onClick="{{ alternarEstudado }}" style="margin-top:auto;align-self:flex-start;min-height:40px;border-radius:8px;border:1px solid {{ t.botaoBorda }};background:{{ t.botaoFundo }};color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">{{ t.botao }}</button>
+</article>
+</sc-for>
+</div>
+
+<p style="margin:0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Aviso: </strong>material de estudo próprio, não é recomendação de investimento. Memecoin é o ativo de maior risco do mercado: 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia em que nasceram (CoinGecko Research).</p>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;compacto&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { categoria: 'todas', busca: '', estudados: { slippage: true, honeypot: true, 'mint-authority': true, 'freeze-authority': true, 'approval-allowance': true, 'address-poisoning': true, bundles: true, 'rug-pull': true, pnl: true } };
+  renderVals() {
+    const S = this.state, compacto = !!this.props.compacto;
+    const CATS = [
+      { id: 'seguranca', nome: 'Segurança', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' },
+      { id: 'liquidez', nome: 'Liquidez', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#22C55E' },
+      { id: 'execucao', nome: 'Execução', borda: 'rgba(124,58,237,.5)', fundo: 'rgba(124,58,237,.15)', cor: '#E6EDF3' },
+      { id: 'social', nome: 'Social', borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#F59E0B' },
+      { id: 'solana', nome: 'Solana', borda: 'rgba(34,211,238,.5)', fundo: 'rgba(34,211,238,.1)', cor: '#22D3EE' },
+      { id: 'evm', nome: 'EVM', borda: '#1F2733', fundo: '#0B0F17', cor: '#9AA7B4' },
+    ];
+    const T = [
+      { id: 'slippage', termo: 'Slippage', categorias: ['execucao'], definicao: 'A diferença entre o preço que você esperava pagar e o preço que a ordem realmente executou.', exemplo: 'Você define 15% de slippage numa compra de token muito volátil, porque o preço muda a cada segundo.', alerta: 'Slippage configurado alto demais faz você pagar muito mais caro que o esperado — e vira alvo fácil de bots de MEV.' },
+      { id: 'lp-lock-burn', termo: 'Liquidez bloqueada (LP lock/burn)', categorias: ['liquidez'], definicao: 'A liquidez do par (LP) fica travada num contrato por um tempo, ou é queimada (enviada a um endereço sem dono), para o criador não poder sacá-la.', exemplo: 'O RugCheck mostra que a LP de um token está marcada como "burned" (queimada).', alerta: 'Sem trava, o dev pode remover a liquidez. Mas trava não aprova token: num estudo, 97,3% dos tokens com liquidez travada eram maliciosos, contra 97,7% no geral (Mazorra et al., 2022). No pump.fun, a pool pós-graduação é do protocolo.' },
+      { id: 'bundles', termo: 'Bundles / bundled buys', categorias: ['seguranca'], definicao: 'Várias compras feitas no mesmo bloco, logo no lançamento do token — geralmente vindas do próprio dev ou de carteiras ligadas a ele (insiders).', exemplo: 'Um explorer mostra 20 carteiras diferentes comprando o mesmo token no mesmo bloco, segundos após o lançamento.', alerta: 'Percentual alto de compras bundladas é sinal de manipulação: o preço subiu artificialmente antes de qualquer comprador real chegar.' },
+      { id: 'dev-dump', termo: 'Dev dump', categorias: ['seguranca'], definicao: 'O criador do token vende de uma vez a parte grande que guardou para si, derrubando o preço para quem comprou depois.', exemplo: 'O preço despenca 80% no mesmo minuto em que uma carteira identificada como do dev vende um volume enorme.', alerta: 'Dev com uma fatia grande do supply e sem trava (vesting/lock) é risco alto de dump a qualquer momento.' },
+      { id: 'sniping', termo: 'Sniping', categorias: ['execucao'], definicao: 'Comprar um token nos primeiros segundos depois do lançamento, tentando entrar antes da maioria.', exemplo: 'Um bot de Telegram (ex.: Trojan, BonkBot) dispara a compra assim que o par de liquidez é criado.', alerta: 'Você está competindo com bots muito mais rápidos que qualquer humano — sniping manual raramente chega primeiro.' },
+      { id: 'honeypot', termo: 'Honeypot', categorias: ['seguranca'], definicao: 'Um token construído (ou configurado) para deixar você comprar, mas impedir a venda.', exemplo: 'Você compra um token e, na hora de vender, a transação sempre falha — muitas vezes porque a freeze authority está ativa.', alerta: 'Uma simulação de venda que falha antes mesmo de comprar é o sinal mais direto de honeypot — ferramentas como RugCheck e GMGN fazem essa simulação por você.' },
+      { id: 'rug-pull', termo: 'Rug pull (hard vs. soft)', categorias: ['seguranca'], definicao: '"Hard rug" é o dev removendo a liquidez de uma vez ou roubando fundos; "soft rug" é o abandono lento do projeto até ele morrer sozinho.', exemplo: 'De um dia para o outro, a liquidez do par some do DexScreener e o preço vai a praticamente zero (hard rug).', alerta: 'Liquidez caindo aos poucos, sem anúncio, com o dev sumindo das redes sociais, é o padrão do soft rug.' },
+      { id: 'market-cap-liquidez-fdv', termo: 'Market cap vs. Liquidez vs. FDV', categorias: ['liquidez'], definicao: 'Market cap (MC) é preço × supply em circulação; FDV é preço × supply total (incluindo o que ainda não circula); liquidez é quanto dá para comprar/vender sem derrubar muito o preço.', exemplo: 'Um token mostra MC de US$ 2 milhões, mas a liquidez na pool é de apenas US$ 8 mil.', alerta: 'Market cap alto com liquidez muito baixa é armadilha: qualquer venda um pouco maior derruba o preço com força.' },
+      { id: 'bonding-curve', termo: 'Bonding curve', categorias: ['solana'], definicao: 'Uma fórmula matemática que define o preço do token conforme a quantidade já comprada — quanto mais gente compra, mais caro fica o próximo comprador. É como launchpads como Pump.fun e LetsBonk lançam tokens novos.', exemplo: 'Nos primeiros minutos de um token no Pump.fun, o preço sobe a cada compra seguindo a curva, antes de existir uma pool de liquidez tradicional.', alerta: 'Antes da "graduação" para uma DEX, a liquidez ainda é fina — o preço pode desabar com poucas vendas.' },
+      { id: 'graduation', termo: 'Graduation / migration', categorias: ['solana'], definicao: 'O momento em que um token "gradua" da bonding curve para uma pool de DEX de verdade — no Pump.fun, a PumpSwap, desde março de 2025.', exemplo: 'No Pump.fun, a graduação é definida em tokens: acontece quando a curva vende 793,1 milhões dos 1 bilhão — em set/2025, isso correspondia a cerca de 85 SOL arrecadados. Não há limiar fixo em dólar: numa amostra de ago/2026, 80% das graduações ficaram entre ~US$ 11 mil e ~US$ 101 mil (mediana ~US$ 38 mil).', alerta: 'A maioria dos tokens lançados em launchpads nunca chega a graduar — morrem ainda na bonding curve.' },
+      { id: 'spl', termo: 'SPL (Solana Program Library)', categorias: ['solana'], definicao: 'O padrão de token da rede Solana — o equivalente ao ERC-20 do mundo EVM.', exemplo: 'Um token SPL fica guardado numa "token account" (ATA) específica da sua carteira para aquele token.', alerta: 'Antes de confiar num token SPL, cheque as authorities (mint/freeze) — o padrão em si não garante segurança nenhuma.' },
+      { id: 'erc-20', termo: 'ERC-20', categorias: ['evm'], definicao: 'O padrão de token mais usado em redes EVM (Ethereum, BNB Chain, Base, Arbitrum...), incluindo como funcionam as permissões de gasto (approvals).', exemplo: 'A maioria dos tokens que você vê no Etherscan ou no BscScan segue o padrão ERC-20.', alerta: 'O modelo de approvals do ERC-20 é justamente o que drainers exploram: um approval ilimitado dado sem perceber.' },
+      { id: 'mint-authority', termo: 'Mint authority', categorias: ['solana'], definicao: 'A conta que tem o poder de criar (mintar) mais unidades de um token na Solana.', exemplo: 'Launchpads como Pump.fun e LetsBonk geralmente setam a mint authority como "null" (ninguém pode mais criar tokens novos) assim que o token é lançado.', alerta: 'Se a mint authority continua ativa, o supply pode ser inflado do nada a qualquer momento, diluindo todo mundo.' },
+      { id: 'freeze-authority', termo: 'Freeze authority', categorias: ['solana'], definicao: 'A conta que tem o poder de congelar a token account de qualquer carteira na Solana, impedindo que ela venda ou transfira o token.', exemplo: 'DEXs como a Raydium exigem que a freeze authority seja revogada antes de aceitar criar um pool para o token.', alerta: 'Freeze authority ativa é sinal clássico de possível honeypot — confirme sempre no Solscan ou no RugCheck antes de comprar.' },
+      { id: 'mutable-metadata', termo: 'Mutable metadata', categorias: ['solana'], definicao: 'Os metadados do token (nome, símbolo, imagem/logo) ainda podem ser editados depois do lançamento.', exemplo: 'Um token muda de nome e de logo do dia para a noite, sem nenhum aviso à comunidade.', alerta: 'Metadados mutáveis permitem que o dev troque a identidade do token depois que as pessoas já compraram — cuidado com "rebrands" repentinos.' },
+      { id: 'top-holders-concentration', termo: 'Top holders concentration', categorias: ['seguranca'], definicao: 'O quanto os maiores detentores (holders) concentram do supply total de um token.', exemplo: 'Um explorer mostra que as 10 maiores carteiras somam 60% de todo o supply do token.', alerta: 'Concentração muito alta em poucas mãos facilita um dump coordenado que derruba o preço de uma vez.' },
+      { id: 'insider-wallets', termo: 'Insider wallets', categorias: ['social', 'seguranca'], definicao: 'Carteiras ligadas ao criador do token ou ao grupo por trás do lançamento, mesmo que não pareçam relacionadas à primeira vista.', exemplo: 'O Bubblemaps mostra várias carteiras "diferentes" conectadas entre si, todas recebendo tokens da mesma origem.', alerta: 'Clusters de carteiras conectadas no Bubblemaps indicam que o supply "distribuído" pode estar, na prática, nas mesmas mãos.' },
+      { id: 'cto', termo: 'CTO (community takeover)', categorias: ['social'], definicao: 'Quando a comunidade assume a administração de um token abandonado pelo criador original (redes sociais, marketing, às vezes até o contrato).', exemplo: 'O dev some das redes e um grupo de holders cria um novo Telegram/X para continuar divulgando o token.', alerta: 'Nem todo CTO dá certo — a maioria dos tokens abandonados continua morrendo mesmo depois da "retomada".' },
+      { id: 'kol-call-channels', termo: 'KOL / call channels', categorias: ['social'], definicao: 'Influenciadores (KOLs — key opinion leaders) e canais que "chamam" (recomendam) tokens para os seguidores comprarem.', exemplo: 'Um canal de Telegram anuncia "call" de um token pouco antes de ele subir forte.', alerta: 'Muitas calls são pagas e não declaradas — o influenciador pode já estar posicionado e vendendo para quem entrou depois da call.' },
+      { id: 'mev-sandwich', termo: 'MEV / sandwich', categorias: ['execucao'], definicao: 'MEV (maximal extractable value) é o lucro que bots extraem reordenando transações; um "sandwich" é quando o bot compra antes e vende depois da sua ordem, lucrando com o movimento que sua própria compra causou.', exemplo: 'Você manda uma compra grande e o preço de execução fica pior do que o mostrado, porque um bot "passou na frente" e "atrás" da sua transação.', alerta: 'Slippage configurado alto demais facilita o sandwich — dá mais espaço para o bot lucrar em cima da sua ordem.' },
+      { id: 'priority-fee-jito', termo: 'Priority fee / Jito tips', categorias: ['solana'], definicao: 'Uma gorjeta extra paga para que sua transação seja priorizada na rede Solana, especialmente em momentos de congestionamento.', exemplo: 'Num lançamento concorrido, terminais como Axiom e Photon deixam você ajustar a priority fee para tentar entrar antes de outros compradores.', alerta: 'Em rede congestionada, transação sem priority fee (ou sem tip ao Jito) tem grande chance de simplesmente falhar.' },
+      { id: 'gas-evm', termo: 'Gas (EVM)', categorias: ['evm'], definicao: 'O custo, pago na moeda nativa da rede (ex.: ETH, BNB), para processar uma transação numa rede EVM.', exemplo: 'Numa hora de pico de uso da rede Ethereum, o gas de uma transação simples fica bem mais caro que o normal.', alerta: 'Gas alto em picos de congestionamento pode tornar operações pequenas inviáveis — o custo da transação come o lucro.' },
+      { id: 'copy-trading', termo: 'Copy trading', categorias: ['execucao'], definicao: 'Copiar automaticamente as compras e vendas de uma carteira específica, geralmente apontada como "smart money".', exemplo: 'O GMGN permite configurar copy trade de uma carteira que teve bons resultados recentes.', alerta: 'Copy trading copia também as perdas e os rugs da carteira copiada — ela pode errar, ou até ser a própria carteira de um golpe.' },
+      { id: 'wallet-tracking', termo: 'Wallet tracking', categorias: ['social'], definicao: 'Acompanhar de perto o comportamento (compras, vendas, transferências) de carteiras específicas, para tentar antecipar movimentos de mercado.', exemplo: 'Um tracker avisa sempre que uma carteira "smart money" conhecida compra um token novo.', alerta: 'A carteira monitorada pode ser isca: alguém pode movimentar fundos de propósito para atrair seguidores para um token ruim.' },
+      { id: 'pnl', termo: 'PnL', categorias: ['execucao'], definicao: 'Profit and loss — o lucro ou o prejuízo de uma posição ou de uma carteira inteira.', exemplo: 'Um print de "+450% de PnL" circula nas redes sociais mostrando o resultado de uma única operação.', alerta: 'PnL "printado" nas redes é seletivo por natureza: ninguém posta os trades perdedores — não use isso como prova de método.' },
+      { id: 'wash-trading', termo: 'Volume fake / wash trading', categorias: ['seguranca'], definicao: 'Volume de negociação inflado artificialmente, muitas vezes pela mesma pessoa comprando e vendendo entre carteiras próprias.', exemplo: 'Um token mostra volume diário altíssimo no DexScreener, mas o número de holders reais é minúsculo.', alerta: 'Volume muito alto com poucos holders é sinal clássico de wash trading — o "interesse" pode não ser real.' },
+      { id: 'renounced-contract', termo: 'Renounced contract', categorias: ['evm'], definicao: 'Um contrato EVM cujo dev abriu mão (renunciou) do controle administrativo sobre ele.', exemplo: 'O explorer mostra o dono do contrato como um endereço "zero" (0x000...000), indicando renúncia.', alerta: '"Renounced" reduz alguns riscos, mas não elimina todos — outras funções perigosas (ex.: tax alta, blacklist) podem continuar ativas mesmo sem dono.' },
+      { id: 'tax-tokens', termo: 'Tax tokens', categorias: ['evm'], definicao: 'Tokens EVM que cobram uma taxa automática em cada compra e/ou venda, redirecionada para o dev, marketing ou liquidez.', exemplo: 'Um token cobra 5% de taxa na compra e 5% na venda, descontados automaticamente do valor negociado.', alerta: 'Taxas altíssimas (às vezes ajustáveis pelo dev a qualquer momento) podem virar armadilha — no limite, uma "venda" pode custar quase tudo.' },
+      { id: 'factory', termo: 'Factory', categorias: ['evm'], definicao: 'Um contrato que cria (faz o deploy de) outros contratos — no contexto de memecoins, o contrato que gera o token e, muitas vezes, o pool.', exemplo: 'Bots como o Sigma fazem uma checagem rápida da factory que deu origem ao token antes de você comprar.', alerta: 'Uma factory já ligada a vários rug pulls anteriores é um padrão conhecido de scam — vale checar o histórico dela, não só do token.' },
+      { id: 'ata-rent', termo: 'ATA / rent (Solana)', categorias: ['solana'], definicao: 'ATA (Associated Token Account) é a "conta" onde um token específico fica guardado para uma carteira específica; "rent" é um pequeno depósito de SOL cobrado para manter essa conta aberta na rede.', exemplo: 'Ao receber um token novo pela primeira vez, sua carteira precisa criar uma ATA para ele, o que consome uma fração de SOL de rent.', alerta: 'Assinaturas ou criações de conta que você não reconhece merecem atenção — nem toda "taxa pequena de rede" é rent legítima.' },
+      { id: 'approval-allowance', termo: 'Approval / allowance', categorias: ['evm'], definicao: 'A permissão que você concede a um contrato para movimentar (gastar) uma certa quantidade dos seus tokens em seu nome.', exemplo: 'Ao usar uma DEX pela primeira vez, você assina um approval liberando aquele contrato a mexer no seu token.', alerta: 'Approvals ilimitados esquecidos são a porta de entrada mais comum dos wallet drainers — revise periodicamente no Revoke.cash.' },
+      { id: 'permit-permit2', termo: 'Permit / Permit2', categorias: ['evm', 'seguranca'], definicao: 'Um padrão de assinatura (EIP-712) que autoriza um contrato a gastar seus tokens sem precisar de uma transação de approval separada — e sem gastar gás para assinar.', exemplo: 'Um site pede para você "assinar uma mensagem" para "reivindicar um airdrop", mas essa assinatura na verdade é um Permit2.', alerta: '"Assinar mensagem" parece inofensivo, mas pode ser uma aprovação disfarçada — drainers usam exatamente essa aparência de inofensividade.' },
+      { id: 'address-poisoning', termo: 'Address poisoning', categorias: ['seguranca'], definicao: 'Um golpe em que o atacante "planta" no seu histórico de transações um endereço parecido com um que você usa de verdade, torcendo para você copiar o errado.', exemplo: 'Você vai copiar o endereço de uma transferência anterior no seu histórico, mas copia por engano um endereço "envenenado" quase idêntico.', alerta: 'Sempre confira o endereço inteiro antes de enviar qualquer valor — nunca confie só nos primeiros e últimos caracteres.' },
+      { id: 'clipper-malware', termo: 'Clipper malware', categorias: ['seguranca'], definicao: 'Um vírus que fica monitorando a área de transferência (clipboard) do computador e troca o endereço de carteira que você copiou por um endereço do atacante.', exemplo: 'Você copia o endereço certo, mas na hora de colar no campo de destino, o endereço já foi trocado sem você perceber.', alerta: 'Sempre confira o endereço colado, caractere por caractere, imediatamente antes de confirmar o envio.' },
+    ];
+    const catDe = (id) => CATS.find((c) => c.id === id) || { id, nome: id, borda: '#1F2733', fundo: '#0B0F17', cor: '#9AA7B4' };
+    const estudado = (id) => !!S.estudados[id];
+    const nEstudados = T.filter((t) => estudado(t.id)).length;
+    const contador = { texto: nEstudados + ' de ' + T.length + ' termos estudados', pct: Math.round((nEstudados / T.length) * 100) + '%', percentual: (nEstudados / T.length) * 100 };
+
+    // 1. Mapa por categoria — termo em duas categorias aparece nas duas, com a ligação
+    const mapa = CATS.map((c) => { const daCat = T.filter((t) => t.categorias.indexOf(c.id) >= 0);
+      return { id: c.id, nome: c.nome, quantos: String(daCat.length), ativo: S.categoria === c.id, borda: S.categoria === c.id ? '#7C3AED' : '#1F2733', fundo: S.categoria === c.id ? 'rgba(124,58,237,.15)' : '#141A24',
+        folhas: daCat.map((t) => { const cruza = t.categorias.length > 1, outraId = cruza ? t.categorias.filter((x) => x !== c.id)[0] : '';
+          const est = estudado(t.id);
+          return { nome: t.termo, cruza, outra: cruza ? catDe(outraId).nome : '',
+            borda: cruza ? '#22D3EE' : (est ? 'rgba(34,197,94,.5)' : '#1F2733'), fundo: cruza ? 'rgba(34,211,238,.1)' : (est ? 'rgba(34,197,94,.12)' : '#0B0F17'), cor: est ? '#E6EDF3' : '#9AA7B4' }; }) }; });
+    const cruzados = T.filter((t) => t.categorias.length > 1);
+    const mapaAlt = 'Mapa dos 34 termos em 6 categorias. ' + mapa.map((c) => c.nome + ' (' + c.quantos + '): ' + c.folhas.map((f) => f.nome).join(', ')).join('. ') + '. ' + cruzados.length + ' termos pertencem a duas categorias e aparecem ligados às duas: ' + cruzados.map((t) => t.termo + ' (' + t.categorias.map((x) => catDe(x).nome).join(' e ') + ')').join('; ') + '.';
+
+    // 2. Busca e filtro
+    const chips = [{ id: 'todas', nome: 'Todas', quantos: String(T.length) }].concat(CATS.map((c) => ({ id: c.id, nome: c.nome, quantos: String(T.filter((t) => t.categorias.indexOf(c.id) >= 0).length) })))
+      .map((c) => Object.assign({}, c, { ativo: S.categoria === c.id, borda: S.categoria === c.id ? '#7C3AED' : '#1F2733', fundo: S.categoria === c.id ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    const q = S.busca.trim().toLowerCase();
+    const filtrados = T.filter((t) => (S.categoria === 'todas' || t.categorias.indexOf(S.categoria) >= 0)
+      && (!q || (t.termo + ' ' + t.definicao + ' ' + t.exemplo).toLowerCase().indexOf(q) >= 0));
+    const catNome = S.categoria === 'todas' ? '' : catDe(S.categoria).nome;
+    const resultado = filtrados.length === 0 ? 'Nenhum termo encontrado.'
+      : filtrados.length + (filtrados.length === 1 ? ' termo' : ' termos') + (catNome ? ' em "' + catNome + '"' : '') + (q ? ' para "' + S.busca.trim() + '"' : '') + ' · ' + filtrados.filter((t) => estudado(t.id)).length + ' já estudados';
+
+    const termos = filtrados.map((t) => { const est = estudado(t.id);
+      return { id: t.id, termo: t.termo, definicao: t.definicao, exemplo: t.exemplo, alerta: t.alerta || '', estudado: est, cruza: t.categorias.length > 1,
+        categorias: t.categorias.map((x) => catDe(x)),
+        borda: est ? 'rgba(34,197,94,.5)' : '#1F2733', fundo: '#141A24', tituloCor: est ? '#9AA7B4' : '#E6EDF3',
+        botao: est ? 'Estudado ✓' : 'Marcar como estudado',
+        botaoBorda: est ? 'rgba(34,197,94,.5)' : '#1F2733', botaoFundo: est ? 'rgba(34,197,94,.12)' : '#0B0F17' }; });
+
+    return {
+      mostrarSidebar: !compacto, paddingMain: compacto ? '20px 16px' : '32px 24px',
+      dirMapa: compacto ? 'column' : 'row', alinhaMapa: compacto ? 'stretch' : 'center', trunkW: compacto ? '2px' : '32px', trunkH: compacto ? '20px' : '2px', trunkML: compacto ? '24px' : '0',
+      minMapa: compacto ? '0' : '760px', colsCards: compacto ? '1fr' : '1fr 1fr',
+      contador, mapa, mapaAlt, chips, busca: S.busca, resultado, termos, vazio: filtrados.length === 0,
+      escolherCategoria: (e) => { const c = e.currentTarget.dataset.categoria; this.setState((st) => ({ categoria: st.categoria === c ? 'todas' : c })); },
+      mudarBusca: (e) => this.setState({ busca: e.target.value }),
+      limparBusca: () => this.setState({ busca: '' }),
+      alternarEstudado: (e) => { const id = e.currentTarget.dataset.id; this.setState((st) => { const m = Object.assign({}, st.estudados); if (m[id]) delete m[id]; else m[id] = true; return { estudados: m }; }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

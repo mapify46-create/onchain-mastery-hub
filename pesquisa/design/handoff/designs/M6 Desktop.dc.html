@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}h1,h2,h3,p,li,dd,dt,td,th{overflow-wrap:break-word}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}.omh-range{-webkit-appearance:none;appearance:none;width:100%;height:24px;background:transparent;cursor:pointer}.omh-range::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:#10151E;border:1px solid #1F2733}.omh-range::-moz-range-track{height:6px;border-radius:999px;background:#10151E;border:1px solid #1F2733}.omh-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;margin-top:-8px;border-radius:50%;background:#7C3AED;border:2px solid #E6EDF3}.omh-range::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#7C3AED;border:2px solid #E6EDF3}.omh-range:focus-visible{outline:none}.omh-range:focus-visible::-webkit-slider-thumb{outline:2px solid #22D3EE;outline-offset:2px}.omh-range:focus-visible::-moz-range-thumb{outline:2px solid #22D3EE;outline-offset:2px}</style></helmet>
+<div style="display:flex;min-height:100vh;align-items:flex-start">
+<sc-if value="{{ mostrarSidebar }}" hint-placeholder-val="{{ true }}">
+<aside aria-label="Rotas do hub" style="position:sticky;top:0;width:16rem;flex:0 0 16rem;height:100vh;box-sizing:border-box;border-right:1px solid #1F2733;background:#141A24;padding:20px 16px;display:flex;flex-direction:column;gap:4px;font-size:14px">
+<p style="margin:0 0 12px;font-weight:600;font-size:14px">onchain-mastery-hub</p>
+<a href="#/inicio" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Início</a>
+<a href="#/modulo-1" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M1 Fundamentos &amp; Segurança</a>
+<a href="#/modulo-2" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M2 Psicologia</a>
+<a href="#/modulo-3" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M3 Os dois pilares</a>
+<a href="#/modulo-4" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M4 Gestão &amp; decisão</a>
+<a href="#/modulo-5" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M5 Execução</a>
+<a href="#/modulo-6" aria-current="page" style="display:block;border-radius:8px;padding:8px 12px;color:#E6EDF3;background:rgba(124,58,237,.15);border:1px solid #7C3AED;text-decoration:none;font-weight:600">M6 Ler a tela</a>
+<a href="#/modulo-7" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M7 A rotina</a>
+<div style="height:1px;background:#1F2733;margin:8px 0"></div>
+<a href="#/glossario" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Glossário</a>
+<a href="#/checklist" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Checklist antes de comprar</a>
+<a href="#/revisao" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Revisão</a>
+</aside>
+</sc-if>
+<main id="conteudo" style="flex:1 1 auto;min-width:0">
+<div style="max-width:868px;margin:0 auto;padding:{{ paddingMain }};display:flex;flex-direction:column;gap:24px">
+
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Módulo 6</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">Ler a tela</h1>
+<p style="margin:8px 0 0;color:#9AA7B4;text-wrap:pretty">Os números de um terminal parecem medir o token. Medem outra coisa — e alguns são fabricados de propósito. Este módulo mostra o que cada número é de verdade, como o volume é inventado, que armadilhas moram no contrato, e o que a pesquisa consegue e não consegue prever sobre um golpe.</p>
+<p style="margin:16px 0 0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:12px 16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Lembrete: </strong>números e nomes de campo conferidos em setembro de 2026. Interfaces e regras de plataforma mudam — se um campo sumir, procure o mesmo conceito.</p>
+</header>
+
+<!-- MAPA MENTAL -->
+<section aria-label="Mapa do módulo" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<p style="margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">O módulo inteiro numa olhada</p>
+<div style="display:flex;flex-direction:{{ dirMapa }};align-items:{{ alinhaMapa }};border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px">
+<div style="flex:0 0 auto;border-radius:12px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:14px 18px;max-width:220px">
+<p style="margin:0;font-size:1.125rem;font-weight:600;line-height:1.3">Ler a tela</p>
+<p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">O que os números escondem</p>
+</div>
+<div aria-hidden="true" style="flex:0 0 auto;width:{{ trunkW }};height:{{ trunkH }};background:#1F2733;margin-left:{{ trunkML }}"></div>
+<ul style="list-style:none;margin:0;padding:0;border-left:2px solid #1F2733;display:flex;flex-direction:column;gap:12px;flex:1 1 auto;min-width:0;margin-left:{{ trunkML }}">
+<sc-for list="{{ mapa }}" as="r" hint-placeholder-count="5">
+<li style="position:relative;padding-left:24px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px" style-before="content:'';position:absolute;left:0;top:19px;width:24px;height:2px;background:#1F2733">
+<button type="button" data-aba="{{ r.aba }}" onClick="{{ irParaAba }}" style="min-height:40px;border-radius:8px;border:1px solid {{ r.borda }};background:{{ r.fundo }};padding:6px 12px;font-size:14px;font-weight:600;color:#E6EDF3;cursor:pointer;text-align:left;white-space:nowrap" style-hover="border-color:#9AA7B4">{{ r.titulo }} →</button>
+<sc-for list="{{ r.folhas }}" as="f" hint-placeholder-count="3"><span style="border-radius:999px;border:1px solid #1F2733;padding:2px 10px;font-size:13px;color:#9AA7B4">{{ f }}</span></sc-for>
+</li>
+</sc-for>
+</ul>
+</div>
+</section>
+
+<!-- ABAS -->
+<div role="tablist" aria-label="Seções do Módulo 6" onKeyDown="{{ teclaAba }}" style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ abas }}" as="a" hint-placeholder-count="5">
+<button type="button" role="tab" id="aba-{{ a.id }}" aria-selected="{{ a.ativa }}" aria-controls="painel-{{ a.id }}" tabindex="{{ a.tabindex }}" data-aba="{{ a.id }}" onClick="{{ irParaAba }}" style="min-height:44px;border-radius:8px;border:1px solid {{ a.borda }};background:{{ a.fundo }};padding:8px 16px;font-size:14px;font-weight:600;color:#E6EDF3;cursor:pointer;white-space:nowrap;flex:0 0 auto" style-hover="border-color:#9AA7B4">{{ a.rotulo }}</button>
+</sc-for>
+</div>
+
+<!-- ================= ABA 1 · OS NÚMEROS ================= -->
+<sc-if value="{{ ehNumeros }}" hint-placeholder-val="{{ true }}">
+<div id="painel-numeros" role="tabpanel" aria-labelledby="aba-numeros" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.numeros }}" hint-size="100%,190px"></x-import>
+<aside aria-label="Termos desta aba" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<p style="margin:0;font-size:14px;font-weight:600">Termos desta aba</p>
+<dl style="margin:12px 0 0;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+<sc-for list="{{ termos.numeros }}" as="t" hint-placeholder-count="3"><div><dt style="font-size:14px;font-weight:600;color:#22D3EE">{{ t.termo }}</dt><dd style="margin:4px 0 0;font-size:14px;color:#9AA7B4">{{ t.definicao }}</dd></div></sc-for>
+</dl>
+</aside>
+
+<!-- 1A três números -->
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Market cap, FDV e liquidez: três números, três perguntas</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Market cap e FDV dizem quanto o token "valeria" no papel. Só a liquidez diz quanto dinheiro existe de verdade para pagar quem vende.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<div role="img" aria-label="Market cap — US$ 50 mil, só no papel. Liquidez na pool — US$ 8 mil: US$ 4 mil em tokens e US$ 4 mil em SOL, o lado que paga quem vende. Exemplo inventado." style="display:flex;flex-direction:column;gap:18px">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span style="font-size:14px;font-weight:600">Market cap (= FDV aqui)</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">US$ 50 mil</span></div>
+<div style="margin-top:6px;height:28px;width:100%;border-radius:4px;border:2px dashed #9AA7B4;box-sizing:border-box"></div>
+<p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">US$ 0,00005 × 1 bilhão de tokens. Esse dinheiro não existe em lugar nenhum.</p>
+</div>
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span style="font-size:14px;font-weight:600">Liquidez na pool</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">US$ 8 mil</span></div>
+<div style="margin-top:6px;height:28px;width:16%;display:flex"><span style="width:50%;background:#7C3AED"></span><span style="width:50%;background:repeating-linear-gradient(135deg,#22D3EE 0 3px,transparent 3px 6px)"></span></div>
+<p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">Só a metade em SOL — US$ 4 mil — paga quem vende. E cada venda derruba o preço.</p>
+</div>
+</div>
+<figcaption style="margin-top:14px;display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:#9AA7B4;align-items:center">
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;border:2px dashed #9AA7B4"></span>no papel</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:#7C3AED"></span>tokens na pool</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:repeating-linear-gradient(135deg,#22D3EE 0 3px,transparent 3px 6px)"></span>SOL: paga quem vende</span>
+<span style="margin-left:auto;border-radius:999px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);color:#F59E0B;padding:1px 10px;font-size:12px;font-weight:600;white-space:nowrap">exemplo inventado</span>
+</figcaption>
+</figure>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 14px"><p style="margin:0;font-size:14px;font-weight:600">Market cap</p><p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">Pergunta: quanto valem os tokens que já estão circulando? Conta: preço × tokens em circulação.</p></div>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 14px"><p style="margin:0;font-size:14px;font-weight:600">FDV (valor totalmente diluído)</p><p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">Pergunta: quanto valeriam todos os tokens que existem? Conta: preço × supply total.</p></div>
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:12px 14px"><p style="margin:0;font-size:14px;font-weight:600">Liquidez</p><p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">Pergunta: quanto dinheiro tem na pool para pagar quem vende? É o valor dos dois lados da pool, somados.</p></div>
+</div>
+<p style="margin:0;color:#9AA7B4">Por que o market cap engana: ele supõe que todo mundo conseguiria vender pelo último preço. Esse preço foi feito por uma negociação pequena. Se muita gente vender junto, o preço despenca muito antes.</p>
+<p style="margin:0;color:#9AA7B4">Regra prática: olhe primeiro a liquidez. Market cap de milhões com liquidez de milhares é número de vitrine.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: cada site calcula do seu jeito</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4">
+<li>DexScreener: FDV = (supply total − tokens queimados) × preço. O market cap só fica diferente do FDV quando o projeto informa o circulante ou a CoinGecko tem esse dado.</li>
+<li style="margin-top:4px">Token ainda na bonding curve: DexScreener e GeckoTerminal não descontam nada.</li>
+<li style="margin-top:4px">GeckoTerminal: não mostra market cap, só FDV.</li>
+<li style="margin-top:4px">Solscan: o campo chamado "Market Cap" é, pela documentação dele, o valor totalmente diluído (FDV).</li>
+</ul>
+</details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m6-check-q1" titulo="Pergunta rápida" perguntas="{{ quiz.q1 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<!-- 1B quanto sai -->
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Quanto dá para vender antes de derrubar o preço</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Cada venda derruba o preço. Derrubar o preço pela metade devolve só 14,64% da liquidez anunciada, seja a pool grande ou pequena.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;align-items:center">
+<svg viewBox="0 0 320 230" width="100%" style="max-width:360px;display:block" role="img" aria-label="{{ curva.alternativa }}">
+<line x1="40" y1="180" x2="300" y2="180" stroke="#1F2733"></line>
+<line x1="40" y1="20" x2="40" y2="180" stroke="#1F2733"></line>
+<path d="{{ curva.caminho }}" fill="none" stroke="#9AA7B4" stroke-width="2"></path>
+<line x1="{{ curva.mx }}" y1="{{ curva.my }}" x2="{{ curva.mx }}" y2="180" stroke="#22D3EE" stroke-dasharray="3 3"></line>
+<line x1="40" y1="{{ curva.my }}" x2="{{ curva.mx }}" y2="{{ curva.my }}" stroke="#22D3EE" stroke-dasharray="3 3"></line>
+<circle cx="40" cy="20" r="5" fill="#0B0F17" stroke="#9AA7B4" stroke-width="2"></circle>
+<text x="50" y="18" fill="#9AA7B4" font-size="11" font-family="Inter, sans-serif">antes da venda</text>
+<circle cx="{{ curva.mx }}" cy="{{ curva.my }}" r="7" fill="#7C3AED" stroke="#E6EDF3" stroke-width="2"></circle>
+<text x="170" y="205" fill="#9AA7B4" font-size="11" text-anchor="middle" font-family="Inter, sans-serif">tokens na pool →</text>
+<text x="14" y="100" fill="#9AA7B4" font-size="11" text-anchor="middle" transform="rotate(-90 14 100)" font-family="Inter, sans-serif">SOL na pool →</text>
+<text x="300" y="222" fill="#9AA7B4" font-size="11" text-anchor="end" font-family="JetBrains Mono, monospace">x · y = k</text>
+</svg>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><label for="m6-queda" style="font-size:14px;color:#9AA7B4">Quero que o preço caia</label><output for="m6-queda" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:600">{{ curva.quedaTexto }}</output></div>
+<input id="m6-queda" class="omh-range" type="range" min="1" max="90" step="1" value="{{ queda }}" aria-valuetext="{{ curva.quedaTexto }}" onInput="{{ mudarQueda }}" onChange="{{ mudarQueda }}" style="width:100%;margin-top:4px">
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<button type="button" data-valor="10" onClick="{{ atalhoQueda }}" style="min-height:40px;border-radius:8px;border:1px solid #1F2733;background:#141A24;color:#E6EDF3;padding:8px 12px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">Cair 10%</button>
+<button type="button" data-valor="30" onClick="{{ atalhoQueda }}" style="min-height:40px;border-radius:8px;border:1px solid #1F2733;background:#141A24;color:#E6EDF3;padding:8px 12px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">Cair 30%</button>
+<button type="button" data-valor="50" onClick="{{ atalhoQueda }}" style="min-height:40px;border-radius:8px;border:1px solid #1F2733;background:#141A24;color:#E6EDF3;padding:8px 12px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">Cair pela metade</button>
+<button type="button" aria-pressed="{{ poolGrande }}" onClick="{{ alternarPool }}" style="min-height:40px;border-radius:8px;border:1px solid {{ curva.poolBorda }};background:{{ curva.poolFundo }};color:#E6EDF3;padding:8px 12px;font-size:14px;font-weight:600;cursor:pointer">Pool 10× maior</button>
+</div>
+<div aria-live="polite" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 12px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Você recebe</p><p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.5rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums">{{ curva.recebeTexto }}</p><p style="margin:4px 0 0;font-size:12px;color:#9AA7B4">da liquidez anunciada</p></div>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 12px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Você vende</p><p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.5rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums">{{ curva.vendeTexto }}</p><p style="margin:4px 0 0;font-size:12px;color:#9AA7B4">dos tokens da reserva</p></div>
+<div style="grid-column:1 / -1;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 12px;display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap"><span style="font-size:13px;color:#9AA7B4">Liquidez anunciada de <span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#E6EDF3">{{ curva.liquidezTexto }}</span> (exemplo inventado)</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.25rem;font-weight:700">≈ {{ curva.dolarTexto }}</span></div>
+</div>
+</div>
+</div>
+<p style="margin:0;color:#9AA7B4">A liquidez anunciada não é o quanto você consegue tirar. Cada venda empurra o preço para baixo, e a parte seguinte da venda sai mais barata.</p>
+<p style="margin:0;color:#9AA7B4">Por isso a pergunta útil não é "quanto de liquidez tem?". É "quanto eu tiro antes de o preço cair X%?". A conta tem uma surpresa: a resposta, em porcentagem, não depende do tamanho da pool.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<p style="margin:0;font-size:14px;font-weight:600">Os três pontos da tabela, em texto</p>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4">
+<li>Cair 10% — vende ≈ 5,41% da reserva; recebe ≈ 2,57% da liquidez anunciada (≈ US$ 206 na pool de US$ 8 mil).</li>
+<li style="margin-top:4px">Cair 30% — vende ≈ 19,52%; recebe ≈ 8,17%.</li>
+<li style="margin-top:4px">Cair pela metade — vende ≈ 41,42%; recebe ≈ 14,64% (≈ US$ 1.171).</li>
+</ul>
+</div>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: a fórmula por trás e a "proporção saudável"</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">A conta vale para pools de produto constante. É a fórmula x · y = k das AMMs, as pools automáticas das DEXs. A curva do pump.fun também usa essa fórmula. Na fórmula, x e y são as quantidades dos dois lados da pool. O produto das duas, k, fica constante a cada troca.</p>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Conta: vende = 1 ÷ √(1 − queda) − 1; recebe = (1 − √(1 − queda)) ÷ 2, em fração da liquidez anunciada. Sem taxas.</p>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Nenhuma pesquisa revisada por pares publica uma proporção "saudável" entre liquidez e market cap. Quem cita uma está usando regra de bolso.</p>
+</details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m6-check-q2" titulo="Pergunta rápida" perguntas="{{ quiz.q2 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<!-- 1C zeros -->
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Zeros compactados: o preço que se lê errado</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Em $0.0₅2786, o 5 pequeno é a quantidade de zeros. Lido como número comum, o preço parece cerca de 19 mil vezes maior.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="Na tela: $0.0₅2786. O 5 pequeno vale cinco zeros. Por extenso: US$ 0,000002786. Lido como texto vira $0.052786, cerca de 19 mil vezes o preço real." style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;align-items:center">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:14px 16px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Na tela</p>
+<p style="margin:6px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:2rem;font-weight:700;line-height:1.1">$0.0<span style="display:inline-block;border-radius:6px;border:2px solid #22D3EE;padding:0 4px;font-size:1.25rem;vertical-align:baseline;color:#22D3EE">₅</span>2786</p>
+<p style="margin:8px 0 0;font-size:13px;color:#9AA7B4">O 5 pequeno diz quantos zeros vêm depois da vírgula, antes do 2786.</p>
+</div>
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:14px 16px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Por extenso (a lupa)</p>
+<p style="margin:6px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.5rem;font-weight:700;line-height:1.1;overflow-wrap:anywhere">US$ 0,<span style="color:#22D3EE">00000</span>2786</p>
+<p style="margin:8px 0 0;font-size:13px;color:#9AA7B4">Cinco zeros. O preço real é US$ 0,000002786.</p>
+</div>
+<div style="grid-column:1 / -1;border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:12px 16px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<span style="font-size:14px;color:#E6EDF3">Copiado para uma planilha, o 5 pequeno vira um 5 comum: <span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#F87171">$0.052786</span></span>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.25rem;font-weight:700;color:#F87171">≈ 19 mil ×</span>
+</div>
+</div>
+</figure>
+<p style="margin:0;color:#9AA7B4">O erro acontece quando o número vira texto: copiado para uma planilha, lido às pressas ou lido por um leitor de tela (programa que lê a tela em voz alta).</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: onde achar o preço completo</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Nenhuma das ferramentas documenta essa notação. No DexScreener, o valor inteiro fica guardado na dica que aparece ao passar o mouse. A API (o acesso de dados para programas) entrega o preço completo.</p>
+</details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m6-check-q4" titulo="Pergunta rápida" perguntas="{{ quiz.q4 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<!-- 1D PnL -->
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">PnL: o lucro que a tela mostra</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">O lucro não realizado da tela não é o dinheiro que chega na carteira quando você vende.</p>
+<div role="img" aria-label="PnL realizado — o que você já travou vendendo; esse dinheiro existe. PnL não realizado — preço de agora × tokens que você tem; estimativa que não desconta a sua venda nem, pela documentação, as taxas." style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+<div style="border-radius:8px;border:2px solid #22C55E;background:#0B0F17;padding:14px 16px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22C55E">PnL realizado</p>
+<p style="margin:6px 0 0;font-size:15px;font-weight:600">O que você já travou vendendo.</p>
+<p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">Esse dinheiro existe.</p>
+</div>
+<div style="border-radius:8px;border:2px dashed #9AA7B4;background:#0B0F17;padding:14px 16px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">PnL não realizado</p>
+<p style="margin:6px 0 0;font-size:15px;font-weight:600">Preço de agora × tokens que você tem.</p>
+<p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">É uma estimativa, e é aí que mora a ilusão. Não desconta o impacto da sua própria venda.</p>
+</div>
+</div>
+<p style="margin:0;color:#9AA7B4">A documentação dos terminais consultados não diz que ele desconta as taxas. Em memecoin de pouca liquidez, o número verde quase nunca é o que chega na carteira. A curva acima mostra quanto chega.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: o erro de leitura ao contrário</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">A central de ajuda da GMGN registra casos de quem vendeu 0,12 SOL pagando 0,2 SOL de taxa de prioridade. A taxa foi maior que a venda, e a pessoa achou que a venda não tinha caído na carteira.</p>
+</details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m6-check-q3" titulo="Pergunta rápida" perguntas="{{ quiz.q3 }}" hint-size="100%,300px"></x-import>
+</section>
+</div>
+</sc-if>
+
+<!-- ================= ABA 2 · VOLUME FALSO ================= -->
+<sc-if value="{{ ehVolume }}" hint-placeholder-val="{{ false }}">
+<div id="painel-volume" role="tabpanel" aria-labelledby="aba-volume" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.volume }}" hint-size="100%,190px"></x-import>
+<aside aria-label="Termos desta aba" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<p style="margin:0;font-size:14px;font-weight:600">Termos desta aba</p>
+<dl style="margin:12px 0 0;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+<sc-for list="{{ termos.volume }}" as="t" hint-placeholder-count="3"><div><dt style="font-size:14px;font-weight:600;color:#22D3EE">{{ t.termo }}</dt><dd style="margin:4px 0 0;font-size:14px;color:#9AA7B4">{{ t.definicao }}</dd></div></sc-for>
+</dl>
+</aside>
+
+<!-- 2A wash trading -->
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Como o volume é fabricado</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Volume falso é a mesma pessoa comprando e vendendo de si mesma, para o token parecer movimentado.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="A carteira A compra o token. A carteira B, da mesma pessoa, vende quase a mesma quantidade. A tela soma as duas operações como volume, como se fossem pessoas diferentes. O volume alto empurra o token para as listas de em alta. Compradores de verdade chegam atraídos pela lista. O grupo vende para eles." style="display:flex;flex-direction:column;align-items:center">
+<div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;width:100%;max-width:520px">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 12px;font-size:14px;font-weight:600;text-align:center">Carteira A compra</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px"><span aria-hidden="true" style="width:56px;border-top:2px dashed #F59E0B"></span><span style="font-size:11px;color:#F59E0B;font-weight:600;white-space:nowrap">mesma pessoa</span></div>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 12px;font-size:14px;font-weight:600;text-align:center">Carteira B vende</div>
+</div>
+<div aria-hidden="true" style="width:100%;max-width:520px;display:grid;grid-template-columns:1fr 1fr"><span style="height:16px;border-right:2px solid #9AA7B4;border-bottom:2px solid #9AA7B4;margin-left:50%;border-radius:0 0 8px 0"></span><span style="height:16px;border-left:2px solid #9AA7B4;border-bottom:2px solid #9AA7B4;margin-right:50%;border-radius:0 0 0 8px"></span></div>
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+<div aria-hidden="true" style="width:8px;height:8px;border-right:2px solid #9AA7B4;border-bottom:2px solid #9AA7B4;transform:rotate(45deg);margin-top:-10px"></div>
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 16px;font-size:14px;font-weight:600;text-align:center;margin-top:4px;max-width:320px">A tela soma volume — como se fossem pessoas diferentes</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div><div aria-hidden="true" style="width:8px;height:8px;border-right:2px solid #9AA7B4;border-bottom:2px solid #9AA7B4;transform:rotate(45deg);margin-top:-10px"></div>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 16px;font-size:14px;text-align:center;margin-top:4px;max-width:320px">O token sobe nas listas de "em alta"</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div><div aria-hidden="true" style="width:8px;height:8px;border-right:2px solid #9AA7B4;border-bottom:2px solid #9AA7B4;transform:rotate(45deg);margin-top:-10px"></div>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 16px;font-size:14px;text-align:center;margin-top:4px;max-width:320px">Compradores reais chegam</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div><div aria-hidden="true" style="width:8px;height:8px;border-right:2px solid #9AA7B4;border-bottom:2px solid #9AA7B4;transform:rotate(45deg);margin-top:-10px"></div>
+<div style="border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:10px 16px;font-size:14px;font-weight:600;text-align:center;margin-top:4px;max-width:320px;color:#F87171">O grupo vende para eles</div>
+</div>
+<figcaption style="margin:14px 0 0;font-size:13px;color:#9AA7B4;text-align:center">Duas carteiras da mesma pessoa fabricam o volume que atrai os compradores reais.</figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">O nome disso é wash trading: negociar consigo mesmo para parecer movimento. Numa DEX, isso custa dinheiro de verdade. Cada troca paga a taxa da pool e a taxa da rede.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">Quanto custa fabricar US$ 1 milhão de volume</p>
+<div role="img" aria-label="Token grande, taxa de pool de 0,30% — perto de US$ 13 mil. Token recém-graduado, taxa de pool de 1,25% — perto de US$ 23 mil. As duas contas somam o 1% que um serviço de volume anuncia cobrar." style="display:flex;flex-direction:column;gap:14px">
+<div><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span style="font-size:14px">Token grande · taxa da pool 0,30%</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">≈ US$ 13 mil</span></div><div style="margin-top:6px;height:24px;width:56.5%;display:flex"><span style="width:23%;background:#7C3AED"></span><span style="width:77%;background:repeating-linear-gradient(135deg,#22D3EE 0 3px,transparent 3px 6px)"></span></div></div>
+<div><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span style="font-size:14px">Token recém-graduado · taxa da pool 1,25%</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">≈ US$ 23 mil</span></div><div style="margin-top:6px;height:24px;width:100%;display:flex"><span style="width:56%;background:#7C3AED"></span><span style="width:44%;background:repeating-linear-gradient(135deg,#22D3EE 0 3px,transparent 3px 6px)"></span></div></div>
+</div>
+<figcaption style="margin-top:12px;display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:#9AA7B4"><span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:#7C3AED"></span>taxa da pool sobre US$ 1 milhão</span><span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:repeating-linear-gradient(135deg,#22D3EE 0 3px,transparent 3px 6px)"></span>1% do serviço de volume</span></figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">Por que alguém paga: volume compra lugar nas listas de "em alta". E a lista traz compradores de verdade. Uma ironia que vale guardar: a taxa da pool é mais alta justamente no token pequeno e recém-graduado. É ali que a manipulação das listas é mais usada.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: os Boosts do DexScreener</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">O DexScreener vende "Boosts", que turbinam o token no trending (a lista de "em alta") por 12 a 24 horas. Ele não publica os pesos do algoritmo que monta essa lista.</p>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">O custo acima soma a taxa oficial da pool com a taxa anunciada por um vendedor de volume (1%). Não é medição independente de campanha real, e não inclui slippage.</p>
+</details>
+</section>
+
+<!-- 2B otimizado contra -->
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Todo sinal público é otimizado contra</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Todo número que você aprende a olhar, quem manipula também aprende a falsificar.</p>
+<div role="img" aria-label="O que um vendedor de volume diz que faz: espalha em mais de 100 carteiras; sorteia tamanho e horário; deixa carteiras só comprando; usa carteiras novas. A defesa: cruzar volume, makers, concentração de holders, carteiras ligadas e idade do token." style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">
+<div style="border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:14px 16px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">O que ele diz que faz</p>
+<ul style="margin:8px 0 0;padding-left:18px;font-size:14px;color:#E6EDF3">
+<li>Espalha as operações em mais de 100 carteiras — um token com US$ 300 mil de volume e só 50 carteiras "é imediatamente suspeito".</li>
+<li style="margin-top:4px">Sorteia o tamanho e o horário de cada operação.</li>
+<li style="margin-top:4px">Deixa algumas carteiras só comprando.</li>
+<li style="margin-top:4px">Usa carteiras novas a cada campanha.</li>
+</ul>
+</div>
+<div style="border-radius:8px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);padding:14px 16px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22C55E">A defesa: cruzar o que custa caro falsificar junto</p>
+<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px">
+<span style="border-radius:999px;border:1px solid #1F2733;background:#0B0F17;padding:2px 10px;font-size:13px">volume</span><span style="border-radius:999px;border:1px solid #1F2733;background:#0B0F17;padding:2px 10px;font-size:13px">makers</span><span style="border-radius:999px;border:1px solid #1F2733;background:#0B0F17;padding:2px 10px;font-size:13px">concentração de holders</span><span style="border-radius:999px;border:1px solid #1F2733;background:#0B0F17;padding:2px 10px;font-size:13px">carteiras ligadas entre si</span><span style="border-radius:999px;border:1px solid #1F2733;background:#0B0F17;padding:2px 10px;font-size:13px">idade do token</span>
+</div>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Cada sinal é uma triagem (um primeiro filtro), nunca um veredito.</p>
+</div>
+</div>
+<p style="margin:0;color:#9AA7B4">A lição vale para a tela inteira. Qualquer número único que você aprenda a olhar já foi, ou pode ser, calibrado contra você.</p>
+</section>
+
+<!-- 2C de graça -->
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O que dá para ver de graça — e o que não dá</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">O primeiro sinal de volume fabricado dá para ver de graça. A confirmação, não.</p>
+<div role="img" aria-label="Passo 1, a suspeita, de graça: volume subiu mais de 500% com o preço variando menos de 5%. Passo 2, a confirmação, não sai no plano gratuito: volume circular, 99% ou mais do volume do dia vem de carteiras que compraram e venderam no mesmo dia." style="display:flex;flex-direction:{{ dirSeq }};gap:0;align-items:stretch">
+<div style="flex:1 1 0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:14px 16px">
+<div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><span style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600"><span aria-hidden="true" style="width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">1</span>A suspeita</span><span style="border-radius:999px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);color:#22C55E;padding:1px 10px;font-size:12px;font-weight:600">de graça</span></div>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">O volume subiu mais de 500% com o preço variando menos de 5%. A variação de preço está de graça no DexScreener e no GeckoTerminal. O volume de ontem, para comparar, só dá para aproximar.</p>
+</div>
+<span aria-hidden="true" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#9AA7B4;padding:4px 8px;min-width:24px">→</span>
+<div style="flex:1 1 0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:14px 16px">
+<div style="display:flex;justify-content:space-between;gap:8px;align-items:center"><span style="display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600"><span aria-hidden="true" style="width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">2</span>A confirmação</span><span style="border-radius:999px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);color:#F87171;padding:1px 10px;font-size:12px;font-weight:600">não sai de graça</span></div>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">"Volume circular": 99% ou mais do volume do dia vem de carteiras que compraram e venderam no mesmo dia. Isso exige cruzar milhares de operações, carteira por carteira. Não sai no plano gratuito de ferramenta nenhuma.</p>
+</div>
+</div>
+<p style="margin:0;color:#9AA7B4">Um estudo revisado por pares analisou 34.988 tokens em busca de crescimento artificial e trabalha nesses dois passos. As razões populares, como "volume por carteira" ou "volume por liquidez", não têm limiar publicado com método e taxa de erro — os números que circulam são regra de bolso.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: qual é o estudo</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">É o estudo Midsummer, do USENIX Security 2026, uma conferência de segurança com revisão por pares.</p>
+</details>
+</section>
+
+<!-- 2D bundles -->
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Bundles: a compra coordenada do lançamento</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">No lançamento, o bundle é o criador comprando em várias carteiras de uma vez. O sinal que importa é quanto essas carteiras ainda seguram.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="Um bundle: até 5 transações, de carteiras diferentes do mesmo criador, entram juntas e em ordem no mesmo bloco — ou entram todas, ou nenhuma. Tudo antes de o token aparecer para o público." style="display:flex;flex-direction:{{ dirSeq }};gap:16px;align-items:center">
+<div style="flex:1 1 0;display:flex;flex-direction:column;gap:6px;min-width:0;width:100%">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Bundle · até 5 transações, em ordem</p>
+<div style="display:flex;flex-direction:column;gap:4px">
+<span style="border-radius:6px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:4px 10px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px">1 · carteira do criador compra</span>
+<span style="border-radius:6px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:4px 10px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px">2 · outra carteira dele compra</span>
+<span style="border-radius:6px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:4px 10px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px">3 · outra carteira dele compra</span>
+<span style="border-radius:6px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:4px 10px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px">4 · …</span>
+<span style="border-radius:6px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:4px 10px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px">5 · …</span>
+</div>
+</div>
+<div aria-hidden="true" style="flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;color:#9AA7B4;font-size:12px;text-align:center"><span style="font-size:20px">→</span>ou entram todas,<br>ou nenhuma</div>
+<div style="flex:1 1 0;border-radius:8px;border:2px solid #22D3EE;padding:12px;min-width:0;width:100%;box-sizing:border-box">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22D3EE">Mesmo bloco</p>
+<p style="margin:6px 0 0;font-size:13px;color:#9AA7B4">O lote de transações que a rede grava de uma vez. As 5 entram juntas — antes de o token aparecer para o público.</p>
+</div>
+</div>
+</figure>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+<div style="border-radius:8px;border:2px dashed #9AA7B4;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Engana: "Total bundled %"</p><p style="margin:6px 0 0;font-size:14px;color:#9AA7B4">Quanto foi comprado em bundle. Sozinho engana, porque o criador pode comprar, vender e recomprar.</p></div>
+<div style="border-radius:8px;border:2px solid #22D3EE;background:rgba(34,211,238,.1);padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22D3EE">Importa: "Current held %"</p><p style="margin:6px 0 0;font-size:14px;color:#E6EDF3">Quanto as carteiras de bundle AINDA seguram. É assim que o trench.bot mostra esse número.</p></div>
+</div>
+<p style="margin:0;color:#9AA7B4">O peso disso é grande. Numa amostra de 41.470 tokens que graduaram, <span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#E6EDF3">36,5%</span> do supply estava em carteiras de bundle na hora da migração para a DEX. Bundle não é prova de golpe: há quem use para se proteger de snipers (robôs que compram nos primeiros instantes de um token).</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: a infraestrutura, o estudo e o top 10</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">O Jito, usado por quase toda a rede, é a infraestrutura dos bundles. O número de 36,5% vem do MELT, um preprint (artigo ainda sem revisão por pares). No mesmo estudo, juntar as carteiras de bundle faz a fatia do top 10 subir 24 pontos nos tokens de alto risco. Nos de baixo risco, sobe 6.</p>
+</details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m6-check-q5" titulo="Pergunta rápida" perguntas="{{ quiz.q5 }}" hint-size="100%,300px"></x-import>
+</section>
+</div>
+</sc-if>
+
+<!-- ================= ABA 3 · O CONTRATO ================= -->
+<sc-if value="{{ ehContrato }}" hint-placeholder-val="{{ false }}">
+<div id="painel-contrato" role="tabpanel" aria-labelledby="aba-contrato" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.contrato }}" hint-size="100%,190px"></x-import>
+<aside aria-label="Termos desta aba" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<p style="margin:0;font-size:14px;font-weight:600">Termos desta aba</p>
+<dl style="margin:12px 0 0;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+<sc-for list="{{ termos.contrato }}" as="t" hint-placeholder-count="3"><div><dt style="font-size:14px;font-weight:600;color:#22D3EE">{{ t.termo }}</dt><dd style="margin:4px 0 0;font-size:14px;color:#9AA7B4">{{ t.definicao }}</dd></div></sc-for>
+</dl>
+</aside>
+
+<!-- 3A árvore -->
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">SPL clássico ou Token-2022: o programa que manda no token</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Todo token da Solana roda num de dois programas. Token-2022 não é perigo por si só: perigosa é a extensão a mais.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="Programa do token: SPL clássico (Owner Program começa com Tokenkeg…; sem taxa, sem extensões) ou Token-2022 (começa com Tokenz…; aceita extensões). Extensões de metadados, metadataPointer e tokenMetadata, são o padrão do pump.fun. transferFeeConfig, permanentDelegate e transferHook são as perigosas." style="display:flex;flex-direction:column;align-items:center">
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 16px;font-size:14px;font-weight:600;text-align:center">Programa, na Solana: o código que administra o token</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div style="display:grid;grid-template-columns:{{ colsRamos }};gap:16px;width:100%">
+<div style="display:flex;flex-direction:column;align-items:center;gap:0">
+<div style="width:100%;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:12px 14px;box-sizing:border-box"><p style="margin:0;font-size:14px;font-weight:600">SPL clássico</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">O original. Não tem taxa de transferência nem extensões.</p><p style="margin:6px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#22D3EE">Owner Program: Tokenkeg…</p></div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div style="width:100%;border-radius:8px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);padding:10px 14px;box-sizing:border-box;font-size:13px">Sem extensões. Olhe as autoridades e o "Mutable" da Metadata. É o que a LetsBonk e a LaunchLab (Raydium) criam.</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:0">
+<div style="width:100%;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:12px 14px;box-sizing:border-box"><p style="margin:0;font-size:14px;font-weight:600">Token-2022</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">O novo. Aceita "extensões" opcionais, escolhidas na criação.</p><p style="margin:6px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#22D3EE">Owner Program: Tokenz…</p></div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div style="width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<div style="border-radius:8px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);padding:10px 12px;font-size:13px"><p style="margin:0;font-weight:600;color:#22C55E;font-size:11px;letter-spacing:.05em;text-transform:uppercase">Padrão do pump.fun</p><p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px">metadataPointer<br>tokenMetadata</p><p style="margin:4px 0 0;color:#9AA7B4">24 de 24 tokens só com estas duas.</p></div>
+<div style="border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:10px 12px;font-size:13px"><p style="margin:0;font-weight:600;color:#F87171;font-size:11px;letter-spacing:.05em;text-transform:uppercase">Qualquer outra = alerta</p><p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px">transferFeeConfig<br>permanentDelegate<br>transferHook</p><p style="margin:4px 0 0;color:#9AA7B4">0 de 24 no pump.fun.</p></div>
+</div>
+</div>
+</div>
+</div>
+</figure>
+<p style="margin:0;color:#9AA7B4">O pump.fun passou a criar tokens em Token-2022. Numa checagem na blockchain em 12/09/2026, 24 de 24 tokens do pump.fun eram Token-2022, todos só com as duas extensões de metadados. Por isso, o alerta num token do pump.fun é aparecer qualquer extensão além dessas duas.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: nomes técnicos e datas</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">A mudança no pump.fun veio com a instrução create_v2, ativada em 12/11/2025. As duas extensões de metadados se chamam metadataPointer e tokenMetadata.</p>
+</details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m6-check-q6" titulo="Pergunta rápida" perguntas="{{ quiz.q6 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<!-- 3B extensões -->
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">As extensões que mudam o jogo</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Duas extensões pesam mais contra quem comprou: delegado permanente e gancho de transferência.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;overflow-x:auto" tabindex="0" role="group" aria-label="As extensões, uma a uma (role na horizontal se preciso)">
+<table style="border-collapse:collapse;width:100%;min-width:600px;font-size:14px">
+<thead><tr>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Extensão</th>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">O que faz</th>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733;border-left:2px solid #22D3EE">Risco para quem comprou</th>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">No pump.fun</th>
+</tr></thead>
+<tbody>
+<sc-for list="{{ extensoes }}" as="e" hint-placeholder-count="4">
+<tr>
+<th scope="row" style="text-align:left;padding:10px 12px;vertical-align:top;border-bottom:1px solid #1F2733;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:500;color:#E6EDF3">{{ e.titulo }}</th>
+<td style="padding:10px 12px;vertical-align:top;border-bottom:1px solid #1F2733;color:#9AA7B4">{{ e.oQueFaz }}</td>
+<td style="padding:10px 12px;vertical-align:top;border-bottom:1px solid #1F2733;border-left:2px solid #22D3EE"><span style="display:inline-block;border-radius:6px;border:1px solid {{ e.borda }};background:{{ e.fundo }};color:{{ e.cor }};padding:4px 8px;font-weight:600">{{ e.risco }}</span></td>
+<td style="padding:10px 12px;vertical-align:top;border-bottom:1px solid #1F2733;color:#9AA7B4">{{ e.pumpfun }}</td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+<p style="margin:0;color:#9AA7B4">A taxa de transferência só pode ser configurada na criação do token: um token criado sem ela não ganha taxa depois. Quando existe, mudar o valor só vale duas epochs depois, cerca de 4 dias (epoch é um ciclo de tempo da rede Solana). Mas a trava não protege de tudo: uma taxa alta pode vir desde o lançamento.</p>
+</section>
+
+<!-- 3C autoridades + fluxograma -->
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Autoridades: o que o dono ainda pode fazer</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Autoridade é uma permissão que o dono guardou. Com a de mint ele cria tokens; com a de freeze, congela contas.</p>
+<div role="img" aria-label="Mint authority — criar tokens novos; ativa, dilui quem comprou. Freeze authority — congelar a conta de alguém; ativa, você compra e pode não conseguir vender (o honeypot da Solana). Autoridade de metadados — trocar nome, símbolo e imagem depois da compra. No pump.fun, as três vêm revogadas." style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#22D3EE">Mint authority</p><p style="margin:6px 0 0;font-size:14px;font-weight:600">Criar tokens novos</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">Ativa, dilui quem comprou: o seu pedaço do total fica menor.</p><p style="margin:8px 0 0;font-size:12px;color:#22C55E">pump.fun: revogada em todo token</p></div>
+<div style="border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:14px 16px"><p style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#22D3EE">Freeze authority</p><p style="margin:6px 0 0;font-size:14px;font-weight:600">Congelar a conta de alguém</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">Ativa, você compra e pode não conseguir vender. É o "honeypot" da Solana — sem código esperto nenhum.</p><p style="margin:8px 0 0;font-size:12px;color:#22C55E">pump.fun: revogada em todo token</p></div>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#22D3EE">Autoridade de metadados</p><p style="margin:6px 0 0;font-size:14px;font-weight:600">Trocar nome, símbolo e imagem</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">Depois da compra, o token passa a se parecer com outro. "Mutable: true" no SPL; update authority no Token-2022.</p><p style="margin:8px 0 0;font-size:12px;color:#22C55E">pump.fun: nula em 11 de 11 checados</p></div>
+</div>
+<p style="margin:0;color:#9AA7B4">No pump.fun, mint e freeze vêm revogadas (desligadas) em todo token. Isso é bom, mas não ajuda a escolher: se estão sempre desligadas, não separam um token do outro. Fora do pump.fun, são a primeira coisa a olhar.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">Checagem do contrato no explorador, na ordem do checklist: programa → extensões → mint → freeze</p>
+<div role="img" aria-label="{{ checagem.alternativa }}" style="display:flex;flex-direction:column;gap:0">
+<sc-for list="{{ checagem.passos }}" as="c" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:{{ colsChecagem }};gap:12px;align-items:start">
+<div style="display:flex;flex-direction:column;align-items:stretch">
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 14px;font-size:14px;font-weight:600">{{ c.pergunta }}</div>
+<sc-if value="{{ c.temProximo }}" hint-placeholder-val="{{ true }}"><div style="display:flex;align-items:center;gap:8px;padding:4px 0 4px 16px"><span aria-hidden="true" style="width:2px;height:24px;background:#9AA7B4"></span><span style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:0 8px;font-size:12px;color:#9AA7B4">{{ c.rotuloSegue }}</span></div></sc-if>
+</div>
+<div style="display:flex;align-items:flex-start;gap:8px;padding-top:{{ c.padTopo }}">
+<span aria-hidden="true" style="color:#9AA7B4;flex:0 0 auto;padding-top:8px">→</span>
+<div style="flex:1 1 auto;border-radius:8px;border:1px solid {{ c.borda }};background:{{ c.fundo }};padding:10px 14px;font-size:14px;color:{{ c.cor }}"><span style="display:block;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:{{ c.rotuloCor }}">{{ c.rotuloDesvio }}</span>{{ c.desvio }}</div>
+</div>
+</div>
+</sc-for>
+<div style="border-radius:8px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);padding:10px 14px;font-size:14px;font-weight:600;max-width:{{ larguraFim }}">Passar por tudo não aprova o token: só quer dizer que ele não mostrou os sinais que dá para ver.</div>
+</div>
+</figure>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: o campo "Authority" do Solscan</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Esse campo é um menu que junta três autoridades: de mint, de freeze e de metadados. Ele mostra "N/A" quando todas foram revogadas. Um endereço ali não quer dizer que o dono ainda emite tokens. Pode ser só a autoridade de metadados.</p>
+</details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m6-check-q7" titulo="Pergunta rápida" perguntas="{{ quiz.q7 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<!-- 3D dev dump -->
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Dev dump: o golpe que sobra no pump.fun</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">No pump.fun o criador não consegue tirar a liquidez. O golpe que sobra é ele vender o que comprou barato.</p>
+<ol role="img" aria-label="1. O criador compra barato no lançamento, muitas vezes em várias carteiras, no mesmo bloco. 2. Outras pessoas chegam depois e compram mais caro. 3. O criador vende tudo em cima de quem chegou depois." style="list-style:none;margin:0;padding:0;display:flex;flex-direction:{{ dirSeq }};gap:0;align-items:stretch">
+<li style="flex:1 1 0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 14px;display:flex;gap:10px;align-items:flex-start"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">1</span><span style="font-size:14px">O criador compra barato no lançamento, muitas vezes em várias carteiras, no mesmo bloco.</span></li>
+<li aria-hidden="true" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#9AA7B4;padding:4px 8px">→</li>
+<li style="flex:1 1 0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 14px;display:flex;gap:10px;align-items:flex-start"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">2</span><span style="font-size:14px">Outras pessoas chegam depois e compram mais caro.</span></li>
+<li aria-hidden="true" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#9AA7B4;padding:4px 8px">→</li>
+<li style="flex:1 1 0;border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:12px 14px;display:flex;gap:10px;align-items:flex-start"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">3</span><span style="font-size:14px;color:#F87171">O criador vende tudo em cima de quem chegou depois.</span></li>
+</ol>
+<p style="margin:0;color:#9AA7B4">Depois da graduação, a pool do pump.fun pertence ao protocolo. A trilha fica visível: a carteira que criou o token aparece como "Creator" no Solscan, e o histórico dela mostra quanto comprou e quando vendeu. Um guia de ferramenta descreve o padrão — as carteiras do primeiro bloco vendendo nos primeiros 30 minutos — mas é descrição, sem medição.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: metadata mutável, os limites do sinal e as redes EVM</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Metadata mutável.</strong> Com a autoridade de metadados ativa, o dono pode trocar nome, símbolo e imagem depois que você comprou. Num SPL clássico aparece como "Mutable: true" na aba Metadata do Solscan; num Token-2022 é a update authority do tokenMetadata. Nos tokens do pump.fun checados, essa porta estava fechada.</p>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Os dois limites do sinal.</strong> Nenhum estudo revisado por pares isolou "o criador vendeu" como preditor de rug. Quem monta o golpe usa carteiras intermediárias para esconder o vínculo.</p>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Fora da Solana.</strong> Em Ethereum, BSC e Base, a taxa e o bloqueio da venda ficam no código do contrato. A checagem que funciona é simular uma compra e uma venda antes (o honeypot.is faz isso de graça) — mas a simulação é só um retrato do momento. Num contrato atualizável, o dono pode trocar a lógica depois.</p>
+</details>
+</section>
+</div>
+</sc-if>
+
+<!-- ================= ABA 4 · PREVER O GOLPE ================= -->
+<sc-if value="{{ ehDeteccao }}" hint-placeholder-val="{{ false }}">
+<div id="painel-deteccao" role="tabpanel" aria-labelledby="aba-deteccao" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.deteccao }}" hint-size="100%,190px"></x-import>
+<aside aria-label="Termos desta aba" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<p style="margin:0;font-size:14px;font-weight:600">Termos desta aba</p>
+<dl style="margin:12px 0 0;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+<sc-for list="{{ termos.deteccao }}" as="t" hint-placeholder-count="3"><div><dt style="font-size:14px;font-weight:600;color:#22D3EE">{{ t.termo }}</dt><dd style="margin:4px 0 0;font-size:14px;color:#9AA7B4">{{ t.definicao }}</dd></div></sc-for>
+</dl>
+</aside>
+
+<!-- 4A régua -->
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O que conta como rug, para quem mede</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Quantos tokens "deram rug" depende da régua usada. Com réguas diferentes, os números vão de 3,59% a 98,6%.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<div role="img" aria-label="Chainalysis, suspeitos de pump-and-dump em 2024 — 3,59%. Catching the Rug, Raydium, liquidez caiu 99% ou parado por mais de 80% da vida — 60,8%. Catching the Rug, PumpFun, mesma régua — 81,9%. Solidus Labs, liquidez abaixo de US$ 1.000 — 98,6%." style="display:flex;flex-direction:column;gap:14px">
+<sc-for list="{{ reguas }}" as="r" hint-placeholder-count="4">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span style="font-size:14px"><strong>{{ r.quem }}</strong> <span style="color:#9AA7B4">· {{ r.regua }}</span></span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:600">{{ r.valorTexto }}</span></div>
+<div style="margin-top:6px;height:20px;width:100%;background:#141A24;border-radius:4px;overflow:hidden"><div style="height:100%;width:{{ r.valor }}%;background:{{ r.cor }}"></div></div>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin-top:12px;font-size:13px;color:#9AA7B4">A régua muda o número. Mesma escala, 0 a 100% dos tokens de cada amostra. Réguas e amostras são diferentes entre si: não compare os valores como se medissem a mesma coisa.</figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">Rug vem de "rug pull", puxar o tapete: o token desaba e quem comprou fica sem saída. Não existe uma definição única. Cada estudo escolhe a sua régua, e o número muda com ela.</p>
+<p style="margin:0;color:#9AA7B4">O maior estudo de detecção na Solana acompanhou 6,4 milhões de tokens do PumpFun e da Raydium, de 30/11/2024 a 30/06/2025, e chamou de rug o token cuja liquidez caiu 99% desde o pico, ou que ficou parado por mais de 80% da própria vida. A Solidus Labs contou colapso de liquidez, não fraude provada — e a pump.fun contestou publicamente esse número.</p>
+</section>
+
+<!-- 4B detector -->
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O melhor detector, em linguagem simples</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">O melhor detector publicado acerta mais que o chute, mas pouco. Os próprios autores dizem que ele ainda não serve para uso real.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px">
+<sc-for list="{{ grades }}" as="g" hint-placeholder-count="2">
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px">
+<p style="margin:0 0 12px;font-size:15px;font-weight:600;text-wrap:pretty">{{ g.frase }}</p>
+<div role="img" aria-label="{{ g.alternativa }}" style="display:grid;grid-template-columns:repeat(10,1fr);gap:3px;max-width:230px">
+<sc-for list="{{ g.celulas }}" as="c" hint-placeholder-count="100"><span style="aspect-ratio:1;border-radius:3px;background:{{ c }}"></span></sc-for>
+</div>
+<figcaption style="margin-top:12px;display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ g.grupos }}" as="gr" hint-placeholder-count="2"><span style="display:flex;align-items:center;gap:8px;font-size:14px;color:#9AA7B4"><span aria-hidden="true" style="width:12px;height:12px;border-radius:3px;background:{{ gr.cor }};flex:0 0 12px"></span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#E6EDF3;min-width:2ch;text-align:right">{{ gr.quantidade }}</span>{{ gr.rotulo }}</span></sc-for>
+</figcaption>
+</figure>
+</sc-for>
+</div>
+<p style="margin:0;font-size:13px;color:#9AA7B4">Estimativa: o artigo não publica esses dois números. Eles foram reconstruídos pelas contagens do teste.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px">
+<div role="img" aria-label="F1 do modelo — 0,79. F1 de chutar tudo é rug — 0,90, melhor que o modelo nessa nota.">
+<p style="margin:0 0 10px;font-size:14px;font-weight:600">F1, de 0 a 1</p>
+<div style="display:flex;justify-content:space-between;font-size:13px;color:#9AA7B4"><span>Modelo (XGBoost)</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#E6EDF3">0,79</span></div>
+<div style="margin-top:4px;height:16px;background:#141A24;border-radius:4px;overflow:hidden"><div style="height:100%;width:79%;background:#7C3AED"></div></div>
+<div style="margin-top:10px;display:flex;justify-content:space-between;font-size:13px;color:#9AA7B4"><span>Chutar "tudo é rug"</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#F87171">0,90</span></div>
+<div style="margin-top:4px;height:16px;background:#141A24;border-radius:4px;overflow:hidden"><div style="height:100%;width:90%;border:2px dashed #EF4444;box-sizing:border-box;border-radius:4px"></div></div>
+<p style="margin:8px 0 0;font-size:13px;color:#9AA7B4">Quase todo token do teste era rug (81,9%), e aí até um chute burro tira nota alta.</p>
+</div>
+<div role="img" aria-label="MCC, de menos 1 a 1: menos 1 é errar tudo, 0 é o mesmo que chutar, 1 é acerto quase perfeito. O modelo marca 0,39. Treinado na Raydium e testado no PumpFun, cai para perto de zero.">
+<p style="margin:0 0 10px;font-size:14px;font-weight:600">MCC, de −1 a 1</p>
+<div style="position:relative;height:44px;margin-top:6px">
+<div style="position:absolute;left:0;right:0;top:20px;height:4px;background:#1F2733;border-radius:2px"></div>
+<span aria-hidden="true" style="position:absolute;left:50%;top:14px;width:2px;height:16px;background:#9AA7B4"></span>
+<span style="position:absolute;left:69.5%;top:12px;width:20px;height:20px;border-radius:50%;background:#7C3AED;border:2px solid #E6EDF3;transform:translateX(-50%);box-sizing:border-box"></span>
+<span style="position:absolute;left:52%;top:14px;width:16px;height:16px;border-radius:50%;background:#0B0F17;border:2px dashed #9AA7B4;transform:translateX(-50%);box-sizing:border-box"></span>
+<span style="position:absolute;left:0;top:30px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:#9AA7B4">−1 erra tudo</span>
+<span style="position:absolute;left:50%;top:30px;transform:translateX(-50%);font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:#9AA7B4">0 = chute</span>
+<span style="position:absolute;right:0;top:30px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:#9AA7B4">1 perfeito</span>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px;font-size:13px;color:#9AA7B4;margin-top:4px"><span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:50%;background:#7C3AED;border:1px solid #E6EDF3"></span>modelo: <span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#E6EDF3">0,39</span></span><span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:50%;border:2px dashed #9AA7B4;box-sizing:border-box"></span>treinado na Raydium, testado no PumpFun: perto de zero</span></div>
+<p style="margin:8px 0 0;font-size:13px;color:#9AA7B4">O MCC não se deixa enganar quando quase tudo é rug. Acerto modesto.</p>
+</div>
+</figure>
+<p style="margin:0;color:#9AA7B4">O modelo que se saiu melhor se chama XGBoost. Ele olha só os 5 primeiros minutos de negociação: quantidade de compras e vendas, carteiras únicas, valores e variação de preço. Nenhuma das 23 características que ele usa é de holders, bundles, autoridades ou redes sociais. Os autores também reconhecem que o golpe muda com o tempo.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: como ler F1 e MCC</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">O F1 junta duas perguntas. Do que o modelo acusou, quanto era rug? E, dos rugs reais, quantos ele achou? O MCC vai de −1 a 1. Perto de 1 é acerto quase perfeito, 0 é o mesmo que chutar, e −1 é errar tudo.</p>
+</details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m6-check-q8" titulo="Pergunta rápida" perguntas="{{ quiz.q8 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<!-- 4C sinais -->
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O que a pesquisa diz sobre os sinais</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Os sinais com mais apoio mostram quem controla o token no minuto zero. Os que o mercado mais repete têm menos apoio.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;overflow-x:auto" tabindex="0" role="group" aria-label="Os sinais, pela força da evidência (role na horizontal se preciso)">
+<table style="border-collapse:collapse;width:100%;min-width:600px;font-size:14px">
+<thead><tr>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Sinal</th>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Evidência</th>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">O que a pesquisa diz</th>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">No pump.fun</th>
+</tr></thead>
+<tbody>
+<sc-for list="{{ sinais }}" as="s" hint-placeholder-count="6">
+<tr>
+<th scope="row" style="text-align:left;padding:10px 12px;vertical-align:top;border-bottom:1px solid #1F2733;font-weight:600">{{ s.titulo }}</th>
+<td style="padding:10px 12px;vertical-align:top;border-bottom:1px solid #1F2733"><span style="display:inline-block;white-space:nowrap;border-radius:999px;border:1px solid {{ s.borda }};background:{{ s.fundo }};color:{{ s.cor }};padding:1px 10px;font-size:12px;font-weight:600">{{ s.etiqueta }}</span></td>
+<td style="padding:10px 12px;vertical-align:top;border-bottom:1px solid #1F2733;color:#9AA7B4">{{ s.evidencia }}</td>
+<td style="padding:10px 12px;vertical-align:top;border-bottom:1px solid #1F2733;color:#9AA7B4">{{ s.pumpfun }}</td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+<p style="margin:0;color:#9AA7B4">Estudos independentes, em redes diferentes, concordam numa família de sinais: quem controla o token no minuto zero, e como disfarça isso. No pump.fun, o que sobra é o criador vendendo e a concentração de insiders — e é justamente aí que a medição revisada por pares é mais fraca.</p>
+</section>
+
+<!-- 4D promessa -->
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Como ler qualquer promessa de detecção</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Diante de "X% de precisão", pergunte: quanto acertaria quem chutasse "golpe" para tudo?</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">Testando um anúncio de "95% de precisão"</p>
+<div role="img" aria-label="Se 82% da amostra era golpe, chutar golpe para todo token já acertava 82%. Os 95% anunciados precisam ser comparados com esses 82%, não com zero." style="display:flex;flex-direction:column;gap:12px">
+<div><div style="display:flex;justify-content:space-between;font-size:13px;color:#9AA7B4"><span>Chutar "golpe" para tudo (se 82% eram golpe)</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#E6EDF3">82%</span></div><div style="margin-top:4px;height:20px;background:#141A24;border-radius:4px;overflow:hidden"><div style="height:100%;width:82%;border:2px dashed #9AA7B4;box-sizing:border-box;border-radius:4px"></div></div></div>
+<div><div style="display:flex;justify-content:space-between;font-size:13px;color:#9AA7B4"><span>O anúncio</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#E6EDF3">95%</span></div><div style="margin-top:4px;height:20px;background:#141A24;border-radius:4px;overflow:hidden;position:relative"><div style="height:100%;width:95%;background:#7C3AED"></div><span aria-hidden="true" style="position:absolute;left:82%;top:0;bottom:0;width:2px;background:#22D3EE"></span></div></div>
+</div>
+<figcaption style="margin-top:10px;font-size:13px;color:#9AA7B4">O que o detector acrescenta é só a faixa entre a linha ciana (82%) e o fim da barra (95%). Compare com 82, não com zero. Números do exemplo do arquivo.</figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">Um detector de rug vale tanto quanto duas coisas: a régua que define rug e a comparação com o chute mais burro possível. Por isso o checklist deste hub não aprova token nenhum. Ele reprova pelo que dá para ver, e separa cada item pela força da evidência.</p>
+<a href="#/checklist" style="display:block;border-radius:12px;border:1px solid rgba(124,58,237,.5);background:rgba(124,58,237,.1);padding:16px 20px;text-decoration:none;color:#E6EDF3" style-hover="border-color:#7C3AED"><p style="margin:0;font-weight:600">Checklist antes de comprar →</p><p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">Os dois pilares em itens marcáveis, cada um com a etiqueta da força da evidência.</p></a>
+</section>
+</div>
+</sc-if>
+
+<!-- ================= ABA 5 · QUIZ ================= -->
+<sc-if value="{{ ehQuiz }}" hint-placeholder-val="{{ false }}">
+<div id="painel-quiz" role="tabpanel" aria-labelledby="aba-quiz" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="modulo-6" titulo="Mini-quiz do Módulo 6" descricao="Oito perguntas. As respostas ficam salvas no navegador." perguntas="{{ quiz.todas }}" hint-size="100%,900px"></x-import>
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Terminou o módulo?</h2>
+<p style="margin:8px 0 16px;font-size:14px;color:#9AA7B4">Marcar aqui faz a barra de progresso do topo avançar. Dá para desmarcar depois.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Botao" variante="primario" hint-size="auto,40px">Marcar módulo como concluído</x-import>
+</section>
+<details style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Fontes e itens não verificados</summary>
+<h3 style="margin:16px 0 0;font-size:14px;font-weight:600">Não verificado</h3>
+<ul style="list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ naoVerificado }}" as="n" hint-placeholder-count="6"><li style="border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.1);padding:12px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">{{ n.titulo }}: </strong>{{ n.texto }}</li></sc-for>
+</ul>
+<h3 style="margin:16px 0 0;font-size:14px;font-weight:600">Fontes consultadas</h3>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4;display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ fontes }}" as="f" hint-placeholder-count="26"><li>{{ f.titulo }} — <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;overflow-wrap:anywhere">{{ f.url }}</span> (consulta em {{ f.consultadoEm }})</li></sc-for>
+</ul>
+</details>
+</div>
+</sc-if>
+
+<p style="margin:0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Aviso: </strong>material de estudo próprio, não é recomendação de investimento. Memecoin é o ativo de maior risco do mercado: 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia em que nasceram (CoinGecko Research).</p>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;compacto&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { aba: 'numeros', queda: 10, poolGrande: false };
+  fmt(v) { return Number(v).toFixed(2).replace('.', ','); }
+  renderVals() {
+    const S = this.state;
+    const compacto = !!this.props.compacto;
+    const ABAS = [
+      { id: 'numeros', rotulo: 'Os números', folhas: ['market cap × liquidez', 'quanto sai', 'zeros compactados', 'PnL'] },
+      { id: 'volume', rotulo: 'Volume falso', folhas: ['wash trading', 'custo por US$ 1 milhão', 'bundles'] },
+      { id: 'contrato', rotulo: 'O contrato', folhas: ['SPL × Token-2022', 'extensões', 'as 3 autoridades'] },
+      { id: 'deteccao', rotulo: 'Prever o golpe', folhas: ['a régua', 'o detector', 'os sinais'] },
+      { id: 'quiz', rotulo: 'Quiz', folhas: ['8 perguntas'] },
+    ];
+    const abas = ABAS.map((a) => ({ id: a.id, rotulo: a.rotulo, ativa: a.id === S.aba, tabindex: a.id === S.aba ? 0 : -1,
+      borda: a.id === S.aba ? '#7C3AED' : '#1F2733', fundo: a.id === S.aba ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    const mapa = ABAS.map((a) => ({ aba: a.id, titulo: a.rotulo, folhas: a.folhas,
+      borda: a.id === S.aba ? '#7C3AED' : '#1F2733', fundo: a.id === S.aba ? 'rgba(124,58,237,.15)' : '#141A24' }));
+
+    const destaques = {
+      numeros: [
+        { rotulo: 'Liquidez que você tira derrubando o preço pela metade', valor: '14,6%', nota: 'Da liquidez anunciada, numa pool de produto constante. Não depende do tamanho da pool.', tom: 'alerta' },
+        { rotulo: 'O que o "Market Cap" do Solscan mede', valor: 'Diluído', nota: 'A documentação dele define o campo como totalmente diluído — o que o DexScreener chama de FDV.' },
+        { rotulo: 'Quanto um preço compactado engana, lido como texto', valor: '~19 mil ×', nota: '$0.0₅2786 vira "$0.052786" quando copiado. O 5 pequeno é a quantidade de zeros.', tom: 'alerta' },
+      ],
+      volume: [
+        { rotulo: 'Custo de fabricar US$ 1 milhão de volume', valor: 'US$ 13–23 mil', nota: 'Taxa da pool mais 1% de um serviço de volume. Mais caro no token recém-graduado.' },
+        { rotulo: 'Carteiras em que um serviço de volume espalha as operações', valor: '100+', nota: 'Declarado pelo próprio vendedor, para a razão volume/carteiras parecer normal.', tom: 'alerta' },
+        { rotulo: 'Tokens que subiram mais de 100% com sinais de crescimento artificial', valor: '82,9%', nota: 'Estudo Midsummer (USENIX Security 2026), em quatro redes: Ethereum, BSC, Solana e Base.', tom: 'alerta' },
+      ],
+      contrato: [
+        { rotulo: 'Tokens do pump.fun que são Token-2022', valor: '24 de 24', nota: 'Checagem própria na blockchain, 12/09/2026. Todos só com as duas extensões de metadados.' },
+        { rotulo: 'Teto da taxa de transferência de um Token-2022', valor: '100%', nota: 'Mudar a taxa só vale duas epochs depois, cerca de 4 dias. Mas ela pode vir alta desde o início.', tom: 'alerta' },
+        { rotulo: 'O que o criador de um token do pump.fun não consegue fazer', valor: 'Tirar a liquidez', nota: 'A pool pós-graduação é do protocolo. O golpe que sobra é vender a própria compra.' },
+      ],
+      deteccao: [
+        { rotulo: 'Tokens que deram rug no teste do PumpFun', valor: '81,9%', nota: '43.835 de 53.546, no maior estudo de detecção na Solana (arXiv 2608.20271, preprint).', tom: 'alerta' },
+        { rotulo: 'F1 do melhor detector publicado', valor: '0,79', nota: 'XGBoost, com os 5 primeiros minutos de negociação.' },
+        { rotulo: 'F1 de chutar "tudo é rug"', valor: '0,90', nota: 'Melhor que o modelo nesse critério. Quando quase tudo é golpe, acurácia e F1 enganam.', tom: 'alerta' },
+      ],
+    };
+    const termos = {
+      numeros: [
+        { termo: 'Market cap', definicao: 'Preço vezes os tokens em circulação. É uma conta, não dinheiro que exista.' },
+        { termo: 'Liquidez', definicao: 'O valor dos dois lados da pool — o dinheiro que paga quem vende.' },
+        { termo: 'PnL não realizado', definicao: 'O lucro que a tela mostra enquanto você ainda não vendeu.' },
+      ],
+      volume: [
+        { termo: 'Wash trading', definicao: 'Negociar consigo mesmo, em carteiras diferentes, para fabricar volume.' },
+        { termo: 'Trending', definicao: 'Lista de tokens "em alta", montada por atividade recente e, em alguns sites, por pagamento.' },
+        { termo: 'Bundle', definicao: 'Pacote de transações que entram juntas, no mesmo bloco, ou nenhuma entra.' },
+      ],
+      contrato: [
+        { termo: 'Mint authority', definicao: 'A permissão de criar tokens novos.' },
+        { termo: 'Freeze authority', definicao: 'A permissão de congelar a conta de alguém.' },
+        { termo: 'Extensão', definicao: 'Recurso opcional de um token Token-2022, escolhido quando ele é criado.' },
+      ],
+      deteccao: [
+        { termo: 'Taxa-base', definicao: 'Com que frequência algo acontece na amostra inteira, antes de olhar qualquer sinal.' },
+        { termo: 'F1', definicao: 'Nota de 0 a 1 que mistura quantos rugs o modelo pega e quantos alarmes dele estão certos.' },
+        { termo: 'MCC', definicao: 'Nota de −1 a 1 que não se deixa enganar quando quase tudo é rug.' },
+      ],
+    };
+
+    // Curva x·y = k
+    const q = S.queda / 100, s = 1 / Math.sqrt(1 - q) - 1, recebe = (s / (1 + s)) * 50;
+    const liquidez = S.poolGrande ? 80000 : 8000;
+    const dolar = Math.round((Math.round(recebe * 100) / 100 / 100) * liquidez);
+    const px = (x) => 40 + ((x - 1) / 2.3) * 260, py = (y) => 180 - ((y - 0.3) / 0.7) * 160;
+    let caminho = '';
+    for (let i = 0; i <= 60; i++) { const x = 1 + (i / 60) * 2.3; caminho += (i ? ' L' : 'M') + px(x).toFixed(1) + ',' + py(1 / x).toFixed(1); }
+    const curva = { caminho, mx: px(1 + s).toFixed(1), my: py(1 / (1 + s)).toFixed(1), quedaTexto: S.queda + '%', recebeTexto: this.fmt(recebe) + '%', vendeTexto: this.fmt(s * 100) + '%',
+      liquidezTexto: S.poolGrande ? 'US$ 80 mil' : 'US$ 8 mil', dolarTexto: 'US$ ' + dolar.toLocaleString('pt-BR'),
+      poolBorda: S.poolGrande ? '#7C3AED' : '#1F2733', poolFundo: S.poolGrande ? 'rgba(124,58,237,.15)' : '#141A24',
+      alternativa: 'Curva x·y = k. Para o preço cair ' + S.queda + '%, você vende ' + this.fmt(s * 100) + '% dos tokens da reserva e recebe ' + this.fmt(recebe) + '% da liquidez anunciada.' };
+
+    // Extensões (tabelaExtensoes)
+    const TOMCEL = { alerta: { borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' }, ok: { borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#E6EDF3' }, atencao: { borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#E6EDF3' }, neutro: { borda: 'transparent', fundo: 'transparent', cor: '#9AA7B4' } };
+    const extensoes = [
+      { titulo: 'metadataPointer + tokenMetadata', oQueFaz: 'Guardam nome, símbolo e imagem dentro do próprio token.', risco: 'Nenhum, se a autoridade de atualização estiver nula.', pumpfun: 'Padrão, com as autoridades nulas em 11 de 11 checados.', tom: 'ok' },
+      { titulo: 'transferFeeConfig', oQueFaz: 'Cobra uma taxa em cada transferência, inclusive na venda.', risco: 'Pode chegar a 100%. Mudança só vale duas epochs depois.', pumpfun: 'Não aparece (0 de 24).', tom: 'alerta' },
+      { titulo: 'permanentDelegate', oQueFaz: 'Dá a uma conta o poder de mover ou queimar tokens de qualquer carteira.', risco: 'O dono pode tirar os tokens da sua carteira sem a sua assinatura.', pumpfun: 'Não aparece (0 de 24).', tom: 'alerta' },
+      { titulo: 'transferHook', oQueFaz: 'Roda um programa do criador a cada transferência, que aprova ou recusa.', risco: 'Pode bloquear a sua venda.', pumpfun: 'Não aparece (0 de 24).', tom: 'alerta' },
+    ].map((e) => Object.assign(e, TOMCEL[e.tom]));
+
+    // Fluxograma de checagem do contrato (anatomia contratoNoExplorador + seções)
+    const RUIM = { borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171', rotuloCor: '#F87171' };
+    const ACAO = { borda: '#1F2733', fundo: '#141A24', cor: '#E6EDF3', rotuloCor: '#9AA7B4' };
+    const ATENCAO = { borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#E6EDF3', rotuloCor: '#F59E0B' };
+    const NAO_COMPRO = 'Não compro. Isso é mecânica, não opinião.';
+    const passosChecagem = [
+      { pergunta: 'Owner Program começa com Tokenz…?', rotuloSegue: 'Sim: é Token-2022', rotuloDesvio: 'Não', desvio: 'SPL clássico (Tokenkeg…): não tem extensões. Siga para as autoridades.', ...ACAO },
+      { pergunta: 'Token Extensions tem algo além de metadataPointer e tokenMetadata?', rotuloSegue: 'Não', rotuloDesvio: 'Sim', desvio: NAO_COMPRO + ' Taxa, delegado permanente ou hook é o alerta mais forte desta tela.', ...RUIM },
+      { pergunta: 'Mint authority ativa?', rotuloSegue: 'Não', rotuloDesvio: 'Sim', desvio: NAO_COMPRO + ' O dono ainda pode criar tokens e diluir quem comprou.', ...RUIM },
+      { pergunta: 'Freeze authority ativa?', rotuloSegue: 'Não', rotuloDesvio: 'Sim', desvio: NAO_COMPRO + ' Você compra e pode não conseguir vender.', ...RUIM },
+      { pergunta: 'Metadata mutável ("Mutable: true" ou update authority ativa)?', rotuloSegue: 'Não', rotuloDesvio: 'Sim: alerta', desvio: 'O dono pode trocar nome, símbolo e imagem depois da compra. Fora do pump.fun é onde esse risco mora.', ...ATENCAO },
+    ];
+    const checagem = { passos: passosChecagem.map((p) => Object.assign({ temProximo: true, padTopo: '0' }, p)),
+      alternativa: passosChecagem.map((p, i) => (i + 1) + '. ' + p.pergunta + ' ' + p.rotuloDesvio + ': ' + p.desvio + ' ' + p.rotuloSegue + ': siga.').join(' ') + ' Passar por tudo não aprova o token: só quer dizer que ele não mostrou os sinais que dá para ver.' };
+
+    // Réguas de rug
+    const reguas = [
+      { quem: 'Chainalysis', regua: 'suspeitos de pump-and-dump, tokens de 2024', valor: 3.59, valorTexto: '3,59%', cor: '#F59E0B' },
+      { quem: 'Catching the Rug · Raydium', regua: 'liquidez caiu 99% ou parado por mais de 80% da vida', valor: 60.8, valorTexto: '60,8%', cor: '#7C3AED' },
+      { quem: 'Catching the Rug · PumpFun', regua: 'mesma régua', valor: 81.9, valorTexto: '81,9%', cor: '#7C3AED' },
+      { quem: 'Solidus Labs', regua: 'liquidez abaixo de US$ 1.000 (colapso, não fraude provada)', valor: 98.6, valorTexto: '98,6%', cor: '#EF4444' },
+    ];
+
+    // Grades de 100
+    const grade = (frase, grupos) => { const celulas = []; grupos.forEach((g) => { for (let i = 0; i < g.quantidade; i++) celulas.push(g.cor); }); while (celulas.length < 100) celulas.push('#1F2733');
+      return { frase, grupos, celulas, alternativa: frase + ' ' + grupos.map((g) => g.quantidade + ' — ' + g.rotulo).join('; ') }; };
+    const grades = [
+      grade('De cada 100 tokens que o modelo marca como rug, cerca de 95 são rug mesmo.', [{ rotulo: 'são rug mesmo', quantidade: 95, cor: '#EF4444' }, { rotulo: 'alarme falso', quantidade: 5, cor: '#1F2733' }]),
+      grade('De cada 100 rugs reais, ele pega uns 68.', [{ rotulo: 'o modelo pega', quantidade: 68, cor: '#7C3AED' }, { rotulo: 'passam despercebidos', quantidade: 32, cor: '#1F2733' }]),
+    ];
+
+    // Sinais (tabelaSinais) com etiqueta de evidência
+    const ETQ = { medido: { etiqueta: 'Sinal medido', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#22C55E' }, desmentido: { etiqueta: 'Medido e desmentido', borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#F59E0B' }, fraco: { etiqueta: 'Sinal fraco', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' } };
+    const sinais = [
+      { titulo: 'Concentração real dos holders', evidencia: 'Medido: juntando carteiras ligadas, o top 10 sobe 24 pontos nos tokens de alto risco.', pumpfun: 'Vale, se você olhar os clusters e não só a lista.', e: 'medido' },
+      { titulo: 'Bundles no lançamento', evidencia: 'Medido: entre os sinais mais preditivos de alto risco (MELT, preprint).', pumpfun: 'Vale; o que importa é quanto as carteiras ainda seguram.', e: 'medido' },
+      { titulo: 'Volume artificial', evidencia: 'Medido: 82,9% dos tokens que subiram mais de 100% tinham sinais (Midsummer, USENIX Security 2026).', pumpfun: 'Vale, mas é o sinal mais contornado de propósito.', e: 'medido' },
+      { titulo: 'LP travada', evidencia: 'Medido e desmentido: 97,3% dos tokens com trava eram maliciosos, contra 97,7% no geral.', pumpfun: 'Não se aplica: a pool pós-graduação é do protocolo.', e: 'desmentido' },
+      { titulo: 'Mint e freeze authority', evidencia: 'Mecânica certa, sem medição como preditor de rug.', pumpfun: 'Vêm sempre revogadas: não diferenciam um token do outro.', e: 'fraco' },
+      { titulo: 'O criador vendeu', evidencia: 'Nenhum preditor revisado por pares isola esse sinal.', pumpfun: 'É o golpe que sobra lá — e o menos medido.', e: 'fraco' },
+    ].map((s) => Object.assign(s, ETQ[s.e]));
+
+    // Quiz com "por que a sua não serve"
+    const porque = {
+      q1: { a: 'Market cap não é dinheiro disponível: é o último preço vezes o supply. Quem vende esbarra na liquidez, e mesmo dela tira só uma parte.', b: 'Liquidez pequena não diz nada sobre segurança. Diz que qualquer venda grande derruba o preço.', d: 'Market cap é preço vezes supply; liquidez é o valor dos dois lados da pool. Um é conta, o outro é dinheiro na pool.' },
+      q2: { a: 'Metade só sairia se o preço não mudasse durante a venda. Cada token vendido sai por um preço pior que o anterior.', c: 'Para tirar tudo, o preço teria que ir a zero. E a liquidez soma os dois lados: só um deles paga a sua venda.', d: 'A fração não depende do supply nem do tamanho da pool: (1 − √0,5) ÷ 2 vale para qualquer pool de produto constante.' },
+      q3: { b: 'O número verde é preço de agora vezes os seus tokens. Vender mexe no preço, e a tela não desconta isso.', c: 'Imposto não entra na conta da tela, mas o problema maior é outro: o impacto da própria venda.', d: 'A taxa de rede é fração de centavo na Solana. O que come o lucro de verdade é o impacto de preço e a taxa da pool.' },
+      q4: { a: 'É o erro de ler o 5 pequeno como dígito comum: dá cerca de 19 mil vezes o preço real.', b: 'Ainda faltam zeros: o 5 pequeno diz que são cinco zeros depois da vírgula antes do 2786.', d: 'O preço está abaixo de um centavo. O 5 pequeno conta zeros, não milhares.' },
+      q5: { a: 'Serviços de volume espalham as operações justamente para essa razão parecer normal. Razão boa não prova volume real.', c: 'Volume, real ou fabricado, não diz para onde o preço vai. E volume fabricado costuma vir antes da venda de quem organizou.', d: 'Espalhar em muitas carteiras é exatamente o que os bots fazem. Número de carteiras não descarta bot.' },
+      q6: { a: 'Os tokens do pump.fun checados tinham só metadataPointer e tokenMetadata. Taxa de transferência foge do padrão.', b: 'Uma taxa em cada transferência pesa contra quem vende. Não protege quem comprou.', d: 'Extensões são escolhidas na criação do token. Graduar não acrescenta extensão.' },
+      q7: { a: 'O campo junta três autoridades. Com mint e freeze nulas, o endereço pode ser só a de metadados.', c: 'Pelo mesmo motivo: o menu mostra as três juntas. Para saber da freeze, confira a autoridade específica.', d: 'O campo é real e útil: "N/A" quer dizer que as três foram revogadas. Só não diz qual está ativa sem abrir o menu.' },
+      q8: { a: 'Com 82% de rugs na amostra, chutar "rug" para tudo já dá F1 de 0,90. O 0,79 fica abaixo do chute.', c: 'Inútil não é: o MCC de 0,39 mostra algum acerto real. Só não basta para uso.', d: 'F1 é uma nota do modelo, não a taxa de rug. A taxa de rug na amostra era de 81,9%.' },
+    };
+    const Q = (id, pergunta, alts, correta, explicacao) => ({ id, pergunta, correta, explicacao, alternativas: alts.map(([aid, texto]) => Object.assign({ id: aid, texto }, porque[id][aid] ? { porque: porque[id][aid] } : {})) });
+    const todas = [
+      Q('q1', 'Um token mostra market cap de US$ 2 milhões e liquidez de US$ 20 mil. O que isso quer dizer?', [['a', 'Que dá para vender até US$ 2 milhões desse token'], ['b', 'Que a liquidez é pequena porque o token é seguro'], ['c', 'Que market cap é preço vezes supply, e quem tentar sair esbarra na liquidez, cem vezes menor'], ['d', 'Que os dois números medem a mesma coisa']], 'c', 'Market cap não é dinheiro: é o último preço multiplicado pelos tokens. O que existe para pagar quem vende é a liquidez — e mesmo dela você só tira uma fração, porque a sua venda derruba o preço.'),
+      Q('q2', 'Numa pool de produto constante, você vende até o preço cair pela metade. Quanto da liquidez anunciada você recebe?', [['a', 'Metade'], ['b', 'Cerca de 14,6%'], ['c', 'Tudo'], ['d', 'Depende de quantos tokens existem']], 'b', 'A conta é (1 − √0,5) ÷ 2 ≈ 14,6%, e a fração não depende do tamanho da pool. A liquidez anunciada soma os dois lados; só um deles paga a sua venda, e cada venda recebe um preço pior que a anterior.'),
+      Q('q3', 'A tela mostra +US$ 1.000 de PnL não realizado. O que esse número não desconta?', [['a', 'O impacto de preço da sua própria venda'], ['b', 'Nada: é o valor que cai na carteira'], ['c', 'Só o imposto de renda'], ['d', 'Só a taxa de rede']], 'a', 'Não realizado é preço de agora vezes os tokens que você tem. Vender mexe no preço — em pool rasa, muito — e os terminais consultados não documentam descontar isso, nem as taxas.'),
+      Q('q4', 'O preço aparece na tela como $0.0₅2786, com o 5 pequeno. Quanto vale o token?', [['a', 'US$ 0,052786'], ['b', 'US$ 0,0052786'], ['c', 'US$ 0,000002786'], ['d', 'US$ 52.786']], 'c', 'O 5 pequeno diz quantos zeros vêm depois da vírgula antes do 2786: 0,000002786. Lido como texto, ele vira "0.052786" — cerca de 19 mil vezes mais.'),
+      Q('q5', 'Um token tem volume alto, e a razão entre volume e carteiras parece normal. O que dá para concluir?', [['a', 'Que o volume é orgânico'], ['b', 'Nada por si só: serviços de volume espalham as operações em mais de 100 carteiras para essa razão parecer normal'], ['c', 'Que o token vai subir'], ['d', 'Que não há bots negociando']], 'b', 'É o exemplo mais claro de sinal otimizado contra: o próprio vendedor publica que distribui as operações justamente porque as pessoas olham essa razão. Serve de triagem, nunca de prova.'),
+      Q('q6', 'No Solscan, um token do pump.fun mostra a extensão transferFeeConfig. O que isso indica?', [['a', 'Nada: todo Token-2022 tem essa extensão'], ['b', 'Que o token é mais seguro'], ['c', 'Uma anomalia: os tokens do pump.fun saem só com as extensões de metadados, e essa cobra taxa em cada transferência'], ['d', 'Que o token já graduou']], 'c', 'Na checagem de 12/09/2026, 24 de 24 tokens do pump.fun tinham só metadataPointer e tokenMetadata. Uma taxa de transferência foge do padrão e pode chegar a 100%.'),
+      Q('q7', 'O campo "Authority" do Solscan mostra um endereço. Isso prova que o dono ainda pode criar tokens?', [['a', 'Sim, é sempre a mint authority'], ['b', 'Não: o campo junta mint, freeze e metadados, e o endereço pode ser só a autoridade de metadados'], ['c', 'Sim, e também prova que ele pode congelar contas'], ['d', 'Não, porque o campo é decorativo']], 'b', 'Pela documentação do Solscan, "Authority" é um menu com as três autoridades e mostra "N/A" só quando todas foram revogadas. Para saber se a mint authority está ativa, abra o menu ou confira no RugCheck.'),
+      Q('q8', 'Um detector de rug anuncia F1 de 0,79 numa amostra em que 82% dos tokens deram rug. Como ler esse número?', [['a', 'É excelente: acerta quase 80%'], ['b', 'Com cuidado: chutar "tudo é rug" já daria F1 de 0,90 nessa amostra'], ['c', 'É inútil em qualquer caso'], ['d', 'Quer dizer que 79% dos tokens são rug']], 'b', 'Quando quase tudo é golpe, o chute mais burro já tem nota alta. Por isso a comparação que importa é com esse chute — e medidas como o MCC, que foi de 0,39 nesse estudo.'),
+    ];
+    const quiz = { todas };
+    todas.forEach((p) => { quiz[p.id] = [p]; });
+
+    const naoVerificado = [
+      { titulo: 'Qual autoridade é o endereço no "Authority" do BONK', texto: 'A documentação do Solscan diz que o campo junta mint, freeze e metadados. Com mint e freeze nulas na blockchain, o endereço deve ser a de metadados — mas o menu não foi aberto para confirmar.' },
+      { titulo: 'Zeros compactados no Solscan e no RugCheck', texto: 'A notação foi confirmada no código do DexScreener. Nas outras duas ferramentas, não foi inspecionada.' },
+      { titulo: 'Extensões perigosas fora do pump.fun', texto: 'O número ">40% dos novos tokens da Solana com delegado permanente" vem do RugCheck citado por terceiros, sem fonte primária. No pump.fun, deu 0 de 24.' },
+      { titulo: 'Precisão e revocação do melhor detector', texto: 'O artigo publica F1, MCC e AUCPRC. Os 95% e 68% são reconstrução a partir das contagens do teste, não números publicados.' },
+      { titulo: 'Custo de fabricar volume', texto: 'Soma a taxa oficial da pool com a taxa anunciada por um vendedor de volume (1%). Não é medição independente de campanha real, e não inclui slippage.' },
+      { titulo: 'Dev dump como preditor', texto: 'Nenhum estudo revisado por pares isolou "o criador vendeu" como sinal de rug. O padrão dos 30 minutos vem de guia de ferramenta, sem medição.' },
+    ];
+    const fontes = [
+      ['pump.fun — Fees (escala da PumpSwap, market cap = preço × 1 bilhão)', 'https://pump.fun/docs/fees', '13/09/2026'],
+      ['pump.fun — Bonding curve (pool pós-graduação do protocolo)', 'https://pump.fun/docs/bonding-curve', '12/09/2026'],
+      ['DexScreener — Token listing (FDV e market cap)', 'https://docs.dexscreener.com/token-listing', '13/09/2026'],
+      ['DexScreener — API reference (priceUsd como texto)', 'https://docs.dexscreener.com/api/reference', '13/09/2026'],
+      ['DexScreener — Boosting (trending pago por 12 a 24 horas)', 'https://docs.dexscreener.com/boosting', '12/09/2026'],
+      ['GeckoTerminal — API FAQ (market_cap_usd nulo, FDV sobre o supply)', 'https://apiguide.geckoterminal.com/faq', '12/09/2026'],
+      ['Solscan — Exploring Token Details page', 'https://info.solscan.io/exploring-token-details-page', '13/09/2026'],
+      ['Axiom — Portfolio (PnL não realizado)', 'https://docs.axiom.trade/axiom/portfolio', '12/09/2026'],
+      ['GMGN — Q&A (taxa de prioridade maior que o valor vendido)', 'https://docs.gmgn.ai/index/q-a', '12/09/2026'],
+      ['Lehar & Parlour, The Journal of Finance 80(1) (2024) — impacto de preço previsível pela pool', 'https://doi.org/10.1111/jofi.13405', '12/09/2026'],
+      ['Mongardini & Mei, "A Midsummer Meme\'s Dream" (USENIX Security 2026; 82,89% na versão publicada, 82,8% no arXiv 2507.01963v2)', 'https://www.usenix.org/conference/usenixsecurity26/presentation/mongardini', '13/09/2026'],
+      ['Victor & Weintraud, "Detecting and Quantifying Wash Trading on DEX" (WWW 2021)', 'https://arxiv.org/pdf/2102.07001', '12/09/2026'],
+      ['MELT / MemeTrans (arXiv 2602.13480, preprint) — bundles', 'https://arxiv.org/html/2602.13480v2', '12/09/2026'],
+      ['Jito — Low latency transaction send (bundles de até 5 transações)', 'https://docs.jito.wtf/lowlatencytxnsend/', '13/09/2026'],
+      ['trench.bot — documentação (Current held %)', 'https://docs.trench.bot/', '12/09/2026'],
+      ['OpenLiquid (vendedor de volume) — distribuição em 100+ carteiras e taxa de 1%', 'https://openliquid.io/blog/trending-dexscreener-volume-thresholds/', '12/09/2026'],
+      ['Solana Docs — Transfer fees (Token-2022)', 'https://solana.com/docs/tokens/extensions/transfer-fees', '12/09/2026'],
+      ['Solana Docs — Metadata pointer e token metadata', 'https://solana.com/docs/tokens/extensions/metadata', '12/09/2026'],
+      ['pump-public-docs — create_v2 e Token-2022', 'https://github.com/pump-fun/pump-public-docs', '12/09/2026'],
+      ['Raydium Docs — Token-2022 transfer fees (LaunchLab cria SPL clássico)', 'https://docs.raydium.io/algorithms/token-2022-transfer-fees', '12/09/2026'],
+      ['"From Programming Bugs to Multimillion-Dollar Scams: Trapdoor Tokens on Uniswap" (arXiv 2309.04700)', 'https://arxiv.org/pdf/2309.04700', '12/09/2026'],
+      ['Catching the Rug (arXiv 2608.20271, preprint)', 'https://arxiv.org/html/2608.20271v1', '13/09/2026'],
+      ['Mazorra, Adan & Daza, "Do Not Rug on Me" (Mathematics, 2022)', 'https://doi.org/10.3390/math10060949', '13/09/2026'],
+      ['Chainalysis — Crypto Market Manipulation 2025', 'https://www.chainalysis.com/blog/crypto-market-manipulation-wash-trading-pump-and-dump-2025/', '12/09/2026'],
+      ['Solidus Labs — Solana Rug Pulls & Pump-and-Dumps', 'https://www.soliduslabs.com/reports/solana-rug-pulls-pump-dumps-crypto-compliance', '12/09/2026'],
+      ['Checagem própria na blockchain (RPC público da Solana): Token-2022, extensões e autoridades em tokens do pump.fun', 'https://api.mainnet-beta.solana.com (getMultipleAccounts)', '12/09/2026'],
+    ].map(([titulo, url, consultadoEm]) => ({ titulo, url, consultadoEm }));
+
+    const ids = ABAS.map((a) => a.id);
+    return {
+      mostrarSidebar: !compacto, paddingMain: compacto ? '20px 16px' : '32px 24px',
+      dirMapa: compacto ? 'column' : 'row', alinhaMapa: compacto ? 'stretch' : 'center',
+      trunkW: compacto ? '2px' : '32px', trunkH: compacto ? '20px' : '2px', trunkML: compacto ? '24px' : '0',
+      dirSeq: compacto ? 'column' : 'row', colsRamos: compacto ? '1fr' : '1fr 1fr', colsChecagem: compacto ? '1fr' : '1fr 1fr', larguraFim: compacto ? '100%' : '50%',
+      abas, mapa, destaques, termos, curva, queda: S.queda, poolGrande: S.poolGrande, extensoes, checagem, reguas, grades, sinais, quiz, naoVerificado, fontes,
+      ehNumeros: S.aba === 'numeros', ehVolume: S.aba === 'volume', ehContrato: S.aba === 'contrato', ehDeteccao: S.aba === 'deteccao', ehQuiz: S.aba === 'quiz',
+      irParaAba: (e) => { this.setState({ aba: e.currentTarget.dataset.aba }); const m = document.getElementById('conteudo'); if (m && e.currentTarget.closest('[aria-label="Mapa do módulo"]')) window.scrollTo({ top: 0, behavior: 'auto' }); },
+      teclaAba: (e) => {
+        const i = ids.indexOf(this.state.aba); let n = i;
+        if (e.key === 'ArrowRight') n = (i + 1) % ids.length; else if (e.key === 'ArrowLeft') n = (i - 1 + ids.length) % ids.length; else if (e.key === 'Home') n = 0; else if (e.key === 'End') n = ids.length - 1; else return;
+        e.preventDefault(); this.setState({ aba: ids[n] });
+        const btn = e.currentTarget.querySelectorAll('[role="tab"]')[n]; if (btn) btn.focus();
+      },
+      mudarQueda: (e) => this.setState({ queda: Number(e.target.value) }),
+      atalhoQueda: (e) => this.setState({ queda: Number(e.currentTarget.dataset.valor) }),
+      alternarPool: () => this.setState((st) => ({ poolGrande: !st.poolGrande })),
+    };
+  }
+}
+</script>
+</body>
+</html>

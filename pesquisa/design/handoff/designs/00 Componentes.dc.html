@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}.omh-range{-webkit-appearance:none;appearance:none;width:100%;height:24px;background:transparent;cursor:pointer}.omh-range::-webkit-slider-runnable-track{height:6px;border-radius:999px;background:#10151E;border:1px solid #1F2733}.omh-range::-moz-range-track{height:6px;border-radius:999px;background:#10151E;border:1px solid #1F2733}.omh-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;margin-top:-8px;border-radius:50%;background:#7C3AED;border:2px solid #E6EDF3;transition:transform 120ms ease}.omh-range::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#7C3AED;border:2px solid #E6EDF3}.omh-range:hover::-webkit-slider-thumb,.omh-range:active::-webkit-slider-thumb{transform:scale(1.15)}.omh-range:focus-visible{outline:none}.omh-range:focus-visible::-webkit-slider-thumb{outline:2px solid #22D3EE;outline-offset:2px}.omh-range:focus-visible::-moz-range-thumb{outline:2px solid #22D3EE;outline-offset:2px}</style></helmet>
+<main style="margin:0 auto;max-width:64rem;padding:32px 24px;display:flex;flex-direction:column;gap:24px">
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Fase 1 · OMH Hub</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">00 Componentes novos</h1>
+<p style="margin:8px 0 0;max-width:48rem;color:#9AA7B4">Nove componentes guiados por dados, no visual do hub. Cada um: estado normal, foco, celular (390px), "reduzir movimento" e os dados que recebe. Todo número dos exemplos vem de <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">src/data/*.js</span> ou está marcado como exemplo inventado.</p>
+<nav aria-label="Componentes" style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px">
+<a href="#mapa-mental" style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:4px 12px;font-size:14px;text-decoration:none">MapaMental</a>
+<a href="#fluxograma" style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:4px 12px;font-size:14px;text-decoration:none">Fluxograma</a>
+<a href="#sequencia" style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:4px 12px;font-size:14px;text-decoration:none">Sequencia</a>
+<a href="#ciclo" style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:4px 12px;font-size:14px;text-decoration:none">Ciclo</a>
+<a href="#grade" style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:4px 12px;font-size:14px;text-decoration:none">GradeDe100</a>
+<a href="#barras" style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:4px 12px;font-size:14px;text-decoration:none">BarrasNaMesmaEscala</a>
+<a href="#curva" style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:4px 12px;font-size:14px;text-decoration:none">CurvaDeslizante</a>
+<a href="#linha" style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:4px 12px;font-size:14px;text-decoration:none">LinhaDoTempo</a>
+<a href="#comparacao" style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:4px 12px;font-size:14px;text-decoration:none">ComparacaoLadoALado</a>
+<a href="#animacao" style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:4px 12px;font-size:14px;text-decoration:none">Animacao</a>
+<a href="#uso" style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:4px 12px;font-size:14px;text-decoration:none">Onde cada um é usado</a>
+</nav>
+</header>
+
+<!-- ============ 1. MAPA MENTAL ============ -->
+<section id="mapa-mental" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+<h2 style="margin:0;font-size:1.25rem;font-weight:600">MapaMental</h2>
+<span style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Relação: o todo e suas partes</span>
+</div>
+<p style="margin:0;color:#9AA7B4">Visão do módulo inteiro antes de começar. Centro + 3–7 ramos + até 3 folhas por ramo. Cada ramo é um link para a aba. Exemplo: Módulo 6, abas e seções de <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">modulo6.js</span>.</p>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Normal · desktop</p>
+<div role="group" aria-label="Mapa do Módulo 6" style="display:flex;align-items:center;gap:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;overflow-x:auto" tabindex="0">
+<div style="flex:0 0 auto;border-radius:12px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:16px 20px;max-width:200px">
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Módulo 6</p>
+<p style="margin:4px 0 0;font-size:1.125rem;font-weight:600;line-height:1.3">Ler a tela</p>
+<p style="margin:6px 0 0;font-size:14px;color:#9AA7B4">O que os números escondem</p>
+</div>
+<div aria-hidden="true" style="flex:0 0 32px;height:2px;background:#1F2733"></div>
+<ul style="list-style:none;margin:0;padding:0 0 0 0;border-left:2px solid #1F2733;display:flex;flex-direction:column;gap:14px;flex:1 1 auto;min-width:420px">
+<sc-for list="{{ mapa.ramos }}" as="r" hint-placeholder-count="4">
+<li style="position:relative;padding-left:28px;display:flex;flex-wrap:wrap;align-items:center;gap:8px" style-before="content:'';position:absolute;left:0;top:18px;width:28px;height:2px;background:#1F2733">
+<a href="{{ r.href }}" style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:6px 12px;font-size:14px;font-weight:600;color:#E6EDF3;text-decoration:none;white-space:nowrap" style-hover="border-color:#9AA7B4;color:#E6EDF3">{{ r.titulo }} →</a>
+<sc-for list="{{ r.folhas }}" as="f" hint-placeholder-count="3">
+<span style="border-radius:999px;border:1px solid #1F2733;background:#0B0F17;padding:2px 10px;font-size:13px;color:#9AA7B4">{{ f }}</span>
+</sc-for>
+</li>
+</sc-for>
+</ul>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;align-items:start">
+<div>
+<p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Celular · 390px</p>
+<div style="width:390px;max-width:100%;border-radius:12px;border:1px solid #1F2733;background:#0B0F17;padding:16px;display:flex;flex-direction:column;align-items:stretch">
+<div style="border-radius:12px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:12px 16px">
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Módulo 6</p>
+<p style="margin:2px 0 0;font-size:1.125rem;font-weight:600">Ler a tela</p>
+</div>
+<div aria-hidden="true" style="width:2px;height:20px;background:#1F2733;margin-left:24px"></div>
+<ul style="list-style:none;margin:0;padding:0;border-left:2px solid #1F2733;margin-left:24px;display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ mapa.ramos }}" as="r" hint-placeholder-count="4">
+<li style="position:relative;padding-left:20px;display:flex;flex-wrap:wrap;gap:6px" style-before="content:'';position:absolute;left:0;top:16px;width:20px;height:2px;background:#1F2733">
+<a href="{{ r.href }}" style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:6px 12px;font-size:14px;font-weight:600;color:#E6EDF3;text-decoration:none;min-height:44px;display:inline-flex;align-items:center;flex:1 1 100%">{{ r.titulo }} →</a>
+<sc-for list="{{ r.folhas }}" as="f" hint-placeholder-count="3">
+<span style="border-radius:999px;border:1px solid #1F2733;padding:2px 10px;font-size:12px;color:#9AA7B4">{{ f }}</span>
+</sc-for>
+</li>
+</sc-for>
+</ul>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div>
+<p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Foco (teclado)</p>
+<span style="display:inline-block;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:6px 12px;font-size:14px;font-weight:600;outline:2px solid #22D3EE;outline-offset:2px">O contrato →</span>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Tab percorre os ramos na ordem das abas. Folhas não recebem foco (são texto).</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Reduzir movimento</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Sem diferença: o mapa não anima. Só a cor da borda muda no hover (150ms), e esse tempo vai a zero.</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Alternativa em texto</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">A própria <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">&lt;ul&gt;</span> é a lista; leitor de tela lê "Módulo 6, Ler a tela; 4 ramos: Os números — market cap × liquidez, …".</p>
+</div>
+</div>
+</div>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Dados que recebe</summary>
+<pre style="margin:12px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.6;color:#9AA7B4;white-space:pre-wrap">montarMapaMental({
+  id,
+  centro:  { rotulo, titulo, subtitulo? },
+  ramos:   [{ titulo, href, folhas?: string[] (máx. 3) }]  // 3 a 7
+})
+Comportamento: ramo = &lt;a href="#/modulo-6?aba=numeros"&gt;; abre a aba e move o foco para o painel.
+Estados: normal · hover (borda #9AA7B4) · foco (contorno 2px #22D3EE) · ramo concluído (borda verde 50%, "✓").</pre>
+</details>
+</section>
+
+<!-- ============ 2. FLUXOGRAMA ============ -->
+<section id="fluxograma" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+<h2 style="margin:0;font-size:1.25rem;font-weight:600">Fluxograma</h2>
+<span style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Relação: se isto, então aquilo</span>
+</div>
+<p style="margin:0;color:#9AA7B4">Substitui o Mermaid: nós de quatro tipos (pergunta, ação, resultado bom, resultado ruim) e setas "sim/não", em HTML puro — sem CDN, sem reserva. Exemplo: plano de emergência, <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">modulo1.js › diagramas › plano-emergencia</span>.</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px;font-size:13px;color:#9AA7B4" aria-label="Tipos de nó">
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:14px;height:14px;border-radius:4px;border:1px solid #22D3EE;background:rgba(34,211,238,.1)"></span>Pergunta</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:14px;height:14px;border-radius:4px;border:1px solid #1F2733;background:#0B0F17"></span>Ação</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:14px;height:14px;border-radius:4px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12)"></span>Resultado bom</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:14px;height:14px;border-radius:4px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12)"></span>Resultado ruim</span>
+</div>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Normal · desktop (ramos lado a lado)</p>
+<div role="img" aria-label="{{ fluxo.alternativa }}" style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:flex;flex-direction:column;align-items:center">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 16px;font-size:14px;font-weight:600;max-width:320px;text-align:center">{{ fluxo.inicio }}</div>
+<div aria-hidden="true" style="width:2px;height:20px;background:#9AA7B4"></div>
+<div aria-hidden="true" style="width:8px;height:8px;border-right:2px solid #9AA7B4;border-bottom:2px solid #9AA7B4;transform:rotate(45deg);margin-top:-10px"></div>
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 16px;font-size:14px;font-weight:600;max-width:320px;text-align:center;margin-top:4px">{{ fluxo.pergunta }}</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;width:100%;max-width:640px;margin-top:0">
+<div style="display:flex;flex-direction:column;align-items:center">
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<span style="border-radius:999px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);color:#22C55E;padding:1px 10px;font-size:12px;font-weight:600">Sim</span>
+<sc-for list="{{ fluxo.sim }}" as="n" hint-placeholder-count="2">
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div aria-hidden="true" style="width:8px;height:8px;border-right:2px solid #9AA7B4;border-bottom:2px solid #9AA7B4;transform:rotate(45deg);margin-top:-10px"></div>
+<div style="border-radius:8px;border:1px solid {{ n.borda }};background:{{ n.fundo }};padding:10px 14px;font-size:14px;text-align:center;margin-top:4px;color:{{ n.cor }};width:100%;max-width:280px">{{ n.texto }}</div>
+</sc-for>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center">
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<span style="border-radius:999px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);color:#F87171;padding:1px 10px;font-size:12px;font-weight:600">Não</span>
+<sc-for list="{{ fluxo.nao }}" as="n" hint-placeholder-count="1">
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div aria-hidden="true" style="width:8px;height:8px;border-right:2px solid #9AA7B4;border-bottom:2px solid #9AA7B4;transform:rotate(45deg);margin-top:-10px"></div>
+<div style="border-radius:8px;border:1px solid {{ n.borda }};background:{{ n.fundo }};padding:10px 14px;font-size:14px;text-align:center;margin-top:4px;color:{{ n.cor }};width:100%;max-width:280px">{{ n.texto }}</div>
+</sc-for>
+</div>
+</div>
+<div aria-hidden="true" style="width:2px;height:20px;background:#9AA7B4;margin-top:8px"></div>
+<div aria-hidden="true" style="width:8px;height:8px;border-right:2px solid #9AA7B4;border-bottom:2px solid #9AA7B4;transform:rotate(45deg);margin-top:-10px"></div>
+<div style="border-radius:8px;border:1px solid {{ fluxo.fim.borda }};background:{{ fluxo.fim.fundo }};padding:10px 16px;font-size:14px;font-weight:600;max-width:320px;text-align:center;margin-top:4px;color:{{ fluxo.fim.cor }}">{{ fluxo.fim.texto }}</div>
+<p style="margin:16px 0 0;font-size:13px;color:#9AA7B4;text-align:center">{{ fluxo.legenda }}</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;align-items:start">
+<div>
+<p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Celular · 390px (vertical, um ramo depois do outro)</p>
+<div style="width:390px;max-width:100%;border-radius:12px;border:1px solid #1F2733;background:#0B0F17;padding:16px;display:flex;flex-direction:column;align-items:stretch">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 14px;font-size:14px;font-weight:600">{{ fluxo.inicio }}</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4;margin-left:20px"></div>
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 14px;font-size:14px;font-weight:600">{{ fluxo.pergunta }}</div>
+<div style="margin:12px 0 0 12px;border-left:2px solid rgba(34,197,94,.5);padding-left:12px;display:flex;flex-direction:column;gap:8px">
+<span style="align-self:flex-start;border-radius:999px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);color:#22C55E;padding:1px 10px;font-size:12px;font-weight:600">Sim</span>
+<sc-for list="{{ fluxo.sim }}" as="n" hint-placeholder-count="2">
+<div style="border-radius:8px;border:1px solid {{ n.borda }};background:{{ n.fundo }};padding:10px 14px;font-size:14px;color:{{ n.cor }}">{{ n.texto }}</div>
+</sc-for>
+</div>
+<div style="margin:12px 0 0 12px;border-left:2px solid rgba(239,68,68,.5);padding-left:12px;display:flex;flex-direction:column;gap:8px">
+<span style="align-self:flex-start;border-radius:999px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);color:#F87171;padding:1px 10px;font-size:12px;font-weight:600">Não</span>
+<sc-for list="{{ fluxo.nao }}" as="n" hint-placeholder-count="1">
+<div style="border-radius:8px;border:1px solid {{ n.borda }};background:{{ n.fundo }};padding:10px 14px;font-size:14px;color:{{ n.cor }}">{{ n.texto }}</div>
+</sc-for>
+</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4;margin:8px 0 0 20px"></div>
+<div style="border-radius:8px;border:1px solid {{ fluxo.fim.borda }};background:{{ fluxo.fim.fundo }};padding:10px 14px;font-size:14px;font-weight:600;color:{{ fluxo.fim.cor }}">{{ fluxo.fim.texto }}</div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div>
+<p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Foco</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">O fluxograma é estático (<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">role="img"</span> + descrição). Só recebe foco quando é largo e rola: a área de rolagem ganha <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">tabindex="0"</span> e o contorno ciano.</p>
+<div style="margin-top:8px;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:8px 12px;font-size:13px;color:#9AA7B4;outline:2px solid #22D3EE;outline-offset:2px">área de rolagem em foco — role com ← →</div>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Reduzir movimento</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Sem diferença: nada anima.</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Alternativa em texto</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Gerada dos dados: "{{ fluxo.alternativa }}"</p>
+</div>
+</div>
+</div>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Dados que recebe</summary>
+<pre style="margin:12px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.6;color:#9AA7B4;white-space:pre-wrap">montarFluxograma({
+  id, legenda?,
+  nos:    [{ id, tipo: 'pergunta'|'acao'|'bom'|'ruim', texto }],
+  setas:  [{ de, para, rotulo?: 'Sim'|'Não'|string }]
+})
+Layout: árvore de cima para baixo; irmãos ficam lado a lado (desktop) ou empilhados (≤ 640px).
+Cores: pergunta = borda #22D3EE + fundo ciano 10% · ação = borda #1F2733 + fundo #0B0F17 · bom = verde 50%/12% · ruim = vermelho 50%/12%, texto #F87171.
+Alternativa em texto: "Se [pergunta] sim: […]. Se não: […]." montada na mesma ordem das setas.</pre>
+</details>
+</section>
+
+<!-- ============ 3. SEQUENCIA ============ -->
+<section id="sequencia" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+<h2 style="margin:0;font-size:1.25rem;font-weight:600">Sequencia</h2>
+<span style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Relação: ordem</span>
+</div>
+<p style="margin:0;color:#9AA7B4">3–7 passos numerados com ligação. O passo atual fica destacado e explica-se embaixo; os outros são botões. Exemplo: como um drainer esvazia a carteira, <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">modulo1.js › diagramas › roteiro-drainer</span>.</p>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Normal · desktop (clique num passo)</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<ol role="tablist" aria-label="Passos" style="list-style:none;margin:0;padding:0;display:flex;align-items:stretch;overflow-x:auto;gap:0">
+<sc-for list="{{ passos }}" as="p" hint-placeholder-count="5">
+<li style="display:flex;align-items:flex-start;flex:1 1 0;min-width:140px">
+<button type="button" role="tab" aria-selected="{{ p.atual }}" data-indice="{{ p.indice }}" onClick="{{ escolherPasso }}" style="flex:1 1 auto;min-height:44px;border-radius:8px;border:1px solid {{ p.borda }};background:{{ p.fundo }};padding:10px 12px;color:#E6EDF3;text-align:left;cursor:pointer;display:flex;gap:10px;align-items:flex-start" style-hover="border-color:#9AA7B4">
+<span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:{{ p.marcadorFundo }};color:{{ p.marcadorCor }};font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ p.numero }}</span>
+<span style="font-size:14px;font-weight:600;line-height:1.35">{{ p.titulo }}</span>
+</button>
+<sc-if value="{{ p.temLigacao }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="flex:0 0 20px;display:flex;align-items:center;justify-content:center;height:44px;color:#9AA7B4">→</span></sc-if>
+</li>
+</sc-for>
+</ol>
+<div role="tabpanel" aria-live="polite" style="margin-top:16px;border-radius:8px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.12);padding:12px 16px">
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Passo {{ passoAtual.numero }} de {{ totalPassos }}</p>
+<p style="margin:4px 0 0;font-size:15px">{{ passoAtual.texto }}</p>
+</div>
+<p style="margin:12px 0 0;font-size:13px;color:#9AA7B4">O dano não está em conectar, e sim em assinar.</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;align-items:start">
+<div>
+<p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Celular · 390px (vertical)</p>
+<div style="width:390px;max-width:100%;border-radius:12px;border:1px solid #1F2733;background:#0B0F17;padding:16px">
+<ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+<sc-for list="{{ passos }}" as="p" hint-placeholder-count="5">
+<li style="display:flex;flex-direction:column">
+<div style="border-radius:8px;border:1px solid {{ p.borda }};background:{{ p.fundo }};padding:10px 12px;display:flex;gap:10px;align-items:flex-start;min-height:44px">
+<span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:{{ p.marcadorFundo }};color:{{ p.marcadorCor }};font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ p.numero }}</span>
+<span style="font-size:14px;font-weight:600">{{ p.titulo }}<sc-if value="{{ p.atual }}" hint-placeholder-val="{{ false }}"><span style="display:block;margin-top:4px;font-weight:400;color:#9AA7B4">{{ p.texto }}</span></sc-if></span>
+</div>
+<sc-if value="{{ p.temLigacao }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="width:2px;height:16px;background:#1F2733;margin-left:23px"></span></sc-if>
+</li>
+</sc-for>
+</ol>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div>
+<p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Foco</p>
+<span style="display:inline-flex;gap:10px;align-items:center;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 12px;font-size:14px;font-weight:600;outline:2px solid #22D3EE;outline-offset:2px"><span aria-hidden="true" style="width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">2</span>Vítima conecta a carteira</span>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Padrão de abas: ← → trocam o passo, Home/End vão ao primeiro/último.</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Reduzir movimento</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">A troca de destaque é imediata (a transição de 150ms na borda vai a zero).</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Alternativa em texto</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">A <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">&lt;ol&gt;</span> já é a lista ordenada; nada extra.</p>
+</div>
+</div>
+</div>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Dados que recebe</summary>
+<pre style="margin:12px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.6;color:#9AA7B4;white-space:pre-wrap">montarSequencia({
+  id, legenda?,
+  passos: [{ titulo, texto }],   // 3 a 7 (reaproveita diagramas[].versaoEmTexto)
+  atual?: 0                      // índice inicial
+})
+Estados do passo: normal · hover (borda #9AA7B4) · atual (borda #7C3AED, fundo roxo 15%, marcador ciano) · foco.
+Horizontal com rolagem interna acima de 640px; vertical abaixo.</pre>
+</details>
+</section>
+
+<!-- ============ 4. CICLO ============ -->
+<section id="ciclo" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+<h2 style="margin:0;font-size:1.25rem;font-weight:600">Ciclo</h2>
+<span style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Relação: o que se repete</span>
+</div>
+<p style="margin:0;color:#9AA7B4">3–6 etapas em círculo com a seta de retorno em destaque. Exemplo: como estudar no hub — intervalos de <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">ESCADA_DIAS</span> em <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">src/components/revisao.js</span>.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;align-items:start">
+<div>
+<p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Normal · desktop e celular (320px, cabe em 390)</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:flex;justify-content:center">
+<div role="img" aria-label="{{ ciclo.alternativa }}" style="position:relative;width:320px;height:320px">
+<svg viewBox="0 0 320 320" width="320" height="320" aria-hidden="true" style="position:absolute;inset:0">
+<defs>
+<marker id="seta-suave" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9AA7B4"></path></marker>
+<marker id="seta-acento" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22D3EE"></path></marker>
+</defs>
+<sc-for list="{{ ciclo.arcos }}" as="a" hint-placeholder-count="3">
+<path d="{{ a.d }}" fill="none" stroke="{{ a.cor }}" stroke-width="2" stroke-dasharray="{{ a.tracejado }}" marker-end="{{ a.marcador }}"></path>
+</sc-for>
+</svg>
+<sc-for list="{{ ciclo.etapas }}" as="e" hint-placeholder-count="3">
+<div style="position:absolute;left:{{ e.x }}px;top:{{ e.y }}px;transform:translate(-50%,-50%);width:120px;box-sizing:border-box;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:8px 8px;text-align:center">
+<span aria-hidden="true" style="display:inline-flex;width:22px;height:22px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;align-items:center;justify-content:center">{{ e.numero }}</span>
+<p style="margin:4px 0 0;font-size:13px;font-weight:600;line-height:1.3">{{ e.titulo }}</p>
+<sc-if value="{{ e.detalhe }}" hint-placeholder-val="{{ false }}"><p style="margin:2px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:#9AA7B4">{{ e.detalhe }}</p></sc-if>
+</div>
+</sc-for>
+<p style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0;text-align:center;font-size:12px;color:#22D3EE;max-width:90px;line-height:1.3">volta ao começo</p>
+</div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Foco</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Estático (<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">role="img"</span>). Se as etapas forem links (ex.: ir à Revisão), cada caixa vira <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">&lt;a&gt;</span> e recebe o contorno ciano.</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Reduzir movimento</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Sem diferença: as setas não se movem. A seta de retorno é tracejada e ciana por cor, não por animação.</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Alternativa em texto</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">"{{ ciclo.alternativa }}"</p>
+</div>
+</div>
+</div>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Dados que recebe</summary>
+<pre style="margin:12px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.6;color:#9AA7B4;white-space:pre-wrap">montarCiclo({
+  id, legenda?,
+  etapas:   [{ titulo, detalhe?, href? }],   // 3 a 6, em ordem
+  retorno?: 'volta ao começo'                // rótulo do centro
+})
+Geometria: raio 110px num quadrado de 320px; ângulo = −90° + i·360/n. Arcos em SVG com marker-end; o último arco (n → 1) usa #22D3EE tracejado.
+Alternativa em texto: "1 Ler a aba → 2 … → volta a 1", gerada dos dados.</pre>
+</details>
+</section>
+
+<!-- ============ 5. GRADE DE 100 ============ -->
+<section id="grade" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+<h2 style="margin:0;font-size:1.25rem;font-weight:600">GradeDe100</h2>
+<span style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Relação: probabilidade e taxa de acerto</span>
+</div>
+<p style="margin:0;color:#9AA7B4">100 quadrados, grupos coloridos, legenda e a frase "de cada 100…". Frequência natural é mais fácil de entender que porcentagem. Exemplo: o melhor detector de rug, <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">modulo6.js › secoes › detector</span> (estimativa reconstruída, como o arquivo avisa).</p>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Normal · duas grades lado a lado (empilham no celular)</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+<sc-for list="{{ grades }}" as="g" hint-placeholder-count="2">
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px">
+<p style="margin:0 0 12px;font-size:15px;font-weight:600">{{ g.frase }}</p>
+<div role="img" aria-label="{{ g.alternativa }}" style="display:grid;grid-template-columns:repeat(10,1fr);gap:3px;max-width:230px">
+<sc-for list="{{ g.celulas }}" as="c" hint-placeholder-count="100">
+<span style="aspect-ratio:1;border-radius:3px;background:{{ c }}"></span>
+</sc-for>
+</div>
+<figcaption style="margin-top:12px;display:flex;flex-direction:column;gap:4px">
+<sc-for list="{{ g.grupos }}" as="gr" hint-placeholder-count="2">
+<span style="display:flex;align-items:center;gap:8px;font-size:14px;color:#9AA7B4"><span aria-hidden="true" style="width:12px;height:12px;border-radius:3px;background:{{ gr.cor }};flex:0 0 12px"></span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#E6EDF3;min-width:2ch;text-align:right">{{ gr.quantidade }}</span>{{ gr.rotulo }}</span>
+</sc-for>
+<span style="margin-top:6px;font-size:12px;color:#9AA7B4">{{ g.fonte }}</span>
+</figcaption>
+</figure>
+</sc-for>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Celular · 390px</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Mesmo desenho: a grade tem no máximo 230px de largura, cabe inteira. As duas grades empilham.</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Foco · Reduzir movimento</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Estático: não recebe foco, não anima. Quando o valor vem de um controle (ex.: taxa de acerto do simulador), os quadrados só trocam de cor, sem transição.</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Alternativa em texto</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">A legenda é a alternativa: "95 — são rug mesmo; 5 — não eram rug".</p>
+</div>
+</div>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Dados que recebe</summary>
+<pre style="margin:12px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.6;color:#9AA7B4;white-space:pre-wrap">montarGradeDe100({
+  id,
+  frase,                                   // "De cada 100 tokens marcados como rug, cerca de 95 são rug mesmo."
+  grupos: [{ rotulo, quantidade, cor }],   // soma = 100; o resto vira "#1F2733"
+  fonte?
+})
+Cores permitidas: #EF4444 (ruim) · #22C55E (bom) · #F59E0B (atenção) · #7C3AED (o que o modelo pega) · #1F2733 (resto).
+Preenche da esquerda para a direita, de cima para baixo, na ordem dos grupos.</pre>
+</details>
+</section>
+
+<!-- ============ 6. BARRAS NA MESMA ESCALA ============ -->
+<section id="barras" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+<h2 style="margin:0;font-size:1.25rem;font-weight:600">BarrasNaMesmaEscala</h2>
+<span style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Relação: proporção</span>
+</div>
+<p style="margin:0;color:#9AA7B4">2–4 barras com rótulo, valor e partes: sólido (dinheiro real), tracejado (número no papel), listrado (a parte que interessa). Exemplo: market cap × liquidez do token inventado de <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">modulo6.js › secoes › numeros-que-enganam</span>.</p>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Normal · desktop e celular (mesmo layout)</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<div role="img" aria-label="{{ barras.alternativa }}" style="display:flex;flex-direction:column;gap:16px">
+<sc-for list="{{ barras.itens }}" as="b" hint-placeholder-count="2">
+<div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap">
+<span style="font-size:14px;font-weight:600">{{ b.rotulo }}</span>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;color:#E6EDF3">{{ b.exibicao }}</span>
+</div>
+<div style="margin-top:6px;height:28px;display:flex;width:{{ b.largura }}%">
+<sc-for list="{{ b.partes }}" as="pt" hint-placeholder-count="1">
+<span title="{{ pt.rotulo }}" style="height:100%;width:{{ pt.largura }}%;border-radius:{{ pt.raio }};border:{{ pt.borda }};background:{{ pt.fundo }};box-sizing:border-box"></span>
+</sc-for>
+</div>
+<sc-if value="{{ b.nota }}" hint-placeholder-val="{{ false }}"><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">{{ b.nota }}</p></sc-if>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin-top:16px;display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:#9AA7B4">
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;border:2px dashed #9AA7B4"></span>no papel</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:#7C3AED"></span>dinheiro na pool</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:repeating-linear-gradient(135deg,#22D3EE 0 3px,transparent 3px 6px)"></span>o lado que paga quem vende</span>
+<span style="margin-left:auto;border-radius:999px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);color:#F59E0B;padding:1px 10px;font-size:12px;font-weight:600">exemplo inventado</span>
+</figcaption>
+</figure>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Celular · 390px</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Idêntico: as barras são porcentagem da largura do card. Rótulo e valor quebram em duas linhas se faltar espaço.</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Foco · Reduzir movimento</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Estático. Quando ligado a uma calculadora, a largura muda com <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">transition: width 120ms</span>, que vai a zero com "reduzir movimento".</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Alternativa em texto</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">"{{ barras.alternativa }}"</p>
+</div>
+</div>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Dados que recebe</summary>
+<pre style="margin:12px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.6;color:#9AA7B4;white-space:pre-wrap">montarBarrasNaMesmaEscala({
+  id, legenda?, exemploInventado?: true,
+  maximo,                                    // valor que ocupa 100% da largura
+  barras: [{ rotulo, valor, exibicao, nota?,
+             partes: [{ rotulo, valor, estilo: 'solido'|'tracejado'|'listrado', cor? }] }]
+})
+Estilos: solido = fundo #7C3AED (ou cor) · tracejado = borda 2px dashed #9AA7B4, sem fundo · listrado = repeating-linear-gradient 135° #22D3EE 3px/3px.
+Alternativa em texto: "rótulo — exibição (parte: valor; …)" por barra.</pre>
+</details>
+</section>
+
+<!-- ============ 7. CURVA DESLIZANTE ============ -->
+<section id="curva" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+<h2 style="margin:0;font-size:1.25rem;font-weight:600">CurvaDeslizante</h2>
+<span style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Relação: sensibilidade — "e se eu mudar isto?"</span>
+</div>
+<p style="margin:0;color:#9AA7B4">Curva + marcador + controle deslizante + 2–3 números que mudam + atalhos. Exemplo: quanto sai da pool x·y = k, <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">modulo6.js › secoes › quanto-sai</span> (2,57% e 14,64%; liquidez de US$ 8 mil é o exemplo inventado do arquivo).</p>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Normal · desktop (arraste)</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;align-items:center">
+<figure style="margin:0">
+<svg viewBox="0 0 320 230" width="100%" style="max-width:360px;display:block" role="img" aria-label="{{ curva.alternativa }}">
+<line x1="40" y1="180" x2="300" y2="180" stroke="#1F2733" stroke-width="1"></line>
+<line x1="40" y1="20" x2="40" y2="180" stroke="#1F2733" stroke-width="1"></line>
+<path d="{{ curva.caminho }}" fill="none" stroke="#9AA7B4" stroke-width="2"></path>
+<line x1="{{ curva.mx }}" y1="{{ curva.my }}" x2="{{ curva.mx }}" y2="180" stroke="#22D3EE" stroke-width="1" stroke-dasharray="3 3"></line>
+<line x1="40" y1="{{ curva.my }}" x2="{{ curva.mx }}" y2="{{ curva.my }}" stroke="#22D3EE" stroke-width="1" stroke-dasharray="3 3"></line>
+<circle cx="40" cy="20" r="5" fill="#0B0F17" stroke="#9AA7B4" stroke-width="2"></circle>
+<text x="50" y="18" fill="#9AA7B4" font-size="11" font-family="Inter, sans-serif">antes da venda</text>
+<circle cx="{{ curva.mx }}" cy="{{ curva.my }}" r="7" fill="#7C3AED" stroke="#E6EDF3" stroke-width="2"></circle>
+<text x="170" y="205" fill="#9AA7B4" font-size="11" text-anchor="middle" font-family="Inter, sans-serif">tokens na pool →</text>
+<text x="14" y="100" fill="#9AA7B4" font-size="11" text-anchor="middle" transform="rotate(-90 14 100)" font-family="Inter, sans-serif">SOL na pool →</text>
+<text x="300" y="222" fill="#9AA7B4" font-size="11" text-anchor="end" font-family="JetBrains Mono, monospace">x · y = k</text>
+</svg>
+</figure>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+<label for="curva-queda" style="font-size:14px;color:#9AA7B4">Quero que o preço caia</label>
+<output for="curva-queda" style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;font-weight:600">{{ curva.quedaTexto }}</output>
+</div>
+<input id="curva-queda" class="omh-range" type="range" min="1" max="90" step="1" value="{{ queda }}" aria-valuetext="{{ curva.quedaTexto }}" onChange="{{ mudarQueda }}" onInput="{{ mudarQueda }}" style="margin-top:4px;width:100%">
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px" aria-label="Atalhos">
+<button type="button" data-valor="10" onClick="{{ atalhoQueda }}" style="min-height:40px;border-radius:8px;border:1px solid #1F2733;background:#141A24;color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">Cair 10%</button>
+<button type="button" data-valor="50" onClick="{{ atalhoQueda }}" style="min-height:40px;border-radius:8px;border:1px solid #1F2733;background:#141A24;color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">Cair pela metade</button>
+<button type="button" aria-pressed="{{ poolGrande }}" onClick="{{ alternarPool }}" style="min-height:40px;border-radius:8px;border:1px solid {{ curva.poolBorda }};background:{{ curva.poolFundo }};color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer">Pool 10× maior</button>
+</div>
+<div aria-live="polite" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 12px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Você recebe</p>
+<p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.5rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums">{{ curva.recebeTexto }}</p>
+<p style="margin:4px 0 0;font-size:12px;color:#9AA7B4">da liquidez anunciada</p>
+</div>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 12px">
+<p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Você vende</p>
+<p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.5rem;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums">{{ curva.vendeTexto }}</p>
+<p style="margin:4px 0 0;font-size:12px;color:#9AA7B4">dos tokens da reserva</p>
+</div>
+<div style="grid-column:1 / -1;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 12px;display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap">
+<span style="font-size:13px;color:#9AA7B4">Com liquidez anunciada de <span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#E6EDF3">{{ curva.liquidezTexto }}</span></span>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:1.25rem;font-weight:700;font-variant-numeric:tabular-nums">≈ {{ curva.dolarTexto }}</span>
+</div>
+</div>
+<p style="margin:0;font-size:13px;color:#9AA7B4">A porcentagem não depende do tamanho da pool. Só o valor em dólar muda. <span style="border-radius:999px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);color:#F59E0B;padding:1px 8px;font-size:12px;font-weight:600">liquidez: exemplo inventado</span></p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Celular · 390px</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Curva em cima (largura total), controle e números embaixo — a grade acima já faz isso abaixo de 600px. Polegar do range com 24px de trilha (alvo de toque).</p>
+</div>
+<div>
+<p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Foco</p>
+<div style="display:flex;align-items:center;gap:12px"><span aria-hidden="true" style="width:20px;height:20px;border-radius:50%;background:#7C3AED;border:2px solid #E6EDF3;outline:2px solid #22D3EE;outline-offset:2px"></span><span style="font-size:14px;color:#9AA7B4">O contorno vai no polegar (como em <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">.omh-range</span>). ← → mudam 1%; Page Up/Down, 10%.</span></div>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Reduzir movimento</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">O marcador já pula sem transição (recalcula a cada quadro do arrasto, como a Calculadora). Nada a desligar.</p>
+</div>
+</div>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Dados que recebe</summary>
+<pre style="margin:12px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.6;color:#9AA7B4;white-space:pre-wrap">montarCurvaDeslizante({
+  id, titulo?, nota?,
+  controle:  { rotulo, min, max, passo, valor, formatar },
+  curva:     { pontos: (x) =&gt; y, dominioX: [a, b], eixoX, eixoY, rotuloOrigem? },
+  marcador:  (valor) =&gt; ({ x, y }),
+  numeros:   (valor, extras) =&gt; [{ rotulo, valor, nota? }],   // 2 a 3
+  atalhos:   [{ rotulo, valor }],
+  alternativas?: [{ rotulo, extras }]                          // ex.: "Pool 10× maior"
+})
+Conta do exemplo (pool de produto constante): s = 1/√(1 − queda) − 1 · recebe = s/(1+s) · ½ da liquidez anunciada · vende = s da reserva.
+Estados: normal · arrastando (polegar 1,15×) · foco no polegar · alternativa ativa (borda #7C3AED, fundo roxo 15%).</pre>
+</details>
+</section>
+
+<!-- ============ 8. LINHA DO TEMPO ============ -->
+<section id="linha" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+<h2 style="margin:0;font-size:1.25rem;font-weight:600">LinhaDoTempo <span style="font-size:14px;font-weight:500;color:#9AA7B4">(melhoria da existente)</span></h2>
+<span style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Relação: ordem e distância no tempo</span>
+</div>
+<p style="margin:0;color:#9AA7B4">A atual mostra a ordem, mas não a distância: 5 anos e 3 meses parecem iguais. Agora o espaço entre marcos é proporcional ao tempo (com mínimo e máximo) e o intervalo é escrito no trilho. Exemplo: <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">modulo1.js › linhaDoTempo</span>, primeiros 5 marcos.</p>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Normal · desktop e celular (mesmo layout, max 620px)</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<ol style="list-style:none;margin:0;padding:0;max-width:620px">
+<sc-for list="{{ linha.marcos }}" as="m" hint-placeholder-count="5">
+<li style="position:relative;padding-left:32px;padding-bottom:{{ m.espaco }}px">
+<sc-if value="{{ m.temProximo }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="position:absolute;left:7px;top:16px;bottom:0;width:2px;background:#1F2733"></span></sc-if>
+<span aria-hidden="true" style="position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:50%;border:2px solid #141A24;background:{{ m.cor }}"></span>
+<time style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22D3EE">{{ m.data }}</time>
+<p style="margin:4px 0 0;font-size:14px;font-weight:600">{{ m.titulo }}</p>
+<p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">{{ m.texto }}</p>
+<sc-if value="{{ m.temProximo }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;left:24px;bottom:{{ m.posIntervalo }}px;border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:1px 10px;font-size:12px;color:#9AA7B4;white-space:nowrap">{{ m.intervalo }}</span></sc-if>
+</li>
+</sc-for>
+</ol>
+<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:#9AA7B4">
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:50%;background:#7C3AED"></span>marco neutro</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:50%;background:#EF4444"></span>alerta</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:50%;background:#F59E0B"></span>não verificado</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:50%;background:#22C55E"></span>ok</span>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Celular · 390px</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Igual: a lista já é vertical e o texto quebra. Nada rola para o lado.</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Foco · Reduzir movimento</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Estático, sem animação. Marcos com <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">href</span> (link para a seção) recebem o contorno ciano no título.</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Alternativa em texto</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">A <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">&lt;ol&gt;</span> com <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">&lt;time&gt;</span> já é a alternativa; o intervalo é lido como texto ("4 anos e 9 meses depois").</p>
+</div>
+</div>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Dados que recebe (compatível com a atual)</summary>
+<pre style="margin:12px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.6;color:#9AA7B4;white-space:pre-wrap">montarLinhaDoTempo({
+  id, titulo, descricao?, nota?,
+  marcos: [{ data: 'dd/mm/aaaa' | 'mm/aaaa' | 'aaaa', titulo, texto?, tom?: 'neutro'|'alerta'|'ok'|'atencao', href? }],
+  proporcional?: true        // novo; false = comportamento atual
+})
+Espaço entre marcos = 24px + 1,2px por mês, limitado a 96px. Rótulo do intervalo: "N anos e M meses depois" / "M meses depois" / "menos de 1 mês depois". Datas só com ano contam como 1º de julho; só com mês, como dia 1.</pre>
+</details>
+</section>
+
+<!-- ============ 9. COMPARACAO LADO A LADO ============ -->
+<section id="comparacao" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+<h2 style="margin:0;font-size:1.25rem;font-weight:600">ComparacaoLadoALado <span style="font-size:14px;font-weight:500;color:#9AA7B4">(melhoria da TabelaComparativa)</span></h2>
+<span style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Relação: X contra Y</span>
+</div>
+<p style="margin:0;color:#9AA7B4">A atual empilha cards e o olho precisa pular entre eles para comparar o mesmo critério. Agora as células ficam alinhadas por critério, o critério decisivo vem destacado e cada célula pode ter tom. Exemplo: quem guarda a chave, <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px">modulo1.js › diagramas › quem-guarda-a-chave</span>.</p>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Normal · desktop</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px;overflow-x:auto" tabindex="0" role="group" aria-label="Comparação: CEX, hot wallet e cold wallet (role na horizontal se preciso)">
+<table style="border-collapse:separate;border-spacing:0;width:100%;min-width:560px;font-size:14px">
+<thead>
+<tr>
+<th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Critério</th>
+<sc-for list="{{ comparacao.opcoes }}" as="o" hint-placeholder-count="3">
+<th scope="col" style="text-align:left;padding:8px 12px;font-weight:600;color:#E6EDF3;border-bottom:1px solid #1F2733">{{ o.titulo }}<span style="display:block;font-size:12px;font-weight:400;color:#9AA7B4">{{ o.subtitulo }}</span></th>
+</sc-for>
+</tr>
+</thead>
+<tbody>
+<sc-for list="{{ comparacao.linhas }}" as="l" hint-placeholder-count="2">
+<tr style="background:{{ l.fundo }}">
+<th scope="row" style="text-align:left;padding:12px;font-weight:600;color:#E6EDF3;border-bottom:1px solid #1F2733;border-left:{{ l.bordaEsq }};border-radius:8px 0 0 8px">{{ l.rotulo }}<sc-if value="{{ l.decisivo }}" hint-placeholder-val="{{ false }}"><span style="display:block;font-size:12px;font-weight:600;color:#22D3EE">critério decisivo</span></sc-if></th>
+<sc-for list="{{ l.celulas }}" as="c" hint-placeholder-count="3">
+<td style="padding:12px;vertical-align:top;border-bottom:1px solid #1F2733;color:#9AA7B4"><span style="display:inline-block;border-radius:6px;border:1px solid {{ c.borda }};background:{{ c.fundo }};color:{{ c.cor }};padding:4px 8px;font-weight:{{ c.peso }}">{{ c.texto }}</span></td>
+</sc-for>
+</tr>
+</sc-for>
+</tbody>
+</table>
+<p style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Se as chaves não são suas, as moedas não são suas.</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;align-items:start">
+<div>
+<p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Celular · 390px (um card por opção, critério decisivo primeiro)</p>
+<div style="width:390px;max-width:100%;border-radius:12px;border:1px solid #1F2733;background:#0B0F17;padding:16px;display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ comparacao.cards }}" as="o" hint-placeholder-count="3">
+<article style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:12px 14px">
+<p style="margin:0;font-size:15px;font-weight:600">{{ o.titulo }} <span style="font-size:12px;font-weight:400;color:#9AA7B4">{{ o.subtitulo }}</span></p>
+<dl style="margin:8px 0 0;display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ o.campos }}" as="c" hint-placeholder-count="2">
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><dt style="font-size:12px;color:#9AA7B4">{{ c.rotulo }}</dt><dd style="margin:0;font-size:13px;font-weight:{{ c.peso }};color:{{ c.cor }};text-align:right">{{ c.texto }}</dd></div>
+</sc-for>
+</dl>
+</article>
+</sc-for>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div>
+<p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Foco</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">A tabela é <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">&lt;table&gt;</span> de verdade (leitor de tela navega por célula). Quando rola, a área ganha <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">tabindex="0"</span> e o contorno ciano.</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Reduzir movimento</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Sem diferença.</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Tons das células</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">ok = verde · atenção = âmbar · alerta = vermelho (texto #F87171) · neutro = sem borda. Uso: só quando o tom ajuda a comparar; nunca em todas as células.</p>
+</div>
+</div>
+</div>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Dados que recebe</summary>
+<pre style="margin:12px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.6;color:#9AA7B4;white-space:pre-wrap">montarComparacaoLadoALado({
+  id, legenda?,
+  criterios: [{ chave, rotulo, decisivo?: true }],
+  opcoes:    [{ titulo, subtitulo?, valores: { [chave]: string | { texto, tom?: 'ok'|'atencao'|'alerta' } } }]
+})
+Desktop (≥ 640px): &lt;table&gt; com critérios nas linhas; linha decisiva com borda esquerda 2px #22D3EE e fundo ciano 10%.
+Celular: um card por opção; o critério decisivo vem primeiro.
+Compatível com a TabelaComparativa atual ({ colunas, linhas }) por um adaptador.</pre>
+</details>
+</section>
+
+<!-- ============ 10. ANIMACAO ============ -->
+<section id="animacao" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+<h2 style="margin:0;font-size:1.25rem;font-weight:600">Animacao</h2>
+<span style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Relação: causa → efeito no tempo</span>
+</div>
+<p style="margin:0;color:#9AA7B4">Palco + legenda (até 12 palavras) + Tocar/Pausar/Voltar/Avançar + barra de cenas. Cada cena é um estado dos elementos do palco; o motor interpola entre cenas. Exemplo curto (3 cenas) do que será a Animação 1 — Pool x·y = k.</p>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Normal · desktop e celular (palco 16:9, largura total)</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px;display:flex;flex-direction:column;gap:12px;max-width:640px">
+<div role="img" aria-label="{{ anim.alternativa }}" style="position:relative;aspect-ratio:16/9;border-radius:8px;border:1px solid #1F2733;background:#10151E;overflow:hidden">
+<div style="position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;gap:48px;padding:24px 24px 44px">
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:88px;height:100%;justify-content:flex-end">
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#E6EDF3">{{ anim.tokensTexto }}</span>
+<div style="width:100%;height:{{ anim.tokensAltura }}%;border-radius:6px 6px 0 0;background:#7C3AED;transition:height {{ anim.duracao }} ease"></div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:88px;height:100%;justify-content:flex-end">
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#E6EDF3">{{ anim.solTexto }}</span>
+<div style="width:100%;height:{{ anim.solAltura }}%;border-radius:6px 6px 0 0;background:#22D3EE;transition:height {{ anim.duracao }} ease"></div>
+</div>
+</div>
+<div style="position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:center;gap:48px;padding:0 24px 12px;font-size:12px;color:#9AA7B4"><span style="width:88px;text-align:center">tokens</span><span style="width:88px;text-align:center">SOL</span></div>
+<span style="position:absolute;top:12px;right:12px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#9AA7B4">x · y = k</span>
+</div>
+<p aria-live="polite" style="margin:0;min-height:48px;font-size:15px;font-weight:600;text-align:center;text-wrap:pretty">{{ anim.legenda }}</p>
+<div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px">
+<button type="button" onClick="{{ animVoltar }}" style="min-height:40px;border-radius:8px;border:1px solid #1F2733;background:#141A24;color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">Voltar</button>
+<button type="button" aria-pressed="{{ tocando }}" onClick="{{ animTocar }}" style="min-height:40px;border-radius:8px;border:1px solid #7C3AED;background:#7C3AED;color:#FFFFFF;padding:8px 16px;font-size:14px;font-weight:600;cursor:pointer;min-width:96px" style-hover="opacity:.85">{{ anim.rotuloTocar }}</button>
+<button type="button" onClick="{{ animAvancar }}" style="min-height:40px;border-radius:8px;border:1px solid #1F2733;background:#141A24;color:#E6EDF3;padding:8px 14px;font-size:14px;font-weight:600;cursor:pointer" style-hover="border-color:#9AA7B4">Avançar</button>
+<span style="margin-left:auto;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#9AA7B4">cena {{ anim.numero }} de {{ anim.total }}</span>
+</div>
+<ol aria-label="Cenas" style="list-style:none;margin:0;padding:0;display:flex;gap:6px">
+<sc-for list="{{ anim.cenas }}" as="c" hint-placeholder-count="3">
+<li style="flex:1 1 0"><button type="button" aria-label="{{ c.rotulo }}" aria-current="{{ c.atual }}" data-indice="{{ c.indice }}" onClick="{{ animIr }}" style="display:block;width:100%;height:24px;border:0;padding:8px 0;background:transparent;cursor:pointer"><span style="display:block;height:6px;border-radius:999px;background:{{ c.cor }}"></span></button></li>
+</sc-for>
+</ol>
+<label style="display:flex;align-items:center;gap:8px;font-size:13px;color:#9AA7B4;cursor:pointer"><input type="checkbox" checked="{{ reduzir }}" onChange="{{ alternarReduzir }}" style="width:16px;height:16px;accent-color:#7C3AED">Simular "reduzir movimento" (o sistema detecta sozinho; aqui é só para ver)</label>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+<div>
+<p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Foco</p>
+<span style="display:inline-block;min-height:40px;border-radius:8px;border:1px solid #7C3AED;background:#7C3AED;color:#FFFFFF;padding:8px 16px;font-size:14px;font-weight:600;outline:2px solid #22D3EE;outline-offset:2px">Tocar</span>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Espaço = tocar/pausar; ← → = cena anterior/seguinte; cada segmento da barra é um botão com nome ("Cena 2: Você vende").</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Reduzir movimento</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">Não toca sozinho: "Tocar" vira "Próxima cena" e cada cena aparece parada, sem transição. O conteúdo é o mesmo — só muda o ritmo, que passa a ser do aluno.</p>
+</div>
+<div>
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Alternativa em texto</p>
+<p style="margin:0;font-size:14px;color:#9AA7B4">As legendas em ordem, numa <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">&lt;ol&gt;</span> recolhida em "Ler como texto".</p>
+</div>
+</div>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Dados que recebe</summary>
+<pre style="margin:12px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.6;color:#9AA7B4;white-space:pre-wrap">montarAnimacao({
+  id, titulo, duracaoPorCena?: 4000,
+  elementos: [{ id, tipo: 'barra'|'caixa'|'seta'|'texto', rotulo, estilo }],
+  cenas:     [{ rotulo, legenda (≤ 12 palavras), estados: { [elementoId]: { altura?, x?, y?, opacidade?, texto? } } }]
+})
+Motor: troca de cena = aplicar os estados com transition 400ms ease; autoplay avança a cada duracaoPorCena.
+Com prefers-reduced-motion: transition none, sem autoplay, "Tocar" vira "Próxima cena".
+Total 20–40 s, 5–10 cenas. Estado não vai para o localStorage.</pre>
+</details>
+</section>
+
+<!-- ============ USO ============ -->
+<section id="uso" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<h2 style="margin:0;font-size:1.25rem;font-weight:600">Componente — onde será usado</h2>
+<dl style="margin:16px 0 0;display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr);gap:10px 16px;font-size:14px">
+<dt style="font-weight:600">MapaMental</dt><dd style="margin:0;color:#9AA7B4">Abertura de M1–M7 (todas as abas do módulo) · Glossário (termos por categoria) · Início (mapa da trilha)</dd>
+<dt style="font-weight:600">Fluxograma</dt><dd style="margin:0;color:#9AA7B4">M1 qual carteira · plano de emergência · CVM/BC · M2 "estou em FOMO?" · M3 narrativa ou hype · M4 checagens · M5 app fora do ar · venda não caiu · M6 checagem do contrato · Checklist completo</dd>
+<dt style="font-weight:600">Sequencia</dt><dd style="margin:0;color:#9AA7B4">M1 transação · drainer · clipper · M2 as 4 fases · M3 rotina social · M5 sandwich · caminho do token · processo até o encerramento</dd>
+<dt style="font-weight:600">Ciclo</dt><dd style="margin:0;color:#9AA7B4">M3 ciclo da narrativa · Início "como estudar" · Revisão (intervalos 1, 3, 7, 16, 35)</dd>
+<dt style="font-weight:600">GradeDe100</dt><dd style="margin:0;color:#9AA7B4">M6 detector (precisão e cobertura) · Revisão (calibração) · Simulador (resultado)</dd>
+<dt style="font-weight:600">BarrasNaMesmaEscala</dt><dd style="margin:0;color:#9AA7B4">M6 market cap × liquidez · custo do volume falso · M7 (2÷0,1)² × (2÷0,05)² · M4 recuperação · M5 taxas 3,2 / 2,4 / 1,4%</dd>
+<dt style="font-weight:600">CurvaDeslizante</dt><dd style="margin:0;color:#9AA7B4">M6 "quanto sai" · M7 fração fixa e 10% × 25% por posição · M4 escada de realização</dd>
+<dt style="font-weight:600">LinhaDoTempo</dt><dd style="margin:0;color:#9AA7B4">M1 Brasil (Atlas Quantum) · M2 TRUMP / MELANIA / LIBRA · M3 cenário 2025–2026</dd>
+<dt style="font-weight:600">ComparacaoLadoALado</dt><dd style="margin:0;color:#9AA7B4">M1 CEX × DEX · carteiras · golpes no Brasil · M3 endereço oficial × falso · M4 tese × catálise · M6 SPL × Token-2022 · M7 o que dizem × evidência</dd>
+<dt style="font-weight:600">Animacao</dt><dd style="margin:0;color:#9AA7B4">Fase 4: Pool x·y=k (M6) · Drainer (M1) · Sandwich (M5) · Caminho do token (M5) · Vida de uma narrativa (M3) · Address poisoning (M1)</dd>
+</dl>
+</section>
+<p style="margin:0;font-size:13px;color:#9AA7B4">Material de estudo, não é recomendação de investimento · OMH Hub · Fase 1</p>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1024,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { passoAtual: 2, queda: 10, poolGrande: false, cena: 0, tocando: false, reduzir: false };
+  componentDidMount() {
+    const mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq && mq.matches) this.setState({ reduzir: true });
+  }
+  componentWillUnmount() { clearInterval(this.timer); }
+  fmt(v) { return Number(v).toFixed(2).replace('.', ','); }
+  // ---- datas para a linha do tempo
+  parse(d) {
+    const p = d.split('/').map(Number);
+    if (p.length === 3) return new Date(p[2], p[1] - 1, p[0]);
+    if (p.length === 2) return new Date(p[1], p[0] - 1, 1);
+    return new Date(p[0], 6, 1);
+  }
+  meses(a, b) { return (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth()); }
+  intervalo(m) {
+    if (m < 1) return 'menos de 1 mês depois';
+    const anos = Math.floor(m / 12), r = m % 12;
+    if (!anos) return r + (r === 1 ? ' mês depois' : ' meses depois');
+    let t = anos + (anos === 1 ? ' ano' : ' anos');
+    if (r) t += ' e ' + r + (r === 1 ? ' mês' : ' meses');
+    return t + ' depois';
+  }
+  renderVals() {
+    const S = this.state;
+    const TOM = { neutro: '#7C3AED', alerta: '#EF4444', ok: '#22C55E', atencao: '#F59E0B' };
+    const NO = {
+      acao: { borda: '#1F2733', fundo: '#0B0F17', cor: '#E6EDF3' },
+      bom: { borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#E6EDF3' },
+      ruim: { borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' },
+    };
+    const no = (tipo, texto) => Object.assign({ texto }, NO[tipo]);
+
+    // 1. Mapa mental — Módulo 6 (abas e seções de modulo6.js)
+    const mapa = { ramos: [
+      { titulo: 'Os números', href: '#/modulo-6', folhas: ['market cap × liquidez', 'quanto sai', 'zeros compactados'] },
+      { titulo: 'Volume falso', href: '#/modulo-6', folhas: ['wash trading', 'custo por US$ 1 milhão', 'bundles'] },
+      { titulo: 'O contrato', href: '#/modulo-6', folhas: ['SPL × Token-2022', 'as 3 autoridades'] },
+      { titulo: 'Prever o golpe', href: '#/modulo-6', folhas: ['o detector', 'F1 × chute', 'MCC'] },
+    ] };
+
+    // 2. Fluxograma — plano de emergência (modulo1.js)
+    const fluxo = {
+      inicio: 'Você percebeu a drenagem',
+      pergunta: 'A frase-semente vazou?',
+      sim: [no('acao', 'Crie carteira nova em dispositivo limpo'), no('acao', 'Mova o que sobrou (cuidado com o sweeper bot)')],
+      nao: [no('acao', 'Revogue as aprovações')],
+      fim: no('bom', 'Registre as evidências e reporte'),
+      legenda: 'A frase-semente vazou ou foi só uma assinatura maliciosa? A resposta muda tudo.',
+    };
+    fluxo.alternativa = 'Você percebe que a carteira foi drenada. A frase-semente vazou? Se sim: crie carteira nova em dispositivo limpo e mova o que sobrou. Se não: revogue as aprovações. Em qualquer caso: registre as evidências e reporte.';
+
+    // 3. Sequência — roteiro do drainer (modulo1.js)
+    const drainer = [
+      ['Isca', 'Uma isca (falso airdrop, mint ou suporte) atrai a vítima a um site clonado.'],
+      ['Vítima conecta a carteira', 'Conectar apenas mostra os saldos. Ainda não há dano.'],
+      ['Vítima assina approve ou permit', 'A assinatura parece inofensiva, mas autoriza o contrato a mover tokens.'],
+      ['Golpista usa transferFrom', 'Com a autorização, o golpista move os fundos para fora.'],
+      ['Lavagem via mixers e pontes', 'Os fundos passam por mixers e pontes entre redes. Sem volta.'],
+    ];
+    const passos = drainer.map(([titulo, texto], i) => {
+      const atual = i === S.passoAtual;
+      return { indice: i, numero: i + 1, titulo, texto, atual, temLigacao: i < drainer.length - 1,
+        borda: atual ? '#7C3AED' : '#1F2733', fundo: atual ? 'rgba(124,58,237,.15)' : '#141A24',
+        marcadorFundo: atual ? '#22D3EE' : '#1F2733', marcadorCor: atual ? '#0B0F17' : '#E6EDF3' };
+    });
+
+    // 4. Ciclo — como estudar (ESCADA_DIAS de revisao.js)
+    const etapasBase = [
+      { titulo: 'Ler a aba', detalhe: '' },
+      { titulo: 'Responder o quiz', detalhe: '' },
+      { titulo: 'Revisar', detalhe: '1 · 3 · 7 · 16 · 35 dias' },
+    ];
+    const C = 160, R = 100, n = etapasBase.length, folga = 50;
+    const ang = (i) => (-90 + (i * 360) / n) * Math.PI / 180;
+    const pt = (a, r) => ({ x: C + r * Math.cos(a), y: C + r * Math.sin(a) });
+    const etapas = etapasBase.map((e, i) => { const p = pt(ang(i), R); return Object.assign({ numero: i + 1 }, e, { x: Math.min(260, Math.max(60, p.x)), y: p.y }); });
+    const arcos = etapasBase.map((e, i) => {
+      const a1 = ang(i) + folga * Math.PI / 180, a2 = ang((i + 1) % n) - folga * Math.PI / 180;
+      const p1 = pt(a1, R), p2 = pt(a2 + (a2 < a1 ? 2 * Math.PI : 0), R);
+      const volta = i === n - 1;
+      return { d: `M${p1.x.toFixed(1)},${p1.y.toFixed(1)} A${R},${R} 0 0 1 ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`,
+        cor: volta ? '#22D3EE' : '#9AA7B4', tracejado: volta ? '6 5' : 'none', marcador: volta ? 'url(#seta-acento)' : 'url(#seta-suave)' };
+    });
+    const ciclo = { etapas, arcos, alternativa: '1 Ler a aba → 2 Responder o quiz → 3 Revisar em 1, 3, 7, 16 e 35 dias → volta a 1.' };
+
+    // 5. Grade de 100 — detector (modulo6.js, estimativa)
+    const grade = (frase, grupos, fonte) => {
+      const celulas = [];
+      grupos.forEach((g) => { for (let i = 0; i < g.quantidade; i++) celulas.push(g.cor); });
+      while (celulas.length < 100) celulas.push('#1F2733');
+      return { frase, grupos, fonte, celulas, alternativa: frase + ' ' + grupos.map((g) => g.quantidade + ' — ' + g.rotulo).join('; ') };
+    };
+    const grades = [
+      grade('De cada 100 tokens que o detector marca como rug, cerca de 95 são rug mesmo.',
+        [{ rotulo: 'são rug mesmo', quantidade: 95, cor: '#EF4444' }, { rotulo: 'não eram rug (alarme falso)', quantidade: 5, cor: '#1F2733' }],
+        'Estimativa reconstruída das contagens do teste; o artigo não publica o número (modulo6.js).'),
+      grade('De cada 100 rugs reais, o detector pega uns 68.',
+        [{ rotulo: 'o detector pega', quantidade: 68, cor: '#7C3AED' }, { rotulo: 'passam despercebidos', quantidade: 32, cor: '#1F2733' }],
+        'Mesma fonte. O modelo olha só os 5 primeiros minutos de negociação.'),
+    ];
+
+    // 6. Barras — market cap × liquidez (exemplo inventado do modulo6.js)
+    const maximo = 50000;
+    const parte = (rotulo, valor, estilo, total) => ({ rotulo, largura: (valor / total) * 100,
+      raio: estilo === 'tracejado' ? '4px' : '0', borda: estilo === 'tracejado' ? '2px dashed #9AA7B4' : '0',
+      fundo: estilo === 'solido' ? '#7C3AED' : estilo === 'listrado' ? 'repeating-linear-gradient(135deg,#22D3EE 0 3px,transparent 3px 6px)' : 'transparent' });
+    const barras = { itens: [
+      { rotulo: 'Market cap', exibicao: 'US$ 50 mil', largura: 100, nota: 'Preço da última negociação × 1 bilhão de tokens. Ninguém tem esse dinheiro.', partes: [parte('no papel', 50000, 'tracejado', 50000)] },
+      { rotulo: 'Liquidez na pool', exibicao: 'US$ 8 mil', largura: 16, nota: 'Só a metade em SOL (US$ 4 mil) paga quem vende.', partes: [parte('tokens', 4000, 'solido', 8000), parte('SOL', 4000, 'listrado', 8000)] },
+    ] };
+    barras.alternativa = 'Market cap — US$ 50 mil (no papel); Liquidez na pool — US$ 8 mil (tokens: US$ 4 mil; SOL, o lado que paga quem vende: US$ 4 mil). Exemplo inventado.';
+
+    // 7. Curva deslizante — pool de produto constante
+    const q = S.queda / 100;
+    const s = 1 / Math.sqrt(1 - q) - 1;
+    const recebe = (s / (1 + s)) * 50;
+    const liquidez = S.poolGrande ? 80000 : 8000;
+    const dolar = Math.round((Math.round(recebe * 100) / 100 / 100) * liquidez);
+    const X0 = 40, X1 = 300, Y0 = 20, Y1 = 180, xmax = 3.3, ymin = 0.3;
+    const px = (x) => X0 + ((x - 1) / (xmax - 1)) * (X1 - X0);
+    const py = (y) => Y1 - ((y - ymin) / (1 - ymin)) * (Y1 - Y0);
+    let caminho = '';
+    for (let i = 0; i <= 60; i++) { const x = 1 + (i / 60) * (xmax - 1); caminho += (i ? ' L' : 'M') + px(x).toFixed(1) + ',' + py(1 / x).toFixed(1); }
+    const curva = {
+      caminho, mx: px(1 + s).toFixed(1), my: py(1 / (1 + s)).toFixed(1),
+      quedaTexto: S.queda + '%', recebeTexto: this.fmt(recebe) + '%', vendeTexto: this.fmt(s * 100) + '%',
+      liquidezTexto: S.poolGrande ? 'US$ 80 mil' : 'US$ 8 mil', dolarTexto: 'US$ ' + dolar.toLocaleString('pt-BR'),
+      poolBorda: S.poolGrande ? '#7C3AED' : '#1F2733', poolFundo: S.poolGrande ? 'rgba(124,58,237,.15)' : '#141A24',
+      alternativa: 'Curva x·y = k. Para o preço cair ' + S.queda + '%, você vende ' + this.fmt(s * 100) + '% dos tokens da reserva e recebe ' + this.fmt(recebe) + '% da liquidez anunciada.',
+    };
+
+    // 8. Linha do tempo — modulo1.js › linhaDoTempo (5 primeiros marcos)
+    const marcosBase = [
+      { data: '13/08/2019', titulo: 'CVM proíbe a Atlas Quantum de ofertar o "robô"', texto: 'Deliberação CVM nº 826. O caso emblemático do falso robô de arbitragem no Brasil.', tom: 'alerta' },
+      { data: '2023', titulo: 'Lei 14.754/2023, a "Lei das Offshores"', texto: 'Regras próprias para operações no exterior.' },
+      { data: '21/05/2024', titulo: 'CVM multa a Atlas Quantum em mais de R$ 55,8 milhões', texto: 'Por operação fraudulenta e embaraço à fiscalização.', tom: 'alerta' },
+      { data: '20/05/2025', titulo: 'Binance Pay integrado ao Pix via Z.ro Bank', texto: 'Se o arranjo continua idêntico em setembro de 2026: não verificado.', tom: 'atencao' },
+      { data: '06/10/2025', titulo: 'CVM alerta para o pig butchering', texto: 'Prejuízo global estimado em mais de US$ 75 bilhões entre 2020 e 2024.', tom: 'alerta' },
+    ];
+    const marcos = marcosBase.map((m, i) => {
+      const prox = marcosBase[i + 1];
+      const ms = prox ? this.meses(this.parse(m.data), this.parse(prox.data)) : 0;
+      const espaco = prox ? Math.min(96, 24 + ms * 1.2) : 0;
+      return Object.assign({}, m, { cor: TOM[m.tom || 'neutro'], temProximo: !!prox, espaco, intervalo: this.intervalo(ms), posIntervalo: Math.max(2, espaco / 2 - 12) });
+    });
+    const linha = { marcos };
+
+    // 9. Comparação — quem guarda a chave (modulo1.js)
+    const TOMCEL = {
+      ok: { borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#E6EDF3', peso: 600 },
+      atencao: { borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#E6EDF3', peso: 600 },
+      alerta: { borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171', peso: 600 },
+      neutro: { borda: 'transparent', fundo: 'transparent', cor: '#9AA7B4', peso: 400 },
+    };
+    const criterios = [
+      { chave: 'chave', rotulo: 'Quem guarda a chave', decisivo: true },
+      { chave: 'risco', rotulo: 'Risco principal' },
+      { chave: 'onde', rotulo: 'Onde a chave fica' },
+    ];
+    const opcoes = [
+      { titulo: 'CEX', subtitulo: 'corretora', valores: { chave: { texto: 'A empresa', tom: 'alerta' }, risco: 'Contraparte: a empresa quebrar ou congelar saques', onde: 'Nos servidores da corretora' } },
+      { titulo: 'Hot wallet', subtitulo: 'você, online', valores: { chave: { texto: 'Você', tom: 'atencao' }, risco: 'Malware e phishing', onde: 'No seu celular ou navegador' } },
+      { titulo: 'Cold wallet', subtitulo: 'você, offline', valores: { chave: { texto: 'Você', tom: 'ok' }, risco: 'Responsabilidade toda sua (perder a frase-semente)', onde: 'Num dispositivo sem internet' } },
+    ];
+    const cel = (v) => { const o = typeof v === 'string' ? { texto: v } : v; return Object.assign({ texto: o.texto }, TOMCEL[o.tom || 'neutro']); };
+    const comparacao = {
+      opcoes,
+      linhas: criterios.map((c) => ({ rotulo: c.rotulo, decisivo: !!c.decisivo, fundo: c.decisivo ? 'rgba(34,211,238,.06)' : 'transparent', bordaEsq: c.decisivo ? '2px solid #22D3EE' : '2px solid transparent', celulas: opcoes.map((o) => cel(o.valores[c.chave])) })),
+      cards: opcoes.map((o) => ({ titulo: o.titulo, subtitulo: o.subtitulo, campos: criterios.slice().sort((a, b) => (b.decisivo ? 1 : 0) - (a.decisivo ? 1 : 0)).map((c) => Object.assign({ rotulo: c.rotulo }, cel(o.valores[c.chave]))) })),
+    };
+
+    // 10. Animação — 3 cenas da pool x·y = k
+    const cenasBase = [
+      { rotulo: 'Cena 1: a pool', legenda: 'A pool guarda tokens de um lado e SOL do outro.', tokens: 1, sol: 1 },
+      { rotulo: 'Cena 2: você vende', legenda: 'Você vende: tokens entram, SOL sai. O produto x·y não muda.', tokens: 1.4, sol: 1 / 1.4 },
+      { rotulo: 'Cena 3: a próxima venda', legenda: 'Com mais tokens na pool, a venda seguinte sai mais barata.', tokens: 2, sol: 0.5 },
+    ];
+    const cena = cenasBase[S.cena];
+    const anim = {
+      legenda: cena.legenda, numero: S.cena + 1, total: cenasBase.length,
+      tokensAltura: Math.round(cena.tokens * 40), solAltura: Math.round(cena.sol * 40),
+      tokensTexto: 'x = ' + this.fmt(cena.tokens), solTexto: 'y = ' + this.fmt(cena.sol),
+      duracao: S.reduzir ? '0ms' : '400ms',
+      rotuloTocar: S.reduzir ? 'Próxima cena' : (S.tocando ? 'Pausar' : 'Tocar'),
+      cenas: cenasBase.map((c, i) => ({ indice: i, rotulo: c.rotulo, atual: i === S.cena, cor: i < S.cena ? '#7C3AED' : i === S.cena ? '#22D3EE' : '#1F2733' })),
+      alternativa: cenasBase.map((c, i) => (i + 1) + '. ' + c.legenda).join(' '),
+    };
+
+    return {
+      mapa, fluxo, passos, passoAtual: passos[S.passoAtual], totalPassos: passos.length, ciclo, grades, barras, curva, linha, comparacao, anim,
+      queda: S.queda, poolGrande: S.poolGrande, tocando: S.tocando, reduzir: S.reduzir,
+      escolherPasso: (e) => this.setState({ passoAtual: Number(e.currentTarget.dataset.indice) }),
+      mudarQueda: (e) => this.setState({ queda: Number(e.target.value) }),
+      atalhoQueda: (e) => this.setState({ queda: Number(e.currentTarget.dataset.valor) }),
+      alternarPool: () => this.setState((st) => ({ poolGrande: !st.poolGrande })),
+      animVoltar: () => this.setState((st) => ({ cena: Math.max(0, st.cena - 1) })),
+      animAvancar: () => this.setState((st) => ({ cena: Math.min(cenasBase.length - 1, st.cena + 1) })),
+      animIr: (e) => this.setState({ cena: Number(e.currentTarget.dataset.indice) }),
+      animTocar: () => {
+        if (this.state.reduzir) { this.setState((st) => ({ cena: (st.cena + 1) % cenasBase.length })); return; }
+        if (this.state.tocando) { clearInterval(this.timer); this.setState({ tocando: false }); return; }
+        this.setState({ tocando: true });
+        this.timer = setInterval(() => {
+          this.setState((st) => {
+            if (st.cena >= cenasBase.length - 1) { clearInterval(this.timer); return { tocando: false }; }
+            return { cena: st.cena + 1 };
+          });
+        }, 3000);
+      },
+      alternarReduzir: (e) => { clearInterval(this.timer); this.setState({ reduzir: e.target.checked, tocando: false }); },
+    };
+  }
+}
+</script>
+</body>
+</html>

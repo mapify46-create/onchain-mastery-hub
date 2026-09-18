@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}h1,h2,h3,p,li,dd,dt,td,th{overflow-wrap:break-word}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}</style></helmet>
+<div style="display:flex;min-height:100vh;align-items:flex-start">
+<sc-if value="{{ mostrarSidebar }}" hint-placeholder-val="{{ true }}">
+<aside aria-label="Rotas do hub" style="position:sticky;top:0;width:16rem;flex:0 0 16rem;height:100vh;box-sizing:border-box;border-right:1px solid #1F2733;background:#141A24;padding:20px 16px;display:flex;flex-direction:column;gap:4px;font-size:14px">
+<p style="margin:0 0 12px;font-weight:600;font-size:14px">onchain-mastery-hub</p>
+<a href="#/inicio" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Início</a>
+<a href="#/modulo-1" aria-current="page" style="display:block;border-radius:8px;padding:8px 12px;color:#E6EDF3;background:rgba(124,58,237,.15);border:1px solid #7C3AED;text-decoration:none;font-weight:600">M1 Fundamentos &amp; Segurança</a>
+<a href="#/modulo-2" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M2 Psicologia</a>
+<a href="#/modulo-3" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M3 Os dois pilares</a>
+<a href="#/modulo-4" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M4 Gestão &amp; decisão</a>
+<a href="#/modulo-5" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M5 Execução</a>
+<a href="#/modulo-6" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M6 Ler a tela</a>
+<a href="#/modulo-7" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M7 A rotina</a>
+<div style="height:1px;background:#1F2733;margin:8px 0"></div>
+<a href="#/glossario" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Glossário</a>
+<a href="#/checklist" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Checklist antes de comprar</a>
+<a href="#/revisao" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Revisão</a>
+</aside>
+</sc-if>
+<main id="conteudo" style="flex:1 1 auto;min-width:0">
+<div style="max-width:868px;margin:0 auto;padding:{{ paddingMain }};display:flex;flex-direction:column;gap:24px">
+
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Módulo 1</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">Fundamentos &amp; Segurança Cripto</h1>
+<p style="margin:8px 0 0;color:#9AA7B4;text-wrap:pretty">Como a blockchain funciona, onde ficam as suas chaves, como os golpes acontecem e o que fazer antes, durante e depois.</p>
+<p style="margin:16px 0 0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:12px 16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Lembrete: </strong>este módulo ensina segurança e fundamentos técnicos. Nomes de carteiras e corretoras aparecem só como exemplos de categoria, nunca como recomendação.</p>
+</header>
+
+<section aria-label="Mapa do módulo" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<p style="margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">O módulo inteiro numa olhada</p>
+<div style="display:flex;flex-direction:{{ dirMapa }};align-items:{{ alinhaMapa }};border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px">
+<div style="flex:0 0 auto;border-radius:12px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:14px 18px;max-width:220px">
+<p style="margin:0;font-size:1.125rem;font-weight:600;line-height:1.3">Fundamentos &amp; Segurança</p>
+<p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">Quem tem a chave tem o dinheiro</p>
+</div>
+<div aria-hidden="true" style="flex:0 0 auto;width:{{ trunkW }};height:{{ trunkH }};background:#1F2733;margin-left:{{ trunkML }}"></div>
+<ul style="list-style:none;margin:0;padding:0;border-left:2px solid #1F2733;display:flex;flex-direction:column;gap:12px;flex:1 1 auto;min-width:0;margin-left:{{ trunkML }}">
+<sc-for list="{{ mapa }}" as="r" hint-placeholder-count="7">
+<li style="position:relative;padding-left:24px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px" style-before="content:'';position:absolute;left:0;top:19px;width:24px;height:2px;background:#1F2733">
+<button type="button" data-aba="{{ r.aba }}" onClick="{{ irParaAba }}" style="min-height:40px;border-radius:8px;border:1px solid {{ r.borda }};background:{{ r.fundo }};padding:6px 12px;font-size:14px;font-weight:600;color:#E6EDF3;cursor:pointer;text-align:left" style-hover="border-color:#9AA7B4">{{ r.titulo }} →</button>
+<sc-for list="{{ r.folhas }}" as="f" hint-placeholder-count="3"><span style="border-radius:999px;border:1px solid #1F2733;padding:2px 10px;font-size:13px;color:#9AA7B4">{{ f }}</span></sc-for>
+</li>
+</sc-for>
+</ul>
+</div>
+</section>
+
+<div role="tablist" aria-label="Seções do Módulo 1" onKeyDown="{{ teclaAba }}" style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ abas }}" as="a" hint-placeholder-count="7">
+<button type="button" role="tab" id="aba-{{ a.id }}" aria-selected="{{ a.ativa }}" aria-controls="painel-{{ a.id }}" tabindex="{{ a.tabindex }}" data-aba="{{ a.id }}" onClick="{{ irParaAba }}" style="min-height:44px;border-radius:8px;border:1px solid {{ a.borda }};background:{{ a.fundo }};padding:8px 16px;font-size:14px;font-weight:600;color:#E6EDF3;cursor:pointer" style-hover="border-color:#9AA7B4">{{ a.rotulo }}</button>
+</sc-for>
+</div>
+
+<!-- ============ FUNDAMENTOS ============ -->
+<sc-if value="{{ eh.fundamentos }}" hint-placeholder-val="{{ true }}">
+<div id="painel-fundamentos" role="tabpanel" aria-labelledby="aba-fundamentos" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.fundamentos }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O que é uma blockchain, e por que não tem "desfazer"</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Depois de confirmada, uma transação não tem botão de "desfazer". Nem para golpe, nem para erro.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">A vida de uma transação: cada bloco em cima é uma confirmação</p>
+<ol role="img" aria-label="1. Sua transação entra num bloco: 1 confirmação. 2. Novos blocos são fechados em cima; cada um soma uma confirmação. 3. Com 12, 30 ou mais, reverter fica cada vez mais impossível. 4. Por isso as corretoras esperam um mínimo de confirmações antes de liberar um depósito." tabindex="0" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:{{ dirSeq }};gap:0;align-items:stretch;overflow-x:auto">
+<sc-for list="{{ transacao }}" as="p" hint-placeholder-count="4">
+<li style="flex:1 1 0;display:flex;flex-direction:{{ dirSeq }};align-items:stretch;min-width:{{ minPasso }}">
+<div style="flex:1 1 auto;min-width:0;border-radius:8px;border:1px solid {{ p.borda }};background:{{ p.fundo }};padding:12px 14px;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;align-items:center;gap:8px"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ p.n }}</span><span style="font-size:14px;font-weight:600">{{ p.titulo }}</span></div>
+<div aria-hidden="true" style="display:flex;flex-direction:column-reverse;gap:3px;height:76px;justify-content:flex-start">
+<sc-for list="{{ p.blocos }}" as="b" hint-placeholder-count="1"><span style="height:14px;border-radius:3px;background:{{ b }}"></span></sc-for>
+</div>
+<p style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#22D3EE">{{ p.conf }}</p>
+<p style="margin:0;font-size:13px;color:#9AA7B4">{{ p.texto }}</p>
+</div>
+<sc-if value="{{ p.seta }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#9AA7B4;padding:4px 8px">→</span></sc-if>
+</li>
+</sc-for>
+</ol>
+<figcaption style="margin:12px 0 0;display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:#9AA7B4"><span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:#7C3AED"></span>o bloco com a sua transação</span><span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:#1F2733"></span>blocos fechados por cima</span></figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">No banco, uma empresa guarda sozinha a lista de quem tem o quê. Numa blockchain, milhares de computadores guardam cópias idênticas da mesma lista. Cada página se chama bloco, e cada bloco carrega o hash (a impressão digital) do anterior. Mudar um bloco antigo quebra a ligação com todos os seguintes — para esconder, seria preciso refazer tudo em todas as cópias ao mesmo tempo.</p>
+<p style="margin:0;color:#9AA7B4">Isso tem dois lados. Ninguém apaga o seu saldo. E, se você mandar para o endereço errado ou cair num golpe, o dinheiro se foi. A irreversibilidade não distingue acerto de erro — uma transação que falhou também fica gravada para sempre.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: bloco, hash e rede</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>Bloco: uma "página" do caderno, com várias transações.</li><li style="margin-top:4px">Hash: a impressão digital que resume um bloco e o liga ao anterior.</li><li style="margin-top:4px">Rede: os milhares de computadores que guardam cópias iguais.</li><li style="margin-top:4px">Você não precisa de permissão nem de conta para "ler" a blockchain. É essa transparência que permite auditar golpes e revisar permissões.</li></ul></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m1-check-q1" titulo="Pergunta rápida" perguntas="{{ quiz.q1 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Explorador de blocos: como ler uma transação</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">O explorador é um site só de leitura que mostra o que realmente aconteceu. Procure três respostas: deu certo? Quanto custou? O que se moveu?</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 4px;font-size:14px;font-weight:600">Anatomia de uma transação no explorador</p>
+<p style="margin:0 0 12px;font-size:13px;color:#9AA7B4">Os campos que importam para um iniciante, e o erro clássico de leitura.</p>
+<div style="display:grid;grid-template-columns:{{ colsAnatomia }};gap:20px;align-items:start">
+<div role="img" aria-label="{{ anatomia.alt }}" style="border-radius:10px;border:1px solid #1F2733;background:#10151E;padding:14px;display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ anatomia.linhas }}" as="l" hint-placeholder-count="5">
+<div style="display:grid;grid-template-columns:{{ l.cols }};gap:8px">
+<sc-for list="{{ l.paineis }}" as="p" hint-placeholder-count="1">
+<div style="border-radius:6px;border:1px solid {{ p.borda }};background:{{ p.fundo }};padding:8px;min-height:{{ p.altura }};display:flex;gap:8px;align-items:flex-start">
+<sc-if value="{{ p.marcador }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="flex:0 0 20px;width:20px;height:20px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ p.marcador }}</span></sc-if>
+<span style="min-width:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11.5px;line-height:1.35;color:{{ p.cor }};overflow-wrap:break-word">{{ p.rotulo }}</span>
+</div>
+</sc-for>
+</div>
+</sc-for>
+<p style="margin:4px 0 0;font-size:12px;color:#9AA7B4">Ilustração esquemática, não é a tela de nenhuma plataforma específica. Os campos aparecem sem valores de propósito: o que se aprende aqui é onde olhar.</p>
+</div>
+<ol style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ anatomia.itens }}" as="c" hint-placeholder-count="6">
+<li style="display:flex;gap:10px;align-items:flex-start;font-size:14px"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ c.n }}</span><span><strong>{{ c.titulo }}</strong> <span style="color:#9AA7B4">{{ c.texto }}</span></span></li>
+</sc-for>
+</ol>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Layout genérico inspirado em Etherscan e Solscan; muda o nome dos campos, não a lógica. Confira sempre a URL do explorador (etherscan.io, solscan.io) — existem sites falsos.</figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">Ele só mostra. Não guarda suas chaves, não faz trocas e não consegue mexer no seu dinheiro. Cada rede tem o seu: Solscan para a Solana, Etherscan para a Ethereum, BscScan para a BNB Chain e Basescan para a Base. Confira sempre a URL — sites falsos de explorador existem.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: os outros campos, e como é no Solscan</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>Transaction Hash: identificador único de 66 caracteres, começando com "0x". Block: em qual bloco entrou, mais o número de confirmações. Timestamp: data e hora em UTC.</li><li style="margin-top:4px">Logs: a aba de eventos. O erro comum de iniciante é ver "Value: 0 ETH" e não abrir "Token Transfers", onde os tokens aparecem.</li><li style="margin-top:4px">No Solscan a lógica é a mesma: Signature é o identificador, há Block/Slot, Timestamp, Result (Success/Failed), Signer (quem iniciou e pagou), Fee (em SOL, frações de centavo), Main Actions e Balance Changes (saldo antes e depois).</li></ul></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m1-check-q9" titulo="Pergunta rápida" perguntas="{{ quiz.q9 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Gas: toda ação paga uma taxa, mesmo quando dá errado</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Toda ação na blockchain paga uma taxa à rede, e paga mesmo quando dá errado.</p>
+<div role="img" aria-label="Transação com sucesso: paga gas, o resultado acontece. Transação que falha: paga gas do mesmo jeito, o resultado não acontece. Vale na EVM e na Solana." style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+<div style="border-radius:8px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22C55E">Success</p><p style="margin:6px 0 0;font-size:14px">Trabalho feito → <strong>paga o gas</strong> → o resultado acontece.</p></div>
+<div style="border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">Failed</p><p style="margin:6px 0 0;font-size:14px">Trabalho feito até o erro → <strong>paga o gas</strong> → nada acontece.</p></div>
+</div>
+<p style="margin:0;color:#9AA7B4">Gas mede quanto trabalho de computador a sua transação exige. Você paga o gas usado vezes o preço de cada unidade; o preço sobe quando muita gente quer usar a rede ao mesmo tempo. Uma parte é queimada e outra, a gorjeta, vai para o validador. Na Solana, a taxa base é fixa: 5.000 lamports por assinatura (0,000005 SOL), mais uma gorjeta opcional.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: EIP-1559, base fee, max fee e as redes L2</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Desde a EIP-1559 (agosto de 2021), o preço do gas na Ethereum tem dois componentes: a base fee, calculada pela rede conforme o congestionamento e queimada, e a priority fee, opcional, que vai para o validador. O max fee é o teto que você aceita pagar; o que sobrar é devolvido. Base é uma L2 construída em cima da Ethereum; a BNB Chain é uma rede alternativa. Mandar ETH para outra pessoa usa 21.000 unidades de gas.</p></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m1-check-q14" titulo="Pergunta rápida" perguntas="{{ quiz.q14 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Corretora (CEX) × troca on-chain (DEX): quem guarda a chave</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Na CEX, uma empresa guarda seu dinheiro e tem suporte. Na DEX, você negocia sozinho, direto da carteira, e não tem a quem recorrer.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;overflow-x:auto" tabindex="0" role="group" aria-label="Comparação CEX e DEX (role na horizontal se preciso)">
+<table style="border-collapse:collapse;width:100%;min-width:540px;font-size:14px">
+<thead><tr><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Critério</th><th scope="col" style="text-align:left;padding:8px 12px;font-weight:600;border-bottom:1px solid #1F2733">CEX <span style="display:block;font-size:12px;font-weight:400;color:#9AA7B4">corretora centralizada</span></th><th scope="col" style="text-align:left;padding:8px 12px;font-weight:600;border-bottom:1px solid #1F2733">DEX <span style="display:block;font-size:12px;font-weight:400;color:#9AA7B4">programa na blockchain</span></th></tr></thead>
+<tbody>
+<sc-for list="{{ cexDex }}" as="l" hint-placeholder-count="5">
+<tr style="background:{{ l.fundo }}"><th scope="row" style="text-align:left;padding:10px 12px;font-weight:600;border-bottom:1px solid #1F2733;border-left:{{ l.bordaEsq }};vertical-align:top">{{ l.rotulo }}<sc-if value="{{ l.decisivo }}" hint-placeholder-val="{{ false }}"><span style="display:block;font-size:12px;font-weight:600;color:#22D3EE">critério decisivo</span></sc-if></th><td style="padding:10px 12px;border-bottom:1px solid #1F2733;color:#9AA7B4;vertical-align:top">{{ l.cex }}</td><td style="padding:10px 12px;border-bottom:1px solid #1F2733;color:#9AA7B4;vertical-align:top">{{ l.dex }}</td></tr>
+</sc-for>
+</tbody></table>
+</div>
+<p style="margin:0;color:#9AA7B4">Quase todo token novo e memecoin só existe em DEX: criar um pool não exige autorização de ninguém. Isso também significa menos proteção e muito mais espaço para golpe. Na DEX, o preço vem de um pool de liquidez, não de um livro de ofertas.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: como o preço anda numa DEX (pool inventado, sem taxas)</summary>
+<ol style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>Um pool com 10 ETH e 10.000 tokens. O AMM olha a proporção: 10.000 ÷ 10 = 1.000 tokens por ETH.</li><li style="margin-top:4px">Fórmula do produto constante: x × y = k. Aqui, 10 × 10.000 = 100.000, e isso não pode mudar.</li><li style="margin-top:4px">Você coloca 1 ETH. O pool fica com 11 ETH, então só pode ficar com 100.000 ÷ 11 ≈ 9.091 tokens.</li><li style="margin-top:4px">Você recebe cerca de 909 tokens, não os 1.000 que a tela mostrava. A diferença é o slippage. Quanto menor o pool e maior a sua ordem, pior. <span style="border-radius:999px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);color:#F59E0B;padding:1px 8px;font-size:12px;font-weight:600">exemplo inventado</span></li></ol></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m1-check-q15" titulo="Pergunta rápida" perguntas="{{ quiz.q15 }}" hint-size="100%,300px"></x-import>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ CARTEIRAS ============ -->
+<sc-if value="{{ eh.carteiras }}" hint-placeholder-val="{{ false }}">
+<div id="painel-carteiras" role="tabpanel" aria-labelledby="aba-carteiras" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.carteiras }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Chave privada, chave pública e endereço</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">O endereço serve para receber e pode ser divulgado. A chave privada serve para gastar e nunca pode ser mostrada.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<ol role="img" aria-label="Da frase-semente nasce a chave privada; da privada, a pública; da pública, o endereço. Cada seta é de mão única: do endereço ninguém volta à chave." tabindex="0" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:{{ dirSeq }};align-items:stretch;gap:0;overflow-x:auto">
+<sc-for list="{{ chaves }}" as="c" hint-placeholder-count="4">
+<li style="flex:1 1 0;display:flex;flex-direction:{{ dirSeq }};align-items:stretch;min-width:{{ minPasso }}">
+<div style="flex:1 1 auto;min-width:0;border-radius:8px;border:1px solid {{ c.borda }};background:{{ c.fundo }};padding:12px 14px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:{{ c.cor }}">{{ c.tag }}</p><p style="margin:4px 0 0;font-size:14px;font-weight:600">{{ c.titulo }}</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">{{ c.texto }}</p></div>
+<sc-if value="{{ c.seta }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#9AA7B4;padding:4px 8px;font-size:18px">→</span></sc-if>
+</li>
+</sc-for>
+</ol>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Cada passo é de mão única. Saber o seu endereço não permite a ninguém descobrir a sua chave.</figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">Em cripto não existe uma senha só. Você tem um par de chaves ligadas por matemática, mais um endereço. A chave privada é um número secreto, sorteado ao acaso, que assina as transações — quem tiver a sua, assina no seu lugar. O endereço é como o número da conta que você passa para receber um Pix.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: bytes, curvas e o formato em cada rede</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>A chave privada tem 32 bytes (256 bits de aleatoriedade). Da privada à pública: curva secp256k1 na EVM, Ed25519 na Solana.</li><li style="margin-top:4px">Na EVM, o endereço são os últimos 20 bytes do hash Keccak-256 da chave pública: 42 caracteres começando com "0x". É um resumo da chave pública, não ela mesma.</li><li style="margin-top:4px">Na Solana, a chave pública de 32 bytes é o próprio endereço, escrita em base58 (32 a 44 letras e números). Por isso chamar endereço de "chave pública" está certo na Solana e não na Ethereum.</li></ul></details>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Onde ficam suas chaves: CEX, hot wallet e cold wallet</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Quem controla a chave privada controla o dinheiro. As três categorias só mudam quem guarda essa chave, e onde.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;overflow-x:auto" tabindex="0" role="group" aria-label="Comparação: CEX, hot wallet e cold wallet (role na horizontal se preciso)">
+<table style="border-collapse:collapse;width:100%;min-width:600px;font-size:14px">
+<thead><tr><th scope="col" style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733">Critério</th>
+<sc-for list="{{ carteiras.opcoes }}" as="o" hint-placeholder-count="3"><th scope="col" style="text-align:left;padding:8px 12px;font-weight:600;border-bottom:1px solid #1F2733">{{ o.titulo }}<span style="display:block;font-size:12px;font-weight:400;color:#9AA7B4">{{ o.subtitulo }}</span></th></sc-for>
+</tr></thead>
+<tbody>
+<sc-for list="{{ carteiras.linhas }}" as="l" hint-placeholder-count="3">
+<tr style="background:{{ l.fundo }}"><th scope="row" style="text-align:left;padding:10px 12px;font-weight:600;border-bottom:1px solid #1F2733;border-left:{{ l.bordaEsq }};vertical-align:top">{{ l.rotulo }}<sc-if value="{{ l.decisivo }}" hint-placeholder-val="{{ false }}"><span style="display:block;font-size:12px;font-weight:600;color:#22D3EE">critério decisivo</span></sc-if></th>
+<sc-for list="{{ l.celulas }}" as="c" hint-placeholder-count="3"><td style="padding:10px 12px;border-bottom:1px solid #1F2733;vertical-align:top;color:#9AA7B4"><span style="display:inline-block;border-radius:6px;border:1px solid {{ c.borda }};background:{{ c.fundo }};color:{{ c.cor }};padding:{{ c.pad }};font-weight:{{ c.peso }}">{{ c.texto }}</span></td></sc-for>
+</tr>
+</sc-for>
+</tbody></table>
+<p style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Se as chaves não são suas, as moedas não são suas.</p>
+</div>
+<p style="margin:0;color:#9AA7B4">Suas moedas não ficam "dentro" da carteira. Elas vivem na blockchain. O que você possui de fato é a chave privada. Daí o ditado "not your keys, not your coins".</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: exemplos de cada categoria e o risco de contraparte</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>CEX: Binance e Mercado Bitcoin, só como exemplos da categoria. A CEX faz o KYC. O risco de contraparte apareceu nos colapsos da FTX, Celsius e Mt. Gox.</li><li style="margin-top:4px">Hot wallet: Phantom (Solana) e MetaMask (EVM), só como exemplos. A entropia é gerada pelo próprio dispositivo.</li><li style="margin-top:4px">Cold wallet: aparelhos da Ledger e de outros fabricantes. Protegem a chave, mas não protegem você de digitar a seed num site de golpe. Em dezembro de 2023, a biblioteca Ledger Connect Kit foi comprometida num ataque de cadeia de suprimentos.</li></ul></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m1-check-q2" titulo="Pergunta rápida" perguntas="{{ quiz.q2 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Em que situação cada carteira faz sentido</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Não existe "a melhor" carteira. Existe a certa para cada uso.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="Para que você vai usar? Para entrar e sair em reais: corretora (CEX). Para operar on-chain: carteira quente, com pouco dinheiro. Para guardar por muito tempo: carteira fria. Nada disso é recomendação." style="display:flex;flex-direction:column;align-items:center">
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 16px;font-size:14px;font-weight:600;text-align:center">Para que você vai usar?</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div style="display:grid;grid-template-columns:{{ colsTres }};gap:12px;width:100%">
+<sc-for list="{{ usoCarteira }}" as="u" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;align-items:center">
+<span style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:1px 10px;font-size:12px;color:#9AA7B4;text-align:center">{{ u.se }}</span>
+<div aria-hidden="true" style="width:2px;height:12px;background:#9AA7B4"></div>
+<div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 14px"><p style="margin:0;font-size:14px;font-weight:600">{{ u.entao }}</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">{{ u.texto }}</p></div>
+</div>
+</sc-for>
+</div>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Muitos usuários combinam as três, cada uma com uma função. Nada disso é recomendação: é a descrição de como as categorias se encaixam.</figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">Regra prática que muita gente adota: não deixar na corretora mais do que se está disposto a perder num eventual bloqueio ou incidente. Outra: ter uma carteira quente só para trade, com pouco saldo, separada da carteira onde está o grosso do patrimônio.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: como criar sua primeira carteira, em 7 passos</summary>
+<ol style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>Baixe só da fonte oficial. NUNCA a partir de anúncio patrocinado.</li><li style="margin-top:4px">Escolha "criar nova carteira", não "importar".</li><li style="margin-top:4px">Anote a frase-semente no papel, na ordem e numerada. NUNCA foto, print ou nuvem.</li><li style="margin-top:4px">Confirme a frase quando o app pedir palavras de posições específicas.</li><li style="margin-top:4px">Crie a senha ou PIN do app — ela é diferente da frase-semente.</li><li style="margin-top:4px">Faça um teste com valor pequeno: envie, confira, envie de volta.</li><li style="margin-top:4px">Confira no explorador de blocos. A blockchain é a fonte da verdade.</li></ol></details>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ SEED ============ -->
+<sc-if value="{{ eh.seed }}" hint-placeholder-val="{{ false }}">
+<div id="painel-seed" role="tabpanel" aria-labelledby="aba-seed" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.seed }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Frase-semente: por que 12 ou 24 palavras SÃO a carteira</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">As 12 ou 24 palavras não são um backup da carteira. Elas são a carteira.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="12 palavras viram uma semente; da semente nasce uma árvore de chaves: conta 1, conta 2, conta 3, cada uma com chave privada e endereço, em qualquer rede. A mesma frase recria tudo em qualquer aplicativo compatível." style="display:flex;flex-direction:column;align-items:center;gap:0">
+<div style="display:grid;grid-template-columns:repeat({{ colsPalavras }},1fr);gap:6px;width:100%;max-width:560px">
+<sc-for list="{{ palavras }}" as="p" hint-placeholder-count="12"><span style="border-radius:6px;border:1px solid #1F2733;background:#141A24;padding:4px 8px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#9AA7B4;display:flex;gap:6px;align-items:center"><span style="color:#22D3EE">{{ p }}</span><span aria-hidden="true" style="flex:1 1 auto;border-bottom:1px dashed #9AA7B4;height:1px"></span></span></sc-for>
+</div>
+<div aria-hidden="true" style="width:2px;height:18px;background:#9AA7B4"></div>
+<div style="border-radius:8px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:8px 16px;font-size:14px;font-weight:600">A semente <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:500;color:#9AA7B4;font-size:12px">512 bits</span></div>
+<div aria-hidden="true" style="width:2px;height:18px;background:#9AA7B4"></div>
+<div style="display:grid;grid-template-columns:{{ colsTres }};gap:12px;width:100%;max-width:560px">
+<sc-for list="{{ contas }}" as="c" hint-placeholder-count="3">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 12px;font-size:13px"><p style="margin:0;font-weight:600">{{ c }}</p><p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#9AA7B4">chave privada<br>→ endereço</p></div>
+</sc-for>
+</div>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Todas as suas chaves e endereços são calculados a partir das palavras. Por isso a mesma frase recria a mesma carteira em qualquer aplicativo compatível — e uma conta "nova" dentro da mesma frase não protege nada se a frase vazou.</figcaption>
+</figure>
+<div role="img" aria-label="Quem tem as palavras tem todo o seu dinheiro, para sempre, em qualquer aparelho. Quem perde as palavras: se o aparelho quebrar, ninguém no mundo recupera." style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+<div style="border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">Quem tem as palavras</p><p style="margin:6px 0 0;font-size:14px">Tem todo o seu dinheiro, para sempre, em qualquer aparelho. Não precisa da sua senha nem do seu celular.</p></div>
+<div style="border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">Quem perde as palavras</p><p style="margin:6px 0 0;font-size:14px">Se o aparelho quebrar, ninguém no mundo recupera o dinheiro. Não existe "esqueci minha senha".</p></div>
+</div>
+<p style="margin:0;color:#9AA7B4">Guardar a frase-semente com segurança é a habilidade número um de todo este módulo.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: como as palavras viram chaves (BIP-39, BIP-32, BIP-44)</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>BIP-39 é o padrão das palavras: uma lista fixa de 2.048. O aparelho sorteia a entropia e acrescenta um checksum.</li><li style="margin-top:4px">Cada pedaço de 11 bits vira uma palavra. 128 bits viram 12 palavras; 256 bits, 24.</li><li style="margin-top:4px">A frase passa por PBKDF2-HMAC-SHA512 e vira uma semente de 512 bits. O BIP-32 cria a árvore de chaves (carteira HD); o BIP-44 organiza por moeda e por conta.</li></ul></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m1-check-q10" titulo="Pergunta rápida" perguntas="{{ quiz.q10 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">As formas concretas de perder tudo pela seed</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Ninguém legítimo jamais pede a sua frase-semente. Todo pedido é golpe.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">As cinco formas mais comuns — e o que cada uma tem em comum</p>
+<div role="img" aria-label="{{ perderAlt }}" style="display:flex;flex-direction:{{ dirSeq }};gap:16px;align-items:{{ alinhaMapa }}">
+<ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;flex:1 1 auto;min-width:0;width:100%">
+<sc-for list="{{ perder }}" as="f" hint-placeholder-count="5">
+<li style="display:flex;gap:10px;align-items:flex-start;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 12px"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ f.n }}</span><span style="font-size:14px"><strong>{{ f.titulo }}</strong> <span style="color:#9AA7B4">{{ f.texto }}</span></span></li>
+</sc-for>
+</ol>
+<span aria-hidden="true" style="flex:0 0 auto;color:#9AA7B4;font-size:20px;padding:0 4px;align-self:center">→</span>
+<div style="flex:0 0 auto;width:{{ larguraSaida }};box-sizing:border-box;border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:14px 16px;align-self:center"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">O que todas fazem</p><p style="margin:6px 0 0;font-size:14px;color:#E6EDF3">A frase sai do papel e vira algo digital, ou vai para a mão de alguém. A partir daí, a carteira é de quem tem a cópia.</p></div>
+</div>
+</figure>
+<p style="margin:0;color:#9AA7B4">Nenhum suporte, nenhuma corretora, nenhum airdrop, nenhum "verificador de carteira". Digitar as 12 ou 24 palavras num site é entregar a carteira.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: o que um infostealer copia</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Famílias como RedLine e Lumma copiam arquivos de carteira (wallet.dat) e dados de extensões de navegador, como a MetaMask. Também vigiam a área de transferência atrás de frases e endereços.</p></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m1-check-q3" titulo="Pergunta rápida" perguntas="{{ quiz.q3 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Checklist de segurança</h2>
+<p style="margin:8px 0 16px;font-size:14px;color:#9AA7B4">Marque conforme for aplicando. Fica salvo no seu navegador.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Checklist" id="modulo-1-seguranca-seed" itens="{{ checklist }}" rotulo-progresso="Progresso do checklist de segurança" hint-size="100%,600px"></x-import>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ GOLPES ============ -->
+<sc-if value="{{ eh.golpes }}" hint-placeholder-val="{{ false }}">
+<div id="painel-golpes" role="tabpanel" aria-labelledby="aba-golpes" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.golpes }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Wallet drainers: o golpe que não rouba a sua seed</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Conectar a carteira não rouba nada. O roubo começa quando você assina.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">Como um drainer esvazia a carteira — clique num passo</p>
+<ol role="tablist" aria-label="Passos do drainer" tabindex="0" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:{{ dirSeq }};align-items:stretch;gap:0;overflow-x:auto">
+<sc-for list="{{ drainer }}" as="p" hint-placeholder-count="5">
+<li style="display:flex;flex-direction:{{ dirSeq }};align-items:stretch;flex:1 1 0;min-width:{{ minPasso }}">
+<button type="button" role="tab" aria-selected="{{ p.atual }}" data-indice="{{ p.indice }}" onClick="{{ escolherPasso }}" style="flex:1 1 auto;min-width:0;min-height:44px;border-radius:8px;border:1px solid {{ p.borda }};background:{{ p.fundo }};padding:10px 12px;color:#E6EDF3;text-align:left;cursor:pointer;display:flex;gap:10px;align-items:flex-start" style-hover="border-color:#9AA7B4"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:{{ p.mFundo }};color:{{ p.mCor }};font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ p.numero }}</span><span style="min-width:0;font-size:14px;font-weight:600;line-height:1.35;overflow-wrap:break-word">{{ p.titulo }}</span></button>
+<sc-if value="{{ p.seta }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#9AA7B4;padding:2px 6px;min-height:{{ alturaSeta }}">→</span></sc-if>
+</li>
+</sc-for>
+</ol>
+<div role="tabpanel" aria-live="polite" style="margin-top:16px;border-radius:8px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.12);padding:12px 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+<div><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">O que a vítima vê</p><p style="margin:4px 0 0;font-size:14px">{{ passoAtual.oQueVeem }}</p></div>
+<div><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">O que está de fato acontecendo</p><p style="margin:4px 0 0;font-size:14px">{{ passoAtual.oQueAcontece }}</p></div>
+</div>
+<p style="margin:12px 0 0;font-size:13px;color:#9AA7B4">O dano não está em conectar, e sim em assinar. O passo 3 é o ponto de virada.</p>
+</div>
+<p style="margin:0;color:#9AA7B4">Um wallet drainer é um kit de golpe num site falso (phishing). O site pede que você assine algo que parece rotina; a assinatura dá ao golpista permissão sobre seus tokens, e ele esvazia a carteira sem nunca ver a sua seed. Por trás há um negócio organizado: o operador cria o kit e aluga para afiliados, que espalham os sites. A divisão mais comum é 80% para o afiliado e 20% para o operador.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: os números da Scam Sniffer e o estudo revisado por pares</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>2023: cerca de US$ 295,5 milhões, mais de 324.000 vítimas. 2024: US$ 494 milhões, 332.000 carteiras (+67%). 2025: US$ 83,85 milhões, 106.106 carteiras (−83% nas perdas). A queda acompanhou o mercado; "à medida que drainers antigos saem, novos surgem".</li><li style="margin-top:4px">He et al. (Zhejiang/BlockSec, ACM IMC 2025), Ethereum de 01/03/2023 a 01/04/2025: US$ 135 milhões de 76.582 vítimas; 1.910 contratos de partilha, 56 operadores, 6.087 afiliados; afiliados ficam "tipicamente com 80% a 90%".</li><li style="margin-top:4px">Inferno Drainer (nov/2022–nov/2023): mais de US$ 80 milhões de cerca de 137.000 vítimas, 16.000 domínios, mais de 100 marcas imitadas (Group-IB).</li></ul></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m1-check-q6" titulo="Pergunta rápida" perguntas="{{ quiz.q6 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Os três truques: nos três, você entrega uma permissão sem perceber</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Os drainers usam três truques principais. Nos três, você entrega uma permissão sem perceber.</p>
+<div role="img" aria-label="Approval ilimitado: autoriza um contrato a gastar um token seu sem limite. Permit e Permit2: um inofensivo assinar mensagem, sem taxa, que dá permissão sobre seus tokens. setApprovalForAll: dá a um operador o direito sobre todos os NFTs de uma coleção. Os três terminam no mesmo lugar: permissão para mover seus ativos." style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+<sc-for list="{{ vetores }}" as="v" hint-placeholder-count="3">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:14px 16px;display:flex;flex-direction:column;gap:6px"><p style="margin:0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#22D3EE">{{ v.titulo }}</p><p style="margin:0;font-size:14px;color:#9AA7B4">{{ v.texto }}</p><p style="margin:auto 0 0;padding-top:8px;font-size:13px;color:#F87171;font-weight:600">→ permissão sobre seus ativos</p></div>
+</sc-for>
+</div>
+<p style="margin:0;color:#9AA7B4">Sites legítimos também pedem approval para funcionar. O perigo é o valor ilimitado. O Permit engana porque não parece uma transação. O setApprovalForAll faz um marketplace funcionar — e está por trás de quase toda drenagem de NFT por phishing. Há ainda o EIP-7702, de 2025, tratado na aba "Defesa".</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: os padrões técnicos e os números da Scam Sniffer</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>ERC-20 é o padrão dos tokens na EVM; Permit e Permit2 são assinaturas EIP-712 sem gás. O Permit2 fica em <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;overflow-wrap:anywhere">0x000000000022D473030F116dDEE9F6B43aC78BA3</span> em várias redes. setApprovalForAll é dos padrões ERC-721 e ERC-1155.</li><li style="margin-top:4px">Relatório 2024 da Scam Sniffer: Permit 56,7% dos roubos, setOwner 31,9%, Transfer 4,5%, increaseAllowance 3,5%. A Ethereum concentrou 85,3% das perdas. Em 2025, Permit/Permit2 responderam por 38% das perdas acima de US$ 1 milhão.</li></ul></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m1-check-q4" titulo="Pergunta rápida" perguntas="{{ quiz.q4 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Address poisoning e clipper: quando o alvo é o endereço</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Antes de enviar, confira o endereço inteiro e faça um teste com valor baixo. Começo e fim iguais não bastam.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><p style="margin:0;font-size:14px;font-weight:600">O endereço quase igual</p><span style="border-radius:999px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);color:#F59E0B;padding:1px 10px;font-size:12px;font-weight:600">endereços inventados</span></div>
+<div role="img" aria-label="Dois endereços com o mesmo começo (0x3aF1) e o mesmo fim (Bf07). Só os caracteres do meio mudam. Conferindo só as pontas, os dois parecem iguais." style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ enderecos }}" as="e" hint-placeholder-count="2">
+<div style="border-radius:8px;border:1px solid {{ e.borda }};background:{{ e.fundo }};padding:10px 14px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:{{ e.cor }}">{{ e.rotulo }}</p><p style="margin:4px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:14px;overflow-wrap:anywhere;line-height:1.5"><span>{{ e.inicio }}</span><span style="border-radius:4px;background:{{ e.meioFundo }};color:{{ e.meioCor }};padding:1px 3px">{{ e.meio }}</span><span>{{ e.fim }}</span></p></div>
+</sc-for>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">A gente costuma conferir só as pontas. O golpista gera um endereço com o mesmo começo e o mesmo fim, manda uma transação minúscula para ele aparecer no seu histórico, e espera você copiar dali.</figcaption>
+</figure>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">Clipper: o vírus troca o endereço na hora de colar</p>
+<ol role="img" aria-label="1. Você copia o endereço certo. 2. O vírus no aparelho vigia o copiar e colar. 3. Na hora de colar, ele troca em silêncio pelo do golpista. 4. Você confere só as pontas e envia. O dinheiro vai para o golpista." tabindex="0" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:{{ dirSeq }};align-items:stretch;gap:0;overflow-x:auto">
+<sc-for list="{{ clipper }}" as="c" hint-placeholder-count="4">
+<li style="flex:1 1 0;display:flex;flex-direction:{{ dirSeq }};align-items:stretch;min-width:{{ minPasso }}">
+<div style="flex:1 1 auto;min-width:0;border-radius:8px;border:1px solid {{ c.borda }};background:{{ c.fundo }};padding:10px 12px;display:flex;gap:10px;align-items:flex-start"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ c.n }}</span><span style="min-width:0;font-size:14px;color:{{ c.cor }};overflow-wrap:break-word">{{ c.texto }}</span></div>
+<sc-if value="{{ c.seta }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#9AA7B4;padding:2px 6px">→</span></sc-if>
+</li>
+</sc-for>
+</ol>
+</figure>
+<p style="margin:0;color:#9AA7B4">A defesa contra os dois é a mesma: nunca confiar só no começo e no fim. Confira a linha inteira. Acima de tudo, envie uma transação-teste de valor baixo antes de um valor alto. Uma carteira fria mostra o endereço de destino na telinha do próprio aparelho, fora do alcance do clipper.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: o tamanho do problema</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Estudo da Carnegie Mellon ("Blockchain Address Poisoning", USENIX Security 2025), Ethereum e BNB Chain de julho de 2022 a junho de 2024: 270 milhões de tentativas contra 17 milhões de vítimas, 6.633 incidentes bem-sucedidos e ao menos US$ 83,8 milhões em perdas. Variantes de clipper usam endereços parecidos com o verdadeiro, para enganar quem confere só o começo depois de colar.</p></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m1-check-q7" titulo="Pergunta rápida" perguntas="{{ quiz.q7 }}" hint-size="100%,300px"></x-import>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ DEFESA ============ -->
+<sc-if value="{{ eh.defesa }}" hint-placeholder-val="{{ false }}">
+<div id="painel-defesa" role="tabpanel" aria-labelledby="aba-defesa" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.defesa }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Revogação de aprovações: como e o que ela não resolve</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Revogar uma aprovação impede roubos futuros por aquela permissão. Mas não devolve nada que já saiu.</p>
+<div role="img" aria-label="Revogar resolve: impede usos futuros de uma permissão que você deu. Revogar não resolve: não recupera o que já saiu, não salva uma frase-semente vazada, não remove um vírus que ainda está no aparelho." style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">
+<div style="border-radius:8px;border:2px solid #22C55E;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22C55E">Revogar resolve</p><ul style="margin:6px 0 0;padding-left:18px;font-size:14px"><li>Impede usos futuros de uma permissão que você deu.</li></ul></div>
+<div style="border-radius:8px;border:2px dashed #EF4444;background:#0B0F17;padding:14px 16px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">Revogar NÃO resolve</p><ul style="margin:6px 0 0;padding-left:18px;font-size:14px;color:#9AA7B4"><li>Não recupera o que já saiu.</li><li>Não salva uma frase-semente vazada.</li><li>Não remove um vírus que ainda está no aparelho.</li></ul></div>
+</div>
+<p style="margin:0;color:#9AA7B4">Aprovação é a permissão que você dá a um contrato para mexer nos seus tokens. Ela fica ativa para sempre, até você cancelar. Para só olhar, não precisa conectar a carteira: no Revoke.cash basta digitar o seu endereço. Para revogar de fato, você conecta, filtra e clica em "Revoke" — é uma transação, custa gas.</p>
+<p style="margin:0;color:#9AA7B4">Regra de ouro: revogar interrompe gastos futuros. Não é um botão de "desfazer".</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: o tutorial clique a clique</summary>
+<p style="margin:8px 0 0;font-size:14px;font-weight:600">No Revoke.cash</p>
+<ol style="margin:4px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>Abra revoke.cash conferindo a URL letra por letra. Digite você mesmo.</li><li>"Connect Wallet" para revogar, ou cole o endereço/ENS para só olhar.</li><li>Selecione a rede no menu.</li><li>Leia a lista: token, spender, valor aprovado e idade.</li><li>Ordene de "Newest to Oldest" para achar uma aprovação suspeita recente.</li><li>Clique em "Revoke" e confirme na carteira, pagando o gas.</li><li>Confira a aba do Permit2 e revogue também as permissões internas.</li></ol>
+<p style="margin:8px 0 0;font-size:14px;font-weight:600">No Token Approval Checker do Etherscan</p>
+<ol style="margin:4px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>Menu "More" → "Token Approvals".</li><li>Cole seu endereço ou conecte.</li><li>Selecione ERC-20, ERC-721 ou ERC-1155 e ative "Show all approvals".</li><li>Localize e clique em "Revoke".</li></ol>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Cada revogação custa gas: revogue primeiro as de maior valor e de contratos que você não reconhece.</p></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m1-check-q12" titulo="Pergunta rápida" perguntas="{{ quiz.q12 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">As duas camadas do Permit2 e o vetor novo (EIP-7702)</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Uma única assinatura pode valer a carteira inteira. Leia sempre o que a carteira pede antes de confirmar.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="Você usa um app DeFi. Dá um approval ERC-20 ao contrato Permit2: a camada 1. O Permit2 guarda sub-permissões por app: a camada 2. Dela saem duas funções: lockdown revoga várias de uma vez; invalidateNonces anula assinaturas não usadas." style="display:flex;flex-direction:column;align-items:center">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 16px;font-size:14px;font-weight:600;text-align:center">Você usa um app DeFi</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div style="border-radius:8px;border:1px solid rgba(124,58,237,.6);background:rgba(124,58,237,.15);padding:10px 16px;font-size:14px;text-align:center;max-width:420px"><span style="display:block;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Camada 1 · você → Permit2</span>Approval ERC-20 ao contrato Permit2, geralmente ilimitado</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 16px;font-size:14px;text-align:center;max-width:420px"><span style="display:block;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Camada 2 · Permit2 → cada app</span>Permit2 guarda sub-permissões por app, com valor e prazo</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:12px;width:100%;max-width:520px">
+<div style="border-radius:8px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);padding:10px 14px;font-size:13px"><span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#22C55E">lockdown</span><br>revoga várias sub-permissões de uma vez</div>
+<div style="border-radius:8px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);padding:10px 14px;font-size:13px"><span style="font-family:'JetBrains Mono',ui-monospace,monospace;color:#22C55E">invalidateNonces</span><br>anula assinaturas já feitas e não usadas</div>
+</div>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Revogar a camada certa importa. O Revoke.cash mostra as duas em abas separadas.</figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">O lado bom do Permit2: as permissões expiram sozinhas. O lado ruim: o risco passa para a assinatura, que não custa gas — fica mais fácil enganar a vítima. O EIP-7702, ativado na atualização Pectra (maio de 2025), deixa uma carteira comum agir como contrato. O golpe: uma assinatura disfarçada de troca esconde uma "delegação" que entrega o controle do seu endereço. Casos reais: cerca de US$ 146,5 mil em 24/05/2025 e mais de US$ 1,54 milhão em 24/08/2025.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: as funções do Permit2 e as fontes dos casos</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>Na camada 2, o app da Uniswap costuma usar aprovação de 30 dias. lockdown é "batch revoking approvals" nas palavras do código da Uniswap.</li><li style="margin-top:4px">As assinaturas do Permit2 seguem o padrão EIP-712.</li><li style="margin-top:4px">Caso de 24/05/2025: ataque EIP-7702 ligado ao Inferno Drainer, analisado pela SlowMist. Caso de 24/08/2025: mesma técnica, monitorada pela Scam Sniffer.</li></ul></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m1-check-q11" titulo="Pergunta rápida" perguntas="{{ quiz.q11 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Plano de emergência: os primeiros 10 minutos</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Primeiro salve o que sobrou. Depois guarde as provas e denuncie. Recuperar o que já saiu é raro.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="{{ emergencia.alt }}" style="display:flex;flex-direction:column;align-items:center">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 16px;font-size:14px;font-weight:600;text-align:center">Você percebeu a drenagem</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 16px;font-size:14px;font-weight:600;text-align:center">A frase-semente vazou?</div>
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:16px;width:100%;max-width:600px">
+<sc-for list="{{ emergencia.ramos }}" as="r" hint-placeholder-count="2">
+<div style="display:flex;flex-direction:column;align-items:center">
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+<span style="border-radius:999px;border:1px solid {{ r.borda }};background:{{ r.fundo }};color:{{ r.cor }};padding:1px 10px;font-size:12px;font-weight:600">{{ r.rotulo }}</span>
+<sc-for list="{{ r.nos }}" as="n" hint-placeholder-count="2">
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+<div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 14px;font-size:14px;text-align:center">{{ n }}</div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div style="border-radius:8px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);padding:10px 16px;font-size:14px;font-weight:600;text-align:center">Registre evidências e reporte</div>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">A frase-semente vazou ou foi só uma assinatura maliciosa? A resposta muda tudo.</figcaption>
+</figure>
+<ol style="margin:0;padding-left:20px;font-size:14px;color:#9AA7B4;display:flex;flex-direction:column;gap:6px">
+<li><strong style="color:#E6EDF3">Pare de usar o aparelho.</strong> Ele pode ter um infostealer ou um clipper. Só volte a operar de um aparelho limpo.</li>
+<li><strong style="color:#E6EDF3">Crie uma carteira NOVA, com frase NOVA,</strong> num aparelho limpo. Uma conta "nova" na mesma frase não serve.</li>
+<li><strong style="color:#E6EDF3">Mova o que sobrou,</strong> começando pelo que vale mais. Deixe gas suficiente.</li>
+<li><strong style="color:#E6EDF3">Cuidado com os sweeper bots.</strong> Se a frase vazou, um robô leva em segundos tudo o que chega, inclusive o gas.</li>
+<li><strong style="color:#E6EDF3">Revogue as aprovações só se a frase NÃO vazou.</strong> Se vazou, revogar não adianta.</li>
+<li><strong style="color:#E6EDF3">Guarde as provas:</strong> hashes, prints, URL do site, data e horário.</li>
+<li><strong style="color:#E6EDF3">Denuncie:</strong> boletim de ocorrência, Chainabuse, Scam Sniffer. Se o dinheiro foi para uma CEX, avise rápido.</li>
+<li><strong style="color:#E6EDF3">Desconfie de quem promete "recuperar seu cripto" cobrando adiantado.</strong> É um segundo golpe.</li>
+</ol>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: por que depositar gas falha e o que o FBI diz</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Quando a frase vazou, "depositar gas para salvar tokens" costuma fracassar: o robô leva o gas primeiro. A MetaMask recomenda abandonar a carteira e criar uma nova. O FBI, no alerta IC3 I-072026 (20/07/2026), afirma que o IC3 nunca cobra para recuperar fundos, nem indica empresa que cobre, e não tem perfil em rede social.</p></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m1-check-q5" titulo="Pergunta rápida" perguntas="{{ quiz.q5 }}" hint-size="100%,300px"></x-import>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ BRASIL ============ -->
+<sc-if value="{{ eh.brasil }}" hint-placeholder-val="{{ false }}">
+<div id="painel-brasil" role="tabpanel" aria-labelledby="aba-brasil" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Destaques" destaques="{{ destaques.brasil }}" hint-size="100%,190px"></x-import>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Golpes comuns no Brasil</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Os golpes mudam de disfarce, mas repetem a mesma promessa: lucro fácil. E, na hora de sacar, pedem mais dinheiro.</p>
+<div role="img" aria-label="{{ golpesBrAlt }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+<sc-for list="{{ golpesBr }}" as="g" hint-placeholder-count="4">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+<p style="margin:0;font-size:14px;font-weight:600">{{ g.titulo }}</p>
+<div><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Promete</p><p style="margin:2px 0 0;font-size:13px">{{ g.promete }}</p></div>
+<div><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Onde está a armadilha</p><p style="margin:2px 0 0;font-size:13px;color:#9AA7B4">{{ g.armadilha }}</p></div>
+<div style="margin-top:auto;border-radius:6px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:6px 10px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#F87171">Sinal</p><p style="margin:2px 0 0;font-size:13px">{{ g.sinal }}</p></div>
+</div>
+</sc-for>
+</div>
+<p style="margin:0;color:#9AA7B4">Sinais de alerta comuns aos quatro: promessa de rendimento fixo ou garantido; pressão por urgência; exigência de recrutar outras pessoas; saque bloqueado até um novo depósito ou o pagamento de uma "taxa"; empresa sem registro ou autorização.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">Antes de colocar dinheiro: a checagem na CVM e no Banco Central</p>
+<div role="img" aria-label="Está nos alertas ou stop orders da CVM? Sim: forte sinal de perigo. Não: é autorizada pelo Banco Central? Não: forte sinal de perigo. Sim: passou pela checagem, o que não é garantia." style="display:flex;flex-direction:column;align-items:center">
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 16px;font-size:14px;font-weight:600;text-align:center;max-width:360px">Está nos alertas ou stop orders da CVM (gov.br/investidor)?</div>
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:16px;width:100%;max-width:600px">
+<div style="display:flex;flex-direction:column;align-items:center"><div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div><span style="border-radius:999px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);color:#F87171;padding:1px 10px;font-size:12px;font-weight:600">Sim</span><div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div><div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:10px 14px;font-size:14px;font-weight:600;color:#F87171;text-align:center">Forte sinal de perigo</div></div>
+<div style="display:flex;flex-direction:column;align-items:center"><div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div><span style="border-radius:999px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);color:#22C55E;padding:1px 10px;font-size:12px;font-weight:600">Não</span><div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div><div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 14px;font-size:14px;font-weight:600;text-align:center">É autorizada pelo Banco Central?</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%">
+<div style="display:flex;flex-direction:column;align-items:center"><div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div><span style="border-radius:999px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);color:#F87171;padding:1px 10px;font-size:12px;font-weight:600">Não</span><div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div><div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:8px 10px;font-size:13px;font-weight:600;color:#F87171;text-align:center">Forte sinal de perigo</div></div>
+<div style="display:flex;flex-direction:column;align-items:center"><div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div><span style="border-radius:999px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);color:#22C55E;padding:1px 10px;font-size:12px;font-weight:600">Sim</span><div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div><div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);padding:8px 10px;font-size:13px;text-align:center">Passou pela checagem. Não é garantia.</div></div>
+</div>
+</div>
+</div>
+</div>
+</figure>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: datas, multas e números de cada golpe</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>Atlas Quantum: Deliberação CVM nº 826 (13/08/2019) mandou parar a oferta. Em 21/05/2024, multas de mais de R$ 55,8 milhões por operação fraudulenta e embaraço à fiscalização. Prejuízo: estimativas da imprensa vão de R$ 1,1 bilhão e 47 mil investidores a R$ 7 bilhões e 200 mil pessoas — sem número oficial único.</li><li style="margin-top:4px">Grupos de sinais: o conflito é o "trader" ganhar comissão da corretora pelo volume que você opera.</li><li style="margin-top:4px">Pig butchering: a CVM (06/10/2025) estima prejuízo global acima de US$ 75 bilhões entre 2020 e 2024. Operação Criptoabate (Polícia Civil do RS, 13/08/2026): uma vítima transferiu R$ 37 milhões em seis meses; a estrutura tinha mais de R$ 30 bilhões em transações suspeitas.</li></ul></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m1-check-q16" titulo="Pergunta rápida" perguntas="{{ quiz.q16 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Cripto no Brasil: a cronologia que importa</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Desde fevereiro de 2026, corretoras de cripto no Brasil seguem regras do Banco Central. Por causa do custo, várias anunciaram que vão parar de atender pessoas comuns.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<ol style="list-style:none;margin:0;padding:0;max-width:620px">
+<sc-for list="{{ linha }}" as="m" hint-placeholder-count="13">
+<li style="position:relative;padding-left:32px;padding-bottom:{{ m.espaco }}px">
+<sc-if value="{{ m.temProximo }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="position:absolute;left:7px;top:16px;bottom:0;width:2px;background:#1F2733"></span></sc-if>
+<span aria-hidden="true" style="position:absolute;left:0;top:6px;width:16px;height:16px;border-radius:50%;border:2px solid #141A24;background:{{ m.cor }}"></span>
+<time style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22D3EE">{{ m.data }}</time>
+<p style="margin:4px 0 0;font-size:14px;font-weight:600">{{ m.titulo }}</p>
+<sc-if value="{{ m.texto }}" hint-placeholder-val="{{ true }}"><p style="margin:4px 0 0;font-size:14px;color:#9AA7B4">{{ m.texto }}</p></sc-if>
+<sc-if value="{{ m.temProximo }}" hint-placeholder-val="{{ true }}"><span style="position:absolute;left:24px;bottom:{{ m.posIntervalo }}px;border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:1px 10px;font-size:12px;color:#9AA7B4;white-space:nowrap">{{ m.intervalo }}</span></sc-if>
+</li>
+</sc-for>
+</ol>
+<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:#9AA7B4"><span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:50%;background:#7C3AED"></span>marco regulatório</span><span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:50%;background:#EF4444"></span>golpe ou alerta</span><span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:50%;background:#F59E0B"></span>prazo em aberto ou não verificado</span></div>
+<p style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Datas conforme o texto deste módulo e suas fontes. Regulação muda: confira no Banco Central e na CVM antes de tomar qualquer decisão baseada nela.</p>
+</div>
+<p style="margin:0;color:#9AA7B4">PSAV quer dizer Prestadora de Serviços de Ativos Virtuais: corretoras, intermediárias e custodiantes. As regras exigem prevenção à lavagem, governança, segurança e segregação do dinheiro dos clientes. Empresas que já operavam têm até 30 de outubro de 2026 para pedir autorização. Em 2026, Bitso, Coinext, NovaDAX, Digitra e Bitnuvem anunciaram o fim do varejo no Brasil, citando o custo de se adequar.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: números das resoluções e a Resolução 561</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>Resoluções BCB 519, 520 e 521, fruto das Consultas Públicas 109, 110 e 111 de 2024. Elas classificam as PSAVs em modalidades: intermediária, custodiante e corretora. A Bitso transferiu a base para o Mercado Bitcoin (setembro de 2026); a Coinext anunciou o fim em 03/09/2026.</li><li style="margin-top:4px">Resolução BCB 561 (30/04/2026, vigor em 01/10/2026): veda stablecoins como liquidação em câmbio eletrônico (eFX), isto é, pagamentos internacionais. Não proíbe comprar, vender nem guardar cripto internamente.</li></ul></details>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="m1-check-q8" titulo="Pergunta rápida" perguntas="{{ quiz.q8 }}" hint-size="100%,300px"></x-import>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Impostos: a obrigação existe (e este módulo não ensina a calcular)</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Vender ou trocar cripto pode gerar imposto. Guarde o registro de tudo e consulte um contador.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<p style="margin:0 0 12px;font-size:14px;font-weight:600">O que guardar de cada operação</p>
+<div role="img" aria-label="De cada operação, guarde: a data (dia da venda ou da troca), o valor (quanto entrou e quanto saiu, em reais) e as taxas (taxa da corretora, da pool e de rede). É isso que permite calcular corretamente." style="display:grid;grid-template-columns:{{ colsTres }};gap:12px">
+<sc-for list="{{ registro }}" as="r" hint-placeholder-count="3">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:12px 14px"><p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#22D3EE">{{ r.campo }}</p><p style="margin:6px 0 0;font-size:14px;font-weight:600">{{ r.oQue }}</p><p style="margin:4px 0 0;font-size:13px;color:#9AA7B4">{{ r.detalhe }}</p></div>
+</sc-for>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Guarde o registro de todas as operações, com datas, valores e taxas. É isso que permite calcular corretamente.</figcaption>
+</figure>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<ol role="img" aria-label="1. Você vende ou troca cripto. 2. Isso pode gerar imposto, e esse imposto pode ter prazo. 3. Guarde o registro da operação: data, valor e taxas. 4. Consulte um contador para o seu caso concreto." tabindex="0" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:{{ dirSeq }};align-items:stretch;gap:0;overflow-x:auto">
+<sc-for list="{{ passosImposto }}" as="p" hint-placeholder-count="4">
+<li style="flex:1 1 0;display:flex;flex-direction:{{ dirSeq }};align-items:stretch;min-width:{{ minPasso }}">
+<div style="flex:1 1 auto;min-width:0;border-radius:8px;border:1px solid {{ p.borda }};background:{{ p.fundo }};padding:10px 12px;display:flex;gap:10px;align-items:flex-start"><span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ p.n }}</span><span style="min-width:0;font-size:14px;font-weight:{{ p.peso }};overflow-wrap:break-word">{{ p.texto }}</span></div>
+<sc-if value="{{ p.seta }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#9AA7B4;padding:2px 6px">→</span></sc-if>
+</li>
+</sc-for>
+</ol>
+</figure>
+<p style="margin:0;color:#9AA7B4">No Brasil, cripto é tratada como um bem. O lucro está sujeito a imposto sobre ganho de capital, e há também obrigações de declaração. Este material não dá orientação tributária: o objetivo é deixar claro que a obrigação existe.</p>
+<p style="margin:0;color:#9AA7B4">As regras mudaram nos últimos anos, e a Receita Federal passou a receber mais informações. Como qualquer erro pode levar à malha fina, consulte um contador para o seu caso concreto.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: a lei e a plataforma DeCripto</summary>
+<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4"><li>As regras mudaram com a Lei 14.754/2023 (a "Lei das Offshores") e com novas normas da Receita Federal.</li><li style="margin-top:4px">A partir de julho de 2026, a plataforma DeCripto amplia a fiscalização, exigindo que plataformas informem as operações à Receita Federal.</li><li style="margin-top:4px">A DeCripto foi instituída pela IN RFB nº 2.291/2025 e é alinhada ao padrão internacional CARF da OCDE.</li></ul></details>
+</section>
+
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Sacar para reais: Pix, KYC e P2P</h2>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">O caminho mais comum é vender numa corretora e sacar por Pix. No P2P, nunca solte a cripto antes de ver o Pix na sua conta.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<div role="img" aria-label="Cripto na sua carteira. Caminho A: envio para uma CEX com KYC, venda por reais, saque via Pix. Caminho B: negociação P2P; só libera após confirmar o Pix." style="display:flex;flex-direction:column;align-items:center">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 16px;font-size:14px;font-weight:600;text-align:center">Cripto na sua carteira</div>
+<div aria-hidden="true" style="width:2px;height:16px;background:#9AA7B4"></div>
+<div style="display:grid;grid-template-columns:{{ colsDois }};gap:16px;width:100%;max-width:600px">
+<sc-for list="{{ saque }}" as="s" hint-placeholder-count="2">
+<div style="display:flex;flex-direction:column;align-items:center">
+<span style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:1px 10px;font-size:12px;color:#9AA7B4">{{ s.rotulo }}</span>
+<sc-for list="{{ s.nos }}" as="n" hint-placeholder-count="3">
+<div aria-hidden="true" style="width:2px;height:14px;background:#9AA7B4"></div>
+<div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid {{ n.borda }};background:{{ n.fundo }};padding:10px 14px;font-size:14px;text-align:center;font-weight:{{ n.peso }}">{{ n.texto }}</div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</div>
+<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">Dois caminhos: corretora com Pix, ou P2P direto com outra pessoa. Em ambos há obrigação tributária a considerar com um contador.</figcaption>
+</figure>
+<p style="margin:0;color:#9AA7B4">No P2P, a outra pessoa pode não pagar, pagar e pedir estorno, ou pagar com dinheiro de origem em fraude — e a sua conta pode ser bloqueada. As plataformas têm escrow, que reduz esse risco, mas não elimina.</p>
+<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px"><summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: o arranjo Binance + Z.ro Bank no Pix</summary>
+<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">Anunciado em 20/05/2025, integrando o Binance Pay ao Pix, operacionalizado pelo Z.ro Bank. Se o arranjo continua idêntico em setembro de 2026: não verificado.</p></details>
+</section>
+</div>
+</sc-if>
+
+<!-- ============ QUIZ ============ -->
+<sc-if value="{{ eh.quiz }}" hint-placeholder-val="{{ false }}">
+<div id="painel-quiz" role="tabpanel" aria-labelledby="aba-quiz" style="display:flex;flex-direction:column;gap:24px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Quiz" id="modulo-1" titulo="Mini-quiz do Módulo 1" descricao="Dezesseis perguntas. As respostas ficam salvas no navegador." perguntas="{{ quiz.todas }}" hint-size="100%,1200px"></x-import>
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Terminou o módulo?</h2>
+<p style="margin:8px 0 16px;font-size:14px;color:#9AA7B4">Marcar aqui faz a barra de progresso do topo avançar. Dá para desmarcar depois.</p>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Botao" variante="primario" hint-size="auto,40px">Marcar módulo como concluído</x-import>
+</section>
+<details style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Fontes e itens não verificados</summary>
+<h3 style="margin:16px 0 0;font-size:14px;font-weight:600">Não verificado</h3>
+<ul style="list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:8px">
+<sc-for list="{{ naoVerificado }}" as="n" hint-placeholder-count="4"><li style="border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.1);padding:12px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">{{ n.titulo }}: </strong>{{ n.texto }}</li></sc-for>
+</ul>
+<p style="margin:16px 0 0;font-size:14px;color:#9AA7B4">Fontes consultadas: a lista completa (datas de consulta em 06/09/2026) está em <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">src/data/modulo1.js › fontes</span> e é exibida integralmente pelo componente atual — sem mudança nesta tela.</p>
+</details>
+</div>
+</sc-if>
+
+<p style="margin:0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Aviso: </strong>material de estudo próprio, não é recomendação de investimento. Memecoin é o ativo de maior risco do mercado: 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia em que nasceram (CoinGecko Research).</p>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;compacto&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { aba: 'fundamentos', passo: 2 };
+  parse(d) { const p = d.split('/').map(Number); if (p.length === 3) return new Date(p[2], p[1] - 1, p[0]); if (p.length === 2) return new Date(p[1], p[0] - 1, 1); return new Date(p[0], 6, 1); }
+  meses(a, b) { return (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth()); }
+  intervalo(m) { if (m < 1) return 'menos de 1 mês depois'; const anos = Math.floor(m / 12), r = m % 12; if (!anos) return r + (r === 1 ? ' mês depois' : ' meses depois'); let t = anos + (anos === 1 ? ' ano' : ' anos'); if (r) t += ' e ' + r + (r === 1 ? ' mês' : ' meses'); return t + ' depois'; }
+  renderVals() {
+    const S = this.state, compacto = !!this.props.compacto;
+    const ABAS = [
+      { id: 'fundamentos', rotulo: 'Fundamentos', folhas: ['confirmações', 'explorador', 'gas', 'CEX × DEX'] },
+      { id: 'carteiras', rotulo: 'Carteiras', folhas: ['chave → endereço', 'CEX · hot · cold', 'qual faz sentido'] },
+      { id: 'seed', rotulo: 'Seed phrase', folhas: ['12 palavras = a carteira', '5 formas de perder', 'checklist'] },
+      { id: 'golpes', rotulo: 'Golpes', folhas: ['drainer', 'os 3 truques', 'endereço quase igual'] },
+      { id: 'defesa', rotulo: 'Defesa', folhas: ['revogar', 'Permit2 · EIP-7702', 'emergência'] },
+      { id: 'brasil', rotulo: 'Brasil', folhas: ['4 golpes', 'CVM · BC', 'cronologia PSAV', 'impostos', 'sacar em reais'] },
+      { id: 'quiz', rotulo: 'Quiz', folhas: ['16 perguntas'] },
+    ];
+    const ativo = (id) => id === S.aba;
+    const abas = ABAS.map((a) => ({ id: a.id, rotulo: a.rotulo, ativa: ativo(a.id), tabindex: ativo(a.id) ? 0 : -1, borda: ativo(a.id) ? '#7C3AED' : '#1F2733', fundo: ativo(a.id) ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    const mapa = ABAS.map((a) => ({ aba: a.id, titulo: a.rotulo, folhas: a.folhas, borda: ativo(a.id) ? '#7C3AED' : '#1F2733', fundo: ativo(a.id) ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    const eh = {}; ABAS.forEach((a) => { eh[a.id] = ativo(a.id); });
+
+    const destaques = {
+      fundamentos: [
+        { rotulo: 'Transações que falharam', valor: 'Ficam gravadas', nota: 'Para sempre — e cobram a taxa de gas do mesmo jeito. O explorador mostra "Failed" em vermelho, mas o custo já foi pago.', tom: 'alerta' },
+        { rotulo: 'Partes do preço do gas', valor: '2', nota: 'Desde a EIP-1559 (agosto de 2021): uma taxa-base, que é queimada, e uma gorjeta ao validador. É por isso que o preço varia com a demanda.' },
+        { rotulo: 'Quem reverte uma transação confirmada', valor: 'Ninguém', nota: 'Nem corretora, nem suporte, nem você. Cada bloco novo em cima do seu aumenta o custo de reescrever a história.' },
+      ],
+      carteiras: [
+        { rotulo: 'Quem guarda a chave na corretora', valor: 'A empresa', nota: '"Not your keys, not your coins." Quando FTX, Celsius e Mt. Gox quebraram, quem deixou fundos lá perdeu o acesso.', tom: 'alerta' },
+        { rotulo: 'Corretoras que anunciaram saída do varejo em 2026', valor: '5', nota: 'Bitso, Coinext, NovaDAX, Digitra e Bitnuvem, citando o custo de adequação à regulação. Nome de corretora é exemplo de categoria, nunca recomendação.' },
+        { rotulo: 'Custo de uma hot wallet', valor: 'Grátis', nota: 'Você guarda as chaves, num aparelho conectado. O preço é o risco de malware e phishing — e a responsabilidade inteira.' },
+      ],
+      seed: [
+        { rotulo: 'Palavras que SÃO a carteira', valor: '12 ou 24', nota: 'Quem tem a frase tem todo o dinheiro, para sempre, em qualquer dispositivo — sem precisar da sua senha nem do seu aparelho.' },
+        { rotulo: 'Cópias digitais seguras da frase', valor: '0', nota: 'Foto, print, nuvem, e-mail, WhatsApp, bloco de notas — qualquer cópia digital é um ponto de vazamento. Papel ou metal, offline.', tom: 'alerta' },
+        { rotulo: 'Quem recupera uma frase perdida', valor: 'Ninguém', nota: 'Não existe "esqueci minha senha". Perdeu as palavras e o aparelho quebrou, o dinheiro ficou inacessível para sempre.', tom: 'alerta' },
+      ],
+      golpes: [
+        { rotulo: 'Roubado por drainers em 2024', valor: 'US$ 494 mi', nota: 'Mais de 332 mil carteiras, alta de 67% sobre 2023. Em 2025 caiu 83%, para cerca de US$ 83,85 milhões.' },
+        { rotulo: 'Fatia de quem espalha a isca', valor: '80%', nota: 'A divisão mais comum entre afiliado e operador do kit. O drainer é um negócio com franquia — e o afiliado é quem te aborda.', tom: 'alerta' },
+        { rotulo: 'O que o drainer NÃO precisa', valor: 'Sua seed', nota: 'Ele rouba com a sua assinatura, não com a sua frase. Você aprova, sem ler, uma permissão que entrega os tokens.', tom: 'alerta' },
+      ],
+      defesa: [
+        { rotulo: 'Roubos por assinatura via Permit (2024)', valor: '56,7%', nota: 'Segundo a Scam Sniffer. Aparece na carteira como um inofensivo "assinar mensagem", sem taxa — e é isso que engana.', tom: 'alerta' },
+        { rotulo: 'Vetor novo desde maio de 2025', valor: 'EIP-7702', nota: 'Ativado na atualização Pectra do Ethereum. Casos reais: US$ 146,5 mil em 24/05/2025 e mais de US$ 1,54 mi em 24/08/2025.', tom: 'alerta' },
+        { rotulo: 'O que revogar NÃO faz', valor: 'Desfazer', nota: 'Revogar interrompe gastos futuros. Não recupera o que já saiu, não conserta uma seed vazada, não remove malware instalado.' },
+      ],
+      brasil: [
+        { rotulo: 'Resoluções do BC que regulam as PSAVs', valor: '519 · 520 · 521', nota: 'Publicadas em 10/11/2025, em vigor desde 02/02/2026. Corretoras já em operação têm até 30/10/2026 para pedir autorização.' },
+        { rotulo: 'Prejuízo global do pig butchering (2020–2024)', valor: 'US$ 75 bi+', nota: 'Estimativa citada pela CVM. No Brasil, uma só vítima transferiu R$ 37 milhões em seis meses (Operação Criptoabate, 13/08/2026).', tom: 'alerta' },
+        { rotulo: 'Quem informa suas operações à Receita desde julho de 2026', valor: 'As plataformas', nota: 'DeCripto, pela IN RFB 2.291/2025. A obrigação de declarar já existia; agora a Receita recebe os dados também pelo outro lado.' },
+      ],
+    };
+
+    // Fundamentos
+    const transacao = [
+      { n: 1, titulo: 'Entra num bloco', conf: '1 confirmação', texto: 'Já está na corrente.', blocos: ['#7C3AED'] },
+      { n: 2, titulo: 'Blocos por cima', conf: '2, 3, 4…', texto: 'Cada bloco fechado em cima soma uma.', blocos: ['#7C3AED', '#1F2733', '#1F2733'] },
+      { n: 3, titulo: 'Reverter fica impossível', conf: '12, 30 ou mais', texto: 'Um atacante teria de reescrever todos ao mesmo tempo.', blocos: ['#7C3AED', '#1F2733', '#1F2733', '#1F2733', '#1F2733'] },
+      { n: 4, titulo: 'A corretora libera', conf: 'mínimo atingido', texto: 'Por isso ela espera um número mínimo antes de liberar um depósito.', blocos: ['#7C3AED', '#1F2733', '#1F2733', '#1F2733', '#1F2733'] },
+    ].map((p, i, arr) => Object.assign(p, { seta: i < arr.length - 1, borda: i === 2 ? '#22D3EE' : '#1F2733', fundo: i === 2 ? 'rgba(34,211,238,.06)' : '#141A24' }));
+    // modulo1.anatomias.transacao — painéis e itens do arquivo, sem valores inventados
+    const paineisTx = [
+      { id: 'hash', rotulo: 'Transaction Hash — 0x… (66 caracteres)' },
+      { id: 'status', rotulo: 'Status', alerta: true },
+      { id: 'bloco', rotulo: 'Block + confirmações' },
+      { id: 'timestamp', rotulo: 'Timestamp (UTC)' },
+      { id: 'de', rotulo: 'From — quem enviou' },
+      { id: 'para', rotulo: 'To — quem recebeu (ou "Contract")' },
+      { id: 'value', rotulo: 'Value — moeda nativa', alerta: true },
+      { id: 'fee', rotulo: 'Transaction Fee / Gas' },
+      { id: 'tokens', rotulo: 'Aba Token Transfers — o que de fato se moveu' },
+    ];
+    const itensTx = [
+      { painel: 'hash', titulo: 'O identificador único.', texto: 'Cole no explorador para achar a transação. Começa com "0x" em redes EVM; na Solana o equivalente é a Signature.' },
+      { painel: 'status', titulo: 'Success ou Failed.', texto: 'Verde deu certo, vermelho falhou — e atenção: mesmo falhando, você pagou a taxa de gas.' },
+      { painel: 'para', titulo: '"To" pode ser um contrato.', texto: 'Em transferência de token, o "To" costuma ser o contrato do token, não uma pessoa. A palavra "Contract" no lugar de um endereço comum denuncia isso.' },
+      { painel: 'value', titulo: 'Value 0 não significa "nada aconteceu".', texto: 'O erro clássico de iniciante. Numa transferência de token, o Value (moeda nativa) pode ser zero enquanto tokens se moveram — olhe a aba de baixo.' },
+      { painel: 'tokens', titulo: 'Onde o movimento de verdade aparece.', texto: 'A aba Token Transfers (ou Balance Changes, no Solscan) mostra o que de fato saiu e entrou de cada carteira.' },
+      { painel: 'bloco', titulo: 'Confirmações.', texto: 'Quantos blocos já foram empilhados em cima do seu. Cada um aumenta o custo de reescrever a história — é o que torna a transação imutável.' },
+    ];
+    const marcadorDe = {}; itensTx.forEach((it, i) => { marcadorDe[it.painel] = i + 1; });
+    const painel = (id, altura) => { const p = paineisTx.find((x) => x.id === id); const m = marcadorDe[id];
+      return { rotulo: p.rotulo, marcador: m || 0, altura, borda: p.alerta ? 'rgba(245,158,11,.4)' : (m ? '#22D3EE' : '#1F2733'), fundo: p.alerta ? 'rgba(245,158,11,.12)' : (m ? 'rgba(34,211,238,.08)' : 'transparent'), cor: m ? '#E6EDF3' : '#9AA7B4' }; };
+    const anatomia = {
+      linhas: [
+        { cols: '1fr', paineis: [painel('hash', '40px')] },
+        { cols: '1fr 1fr 1fr', paineis: [painel('status', '58px'), painel('bloco', '58px'), painel('timestamp', '58px')] },
+        { cols: '1fr 1fr', paineis: [painel('de', '50px'), painel('para', '50px')] },
+        { cols: '1fr 1fr', paineis: [painel('value', '50px'), painel('fee', '50px')] },
+        { cols: '1fr', paineis: [painel('tokens', '40px')] },
+      ],
+      itens: itensTx.map((it, i) => ({ n: i + 1, titulo: it.titulo, texto: it.texto })),
+      alt: 'Ilustração esquemática de uma transação no explorador, com nove campos e seis marcadores: ' + itensTx.map((it, i) => (i + 1) + ' ' + paineisTx.find((p) => p.id === it.painel).rotulo).join('; ') + '. Os campos aparecem sem valores.',
+    };
+    const cexDex = [
+      { rotulo: 'Quem guarda o dinheiro', cex: 'A empresa (custódia).', dex: 'Você, direto da sua carteira.', ehDecisivo: true },
+      { rotulo: 'Cadastro', cex: 'KYC obrigatório.', dex: 'Sem cadastro.' },
+      { rotulo: 'Se der errado', cex: 'Tem suporte; às vezes reverte um erro internamente.', dex: 'Sem suporte e sem reversão.' },
+      { rotulo: 'De onde vem o preço', cex: 'Livro de ofertas (order book).', dex: 'Pool de liquidez, via AMM.' },
+      { rotulo: 'Quem vive lá', cex: 'Moedas listadas pela empresa.', dex: 'Quase todo token novo e memecoin.' },
+    ].map((l) => ({ rotulo: l.rotulo, cex: l.cex, dex: l.dex, decisivo: !!l.ehDecisivo, fundo: l.ehDecisivo ? 'rgba(34,211,238,.06)' : 'transparent', bordaEsq: l.ehDecisivo ? '2px solid #22D3EE' : '2px solid transparent' }));
+
+    // Carteiras
+    const chaves = [
+      { tag: 'Segredo absoluto', titulo: 'Frase-semente', texto: 'A raiz de tudo. 12 ou 24 palavras.', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' },
+      { tag: 'Segredo absoluto', titulo: 'Chave privada', texto: 'Número secreto que assina as transações.', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' },
+      { tag: 'Calculada', titulo: 'Chave pública', texto: 'Vem da privada. Da pública, ninguém volta à privada.', borda: '#1F2733', fundo: '#141A24', cor: '#9AA7B4' },
+      { tag: 'Pode divulgar', titulo: 'Endereço', texto: 'Vem da pública. Como o número da conta para receber um Pix.', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#22C55E' },
+    ].map((c, i, arr) => Object.assign(c, { seta: i < arr.length - 1 }));
+    const TOMCEL = { ok: { borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#E6EDF3', peso: 600, pad: '4px 8px' }, atencao: { borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#E6EDF3', peso: 600, pad: '4px 8px' }, alerta: { borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171', peso: 600, pad: '4px 8px' }, neutro: { borda: 'transparent', fundo: 'transparent', cor: '#9AA7B4', peso: 400, pad: '0' } };
+    const cel = (v) => { const o = typeof v === 'string' ? { texto: v } : v; return Object.assign({ texto: o.texto }, TOMCEL[o.tom || 'neutro']); };
+    const criterios = [{ chave: 'custodia', rotulo: 'Quem guarda as chaves', decisivo: true }, { chave: 'pros', rotulo: 'Prós' }, { chave: 'contras', rotulo: 'Contras' }];
+    const opcoes = [
+      { titulo: 'CEX (corretora centralizada)', subtitulo: 'Binance, Mercado Bitcoin — exemplos de categoria', valores: { custodia: { texto: 'A empresa guarda as chaves por você, como um banco (custódia de terceiro).', tom: 'alerta' }, pros: 'Fácil de usar; aceita Pix e entrada/saída em reais; faz KYC; tem suporte.', contras: 'Você não controla as chaves ("not your keys, not your coins"); risco de bloqueio de conta, hack ou encerramento da plataforma.' } },
+      { titulo: 'Hot wallet (carteira quente)', subtitulo: 'Phantom (Solana), MetaMask (EVM) — exemplos de categoria', valores: { custodia: { texto: 'Você guarda as chaves, mas num aparelho conectado à internet.', tom: 'atencao' }, pros: 'Grátis; conecta em aplicativos descentralizados; é o que se usa para negociar on-chain.', contras: 'Exposta a phishing, drainers e malware; uma assinatura errada pode esvaziá-la.' } },
+      { titulo: 'Cold wallet (carteira fria)', subtitulo: 'Aparelhos de hardware — exemplos de categoria', valores: { custodia: { texto: 'Você guarda as chaves num dispositivo físico offline.', tom: 'ok' }, pros: 'As chaves nunca tocam a internet; melhor categoria para guardar por muito tempo; mostra o destino na própria telinha (defesa contra clipper).', contras: 'Custo do aparelho; menos prática para trocas rápidas.' } },
+    ];
+    const carteiras = { opcoes, linhas: criterios.map((c) => ({ rotulo: c.rotulo, decisivo: !!c.decisivo, fundo: c.decisivo ? 'rgba(34,211,238,.06)' : 'transparent', bordaEsq: c.decisivo ? '2px solid #22D3EE' : '2px solid transparent', celulas: opcoes.map((o) => cel(o.valores[c.chave])) })) };
+    const usoCarteira = [
+      { se: 'Para entrar e sair em reais', entao: 'Corretora (CEX)', texto: 'Resolve Pix, conversão, KYC e suporte num só lugar. Costuma ser o ponto de partida.' },
+      { se: 'Para operar on-chain', entao: 'Carteira quente, com pouco dinheiro', texto: 'Conecta nos sites e assina transações. É a ferramenta para negociar memecoins.' },
+      { se: 'Para guardar por muito tempo', entao: 'Carteira fria', texto: 'Tira as chaves da internet. É para o que não vai ser mexido tão cedo.' },
+    ];
+
+    // Seed
+    const palavras = Array.from({ length: 12 }, (_, i) => String(i + 1));
+    const contas = ['Conta 1', 'Conta 2', 'Conta 3 …'];
+    const perder = [
+      { n: 1, titulo: 'Foto, print ou nuvem.', texto: 'Google Drive, iCloud, e-mail, WhatsApp. Se a nuvem ou o celular for invadido, a frase vai junto.' },
+      { n: 2, titulo: 'Arquivo de texto no PC,', texto: 'ou o gerenciador de senhas do navegador.' },
+      { n: 3, titulo: 'Site de phishing', texto: 'que imita a sua carteira e promete um airdrop ou um "resgate".' },
+      { n: 4, titulo: 'Falso "suporte"', texto: 'no Discord, Telegram, X ou e-mail que pede a frase. Suporte de verdade nunca pede.' },
+      { n: 5, titulo: 'Malware infostealer,', texto: 'um programa que vasculha o computador atrás de carteiras.' },
+    ];
+    const perderAlt = perder.map((f) => f.n + '. ' + f.titulo + ' ' + f.texto).join(' ') + ' Todas fazem a frase sair do papel e virar algo digital, ou ir para a mão de alguém.';
+    const checklist = [
+      { id: 'anotar-papel', texto: 'Anotei minha frase-semente no papel ou em placa de metal e guardo offline.', porque: 'Papel e metal ficam offline; nuvem e foto podem vazar e entregar a carteira inteira.' },
+      { id: 'nunca-nuvem', texto: 'Nunca fotografei, fiz print nem salvei a frase em nuvem, e-mail, PC ou WhatsApp.', porque: 'Qualquer cópia digital é um ponto de vazamento; a frase É a carteira.' },
+      { id: 'copias-fisicas', texto: 'Guardo cópias da frase em mais de um lugar físico seguro.', porque: 'Se o único papel se perder ou queimar, o dinheiro some para sempre.' },
+      { id: 'nunca-digitar', texto: 'Nunca digito a frase-semente em nenhum site.', porque: 'Nenhum serviço legítimo pede a frase; todo pedido é golpe.' },
+      { id: 'desconfiar-suporte', texto: 'Desconfio de todo "suporte" que peça a frase ou a chave privada.', porque: 'Suporte real nunca pede isso — por Discord, Telegram, X ou e-mail.' },
+      { id: 'conferir-url', texto: 'Confiro a URL do site e do explorador antes de conectar a carteira.', porque: 'Sites falsos (drainers) imitam apps e exploradores conhecidos.' },
+      { id: 'favoritos-sem-anuncio', texto: 'Salvei nos favoritos os sites oficiais; não clico em anúncios nem em links de mensagem direta.', porque: 'Golpistas já compraram anúncios do Google mirando quem procurava carteiras conhecidas.' },
+      { id: 'ler-antes-de-assinar', texto: 'Leio o que a carteira mostra antes de assinar qualquer coisa, e desconfio de "assinar mensagem" vindo de site que eu não abri digitando o endereço.', porque: 'Permit, Permit2 e EIP-7702 se escondem em assinaturas sem gás disfarçadas de "login" ou "claim".' },
+      { id: 'aprovar-limitado', texto: 'Prefiro aprovar valores limitados, não "ilimitado".', porque: 'Uma aprovação ilimitada dormente pode ser usada para sacar depois, sem nova interação sua.' },
+      { id: 'revisar-aprovacoes', texto: 'Reviso e revogo aprovações antigas periodicamente no Revoke.cash ou no Token Approval Checker do Etherscan.', porque: 'Contratos que você não usa mais continuam com permissão de gastar seus tokens.' },
+      { id: 'conferir-endereco', texto: 'Confiro o endereço inteiro ao colar, não só o começo e o fim.', porque: 'Address poisoning e clipper malware trocam o endereço por um "sósia".' },
+      { id: 'confirmar-no-aparelho', texto: 'Confirmo transações no aparelho da hardware wallet, lendo o endereço na telinha.', porque: 'Mesmo com clipper no PC, o aparelho mostra o destino real antes de você aprovar.' },
+      { id: 'segregar-carteiras', texto: 'Mantenho valores grandes em cold wallet e uso uma carteira quente separada, com pouco saldo, só para trade.', porque: 'Reduz o estrago se a carteira do dia a dia for comprometida.' },
+      { id: 'migrar-se-infectado', texto: 'Se suspeitar de infecção, migro tudo para uma carteira nova (frase nova) a partir de um dispositivo limpo.', porque: 'Revogar não resolve frase comprometida nem malware ainda instalado.' },
+      { id: 'baixar-fonte-oficial', texto: 'Baixo carteiras apenas do site ou loja oficial, nunca de anúncio patrocinado.', porque: 'Golpistas já distribuíram versões falsas de carteiras conhecidas via anúncio, que roubaram a frase-semente.' },
+      { id: 'teste-de-valor-baixo', texto: 'Faço uma transação-teste de valor baixo antes de mover ou enviar quantia relevante.', porque: 'Um erro de endereço ou de rede é irreversível; o teste barato revela o problema antes.' },
+      { id: 'consultar-cvm-bc', texto: 'Antes de investir, consulto os alertas/stop orders da CVM e verifico se a instituição é autorizada pelo Banco Central.', porque: 'Estar numa lista de alerta, ou não constar entre as autorizadas, é um forte sinal de golpe.' },
+      { id: 'nunca-recuperacao-paga', texto: 'Nunca pago taxa adiantada a "serviços de recuperação" de cripto.', porque: 'Prometer recuperar fundos mediante taxa é golpe secundário — o próprio FBI/IC3 afirma que jamais cobra para isso.' },
+      { id: 'p2p-confirmar-pix', texto: 'No P2P, só libero a cripto depois de confirmar que o Pix caiu de fato na minha conta.', porque: 'Comprovante falso e estorno são golpes comuns de contraparte.' },
+      { id: 'registrar-para-contador', texto: 'Guardo registro de todas as operações e vou consultar um contador.', porque: 'A obrigação tributária existe, e o registro evita cair na malha fina.' },
+    ];
+
+    // Golpes
+    const roteiro = [
+      { numero: 1, titulo: 'Isca', oQueVeem: 'Um anúncio, "airdrop", "mint" de NFT, conta de projeto conhecida no X/Discord, ou site clonado que parece oficial.', oQueAcontece: 'O golpista usa marca imitada e conta hackeada ou falsa para atrair; kits de drainer clonam sites automaticamente.' },
+      { numero: 2, titulo: 'Conectar carteira', oQueVeem: '"Conecte sua carteira para reivindicar/participar" — parece o passo normal de qualquer app.', oQueAcontece: 'Conectar em si não rouba: só permite que o site veja seus saldos públicos. O passo leva à tela onde a assinatura maliciosa será pedida.' },
+      { numero: 3, titulo: 'Assinar', oQueVeem: 'Um pop-up pedindo para "assinar", às vezes chamado de "verificação" ou "claim" gratuito, sem taxa.', oQueAcontece: 'É um approve ilimitado, uma assinatura Permit/Permit2 (EIP-712, sem gás) ou um setApprovalForAll de NFTs — autorizando o golpista a mover seus ativos.' },
+      { numero: 4, titulo: 'Drenagem', oQueVeem: 'Nada, ou uma tela de "erro"/"tente de novo"; o saldo some minutos depois.', oQueAcontece: 'O golpista chama transferFrom (ou usa a assinatura/delegação) e transfere os fundos, sem precisar de nova ação da vítima.' },
+      { numero: 5, titulo: 'Lavagem', oQueVeem: '(a vítima costuma perceber tarde, quando o saldo já sumiu)', oQueAcontece: 'Os fundos passam por mixers, pontes entre redes ou corretoras rapidamente; a divisão operador/afiliado (tipicamente 20%/80%) é paga automaticamente por um contrato.' },
+    ];
+    const drainer = roteiro.map((p, i) => { const atual = i === S.passo; return Object.assign({}, p, { indice: i, atual, seta: i < roteiro.length - 1, borda: atual ? '#7C3AED' : (i === 2 ? 'rgba(239,68,68,.5)' : '#1F2733'), fundo: atual ? 'rgba(124,58,237,.15)' : '#141A24', mFundo: atual ? '#22D3EE' : '#1F2733', mCor: atual ? '#0B0F17' : '#E6EDF3' }); });
+    const vetores = [
+      { titulo: 'Approval ilimitado', texto: 'Você autoriza um contrato a gastar um token seu, sem limite de valor. Ele fica livre para esvaziar aquele token quando quiser, sem pedir de novo.' },
+      { titulo: 'Permit e Permit2', texto: 'Aparecem como um inofensivo "assinar mensagem", sem taxa, e não como uma transação. Mas a assinatura dá permissão sobre seus tokens.' },
+      { titulo: 'setApprovalForAll (NFT)', texto: 'Dá a um "operador" o direito de gerenciar todos os seus NFTs de uma coleção de uma vez. Um único clique pode entregar a coleção inteira.' },
+    ];
+    const enderecos = [
+      { rotulo: 'O endereço certo', inicio: '0x3aF1', meio: '9c2e8B7d40a1f6E3c9D2b58A7e14C0f3', fim: 'Bf07', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.08)', cor: '#22C55E', meioFundo: 'transparent', meioCor: '#9AA7B4' },
+      { rotulo: 'O endereço do golpista', inicio: '0x3aF1', meio: '7D0b3e4C91f2a8B6d5E0c73F1a9e2D48', fim: 'Bf07', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.08)', cor: '#F87171', meioFundo: 'rgba(239,68,68,.25)', meioCor: '#F87171' },
+    ];
+    const clipper = [
+      { n: 1, texto: 'Você copia o endereço certo.', cor: '#E6EDF3', borda: '#1F2733', fundo: '#141A24' },
+      { n: 2, texto: 'Um vírus no aparelho vigia o "copiar e colar".', cor: '#E6EDF3', borda: '#1F2733', fundo: '#141A24' },
+      { n: 3, texto: 'Na hora de colar, ele troca em silêncio pelo do golpista.', cor: '#F87171', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)' },
+      { n: 4, texto: 'Você confere só as pontas e envia. Irreversível.', cor: '#E6EDF3', borda: '#1F2733', fundo: '#141A24' },
+    ].map((c, i, arr) => Object.assign(c, { seta: i < arr.length - 1 }));
+
+    // Defesa
+    const emergencia = { ramos: [
+      { rotulo: 'Sim', borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171', nos: ['Crie carteira nova em dispositivo limpo', 'Mova o que sobrou (cuidado com o sweeper bot)'] },
+      { rotulo: 'Não', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#22C55E', nos: ['Revogue as aprovações'] },
+    ], alt: 'Você percebe que a carteira foi drenada. A frase-semente vazou? Se sim: crie uma carteira nova em um dispositivo limpo e mova o que sobrou, atento ao sweeper bot. Se não: revogue as aprovações. Em qualquer caso: registre as evidências e reporte.' };
+
+    // Brasil
+    const golpesBr = [
+      { titulo: '1. Falso robô de trade', promete: 'Lucro fixo com um "robô" que sempre ganha.', armadilha: 'Impossível num mercado de risco. Caso mais conhecido: Atlas Quantum, multada pela CVM em mais de R$ 55,8 milhões em 2024.', sinal: 'Rendimento garantido' },
+      { titulo: '2. Grupo de sinais', promete: 'Avisos de "compre agora".', armadilha: 'O organizador compra antes, manda o grupo comprar e vende no topo (pump and dump). Muitas vezes ganha comissão da corretora pelo seu volume.', sinal: 'Urgência: "é agora ou nunca"' },
+      { titulo: '3. Pirâmide com cara de fundo cripto', promete: 'Um "fundo" que rende sempre.', armadilha: 'Esquema Ponzi: paga os antigos com o dinheiro dos novos, até desabar. A CVM avisa com stop orders.', sinal: 'Exigência de recrutar' },
+      { titulo: '4. Falso investimento por WhatsApp', promete: 'Um "assessor" e lucros subindo na tela.', armadilha: 'Pig butchering: ganha sua confiança por semanas e indica uma plataforma falsa. Na hora de sacar, o saque trava.', sinal: 'Saque bloqueado até nova "taxa"' },
+    ];
+    const golpesBrAlt = golpesBr.map((g) => g.titulo + ' — promete: ' + g.promete + ' Armadilha: ' + g.armadilha + ' Sinal: ' + g.sinal).join(' ');
+    const TOM = { neutro: '#7C3AED', alerta: '#EF4444', ok: '#22C55E', atencao: '#F59E0B' };
+    const marcosBase = [
+      { data: '13/08/2019', titulo: 'CVM proíbe a Atlas Quantum de ofertar o "robô"', texto: 'Deliberação CVM nº 826. O caso emblemático do falso robô de arbitragem no Brasil.', tom: 'alerta' },
+      { data: '2023', titulo: 'Lei 14.754/2023, a "Lei das Offshores"', texto: 'Regras próprias para operações no exterior.' },
+      { data: '21/05/2024', titulo: 'CVM multa a Atlas Quantum em mais de R$ 55,8 milhões', texto: 'Por operação fraudulenta e embaraço à fiscalização.', tom: 'alerta' },
+      { data: '20/05/2025', titulo: 'Binance Pay integrado ao Pix via Z.ro Bank', texto: 'Se o arranjo continua idêntico em setembro de 2026: não verificado.', tom: 'atencao' },
+      { data: '06/10/2025', titulo: 'CVM alerta para o pig butchering', texto: 'Prejuízo global estimado em mais de US$ 75 bilhões entre 2020 e 2024.', tom: 'alerta' },
+      { data: '10/11/2025', titulo: 'BC publica as Resoluções 519, 520 e 521', texto: 'O marco regulatório das PSAVs — corretoras, intermediárias e custodiantes.' },
+      { data: '02/02/2026', titulo: 'As Resoluções entram em vigor', texto: 'Prevenção à lavagem, governança, segurança e segregação de recursos de clientes passam a valer para cripto.' },
+      { data: '30/04/2026', titulo: 'Resolução BCB 561', texto: 'Veda stablecoins como liquidação em câmbio eletrônico (eFX). Não proíbe comprar, vender nem guardar.', tom: 'atencao' },
+      { data: '07/2026', titulo: 'DeCripto passa a valer', texto: 'IN RFB 2.291/2025: as plataformas informam operações à Receita, no padrão CARF da OCDE.' },
+      { data: '13/08/2026', titulo: 'Operação Criptoabate', texto: 'Polícia Civil do RS. Uma vítima transferiu R$ 37 milhões em seis meses a um falso "professor" de WhatsApp.', tom: 'alerta' },
+      { data: '03/09/2026', titulo: 'Coinext anuncia o fim das atividades', texto: 'Uma das cinco corretoras que deixaram o varejo em 2026 citando o custo da adequação.', tom: 'atencao' },
+      { data: '01/10/2026', titulo: 'Resolução 561 entra em vigor', texto: '', tom: 'atencao' },
+      { data: '30/10/2026', titulo: 'Prazo para as PSAVs pedirem autorização', texto: 'Quem já operava precisa ter pedido até aqui. Qualquer lista de "quem opera" envelhece rápido — confira no BC.', tom: 'atencao' },
+    ];
+    const linha = marcosBase.map((m, i) => { const prox = marcosBase[i + 1]; const ms = prox ? this.meses(this.parse(m.data), this.parse(prox.data)) : 0; const espaco = prox ? Math.min(96, 24 + ms * 1.2) : 0; return Object.assign({}, m, { cor: TOM[m.tom || 'neutro'], temProximo: !!prox, espaco, intervalo: this.intervalo(ms), posIntervalo: Math.max(2, espaco / 2 - 12) }); });
+    const registro = [
+      { campo: 'Data', oQue: 'O dia da venda ou da troca', detalhe: 'Vender ou trocar pode gerar imposto — e esse imposto pode ter prazo.' },
+      { campo: 'Valor', oQue: 'Quanto entrou e quanto saiu, em reais', detalhe: 'Cripto é tratada como um bem; o lucro está sujeito a ganho de capital.' },
+      { campo: 'Taxas', oQue: 'Taxa da corretora, da pool e de rede', detalhe: 'Elas entram na conta. Sem o registro, não dá para calcular certo.' },
+    ];
+    const passosImposto = [
+      { n: 1, texto: 'Você vende ou troca cripto', peso: 400, borda: '#1F2733', fundo: '#141A24' },
+      { n: 2, texto: 'Pode gerar imposto, e esse imposto pode ter prazo', peso: 400, borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)' },
+      { n: 3, texto: 'Guarde o registro: data, valor e taxas', peso: 600, borda: '#22D3EE', fundo: 'rgba(34,211,238,.1)' },
+      { n: 4, texto: 'Consulte um contador para o seu caso concreto', peso: 600, borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)' },
+    ].map((p, i, arr) => Object.assign(p, { seta: i < arr.length - 1 }));
+    const NO = { borda: '#1F2733', fundo: '#141A24', peso: 400 };
+    const saque = [
+      { rotulo: 'Caminho A · corretora', nos: [Object.assign({ texto: 'Envio para uma CEX com KYC' }, NO), Object.assign({ texto: 'Venda por reais' }, NO), { texto: 'Saque via Pix', borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', peso: 600 }] },
+      { rotulo: 'Caminho B · P2P', nos: [Object.assign({ texto: 'Negociação P2P, direto com outra pessoa' }, NO), { texto: 'Só libera após confirmar o Pix na sua conta', borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', peso: 600 }] },
+    ];
+
+    // Quiz
+    const porque = {
+      q1: { a: 'Nem a corretora nem o suporte conseguem desfazer um bloco já confirmado.', c: 'O valor não muda nada: uma transação de centavos é tão definitiva quanto uma de milhões.', d: 'Não existe botão de "final": o que torna a transação definitiva são os blocos empilhados por cima.' },
+      q2: { a: 'Na cold wallet as chaves ficam num aparelho seu, fora da internet.', b: 'Na hot wallet as chaves ficam no seu celular ou navegador — conectadas, mas suas.', d: 'Carteira de hardware é um tipo de cold wallet: as chaves ficam no aparelho, com você.' },
+      q3: { a: 'O cadeado só diz que a conexão é criptografada. Site de golpe também tem cadeado.', b: 'Pressa é o gatilho que o golpe usa; ela não torna nada seguro.', d: 'Uma vez basta: quem recebe a frase recria a carteira inteira na hora.' },
+      q4: { a: 'Um approval é permissão sobre tokens, não acesso ao seu e-mail.', c: 'Assinar na blockchain não expõe dados pessoais; expõe o que você autorizou a mover.', d: 'Approval não roda nada no seu computador: é uma permissão registrada na blockchain.' },
+      q5: { b: 'Um tradutor não lê permissões na blockchain.', c: 'Um explorador só de leitura mostra as aprovações, mas para revogar é preciso conectar e assinar a revogação.', d: 'O banco não enxerga permissões dadas na blockchain.' },
+      q6: { a: 'Conectar sozinho não move nada: o roubo precisa de uma assinatura sua.', c: 'A frase-semente nunca sai da carteira quando você conecta.', d: 'Conectar não custa taxa; taxa só aparece quando uma transação é enviada.' },
+      q7: { a: 'No address poisoning você copia um endereço parecido do próprio histórico — cola o que copiou. No clipper, você copia o certo e o vírus cola outro.', c: 'Permit2 é um sistema de permissões de token; não troca o que você cola.', d: 'Rug pull é o criador do token tirando a liquidez; não tem relação com a área de transferência.' },
+      q8: { a: 'Mudou: as Resoluções BCB 519, 520 e 521 criaram a autorização de PSAV.', b: 'O Pix continua sendo usado para comprar e vender cripto.', d: 'Não houve banimento: as empresas precisam de autorização, e várias saíram do varejo por conta própria.' },
+      q9: { a: '"Success" quer dizer que a transação executou — alguma coisa aconteceu.', b: 'Uma falha apareceria como "Failed", não "Success".', d: 'Value 0 não é devolução: a transferência foi de token, não da moeda nativa.' },
+      q10: { a: 'A frase não é login de corretora: é a origem de todas as chaves da carteira.', c: 'A frase não expira: vale para sempre.', d: 'Funciona em qualquer app compatível — é justamente isso que a torna perigosa.' },
+      q11: { a: 'Sem gas não quer dizer inofensiva: um Permit autoriza mover seus tokens.', c: 'Assinatura de login existe, mas a mesma tela pode esconder um Permit.', d: 'A assinatura vale sem gas; quem paga o gas é o atacante, depois, ao usar a permissão.' },
+      q12: { a: 'O Revoke.cash não estorna nada: a blockchain não tem estorno.', c: 'Não há prazo que recupere: revogar só impede o próximo uso.', d: 'Vale igual para NFT: revogar não traz de volta o que já saiu.' },
+      q13: { a: 'A Solana tem taxas — pequenas, mas tem.', c: 'Na EVM existe aprovação: é o allowance de ERC-20, justamente o que se revoga.', d: 'Na Solana dá para revogar delegações; o mecanismo é por conta, não por allowance.' },
+      q14: { a: 'Não há devolução: a rede fez o trabalho até o ponto do erro.', b: 'Falhar não isenta: o gas paga o processamento, não o resultado.', d: 'Transação que falha também paga — é por isso que slippage mal configurado custa dinheiro.' },
+      q15: { a: 'Não são sinônimos: numa há uma empresa no meio, na outra não.', c: 'A DEX não é mais segura: sem suporte, erro seu não tem volta.', d: 'A DEX também cobra: taxa da pool e taxa de rede.' },
+      q16: { a: 'Corretora de verdade não cobra "taxa para liberar o saque".', c: 'O Banco Central não cobra imposto para liberar saque.', d: 'Pedir dinheiro para liberar dinheiro é o padrão do golpe, não garantia.' },
+    };
+    const Q = (id, pergunta, alts, correta, explicacao) => ({ id, pergunta, correta, explicacao, alternativas: alts.map(([aid, texto]) => Object.assign({ id: aid, texto }, porque[id][aid] ? { porque: porque[id][aid] } : {})) });
+    const todas = [
+      Q('q1', 'O que torna uma transação praticamente imutável numa blockchain?', [['a', 'O suporte da corretora aprovar'], ['b', 'O número de confirmações (blocos empilhados por cima)'], ['c', 'O valor ser alto'], ['d', 'Você marcar como "final"']], 'b', 'Cada bloco novo em cima do seu aumenta o custo de reescrever a história; por isso corretoras esperam um mínimo de confirmações. Transações que falharam também ficam gravadas para sempre.'),
+      Q('q2', 'Qual opção NÃO guarda as chaves com você?', [['a', 'Cold wallet'], ['b', 'Hot wallet'], ['c', 'CEX (corretora)'], ['d', 'Carteira de hardware']], 'c', 'Na CEX, a empresa custodia as chaves, como um banco. Daí o ditado "not your keys, not your coins": sem as chaves, você depende da plataforma.'),
+      Q('q3', 'É seguro digitar sua frase-semente num site que promete um airdrop?', [['a', 'Sim, se o site tiver cadeado'], ['b', 'Sim, se for rápido'], ['c', 'Não, nunca — nenhum serviço legítimo pede a frase'], ['d', 'Só na primeira vez']], 'c', 'A frase recria a carteira inteira em qualquer aparelho. Todo pedido de frase é golpe; a forma segura é mantê-la offline, no papel ou no metal.'),
+      Q('q4', 'O que um "approval" malicioso permite ao atacante?', [['a', 'Descobrir sua senha do e-mail'], ['b', 'Transferir seus tokens usando uma permissão que você assinou'], ['c', 'Ver seu CPF'], ['d', 'Minerar Bitcoin no seu PC']], 'b', 'O golpe de drainer não rouba a frase-semente; ele faz você assinar uma permissão e depois usa transferFrom para levar os tokens. Ler o que se assina é a defesa.'),
+      Q('q5', 'Qual ferramenta serve para revisar e revogar aprovações?', [['a', 'Revoke.cash'], ['b', 'Um tradutor online'], ['c', 'Um explorador só de leitura, sem conectar'], ['d', 'O aplicativo do banco']], 'a', 'O Revoke.cash (100+ redes) e o Token Approval Checker do Etherscan listam e revogam permissões. Revogar impede usos futuros, mas não recupera o que já saiu.'),
+      Q('q6', 'Você conectou a carteira num site e não assinou nada. O que aconteceu?', [['a', 'Seus tokens já foram roubados'], ['b', 'O site só passou a ver seus saldos públicos'], ['c', 'Sua frase-semente foi exposta'], ['d', 'Você pagou uma taxa alta']], 'b', 'Conectar, sozinho, não move fundos — apenas mostra saldos. O risco aparece no passo seguinte, quando o site pede uma assinatura disfarçada.'),
+      Q('q7', 'Você copiou um endereço, mas colou outro, e o dinheiro sumiu. Que golpe é esse?', [['a', 'Address poisoning'], ['b', 'Clipper malware'], ['c', 'Permit2'], ['d', 'Rug pull']], 'b', 'O clipper é um vírus que troca o endereço na área de transferência. Conferir a linha inteira e usar uma carteira fria (que mostra o destino na telinha) defende contra ele.'),
+      Q('q8', 'Desde fevereiro de 2026, o que mudou para corretoras no Brasil?', [['a', 'Nada mudou'], ['b', 'O Pix foi proibido para cripto'], ['c', 'Passou a valer a regra de PSAV do Banco Central, e várias corretoras encerraram o varejo'], ['d', 'Todas as corretoras estrangeiras foram banidas para sempre']], 'c', 'As Resoluções BCB 519, 520 e 521 criaram a PSAV; empresas têm até 30/10/2026 para pedir autorização, e Bitso, Coinext, NovaDAX, Digitra e Bitnuvem anunciaram saída do varejo em 2026.'),
+      Q('q9', 'Você abre uma transação no Etherscan e vê "Value: 0 ETH" com Status: Success. O que provavelmente aconteceu?', [['a', 'Nada aconteceu, foi um erro'], ['b', 'A transação falhou'], ['c', 'Pode ter havido transferência de tokens — confira a aba "Token Transfers"'], ['d', 'O ETH foi devolvido automaticamente']], 'c', 'Em transferências de token o campo "Value" (moeda nativa) costuma ser 0, mas os tokens se movem e aparecem em "Token Transfers"/Logs. "Success" só diz que a transação executou, não o que ela fez.'),
+      Q('q10', 'Por que as 12 ou 24 palavras da frase-semente são tão perigosas se vazarem?', [['a', 'Porque são a senha de login da corretora'], ['b', 'Porque geram todas as chaves e endereços da carteira, em qualquer app compatível'], ['c', 'Porque expiram a cada 30 dias'], ['d', 'Porque só funcionam no aparelho original']], 'b', 'Pelos padrões BIP-39/BIP-32/BIP-44, a frase vira uma "semente" que deriva toda a árvore de chaves. Quem tem a frase recria a carteira inteira em qualquer dispositivo, sem precisar de senha nem do seu aparelho.'),
+      Q('q11', 'Um site pede para você assinar uma mensagem que não cobra gas. Por que isso pode ser perigoso?', [['a', 'Assinaturas sem gas são sempre seguras'], ['b', 'Uma assinatura Permit/Permit2 (EIP-712) pode autorizar o saque dos seus tokens'], ['c', 'Assinar só serve para fazer login'], ['d', 'Sem gas, a transação nunca é válida']], 'b', 'Assinaturas offchain não custam gas e não parecem transações, mas um Permit/Permit2 autoriza mover seus fundos. Foi o método por trás da maior parte dos roubos por drainer em 2024–2025.'),
+      Q('q12', 'Você foi vítima de um drainer e os fundos já saíram. Revogar as aprovações no Revoke.cash vai recuperar o dinheiro?', [['a', 'Sim, o Revoke.cash estorna tudo'], ['b', 'Não — revogar só impede gastos futuros; não recupera o que já saiu'], ['c', 'Sim, se você revogar em até 24 horas'], ['d', 'Só recupera se for NFT']], 'b', 'Revogar é preventivo: zera permissões para o futuro. Não recupera fundos drenados, não desfaz uma frase comprometida e não remove malware — nesses casos, migre para uma carteira nova a partir de um dispositivo limpo.'),
+      Q('q13', 'Qual é a diferença central entre a Solana e as redes EVM que muda como os golpes e a revogação funcionam?', [['a', 'Solana não tem taxas'], ['b', 'Na Solana os tokens vivem em token accounts (ATAs) com rent, e a delegação/troca de authority é por conta — não por "allowance" de token como na EVM'], ['c', 'Na EVM não existe aprovação'], ['d', 'Solana não permite revogar nada']], 'b', 'Na EVM você revoga allowances de ERC-20; na Solana você lida com token accounts (ATAs, que exigem rent), delegação por conta e o risco específico de assinar uma troca de authority (SetAuthority), que pode entregar o controle da conta.'),
+      Q('q14', 'Sua transação numa DEX falhou (Status: Failed). O que acontece com a taxa de gas?', [['a', 'É devolvida integralmente'], ['b', 'Você não paga nada porque falhou'], ['c', 'Você paga o gas assim mesmo, pois a rede fez o trabalho computacional até o ponto do erro'], ['d', 'A taxa só é cobrada em transações de sucesso']], 'c', 'O gas paga o trabalho computacional dos computadores da rede, que foi realizado até o ponto da falha. Por isso uma transação que falha ainda custa gas — vale tanto na EVM quanto na Solana.'),
+      Q('q15', 'Qual é a diferença central entre uma CEX e uma DEX?', [['a', 'Nenhuma, são sinônimos'], ['b', 'Na CEX a empresa faz a custódia, com KYC e suporte; na DEX você negocia direto da sua carteira contra um pool de liquidez, sem cadastro, sem suporte e sem reversão'], ['c', 'A DEX é sempre mais segura'], ['d', 'Só a CEX cobra taxas']], 'b', 'Na CEX há uma empresa no meio (custódia, KYC, suporte, às vezes reversão). Na DEX você opera direto da carteira contra um pool via AMM — se errar, não há para quem recorrer, e por isso a maioria dos memecoins só vive em DEX.'),
+      Q('q16', 'Um "assessor" que você conheceu por WhatsApp mostra lucros crescentes numa plataforma e, quando você tenta sacar, pedem uma "taxa" para liberar. O que provavelmente é?', [['a', 'Uma exigência normal de qualquer corretora'], ['b', 'Um golpe: o lucro na tela é falso e a "taxa para liberar o saque" é sinal clássico de fraude (pig butchering)'], ['c', 'Um imposto cobrado pelo Banco Central'], ['d', 'Uma garantia de que o dinheiro está seguro']], 'b', 'Lucro na tela é só um número numa plataforma falsa; pedir uma "taxa" para liberar o saque é sinal clássico de golpe. Antes de depositar, consulte os alertas da CVM e verifique a autorização da instituição no Banco Central.'),
+    ];
+    const quiz = { todas }; todas.forEach((p) => { quiz[p.id] = [p]; });
+    const naoVerificado = [
+      { titulo: 'Continuidade do arranjo Binance + Z.ro Bank (Pix) em setembro de 2026', texto: 'O lançamento foi confirmado em 20 de maio de 2025, mas não há fonte de 2026 que confirme se o Z.ro Bank segue operacionalizando o serviço — a empresa migrou para um modelo B2B e encerrou contas de pessoa física em abril de 2026. Trate como plausível, mas não confirmado.' },
+      { titulo: 'Prejuízo e número de vítimas da Atlas Quantum', texto: 'As fontes de imprensa divergem bastante — de cerca de R$ 1,1 bilhão e 47 mil investidores até cerca de R$ 7 bilhões e 200 mil vítimas. O único valor confirmado em fonte primária é o das multas aplicadas pela CVM (mais de R$ 55,8 milhões, 21/05/2024).' },
+      { titulo: 'Lista oficial consolidada de PSAVs autorizadas pelo Banco Central', texto: 'Como o regime só entrou em vigor em 02/02/2026, não existe ainda uma página estática com a relação completa — a consulta cabível é a de instituições autorizadas a funcionar no site do Banco Central.' },
+      { titulo: 'Perdas de drainers em 2023 (US$ 295,5 milhões / 324.000 vítimas)', texto: 'Reportado pela Scam Sniffer e repercutido pela imprensa (The Block), mas não foi possível abrir o relatório anual original de 2023 para confirmação direta.' },
+    ];
+
+    const ids = ABAS.map((a) => a.id);
+    return {
+      mostrarSidebar: !compacto, paddingMain: compacto ? '20px 16px' : '32px 24px',
+      dirMapa: compacto ? 'column' : 'row', alinhaMapa: compacto ? 'stretch' : 'center', trunkW: compacto ? '2px' : '32px', trunkH: compacto ? '20px' : '2px', trunkML: compacto ? '24px' : '0',
+      dirSeq: compacto ? 'column' : 'row', colsDois: compacto ? '1fr' : '1fr 1fr', colsTres: compacto ? '1fr' : '1fr 1fr 1fr', colsAnatomia: compacto ? '1fr' : '1fr 1fr', colsPalavras: compacto ? 3 : 6, larguraSaida: compacto ? '100%' : '240px', alturaSeta: compacto ? '20px' : '44px', minPasso: compacto ? '0' : '150px',
+      abas, mapa, eh, destaques, transacao, anatomia, cexDex, chaves, carteiras, usoCarteira, palavras, contas, perder, perderAlt, checklist, drainer, passoAtual: roteiro[S.passo], vetores, enderecos, clipper, emergencia, golpesBr, golpesBrAlt, linha, registro, passosImposto, saque, quiz, naoVerificado,
+      irParaAba: (e) => { this.setState({ aba: e.currentTarget.dataset.aba }); },
+      teclaAba: (e) => { const i = ids.indexOf(this.state.aba); let n = i; if (e.key === 'ArrowRight') n = (i + 1) % ids.length; else if (e.key === 'ArrowLeft') n = (i - 1 + ids.length) % ids.length; else if (e.key === 'Home') n = 0; else if (e.key === 'End') n = ids.length - 1; else return; e.preventDefault(); this.setState({ aba: ids[n] }); const btn = e.currentTarget.querySelectorAll('[role="tab"]')[n]; if (btn) btn.focus(); },
+      escolherPasso: (e) => this.setState({ passo: Number(e.currentTarget.dataset.indice) }),
+    };
+  }
+}
+</script>
+</body>
+</html>

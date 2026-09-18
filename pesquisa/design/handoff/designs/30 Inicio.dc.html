@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}a{color:#22D3EE}a:hover{color:#E6EDF3}button{font-family:inherit}h1,h2,h3,p,li,dd,dt{overflow-wrap:break-word}@media (prefers-reduced-motion: reduce){*{transition-duration:0.01ms !important}}.omh-campo{width:100%;box-sizing:border-box;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;color:#E6EDF3;font-family:inherit;font-size:14px;padding:10px 12px}.omh-campo::placeholder{color:#9AA7B4}.omh-campo:focus-visible{outline:2px solid #22D3EE;outline-offset:2px}</style></helmet>
+<div style="display:flex;min-height:100vh;align-items:flex-start">
+<sc-if value="{{ mostrarSidebar }}" hint-placeholder-val="{{ true }}">
+<aside aria-label="Rotas do hub" style="position:sticky;top:0;width:16rem;flex:0 0 16rem;height:100vh;box-sizing:border-box;border-right:1px solid #1F2733;background:#141A24;padding:20px 16px;display:flex;flex-direction:column;gap:4px;font-size:14px">
+<p style="margin:0 0 12px;font-weight:600;font-size:14px">onchain-mastery-hub</p>
+<a href="#/inicio" aria-current="page" style="display:block;border-radius:8px;padding:8px 12px;color:#E6EDF3;background:rgba(124,58,237,.15);border:1px solid #7C3AED;text-decoration:none;font-weight:600">Início</a>
+<a href="#/modulo-1" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M1 Fundamentos &amp; Segurança</a>
+<a href="#/modulo-2" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M2 Psicologia</a>
+<a href="#/modulo-3" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M3 Os dois pilares</a>
+<a href="#/modulo-4" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M4 Gestão &amp; decisão</a>
+<a href="#/modulo-5" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M5 Execução</a>
+<a href="#/modulo-6" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M6 Ler a tela</a>
+<a href="#/modulo-7" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">M7 A rotina</a>
+<div style="height:1px;background:#1F2733;margin:8px 0"></div>
+<a href="#/glossario" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Glossário</a>
+<a href="#/checklist" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Checklist antes de comprar</a>
+<a href="#/revisao" style="display:block;border-radius:8px;padding:8px 12px;color:#9AA7B4;text-decoration:none">Revisão</a>
+</aside>
+</sc-if>
+<main id="conteudo" style="flex:1 1 auto;min-width:0">
+<div style="max-width:868px;margin:0 auto;padding:{{ paddingMain }};display:flex;flex-direction:column;gap:24px">
+
+<header>
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">onchain-mastery-hub</p>
+<h1 style="margin:4px 0 0;font-size:1.875rem;font-weight:600;line-height:1.25">Bem-vindo ao seu hub de estudos on-chain</h1>
+<p style="margin:8px 0 0;color:#9AA7B4;text-wrap:pretty">Um curso local para aprender, do zero, como funcionam as memecoins, quais ferramentas existem e — principalmente — como decidir sem se enganar. Tudo roda no seu navegador, e o progresso fica salvo aqui mesmo.</p>
+<p style="margin:16px 0 0;border-radius:12px;border:1px solid rgba(124,58,237,.5);background:rgba(124,58,237,.12);padding:12px 16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Estado de exemplo: </strong>esta tela mostra um progresso fictício, de propósito, para você ver como cada peça se comporta. Use o seletor abaixo para trocar de situação — no app, o estado vem do seu navegador.</p>
+<div role="group" aria-label="Situação de exemplo" style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ situacoes }}" as="s" hint-placeholder-count="4">
+<button type="button" data-id="{{ s.id }}" aria-pressed="{{ s.ativo }}" onClick="{{ trocarSituacao }}" style="min-height:40px;border-radius:999px;border:1px solid {{ s.borda }};background:{{ s.fundo }};color:#E6EDF3;padding:6px 14px;font-size:14px;cursor:pointer" style-hover="border-color:#9AA7B4">{{ s.rotulo }}</button>
+</sc-for>
+</div>
+</header>
+
+<!-- 1. PRÓXIMA AÇÃO -->
+<section aria-label="Próxima ação" style="border-radius:12px;border:1px solid #7C3AED;background:rgba(124,58,237,.15);padding:24px;display:flex;flex-direction:column;gap:16px">
+<p style="margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Próxima ação</p>
+<div style="display:flex;flex-direction:{{ dirAcao }};gap:20px;align-items:{{ alinhaAcao }}">
+<div style="flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:10px">
+<p style="margin:0;font-size:{{ tamAcao }};font-weight:600;line-height:1.2;text-wrap:pretty">{{ acao.texto }}</p>
+<p style="margin:0;font-size:15px;color:#9AA7B4">{{ acao.detalhe }}</p>
+<a href="{{ acao.href }}" style="align-self:flex-start;min-height:44px;display:inline-flex;align-items:center;border-radius:8px;border:1px solid #7C3AED;background:#7C3AED;color:#FFFFFF;padding:10px 20px;font-size:15px;font-weight:600;text-decoration:none" style-hover="opacity:.85">{{ acao.botao }} →</a>
+</div>
+<figure style="flex:0 0 auto;margin:0;display:flex;flex-direction:column;align-items:center;gap:6px">
+<svg viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="{{ anel.alt }}">
+<circle cx="60" cy="60" r="50" fill="none" stroke="#1F2733" stroke-width="10"></circle>
+<circle cx="60" cy="60" r="50" fill="none" stroke="#7C3AED" stroke-width="10" stroke-linecap="round" stroke-dasharray="{{ anel.dash }}" transform="rotate(-90 60 60)"></circle>
+<text x="60" y="58" text-anchor="middle" fill="#E6EDF3" font-size="26" font-weight="700" font-family="JetBrains Mono, monospace">{{ anel.feitos }}</text>
+<text x="60" y="78" text-anchor="middle" fill="#9AA7B4" font-size="11" font-family="Inter, sans-serif">de 7 módulos</text>
+</svg>
+<figcaption style="font-size:13px;color:#9AA7B4">{{ anel.rotulo }}</figcaption>
+</figure>
+</div>
+<p style="margin:0;font-size:13px;color:#9AA7B4">Um botão só, em vez de ter de decidir por onde continuar. A ordem de prioridade é fixa: revisar o que venceu vem antes de conteúdo novo.</p>
+<details style="border-radius:8px;border:1px solid rgba(124,58,237,.4);background:#0B0F17;padding:12px 16px">
+<summary style="cursor:pointer;font-size:14px;font-weight:600">Como esta ação é escolhida</summary>
+<ol style="margin:8px 0 0;padding:0;list-style:none;display:flex;flex-direction:column">
+<sc-for list="{{ regras }}" as="r" hint-placeholder-count="5">
+<li style="display:flex;flex-direction:column">
+<div style="border-radius:8px;border:1px solid {{ r.borda }};background:{{ r.fundo }};padding:8px 12px;display:flex;gap:10px;align-items:flex-start">
+<span aria-hidden="true" style="flex:0 0 22px;width:22px;height:22px;border-radius:50%;background:{{ r.marcaFundo }};color:{{ r.marcaCor }};font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ r.n }}</span>
+<span style="min-width:0;font-size:13px;color:{{ r.cor }}">{{ r.texto }}</span>
+</div>
+<sc-if value="{{ r.liga }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="width:2px;height:10px;background:#1F2733;margin-left:22px"></span></sc-if>
+</li>
+</sc-for>
+</ol>
+<p style="margin:10px 0 0;font-size:13px;color:#9AA7B4">A regra em destaque é a que se aplica agora. Meta concreta e única rende mais que meta vaga (Locke &amp; Latham, 2002).</p>
+</details>
+</section>
+
+<!-- 2. MAPA DA TRILHA -->
+<section aria-label="Mapa da trilha" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">O mapa da trilha</h2>
+<span style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Relação: ordem, e o que falta</span>
+</div>
+<p style="margin:0;color:#9AA7B4">Os 7 módulos na ordem — cada um assume o anterior — e as duas rotas que você usa durante e depois deles. Clique para abrir.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px">
+<ol role="list" aria-label="{{ trilhaAlt }}" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+<sc-for list="{{ trilha }}" as="m" hint-placeholder-count="9">
+<li style="display:flex;flex-direction:column">
+<a href="{{ m.href }}" style="border-radius:8px;border:1px solid {{ m.borda }};background:{{ m.fundo }};padding:12px 16px;text-decoration:none;color:#E6EDF3;display:flex;gap:12px;align-items:flex-start;min-height:44px" style-hover="border-color:#9AA7B4">
+<span aria-hidden="true" style="flex:0 0 28px;width:28px;height:28px;border-radius:50%;background:{{ m.marcaFundo }};color:{{ m.marcaCor }};font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">{{ m.marca }}</span>
+<span style="flex:1 1 auto;min-width:0">
+<span style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<span style="font-size:15px;font-weight:600">{{ m.titulo }}</span>
+<span style="border-radius:999px;border:1px solid {{ m.etqBorda }};background:{{ m.etqFundo }};color:{{ m.etqCor }};padding:1px 10px;font-size:12px;font-weight:600;white-space:nowrap">{{ m.etiqueta }}</span>
+</span>
+<span style="display:block;margin-top:4px;font-size:13px;color:#9AA7B4">{{ m.descricao }}</span>
+<sc-if value="{{ m.temBarra }}" hint-placeholder-val="{{ true }}">
+<span style="display:block;margin-top:8px;height:6px;border-radius:999px;background:#1F2733;overflow:hidden"><span style="display:block;height:100%;width:{{ m.percentual }}%;border-radius:999px;background:{{ m.barraCor }}"></span></span>
+</sc-if>
+</span>
+</a>
+<sc-if value="{{ m.liga }}" hint-placeholder-val="{{ true }}"><span aria-hidden="true" style="width:2px;height:12px;background:#1F2733;margin-left:27px"></span></sc-if>
+</li>
+</sc-for>
+</ol>
+<div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:#9AA7B4">
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:3px;background:#22C55E"></span>concluído</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:3px;background:#7C3AED"></span>começado</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:3px;background:#1F2733"></span>a fazer</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:12px;height:12px;border-radius:3px;background:#22D3EE"></span>é onde você está</span>
+</div>
+</div>
+</section>
+
+<!-- 3. COMO ESTUDAR: CICLO -->
+<section aria-label="Como estudar" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Como estudar</h2>
+<span style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">Relação: o que se repete</span>
+</div>
+<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">Ler a aba → responder o quiz → revisar em 1, 3, 7, 16 e 35 dias. E volta ao começo, na aba seguinte.</p>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:20px;display:flex;justify-content:center">
+<div role="img" aria-label="{{ ciclo.alt }}" style="position:relative;width:340px;max-width:100%;height:340px">
+<svg viewBox="0 0 340 340" width="100%" height="100%" aria-hidden="true" style="position:absolute;inset:0">
+<defs>
+<marker id="ini-seta" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9AA7B4"></path></marker>
+<marker id="ini-seta-acento" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#22D3EE"></path></marker>
+</defs>
+<sc-for list="{{ ciclo.arcos }}" as="a" hint-placeholder-count="3">
+<path d="{{ a.d }}" fill="none" stroke="{{ a.cor }}" stroke-width="2" stroke-dasharray="{{ a.tracejado }}" marker-end="{{ a.marcador }}"></path>
+</sc-for>
+</svg>
+<sc-for list="{{ ciclo.etapas }}" as="e" hint-placeholder-count="3">
+<div style="position:absolute;left:{{ e.x }}px;top:{{ e.y }}px;transform:translate(-50%,-50%);width:118px;box-sizing:border-box;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:8px;text-align:center">
+<span aria-hidden="true" style="display:inline-flex;width:22px;height:22px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;align-items:center;justify-content:center">{{ e.numero }}</span>
+<p style="margin:4px 0 0;font-size:13px;font-weight:600;line-height:1.25">{{ e.titulo }}</p>
+<sc-if value="{{ e.detalhe }}" hint-placeholder-val="{{ false }}"><p style="margin:2px 0 0;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:#9AA7B4">{{ e.detalhe }}</p></sc-if>
+</div>
+</sc-for>
+
+</div>
+</div>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<p style="margin:0 0 10px;font-size:14px;font-weight:600">A escada dos intervalos, na mesma escala de tempo</p>
+<div role="img" aria-label="{{ escadaAlt }}" style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ escada }}" as="d" hint-placeholder-count="5">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><span style="font-size:13px;color:#9AA7B4">Degrau {{ d.degrau }}</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px">{{ d.texto }}</span></div>
+<div style="margin-top:4px;height:14px;background:#141A24;border-radius:3px;overflow:hidden"><div style="height:100%;width:{{ d.largura }}%;background:#7C3AED"></div></div>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin-top:10px;font-size:13px;color:#9AA7B4">Acertou, sobe um degrau; errou, volta ao primeiro. O primeiro nunca é "hoje": a primeira revisão no mesmo dia vira releitura, e releitura ensina pouco. A escada é derivada da teoria do espaçamento — não foi testada nesta forma exata.</figcaption>
+</figure>
+<ol style="margin:0;padding-left:20px;color:#9AA7B4;display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ comoEstudar }}" as="p" hint-placeholder-count="6"><li>{{ p }}</li></sc-for>
+</ol>
+</section>
+
+<!-- 4. REVISÃO DE HOJE -->
+<section aria-label="Revisão de hoje" style="border-radius:12px;border:1px solid {{ revisao.borda }};background:#141A24;padding:20px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Revisão de hoje</h2>
+<span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#9AA7B4">{{ revisao.contagem }}</span>
+</div>
+<p style="margin:0;color:#9AA7B4">{{ revisao.texto }}</p>
+<a href="#/revisao" style="align-self:flex-start;min-height:44px;display:inline-flex;align-items:center;border-radius:8px;border:1px solid {{ revisao.botaoBorda }};background:{{ revisao.botaoFundo }};color:#E6EDF3;padding:8px 16px;font-size:14px;font-weight:600;text-decoration:none" style-hover="border-color:#9AA7B4">{{ revisao.botao }} →</a>
+</section>
+
+<!-- PROGRESSO POR MÓDULO -->
+<section aria-label="Seu progresso" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Seu progresso, módulo a módulo</h2>
+<span style="font-size:14px;color:#9AA7B4">{{ geral.texto }}</span>
+</div>
+<div style="height:8px;border-radius:999px;background:#1F2733;overflow:hidden" role="img" aria-label="Progresso geral dos módulos: {{ geral.texto }}"><div style="height:100%;width:{{ geral.percentual }}%;border-radius:999px;background:#7C3AED"></div></div>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<div role="img" aria-label="{{ barrasAlt }}" style="display:flex;flex-direction:column;gap:14px">
+<sc-for list="{{ barras }}" as="b" hint-placeholder-count="9">
+<div>
+<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline"><span style="font-size:14px">{{ b.rotulo }}</span><span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:13px;color:#9AA7B4">{{ b.valorTexto }}</span></div>
+<div style="margin-top:6px;height:20px;background:#141A24;border-radius:4px;overflow:hidden;display:flex">
+<div style="height:100%;width:{{ b.quiz }}%;background:#22D3EE" title="quiz respondido"></div>
+<div style="height:100%;width:{{ b.concluido }}%;background:#22C55E" title="módulo concluído"></div>
+</div>
+</div>
+</sc-for>
+</div>
+<figcaption style="margin-top:12px;display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:#9AA7B4">
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:#22D3EE"></span>quiz respondido (50%)</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span aria-hidden="true" style="width:22px;height:12px;border-radius:3px;background:#22C55E"></span>módulo concluído (50%)</span>
+<span style="width:100%">Cada módulo vale metade por responder o quiz e metade por marcar como concluído — é a mesma conta do app. As duas últimas barras contam itens, não metades: termos estudados de 34 no Glossário e cenários respondidos de 12 no Simulador.</span>
+</figcaption>
+</figure>
+</section>
+
+<!-- PLANO -->
+<section aria-label="Seu plano" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Seu plano: quando, e o quê</h2>
+<p style="margin:0;color:#9AA7B4">Escreva "quando X, eu faço Y" e "se surgir o obstáculo Z, então W". Escolha um obstáculo concreto e superável: "falta de tempo" foi o caso em que esse tipo de plano não funcionou.</p>
+<label for="ini-plano" style="font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4">O seu plano</label>
+<textarea id="ini-plano" class="omh-campo" rows="3" placeholder="Quando [terminar o café], eu [abro a Revisão e leio uma aba]. Se [chegar um call no Telegram], então [passo o token pelo Checklist antes de qualquer coisa]."></textarea>
+<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Botao" variante="secundario" hint-size="auto,40px">Salvar o plano</x-import>
+<span style="font-size:13px;color:#9AA7B4">Fica salvo neste navegador. Planos "quando X, eu faço Y" aumentam a chance de cumprir uma meta (Gollwitzer &amp; Sheeran, 2006).</span>
+</div>
+</section>
+
+<!-- GUARDAR O PROGRESSO -->
+<section aria-label="Guardar o progresso" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:12px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600">Guardar o progresso</h2>
+<p style="margin:0;color:#9AA7B4">Tudo fica só neste navegador: limpar os dados dele apaga o progresso. Exporte um arquivo de vez em quando; ele importa em outro navegador ou computador.</p>
+<figure style="margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px 20px">
+<div role="img" aria-label="Exportar gera um arquivo .json com o seu progresso, que sai do navegador para o seu computador. Importar lê esse arquivo e substitui o progresso do navegador." style="display:flex;flex-direction:{{ dirSeq }};align-items:center;gap:0;justify-content:center">
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 14px;font-size:14px;text-align:center">Progresso neste navegador</div>
+<span aria-hidden="true" style="display:flex;flex-direction:column;align-items:center;color:#9AA7B4;padding:6px 10px;font-size:12px"><span style="font-size:18px">→</span>Exportar</span>
+<div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);padding:10px 14px;font-size:14px;text-align:center;font-family:'JetBrains Mono',ui-monospace,monospace">omh-progresso-<span style="color:#9AA7B4">AAAA-MM-DD</span>.json</div>
+<span aria-hidden="true" style="display:flex;flex-direction:column;align-items:center;color:#9AA7B4;padding:6px 10px;font-size:12px"><span style="font-size:18px">→</span>Importar</span>
+<div style="border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 14px;font-size:14px;text-align:center">Outro navegador ou computador</div>
+</div>
+</figure>
+<div style="display:flex;flex-wrap:wrap;gap:12px">
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Botao" variante="secundario" hint-size="auto,40px">Exportar</x-import>
+<x-import component-from-global-scope="OMHHubDesignSystem_05e041.Botao" variante="secundario" hint-size="auto,40px">Importar</x-import>
+</div>
+</section>
+
+<p style="margin:0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">Antes de tudo: </strong>este hub é material de estudo próprio, e os números dos exercícios são de treino. Memecoin é o ativo de maior risco do mercado: 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia em que nasceram (CoinGecko Research).</p>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;compacto&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Layout&quot;}}">
+class Component extends DCLogic {
+  state = { situacao: 'meio' };
+  n0(v) { return String(Math.round(v)); }
+  renderVals() {
+    const S = this.state, compacto = !!this.props.compacto;
+    const MODULOS = [
+      { id: 'modulo-1', curto: 'Módulo 1', titulo: 'M1 Fundamentos & Segurança Cripto', descricao: 'Blockchain, carteiras, frase-semente, golpes, defesa e o Brasil.' },
+      { id: 'modulo-2', curto: 'Módulo 2', titulo: 'M2 Psicologia das memecoins', descricao: 'Economia da atenção, os 5 vieses, tipos de token e as 4 fases.' },
+      { id: 'modulo-3', curto: 'Módulo 3', titulo: 'M3 Os dois pilares', descricao: 'Pilar social e pilar técnico, narrativas e a matriz de ferramentas.' },
+      { id: 'modulo-4', curto: 'Módulo 4', titulo: 'M4 Gestão, catálises & decisão', descricao: 'Tese, catálise, take profit e o simulador de decisão.' },
+      { id: 'modulo-5', curto: 'Módulo 5', titulo: 'M5 A mecânica da execução', descricao: 'Terminal, custódia, as cinco camadas de taxa e os erros de operação.' },
+      { id: 'modulo-6', curto: 'Módulo 6', titulo: 'M6 Ler a tela', descricao: 'Market cap × liquidez, volume falso, o contrato e prever o golpe.' },
+      { id: 'modulo-7', curto: 'Módulo 7', titulo: 'M7 A rotina', descricao: 'A regra, o tamanho, o diário, a revisão e os números que circulam.' },
+    ];
+    // Estados de exemplo, declarados: quizzes { acertos, total } e módulos concluídos.
+    const SITUACOES = [
+      { id: 'inicio', rotulo: 'Primeiro dia', quizzes: {}, concluidos: [], vencidos: 0, naFila: 0, termos: 0, cenarios: 0 },
+      { id: 'meio', rotulo: 'No meio da trilha', quizzes: { 'modulo-1': { acertos: 15, total: 16 }, 'modulo-2': { acertos: 3, total: 4 }, 'modulo-3': { acertos: 9, total: 13 } }, concluidos: ['modulo-1', 'modulo-2'], vencidos: 4, naFila: 33, termos: 14, cenarios: 5 },
+      { id: 'quiz-fraco', rotulo: 'Quiz abaixo de 80%', quizzes: { 'modulo-1': { acertos: 15, total: 16 }, 'modulo-2': { acertos: 2, total: 4 } }, concluidos: ['modulo-1'], vencidos: 0, naFila: 20, termos: 9, cenarios: 0 },
+      { id: 'fim', rotulo: 'Tudo concluído', quizzes: { 'modulo-1': { acertos: 15, total: 16 }, 'modulo-2': { acertos: 4, total: 4 }, 'modulo-3': { acertos: 12, total: 13 }, 'modulo-4': { acertos: 4, total: 4 }, 'modulo-5': { acertos: 7, total: 8 }, 'modulo-6': { acertos: 7, total: 8 }, 'modulo-7': { acertos: 7, total: 8 } }, concluidos: MODULOS.map((m) => m.id), vencidos: 0, naFila: 61, termos: 34, cenarios: 12 },
+    ];
+    const est = SITUACOES.find((s) => s.id === S.situacao) || SITUACOES[1];
+    const situacoes = SITUACOES.map((s) => ({ id: s.id, rotulo: s.rotulo, ativo: s.id === est.id, borda: s.id === est.id ? '#7C3AED' : '#1F2733', fundo: s.id === est.id ? 'rgba(124,58,237,.15)' : '#141A24' }));
+    const concluido = (id) => est.concluidos.indexOf(id) >= 0;
+    const quizDe = (id) => est.quizzes[id];
+
+    // 1. Próxima ação — mesma ordem de prioridade de views/inicio.js
+    let acao = null, regraAtiva = 0;
+    if (est.vencidos > 0) { regraAtiva = 1; acao = { texto: 'Revisar ' + (est.vencidos === 1 ? '1 pergunta' : est.vencidos + ' perguntas'), detalhe: 'A revisão de hoje vem antes de conteúdo novo.', href: '#/revisao', botao: 'Revisar agora' }; }
+    if (!acao) { for (let i = 0; i < MODULOS.length; i++) { const m = MODULOS[i], q = quizDe(m.id);
+      if (!q) { regraAtiva = 2; acao = { texto: 'Continuar: ' + m.titulo, detalhe: 'Falta estudar as abas e responder o quiz.', href: '#/' + m.id, botao: 'Abrir o módulo' }; break; }
+      if (q.total && q.acertos / q.total < 0.8) { regraAtiva = 3; acao = { texto: 'Refazer o quiz do ' + m.curto, detalhe: 'Você acertou ' + q.acertos + ' de ' + q.total + '. Releia as explicações das que errou e refaça.', href: '#/' + m.id, botao: 'Abrir o quiz' }; break; }
+      if (!concluido(m.id)) { regraAtiva = 4; acao = { texto: 'Concluir: ' + m.titulo, detalhe: 'Quiz feito. Falta marcar o módulo como concluído, no fim da aba Quiz.', href: '#/' + m.id, botao: 'Abrir o módulo' }; break; } } }
+    if (!acao) { regraAtiva = 5; acao = { texto: 'Refazer o simulador do Módulo 4', detalhe: 'Todos os módulos concluídos. Refaça os cenários sem olhar os feedbacks antes.', href: '#/modulo-4', botao: 'Abrir o simulador' }; }
+    const regrasBase = [
+      'Venceu alguma pergunta na revisão? Revisar vem antes de conteúdo novo.',
+      'Existe um módulo sem quiz respondido? Continuar o primeiro deles.',
+      'Algum quiz ficou abaixo de 80%? Refazer, depois de reler as explicações.',
+      'Quiz feito mas módulo não marcado? Concluir o módulo.',
+      'Tudo concluído? Refazer o simulador do Módulo 4, sem olhar os feedbacks antes.',
+    ];
+    const regras = regrasBase.map((texto, i, arr) => { const at = i + 1 === regraAtiva;
+      return { n: i + 1, texto, liga: i < arr.length - 1, borda: at ? '#22D3EE' : '#1F2733', fundo: at ? 'rgba(34,211,238,.1)' : '#141A24', cor: at ? '#E6EDF3' : '#9AA7B4', marcaFundo: at ? '#22D3EE' : '#1F2733', marcaCor: at ? '#0B0F17' : '#E6EDF3' }; });
+
+    // Progresso: quiz 50% + concluído 50%
+    const pctDe = (id) => (quizDe(id) ? 50 : 0) + (concluido(id) ? 50 : 0);
+    const feitos = est.concluidos.length;
+    const circ = 2 * Math.PI * 50;
+    const geralPct = MODULOS.reduce((a, m) => a + pctDe(m.id), 0) / MODULOS.length;
+    const anel = { feitos: String(feitos), dash: (circ * feitos / 7).toFixed(1) + ' ' + circ.toFixed(1), rotulo: this.n0(geralPct) + '% da trilha', alt: feitos + ' de 7 módulos concluídos, ' + this.n0(geralPct) + ' por cento da trilha contando quiz e conclusão.' };
+    const geral = { percentual: geralPct, texto: this.n0(geralPct) + '% dos 7 módulos' };
+    const barras = MODULOS.map((m) => { const q = quizDe(m.id), c = concluido(m.id);
+      const partes = []; if (q) partes.push('quiz ' + q.acertos + '/' + q.total); if (c) partes.push('concluído');
+      return { rotulo: m.curto, quiz: q ? 50 : 0, concluido: c ? 50 : 0, valorTexto: partes.length ? this.n0(pctDe(m.id)) + '% · ' + partes.join(' · ') : 'não começado' }; });
+    // Glossário: 34 termos (glossario.js). Simulador: 12 cenários (cenarios.js).
+    const TOTAL_TERMOS = 34, TOTAL_CENARIOS = 12;
+    const extrasBarras = [
+      { rotulo: 'Glossário', quiz: (est.termos / TOTAL_TERMOS) * 100, concluido: 0, valorTexto: est.termos + ' de ' + TOTAL_TERMOS + ' termos estudados' },
+      { rotulo: 'Simulador', quiz: (est.cenarios / TOTAL_CENARIOS) * 100, concluido: 0, valorTexto: est.cenarios + ' de ' + TOTAL_CENARIOS + ' cenários respondidos' },
+    ];
+    const barrasTodas = barras.concat(extrasBarras);
+    const barrasAlt = 'Progresso por módulo, cada um valendo metade pelo quiz e metade pela conclusão: ' + barras.map((b) => b.rotulo + ' ' + b.valorTexto).join('; ') + '. E ainda: ' + extrasBarras.map((b) => b.rotulo + ', ' + b.valorTexto).join('; ') + '.';
+
+    // 2. Mapa da trilha
+    const ETQ = { feito: { etiqueta: 'Concluído', etqBorda: 'rgba(34,197,94,.5)', etqFundo: 'rgba(34,197,94,.12)', etqCor: '#22C55E', barraCor: '#22C55E' },
+      comecado: { etiqueta: 'Começado', etqBorda: 'rgba(124,58,237,.5)', etqFundo: 'rgba(124,58,237,.15)', etqCor: '#E6EDF3', barraCor: '#7C3AED' },
+      aFazer: { etiqueta: 'A fazer', etqBorda: '#1F2733', etqFundo: '#0B0F17', etqCor: '#9AA7B4', barraCor: '#1F2733' } };
+    const idAcao = acao.href.replace('#/', '');
+    const trilhaModulos = MODULOS.map((m, i) => { const pct = pctDe(m.id), c = concluido(m.id), q = !!quizDe(m.id);
+      const t = c ? ETQ.feito : (q ? ETQ.comecado : ETQ.aFazer), aqui = m.id === idAcao;
+      return Object.assign({ marca: String(i + 1), titulo: m.titulo, descricao: m.descricao, href: '#/' + m.id, percentual: pct, temBarra: true, liga: true,
+        borda: aqui ? '#22D3EE' : (c ? 'rgba(34,197,94,.5)' : '#1F2733'), fundo: aqui ? 'rgba(34,211,238,.08)' : '#141A24',
+        marcaFundo: c ? '#22C55E' : (aqui ? '#22D3EE' : '#1F2733'), marcaCor: c || aqui ? '#0B0F17' : '#E6EDF3' }, t, aqui ? { etiqueta: 'Você está aqui', etqBorda: '#22D3EE', etqFundo: 'rgba(34,211,238,.12)', etqCor: '#22D3EE' } : {}); });
+    const extras = [
+      { marca: '✓', titulo: 'Checklist antes de comprar', descricao: 'Usado a cada token, durante e depois dos módulos. Nunca "concluído": é rotina.', href: '#/checklist', etiqueta: 'Rotina', etqBorda: 'rgba(34,211,238,.5)', etqFundo: 'rgba(34,211,238,.1)', etqCor: '#22D3EE', temBarra: false, percentual: 0, barraCor: '#1F2733', liga: true, borda: '#1F2733', fundo: '#141A24', marcaFundo: '#1F2733', marcaCor: '#E6EDF3' },
+      { marca: '⇢', titulo: 'Revisão espaçada', descricao: 'As perguntas dos quizzes voltam em 1, 3, 7, 16 e 35 dias. ' + (est.naFila > 0 ? est.naFila + ' na fila.' : 'A fila começa no primeiro quiz.'), href: '#/revisao', etiqueta: est.vencidos > 0 ? est.vencidos + ' vencidas' : 'Em dia', etqBorda: est.vencidos > 0 ? '#22D3EE' : 'rgba(34,197,94,.5)', etqFundo: est.vencidos > 0 ? 'rgba(34,211,238,.12)' : 'rgba(34,197,94,.12)', etqCor: est.vencidos > 0 ? '#22D3EE' : '#22C55E', temBarra: false, percentual: 0, barraCor: '#1F2733', liga: false, borda: est.vencidos > 0 ? '#22D3EE' : '#1F2733', fundo: est.vencidos > 0 ? 'rgba(34,211,238,.08)' : '#141A24', marcaFundo: '#1F2733', marcaCor: '#E6EDF3' },
+    ];
+    const trilha = trilhaModulos.concat(extras);
+    const trilhaAlt = 'Mapa da trilha: ' + trilhaModulos.map((m) => m.titulo + ' — ' + m.etiqueta + ', ' + this.n0(m.percentual) + ' por cento').join('; ') + '; Checklist antes de comprar — rotina; Revisão espaçada — ' + extras[1].etiqueta + '.';
+
+    // 3. Ciclo de estudo
+    const etapasBase = [
+      { titulo: 'Ler a aba', detalhe: '' },
+      { titulo: 'Responder o quiz', detalhe: '' },
+      { titulo: 'Revisar', detalhe: '1 · 3 · 7 · 16 · 35 dias' },
+    ];
+    const C = 170, R = 112, n = etapasBase.length, folga = 34;
+    const ang = (i) => (-90 + (i * 360) / n) * Math.PI / 180;
+    const pt = (a, r) => ({ x: C + r * Math.cos(a), y: C + r * Math.sin(a) });
+    const ciclo = {
+      etapas: etapasBase.map((e, i) => { const p = pt(ang(i), R); return Object.assign({ numero: i + 1 }, e, { x: Math.min(272, Math.max(68, p.x)), y: p.y }); }),
+      arcos: etapasBase.map((e, i) => { const a1 = ang(i) + folga * Math.PI / 180; let a2 = ang((i + 1) % n) - folga * Math.PI / 180; if (a2 < a1) a2 += 2 * Math.PI;
+        const p1 = pt(a1, R), p2 = pt(a2, R), volta = i === n - 1;
+        return { d: 'M' + p1.x.toFixed(1) + ',' + p1.y.toFixed(1) + ' A' + R + ',' + R + ' 0 0 1 ' + p2.x.toFixed(1) + ',' + p2.y.toFixed(1), cor: volta ? '#22D3EE' : '#9AA7B4', tracejado: volta ? '6 5' : 'none', marcador: volta ? 'url(#ini-seta-acento)' : 'url(#ini-seta)' }; }),
+      alt: '1 Ler a aba → 2 Responder o quiz → 3 Revisar em 1, 3, 7, 16 e 35 dias → e volta ao começo, na aba seguinte.',
+    };
+    const DIAS = [1, 3, 7, 16, 35];
+    const escada = DIAS.map((d, i) => ({ degrau: String(i + 1), texto: d === 1 ? 'amanhã (1 dia)' : d + ' dias', largura: (d / 35) * 100 }));
+    const escadaAlt = 'Intervalos por degrau, na mesma escala: ' + DIAS.map((d, i) => 'degrau ' + (i + 1) + ', ' + d + (d === 1 ? ' dia' : ' dias')).join('; ') + '.';
+    const comoEstudar = [
+      'Comece pelo Módulo 1 e siga na ordem até o 7 — cada um assume o anterior.',
+      'Abra o Glossário sempre que aparecer um termo novo e marque como estudado o que já entendeu.',
+      'Responda o mini-quiz no fim de cada módulo antes de marcar o módulo como concluído.',
+      'Volte à página Revisão quando ela avisar: as perguntas retornam em 1, 3, 7, 16 e 35 dias.',
+      'Treine a decisão nos 12 cenários do simulador do Módulo 4.',
+      'Antes de qualquer compra, passe o token pela página Checklist antes de comprar.',
+    ];
+
+    // 4. Revisão de hoje
+    const quizzesFeitos = Object.keys(est.quizzes).length;
+    let revTexto, revBotao;
+    if (est.vencidos > 0) { revTexto = (est.vencidos === 1 ? '1 pergunta venceu' : est.vencidos + ' perguntas venceram') + '. Responder de novo, dias depois, é o que faz o conteúdo ficar.'; revBotao = 'Revisar agora'; }
+    else if (est.naFila > 0) { revTexto = 'Nada vencido hoje. As perguntas voltam em 1, 3, 7, 16 e 35 dias, conforme você acerta.'; revBotao = 'Abrir a Revisão'; }
+    else if (quizzesFeitos > 0) { revTexto = 'Abra a Revisão uma vez: as perguntas dos quizzes que você já fez entram na fila.'; revBotao = 'Abrir a Revisão'; }
+    else { revTexto = 'Responda o quiz de um módulo e as perguntas dele voltam aqui no dia seguinte.'; revBotao = 'Abrir a Revisão'; }
+    const revisao = { texto: revTexto, botao: revBotao, contagem: est.naFila > 0 ? est.vencidos + ' vencidas · ' + est.naFila + ' na fila' : 'fila vazia',
+      borda: est.vencidos > 0 ? 'rgba(34,211,238,.5)' : '#1F2733', botaoBorda: est.vencidos > 0 ? '#22D3EE' : '#1F2733', botaoFundo: est.vencidos > 0 ? 'rgba(34,211,238,.1)' : '#141A24' };
+
+    return {
+      mostrarSidebar: !compacto, paddingMain: compacto ? '20px 16px' : '32px 24px',
+      dirAcao: compacto ? 'column' : 'row', alinhaAcao: compacto ? 'flex-start' : 'center', tamAcao: compacto ? '1.25rem' : '1.5rem', dirSeq: compacto ? 'column' : 'row',
+      situacoes, acao, regras, anel, geral, barras: barrasTodas, barrasAlt, trilha, trilhaAlt, ciclo, escada, escadaAlt, comoEstudar, revisao,
+      trocarSituacao: (e) => this.setState({ situacao: e.currentTarget.dataset.id }),
+    };
+  }
+}
+</script>
+</body>
+</html>
