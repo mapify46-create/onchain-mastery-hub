@@ -28,7 +28,7 @@ const CONSULTA_DESKTOP = '(min-width: 1024px)';
 
 const CLASSE_LINK =
   'block rounded-lg border px-3 py-2 text-sm transition-colors duration-150';
-const LINK_ATIVO = ' border-primaria bg-primaria/15 text-texto font-medium';
+const LINK_ATIVO = ' border-primaria bg-primaria/15 text-texto font-semibold';
 const LINK_INATIVO =
   ' border-transparent text-texto-suave hover:bg-borda/50 hover:text-texto';
 
@@ -109,8 +109,10 @@ export function montarSidebar() {
         onclick: () => fechar(),
       },
       [
-        criarElemento('span', { class: 'flex items-center justify-between gap-2' }, [
-          criarElemento('span', { class: 'min-w-0 truncate' }, [rota.curto]),
+        // O nome do módulo pode quebrar em duas linhas, como no desenho; o
+        // percentual fica no alto, à direita.
+        criarElemento('span', { class: 'flex items-start justify-between gap-2' }, [
+          criarElemento('span', { class: 'min-w-0' }, [rota.curto]),
           rotulo,
         ]),
         barra,
@@ -157,18 +159,23 @@ export function montarSidebar() {
   // -------------------------------------------------------------------------
   // Estrutura fixa do menu
   // -------------------------------------------------------------------------
-  const cabecalho = criarElemento('div', { class: 'border-b border-borda px-4 py-4' }, [
+  // No desenho o cabeçalho do menu é só o nome do hub.
+  const cabecalho = criarElemento('div', { class: 'px-4 pt-5 pb-3' }, [
     criarElemento('p', { class: 'text-sm font-semibold' }, ['onchain-mastery-hub']),
-    criarElemento('p', { class: 'mt-1 text-xs text-texto-suave' }, [
-      'Hub de estudos on-chain — material de estudo próprio.',
-    ]),
   ]);
 
-  const lista = criarElemento(
-    'ul',
-    { class: 'space-y-1 px-3 py-4' },
-    ROTAS.map(criarLinha),
-  );
+  // Os módulos, uma linha fina, e depois as páginas de consulta (Glossário,
+  // Checklist, Revisão) — a ordem e o separador do desenho.
+  const itens = [];
+  ROTAS.forEach((rota, indice) => {
+    const anterior = ROTAS[indice - 1];
+    if (anterior?.tipo === 'modulo' && rota.tipo !== 'modulo') {
+      itens.push(criarElemento('li', { class: 'my-2 h-px bg-borda', 'aria-hidden': 'true' }));
+    }
+    itens.push(criarLinha(rota));
+  });
+
+  const lista = criarElemento('ul', { class: 'space-y-1 px-4 pb-4' }, itens);
 
   const botaoLimpar = criarBotao('Limpar progresso', {
     variante: 'secundario',

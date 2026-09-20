@@ -3,15 +3,16 @@
 // Duas estratégias diferentes, porque os arquivos têm naturezas diferentes:
 //   1. Arquivos do próprio app (esta lista): "cache primeiro". Eles só mudam quando
 //      alguém publica uma versão nova — e aí CACHE_VERSAO muda junto (ver abaixo).
-//   2. CDN externo (Tailwind, Mermaid, Chart.js): "rede primeiro, cache de reserva".
-//      Tenta buscar a versão mais nova; se não tiver internet, usa a cópia salva da
-//      visita anterior. Isso é o que permite abrir Módulo 1/2 (com diagrama) e a
-//      tela de Início (com gráfico) mesmo offline, depois da primeira vez.
+//   2. CDN externo (Tailwind, Mermaid): "rede primeiro, cache de reserva". Tenta
+//      buscar a versão mais nova; se não tiver internet, usa a cópia salva da
+//      visita anterior. Isso é o que permite abrir Módulo 1/2 (com diagrama) mesmo
+//      offline, depois da primeira vez. O Chart.js saiu do projeto em 19/09 — a
+//      tela de Início agora desenha o progresso com barras próprias.
 //
 // IMPORTANTE ao editar arquivos do app: aumente o número em CACHE_VERSAO. Sem isso,
 // quem já instalou o app continua vendo a versão antiga guardada em cache.
 
-const CACHE_VERSAO = 'omh-cache-v20';
+const CACHE_VERSAO = 'omh-cache-v21';
 
 const ARQUIVOS_DO_APP = [
   './',
@@ -23,7 +24,14 @@ const ARQUIVOS_DO_APP = [
   'src/app.js',
   'src/components/anatomia.js',
   'src/components/animacoes.js',
-  'src/components/calculadora.js',
+  'src/components/animacoes/caminho-do-token.js',
+  'src/components/animacoes/drainer.js',
+  'src/components/animacoes/envenenamento.js',
+  'src/components/animacoes/motor.js',
+  'src/components/animacoes/narrativa.js',
+  'src/components/animacoes/pool.js',
+  'src/components/animacoes/sanduiche.js',
+  'src/components/aviso.js',
   'src/components/checklist.js',
   'src/components/comparisonTable.js',
   'src/components/destaques.js',
@@ -33,7 +41,7 @@ const ARQUIVOS_DO_APP = [
   'src/components/secao.js',
   'src/components/visuais.js',
   'src/components/glossary.js',
-  'src/components/grafico.js',
+  'src/components/instalarApp.js',
   'src/components/linhaDoTempo.js',
   'src/components/phaseFlow.js',
   'src/components/quiz.js',
@@ -45,6 +53,7 @@ const ARQUIVOS_DO_APP = [
   'src/data/cenarios.js',
   'src/data/checklist.js',
   'src/data/glossario.js',
+  'src/data/inicio.js',
   'src/data/modulo1.js',
   'src/data/modulo2.js',
   'src/data/modulo3.js',

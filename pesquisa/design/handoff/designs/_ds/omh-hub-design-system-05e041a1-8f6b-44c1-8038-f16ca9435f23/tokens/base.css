@@ -1,0 +1,45 @@
+/* Reset e comportamentos globais, vindos de styles/custom.css do código original. */
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background-color: var(--omh-fundo);
+  color: var(--omh-texto);
+  font-family: var(--omh-fonte-sans);
+  font-size: var(--omh-texto-base);
+  line-height: var(--omh-linha-corpo);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Foco sempre visível: requisito de acessibilidade do projeto. O contorno ciano tem
+   9,7:1 contra a superfície dos cards, e o offset garante que ele apareça mesmo em
+   cima de botões preenchidos. */
+:focus-visible {
+  outline: var(--omh-foco-anel);
+  outline-offset: var(--omh-foco-offset);
+  border-radius: var(--omh-raio-foco);
+}
+
+a { color: var(--omh-acento); text-decoration: none; }
+a:hover { color: var(--omh-texto); text-decoration: underline; }
+
+/* Nenhuma palavra longa (endereço, ticker, URL) pode esticar a página no celular. */
+h1, h2, h3, h4, h5, p, li, dd, dt, summary, figcaption { overflow-wrap: break-word; }
+
+/* Scrollbar discreta, combinando com o dark mode. */
+* { scrollbar-width: thin; scrollbar-color: var(--omh-borda) transparent; }
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb { background-color: var(--omh-borda); border-radius: var(--omh-raio-caixa); }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* Quem pediu menos animação no sistema operacional não recebe animação nenhuma. */
+@media (prefers-reduced-motion: reduce) {
+  html, *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}

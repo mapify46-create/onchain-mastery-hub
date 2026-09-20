@@ -19,6 +19,22 @@ export const modulo7 = {
     'pensou e uma revisão que olha o comportamento, não o saldo. Este módulo mostra o que ' +
     'cada peça tem de evidência — e o que não tem.',
 
+  // Subtítulo do cabeçalho da página, como no desenho: o resumo sem a primeira frase.
+  subtitulo:
+    'Uma regra escrita antes, um tamanho que aguenta ir a zero, uma saída que executa ' +
+    'sozinha, um diário que guarda o que você pensou e uma revisão que olha o ' +
+    'comportamento, não o saldo. Este módulo mostra o que cada peça tem de evidência — e o ' +
+    'que não tem.',
+
+  // A caixa roxa do cabeçalho: a regra do dono dita na primeira tela.
+  avisoDoCabecalho: {
+    destaque: 'Este módulo não escreve a sua regra.',
+    texto:
+      'Ele mostra o que ela precisa ter para ser testada depois. Quando comprar é decisão ' +
+      'sua — e fica no papel antes de você ver o próximo token. Nenhum campo desta tela vem ' +
+      'preenchido, e todo exemplo aparece marcado como exemplo.',
+  },
+
   objetivos: [
     'Escrever uma regra que dá para conferir depois — a regra é sua; o módulo mostra a forma.',
     'Entender por que o critério de Kelly quebra em memecoin e o que sobra: sobreviver.',
@@ -28,8 +44,36 @@ export const modulo7 = {
     'Reconhecer as estatísticas de trading inventadas que circulam.',
   ],
 
+  // Mapa do módulo ("O módulo inteiro numa olhada", no topo da página): o centro
+  // e as folhas curtas de cada aba, copiados do desenho (M7 Desktop, renderVals ›
+  // ABAS). `aba` é o id da aba na view. O ramo do Quiz não entra aqui: a view
+  // conta as perguntas de `quiz` e escreve "N perguntas".
+  mapa: {
+    titulo: 'A rotina',
+    subtitulo: 'A regra é sua; a forma é daqui',
+    ramos: [
+      { aba: 'regra', folhas: ['por que antes', 'as 5 partes em branco', 'o ciclo', 'saída automática'] },
+      { aba: 'tamanho', folhas: ['fração fixa', 'sequência de perdas', 'ruína do apostador'] },
+      { aba: 'diario', folhas: ['o que tem lastro', 'os 9 campos'] },
+      { aba: 'revisao', folhas: ['olhar pouco', 'a pergunta', 'quantas operações'] },
+      { aba: 'mitos', folhas: ['o que dizem × a evidência'] },
+    ],
+  },
+
+  // "Antes de ler: o que você acha?" no topo de cada aba: o id de uma pergunta do
+  // quiz. Não é corrigida ali; a mesma pergunta volta corrigida na "Pergunta rápida".
+  perguntaAntes: { regra: 'q4', tamanho: 'q3', diario: 'q1', revisao: 'q6', mitos: 'q7' },
+
   // ---------------------------------------------------------------------------
-  // Seções de texto
+  // Seções — uma por card, na ordem do desenho (M7 Desktop). Cada seção tem o
+  // título, a ideia central (`emUmaFrase`) e os dados do visual que fica DENTRO
+  // do card. `pergunta` é a "Pergunta rápida" do fim do card: o id de uma
+  // pergunta do `quiz` (não grava nada).
+  //
+  // Texto com pedaço em negrito: ['antes ', { forte: 'negrito' }, ' depois'].
+  // Caixa com começo em negrito: { destaque: 'Frase forte.', texto: 'O resto.' }.
+  // `tom` escolhe a cor do desenho: 'bom' (verde), 'ruim' (vermelho),
+  // 'atencao' (âmbar), 'primaria' (roxo), 'acento' (ciano), 'neutro' (cinza).
   // ---------------------------------------------------------------------------
   secoes: [
     // ================================ A REGRA ================================
@@ -40,83 +84,145 @@ export const modulo7 = {
       emUmaFrase:
         'Depois do resultado, a memória reescreve o que você pensava. A regra escrita antes ' +
         'guarda o que você pensou de verdade.',
-      paragrafos: [
-        'Depois que o resultado chega, a cabeça muda a história. Veja o que ela costuma dizer.',
-      ],
-      quadro: [
-        {
-          rotulo: 'Se deu certo',
+      // O que a cabeça diz depois do resultado: dois cartões e, embaixo, a caixa ciano.
+      memoria: {
+        cartoes: [
+          {
+            quando: 'Se deu certo',
+            frase: '"Eu sabia."',
+            vies: 'Viés de retrospectiva. E "foi habilidade": viés de autoatribuição.',
+            tom: 'atencao',
+          },
+          {
+            quando: 'Se deu errado',
+            frase: '"Foi azar."',
+            vies: 'A mesma decisão, contada de outro jeito — porque o resultado mudou.',
+            tom: 'ruim',
+          },
+        ],
+        conclusao: {
+          destaque: 'A regra escrita antes é a única versão que não muda.',
           texto:
-            '"Eu sabia" (viés de retrospectiva). E "foi habilidade" (viés de autoatribuição).',
+            'Planos do tipo "se acontecer X, eu faço Y", feitos antes, aumentam a chance de a ' +
+            'pessoa cumprir o que planejou — é um resultado repetido da psicologia do comportamento.',
         },
-        {
-          rotulo: 'Se deu errado',
-          texto: '"Foi azar."',
-        },
-      ],
-      paragrafosFinais: [
-        'Escrita antes, a regra guarda o que você de fato pensou.',
-        'Planos do tipo "se acontecer X, eu faço Y", feitos antes, aumentam a chance de a pessoa ' +
-          'cumprir o que planejou. É um resultado repetido da psicologia do comportamento.',
-        'Este módulo não escreve a sua regra. Ele mostra o que ela precisa ter para ser testada ' +
-          'depois.',
-        'Quando comprar é decisão sua. E fica no papel antes de você ver o próximo token.',
-      ],
+      },
       detalhe: {
-        titulo: 'de onde vem',
+        titulo: 'de onde vem, e por que o pré-compromisso falha',
         paragrafos: [
           'O resultado dos planos "se acontecer X, eu faço Y" é de Gollwitzer & Sheeran (2006).',
+          {
+            destaque: 'Pré-compromisso funciona, e falha com frequência.',
+            texto:
+              'Numa conta de poupança das Filipinas que travava os saques até uma data, a ' +
+              'poupança aumentou cerca de 82% em um ano — mas só 28% das pessoas aceitaram ' +
+              'abrir a conta, e outros estudos mostram muita gente abandonando o compromisso ' +
+              'antes do prazo (Ashraf, Karlan & Yin, 2006). A lição: o compromisso precisa ser ' +
+              'rígido o bastante para valer e simples o bastante para você manter. Regra que ' +
+              'você quebra toda semana não protege nada.',
+          },
         ],
       },
     },
     {
-      id: 'o-que-a-regra-tem',
+      // O formulário EM BRANCO. Regra do dono: o hub não escreve a regra de
+      // ninguém. Cada parte diz o que ela tem e dá um exemplo só da FORMA de uma
+      // resposta verificável — nunca um limiar, um percentual ou um gatilho.
+      id: 'cinco-partes',
       aba: 'regra',
-      titulo: 'O que uma regra testável precisa ter',
-      emUmaFrase: 'Uma regra que não dá para conferir depois não é regra: é intenção.',
-      paragrafos: [
-        'Uma regra testável tem cinco partes. Cada uma é escrita de um jeito que outra pessoa ' +
-          'conseguiria verificar olhando o seu diário.',
-      ],
-      ordenada: true,
-      lista: [
-        'Gatilho de entrada: o que precisa acontecer, de um jeito que dá para ver, para você ' +
-          'comprar. O checklist é o filtro mínimo. O gatilho é seu.',
-        'Tamanho: quanto entra, em porcentagem do capital. Decidido antes de ver o gráfico.',
-        'Saída por perda: o nível ou a condição em que você sai. Já fica programada.',
-        'Saída por ganho e por tempo: quando realizar (a escada do Módulo 4) e quanto tempo ' +
-          'esperar sem nada acontecer.',
-        'O que invalida a regra: o que precisaria acontecer, na revisão, para você parar de usá-la.',
-      ],
-    },
-    {
-      id: 'pre-compromisso',
-      aba: 'regra',
-      titulo: 'Pré-compromisso: funciona, e falha com frequência',
+      titulo: 'As cinco partes da sua regra',
+      etiqueta: 'em branco: você escreve',
       emUmaFrase:
-        'Travar uma decisão hoje funciona. Mas muita gente nem aceita a trava, ou desiste dela ' +
-        'no meio.',
-      paragrafos: [
-        'Pré-compromisso é decidir agora e tornar caro mudar de ideia depois.',
+        'Uma regra que não dá para conferir depois não é regra: é intenção. Cada parte é ' +
+        'escrita de um jeito que outra pessoa conseguiria verificar olhando o seu diário.',
+      rotuloDoExemplo: 'exemplo de forma',
+      partes: [
+        {
+          id: 'gatilho',
+          rotulo: 'Gatilho de entrada',
+          oQueTem:
+            'O que precisa acontecer, de um jeito que dá para ver, para você comprar. O ' +
+            'checklist é o filtro mínimo; o gatilho é seu.',
+          placeholder: 'Escreva o seu gatilho, de um jeito verificável',
+          exemplo:
+            'A forma de um gatilho verificável tem um fato observável e um momento — não ' +
+            '"quando parecer bom".',
+        },
+        {
+          id: 'tamanho',
+          rotulo: 'Tamanho',
+          oQueTem: 'Quanto entra, em porcentagem do capital. Decidido antes de ver o gráfico.',
+          placeholder: 'Escreva a sua fração, em % do capital',
+          exemplo: 'A forma é uma porcentagem do capital de hoje, e não um valor em reais que envelhece.',
+        },
+        {
+          id: 'perda',
+          rotulo: 'Saída por perda',
+          oQueTem: 'O nível ou a condição em que você sai. Já fica programada.',
+          placeholder: 'Escreva onde você sai, e como isso fica programado',
+          exemplo:
+            'A forma diz o nível e quem executa: você programou a ordem, ou vai depender de ' +
+            'estar olhando?',
+        },
+        {
+          id: 'ganho',
+          rotulo: 'Saída por ganho e por tempo',
+          oQueTem:
+            'Quando realizar (a escada do Módulo 4) e quanto tempo esperar sem nada acontecer.',
+          placeholder: 'Escreva os seus alvos e o prazo sem catálise',
+          exemplo:
+            'A forma tem faixas definidas antes e um prazo — "espero até quando?" precisa ter ' +
+            'resposta.',
+        },
+        {
+          id: 'invalida',
+          rotulo: 'O que invalida a regra',
+          oQueTem: 'O que precisaria acontecer, na revisão, para você parar de usá-la.',
+          placeholder: 'Escreva o que faria você abandonar esta regra',
+          exemplo:
+            'A forma é uma condição que dá para conferir no diário, não uma sensação de que ' +
+            '"não está funcionando".',
+        },
       ],
-      exemplo: {
-        titulo: 'A conta de poupança das Filipinas',
-        passos: [
-          'Uma conta travava os saques até uma data.',
-          'Em um ano, ela aumentou a poupança em cerca de 82%.',
-          'Mas só 28% das pessoas aceitaram abrir a conta.',
-          'E outros estudos mostram muita gente abandonando o compromisso antes do prazo.',
+      rodape: [
+        [
+          'Os exemplos mostram o ',
+          { forte: 'formato' },
+          ' de uma resposta verificável, nunca um limiar, um percentual ou um gatilho a seguir. ' +
+            'O hub não sabe qual é o seu capital, o seu prazo nem o que você aceita perder — e ' +
+            'não tem como saber.',
         ],
-      },
-      paragrafosFinais: [
-        'A lição para a rotina: o compromisso precisa ser rígido o bastante para valer. E ' +
-          'simples o bastante para você manter.',
-        'Regra que você quebra toda semana não protege nada.',
+        'Nada digitado aqui é salvo: esta tela é a forma, e o lugar da regra é o seu caderno.',
       ],
-      detalhe: {
-        titulo: 'o estudo',
-        paragrafos: ['O estudo da conta é de Ashraf, Karlan & Yin (2006).'],
+    },
+    {
+      id: 'ciclo',
+      aba: 'regra',
+      titulo: 'O ciclo de uma operação',
+      emUmaFrase: 'A regra só muda na revisão — nunca no meio de uma operação.',
+      // As caixas do ciclo, de cima para baixo.
+      ciclo: {
+        inicio: 'Escrevo a regra',
+        filtro: 'Passo o token pelo checklist',
+        reprovou: 'reprovou',
+        passou: 'passou',
+        naoCompro: 'Não compro e anoto o motivo',
+        gatilho: 'O gatilho da minha regra aconteceu?',
+        nao: 'não',
+        sim: 'sim',
+        entrada: 'Entro com o tamanho da regra e a saída já programada',
+        depois: ['Anoto no diário antes de ver o resultado', 'A saída executa', 'Anoto a saída executada'],
+        revisao: 'Revisão: segui a regra?',
+        volta: 'mudança na regra só aqui, e volta para o começo',
+        descricao:
+          'Escrevo a regra. Passo o token pelo checklist: se reprovou, não compro e anoto o ' +
+          'motivo. Se passou, confiro se o gatilho da minha regra aconteceu: se não, não compro e ' +
+          'anoto o motivo; se sim, entro com o tamanho da regra e a saída já programada. Anoto no ' +
+          'diário antes de ver o resultado. A saída executa, e eu anoto a saída executada. Na ' +
+          'revisão, pergunto se segui a regra — qualquer mudança na regra acontece só aqui, e ' +
+          'volta para o começo.',
       },
+      pergunta: 'q4',
     },
     {
       id: 'stop-automatico',
@@ -125,27 +231,21 @@ export const modulo7 = {
       emUmaFrase:
         'Uma ordem de venda automática mudou o comportamento. Um lembrete para vender não mudou ' +
         'nada.',
+      comparacao: {
+        descricao:
+          'Num experimento, investidores com ordem de venda automática seguraram menos as ' +
+          'posições perdedoras. O lembrete para considerar vender não mudou nada.',
+        cartoes: [
+          { tom: 'bom', rotulo: 'Ordem de venda automática', frase: 'Seguraram menos as posições perdedoras.' },
+          { tom: 'neutro', rotulo: 'Lembrete para "considerar vender"', frase: 'Não mudou nada.' },
+        ],
+      },
       paragrafos: [
         'Stop-loss é uma ordem de venda automática: você programa um nível, e a venda acontece ' +
-          'sozinha quando o preço chega lá.',
-        'Efeito disposição é o hábito de vender rápido o que ganha e segurar o que perde.',
-        'Num experimento (Fischbacher, Hoffmann & Schudy, 2017), investidores receberam uma de ' +
-          'duas saídas.',
-      ],
-      quadro: [
-        {
-          rotulo: 'Ordem de venda automática',
-          texto: 'Os investidores seguraram menos as posições perdedoras.',
-        },
-        {
-          rotulo: 'Lembrete para "considerar vender"',
-          texto: 'Não mudou nada.',
-        },
-      ],
-      paragrafosFinais: [
-        'Em memecoin, a ordem automática também tem limite. Numa queda rápida, ela pode ' +
-          'executar bem abaixo do nível programado (slippage, Módulo 5).',
-        'Mesmo assim, é o único pré-compromisso de saída com efeito medido.',
+          'sozinha quando o preço chega lá. Em memecoin ela também tem limite — numa queda ' +
+          'rápida, pode executar bem abaixo do nível programado (slippage, Módulo 5). Mesmo ' +
+          'assim, é o único pré-compromisso de saída com efeito medido (Fischbacher, Hoffmann & ' +
+          'Schudy, 2017).',
       ],
     },
 
@@ -153,123 +253,126 @@ export const modulo7 = {
     {
       id: 'fracao-fixa',
       aba: 'tamanho',
-      titulo: 'Fração fixa: o ponto de partida, e por quê',
+      titulo: 'Fração fixa: uma perda nunca zera a banca',
       emUmaFrase:
-        'Arriscar sempre a mesma porcentagem do capital de hoje. Assim, uma perda sozinha nunca ' +
-        'zera a banca.',
-      paragrafos: [
-        'Fração fixa é arriscar sempre a mesma porcentagem do capital que você tem hoje. Duas ' +
-          'propriedades explicam por que ela é o ponto de partida.',
-      ],
-      quadro: [
-        {
-          rotulo: 'Uma perda nunca zera a banca',
-          texto: 'Você arrisca só uma parte. Depois de uma perda, sempre sobra capital.',
-        },
-        {
-          rotulo: 'O tamanho se ajusta sozinho',
-          texto: 'Encolhe quando você perde e cresce quando ganha, sem precisar decidir de novo.',
-        },
-      ],
-      exemplo: {
-        titulo: 'Exemplo com 10% por posição',
+        'Arriscar sempre a mesma porcentagem do capital de hoje. O tamanho encolhe quando você ' +
+        'perde e cresce quando ganha, sem precisar decidir de novo.',
+      // O exemplo do arquivo (10%), em três cartões. `barra` é o comprimento da
+      // barrinha, em % do capital inicial.
+      mecanismo: {
+        titulo: 'O mecanismo, com 10% por posição',
+        etiqueta: 'exemplo do arquivo, não sugestão de fração',
+        descricao:
+          'Você tem 100 de capital, a posição é 10. A posição vai a zero e sobram 90. A próxima ' +
+          'posição é 10% de 90: 9.',
         passos: [
-          'Você tem 100 de capital. A posição é 10.',
-          'A posição vai a zero. Sobram 90.',
-          'A próxima posição é 10% de 90: 9.',
+          { momento: 'Capital de hoje', capital: '100', texto: 'A posição é 10 — 10% do capital.', barra: 100, tom: 'primaria' },
+          {
+            momento: 'A posição vai a zero',
+            capital: '90',
+            texto: 'Sobram 90. A perda nunca zera a banca, porque você arriscou só uma parte.',
+            barra: 90,
+            tom: 'ruim',
+          },
+          {
+            momento: 'Próxima posição',
+            capital: '9',
+            texto: '10% de 90. O tamanho encolheu sozinho, sem você decidir de novo.',
+            barra: 9,
+            tom: 'acento',
+          },
         ],
       },
-      paragrafosFinais: [
-        'O número que circula, "arrisque de 1% a 2% por operação", é convenção de mercado. ' +
-          'Nenhum estudo revisado por pares o fixa como ótimo.',
-        'Ele é coerente com a ideia de sobreviver. E é só isso.',
-      ],
-    },
-    {
-      id: 'kelly',
-      aba: 'tamanho',
-      titulo: 'O critério de Kelly, e por que ele quebra em memecoin',
-      emUmaFrase:
-        'A fórmula de Kelly precisa de média e variância. Em cauda muito pesada, elas podem nem ' +
-        'existir, e a fórmula não dá número.',
       paragrafos: [
-        'O critério de Kelly responde uma pergunta: que fração apostar para o capital crescer o ' +
-          'mais rápido possível no longo prazo?',
-        'Para um ativo contínuo, a fórmula é f* = μ ÷ σ². O μ é o retorno esperado (a média). O ' +
-          'σ² é a variância, que mede o quanto os retornos se espalham.',
-        'A fórmula só funciona se a média e a variância existirem.',
-        'Cauda é a ponta da distribuição, onde ficam os resultados extremos. Numa cauda muito ' +
-          'pesada, retornos gigantes, para cima e para baixo, aparecem com frequência demais.',
-        'Aí a variância pode ser infinita, e a média pode nem existir. A fórmula não produz ' +
-          'número nenhum.',
-      ],
-      paragrafosFinais: [
-        'O que a pesquisa diz com segurança é a direção: quanto mais pesada a cauda, menor a ' +
-          'fração ótima.',
-        'O valor ótimo para memecoin, ninguém resolveu.',
+        'O número que circula, "arrisque de 1% a 2% por operação", é convenção de mercado. ' +
+          'Nenhum estudo revisado por pares o fixa como ótimo: ele é coerente com a ideia de ' +
+          'sobreviver, e é só isso. Qual fração você usa é decisão sua.',
       ],
       detalhe: {
-        titulo: 'os estudos',
-        lista: [
-          'Estudos sobre estratégias em cripto encontram esse padrão de cauda muito pesada ' +
-            '(Grobys & Shahzad, 2025).',
-          'A direção "cauda mais pesada, fração ótima menor" é de Bamberg & Neuhierl (2012).',
+        titulo: 'por que o critério de Kelly quebra aqui',
+        paragrafos: [
+          'O critério de Kelly responde que fração apostar para o capital crescer o mais rápido ' +
+            'possível no longo prazo. Para um ativo contínuo, f* = μ ÷ σ², em que μ é o retorno ' +
+            'esperado e σ² é a variância. A fórmula só funciona se as duas existirem — e numa ' +
+            'cauda muito pesada a variância pode ser infinita e a média pode nem existir, então ' +
+            'ela não produz número nenhum.',
+          'O que a pesquisa diz com segurança é a direção: quanto mais pesada a cauda, menor a ' +
+            'fração ótima (Bamberg & Neuhierl, 2012; padrão de cauda em cripto em Grobys & ' +
+            'Shahzad, 2025). O valor ótimo para memecoin, ninguém resolveu.',
         ],
       },
+      pergunta: 'q2',
+    },
+    {
+      // O card da calculadora (os dados dela estão em `calculadoraDeSequencia`).
+      id: 'sequencia-de-perdas',
+      aba: 'tamanho',
+      titulo: 'Quanto sobra depois de uma sequência de perdas totais',
+      emUmaFrase:
+        'Perder é mais rápido que recuperar, e a diferença cresce com a fração. É a matemática ' +
+        'de uma regra, não uma sugestão de fração.',
+      paragrafos: [
+        'Recuperar custa mais do que perder, porque o ganho é calculado sobre um capital menor.',
+      ],
+      pergunta: 'q3',
     },
     {
       id: 'ruina',
       aba: 'tamanho',
       titulo: 'A ruína do apostador: sobreviver vem primeiro',
       emUmaFrase:
-        'Com uma desvantagem pequena repetida muitas vezes, quebrar é quase certo. Por isso ' +
-        'sobreviver vem antes de crescer.',
-      paragrafos: [
-        'Num jogo com uma desvantagem pequena, repetido muitas vezes, a ruína é quase certa.',
-      ],
-      exemplo: {
-        titulo: 'Na roleta americana',
-        passos: [
-          'Você aposta sempre no par: 18 chances de ganhar em 38.',
-          'Começa com 50 fichas.',
-          'Só para quando chegar a 100 fichas.',
-          'Resultado: quebra em 99,5% das vezes.',
+        'Com uma desvantagem pequena repetida muitas vezes, quebrar é quase certo. Aí a ' +
+        'pergunta muda.',
+      // Grade de 100: 99,5% arredonda para 100, então são 100 quadrados vermelhos e
+      // nenhum escuro — a legenda diz o número exato.
+      grade: {
+        frase: 'Na roleta americana, apostando sempre no par: de cada 100 tentativas',
+        grupos: [
+          {
+            quantidade: 100,
+            cor: 'ruim',
+            exibicao: '99,5%',
+            rotulo: 'quebram (18 chances de ganhar em 38, começando com 50 fichas e parando só em 100)',
+          },
+          {
+            quantidade: 0,
+            cor: 'resto',
+            exibicao: '',
+            rotulo: 'menos de 1 em 100 chega a 100 fichas — e é por isso que não há quadrado escuro na grade',
+          },
+        ],
+        fonte:
+          'Ruína do apostador (Feller). Número exato: 99,5% — a grade desenha 100 quadrados, e ' +
+          'por isso o arredondamento aparece.',
+        descricao:
+          'De cada 100 tentativas, cerca de 99 ou 100 quebram antes de chegar a 100 fichas: a ' +
+          'chance de quebrar é de 99,5%. Começando com 50 fichas e parando só em 100.',
+      },
+      comparacao: {
+        descricao:
+          'Em memecoin, a pergunta sai de quanto cresce e entra quanto aguento perder sem ser ' +
+          'eliminado.',
+        cartoes: [
+          {
+            tom: 'neutro',
+            rotulo: 'Sai a pergunta',
+            frase: '"Quanto cresce?"',
+            nota: 'A matemática do crescimento não funciona quando a média pode não existir.',
+          },
+          {
+            tom: 'acento',
+            rotulo: 'Entra a pergunta',
+            frase: '"Quanto aguento perder sem ser eliminado?"',
+            nota:
+              'Daí a regra que sobra com fundamento: o tamanho de cada posição é um valor que ' +
+              'você pode perder inteiro.',
+          },
         ],
       },
-      paragrafosFinais: [
-        'Em memecoin, a matemática do crescimento não funciona e a perda total é comum. Aí a ' +
-          'pergunta muda.',
-        'Sai "quanto cresce?". Entra "quanto aguento perder sem ser eliminado?".',
-        'Daí a regra que sobra com fundamento: o tamanho de cada posição é um valor que você ' +
-          'pode perder inteiro.',
-        'Perder inteiro não é o caso extremo. 68,67% dos tokens do Pump.fun pararam de negociar ' +
-          'no mesmo dia em que nasceram (CoinGecko Research).',
-      ],
-    },
-    {
-      id: 'a-conta',
-      aba: 'tamanho',
-      titulo: 'A conta que a calculadora faz',
-      emUmaFrase: 'Perder é mais rápido que recuperar, e a diferença cresce com a fração.',
       paragrafos: [
-        'Se cada posição perdida vai a zero, depois de n perdas seguidas com a fração f sobra ' +
-          '(1 − f)ⁿ do capital.',
-        'Em palavras: a cada perda, você fica com (1 − f) do que tinha.',
-      ],
-      quadro: [
-        {
-          rotulo: '10% por posição',
-          texto:
-            '5 perdas deixam 59%. Para voltar ao começo, precisa ganhar 69% sobre o que sobrou.',
-        },
-        {
-          rotulo: '25% por posição',
-          texto:
-            '5 perdas deixam 24%. Para voltar ao começo, precisa ganhar 321% sobre o que sobrou.',
-        },
-      ],
-      paragrafosFinais: [
-        'Recuperar custa mais do que perder, porque o ganho é calculado sobre um capital menor.',
+        'Perder inteiro não é o caso extremo: 68,67% dos tokens do Pump.fun pararam de negociar ' +
+          'no mesmo dia em que nasceram (CoinGecko Research). Quanto é "um valor que você pode ' +
+          'perder inteiro" só você sabe — depende da sua vida, não do mercado.',
       ],
     },
 
@@ -280,67 +383,120 @@ export const modulo7 = {
       titulo: 'O que o diário faz, e o que não faz',
       emUmaFrase:
         'O diário ajuda você a seguir a sua regra. Ninguém mediu se ele faz ganhar dinheiro.',
-      paragrafos: [
-        'Duas frases parecem dizer a mesma coisa. Só uma tem evidência.',
-      ],
-      quadro: [
-        {
-          rotulo: 'Tem lastro',
-          texto:
-            '"O registro ajuda você a seguir a sua própria regra." Monitorar o progresso ' +
-            'aumentou o cumprimento de metas de comportamento: perder peso, parar de fumar, ' +
-            'tomar remédio.',
-        },
-        {
-          rotulo: 'Não tem lastro',
-          texto: '"O registro faz você ganhar dinheiro." Nenhum estudo revisado por pares mediu isso.',
-        },
-      ],
-      paragrafosFinais: [
-        'Se a regra for ruim, o diário ajuda você a seguir uma regra ruim com mais fidelidade.',
-        'O efeito foi maior quando o registro era escrito de verdade, e não conferido de cabeça.',
-        'E foi maior também quando o resultado era mostrado a alguém.',
-      ],
-      detalhe: {
-        titulo: 'o estudo',
-        paragrafos: [
-          'É uma meta-análise de 138 experimentos (Harkin et al., 2016). Meta-análise é um ' +
-            'estudo que junta os resultados de muitos outros estudos.',
+      comparacao: {
+        descricao:
+          'Tem lastro: o registro ajuda você a seguir a sua própria regra — monitorar o ' +
+          'progresso aumentou o cumprimento de metas de comportamento. Não tem lastro: o ' +
+          'registro faz você ganhar dinheiro — nenhum estudo revisado por pares mediu isso.',
+        cartoes: [
+          {
+            tom: 'bom',
+            rotulo: 'Tem lastro',
+            frase: '"O registro ajuda você a seguir a sua própria regra."',
+            nota:
+              'Monitorar o progresso aumentou o cumprimento de metas de comportamento: perder ' +
+              'peso, parar de fumar, tomar remédio.',
+          },
+          {
+            tom: 'ruim',
+            rotulo: 'Não tem lastro',
+            frase: '"O registro faz você ganhar dinheiro."',
+            nota: 'Nenhum estudo revisado por pares mediu isso.',
+          },
         ],
       },
-    },
-    {
-      id: 'o-tamanho-do-efeito',
-      aba: 'diario',
-      titulo: 'Quanto é um efeito de 0,40',
-      emUmaFrase: 'O efeito de monitorar é real, e fica entre pequeno e médio.',
-      paragrafos: [
-        'O efeito medido foi d = 0,40. Quem monitorou ficou, em média, 0,40 desvio-padrão melhor.',
-        'Desvio-padrão é o quanto os resultados costumam variar em torno da média.',
-        'Na régua usual, 0,2 é pequeno, 0,5 é médio e 0,8 é grande. Então 0,40 é de pequeno a ' +
-          'médio.',
-      ],
-      exemplo: {
-        titulo: 'O mesmo efeito, em chances',
-        passos: [
-          'Sorteie uma pessoa que monitorou e uma que não monitorou.',
-          'Há 61% de chance de a que monitorou ter cumprido mais a meta.',
-          'Se não houvesse efeito nenhum, seriam 50%.',
-          'E a pessoa mediana que monitorou (a do meio da fila) supera 66% de quem não monitorou.',
+      // Grade de 100: d = 0,40 dá 61 chances em 100 (sem efeito, seriam 50).
+      grade: {
+        frase: 'Quanto é um efeito de 0,40, em chances',
+        grupos: [
+          { quantidade: 61, cor: 'modelo', rotulo: 'de cada 100 sorteios, quem monitorou cumpriu mais a meta' },
+          { quantidade: 39, cor: 'resto', rotulo: 'restantes' },
+          { tracejado: true, rotulo: 'sem efeito nenhum, seriam 50' },
         ],
+        fonte:
+          'd = 0,40 — meta-análise de 138 experimentos com 19.951 pessoas (Harkin et al., 2016). ' +
+          'Na régua usual, 0,2 é pequeno, 0,5 é médio e 0,8 é grande: 0,40 é de pequeno a médio.',
+        descricao:
+          'Sorteando uma pessoa que monitorou e uma que não monitorou, há 61 chances em 100 de a ' +
+          'que monitorou ter cumprido mais a meta. Se não houvesse efeito nenhum, seriam 50 em 100.',
       },
+      paragrafos: [
+        'Se a regra for ruim, o diário ajuda você a seguir uma regra ruim com mais fidelidade. O ' +
+          'efeito foi maior quando o registro era escrito de verdade, e não conferido de cabeça — ' +
+          'e maior também quando o resultado era mostrado a alguém.',
+      ],
+      pergunta: 'q1',
     },
     {
+      // O diário EM BRANCO: nove campos vazios. O campo 7 (a saída executada) é o
+      // que amarra tudo e fica em destaque.
       id: 'nove-campos',
       aba: 'diario',
-      titulo: 'Os nove campos',
-      emUmaFrase: 'Oito campos anotam o que você fez. Só um anota quanto ganhou ou perdeu.',
-      paragrafos: [
-        'Oito campos são de comportamento, que está sob o seu controle. Um é de resultado, que ' +
-          'não está.',
-        'A peça que amarra tudo é o campo 7: a saída executada.',
-        'Sem ela anotada, "segui a regra?" vira lembrança. E lembrança é o que os vieses corrompem.',
+      titulo: 'O diário, campo a campo',
+      etiqueta: 'em branco: você escreve',
+      emUmaFrase:
+        'Oito campos anotam o que você fez. Só um anota quanto ganhou ou perdeu. A peça que ' +
+        'amarra tudo é o campo 7.',
+      campos: [
+        {
+          titulo: 'A regra, escrita antes da entrada',
+          tipo: 'Comportamento',
+          porque: 'Sem ela, não dá para separar decisão de resultado.',
+          placeholder: 'Cole aqui a regra que você escreveu antes',
+        },
+        {
+          titulo: 'Data e hora, token e tamanho em % do capital',
+          tipo: 'Comportamento',
+          porque: 'O tamanho é parte da regra, não do resultado.',
+          placeholder: 'Data, hora, token e % do capital',
+        },
+        {
+          titulo: 'Preço de entrada, saída por perda programada e alvo',
+          tipo: 'Comportamento',
+          porque: 'O plano de saída, registrado antes de saber como termina.',
+          placeholder: 'Entrada, saída por perda e alvo',
+        },
+        {
+          titulo: 'A tese, em uma frase',
+          tipo: 'Comportamento',
+          porque: 'Congela a narrativa antes do resultado (a ficha do Módulo 4).',
+          placeholder: 'Uma frase, escrita antes',
+        },
+        {
+          titulo: 'Convicção, numa escala fixa de 1 a 5',
+          tipo: 'Comportamento',
+          porque: 'Deixa ver depois se convicção alta acerta mais — ou só aposta mais.',
+          placeholder: 'De 1 a 5',
+        },
+        {
+          titulo: 'Estado emocional na entrada',
+          tipo: 'Comportamento',
+          porque: 'Pressa, medo de ficar de fora, vontade de recuperar uma perda.',
+          placeholder: 'Como você estava na hora de clicar',
+        },
+        {
+          titulo: 'Saída executada: hora, preço e o que disparou',
+          tipo: 'Comportamento',
+          porque: 'Stop, alvo, tempo ou decisão na hora. É o que torna o campo 8 verificável.',
+          placeholder: 'Hora, preço e o que disparou a saída',
+          destaque: true,
+        },
+        {
+          titulo: 'Segui a regra?',
+          tipo: 'Comportamento',
+          porque: 'Sai da comparação entre os campos 1 e 3 e o campo 7 — não da memória.',
+          placeholder: 'Sim ou não, comparando os campos 1, 3 e 7',
+        },
+        {
+          titulo: 'Resultado em dinheiro',
+          tipo: 'Resultado',
+          porque: 'O único campo de resultado. Olhe pouco (aba A revisão).',
+          placeholder: 'Quanto entrou ou saiu',
+        },
       ],
+      rodape:
+        'Sem o campo 7 anotado, "segui a regra?" vira lembrança. E lembrança é o que os vieses ' +
+        'corrompem. Nada digitado aqui é salvo: o diário é seu, e mora fora do hub.',
     },
 
     // =============================== REVISÃO =================================
@@ -351,62 +507,67 @@ export const modulo7 = {
       emUmaFrase:
         'Olhar o dinheiro toda hora piora a decisão. Revisar se você seguiu a regra é outra ' +
         'coisa, e ajuda.',
-      paragrafos: [
-        'Em experimentos, quem via o resultado das apostas com mais frequência assumia menos ' +
-          'risco e decidia pior.',
-        'Isso se chama aversão míope à perda: de tanto olhar de perto, cada perda pesa mais.',
-        'E as pessoas preferem olhar com frequência, mesmo sendo prejudicadas.',
-      ],
-      quadro: [
-        {
-          rotulo: 'Olhar o dinheiro',
-          texto: 'Com frequência, piora a decisão. É isso que esses experimentos mediram.',
-        },
-        {
-          rotulo: 'Revisar o comportamento',
-          texto: 'Conferir se você seguiu a regra. É isso que o lastro do diário apoia.',
-        },
-      ],
-      paragrafosFinais: [
-        'Qual a cadência ideal de revisão para quem opera? Ninguém mediu.',
-        'Semanal é uma escolha razoável para começar. Trate como um teste seu, não como verdade.',
-      ],
-      detalhe: {
-        titulo: 'os estudos',
-        paragrafos: [
-          'Gneezy, Kapteyn & Potters (2003) e Fellner & Sutter (2009).',
+      comparacao: {
+        descricao:
+          'Olhar o dinheiro com frequência piora a decisão — foi isso que os experimentos ' +
+          'mediram. Revisar o comportamento, conferindo se você seguiu a regra, é o que o lastro ' +
+          'do diário apoia.',
+        cartoes: [
+          {
+            tom: 'ruim',
+            rotulo: 'Olhar o dinheiro',
+            frase: 'Com frequência, piora a decisão.',
+            nota:
+              'Aversão míope à perda: de tanto olhar de perto, cada perda pesa mais. E as ' +
+              'pessoas preferem olhar com frequência, mesmo sendo prejudicadas.',
+          },
+          {
+            tom: 'bom',
+            rotulo: 'Revisar o comportamento',
+            frase: 'Conferir se você seguiu a regra.',
+            nota: 'É isso que o lastro do diário apoia.',
+          },
         ],
       },
-    },
-    {
-      id: 'a-pergunta',
-      aba: 'revisao',
-      titulo: 'A pergunta da revisão',
-      emUmaFrase:
-        'Não pergunte "o resultado foi bom?". Pergunte "a decisão foi boa, dado o que eu sabia ' +
-        'antes?".',
       paragrafos: [
-        'A primeira pergunta convida os vieses da lista abaixo.',
-        'A segunda só se responde com o diário.',
+        'Qual a cadência ideal de revisão para quem opera? Ninguém mediu. Semanal é uma escolha ' +
+          'razoável para começar — trate como um teste seu, não como verdade (Gneezy, Kapteyn & ' +
+          'Potters, 2003; Fellner & Sutter, 2009).',
       ],
-      listaTitulo: 'Os vieses de quem revisa o próprio histórico:',
-      lista: [
-        'Retrospectiva: "eu sabia que ia acontecer".',
-        'Autoatribuição: ganho é habilidade, perda é azar. Isso gera excesso de confiança.',
-        'Viés de resultado: julgar a decisão pelo desfecho.',
-        'Ilusão de controle: achar que influencia o que é sorte.',
-        'Padrão no ruído: ver sequência onde há acaso. Num histórico curto de cauda pesada, ' +
-          'quase todo padrão é ruído.',
-      ],
-      detalhe: {
-        titulo: 'de onde vem cada viés',
-        lista: [
-          'Retrospectiva: Fischhoff (1975).',
-          'Autoatribuição e excesso de confiança: Gervais & Odean (2001).',
-          'Viés de resultado: Baron & Hershey (1988).',
-          'Ilusão de controle: Langer (1975).',
+      // A figura "A pergunta da revisão", dentro do mesmo card.
+      aPergunta: {
+        titulo: 'A pergunta da revisão',
+        comparacao: {
+          descricao:
+            'Não pergunte se o resultado foi bom: isso convida os vieses. Pergunte se a decisão ' +
+            'foi boa, dado o que você sabia antes — e isso só se responde com o diário.',
+          cartoes: [
+            {
+              tom: 'ruim',
+              rotulo: 'Não pergunte',
+              frase: '"O resultado foi bom?"',
+              nota: 'Essa pergunta convida os cinco vieses abaixo.',
+            },
+            {
+              tom: 'acento',
+              rotulo: 'Pergunte',
+              frase: '"A decisão foi boa, dado o que eu sabia antes?"',
+              nota: 'Essa só se responde com o diário.',
+            },
+          ],
+        },
+        vieses: [
+          { nome: 'Retrospectiva', texto: '"eu sabia que ia acontecer".' },
+          { nome: 'Autoatribuição', texto: 'ganho é habilidade, perda é azar. Isso gera excesso de confiança.' },
+          { nome: 'Viés de resultado', texto: 'julgar a decisão pelo desfecho.' },
+          { nome: 'Ilusão de controle', texto: 'achar que influencia o que é sorte.' },
+          {
+            nome: 'Padrão no ruído',
+            texto: 'ver sequência onde há acaso. Num histórico curto de cauda pesada, quase todo padrão é ruído.',
+          },
         ],
       },
+      pergunta: 'q5',
     },
     {
       id: 'amostra',
@@ -415,56 +576,106 @@ export const modulo7 = {
       emUmaFrase:
         '30 operações boas não provam habilidade. No melhor caso seriam centenas, e em cauda ' +
         'pesada talvez nenhum número baste.',
+      // As três barras na mesma escala (0 a 1.600). São CONTAS, não medições:
+      // n ≈ (2 ÷ SR)², de Lo (2002). O 30 é o exemplo da pergunta 6 do quiz.
+      barras: {
+        titulo: 'A conta no melhor caso: n ≈ (2 ÷ SR)²',
+        maximo: 1600,
+        itens: [
+          {
+            rotulo: 'Você fez',
+            valorTexto: '30 operações',
+            valor: 30,
+            tom: 'neutro',
+            nota: 'Não prova nada: 20 lucros em 30 cabem perfeitamente na sorte.',
+          },
+          {
+            rotulo: 'SR de 0,1 por operação — um número bom',
+            valorTexto: '(2 ÷ 0,1)² = 400',
+            valor: 400,
+            tom: 'primaria',
+            nota: 'Operações para o resultado se distinguir de zero.',
+          },
+          {
+            rotulo: 'SR de 0,05 por operação',
+            valorTexto: '(2 ÷ 0,05)² = 1.600',
+            valor: 1600,
+            tom: 'acento',
+            nota: 'Metade do SR, quatro vezes a amostra: a conta é quadrática.',
+          },
+        ],
+        legenda:
+          'Mesma escala, de 0 a 1.600 operações. SR é o retorno médio por operação dividido pelo ' +
+          'desvio-padrão. A conta é de Lo (2002) e vale só com variância finita.',
+        descricao:
+          'Na mesma escala, de 0 a 1.600 operações: você fez 30, que não provam nada. Com SR de ' +
+          '0,1 por operação seriam 400 operações. Com SR de 0,05, 1.600.',
+      },
       paragrafos: [
-        'Para saber se uma regra ganha por habilidade, e não por sorte, é preciso muitas ' +
-          'operações.',
-        'Se os retornos se comportassem bem, dá para estimar quantas.',
+        'Em cauda pesada, a média converge muito mais devagar. E se a média nem existe, nenhum ' +
+          'número de operações distingue habilidade de sorte pela média — ninguém publicou o ' +
+          'índice de cauda das memecoins.',
+        'Tem um agravante: testar várias versões da própria regra e ficar com a que "funcionou" ' +
+          'infla o resultado. Com só três tentativas independentes, a melhor já é provavelmente ' +
+          'falsa (Bailey & López de Prado, 2021). Na prática: o diário serve para saber se você ' +
+          'seguiu a regra, não para provar que ela ganha.',
       ],
-      exemplo: {
-        titulo: 'A conta no melhor caso',
-        passos: [
-          'SR é o retorno médio por operação dividido pelo desvio-padrão.',
-          'A conta é n ≈ (2 ÷ SR)², em que n é o número de operações.',
-          'Com SR de 0,1 por operação, que é um número bom: (2 ÷ 0,1)² = 400 operações para o ' +
-            'resultado se distinguir de zero.',
-          'Com SR de 0,05: (2 ÷ 0,05)² = 1.600 operações.',
-        ],
-      },
-      paragrafosFinais: [
-        'Em cauda pesada, a média converge muito mais devagar. Converger é ir se firmando num ' +
-          'valor conforme as operações se acumulam.',
-        'E se a média nem existe, nenhum número de operações distingue habilidade de sorte pela ' +
-          'média. Ninguém publicou o índice de cauda das memecoins.',
-        'Tem um agravante. Testar várias versões da própria regra e ficar com a que ' +
-          '"funcionou" infla o resultado.',
-        'Com só três tentativas independentes, a melhor já é provavelmente falsa.',
-        'Na prática: o diário serve para saber se você seguiu a regra. Não serve para provar ' +
-          'que ela ganha.',
-      ],
-      detalhe: {
-        titulo: 'os termos técnicos e os estudos',
-        lista: [
-          'A conta n ≈ (2 ÷ SR)² é de Lo (2002).',
-          'O índice de cauda α mede o quão pesada é a cauda. Com α ≤ 1, a média não existe.',
-          'O agravante das várias tentativas é de Bailey & López de Prado (2021).',
-        ],
-      },
+      pergunta: 'q6',
     },
 
     // ================================ MITOS ==================================
     {
-      id: 'por-que-circulam',
+      id: 'mitos',
       aba: 'mitos',
-      titulo: 'Por que esses números colam',
+      titulo: 'O que dizem × o que a evidência mostra',
       emUmaFrase:
         'Número preciso, nome de universidade e prazo curto: é o formato da estatística que ' +
         'vende curso e ferramenta.',
-      paragrafos: [
-        'A defesa é a mesma do checklist. Pergunte de onde vem o número, qual foi a amostra, e ' +
-          'comparado com quê.',
-        'Os dados que existem de verdade, com amostra e método, apontam todos para o mesmo lado: ' +
-          'a maioria de quem opera com frequência perde.',
+      rotulos: { dizem: 'O que dizem', fonte: 'Tem fonte?', evidencia: 'O que a evidência mostra' },
+      // Cada número que circula: o que dizem (`titulo`), se tem fonte e o dado real.
+      itens: [
+        {
+          titulo: '"Quem mantém diário melhora 23% o desempenho mensal em 60 dias"',
+          fonte: 'Não. Número de blog de plataforma, sem estudo, autor ou método.',
+          real: 'Nenhum estudo revisado por pares mede diário → retorno.',
+        },
+        {
+          titulo: '"Estudo da Universidade da Califórnia: registro sistemático dá 73% de resultados melhores"',
+          fonte: 'Distorção de dois estudos reais.',
+          real:
+            'O estudo real (Barber & Odean, 2000) mostra que quem mais opera ganha menos. O "73" ' +
+            'é a diferença diária, em centésimos de ponto, entre os melhores e os piores day ' +
+            'traders de Taiwan — sem relação com diário.',
+        },
+        {
+          titulo: '"Diário reduz o drawdown máximo em 25% a 30%"',
+          fonte: 'Não localizável.',
+          real: 'Sem amostra e sem método publicados.',
+        },
+        {
+          titulo: '"90% dos traders perdem 90% do dinheiro em 90 dias"',
+          fonte: 'Folclore: não existe um número oficial único.',
+          real: 'Na Europa, 74% a 89% das contas de varejo em CFD perdem dinheiro (ESMA, 2018).',
+        },
+        {
+          titulo: '"95% dos traders falham"',
+          fonte: 'Não. Número redondo que muda de blog para blog.',
+          real: 'Na B3, 97% dos day traders que persistiram mais de 300 dias perderam dinheiro.',
+        },
+        {
+          titulo: '"Com prática, você fica lucrativo"',
+          fonte: 'Não sustentado.',
+          real:
+            'Traders aprendem devagar e de forma custosa, e os menos hábeis "aprendem" saindo do ' +
+            'mercado. No estudo da B3, os autores não acharam evidência de aprendizado.',
+        },
       ],
+      paragrafos: [
+        'A defesa é a mesma do checklist: pergunte de onde vem o número, qual foi a amostra, e ' +
+          'comparado com quê. Os dados que existem de verdade, com amostra e método, apontam todos ' +
+          'para o mesmo lado: a maioria de quem opera com frequência perde.',
+      ],
+      pergunta: 'q7',
     },
   ],
 
@@ -570,102 +781,12 @@ export const modulo7 = {
   },
 
   // ---------------------------------------------------------------------------
-  // Tabelas
-  // ---------------------------------------------------------------------------
-  tabelaCampos: {
-    colunas: [
-      { chave: 'tipo', rotulo: 'Tipo' },
-      { chave: 'porque', rotulo: 'Por que existe' },
-    ],
-    linhas: [
-      { id: 'c1', titulo: '1. A regra, escrita antes da entrada', valores: { tipo: 'Comportamento', porque: 'Sem ela, não dá para separar decisão de resultado.' } },
-      { id: 'c2', titulo: '2. Data e hora, token e tamanho em % do capital', valores: { tipo: 'Comportamento', porque: 'O tamanho é parte da regra, não do resultado.' } },
-      { id: 'c3', titulo: '3. Preço de entrada, saída por perda programada e alvo', valores: { tipo: 'Comportamento', porque: 'O plano de saída, registrado antes de saber como termina.' } },
-      { id: 'c4', titulo: '4. A tese, em uma frase', valores: { tipo: 'Comportamento', porque: 'Congela a narrativa antes do resultado (a ficha do Módulo 4).' } },
-      { id: 'c5', titulo: '5. Convicção, numa escala fixa de 1 a 5', valores: { tipo: 'Comportamento', porque: 'Deixa ver depois se convicção alta acerta mais — ou só aposta mais.' } },
-      { id: 'c6', titulo: '6. Estado emocional na entrada', valores: { tipo: 'Comportamento', porque: 'Pressa, medo de ficar de fora, vontade de recuperar uma perda.' } },
-      { id: 'c7', titulo: '7. Saída executada: hora, preço e o que disparou', valores: { tipo: 'Comportamento', porque: 'Stop, alvo, tempo ou decisão na hora. É o que torna o campo 8 verificável.' } },
-      { id: 'c8', titulo: '8. Segui a regra?', valores: { tipo: 'Comportamento', porque: 'Sai da comparação entre os campos 1 e 3 e o campo 7 — não da memória.' } },
-      { id: 'c9', titulo: '9. Resultado em dinheiro', valores: { tipo: 'Resultado', porque: 'O único campo de resultado. Olhe pouco (aba A revisão).' } },
-    ],
-  },
-
-  tabelaMitos: {
-    colunas: [
-      { chave: 'fonte', rotulo: 'Tem fonte?' },
-      { chave: 'real', rotulo: 'O que o dado real diz' },
-    ],
-    linhas: [
-      {
-        id: 'm23',
-        titulo: '"Quem mantém diário melhora 23% o desempenho mensal em 60 dias"',
-        valores: {
-          fonte: 'Não. Número de blog de plataforma, sem estudo, autor ou método.',
-          real: 'Nenhum estudo revisado por pares mede diário → retorno.',
-        },
-      },
-      {
-        id: 'm73',
-        titulo: '"Estudo da Universidade da Califórnia: registro sistemático dá 73% de resultados melhores"',
-        valores: {
-          fonte: 'Distorção de dois estudos reais.',
-          real:
-            'O estudo real (Barber & Odean, 2000) mostra que quem mais opera ganha menos. O "73" é a ' +
-            'diferença diária, em centésimos de ponto, entre os melhores e os piores day traders de ' +
-            'Taiwan — sem relação com diário.',
-        },
-      },
-      {
-        id: 'm25',
-        titulo: '"Diário reduz o drawdown máximo em 25% a 30%"',
-        valores: { fonte: 'Não localizável.', real: 'Sem amostra e sem método publicados.' },
-      },
-      {
-        id: 'm909090',
-        titulo: '"90% dos traders perdem 90% do dinheiro em 90 dias"',
-        valores: {
-          fonte: 'Folclore: não existe um número oficial único.',
-          real: 'Na Europa, 74% a 89% das contas de varejo em CFD perdem dinheiro (ESMA, 2018).',
-        },
-      },
-      {
-        id: 'm95',
-        titulo: '"95% dos traders falham"',
-        valores: {
-          fonte: 'Não. Número redondo que muda de blog para blog.',
-          real: 'Na B3, 97% dos day traders que persistiram mais de 300 dias perderam dinheiro.',
-        },
-      },
-      {
-        id: 'mpratica',
-        titulo: '"Com prática, você fica lucrativo"',
-        valores: {
-          fonte: 'Não sustentado.',
-          real:
-            'Traders aprendem devagar e de forma custosa, e os menos hábeis "aprendem" saindo do ' +
-            'mercado. No estudo da B3, os autores não acharam evidência de aprendizado.',
-        },
-      },
-    ],
-  },
-
-  // ---------------------------------------------------------------------------
-  // Calculadora da sequência de perdas (a matemática mora em views/modulo7.js)
+  // Calculadora da sequência de perdas (card "Quanto sobra depois de uma
+  // sequência de perdas totais"; a matemática mora em views/modulo7.js).
+  // Os atalhos 10% e 25% são as duas frações do exemplo do arquivo: servem para
+  // comparar, não são sugestão de fração.
   // ---------------------------------------------------------------------------
   calculadoraDeSequencia: {
-    titulo: 'Quanto sobra depois de uma sequência de perdas totais',
-    exemplo: {
-      passos: [
-        '10% do capital em cada posição, e 5 posições seguidas vão a zero.',
-        'Depois da primeira, sobra 90%. Depois da segunda, 90% de 90%: 81%.',
-        'Depois da quinta: 0,9 × 0,9 × 0,9 × 0,9 × 0,9 ≈ 59%.',
-        'Para voltar ao começo: 1 ÷ 0,59 − 1 ≈ 69% de ganho sobre o que sobrou.',
-        'Agora suba a fração para 25% e compare.',
-      ],
-    },
-    descricao:
-      'Escolha a fração do capital em cada posição e quantas posições seguidas vão a zero. ' +
-      'É a matemática de uma regra, não uma sugestão de fração.',
     controles: [
       {
         id: 'fracao',
@@ -686,44 +807,21 @@ export const modulo7 = {
         formatar: (n) => String(n),
       },
     ],
+    atalhos: [
+      { valor: 10, rotulo: '10% por posição' },
+      { valor: 25, rotulo: '25% por posição' },
+    ],
+    rotuloDosAtalhos: 'Atalhos de comparação',
     nota:
       'Supõe que cada posição perdida vai a zero e que a fração é recalculada sobre o capital ' +
       'que sobrou. Não inclui taxas nem ganhos no meio da sequência.',
+    rotuloDoResultado: 'O que sobra, e o que exige de volta',
+    rotuloDaSobra: 'Sobra do capital',
+    rotuloDoGanho: 'Ganho para voltar ao começo',
+    legenda:
+      'Cada barra é o capital depois de uma perda, da esquerda para a direita. A primeira é o ' +
+      'capital inteiro. Fórmula: sobra = (1 − f) elevado a n.',
   },
-
-  // ---------------------------------------------------------------------------
-  // Diagrama
-  // ---------------------------------------------------------------------------
-  diagramas: [
-    {
-      id: 'ciclo',
-      aba: 'regra',
-      titulo: 'O ciclo de uma operação',
-      legenda: 'A regra só muda na revisão — nunca no meio de uma operação.',
-      codigoMermaid: [
-        'flowchart TD',
-        '  A["Escrevo a regra"] --> B["Passo o token pelo checklist"]',
-        '  B -->|reprovou| X["Não compro e anoto o motivo"]',
-        '  B -->|passou| C{"O gatilho da minha regra aconteceu?"}',
-        '  C -->|não| X',
-        '  C -->|sim| D["Entro com o tamanho da regra e a saída já programada"]',
-        '  D --> E["Anoto no diário antes de ver o resultado"]',
-        '  E --> F["A saída executa"]',
-        '  F --> G["Anoto a saída executada"]',
-        '  G --> H{"Revisão: segui a regra?"}',
-        '  H -->|"mudança só aqui"| A',
-      ].join('\n'),
-      versaoEmTexto: [
-        'Escrevo a regra.',
-        'Passo o token pelo checklist. Se reprovou, não compro e anoto o motivo.',
-        'Se passou, confiro se o gatilho da minha regra aconteceu. Se não, não compro e anoto o motivo.',
-        'Se sim, entro com o tamanho da regra e a saída já programada.',
-        'Anoto no diário antes de ver o resultado.',
-        'A saída executa, e eu anoto a saída executada.',
-        'Na revisão, pergunto se segui a regra. Qualquer mudança na regra acontece só aqui, e volta para o começo.',
-      ],
-    },
-  ],
 
   // ---------------------------------------------------------------------------
   // Quiz

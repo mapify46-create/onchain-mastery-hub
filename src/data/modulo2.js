@@ -17,6 +17,22 @@ export const modulo2 = {
     'Visualizar as 4 fases do ciclo de vida de uma moeda e onde mora o risco em cada uma.',
   ],
 
+  // Mapa do módulo ("O módulo inteiro numa olhada", no topo da página): o centro
+  // e as folhas curtas de cada aba, copiados do desenho (M2 Desktop, renderVals ›
+  // ABAS). `aba` é o id da aba na view. O ramo do Quiz não entra aqui: a view
+  // conta as perguntas de `quiz` e escreve "N perguntas".
+  mapa: {
+    titulo: 'Psicologia',
+    subtitulo: 'O preço é feito de olhos',
+    ramos: [
+      { aba: 'visao-geral', folhas: ['preço feito de olhos', 'dopamina', 'o antídoto'] },
+      { aba: 'vieses', folhas: ['os 5 vieses', 'estou em FOMO?', 'post de hype'] },
+      { aba: 'tipos', folhas: ['5 categorias', '10 tipos'] },
+      { aba: 'casos', folhas: ['TRUMP', 'MELANIA', 'LIBRA'] },
+      { aba: 'fases', folhas: ['o que checar em cada uma', 'o que "vai a zero" quer dizer'] },
+    ],
+  },
+
   // ---------------------------------------------------------------------------
   // Seções de texto (aba "Visão geral")
   // ---------------------------------------------------------------------------
@@ -96,8 +112,77 @@ export const modulo2 = {
   ],
 
   // ---------------------------------------------------------------------------
-  // Vieses (aba "Vieses") — viram cards com efeito flip:
-  // frente = a armadilha, verso = o antídoto.
+  // Os visuais das três seções da "Visão geral" (desenho M2 Desktop). No
+  // desenho, cada seção troca os parágrafos por um visual + uma legenda; os
+  // textos desses visuais moram aqui. Os parágrafos acima continuam no arquivo.
+  // ---------------------------------------------------------------------------
+
+  // "Economia da atenção": ação com empresa (tem chão) × memecoin (sem chão), e
+  // embaixo a sequência da atenção. A 1ª caixa da sequência sai em ciano e a
+  // última em vermelho, como no desenho.
+  figuraDaAtencao: {
+    comChao: {
+      rotulo: 'Ação com empresa',
+      texto: 'Produto, receita e caixa ficam embaixo do preço. Eles seguram um chão.',
+      legenda: 'O bloco roxo é o chão: lucro e caixa.',
+    },
+    semChao: {
+      rotulo: 'Memecoin',
+      texto: 'Não há produto, receita nem utilidade. Embaixo do preço só tem atenção.',
+      legenda: 'Tracejado: não existe chão nenhum.',
+    },
+    sequencia: [
+      'A atenção cresce',
+      'O preço cresce junto',
+      'A multidão acha o próximo token',
+      'A atenção vai embora, e o preço atrás',
+    ],
+    legenda:
+      'Atenção é escassa e muda de lugar. Por isso o mesmo token pode subir 10x em horas e ' +
+      'voltar ao ponto de partida no mesmo dia — isso não é anomalia, é o funcionamento ' +
+      'normal desse mercado.',
+    // Alternativa em texto da figura inteira (leitor de tela).
+    descricao:
+      'Numa ação com empresa, produto, receita e caixa ficam embaixo do preço e seguram um ' +
+      'chão. Numa memecoin não há produto, receita nem utilidade: embaixo do preço só tem ' +
+      'atenção, e não existe chão. A atenção cresce, o preço cresce junto, a multidão acha o ' +
+      'próximo token, a atenção vai embora e o preço vai atrás.',
+  },
+
+  // "Dopamina e reforço intermitente": o laço em círculo. As 5 etapas curtas
+  // resumem os passos de `secoes[1].exemplo` ("Você acerta algumas operações. /
+  // Passa a operar mais vezes. / Com posições maiores. / E com menos checagem.")
+  // e os parágrafos da seção (a alta na tela libera dopamina).
+  laco: {
+    frase: 'O laço que se fecha: o ganho de ontem financia o erro de amanhã',
+    etapas: ['Alta na tela', 'Dopamina', 'Opera mais vezes', 'Posições maiores', 'Menos checagem'],
+    centro: 'e o laço aperta',
+    legenda:
+      'Como a recompensa vem às vezes, e não sempre, o hábito fica mais reforçado — é o ' +
+      '"reforço intermitente". Cada alta na tela libera dopamina, e o cérebro aprende que ' +
+      'olhar o gráfico e clicar em comprar traz recompensa.',
+    descricao:
+      '1 Alta na tela → 2 Dopamina → 3 Opera mais vezes → 4 Posições maiores → 5 Menos ' +
+      'checagem → volta a 1, e o laço aperta. O ganho de ontem financia o erro de amanhã.',
+  },
+
+  // "O antídoto não é força de vontade": você calmo × você empolgado. A lista
+  // do "calmo" é a `lista` da seção "antidoto" (os 5 itens de "Na prática").
+  calmoOuEmpolgado: {
+    calmo: { rotulo: 'Você calmo, antes' },
+    empolgado: {
+      rotulo: 'Você empolgado, com o gráfico piscando',
+      texto:
+        'Ninguém vence um viés cognitivo no impulso. Viés cognitivo é um atalho do cérebro ' +
+        'que erra sempre para o mesmo lado.',
+      fecho: 'A regra escrita é o seu "eu calmo" mandando no seu "eu empolgado".',
+    },
+  },
+
+  // ---------------------------------------------------------------------------
+  // Vieses (aba "Vieses") — viram a tabela "o que você pensa → o que acontece
+  // → o que fazer": gatilho = o que você pensa, custo = o que acontece,
+  // antídoto = o que fazer.
   // ---------------------------------------------------------------------------
   vieses: [
     {
@@ -133,7 +218,7 @@ export const modulo2 = {
       nome: 'Custo afundado',
       subtitulo: 'Sunk cost — "já perdi tanto que agora tenho que esperar voltar"',
       gatilho:
-        'A posição está -70%. Vender parece assumir a perda, então você segura. O dinheiro ' +
+        'A posição está −70%. Vender parece assumir a perda, então você segura. O dinheiro ' +
         'já gasto vira argumento para gastar mais tempo (e, muitas vezes, mais dinheiro).',
       quandoAparece: 'Na fase de Degradação, quando a atenção já migrou para outro token.',
       antidoto:
@@ -162,7 +247,7 @@ export const modulo2 = {
       nome: 'Efeito disposição',
       subtitulo: 'Vender rápido o que sobe, segurar para sempre o que cai',
       gatilho:
-        'Você realiza +20% "para garantir" e segura -60% "para não perder". No fim do mês, ' +
+        'Você realiza +20% "para garantir" e segura −60% "para não perder". No fim do mês, ' +
         'os ganhos são pequenos e as perdas são inteiras.',
       quandoAparece: 'Em toda posição aberta, o tempo todo.',
       antidoto:
@@ -173,9 +258,87 @@ export const modulo2 = {
     },
   ],
 
+  // Título, ideia central e cabeçalho da tabela dos vieses. Cada coluna mostra
+  // um campo de `vieses`: nome (+ subtítulo e "Aparece …"), gatilho, custo e
+  // antídoto. `rotuloDaRolagem` é o nome da caixa que rola para o lado no
+  // celular (a tabela tem no mínimo 720px).
+  tabelaDosVieses: {
+    titulo: 'Os cinco vieses: o que você pensa → o que acontece → o que fazer',
+    emUmaFrase:
+      'Cada viés tem um gatilho, um momento em que aparece e um antídoto que só funciona ' +
+      'escrito antes.',
+    colunas: {
+      nome: 'Viés',
+      gatilho: 'O que você pensa',
+      custo: 'O que acontece',
+      antidoto: 'O que fazer',
+    },
+    aparece: 'Aparece',
+    rotuloDaRolagem: 'Os cinco vieses (role na horizontal se preciso)',
+  },
+
+  // "Estou em FOMO?" — o fluxograma do desenho. Cada passo é uma pergunta com
+  // duas saídas: `desvio` (a que reprova, em vermelho) e `segue` (a que passa,
+  // em verde). A view desenha no traço do desenho (M2 Desktop).
+  // Os textos vêm do antídoto do FOMO e da seção "O antídoto não é força de
+  // vontade" (tempo de espera, tese e catálise escritas, alvos e limite de perda).
+  fluxoFomo: {
+    titulo: 'Estou em FOMO?',
+    emUmaFrase:
+      'O gatilho do FOMO é o preço já ter subido. Se a vontade de comprar nasceu do gráfico, ' +
+      'ela não é tese.',
+    inicio: 'Quero comprar agora',
+    passos: [
+      {
+        pergunta: 'A vontade nasceu do gráfico já ter subido?',
+        desvio: { rotulo: 'Sim', texto: 'É FOMO. Espere 10 minutos antes de qualquer clique.' },
+        segue: { rotulo: 'Não', texto: 'Siga para a próxima pergunta.' },
+      },
+      {
+        pergunta: 'Existe tese e catálise escritas, de antes?',
+        desvio: { rotulo: 'Não', texto: 'Sem catálise clara, é aposta. Não entra.' },
+        segue: { rotulo: 'Sim', texto: 'Siga para a próxima pergunta.' },
+      },
+      {
+        pergunta: 'Os alvos de realização e o limite de perda já estão definidos?',
+        desvio: { rotulo: 'Não', texto: 'Defina antes de entrar, nunca depois de já estar no lucro.' },
+        segue: { rotulo: 'Sim', texto: 'Checagem técnica feita? (Módulo 3 e Checklist)' },
+      },
+    ],
+    fim: 'Passou nas três: siga a regra escrita, com tamanho reduzido.',
+    legenda:
+      'Aceite que perder oportunidade é o custo normal de operar com regra — e que existe ' +
+      'token novo toda hora.',
+    // Alternativa em texto do fluxograma inteiro (leitor de tela).
+    descricao:
+      'Quero comprar agora. A vontade nasceu do gráfico já ter subido? Se sim, é FOMO: ' +
+      'espere 10 minutos. Se não: existe tese e catálise escritas, de antes? Se não, é ' +
+      'aposta: não entra. Se sim: os alvos de realização e o limite de perda já estão ' +
+      'definidos? Se não, defina antes de entrar. Passou nas três: siga a regra escrita, com ' +
+      'tamanho reduzido.',
+  },
+
   // ---------------------------------------------------------------------------
   // Mapa de tipos de token (aba "Tipos de token") — filtrável por categoria
   // ---------------------------------------------------------------------------
+
+  // O card "O mapa dos tipos de token" (desenho M2 Desktop). O centro do mapa
+  // escreve "5 categorias, 10 tipos" contando as listas abaixo; "Nenhum tipo é
+  // risco baixo." só aparece enquanto nenhum tipo tiver risco "baixo".
+  mapaDosTipos: {
+    titulo: 'O mapa dos tipos de token',
+    emUmaFrase:
+      'Saber que tipo você está olhando muda a pergunta que você faz. Cada um tem um motor ' +
+      'de atenção diferente — e 8 dos 10 são risco alto.',
+    centro: 'Tipos de token',
+    rotuloDaRolagem: 'Mapa dos tipos de token por categoria (role na horizontal se preciso)',
+    legenda: { alto: 'risco alto', medio: 'risco médio', semBaixo: 'Nenhum tipo é risco baixo.' },
+    instrucao: 'Clique numa categoria do mapa para filtrar; clique de novo para ver todas.',
+    // Os dois micro-rótulos de dentro do card de cada tipo (o desenho os
+    // escreve assim; quem desenha o card põe em maiúsculas pelo CSS).
+    rotulos: { comoReconhecer: 'Como reconhecer', alerta: 'Alerta' },
+  },
+
   categoriasDeToken: [
     { id: 'ia', nome: 'IA / agentes de IA' },
     { id: 'comunidade', nome: 'Comunidade / CTO' },
@@ -373,7 +536,7 @@ export const modulo2 = {
           rotulo: 'Market cap: pico e depois',
           valor: 'de ~US$ 1,73 bilhão para ~US$ 164 milhões',
         },
-        { rotulo: 'Queda em 06/02/2025', valor: 'cerca de 90% (noticiado pela Bloomberg)' },
+        { rotulo: 'Queda em 06/02/2025', valor: 'cerca de 90% (Bloomberg)' },
         {
           rotulo: 'Queda acumulada',
           valor: 'mais de 99% do pico, até dezembro de 2025 (Messari)',
@@ -410,18 +573,25 @@ export const modulo2 = {
     },
   ],
 
+  // Os dois rótulos de dentro do card de cada caso, como no desenho. O
+  // "Fontes: " já vem com o espaço, porque a lista de fontes vem logo depois.
+  rotulosDosCasos: { licao: 'Lição', fontes: 'Fontes: ' },
+
   licaoDosCasos:
     'Hype e endosso de celebridade não garantem durabilidade. Nos três casos o pico de ' +
     'atenção durou horas, e quem comprou perto do topo ficou com o prejuízo quando a ' +
     'atenção migrou. É o padrão clássico de pump-and-dump — só que com nomes conhecidos ' +
     'no anúncio.',
 
+  // Não aparece na tela desde o redesenho (o desenho não tem esta nota; a nota
+  // da linha do tempo, em `linhaDoTempoCasos`, diz o mesmo sobre as fontes).
   notaDosCasos:
     'Números registrados pelas fontes citadas, nas datas indicadas. Cotação muda todo dia; ' +
     'fato histórico, não. Nada aqui é recomendação de compra ou de venda.',
 
   // ---------------------------------------------------------------------------
-  // As 4 fases (aba "As 4 fases") — o diagrama abaixo é renderizado pelo Mermaid
+  // As 4 fases (aba "As 4 fases") — o seletor das fases com o painel "o que
+  // você vê / o que checar / armadilha" de cada uma
   // ---------------------------------------------------------------------------
   fases: [
     {
@@ -517,36 +687,77 @@ export const modulo2 = {
     },
   ],
 
-  // Diagrama do fluxo em sintaxe Mermaid. As cores seguem o design system do hub.
-  // Fica como array de linhas só para o arquivo ficar legível; o join monta o texto final.
-  diagramaFases: [
-    'graph LR',
-    '  A["1. Lançamento"] --> B["2. Consolidação / Acumulação"]',
-    '  B --> C["3. Expansão por catálise"]',
-    '  C --> D["4. Degradação"]',
-    '  D -.-> E["Maioria vai a zero"]',
-    '  classDef alto fill:#3B1418,stroke:#EF4444,color:#FCA5A5,stroke-width:2px',
-    '  classDef medio fill:#3A2A0E,stroke:#F59E0B,color:#FCD34D,stroke-width:2px',
-    '  classDef fim fill:#141A24,stroke:#1F2733,color:#9AA7B4,stroke-width:2px',
-    '  class A,D alto',
-    '  class B,C medio',
-    '  class E fim',
-  ].join('\n'),
-
-  // Último nó do fluxo, usado tanto pelo diagrama quanto pelos cards de reserva.
+  // O desfecho que vem depois da última fase, na caixa cinza do fim do seletor.
   desfechoFases: 'Maioria vai a zero',
 
-  observacaoFases:
-    'Este é um modelo didático de ciclo de vida. Serve para você saber que perguntas fazer em ' +
-    'cada momento. Não é previsão nem garantia. Muitos tokens pulam fases, e a maioria não ' +
-    'passa da primeira. Quantos, exatamente, depende do que se chama de "morrer". Segundo a ' +
-    'CoinGecko Research (18,67 milhões de tokens, jan/2024–jun/2026), 68,67% dos tokens do ' +
-    'Pump.fun pararam de negociar no mesmo dia do lançamento. Em até dois dias, foram 80,37%. ' +
-    'Só 4,55% seguiram negociando depois de 90 dias. Por outra métrica, a de liquidez abaixo ' +
-    'de US$ 1.000, a Solidus Labs mediu 98,6%. A Pump.fun contestou esse número em público, ' +
-    'dizendo que o relatório "carece de entendimento básico de memecoins" (CoinDesk, ' +
-    '07/05/2025). Nenhuma dessas fontes mede o preço chegando literalmente a zero. Todas medem ' +
-    'parar de negociar ou ficar sem liquidez. É isso que "vai a zero" quer dizer na prática.',
+  // O card "As 4 fases" do desenho (M2 Desktop): o seletor das fases, o
+  // parágrafo da CoinGecko e as duas grades de 100. O texto corrido que ficava
+  // aqui num campo só (`observacaoFases`) foi dividido nos pedaços que o
+  // desenho mostra, para os números não ficarem escritos em dois lugares:
+  // `seletorDeFases.emUmaFrase`, `paragrafoDaMortalidade` e `grades` (com a
+  // contestação da pump.fun e a legenda final).
+  seletorDeFases: {
+    titulo: 'As 4 fases: clique numa para ver o que checar',
+    emUmaFrase:
+      'Saber em que fase você está muda o que perguntar. É modelo didático, não previsão: ' +
+      'muitos tokens pulam fases, e a maioria não passa da primeira.',
+    rotuloDaLista: 'As quatro fases',
+    // Os três micro-rótulos do painel da fase escolhida, como no desenho.
+    rotulos: {
+      oQueVoceVe: 'O que você vê',
+      oQueChecar: 'O que checar',
+      armadilha: 'Armadilha desta fase',
+    },
+  },
+
+  paragrafoDaMortalidade:
+    'Segundo a CoinGecko Research (18,67 milhões de tokens, jan/2024–jun/2026), 68,67% dos ' +
+    'tokens do Pump.fun pararam de negociar no mesmo dia do lançamento. Em até dois dias, ' +
+    'foram 80,37%. Só 4,55% seguiram negociando depois de 90 dias.',
+
+  // "Vai a zero" em quadradinhos: duas grades, porque o número muda conforme a
+  // régua. A grade arredonda (69 e 99 de 100); o número exato vai ao lado, em
+  // `exato`, e a conta fica escrita na fonte. `cor`: 'ruim' = vermelho, 'resto'
+  // = cinza. A contestação da pump.fun vai na caixa âmbar "Contestado".
+  grades: {
+    frase: '"Vai a zero" depende da régua — de cada 100 tokens do Pump.fun',
+    itens: [
+      {
+        frase:
+          'Pela régua "parou de negociar": 69 de cada 100 param no mesmo dia em que nasceram.',
+        grupos: [
+          { rotulo: 'param no mesmo dia', quantidade: 69, cor: 'ruim' },
+          { rotulo: 'seguem para o dia seguinte', quantidade: 31, cor: 'resto' },
+        ],
+        exato: '68,67%',
+        credito: 'CoinGecko Research · 18,67 mi de tokens',
+        fonte:
+          'Número exato: 68,67% — 69 de 100 é o arredondamento que a grade desenha. Fonte: ' +
+          'CoinGecko Research, 18,67 milhões de tokens, jan/2024–jun/2026. Em até dois dias, ' +
+          '80,37%; só 4,55% seguem negociando depois de 90 dias.',
+      },
+      {
+        frase: 'Pela régua "liquidez abaixo de US$ 1.000": 99 de cada 100.',
+        grupos: [
+          { rotulo: 'ficam sem liquidez', quantidade: 99, cor: 'ruim' },
+          { rotulo: 'restante', quantidade: 1, cor: 'resto' },
+        ],
+        exato: '98,6%',
+        credito: 'Solidus Labs · liquidez abaixo de US$ 1.000',
+        fonte:
+          'Número exato: 98,6% — 99 de 100 é o arredondamento que a grade desenha. Fonte: ' +
+          'Solidus Labs, pela liquidez abaixo de US$ 1.000. A régua muda o número: uma mede ' +
+          'parar de negociar, a outra mede colapso de liquidez.',
+        contestacao:
+          'A pump.fun contestou publicamente este relatório, dizendo que ele "carece de ' +
+          'entendimento básico de memecoins" (CoinDesk, 07/05/2025). O número mede colapso de ' +
+          'liquidez, não fraude provada.',
+      },
+    ],
+    legenda:
+      'Nenhuma dessas fontes mede o preço chegando literalmente a zero. Todas medem parar de ' +
+      'negociar ou ficar sem liquidez. É isso que "vai a zero" quer dizer na prática.',
+  },
 
   // ---------------------------------------------------------------------------
   // Mini-quiz (aba "Quiz") — 4 perguntas
@@ -668,14 +879,16 @@ export const modulo2 = {
     postDeHype: {
       titulo: 'Anatomia de um post de hype',
       descricao: 'Os seis elementos que quase toda campanha repete — e o viés que cada um está tentando acionar em você.',
-      viewBox: [0, 0, 640, 320],
+      // Os seis campos do post. `rotulo` é o texto que aparece dentro do campo;
+      // `alerta: true` pinta o campo de âmbar (os outros são ciano). A posição
+      // de cada campo na tela vem de `grade`, mais abaixo.
       paineis: [
-        { id: 'autor', x: 12, y: 12, w: 400, h: 56, rotulo: '@perfil-grande · verificado', tipo: 'campo' },
-        { id: 'texto', x: 12, y: 80, w: 400, h: 110, rotulo: '"$TICKER vai 100x, ainda dá tempo, não fique de fora"', tipo: 'texto' },
-        { id: 'grafico', x: 424, y: 12, w: 204, h: 178, rotulo: 'Print do gráfico subindo', tipo: 'grafico' },
-        { id: 'metricas', x: 12, y: 202, w: 400, h: 50, rotulo: 'milhares de curtidas · reposts · "eu comprei"', tipo: 'numeros' },
-        { id: 'contrato', x: 424, y: 202, w: 204, h: 50, rotulo: 'CA: 0x… (na bio)', tipo: 'campo', alerta: true },
-        { id: 'urgencia', x: 12, y: 264, w: 616, h: 44, rotulo: '"Últimas horas antes da listagem"', tipo: 'texto', alerta: true },
+        { id: 'autor', rotulo: '@perfil-grande · verificado' },
+        { id: 'texto', rotulo: '"$TICKER vai 100x, ainda dá tempo, não fique de fora"' },
+        { id: 'grafico', rotulo: 'Print do gráfico subindo' },
+        { id: 'metricas', rotulo: 'milhares de curtidas · reposts · "eu comprei"' },
+        { id: 'contrato', rotulo: 'CA: 0x… (na bio)', alerta: true },
+        { id: 'urgencia', rotulo: '"Últimas horas antes da listagem"', alerta: true },
       ],
       itens: [
         {
@@ -709,7 +922,21 @@ export const modulo2 = {
           texto: '"Últimas horas" existe para impedir a espera de 10 minutos que o antídoto do FOMO pede.',
         },
       ],
-      nota: 'Post esquemático. Nenhum perfil ou token real foi copiado; os elementos são os que se repetem em quase toda campanha de hype.',
+      // Como o desenho (M2 Desktop) monta o post: 4 linhas em grade HTML. `cols`
+      // é a divisão da linha, `paineis` os ids de `paineis` acima e `altura` a
+      // altura mínima de cada painel, em px. No celular as linhas continuam
+      // iguais; só a lista numerada desce para baixo do post.
+      grade: [
+        { cols: '2fr 1fr', paineis: ['autor', 'grafico'], altura: 46 },
+        { cols: '1fr', paineis: ['texto'], altura: 52 },
+        { cols: '2fr 1fr', paineis: ['metricas', 'contrato'], altura: 46 },
+        { cols: '1fr', paineis: ['urgencia'], altura: 40 },
+      ],
+      // A frase miúda embaixo do post e a legenda da figura inteira.
+      rodape: 'Post esquemático. Nenhum perfil ou token real foi copiado.',
+      legenda:
+        'Os elementos são os que se repetem em quase toda campanha de hype. É defensivo, na ' +
+        'lógica do módulo: reconhecer, não produzir.',
     },
   },
 
@@ -722,12 +949,19 @@ export const modulo2 = {
     descricao: 'Da estreia ao esquecimento, em semanas. Repare na distância entre o pico e a queda.',
     marcos: [
       { data: '17/01/2025', titulo: 'OFFICIAL TRUMP é lançada', texto: 'Em cerca de 24 horas vira a 2ª maior memecoin, com pico de market cap perto de US$ 15 bilhões. Quem chegou no segundo dia comprou de quem estava saindo.' },
-      { data: '01/2025', titulo: 'MELANIA MEME é lançada' },
+      { data: '01/2025', titulo: 'MELANIA MEME é lançada', texto: 'Poucos dias depois da TRUMP. O arquivo registra só o mês.' },
       { data: '06/02/2025', titulo: 'MELANIA já caiu cerca de 90%', texto: 'Noticiado pela Bloomberg.', tom: 'alerta' },
       { data: '14/02/2025', titulo: 'LIBRA é lançada na Argentina', texto: 'Pico de market cap de cerca de US$ 4,56 bilhões no mesmo dia. O pico de atenção durou horas.', tom: 'alerta' },
-      { data: '12/2025', titulo: 'MELANIA acumula queda de mais de 99% do pico', texto: 'Segundo a Messari. A TRUMP, mais de 96% abaixo do topo.', tom: 'alerta' },
+      { data: '12/2025', titulo: 'MELANIA acumula queda de mais de 99% do pico', texto: 'Segundo a Messari, em dezembro de 2025. A TRUMP, mais de 96% abaixo do topo.', tom: 'alerta' },
     ],
-    nota: 'Números registrados pelas fontes citadas em cada caso, nas datas indicadas. Fato histórico, não recomendação.',
+    // A pílula entre os marcos é calculada das datas (linhaDoTempo.js). Com a
+    // MELANIA registrada só pelo mês (01/2025), não dá para dizer quantos dias
+    // passaram até 06/02/2025: ali a pílula não sai.
+    nota:
+      'Números registrados pelas fontes citadas em cada caso, nas datas indicadas. Fato ' +
+      'histórico, não recomendação. Dois marcos têm só o mês no arquivo (01/2025 e 12/2025): ' +
+      'quando o arquivo não permite contar os dias, o intervalo aparece como "cerca de" ou ' +
+      'como "no mesmo mês", e onde nem isso dá para dizer ele não aparece.',
   },
 
   // Por que cada alternativa errada do quiz não serve (o quiz mostra a da resposta escolhida).

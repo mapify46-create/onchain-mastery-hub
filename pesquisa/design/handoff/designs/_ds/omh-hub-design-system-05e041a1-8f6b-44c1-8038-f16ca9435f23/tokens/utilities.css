@@ -1,0 +1,76 @@
+/* As poucas classes utilitárias do hub que não vêm do Tailwind. Nomes e valores
+   idênticos aos de styles/custom.css. */
+
+/* --- Número -------------------------------------------------------------
+   Dado quantitativo pede numeral tabular: sem isso os dígitos têm larguras
+   diferentes e o número "pula" a cada recálculo da calculadora. */
+.omh-numero {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+  letter-spacing: var(--omh-tracking-numero);
+  line-height: var(--omh-linha-numero);
+}
+.omh-numero-grande { font-size: var(--omh-numero-grande); font-weight: var(--omh-peso-bold); }
+
+/* Endereços de carteira e hashes em fonte mono. */
+.endereco { font-family: var(--omh-fonte-mono); word-break: break-all; }
+
+/* --- Cartão de destaque: superfície elevada com tingimento diagonal ----- */
+.omh-destaque {
+  background-image: var(--omh-destaque-gradiente);
+  background-color: var(--omh-superficie-alta);
+  border: var(--omh-borda-padrao);
+}
+.omh-destaque-alerta { background-image: var(--omh-destaque-gradiente-alerta); }
+.omh-destaque-ok { background-image: var(--omh-destaque-gradiente-ok); }
+
+/* --- Link de pular conteúdo: escondido até receber foco pelo Tab -------- */
+.link-pular {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  padding: 0.5rem 1rem;
+  background-color: var(--omh-primaria);
+  color: #fff;
+  border-radius: 0 0 var(--omh-raio-caixa) 0;
+}
+.link-pular:focus { left: 0; }
+
+/* --- input[type=range] --------------------------------------------------
+   O alvo do polegar tem 24px de altura para atender ao tamanho mínimo de alvo
+   de toque (WCAG 2.2), mesmo o traço visual tendo 6px. */
+.omh-range { -webkit-appearance: none; appearance: none; width: 100%; height: 24px; background: transparent; cursor: pointer; }
+.omh-range::-webkit-slider-runnable-track { height: 6px; border-radius: var(--omh-raio-pilula); background: var(--omh-superficie-baixa); border: var(--omh-borda-padrao); }
+.omh-range::-moz-range-track { height: 6px; border-radius: var(--omh-raio-pilula); background: var(--omh-superficie-baixa); border: var(--omh-borda-padrao); }
+.omh-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; margin-top: -8px; border-radius: 50%; background: var(--omh-primaria); border: 2px solid var(--omh-texto); transition: transform var(--omh-dur-rapida) var(--omh-easing); }
+.omh-range::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--omh-primaria); border: 2px solid var(--omh-texto); transition: transform var(--omh-dur-rapida) var(--omh-easing); }
+.omh-range:hover::-webkit-slider-thumb, .omh-range:active::-webkit-slider-thumb { transform: scale(1.15); }
+.omh-range:hover::-moz-range-thumb, .omh-range:active::-moz-range-thumb { transform: scale(1.15); }
+/* Num range de largura total o contorno geral viraria uma moldura enorme: o foco
+   vai no polegar, que é o que o teclado de fato move. */
+.omh-range:focus-visible { outline: none; }
+.omh-range:focus-visible::-webkit-slider-thumb { outline: var(--omh-foco-anel); outline-offset: var(--omh-foco-offset); }
+.omh-range:focus-visible::-moz-range-thumb { outline: var(--omh-foco-anel); outline-offset: var(--omh-foco-offset); }
+
+/* --- Anatomias (mockup desenhado com marcadores numerados) -------------- */
+.omh-marcador { cursor: pointer; transition: transform var(--omh-dur-rapida) var(--omh-easing); transform-box: fill-box; transform-origin: center; }
+.omh-marcador:hover, .omh-marcador[aria-pressed='true'] { transform: scale(1.18); }
+.omh-legenda-item[data-ativo='true'] { border-color: var(--omh-acento); background-color: var(--omh-tint-acento); }
+
+/* --- Card de viés com efeito flip (Módulo 2) ---------------------------
+   As duas faces ficam empilhadas na MESMA célula de um grid — assim a altura do
+   card é a da face mais alta e nenhum texto é cortado. */
+.card-flip { display: block; width: 100%; height: 100%; padding: 0; border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; perspective: 1200px; }
+.card-flip-interno { display: grid; height: 100%; transform-style: preserve-3d; transition: transform var(--omh-dur-lenta) var(--omh-easing); }
+.card-flip[aria-expanded='true'] .card-flip-interno { transform: rotateY(180deg); }
+.card-flip-face { grid-area: 1 / 1; display: flex; flex-direction: column; padding: 1.25rem; border: var(--omh-borda-padrao); border-radius: var(--omh-raio-card); background-color: var(--omh-superficie); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.card-flip-verso { transform: rotateY(180deg); border-color: rgba(124, 58, 237, 0.55); background-color: rgba(124, 58, 237, 0.12); }
+.card-flip:hover .card-flip-frente { border-color: var(--omh-texto-suave); }
+
+/* O <summary> dos cards de ferramenta desenha a própria seta e pede .list-none.
+   No Safari o marcador nativo não some só com list-style. */
+summary.list-none::-webkit-details-marker { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .omh-range::-webkit-slider-thumb, .omh-range::-moz-range-thumb, .omh-marcador { transition: none; }
+  .omh-range:hover::-webkit-slider-thumb, .omh-range:active::-webkit-slider-thumb,
+  .omh-marcador:hover, .omh-marcador[aria-pressed='true'] { transform: none; }
+}

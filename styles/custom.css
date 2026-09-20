@@ -29,6 +29,24 @@ body {
   line-height: 1.6;
 }
 
+/* A coluna de conteúdo do desenho: 868px de largura no máximo, blocos
+   separados por 24px. O router.js embrulha cada página nela, com o aviso
+   âmbar no fim (src/components/aviso.js). */
+.omh-coluna {
+  max-width: 868px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+/* Cada bloco ocupa a largura da coluna. Sem o width, uma view com mx-auto
+   deixa de esticar dentro do flex e cresce até o max-width dela (1024px),
+   empurrando a página para o lado. */
+.omh-coluna > * {
+  min-width: 0;
+  width: 100%;
+}
+
 /* Foco sempre visível: requisito de acessibilidade do projeto.
    O contorno ciano tem 9,7:1 contra a superfície dos cards, e o outline-offset
    garante que ele apareça mesmo em cima de botões com fundo preenchido. */
@@ -347,13 +365,66 @@ summary.list-none::-webkit-details-marker {
    estreitas e "reduzir movimento".
    =========================================================================== */
 
-/* Mapa mental: o conector de cada ramo até o tronco. */
+/* Mapa do módulo (src/components/visuais.js › criarMapaDoModulo), como no topo
+   de cada "M<N> Desktop" do desenho: card #141A24 com o micro-rótulo e UMA caixa
+   #0B0F17 dentro. O mapa genérico (criarMapaMental) usa só a caixa. */
+.omh-mapa-card {
+  border-radius: 12px;
+  border: 1px solid var(--omh-borda);
+  background: var(--omh-superficie);
+  padding: 20px;
+  /* 24px até as abas, como o gap da coluna no desenho. Provisório: quando a
+     view puser cabeçalho, mapa e abas numa coluna com gap de 24px, tirar
+     esta margem (senão o espaço dobra). */
+  margin-bottom: 24px;
+}
+.omh-mapa-rotulo {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--omh-texto-suave);
+}
 .omh-mapa {
   display: flex;
   align-items: center;
-  gap: 0;
-  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid var(--omh-borda);
+  background: var(--omh-fundo);
+  padding: 16px;
 }
+/* Centro: card roxo só com título e subtítulo. Os 220px do desenho são do
+   texto (content-box), sem contar padding e borda. */
+.omh-mapa-centro {
+  flex: 0 0 auto;
+  box-sizing: content-box;
+  border-radius: 12px;
+  border: 1px solid rgba(124, 58, 237, 0.6);
+  background: rgba(124, 58, 237, 0.15);
+  padding: 14px 18px;
+  max-width: 220px;
+}
+.omh-mapa-centro-rotulo {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--omh-texto-suave);
+}
+.omh-mapa-centro-titulo {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+.omh-mapa-centro-subtitulo {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: var(--omh-texto-suave);
+}
+/* Tronco de 2px entre o centro e a lista de ramos. */
 .omh-mapa-tronco {
   flex: 0 0 32px;
   height: 2px;
@@ -366,55 +437,94 @@ summary.list-none::-webkit-details-marker {
   border-left: 2px solid var(--omh-borda);
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   flex: 1 1 auto;
-  min-width: 420px;
+  min-width: 0;
 }
+/* Cada ramo: conector de 24px até a borda da lista, botão e folhas. */
 .omh-mapa-ramo {
   position: relative;
-  padding-left: 28px;
+  padding-left: 24px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 6px 8px;
 }
 .omh-mapa-ramo::before {
   content: '';
   position: absolute;
   left: 0;
-  top: 18px;
-  width: 28px;
+  top: 19px;
+  width: 24px;
   height: 2px;
   background: var(--omh-borda);
 }
+/* O ramo é um botão (abre a aba). Estados: hover (borda #9AA7B4), aba aberta
+   (roxo), concluído (verde 50%); o foco usa o :focus-visible geral. */
+.omh-mapa-botao {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px; /* a largura de um espaço, como "Os números →" no desenho */
+  border-radius: 8px;
+  border: 1px solid var(--omh-borda);
+  background: var(--omh-superficie);
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--omh-texto);
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 150ms ease;
+}
+.omh-mapa-botao:hover {
+  border-color: var(--omh-texto-suave);
+  color: var(--omh-texto);
+}
+.omh-mapa-botao[data-concluido='true'] {
+  border-color: rgba(34, 197, 94, 0.5);
+}
+.omh-mapa-botao[data-ativo='true'] {
+  border-color: var(--omh-primaria);
+  background: rgba(124, 58, 237, 0.15);
+}
+.omh-mapa-botao[data-so-texto] {
+  cursor: default;
+}
+/* Folhas: chips de texto, sem foco. */
+.omh-mapa-folha {
+  border-radius: 999px;
+  border: 1px solid var(--omh-borda);
+  padding: 2px 10px;
+  font-size: 13px;
+  color: var(--omh-texto-suave);
+}
+/* Celular: o tronco vira vertical, o centro ocupa a largura e o ramo tem 44px. */
 @media (max-width: 640px) {
   .omh-mapa {
     flex-direction: column;
     align-items: stretch;
-    overflow-x: visible;
+  }
+  .omh-mapa-centro {
+    max-width: none;
   }
   .omh-mapa-tronco {
-    flex-basis: 20px;
+    flex: 0 0 20px;
     width: 2px;
     height: 20px;
     margin-left: 24px;
   }
   .omh-mapa-ramos {
-    min-width: 0;
     margin-left: 24px;
-    gap: 12px;
-  }
-  .omh-mapa-ramo {
-    padding-left: 20px;
   }
   .omh-mapa-ramo::before {
-    width: 20px;
-    top: 16px;
+    top: 21px;
   }
-  .omh-mapa-ramo > a,
-  .omh-mapa-ramo > button {
-    flex: 1 1 100%;
+  .omh-mapa-botao {
     min-height: 44px;
+    white-space: normal;
   }
 }
 
@@ -428,32 +538,133 @@ summary.list-none::-webkit-details-marker {
   overflow-x: auto;
   gap: 0;
 }
+/* Como no uso real dos módulos (M1 drainer, M2 fases): os passos esticam até
+   a altura do mais alto, e a seta fica no meio da altura.
+   Cada passo parte de 150px e cresce igual aos outros, mas nunca fica mais
+   estreito que a palavra mais comprida do título: nenhuma palavra é cortada
+   no meio. Se os passos não couberem, a lista rola para o lado. */
 .omh-sequencia > li {
   display: flex;
+  align-items: stretch;
+  flex: 1 0 150px;
+  min-width: min-content;
+}
+/* O passo: normal, hover (borda #9AA7B4) e atual (roxo, marcador ciano).
+   Sem min-width: o botão não encolhe abaixo da palavra mais comprida. */
+.omh-sequencia-passo {
+  flex: 1 1 auto;
+  min-height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--omh-borda);
+  background: var(--omh-superficie);
+  padding: 10px 12px;
+  color: var(--omh-texto);
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
   align-items: flex-start;
-  flex: 1 1 0;
-  min-width: 140px;
+  transition: border-color 150ms ease;
+}
+.omh-sequencia-passo[aria-selected='false']:hover {
+  border-color: var(--omh-texto-suave);
+}
+.omh-sequencia-passo[aria-selected='true'] {
+  border-color: var(--omh-primaria);
+  background: rgba(124, 58, 237, 0.15);
+}
+.omh-sequencia-marcador {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--omh-borda);
+  color: var(--omh-texto);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.omh-sequencia-passo[aria-selected='true'] .omh-sequencia-marcador {
+  background: var(--omh-acento);
+  color: var(--omh-fundo);
+}
+.omh-sequencia-titulo {
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+/* O texto do passo dentro do botão: escondido no desktop (ele já está no painel
+   de baixo); no celular aparece só no passo atual. */
+.omh-sequencia-texto {
+  display: none;
+  margin-top: 4px;
+  font-weight: 400;
+  color: var(--omh-texto-suave);
 }
 .omh-sequencia-ligacao {
-  flex: 0 0 20px;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 44px;
+  min-height: 44px;
+  padding: 2px 6px;
   color: var(--omh-texto-suave);
+}
+/* O painel do passo atual ("PASSO N DE M" + texto). */
+.omh-sequencia-painel {
+  margin-top: 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(124, 58, 237, 0.6);
+  background: rgba(124, 58, 237, 0.12);
+  padding: 12px 16px;
+}
+/* Painel em colunas rotuladas (M1 drainer: "O que a vítima vê" / "O que está
+   de fato acontecendo"). */
+.omh-sequencia-painel-colunas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
 }
 @media (max-width: 640px) {
   .omh-sequencia {
     flex-direction: column;
     overflow-x: visible;
   }
+  /* No celular a lista é vertical: o passo tem a altura do conteúdo (a base
+     de 150px de cima é só para a lista horizontal). */
   .omh-sequencia > li {
+    flex: 1 1 0;
     flex-direction: column;
+    align-items: stretch;
     min-width: 0;
+  }
+  .omh-sequencia-passo[aria-selected='true'] .omh-sequencia-texto {
+    display: block;
+  }
+  /* O texto já está dentro do passo atual: o painel sai da tela (fica só para
+     o leitor de tela, que ouve a troca pelo aria-live). O painel em colunas
+     (M1 drainer) continua visível. */
+  .omh-sequencia-painel:not(.omh-sequencia-painel-colunas) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
   }
   .omh-sequencia-ligacao {
     height: 16px;
+    min-height: 0;
     width: 2px;
+    padding: 0;
     margin-left: 23px;
     background: var(--omh-borda);
     color: transparent;
@@ -461,25 +672,969 @@ summary.list-none::-webkit-details-marker {
   }
 }
 
-/* Fluxograma: os ramos ficam lado a lado no desktop e empilham no celular. */
-.omh-fluxo-ramos {
-  display: grid;
-  grid-template-columns: repeat(var(--omh-fluxo-colunas, 2), minmax(0, 1fr));
-  gap: 24px;
+/* ==========================================================================
+   Fluxogramas (src/components/fluxograma.js)
+   Desenhos: "00 Componentes › Fluxograma" (árvore), "31 Checklist" (espinha)
+   e "M6 › checagem do contrato" (trilho). Todas as cores e medidas deles
+   moram aqui; o JS só monta as peças e põe as classes.
+   ========================================================================== */
+
+/* A caixa: fundo #0B0F17, raio 8, padding 20, com a legenda DENTRO dela. */
+.omh-fluxo {
+  margin: 0;
+  min-width: 0;
+  border-radius: 8px;
+  border: 1px solid var(--omh-borda);
+  background: var(--omh-fundo);
+  padding: 20px;
+}
+/* Frase em negrito no topo da caixa (quando o desenho tem uma). */
+.omh-fluxo-titulo {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.omh-fluxo-legenda {
+  margin: 16px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--omh-texto-suave);
+  text-align: center;
+}
+/* No fluxo linear (desenho 31) a legenda fica alinhada à esquerda. */
+.omh-fluxo-legenda--linear {
+  text-align: left;
+}
+
+/* Diagrama largo rola aqui dentro. O JS dá tabindex="0" só quando rola, e o
+   contorno ciano do :focus-visible aparece em volta. */
+.omh-fluxo-rolagem {
+  overflow-x: auto;
+}
+
+/* --- Árvore: nó → seta → nó; ramos lado a lado ---------------------------- */
+.omh-fluxo-arvore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Cresce além da caixa só quando o conteúdo não cabe (aí a caixa rola). */
+  width: fit-content;
+  min-width: 100%;
+}
+.omh-fluxo-cadeia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
 }
+
+/* Nó. Ação: borda #1F2733 e fundo #141A24, como nos módulos do desenho. */
+.omh-fluxo-no {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 320px;
+  border-radius: 8px;
+  border: 1px solid var(--omh-borda);
+  background: var(--omh-superficie);
+  padding: 10px 14px;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--omh-texto);
+  overflow-wrap: break-word;
+}
+/* No eixo do meio a caixa tem a largura do texto (até 420px). */
+.omh-fluxo-no--eixo {
+  width: auto;
+  max-width: 420px;
+  padding: 10px 16px;
+}
+/* Início, pergunta, resultado e fim vão em negrito; ação dentro do ramo, não. */
+.omh-fluxo-no--inicio,
+.omh-fluxo-no--pergunta,
+.omh-fluxo-no--bom,
+.omh-fluxo-no--ruim,
+.omh-fluxo-no--alerta {
+  font-weight: 600;
+}
+.omh-fluxo-no--pergunta {
+  border-color: var(--omh-acento);
+  background: rgba(34, 211, 238, 0.1);
+}
+.omh-fluxo-no--bom {
+  border-color: rgba(34, 197, 94, 0.5);
+  background: rgba(34, 197, 94, 0.12);
+}
+.omh-fluxo-no--ruim {
+  border-color: rgba(239, 68, 68, 0.5);
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--omh-risco-alto-texto);
+}
+.omh-fluxo-no--alerta {
+  border-color: rgba(245, 158, 11, 0.4);
+  background: rgba(245, 158, 11, 0.12);
+}
+/* Caixa que só explica: texto cinza, sem negrito. */
+.omh-fluxo-no--suave {
+  color: var(--omh-texto-suave);
+  font-weight: 400;
+}
+/* Peso vindo dos dados, quando o desenho foge do padrão acima. */
+.omh-fluxo-no--forte {
+  font-weight: 600;
+}
+.omh-fluxo-no--leve {
+  font-weight: 400;
+}
+/* Caixa de observação (o "No outro extremo…" do slippage, M5): sem negrito e,
+   no eixo, até 520px de texto (554px com o padding), medida do desenho. */
+.omh-fluxo-no--nota {
+  font-weight: 400;
+}
+.omh-fluxo-no--eixo.omh-fluxo-no--nota {
+  box-sizing: content-box;
+  max-width: 520px;
+}
+
+/* Linha de 2px (começo de ramo) e seta: linha + ponta (quadrado girado 45°). */
+.omh-fluxo-linha {
+  flex: none;
+  width: 2px;
+  height: 16px;
+  background: var(--omh-texto-suave);
+}
+.omh-fluxo-seta {
+  flex: none;
+  position: relative;
+  width: 2px;
+  height: 16px;
+  margin-bottom: 4px;
+  background: var(--omh-texto-suave);
+}
+.omh-fluxo-seta::after {
+  content: '';
+  position: absolute;
+  left: -4px;
+  bottom: 0;
+  box-sizing: content-box;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--omh-texto-suave);
+  border-bottom: 2px solid var(--omh-texto-suave);
+  transform: rotate(45deg);
+}
+/* No eixo do meio a seta é um pouco mais longa (20px), como no desenho. */
+.omh-fluxo-arvore > .omh-fluxo-cadeia > .omh-fluxo-seta {
+  height: 20px;
+}
+/* Seta que sai de baixo dos ramos para o nó onde eles se juntam. */
+.omh-fluxo-seta--juncao {
+  margin-top: 8px;
+}
+.omh-fluxo-seta--tracejada {
+  background: repeating-linear-gradient(to bottom, var(--omh-texto-suave) 0 4px, transparent 4px 7px);
+}
+.omh-fluxo-seta--verde::after {
+  border-color: var(--omh-risco-baixo);
+}
+
+/* Pílula do rótulo da seta. A cor vem do SENTIDO do ramo (classe posta pelo JS). */
+.omh-fluxo-rotulo {
+  flex: none;
+  display: inline-block;
+  max-width: 100%;
+  box-sizing: border-box;
+  border-radius: 999px;
+  border: 1px solid var(--omh-borda);
+  background: var(--omh-superficie);
+  padding: 1px 10px;
+  font-size: 12px;
+  line-height: 1.6;
+  font-weight: 600;
+  text-align: center;
+  color: var(--omh-texto-suave);
+}
+.omh-fluxo-rotulo--neutro {
+  font-weight: 400;
+}
+.omh-fluxo-rotulo--bom {
+  border-color: rgba(34, 197, 94, 0.5);
+  background: rgba(34, 197, 94, 0.12);
+  color: var(--omh-risco-baixo);
+}
+.omh-fluxo-rotulo--ruim {
+  border-color: rgba(239, 68, 68, 0.5);
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--omh-risco-alto-texto);
+}
+.omh-fluxo-rotulo--alerta {
+  border-color: rgba(245, 158, 11, 0.4);
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--omh-risco-medio);
+}
+
+/* Ramos lado a lado. Cada coluna tem pelo menos 140px: se não couber, a caixa
+   rola em vez de espremer o texto palavra por palavra. */
+.omh-fluxo-ramos {
+  display: grid;
+  grid-template-columns: repeat(var(--omh-fluxo-colunas, 2), minmax(min-content, 1fr));
+  gap: 24px;
+  width: 100%;
+  max-width: calc(var(--omh-fluxo-colunas, 2) * 320px);
+}
+.omh-fluxo-ramo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 140px;
+}
+/* --- Vários nós de partida (o wash trading, desenho "M6 › Como o volume é
+   fabricado") ----------------------------------------------------------------
+   Topo: os nós lado a lado numa grade de até 520px. O molde das colunas vem do
+   JS ("1fr auto 1fr": uma coluna por nó e uma "auto" para a ligação). Embaixo,
+   o colchete que junta os dois e a coluna do meio com caixas de até 320px de
+   texto. No celular o desenho é o mesmo (ver o fim do @media abaixo). */
+.omh-fluxo-partidas {
+  display: grid;
+  grid-template-columns: var(--omh-fluxo-molde, 1fr 1fr);
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  max-width: 520px;
+}
+.omh-fluxo-partida .omh-fluxo-no {
+  max-width: none;
+  padding: 10px 12px;
+}
+/* A ligação: tracejado de 56px e, embaixo, o rótulo (11px, na cor do tom). */
+.omh-fluxo-ligacao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.omh-fluxo-ligacao-traco {
+  width: 56px;
+  border-top: 2px dashed var(--omh-texto-suave);
+}
+.omh-fluxo-ligacao-rotulo {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.6;
+  white-space: nowrap;
+  color: var(--omh-texto-suave);
+}
+.omh-fluxo-ligacao--bom .omh-fluxo-ligacao-traco {
+  border-top-color: var(--omh-risco-baixo);
+}
+.omh-fluxo-ligacao--bom .omh-fluxo-ligacao-rotulo {
+  color: var(--omh-risco-baixo);
+}
+/* Vermelho de borda no traço; no texto, o #F87171 (como pede o handoff). */
+.omh-fluxo-ligacao--ruim .omh-fluxo-ligacao-traco {
+  border-top-color: rgba(239, 68, 68, 0.5);
+}
+.omh-fluxo-ligacao--ruim .omh-fluxo-ligacao-rotulo {
+  color: var(--omh-risco-alto-texto);
+}
+.omh-fluxo-ligacao--alerta .omh-fluxo-ligacao-traco {
+  border-top-color: var(--omh-risco-medio);
+}
+.omh-fluxo-ligacao--alerta .omh-fluxo-ligacao-rotulo {
+  color: var(--omh-risco-medio);
+}
+/* O colchete: duas metades de 16px com o canto de dentro arredondado (8px),
+   medidas do desenho (lá as caixas não contam a borda na altura). */
+.omh-fluxo-colchete {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 520px;
+}
+.omh-fluxo-colchete-esquerda,
+.omh-fluxo-colchete-direita {
+  box-sizing: content-box;
+  height: 16px;
+  border-bottom: 2px solid var(--omh-texto-suave);
+}
+.omh-fluxo-colchete-esquerda {
+  margin-left: 50%;
+  border-right: 2px solid var(--omh-texto-suave);
+  border-radius: 0 0 8px 0;
+}
+.omh-fluxo-colchete-direita {
+  margin-right: 50%;
+  border-left: 2px solid var(--omh-texto-suave);
+  border-radius: 0 0 0 8px;
+}
+/* A coluna do meio: caixas de até 320px de texto e setas de 16px (14px logo
+   depois do colchete), como no desenho do M6. */
+.omh-fluxo-cadeia--partidas > .omh-fluxo-no--eixo {
+  box-sizing: content-box;
+  max-width: 320px;
+}
+.omh-fluxo-arvore > .omh-fluxo-cadeia--partidas > .omh-fluxo-seta {
+  height: 16px;
+}
+.omh-fluxo-arvore > .omh-fluxo-cadeia--partidas > .omh-fluxo-colchete + .omh-fluxo-seta {
+  height: 14px;
+}
+
+/* Nó que já está desenhado em outro lugar (volta de laço): "⇢ texto". */
+.omh-fluxo-ref {
+  flex: none;
+  max-width: 100%;
+  box-sizing: border-box;
+  border-radius: 999px;
+  border: 1px dashed var(--omh-texto-suave);
+  padding: 3px 12px;
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--omh-texto-suave);
+}
+.omh-fluxo-ref--pergunta {
+  border-color: var(--omh-acento);
+}
+.omh-fluxo-ref--bom {
+  border-color: rgba(34, 197, 94, 0.5);
+}
+.omh-fluxo-ref--ruim {
+  border-color: rgba(239, 68, 68, 0.5);
+}
+.omh-fluxo-ref--alerta {
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+/* --- Fluxo linear: a espinha do Checklist (desenho 31) -------------------- */
+.omh-fluxo-linear {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+.omh-fluxo-espinha {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.omh-fluxo-espinha > .omh-fluxo-seta {
+  height: 14px;
+}
+.omh-fluxo-espinha > .omh-fluxo-seta--juncao {
+  height: 16px;
+}
+/* Caixa ciano da pergunta, com o marcador numerado. */
+.omh-fluxo-passo {
+  box-sizing: border-box;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  border-radius: 8px;
+  border: 1px solid var(--omh-acento);
+  background: rgba(34, 211, 238, 0.1);
+  padding: 10px 14px;
+}
+.omh-fluxo-passo--espinha {
+  width: 100%;
+  max-width: 560px;
+  padding: 10px 16px;
+}
+.omh-fluxo-passo-texto {
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.omh-fluxo-marcador {
+  flex: 0 0 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--omh-acento);
+  color: var(--omh-fundo);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+/* Etiqueta de evidência embaixo da pergunta, na cor da etiqueta. */
+.omh-fluxo-evidencia {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--omh-texto-suave);
+}
+.omh-fluxo-evidencia--fato {
+  color: var(--omh-acento);
+}
+.omh-fluxo-evidencia--medido {
+  color: var(--omh-risco-baixo);
+}
+.omh-fluxo-evidencia--fraco {
+  color: var(--omh-risco-medio);
+}
+/* As duas saídas embaixo de cada pergunta: desvio | segue. */
+.omh-fluxo-saidas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 620px;
+}
+.omh-fluxo-saida {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+.omh-fluxo-saida > .omh-fluxo-linha {
+  height: 12px;
+}
+.omh-fluxo-desvio,
+.omh-fluxo-segue {
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--omh-borda);
+  background: var(--omh-superficie);
+  padding: 10px 14px;
+  line-height: 1.6;
+  text-align: center;
+}
+.omh-fluxo-desvio {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--omh-texto);
+}
+.omh-fluxo-desvio--nao {
+  border-color: rgba(239, 68, 68, 0.5);
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--omh-risco-alto-texto);
+}
+.omh-fluxo-desvio--ajusta,
+.omh-fluxo-desvio--alerta {
+  border-color: rgba(245, 158, 11, 0.4);
+  background: rgba(245, 158, 11, 0.12);
+}
+.omh-fluxo-segue {
+  font-size: 13px;
+  color: var(--omh-texto-suave);
+}
+/* Caixa do fim (borda verde de 2px) e a caixa ciano de fechamento. */
+.omh-fluxo-fim {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 560px;
+  border-radius: 8px;
+  border: 2px solid var(--omh-risco-baixo);
+  background: rgba(34, 197, 94, 0.12);
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.6;
+  text-align: center;
+}
+.omh-fluxo-fechamento {
+  border-radius: 8px;
+  border: 2px solid var(--omh-acento);
+  background: rgba(34, 211, 238, 0.1);
+  padding: 16px 20px;
+}
+.omh-fluxo-fechamento p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* --- Fluxo linear: o trilho da checagem do contrato (M6) e das 6 do M4 ---- */
+.omh-fluxo-trilho {
+  display: flex;
+  flex-direction: column;
+}
+.omh-fluxo-trilho-linha {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+.omh-fluxo-trilho-esquerda {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.omh-fluxo-passo--trilho .omh-fluxo-passo-texto {
+  font-weight: 400;
+}
+.omh-fluxo-passo-pergunta {
+  display: block;
+  font-weight: 600;
+}
+.omh-fluxo-passo-porque {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--omh-texto-suave);
+}
+.omh-fluxo-passo-onde {
+  display: block;
+  margin-top: 4px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12px;
+  color: var(--omh-acento);
+}
+/* Embaixo da pergunta: fio de 24px + o rótulo de seguir ("Não", "Sim: é Token-2022"). */
+.omh-fluxo-trilho-segue {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0 4px 16px;
+}
+.omh-fluxo-trilho-fio {
+  flex: none;
+  width: 2px;
+  height: 24px;
+  background: var(--omh-texto-suave);
+}
+.omh-fluxo-trilho-segue .omh-fluxo-rotulo {
+  padding: 0 8px;
+}
+.omh-fluxo-trilho-segue-texto {
+  font-size: 13px;
+  color: var(--omh-texto-suave);
+}
+/* À direita: seta → e a caixa do desvio, com o rótulo em micro-rótulo. */
+.omh-fluxo-trilho-direita {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+.omh-fluxo-trilho-seta {
+  flex: none;
+  padding-top: 8px;
+  color: var(--omh-texto-suave);
+}
+.omh-fluxo-desvio--trilho {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-weight: 400;
+  text-align: left;
+}
+.omh-fluxo-desvio-rotulo {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--omh-texto-suave);
+}
+.omh-fluxo-desvio--nao .omh-fluxo-desvio-rotulo {
+  color: var(--omh-risco-alto-texto);
+}
+.omh-fluxo-desvio--ajusta .omh-fluxo-desvio-rotulo,
+.omh-fluxo-desvio--alerta .omh-fluxo-desvio-rotulo {
+  color: var(--omh-risco-medio);
+}
+/* O fim do trilho: borda verde de 1px, meia largura no desktop. */
+.omh-fluxo-fim--trilho {
+  max-width: 50%;
+  border-width: 1px;
+  border-color: rgba(34, 197, 94, 0.5);
+  padding: 10px 14px;
+  font-size: 14px;
+  text-align: left;
+}
+
+/* --- Celular (≤ 640px) ------------------------------------------------------
+   Árvore: um ramo embaixo do outro, cada um com borda-esquerda de 2px na cor do
+   rótulo e a pílula no topo (desenho "Celular · 390px"). Fluxo linear: as duas
+   saídas viram uma coluna só. */
 @media (max-width: 640px) {
+  .omh-fluxo {
+    padding: 16px;
+  }
+  .omh-fluxo-arvore,
+  .omh-fluxo-cadeia {
+    align-items: stretch;
+  }
+  .omh-fluxo-no,
+  .omh-fluxo-no--eixo,
+  .omh-fluxo-no--eixo.omh-fluxo-no--nota {
+    width: auto;
+    max-width: none;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  /* No eixo, a seta vira um fio curto à esquerda, sem ponta. */
+  .omh-fluxo-seta,
+  .omh-fluxo-arvore > .omh-fluxo-cadeia > .omh-fluxo-seta {
+    height: 16px;
+    margin: 0 0 0 20px;
+  }
+  .omh-fluxo-seta::after {
+    display: none;
+  }
+  .omh-fluxo-cadeia > .omh-fluxo-seta--juncao {
+    margin-top: 8px;
+  }
   .omh-fluxo-ramos {
     grid-template-columns: minmax(0, 1fr);
-    gap: 12px;
+    gap: 0;
+    max-width: none;
   }
   .omh-fluxo-ramo {
-    align-items: stretch !important;
+    align-items: stretch;
+    gap: 8px;
+    min-width: 0;
+    margin: 12px 0 0 12px;
+    border-left: 2px solid var(--omh-texto-suave);
+    padding-left: 12px;
+  }
+  .omh-fluxo-ramo--bom {
+    border-left-color: rgba(34, 197, 94, 0.5);
+  }
+  .omh-fluxo-ramo--ruim {
+    border-left-color: rgba(239, 68, 68, 0.5);
+  }
+  .omh-fluxo-ramo--alerta {
+    border-left-color: rgba(245, 158, 11, 0.4);
+  }
+  .omh-fluxo-ramo--vazio {
+    display: none;
+  }
+  /* Dentro do ramo, as caixas vêm uma embaixo da outra, sem fio nem seta. */
+  .omh-fluxo-ramo > .omh-fluxo-linha,
+  .omh-fluxo-ramo > .omh-fluxo-seta,
+  .omh-fluxo-ramo .omh-fluxo-cadeia > .omh-fluxo-seta {
+    display: none;
+  }
+  .omh-fluxo-ramo .omh-fluxo-cadeia {
+    gap: 8px;
+  }
+  .omh-fluxo-rotulo,
+  .omh-fluxo-ref {
+    align-self: flex-start;
+  }
+
+  /* Fluxo linear: as saídas e o trilho em uma coluna. */
+  .omh-fluxo-saidas,
+  .omh-fluxo-trilho-linha {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .omh-fluxo-saida .omh-fluxo-rotulo {
+    align-self: center;
+  }
+  .omh-fluxo-espinha > .omh-fluxo-seta {
+    margin: 0 0 4px;
+  }
+  .omh-fluxo-espinha > .omh-fluxo-seta::after {
+    display: block;
+  }
+  .omh-fluxo-espinha > .omh-fluxo-seta--juncao {
+    margin-top: 8px;
+  }
+  .omh-fluxo-fim--trilho {
+    max-width: none;
+  }
+
+  /* Vários nós de partida (wash trading, M6): o desenho do celular é o mesmo do
+     desktop. A e B continuam lado a lado, com a ligação no meio (a grade
+     .omh-fluxo-partidas não empilha), e a coluna do meio continua centralizada,
+     com as setas com ponta. Estas regras desfazem, só aqui, a pilha acima. */
+  .omh-fluxo-cadeia.omh-fluxo-cadeia--partidas {
+    align-items: center;
+  }
+  .omh-fluxo-cadeia--partidas > .omh-fluxo-no--eixo {
+    width: auto;
+    max-width: 320px;
+    padding: 10px 16px;
+    text-align: center;
+  }
+  .omh-fluxo-partida .omh-fluxo-no {
+    padding: 10px 12px;
+    text-align: center;
+  }
+  .omh-fluxo-arvore > .omh-fluxo-cadeia--partidas > .omh-fluxo-seta {
+    height: 16px;
+    margin: 0 0 4px;
+  }
+  .omh-fluxo-arvore > .omh-fluxo-cadeia--partidas > .omh-fluxo-colchete + .omh-fluxo-seta {
+    height: 14px;
+  }
+  .omh-fluxo-cadeia--partidas .omh-fluxo-seta::after {
+    display: block;
   }
 }
 
-/* Animação: as transições do palco (altura, largura, opacidade) — e nada disso
-   quando o sistema pediu menos movimento; o motor também não toca sozinho. */
+/* ---------------------------------------------------------------------------
+   Animações (Fase 4) — o motor de src/components/animacoes/motor.js.
+   Medidas do desenho: pesquisa/design/handoff/designs/Animacao N - *.dc.html.
+   --------------------------------------------------------------------------- */
+
+/* Cabeçalho + moldura + nota do pé, empilhados. */
+.omh-anim {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Cabeçalho: sobrancelha "Animação N · Módulo M · X s", título e parágrafo. */
+.omh-anim-sobrancelha {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--omh-texto-suave);
+}
+.omh-anim-titulo {
+  margin: 4px 0 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--omh-texto);
+}
+.omh-anim-descricao {
+  margin: 8px 0 0;
+  color: var(--omh-texto-suave);
+  text-wrap: pretty;
+}
+
+/* A moldura: card #141A24, raio 12, padding 20, gap 14. */
+.omh-anim-moldura {
+  border-radius: 12px;
+  border: 1px solid var(--omh-borda);
+  background: var(--omh-superficie);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Topo da moldura: "cena N de T" à esquerda, a caixa de marcar à direita. */
+.omh-anim-topo {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.omh-anim-contador {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--omh-texto-suave);
+}
+/* A caixa tem 44px de altura para o toque; a margem negativa devolve a linha
+   do topo à altura do desenho. */
+.omh-anim-reduzir {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin: -12px 0;
+  font-size: 13px;
+  color: var(--omh-texto-suave);
+  cursor: pointer;
+}
+.omh-anim-reduzir input {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  accent-color: var(--omh-primaria);
+  cursor: pointer;
+}
+
+/* Palco, legenda, botões e barra (o que some no modo "cenas paradas"). */
+.omh-anim-animado {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* O palco: grupo focável #0B0F17, raio 8, padding 20. O desenho de cada
+   animação (o role="img") fica dentro. */
+.omh-anim-palco {
+  border-radius: 8px;
+  border: 1px solid var(--omh-borda);
+  background: var(--omh-fundo);
+  padding: 20px;
+  min-width: 0;
+}
+
+/* Legenda da cena: 1,0625rem, 600, centralizada; o leitor de tela a anuncia. */
+.omh-anim-legenda {
+  margin: 0;
+  min-height: 48px;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  text-align: center;
+  text-wrap: pretty;
+}
+
+/* "← Voltar cena" / "Tocar" / "Avançar cena →": 44px, fundo #0B0F17. */
+.omh-anim-controles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.omh-anim-botao {
+  min-height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--omh-borda);
+  background: var(--omh-fundo);
+  color: var(--omh-texto);
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 150ms ease;
+}
+.omh-anim-botao:hover {
+  border-color: var(--omh-texto-suave);
+}
+.omh-anim-botao--tocar {
+  min-width: 110px;
+  border-color: var(--omh-primaria);
+  background: var(--omh-primaria);
+  color: #ffffff;
+  padding: 8px 16px;
+  transition: opacity 150ms ease;
+}
+.omh-anim-botao--tocar:hover {
+  border-color: var(--omh-primaria);
+  opacity: 0.85;
+}
+
+/* Barra de cenas: um botão de 44px por cena, com traço de 6px e o número. */
+.omh-anim-barra {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 6px;
+}
+.omh-anim-barra > li {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.omh-anim-segmento {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  padding: 6px 0;
+  background: transparent;
+  cursor: pointer;
+}
+.omh-anim-segmento-traco {
+  display: block;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--omh-borda);
+  transition: background-color var(--omh-anim-dur, 400ms) ease;
+}
+.omh-anim-segmento-numero {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--omh-texto-suave);
+}
+/* Já vista: roxo. Atual: ciano, com o número claro. */
+.omh-anim-segmento[data-estado='vista'] .omh-anim-segmento-traco {
+  background: var(--omh-primaria);
+}
+.omh-anim-segmento[data-estado='atual'] .omh-anim-segmento-traco {
+  background: var(--omh-acento);
+}
+.omh-anim-segmento[data-estado='atual'] .omh-anim-segmento-numero {
+  color: var(--omh-texto);
+}
+
+/* Modo "cenas paradas": grade de miniaturas (as colunas vêm do motor,
+   auto-fill com mínimo de 230px). */
+.omh-anim-paradas {
+  display: grid;
+  gap: 12px;
+}
+.omh-anim-miniatura {
+  margin: 0;
+  min-width: 0;
+  border-radius: 8px;
+  border: 1px solid var(--omh-borda);
+  background: var(--omh-fundo);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.omh-anim-miniatura-topo {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: baseline;
+}
+.omh-anim-miniatura-numero {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--omh-texto-suave);
+}
+.omh-anim-miniatura-legenda {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* "Ler como texto": lista numerada, "legenda — texto alternativo". O resumo tem
+   44px de altura (alvo de toque) sem mudar o desenho (12px em cima e embaixo). */
+.omh-anim-texto {
+  border-radius: 8px;
+  border: 1px solid var(--omh-borda);
+  background: var(--omh-fundo);
+  padding: 0 16px;
+}
+.omh-anim-texto > summary {
+  padding: 11px 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+.omh-anim-texto > ol {
+  list-style: decimal;
+  margin: 0 0 12px;
+  padding-left: 20px;
+  font-size: 14px;
+  color: var(--omh-texto-suave);
+}
+.omh-anim-texto > ol > li + li {
+  margin-top: 4px;
+}
+
+/* Nota miúda no pé da animação. */
+.omh-anim-nota {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--omh-texto-suave);
+}
+
+/* Transições do palco: 400–500ms ease, com a duração que o motor passa em
+   --omh-anim-dur. Só propriedades que não mexem no texto da cena. */
 .omh-anim-transicao {
   transition:
     height var(--omh-anim-dur, 400ms) ease,
@@ -487,10 +1642,38 @@ summary.list-none::-webkit-details-marker {
     opacity var(--omh-anim-dur, 400ms) ease,
     transform var(--omh-anim-dur, 400ms) ease,
     background-color var(--omh-anim-dur, 400ms) ease,
-    border-color var(--omh-anim-dur, 400ms) ease;
+    border-color var(--omh-anim-dur, 400ms) ease,
+    color var(--omh-anim-dur, 400ms) ease,
+    margin-left var(--omh-anim-dur, 400ms) ease;
 }
+
+/* Arrumações de palco feitas em CSS (antes eram medidas de janela em JS):
+   Drainer (carteira | seta | site) e Caminho do token (3 locais com setas). */
+.omh-anim-tres-colunas {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+.omh-anim-trilha {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+}
+@media (max-width: 639px) {
+  .omh-anim-tres-colunas,
+  .omh-anim-trilha {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* A seta gira para baixo; centralizada, a caixa dela fica do tamanho do
+     símbolo (larga, o giro jogaria o símbolo para cima do cartão). */
+  .omh-anim-trilha-seta {
+    justify-self: center;
+    transform: rotate(90deg);
+  }
+}
+
+/* Quem pediu menos movimento no sistema: nada anima (e o motor já abre nas
+   cenas paradas). */
 @media (prefers-reduced-motion: reduce) {
-  .omh-anim-transicao {
+  .omh-anim-transicao,
+  .omh-anim-segmento-traco,
+  .omh-anim-botao {
     transition: none;
   }
 }

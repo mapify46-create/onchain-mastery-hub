@@ -51,6 +51,8 @@
     @theme {
       --color-fundo: #0B0F17;
       --color-superficie: #141A24;
+      --color-superficie-alta: #1B2330;
+      --color-superficie-baixa: #10151E;
       --color-borda: #1F2733;
       --color-texto: #E6EDF3;
       --color-texto-suave: #9AA7B4;
@@ -101,26 +103,19 @@
       <!-- Cabeçalho mobile: guarda o botão hambúrguer. Fica grudado no topo para o
            menu continuar a um toque de distância mesmo depois de rolar a página. -->
       <header id="cabecalho-mobile"
-              class="sticky top-1 z-20 flex items-center gap-3 border-b border-borda bg-superficie px-4 py-3 lg:hidden">
+              class="sticky top-1 z-20 flex items-center gap-3 border-b border-borda bg-superficie px-4 py-2.5 lg:hidden">
+        <!-- Como no desenho: só o ☰, num quadrado de 44px (alvo de toque). -->
         <button id="botao-menu" type="button"
-                class="flex shrink-0 items-center gap-2 rounded-lg border border-borda px-3 py-2 text-sm font-medium"
-                aria-controls="sidebar" aria-expanded="false">
+                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-borda text-lg"
+                aria-label="Menu" aria-controls="sidebar" aria-expanded="false">
           <span aria-hidden="true">☰</span>
-          <span>Menu</span>
         </button>
-        <span class="min-w-0 flex-1 truncate font-semibold">onchain-mastery-hub</span>
+        <span class="min-w-0 flex-1 truncate text-sm font-semibold">onchain-mastery-hub</span>
       </header>
 
-      <!-- O router monta a view ativa aqui dentro -->
-      <main id="conteudo" tabindex="-1" class="flex-1 px-4 py-8 sm:px-6 lg:px-10"></main>
-
-      <footer class="border-t border-borda px-4 py-6 text-sm text-texto-suave sm:px-6 lg:px-10">
-        <p>
-          <strong class="text-texto">Aviso:</strong> material de estudo próprio. Memecoin é o ativo
-          de maior risco do mercado: 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia
-          em que nasceram (CoinGecko Research).
-        </p>
-      </footer>
+      <!-- O router monta a view ativa aqui dentro, numa coluna de 868px que
+           termina com o aviso (src/components/aviso.js). -->
+      <main id="conteudo" tabindex="-1" class="flex-1 px-4 py-5 sm:px-6 sm:py-8"></main>
     </div>
   </div>
 

@@ -7,33 +7,47 @@
 //
 //   emUmaFrase  a ideia central, destacada no topo            (sinalização)
 //   paragrafos  curtos, uma ideia cada                         (segmentação)
-//   quadro      [{ rotulo, texto }] — comparação lado a lado    (contiguidade)
+//   quadro      [{ rotulo, texto, destaque? }] — lado a lado    (contiguidade)
 //   exemplo     { titulo?, passos: [] } — a conta feita à mão   (exemplo resolvido)
 //   detalhe     { titulo, paragrafos } — exceções e minúcias,   (coerência: tira do
 //               recolhidas, para quem quer ir mais fundo         caminho principal)
 //
+// A ordem e as medidas seguem o desenho do handoff (pesquisa/design, os módulos):
+// título → ideia central → O VISUAL → texto → "Para ir mais fundo" → "Pergunta
+// rápida", tudo numa coluna com 16px entre as partes. O visual e a pergunta vêm
+// de quem chama (opções `visual` e `pergunta`), porque dependem de cada seção.
+//
 // Continua aceitando os campos antigos: lista, listaTitulo, ordenada, subListas,
 // paragrafosFinais. Seção sem os campos novos aparece como antes.
 
-import { criarElemento, criarCard } from '../ui.js';
+import { criarElemento } from '../ui.js';
 
 function criarQuadro(itens) {
   return criarElemento(
     'dl',
-    { class: 'mt-4 grid gap-3 sm:grid-cols-' + Math.min(itens.length, 3) },
+    { class: 'grid gap-3', style: 'grid-template-columns:repeat(auto-fit,minmax(200px,1fr))' },
     itens.map((item) =>
-      criarElemento('div', { class: 'rounded-lg border border-borda bg-fundo p-3' }, [
-        criarElemento('dt', { class: 'text-sm font-semibold text-acento' }, [item.rotulo]),
-        criarElemento('dd', { class: 'mt-1 text-sm text-texto-suave' }, [item.texto]),
-      ]),
+      criarElemento(
+        'div',
+        {
+          // O item em destaque (a resposta que importa) fica com a borda ciano.
+          class:
+            'rounded-lg border px-3.5 py-3 ' +
+            (item.destaque ? 'border-acento bg-acento/10' : 'border-borda bg-fundo'),
+        },
+        [
+          criarElemento('dt', { class: 'text-sm font-semibold text-texto' }, [item.rotulo]),
+          criarElemento('dd', { class: 'mt-1 text-sm text-texto-suave' }, [item.texto]),
+        ],
+      ),
     ),
   );
 }
 
 function criarExemplo(exemplo) {
-  return criarElemento('div', { class: 'mt-4 rounded-lg border border-borda bg-fundo p-4' }, [
+  return criarElemento('div', { class: 'rounded-lg border border-borda bg-fundo p-4' }, [
     criarElemento('p', { class: 'text-sm font-semibold text-texto' }, [exemplo.titulo ?? 'Exemplo']),
-    exemplo.passos?.length &&
+    exemplo.passos?.length > 0 &&
       criarElemento(
         'ol',
         { class: 'mt-2 list-decimal space-y-1 pl-5 text-sm text-texto-suave' },
@@ -45,27 +59,20 @@ function criarExemplo(exemplo) {
   ]);
 }
 
+// "Para ir mais fundo": recolhido, com o triângulo nativo do <details>, como no
+// desenho.
 function criarDetalhe(detalhe) {
-  return criarElemento('details', { class: 'group mt-4 rounded-lg border border-borda bg-fundo p-3' }, [
-    criarElemento(
-      'summary',
-      { class: 'flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-medium text-texto' },
-      [
-        criarElemento('span', {}, ['Para ir mais fundo: ' + detalhe.titulo]),
-        criarElemento(
-          'span',
-          { class: 'text-texto-suave transition-transform duration-150 group-open:rotate-180', 'aria-hidden': 'true' },
-          ['▾'],
-        ),
-      ],
-    ),
+  return criarElemento('details', { class: 'rounded-lg border border-borda bg-fundo px-4 py-3' }, [
+    criarElemento('summary', { class: 'cursor-pointer text-sm font-semibold text-texto' }, [
+      'Para ir mais fundo: ' + detalhe.titulo,
+    ]),
     ...(detalhe.paragrafos ?? []).map((paragrafo) =>
-      criarElemento('p', { class: 'mt-3 text-sm text-texto-suave' }, [paragrafo]),
+      criarElemento('p', { class: 'mt-2 text-sm text-texto-suave' }, [paragrafo]),
     ),
-    detalhe.lista?.length &&
+    detalhe.lista?.length > 0 &&
       criarElemento(
         'ul',
-        { class: 'mt-3 list-disc space-y-1 pl-5 text-sm text-texto-suave' },
+        { class: 'mt-2 list-disc space-y-1 pl-5 text-sm text-texto-suave' },
         detalhe.lista.map((item) => criarElemento('li', {}, [item])),
       ),
   ]);
@@ -75,28 +82,42 @@ function criarDetalhe(detalhe) {
  * Monta o card de uma seção.
  * @param {object} secao  { titulo, emUmaFrase?, paragrafos?, quadro?, exemplo?, lista?,
  *                          listaTitulo?, ordenada?, subListas?, paragrafosFinais?, detalhe? }
- * @param {object} [opcoes]  Repassado ao criarCard (ex.: { class }).
+ * @param {object} [opcoes]
+ * @param {Node}   [opcoes.visual]    o desenho da seção, logo depois da ideia central
+ * @param {Node}   [opcoes.pergunta]  a "Pergunta rápida" que fecha o card
+ * @param {Array}  [opcoes.omitir]    campos do dado que o visual já mostra
+ *                                    (ex.: ['exemplo']) — o desenho troca alguns
+ *                                    textos pelo visual; o dado continua no arquivo
+ * @param {Array}  [opcoes.depois]    nós extras no fim, antes da pergunta
+ * @param {string} [opcoes.class]     classes extras do card
  */
 export function criarCardDaSecao(secao, opcoes = {}) {
-  return criarCard(
+  const { visual = null, pergunta = null, omitir = [], depois = [], class: extra = '' } = opcoes;
+  const mostra = (campo) => !omitir.includes(campo);
+
+  return criarElemento(
+    'section',
+    { class: ('flex flex-col gap-4 rounded-card border border-borda bg-superficie p-5 ' + extra).trim() },
     [
       criarElemento('h2', { class: 'text-lg font-semibold' }, [secao.titulo]),
 
       secao.emUmaFrase &&
-        criarElemento('p', { class: 'mt-3 border-l-2 border-acento pl-3 text-base font-semibold text-texto' }, [
+        criarElemento('p', { class: 'border-l-2 border-acento pl-3 font-semibold text-texto' }, [
           secao.emUmaFrase,
         ]),
 
-      ...(secao.paragrafos ?? []).map((paragrafo) =>
-        criarElemento('p', { class: 'mt-3 text-texto-suave' }, [paragrafo]),
+      visual,
+
+      ...(mostra('paragrafos') ? secao.paragrafos ?? [] : []).map((paragrafo) =>
+        criarElemento('p', { class: 'text-texto-suave' }, [paragrafo]),
       ),
 
-      secao.quadro?.length && criarQuadro(secao.quadro),
+      mostra('quadro') && secao.quadro?.length > 0 && criarQuadro(secao.quadro),
 
       // Duas sequências de passos numeradas de forma independente (ex.: "no
       // Revoke.cash" e "no Etherscan"), cada uma com o próprio <ol>.
-      ...(secao.subListas ?? []).map((sub) =>
-        criarElemento('div', { class: 'mt-4' }, [
+      ...(mostra('subListas') ? secao.subListas ?? [] : []).map((sub) =>
+        criarElemento('div', {}, [
           criarElemento('h3', { class: 'text-sm font-semibold text-acento' }, [sub.titulo]),
           criarElemento(
             'ol',
@@ -106,27 +127,34 @@ export function criarCardDaSecao(secao, opcoes = {}) {
         ]),
       ),
 
-      secao.listaTitulo && criarElemento('p', { class: 'mt-4 text-sm font-semibold text-texto' }, [secao.listaTitulo]),
-      secao.lista?.length &&
-        criarElemento(
-          secao.ordenada ? 'ol' : 'ul',
-          {
-            class:
-              (secao.listaTitulo ? 'mt-2' : 'mt-4') +
-              ' space-y-2 pl-5 text-texto-suave ' +
-              (secao.ordenada ? 'list-decimal' : 'list-disc'),
-          },
-          secao.lista.map((item) => criarElemento('li', {}, [item])),
-        ),
+      mostra('lista') && (secao.listaTitulo || secao.lista?.length > 0)
+        ? criarElemento('div', {}, [
+            secao.listaTitulo && criarElemento('p', { class: 'text-sm font-semibold text-texto' }, [secao.listaTitulo]),
+            secao.lista?.length > 0 &&
+              criarElemento(
+                secao.ordenada ? 'ol' : 'ul',
+                {
+                  class:
+                    (secao.listaTitulo ? 'mt-2 ' : '') +
+                    'space-y-2 pl-5 text-texto-suave ' +
+                    (secao.ordenada ? 'list-decimal' : 'list-disc'),
+                },
+                secao.lista.map((item) => criarElemento('li', {}, [item])),
+              ),
+          ])
+        : null,
 
-      secao.exemplo && criarExemplo(secao.exemplo),
+      mostra('exemplo') && secao.exemplo && criarExemplo(secao.exemplo),
 
-      ...(secao.paragrafosFinais ?? []).map((paragrafo) =>
-        criarElemento('p', { class: 'mt-4 text-texto-suave' }, [paragrafo]),
+      ...(mostra('paragrafosFinais') ? secao.paragrafosFinais ?? [] : []).map((paragrafo) =>
+        criarElemento('p', { class: 'text-texto-suave' }, [paragrafo]),
       ),
 
-      secao.detalhe && criarDetalhe(secao.detalhe),
+      mostra('detalhe') && secao.detalhe && criarDetalhe(secao.detalhe),
+
+      ...[].concat(depois),
+
+      pergunta,
     ],
-    opcoes,
   );
 }

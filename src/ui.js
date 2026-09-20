@@ -189,9 +189,15 @@ export function limpar(elemento) {
 
 // Cabeçalho padrão de página. Cada view chama isto uma vez, no topo — por isso o
 // nível 1: é o <h1> da rota, e os títulos de dentro dos cards seguem em h2/h3/h4.
-export function criarTitulo(texto, { nivel = 1, subtitulo = null } = {}) {
+// `rotulo` é o micro-rótulo em maiúsculas acima do título, como no desenho
+// ("MÓDULO 6" em cima de "Ler a tela").
+export function criarTitulo(texto, { nivel = 1, subtitulo = null, rotulo = null } = {}) {
   return criarElemento('header', { class: 'mb-6' }, [
-    criarElemento('h' + nivel, { class: 'text-2xl font-semibold sm:text-3xl' }, [texto]),
+    rotulo &&
+      // leading-[1.6]: a mesma altura de linha do corpo, como no desenho — sem
+      // isso o micro-rótulo encolhe e sobe tudo o que vem depois em 3px.
+      criarElemento('p', { class: 'text-xs font-semibold uppercase leading-[1.6] tracking-[.05em] text-texto-suave' }, [rotulo]),
+    criarElemento('h' + nivel, { class: 'text-3xl font-semibold leading-tight' + (rotulo ? ' mt-1' : '') }, [texto]),
     subtitulo && criarElemento('p', { class: 'mt-2 text-texto-suave' }, [subtitulo]),
   ]);
 }
@@ -305,8 +311,9 @@ export function criarBotao(texto, { variante = 'primario', class: extra = '', ..
     'button',
     {
       type: 'button',
+      // min-h-11 = 44px: o alvo de toque mínimo que o desenho pede em todo botão.
       class: (
-        'rounded-lg px-4 py-2 text-sm font-semibold transition-colors duration-150 ' +
+        'min-h-11 rounded-lg px-4 py-2 text-sm font-semibold transition-colors duration-150 ' +
         cor +
         ' ' +
         extra
@@ -328,19 +335,22 @@ export function criarAbas({ id, abas = [], rotulo = 'Seções do módulo' }) {
   const botoes = [];
   const paineis = [];
 
+  // Como no desenho: abas lado a lado, sem linha embaixo da lista.
   const listaDeAbas = criarElemento('div', {
     role: 'tablist',
     'aria-label': rotulo,
-    class: 'flex flex-wrap gap-2 border-b border-borda pb-4',
+    class: 'flex flex-wrap gap-2',
   });
 
   const areaDePaineis = criarElemento('div', {});
 
+  // 44px de altura (alvo de toque), texto claro e peso 600 em todas as abas;
+  // a ativa se distingue pela borda e pelo fundo roxos.
   const CLASSE_BASE =
-    'rounded-lg border px-3 py-2 text-sm font-medium transition-colors duration-150';
-  const CLASSE_ATIVA = ' border-primaria bg-primaria/15 text-texto';
-  const CLASSE_INATIVA =
-    ' border-borda bg-superficie text-texto-suave hover:border-texto-suave hover:text-texto';
+    'min-h-11 whitespace-nowrap rounded-lg border px-4 py-2 text-sm font-semibold text-texto ' +
+    'transition-colors duration-150';
+  const CLASSE_ATIVA = ' border-primaria bg-primaria/15';
+  const CLASSE_INATIVA = ' border-borda bg-superficie hover:border-texto-suave';
 
   function ativar(indice, moverFoco = false) {
     abas.forEach((aba, i) => {
@@ -366,6 +376,12 @@ export function criarAbas({ id, abas = [], rotulo = 'Seções do módulo' }) {
         if (typeof aba.aoAtivar === 'function') aba.aoAtivar(painel);
       }
     });
+
+    // Avisa quem desenha algo ligado às abas (o mapa do módulo pinta o ramo
+    // da aba aberta). O `id` diz de qual lista de abas veio o aviso.
+    document.dispatchEvent(
+      new CustomEvent('omh:aba-ativada', { detail: { id, aba: abas[indice]?.id } }),
+    );
 
     if (moverFoco) botoes[indice].focus();
   }

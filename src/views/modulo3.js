@@ -1,386 +1,556 @@
 // views/modulo3.js — monta a página do Módulo 3 a partir de src/data/modulo3.js.
 //
+// A página segue o desenho do Claude Design (pesquisa/design/handoff/designs/
+// "M3 Desktop.dc.html" e "M3 Celular.dc.html"): cabeçalho (com a correção
+// "Axon → Axiom" em âmbar), o mapa "O módulo inteiro numa olhada", as abas e,
+// em cada aba, os destaques e um card por seção. Cada card tem o título, a ideia
+// central (borda ciano), o visual DENTRO do card, as frases e, quando o desenho
+// pede, a "Pergunta rápida" no fim.
+//
 // Abas internas (padrão ARIA de tabs, vindo de ui.js):
 //   Visão geral · Narrativas · Pilar social na prática · Pilar técnico na prática ·
 //   Matriz de ferramentas · Cenário 2025–2026 · Quiz
+//
+// Blocos de didática que só o app tinha e o dono decidiu manter (18/09/2026):
+// "Antes de ler" no topo da aba Pilar técnico, "Parte X de N" com "Continuar"
+// nas abas Narrativas e Pilar social, e "Confira antes de seguir" no fim da
+// Parte 3 do Pilar social. As perguntas de cada um estão em src/data/modulo3.js
+// (perguntaAntes, confira) e nenhuma se repete em outro bloco do módulo.
+// As abas Pilar social e Narrativas ficaram sem "Antes de ler"
+// (perguntaAntes: null): não sobrou pergunta do quiz que o aluno ainda não
+// tenha respondido — e, na Narrativas, a resposta da única candidata estava
+// logo abaixo, nos destaques da própria aba.
+//
+// As cores e medidas são as do desenho (tokens do README do handoff). Os textos
+// vêm todos de src/data/modulo3.js; aqui ficam só a montagem e as contas.
 
 import { modulo3 } from '../data/modulo3.js';
-import {
-  criarElemento,
-  criarTitulo,
-  criarCard,
-  criarBotao,
-  criarAbas,
-  mostrarToast,
-  html,
-} from '../ui.js';
-import { montarMatrizDeFerramentas } from '../components/toolMatrix.js';
-import { montarQuiz, juntarPorques } from '../components/quiz.js';
+import { criarElemento, criarTitulo, criarCard, criarBotao, criarAbas, mostrarToast, rotuloRisco, html } from '../ui.js';
+import { montarQuiz, montarPerguntaRapida, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
-import { criarMapaMental, criarCiclo, criarBarrasNaMesmaEscala, abrirAba } from '../components/visuais.js';
+import { criarMapaDoModulo, criarCiclo } from '../components/visuais.js';
 import { criarAnimacaoNarrativa } from '../components/animacoes.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
-import { montarAnatomia } from '../components/anatomia.js';
-import { montarTabelaComparativa } from '../components/comparisonTable.js';
 import { montarSegmentos, montarPerguntaPrevia, montarTermos } from '../components/didatica.js';
+import { obterEstado, atualizar } from '../store.js';
 
-// As perguntas do quiz com o "por que a sua não serve", para usar no fim das partes.
+// ---------------------------------------------------------------------------
+// Peças comuns
+// ---------------------------------------------------------------------------
+
+const MONO = "'JetBrains Mono',ui-monospace,monospace";
+
+// Os "trios" de estado do desenho: borda + fundo + cor do texto (ou do rótulo).
+const TRIO = {
+  acento: { borda: 'rgba(34,211,238,.5)', fundo: 'rgba(34,211,238,.1)', cor: '#22D3EE' },
+  primaria: { borda: 'rgba(124,58,237,.6)', fundo: 'rgba(124,58,237,.15)', cor: '#E6EDF3' },
+  ok: { borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#22C55E' },
+  atencao: { borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#F59E0B' },
+  alerta: { borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' },
+};
+
+// Micro-rótulo em maiúsculas (11px ou 12px, como no desenho).
+const MICRO_11 = 'margin:0;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase';
+const MICRO_12 = 'margin:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4';
+
+// A caixa escura em que todo visual fica, dentro do card da seção.
+const CAIXA = 'margin:0;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;min-width:0';
+
+// Duas colunas no computador e uma no celular (cada coluna com pelo menos 280px).
+// É o `colsDois` do desenho ('1fr 1fr' no desktop, '1fr' no celular), sem medir a tela.
+const DUAS_COLUNAS = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))';
+
+// Círculo ciano numerado (o marcador de passo do desenho). Tamanhos: 20, 22 ou
+// 24px; a fonte acompanha (11, 12 ou 13px).
+function criarMarcador(numero, tamanho = 24) {
+  const fonte = tamanho >= 24 ? 13 : tamanho >= 22 ? 12 : 11;
+  return html`<span aria-hidden="true" style="flex:0 0 ${tamanho}px;width:${tamanho}px;height:${tamanho}px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:${MONO};font-size:${fonte}px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">${String(numero)}</span>`;
+}
+
+// Um texto de src/data/modulo3.js pode ser uma string ou uma lista de pedaços:
+// { forte: '…' } sai em negrito e { mono: '…' } em fonte de código. Devolve
+// algo que pode ir dentro de qualquer elemento. `tamanhoDoMono` é o tamanho da
+// fonte de código (o desenho usa 14px no parágrafo e 13px nas listas miúdas).
+function montarTexto(valor, tamanhoDoMono = 14) {
+  if (!Array.isArray(valor)) return valor;
+  const fragmento = document.createDocumentFragment();
+  for (const pedaco of valor) {
+    if (typeof pedaco === 'string') fragmento.append(pedaco);
+    else if (pedaco.forte) fragmento.append(html`<strong style="color:#E6EDF3">${pedaco.forte}</strong>`);
+    else if (pedaco.mono) fragmento.append(html`<span style="font-family:${MONO};font-size:${tamanhoDoMono}px">${pedaco.mono}</span>`);
+  }
+  return fragmento;
+}
+
+// Parágrafo cinza de 16px, entre os blocos de um card.
+function criarParagrafo(texto) {
+  return html`<p style="margin:0;color:#9AA7B4">${montarTexto(texto)}</p>`;
+}
+
+// "Para ir mais fundo": recolhido, com o triângulo nativo do <details>. Aceita
+// parágrafos (`paragrafos`) ou uma lista com marcadores (`lista`).
+function criarParaIrMaisFundo(detalhe) {
+  if (!detalhe) return null;
+  const paragrafos = (detalhe.paragrafos ?? []).map(
+    (paragrafo) => html`<p style="margin:8px 0 0;font-size:14px;color:#9AA7B4">${montarTexto(paragrafo, 13)}</p>`,
+  );
+  const lista = detalhe.lista?.length
+    ? html`<ul style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4;list-style:disc">
+        ${detalhe.lista.map((item, i) => html`<li style="${i ? 'margin-top:4px' : ''}">${montarTexto(item, 13)}</li>`)}
+      </ul>`
+    : null;
+  return html`<details style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px 16px">
+    <summary style="cursor:pointer;font-size:14px;font-weight:600">Para ir mais fundo: ${detalhe.titulo}</summary>
+    ${paragrafos}${lista}
+  </details>`;
+}
+
+// Caixa âmbar com o texto em cinza e o começo em negrito (aviso do ciclo).
+function criarCaixaAmbar(texto) {
+  return html`<p style="margin:0;border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:12px 16px;font-size:14px;color:#9AA7B4">${montarTexto(texto)}</p>`;
+}
+
+// O card de uma seção, no traço do desenho: título, ideia central (borda ciano)
+// e os blocos na ordem do desenho, com 16px entre eles; a "Pergunta rápida"
+// fecha o card. É o card de components/secao.js: aqui os blocos já chegam
+// montados, porque a ordem muda de uma seção para outra no M3.
+function criarSecao({ titulo, emUmaFrase, blocos = [], pergunta = null }) {
+  return criarCardDaSecao({ titulo, emUmaFrase }, { depois: blocos, pergunta: pergunta ? criarPerguntaRapida(pergunta) : null });
+}
+
+// Uma coluna de blocos com 24px entre eles (o painel de cada aba no desenho).
+function criarColuna(nos) {
+  return criarElemento('div', { class: 'flex flex-col gap-6' }, nos);
+}
+
+// As perguntas do quiz já com o "Por que a sua não serve" de cada errada.
 const PERGUNTAS = juntarPorques(modulo3.quiz, modulo3.porqueErradas);
 function perguntaDoQuiz(id) {
   return PERGUNTAS.find((pergunta) => pergunta.id === id);
 }
 
-// A pergunta do quiz usada antes de ler uma aba.
-function previa(idDaPergunta) {
-  return montarPerguntaPrevia({
-    id: modulo3.id,
-    pergunta: modulo3.quiz.find((pergunta) => pergunta.id === idDaPergunta),
+// A "Pergunta rápida" do fim de um card: a pergunta `id` do quiz do módulo.
+// Não grava nada e não conta no Início (é só para conferir a leitura).
+function criarPerguntaRapida(id) {
+  return montarPerguntaRapida({ id: 'm3-rapida-' + id, pergunta: perguntaDoQuiz(id), moduloNome: 'Módulo 3' });
+}
+
+// "Antes de ler: o que você acha?" — a pergunta `id` do quiz, antes da aba.
+// `id` nulo (aba sem o bloco, como o Pilar social) devolve nada.
+function criarPerguntaAntes(id) {
+  if (!id) return null;
+  return montarPerguntaPrevia({ id: modulo3.id, pergunta: perguntaDoQuiz(id) });
+}
+
+// As folhas do mapa de uma aba: são os nomes curtos das partes dela.
+function folhasDaAba(idDaAba) {
+  return modulo3.mapa.ramos.find((ramo) => ramo.aba === idDaAba)?.folhas ?? [];
+}
+
+// ---------------------------------------------------------------------------
+// Tabela do desenho
+// ---------------------------------------------------------------------------
+
+// Um selo colorido dentro de uma célula (raio 6). `curto` = uma linha só, em
+// 13px e negrito (a coluna "Memecoin nova"). Sem tom, o texto fica cinza, com o
+// mesmo recuo dos selos coloridos.
+const SELO_POR_TOM = {
+  ok: { borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.12)', cor: '#E6EDF3' },
+  atencao: { borda: 'rgba(245,158,11,.4)', fundo: 'rgba(245,158,11,.12)', cor: '#E6EDF3' },
+  alerta: { borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.12)', cor: '#F87171' },
+  neutro: { borda: 'transparent', fundo: 'transparent', cor: '#9AA7B4' },
+};
+
+function criarSelo(valor, curto) {
+  const { texto, tom } = typeof valor === 'object' ? valor : { texto: valor, tom: 'neutro' };
+  const t = SELO_POR_TOM[tom] ?? SELO_POR_TOM.neutro;
+  const extra = curto ? 'white-space:nowrap;font-size:13px;font-weight:600;' : '';
+  return html`<span style="display:inline-block;${extra}border-radius:6px;border:1px solid ${t.borda};background:${t.fundo};color:${t.cor};padding:2px 8px">${texto}</span>`;
+}
+
+/**
+ * Uma <table> de verdade dentro da caixa escura, como no desenho. Quando a tela
+ * é estreita, a tabela rola para o lado dentro da caixa (que ganha tabindex para
+ * rolar pelo teclado). A estrutura é montada com criarElemento, e não com html``,
+ * porque o leitor de HTML tira de dentro da <tr> o texto provisório do html``.
+ *
+ * @param {object} tabela  { rotuloDasLinhas, rotulo, larguraMinima, frase?,
+ *   colunas: [{ chave, rotulo, selo?, destaque?, mono? }],
+ *   linhas: [{ titulo, subtitulo?, valores: { chave: texto | { texto, tom } } }] }
+ *   selo: a célula vira selo colorido (`'curto'` = numa linha só). destaque: a
+ *   coluna ganha a borda ciano à esquerda. mono: fonte de código.
+ */
+function criarTabela(tabela) {
+  const CABECALHO =
+    'text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#9AA7B4;border-bottom:1px solid #1F2733';
+  const CELULA = 'padding:10px 12px;border-bottom:1px solid #1F2733;vertical-align:top';
+  const bordaDaColuna = (coluna) => (coluna.destaque ? ';border-left:2px solid #22D3EE' : '');
+
+  const cabecalho = criarElemento('tr', {}, [
+    criarElemento('th', { scope: 'col', style: CABECALHO }, [tabela.rotuloDasLinhas]),
+    ...tabela.colunas.map((coluna) =>
+      criarElemento('th', { scope: 'col', style: CABECALHO + bordaDaColuna(coluna) }, [coluna.rotulo]),
+    ),
+  ]);
+
+  function celula(coluna, valor) {
+    if (coluna.selo) {
+      return criarElemento('td', { style: CELULA + bordaDaColuna(coluna) }, [criarSelo(valor, coluna.selo === 'curto')]);
+    }
+    const texto = typeof valor === 'object' ? valor.texto : valor;
+    const estilo = coluna.mono ? `;font-family:${MONO};font-size:12.5px;color:#E6EDF3` : ';color:#9AA7B4';
+    return criarElemento('td', { style: CELULA + estilo + bordaDaColuna(coluna) }, [texto]);
+  }
+
+  const linhas = tabela.linhas.map((linha) =>
+    criarElemento('tr', {}, [
+      criarElemento('th', { scope: 'row', style: 'text-align:left;padding:10px 12px;font-weight:600;border-bottom:1px solid #1F2733;vertical-align:top' }, [
+        linha.titulo,
+        linha.subtitulo &&
+          criarElemento('span', { style: 'display:block;font-size:12px;font-weight:400;color:#9AA7B4' }, [linha.subtitulo]),
+      ]),
+      ...tabela.colunas.map((coluna) => celula(coluna, linha.valores[coluna.chave])),
+    ]),
+  );
+
+  return criarElemento(
+    'div',
+    {
+      style: 'border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:12px;overflow-x:auto',
+      tabindex: '0',
+      role: 'group',
+      'aria-label': tabela.rotulo,
+    },
+    [
+      criarElemento('table', { style: `border-collapse:collapse;width:100%;min-width:${tabela.larguraMinima}px;font-size:14px` }, [
+        criarElemento('thead', {}, [cabecalho]),
+        criarElemento('tbody', {}, linhas),
+      ]),
+      tabela.frase && criarElemento('p', { style: 'margin:12px 0 0;font-size:13px;color:#9AA7B4' }, [tabela.frase]),
+    ],
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Anatomia de uma página (mockup em grade HTML)
+// ---------------------------------------------------------------------------
+
+/**
+ * O mockup desenhado de uma página (perfil do X, RugCheck, Solscan…): uma grade
+ * de painéis numerados à esquerda e a lista "Título. texto" à direita (embaixo,
+ * no celular). Painel com `alerta` sai em âmbar. Os campos aparecem sem valores.
+ *
+ * @param {object} p
+ * @param {string} [p.titulo]      linha em negrito no topo da caixa (as ferramentas)
+ * @param {object} p.paineis       { id: { rotulo, alerta? } }
+ * @param {Array}  p.grade         [{ cols, ids, altura }] — as linhas do mockup
+ * @param {Array}  p.itens         [{ painel, titulo, texto }] — a ordem dá o número
+ * @param {string} p.notaDoMockup  a frase miúda dentro do mockup
+ * @param {string} [p.legenda]     a frase embaixo da caixa
+ */
+function criarAnatomia({ titulo = null, paineis, grade, itens, notaDoMockup, legenda = null }) {
+  const numeroDoPainel = {};
+  itens.forEach((item, i) => {
+    numeroDoPainel[item.painel] = i + 1;
   });
-}
-import { obterEstado, atualizar } from '../store.js';
 
-// ---------------------------------------------------------------------------
-// Destaques e mapa — derivados do catálogo
-//
-// Diferente dos outros módulos, os destaques do M3 moram aqui e não em
-// src/data/modulo3.js: quase todos são CONTAGENS do próprio catálogo de
-// ferramentas (quantas de risco baixo, quantas por pilar), e contar na view
-// garante que o número acompanha qualquer edição no catálogo sem virar dado
-// duplicado e desatualizado. Só os textos são fixos. (As abas práticas são
-// exceção: os destaques delas têm fonte e ficam no arquivo de dados.)
-// ---------------------------------------------------------------------------
-
-function contarPorRisco(risco) {
-  return modulo3.ferramentas.filter((f) => f.risco === risco).length;
-}
-
-function contarPorPilar(pilar) {
-  return modulo3.ferramentas.filter((f) => f.pilar === pilar).length;
-}
-
-function destaquesDaVisaoGeral() {
-  const tecnico = contarPorPilar('tecnico');
-  const social = contarPorPilar('social');
-  return [
-    {
-      rotulo: 'Pilares de checagem',
-      valor: '2',
-      nota: 'Social (o token é quem diz ser?) e técnico (o que o contrato e as carteiras permitem?). Duas checagens, não uma — e nenhuma substitui a outra.',
-    },
-    {
-      rotulo: 'Ferramentas catalogadas',
-      valor: String(tecnico + social),
-      nota:
-        tecnico +
-        ' no pilar técnico e ' +
-        social +
-        ' no social. O pilar social é quase todo manual: por isso tem tão poucas ferramentas.',
-    },
-    {
-      rotulo: 'O nome certo',
-      valor: 'Axiom',
-      nota: '"Axon" não existe. A correção está em destaque na aba porque erro de nome é exatamente o que um impostor explora.',
-    },
-  ];
-}
-
-function destaquesDaMatriz() {
-  return [
-    {
-      rotulo: 'Ferramentas de risco baixo',
-      valor: String(contarPorRisco('baixo')),
-      nota: 'Todas só de leitura: visualizam e checam, não executam ordens nem guardam chave.',
-      tom: 'ok',
-    },
-    {
-      rotulo: 'Ferramentas de risco alto',
-      valor: String(contarPorRisco('alto')),
-      nota: 'O que têm em comum: executam ordens — e algumas guardam a chave por você.',
-      tom: 'alerta',
-    },
-    {
-      rotulo: 'Papéis que uma ferramenta pode ter',
-      valor: String(modulo3.papeis.length),
-      nota: 'Visualização, execução, checagem, monitoramento social. Uma ferramenta que faz tudo é uma ferramenta em que você precisa confiar para tudo.',
-    },
-  ];
-}
-
-// Os números do cenário vêm do texto de modulo3.cenarioLaunchpads, que já os
-// carrega com a ressalva de que mudam de mês em mês.
-const DESTAQUES_DO_CENARIO = [
-  {
-    rotulo: 'Receita de launchpad capturada pelo Pump.fun',
-    valor: '~98%',
-    nota: 'Início de agosto de 2025 — um mês depois de ter sido ultrapassado pelo LetsBonk. A liderança oscila em semanas.',
-  },
-  {
-    rotulo: 'Tokens criados num só dia na Four.meme',
-    valor: '20.000+',
-    nota: 'Em 08/10/2025, na BNB Chain, com ~US$ 1,4 mi de receita em 24h contra ~US$ 885 mil do Pump.fun.',
-  },
-  {
-    rotulo: 'O que fica quando o líder muda',
-    valor: 'O conceito',
-    nota: 'Launchpad + bonding curve + graduação para uma DEX. Nomes e números mudam — e estão editáveis em src/data/modulo3.js.',
-  },
-];
-
-// O mapa dos dois pilares: cada ferramenta no pilar e nos papéis em que atua,
-// com o risco na cor do ponto. Agrupamento, não scatter, de propósito — `pilar`
-// é categórico; uma posição contínua num eixo "social ↔ técnico" seria nota
-// inventada. Uma ferramenta com vários papéis aparece em vários grupos: é
-// justamente o que se quer mostrar.
-function criarMapaDosPilares() {
-  const COR_RISCO = { baixo: 'bg-risco-baixo', medio: 'bg-risco-medio', alto: 'bg-risco-alto' };
-
-  const coluna = (pilarId, titulo, classeBorda) => {
-    const doPilar = modulo3.ferramentas.filter((f) => f.pilar === pilarId);
-    const grupos = modulo3.papeis
-      .map((papel) => ({ papel, itens: doPilar.filter((f) => f.papeis.includes(papel.id)) }))
-      .filter((grupo) => grupo.itens.length > 0);
-
-    return html`<div class="rounded-card border ${classeBorda} bg-fundo p-4">
-      <h3 class="text-base font-semibold">${titulo}</h3>
-      <p class="mt-1 text-xs text-texto-suave">
-        ${doPilar.length} ferramenta${doPilar.length === 1 ? '' : 's'}
-      </p>
-      ${grupos.map(
-        (grupo) => html`<div class="mt-4">
-          <p class="text-xs font-semibold uppercase tracking-wide text-texto-suave">
-            ${grupo.papel.nome}
-          </p>
-          <ul class="mt-2 flex flex-wrap gap-2">
-            ${grupo.itens.map(
-              (f) => html`<li
-                class="flex items-center gap-2 rounded-full border border-borda bg-superficie px-3 py-1 text-xs text-texto"
-              >
-                <span class="h-2 w-2 shrink-0 rounded-full ${COR_RISCO[f.risco]}" aria-hidden="true"></span>
-                ${f.nome}
-                <span class="sr-only">, risco ${f.risco}</span>
-              </li>`,
-            )}
-          </ul>
-        </div>`,
-      )}
+  // Um painel do mockup. `peso` é a fração da linha ("2fr 1fr" → 2 e 1): a
+  // caixa de fora só divide a largura (sem borda nem padding, para a divisão
+  // sair igual à da grade do desenho); a de dentro é o painel.
+  // A altura mínima do desenho não conta o padding (content-box): por isso o
+  // box-sizing do painel é content-box, e não o border-box do resto do app.
+  const painel = (id, altura, peso) => {
+    const dados = paineis[id];
+    const borda = dados.alerta ? 'rgba(245,158,11,.4)' : '#22D3EE';
+    const fundo = dados.alerta ? 'rgba(245,158,11,.12)' : 'rgba(34,211,238,.08)';
+    return html`<div style="flex:${peso} 1 0;display:flex">
+      <div style="flex:1 1 auto;border-radius:6px;border:1px solid ${borda};background:${fundo};box-sizing:content-box;padding:8px;min-height:${altura};display:flex;gap:8px;align-items:flex-start">
+        ${criarMarcador(numeroDoPainel[id], 20)}
+        <span style="min-width:0;font-family:${MONO};font-size:11.5px;line-height:1.35;color:#E6EDF3;overflow-wrap:break-word">${dados.rotulo}</span>
+      </div>
     </div>`;
   };
 
-  return criarCard([
-    criarElemento('h2', { class: 'text-lg font-semibold' }, ['O mapa dos dois pilares']),
-    criarElemento('p', { class: 'mt-2 text-sm text-texto-suave' }, [
-      'Cada ferramenta do catálogo, no pilar e nos papéis em que atua. A cor do ponto é o ' +
-        'risco: verde baixo, âmbar médio, vermelho alto. Uma ferramenta que aparece em vários ' +
-        'papéis é uma ferramenta em que você precisa confiar para várias coisas.',
-    ]),
-    html`<div class="mt-4 grid gap-4 md:grid-cols-[3fr_2fr]">
-      ${coluna('tecnico', 'Pilar técnico', 'border-primaria/50')}
-      ${coluna('social', 'Pilar social', 'border-acento/50')}
-    </div>`,
-  ]);
-}
+  // Uma linha do mockup. O desenho usa uma grade ("2fr 1fr"); aqui é uma linha
+  // flexível com os mesmos pesos, que dá as mesmas larguras no computador e,
+  // no celular, passa um painel para a linha de baixo quando as palavras não
+  // cabem (em vez de quebrar a palavra no meio ou vazar para o lado).
+  const linhaDoMockup = (linha) => {
+    const pesos = linha.cols.split(/\s+/).map((coluna) => parseFloat(coluna) || 1);
+    return html`<div style="display:flex;flex-wrap:wrap;gap:8px">${linha.ids.map((id, i) => painel(id, linha.altura, pesos[i] ?? 1))}</div>`;
+  };
 
+  const descricao =
+    'Mockup esquemático com ' + itens.length + ' marcadores: ' +
+    itens.map((item, i) => i + 1 + ' ' + paineis[item.painel].rotulo).join('; ') +
+    '. Os campos aparecem sem valores.';
 
-// O ciclo da narrativa desenhado, a partir da MESMA lista da seção: cada item
-// vem como "Fase: explicação", então o título é o que vem antes dos dois pontos.
-function criarCicloDaNarrativa() {
-  const secaoDoCiclo = modulo3.praticaNarrativas.secoes.find((item) => item.id === 'ciclo');
-  if (!secaoDoCiclo?.lista?.length) return null;
-
-  const etapas = secaoDoCiclo.lista.map((item) => {
-    const corte = item.indexOf(':');
-    return corte === -1
-      ? { titulo: item }
-      : { titulo: item.slice(0, corte), texto: item.slice(corte + 1).trim().split(/(?<=.)s/)[0] };
-  });
-
-  return criarCiclo({
-    titulo: 'O ciclo, em círculo',
-    etapas,
-    centro: 'atenção',
-    nota: 'A seta tracejada fecha o ciclo: quando uma narrativa morre, a atenção já está em outra. Reconhecer a fase não prevê o preço.',
-  });
-}
-
-// A conta que decide o pilar social: o sinal, no melhor caso, é menor que o
-// pedágio de entrar e sair. Os dois números vêm do exemplo da própria seção.
-function criarBarrasDoSinalContraCusto() {
-  return criarBarrasNaMesmaEscala({
-    titulo: 'O sinal social contra o custo de operar',
-    itens: [
-      { rotulo: 'Sinal social, no melhor caso', valor: 3, exibicao: '1% a 3%', tom: 'acento',
-        nota: 'E só por poucos minutos.' },
-      { rotulo: 'Custo de entrar e sair de uma memecoin', valor: 6, exibicao: '3 a 6 pontos', tom: 'alto',
-        nota: 'As cinco camadas de custo do Módulo 5.' },
-    ],
-    nota: 'As barras estão na mesma escala. O custo come o sinal antes de ele virar lucro.',
-  });
-}
-
-// O que aconteceu com o preço depois do tweet de um influenciador. As barras
-// mostram o tamanho da variação; o sinal fica no número, porque barra não tem
-// lado. Os três valores são do estudo citado na seção.
-function criarBarrasDosCalls() {
-  return criarBarrasNaMesmaEscala({
-    titulo: 'Depois do tweet: o primeiro dia e os trinta',
-    itens: [
-      { rotulo: 'No primeiro dia', valor: 1.83, exibicao: '+1,83%', tom: 'baixo' },
-      { rotulo: 'Em 10 dias', valor: 2.24, exibicao: '−2,24%', tom: 'medio' },
-      { rotulo: 'Em 30 dias', valor: 6.53, exibicao: '−6,53%', tom: 'alto' },
-    ],
-    descricao: 'Variação de preço depois do tweet: mais 1,83% no primeiro dia, menos 2,24% em 10 dias e menos 6,53% em 30 dias.',
-    nota: '36 mil tweets de 180 influenciadores, sobre mais de 1.600 criptoativos. A barra mostra o tamanho; o sinal está no número. Quem pôs US$ 1.000 em tokens fora do top 100 no dia do tweet e segurou 30 dias perdeu US$ 79, em média.',
-  });
-}
-// Parágrafo de apoio usado no topo de várias abas.
-function criarIntroducao(texto) {
-  return criarElemento('p', { class: 'max-w-3xl text-texto-suave' }, [texto]);
-}
-
-// O card de seção mora em components/secao.js, igual para todos os módulos.
-
-// Card-link para outra página do hub.
-function criarLink(href, titulo, texto) {
-  return criarElemento(
-    'a',
-    {
-      href,
-      class:
-        'block rounded-card border border-primaria/50 bg-primaria/10 p-5 transition-colors ' +
-        'duration-150 hover:border-primaria',
-    },
-    [
-      criarElemento('p', { class: 'text-base font-semibold text-texto' }, [titulo + ' →']),
-      criarElemento('p', { class: 'mt-1 text-sm text-texto-suave' }, [texto]),
-    ],
-  );
-}
-
-// Tabela com título.
-function criarTabela(titulo, tabela) {
-  return criarElemento('div', { class: 'space-y-4' }, [
-    criarElemento('h2', { class: 'text-lg font-semibold' }, [titulo]),
-    montarTabelaComparativa(tabela),
-  ]);
+  return html`<figure style="${CAIXA};padding:20px">
+    ${titulo ? html`<p style="margin:0 0 12px;font-size:14px;font-weight:600">${titulo}</p>` : ''}
+    <div style="${DUAS_COLUNAS};gap:20px;align-items:start">
+      <div role="img" aria-label="${descricao}" style="border-radius:10px;border:1px solid #1F2733;background:#10151E;padding:14px;display:flex;flex-direction:column;gap:8px;min-width:0">
+        ${grade.map(linhaDoMockup)}
+        <p style="margin:4px 0 0;font-size:12px;color:#9AA7B4">${notaDoMockup}</p>
+      </div>
+      <ol role="list" style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px;min-width:0">
+        ${itens.map(
+          (item, i) => html`<li style="display:flex;gap:10px;align-items:flex-start;font-size:14px">
+            ${criarMarcador(i + 1, 24)}
+            <span style="min-width:0"><strong>${item.titulo}.</strong> <span style="color:#9AA7B4">${item.texto}</span></span>
+          </li>`,
+        )}
+      </ol>
+    </div>
+    ${legenda ? html`<figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">${legenda}</figcaption>` : ''}
+  </figure>`;
 }
 
 // ---------------------------------------------------------------------------
-// Aba 1 — Visão geral (os dois pilares, a correção Axiom e o J7 Tracker)
+// Aba 1 — Visão geral
 // ---------------------------------------------------------------------------
-function montarVisaoGeral() {
-  const objetivos = criarCard([
-    criarElemento('h2', { class: 'text-lg font-semibold' }, ['O que você leva deste módulo']),
-    criarElemento(
-      'ul',
-      { class: 'mt-3 list-disc space-y-2 pl-5 text-texto-suave' },
-      modulo3.objetivos.map((objetivo) => criarElemento('li', {}, [objetivo])),
-    ),
-  ]);
 
-  // Correção em destaque: precisa ser a coisa mais visível da aba.
-  const correcao = criarCard(
-    [
-      criarElemento('h2', { class: 'text-lg font-semibold text-acento' }, [
-        modulo3.correcaoAxiom.titulo,
-      ]),
-      criarElemento('p', { class: 'mt-3 text-texto-suave' }, [modulo3.correcaoAxiom.texto]),
-    ],
-    { class: 'border-acento/50 bg-acento/5' },
-  );
+// Os dois pilares lado a lado (social em ciano, técnico em roxo), cada um com a
+// pergunta, o que cobre e o que acontece sozinho; embaixo, a legenda âmbar.
+function criarPilares(secao) {
+  const descricao = secao.pilares
+    .map((pilar) => pilar.nome + ' pergunta: ' + pilar.pergunta + ' Cobre ' + pilar.cobre.join(', ') + '. ' + pilar.sozinho)
+    .join(' ');
 
-  const secoes = modulo3.secoes.map(criarCardDaSecao);
+  return html`<figure style="${CAIXA};padding:20px">
+    <div role="img" aria-label="${descricao}" style="${DUAS_COLUNAS};gap:16px">
+      ${secao.pilares.map((pilar) => {
+        const tom = TRIO[pilar.tom] ?? TRIO.primaria;
+        return html`<div style="border-radius:8px;border:1px solid ${tom.borda};background:${tom.fundo};padding:16px;display:flex;flex-direction:column;gap:10px">
+          <p style="${MICRO_11};color:${tom.cor}">${pilar.nome}</p>
+          <p style="margin:0;font-size:15px;font-weight:600;text-wrap:pretty">${pilar.pergunta}</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            ${pilar.cobre.map((item) => html`<span style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:2px 10px;font-size:13px;color:#9AA7B4">${item}</span>`)}
+          </div>
+          <p style="margin:auto 0 0;padding-top:8px;font-size:13px;color:#9AA7B4">${pilar.sozinho}</p>
+        </div>`;
+      })}
+    </div>
+    <figcaption style="margin:16px 0 0;border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:12px 16px;font-size:14px;color:#9AA7B4">${montarTexto(secao.legendaDosPilares)}</figcaption>
+  </figure>`;
+}
 
-  const pilarSocial = criarCard([
-    criarElemento('h2', { class: 'text-lg font-semibold' }, [modulo3.pilarSocial.titulo]),
-    ...modulo3.pilarSocial.paragrafos.map((paragrafo) =>
-      criarElemento('p', { class: 'mt-3 text-texto-suave' }, [paragrafo]),
-    ),
-    criarElemento(
-      'div',
-      { class: 'mt-4 rounded-lg border border-risco-medio/40 bg-risco-medio/10 p-3 text-sm' },
-      [
-        criarElemento('strong', { class: 'block text-texto' }, [modulo3.pilarSocial.jTracker.titulo]),
-        criarElemento('span', { class: 'mt-1 block text-texto-suave' }, [
-          modulo3.pilarSocial.jTracker.texto,
-        ]),
+// "O que você leva deste módulo": o último card da Visão geral, como no desenho.
+function criarObjetivos() {
+  return html`<section class="rounded-card border border-borda bg-superficie p-5" style="display:flex;flex-direction:column;gap:16px">
+    <h2 class="text-lg font-semibold">O que você leva deste módulo</h2>
+    <ul style="margin:0;padding-left:20px;color:#9AA7B4;display:flex;flex-direction:column;gap:6px;list-style:disc">
+      ${modulo3.objetivos.map((objetivo) => html`<li>${objetivo}</li>`)}
+    </ul>
+  </section>`;
+}
+
+function montarAbaVisaoGeral() {
+  const secao = modulo3.secoes[0];
+  return criarColuna([
+    criarSecao({
+      titulo: secao.titulo,
+      emUmaFrase: secao.emUmaFrase,
+      blocos: [
+        criarPilares(secao),
+        ...secao.paragrafos.map(criarParagrafo),
+        // Aviso 1 de 3 ("reconhecer narrativa não prevê preço"): linha âmbar.
+        html`<p style="margin:0;border-left:2px solid #F59E0B;padding-left:12px;font-size:14px;color:#9AA7B4">${secao.aviso}</p>`,
+        criarParaIrMaisFundo(secao.detalhe),
       ],
-    ),
-  ]);
-
-  // O mapa entra antes da seção do pilar social: ela argumenta que esse pilar é
-  // raso, e o mapa mostra isso antes de o texto dizer.
-  return criarElemento('div', { class: 'space-y-6' }, [
-    objetivos,
-    montarDestaques(destaquesDaVisaoGeral()),
-    correcao,
-    ...secoes,
-    criarMapaDosPilares(),
-    pilarSocial,
+      pergunta: secao.pergunta,
+    }),
+    criarObjetivos(),
   ]);
 }
 
 // ---------------------------------------------------------------------------
 // Aba 2 — Narrativas
 // ---------------------------------------------------------------------------
+
+// O ciclo das 5 fases (círculo de 360px, raio 118) e, embaixo, a lista com o
+// texto inteiro de cada fase.
+function criarCicloDaNarrativa(secao) {
+  const ciclo = criarCiclo({
+    etapas: secao.fases.map((fase) => ({ titulo: fase.titulo, texto: fase.texto })),
+    tamanho: 360,
+    raio: 118,
+    larguraDaCaixa: 120,
+    margem: 2,
+    centro: { texto: secao.centroDoCiclo, largura: 100 },
+    descricao:
+      secao.fases.map((fase, i) => i + 1 + ' ' + fase.titulo + ': ' + fase.texto).join(' ') + ' ' + secao.fimDoCiclo,
+  });
+
+  const lista = html`<ol style="margin:0;padding-left:20px;font-size:14px;color:#9AA7B4;display:flex;flex-direction:column;gap:8px;list-style:decimal">
+    ${secao.fases.map((fase) => html`<li><strong style="color:#E6EDF3">${fase.titulo}: </strong>${fase.texto}</li>`)}
+  </ol>`;
+
+  // O círculo nasce com 360px e só depois se ajusta à tela (no celular vira
+  // oval). O `overflow-x:clip` evita que, nesse instante, a página role para o
+  // lado; depois do ajuste nada fica cortado.
+  return [html`<div style="overflow-x:clip;min-width:0">${ciclo}</div>`, lista];
+}
+
+// A triagem "narrativa ou hype?": a pergunta em ciano, o ramo "Sim" em verde e o
+// "Não" em âmbar, e os dois descendo para o nó final âmbar (aviso 3 de 3).
+function criarTriagem(triagem) {
+  const conector = (altura = 14) => html`<div aria-hidden="true" style="width:2px;height:${altura}px;background:#9AA7B4"></div>`;
+  const ramo = (dados, tom) => html`<div style="display:flex;flex-direction:column;align-items:center">
+    ${conector()}
+    <span style="border-radius:999px;border:1px solid ${tom.borda};background:${tom.fundo};color:${tom.cor};padding:1px 10px;font-size:12px;font-weight:600">${dados.rotulo}</span>
+    ${conector()}
+    <div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid ${tom.borda};background:${tom.fundo};padding:10px 14px;font-size:14px;text-align:center;font-weight:600">${dados.titulo}</div>
+    ${conector()}
+    <div style="width:100%;box-sizing:border-box;border-radius:8px;border:1px solid #1F2733;background:#141A24;padding:10px 14px;font-size:14px;text-align:center;color:#9AA7B4">${dados.texto}</div>
+  </div>`;
+
+  return html`<figure style="${CAIXA};padding:20px">
+    <div role="img" aria-label="${triagem.descricao}" style="display:flex;flex-direction:column;align-items:center">
+      <div style="border-radius:8px;border:1px solid #22D3EE;background:rgba(34,211,238,.1);box-sizing:content-box;padding:10px 16px;font-size:14px;font-weight:600;text-align:center;max-width:380px">${triagem.pergunta}</div>
+      <div style="${DUAS_COLUNAS};gap:16px;width:100%;max-width:620px">
+        ${ramo(triagem.sim, TRIO.ok)}
+        ${ramo(triagem.nao, TRIO.atencao)}
+      </div>
+      ${conector(16)}
+      <div style="border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);box-sizing:content-box;padding:10px 16px;font-size:14px;font-weight:600;text-align:center;max-width:460px">${triagem.fim}</div>
+    </div>
+  </figure>`;
+}
+
+// As duas barras na mesma escala: o sinal social (listrado ciano) contra o custo
+// de entrar e sair (vermelho sólido). O comprimento sai dos tetos do dado.
+function criarContaDoSinal(conta) {
+  const teto = Math.max(conta.sinal.valor, conta.custo.valor);
+  const barra = (item, preenchimento, corDaNota) => html`<div>
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+      <span style="font-size:14px">${item.rotulo}</span>
+      <span style="font-family:${MONO};font-size:14px">${item.exibicao}</span>
+    </div>
+    <div style="margin-top:6px;height:24px;width:${((item.valor / teto) * 100).toFixed(2)}%;background:#141A24;border-radius:4px;overflow:hidden">
+      <div style="height:100%;width:100%;background:${preenchimento}"></div>
+    </div>
+    <p style="margin:4px 0 0;font-size:13px;color:${corDaNota}">${item.nota}</p>
+  </div>`;
+
+  return html`<figure style="${CAIXA};padding:16px 20px">
+    <p style="margin:0 0 12px;font-size:14px;font-weight:600">${conta.titulo}</p>
+    <div role="img" aria-label="${conta.descricao}" style="display:flex;flex-direction:column;gap:14px">
+      ${barra(conta.sinal, 'repeating-linear-gradient(135deg,#22D3EE 0 3px,transparent 3px 6px)', '#9AA7B4')}
+      ${barra(conta.custo, '#EF4444', '#F87171')}
+    </div>
+    <figcaption style="margin-top:12px;font-size:13px;color:#9AA7B4">${conta.legenda}</figcaption>
+  </figure>`;
+}
+
+// Os três achados, cada rótulo na sua cor.
+function criarEvidencias(evidencias) {
+  const COR_DO_ROTULO = { alerta: '#F87171', atencao: '#F59E0B', acento: '#22D3EE' };
+  const minuscula = (texto) => texto.charAt(0).toLowerCase() + texto.slice(1);
+  const descricao = evidencias.map((item) => item.rotulo + ': ' + minuscula(item.texto)).join(' ');
+
+  return html`<div role="img" aria-label="${descricao}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+    ${evidencias.map(
+      (item) => html`<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:14px 16px">
+        <p style="${MICRO_11};color:${COR_DO_ROTULO[item.tom] ?? '#9AA7B4'}">${item.rotulo}</p>
+        <p style="margin:6px 0 0;font-size:14px;color:#9AA7B4">${item.texto}</p>
+      </div>`,
+    )}
+  </div>`;
+}
+
+// A rotina de estudo: passos numerados ligados por um fio; o último (o
+// Checklist) em destaque ciano.
+function criarRotinaDeEstudo(secao) {
+  const ultimo = secao.passos.length - 1;
+  return html`<div style="${CAIXA};padding:20px">
+    <p style="${MICRO_12};margin:0 0 12px">${secao.rotuloDosPassos}</p>
+    <ol role="list" style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+      ${secao.passos.map((passo, i) => {
+        const destaque = i === ultimo;
+        return html`<li style="display:flex;flex-direction:column">
+          <div style="border-radius:8px;border:1px solid ${destaque ? '#22D3EE' : '#1F2733'};background:${destaque ? 'rgba(34,211,238,.1)' : '#141A24'};padding:10px 14px;display:flex;gap:10px;align-items:flex-start">
+            ${criarMarcador(i + 1, 24)}
+            <span style="min-width:0;font-size:14px;color:#E6EDF3">${passo}</span>
+          </div>
+          ${i < ultimo ? html`<span aria-hidden="true" style="width:2px;height:12px;background:#1F2733;margin-left:23px"></span>` : ''}
+        </li>`;
+      })}
+    </ol>
+  </div>`;
+}
+
 function montarAbaNarrativas() {
   const pratica = modulo3.praticaNarrativas;
-  const secao = (id) => {
-    const dados = pratica.secoes.find((item) => item.id === id);
-    return dados ? criarCardDaSecao(dados) : null;
-  };
+  const secao = (id) => pratica.secoes.find((item) => item.id === id);
+  const [nomeDoCiclo, nomeDaTriagem, nomeDaRotacao, nomeDasFerramentas] = folhasDaAba('narrativas');
 
-  return criarElemento('div', { class: 'space-y-6' }, [
-    previa('q11'),
+  const ciclo = secao('ciclo');
+  const cardDoCiclo = criarSecao({
+    titulo: ciclo.titulo,
+    emUmaFrase: ciclo.emUmaFrase,
+    blocos: [
+      ...criarCicloDaNarrativa(ciclo),
+      ...ciclo.paragrafos.map(criarParagrafo),
+      // Aviso 2 de 3: limita a leitura da fase.
+      criarCaixaAmbar(ciclo.aviso),
+      criarParaIrMaisFundo(ciclo.detalhe),
+    ],
+    pergunta: ciclo.pergunta,
+  });
+
+  const preco = secao('narrativa-e-preco');
+  const cardDoPreco = criarSecao({
+    titulo: preco.titulo,
+    emUmaFrase: preco.emUmaFrase,
+    blocos: [
+      criarTriagem(preco.triagem),
+      criarContaDoSinal(preco.conta),
+      criarEvidencias(preco.evidencias),
+      ...preco.paragrafos.map(criarParagrafo),
+      criarParaIrMaisFundo(preco.detalhe),
+    ],
+  });
+
+  const rotacao = secao('rotacao');
+  const cardDaRotacao = criarSecao({
+    titulo: rotacao.titulo,
+    emUmaFrase: rotacao.emUmaFrase,
+    blocos: [
+      // Datas como estão no dado (com o intervalo e o "~"); o intervalo entre
+      // marcos só sai onde as datas permitem. Escala do desenho do M3: 8px por mês.
+      montarLinhaDoTempo({ ...rotacao.linhaDoTempo, caixa: true, pxPorMes: 8 }),
+      criarTabela(rotacao.tabela),
+    ],
+  });
+
+  const rastrear = secao('ferramentas');
+  const cardDeRastrear = criarSecao({
+    titulo: rastrear.titulo,
+    emUmaFrase: rastrear.emUmaFrase,
+    blocos: [criarTabela(rastrear.tabela), ...rastrear.paragrafos.map(criarParagrafo)],
+    pergunta: rastrear.pergunta,
+  });
+
+  const rotina = secao('rotina');
+  const cardDaRotina = criarSecao({
+    titulo: rotina.titulo,
+    emUmaFrase: rotina.emUmaFrase,
+    blocos: [criarRotinaDeEstudo(rotina)],
+  });
+
+  return criarColuna([
+    criarPerguntaAntes(pratica.perguntaAntes),
+    montarDestaques(pratica.destaques),
     montarTermos(pratica.termos),
     montarSegmentos({
       partes: [
-        {
-          titulo: 'O que é e onde nasce',
-          conteudo: [
-            montarDestaques(pratica.destaques),
-            criarIntroducao(pratica.introducao),
-            secao('o-que-e'),
-            secao('onde-nasce'),
-            secao('fabricada'),
-          ],
-        },
-        {
-          titulo: 'O ciclo e a rotação',
-          pergunta: perguntaDoQuiz('q13'),
-          conteudo: [
-            secao('ciclo'),
-            criarCicloDaNarrativa(),
-            criarAnimacaoNarrativa(),
-            montarLinhaDoTempo({ id: 'm3-rotacao-narrativas', ...pratica.linhaDoTempo }),
-            criarTabela('As cinco narrativas, lado a lado', pratica.tabelaNarrativas),
-          ],
-        },
-        {
-          titulo: 'Narrativa e preço',
-          conteudo: [secao('narrativa-e-preco'), criarBarrasDoSinalContraCusto()],
-        },
-        {
-          titulo: 'Rastrear',
-          pergunta: perguntaDoQuiz('q12'),
-          conteudo: [
-            secao('ferramentas'),
-            criarTabela('As ferramentas de "em alta" e de atenção', pratica.tabelaFerramentas),
-            secao('rotina'),
-            criarElemento('div', { class: 'grid gap-4 md:grid-cols-2' }, [
-              criarLink(
-                '#/modulo-2',
-                'Módulo 2 — As 4 fases',
-                'As fases de um token, que o ciclo de uma narrativa espelha.',
-              ),
-              criarLink(
-                '#/checklist',
-                'Checklist antes de comprar',
-                'Onde qualquer token de uma narrativa passa antes de qualquer outra coisa.',
-              ),
-            ]),
-          ],
-        },
+        // A animação "Vida de uma narrativa" vem logo depois do ciclo: ela conta
+        // o mesmo caminho (nasce → cresce → pico → satura) e o limite do tema.
+        { titulo: nomeDoCiclo, conteudo: [cardDoCiclo, criarAnimacaoNarrativa()] },
+        { titulo: nomeDaTriagem, conteudo: [cardDoPreco] },
+        { titulo: nomeDaRotacao, conteudo: [cardDaRotacao] },
+        { titulo: nomeDasFerramentas, conteudo: [cardDeRastrear, cardDaRotina] },
       ],
     }),
   ]);
@@ -390,231 +560,569 @@ function montarAbaNarrativas() {
 // Aba 3 — Pilar social na prática
 // ---------------------------------------------------------------------------
 
-// A rotina de 5 minutos: lista numerada, com a janela de tempo de cada passo.
-function criarRotina(rotina) {
-  return criarCard(
-    [
-      criarElemento('h2', { class: 'text-lg font-semibold' }, [rotina.titulo]),
-      criarElemento('p', { class: 'mt-2 text-sm text-texto-suave' }, [rotina.descricao]),
-      criarElemento(
-        'ol',
-        { class: 'mt-4 space-y-3' },
-        rotina.passos.map((passo, indice) =>
-          criarElemento('li', { class: 'flex gap-3' }, [
-            criarElemento(
-              'span',
-              {
-                class:
-                  'flex h-7 w-7 shrink-0 items-center justify-center rounded-full border ' +
-                  'border-acento/50 text-sm font-semibold text-acento',
-                'aria-hidden': 'true',
-              },
-              [String(indice + 1)],
-            ),
-            criarElemento('div', { class: 'min-w-0' }, [
-              criarElemento('p', { class: 'text-sm font-semibold text-texto' }, [
-                passo.titulo,
-                criarElemento('span', { class: 'ml-2 font-mono text-xs font-normal text-texto-suave' }, [
-                  passo.tempo,
-                ]),
-              ]),
-              criarElemento('p', { class: 'mt-1 text-sm text-texto-suave' }, [passo.texto]),
-            ]),
-          ]),
-        ),
-      ),
-    ],
-    { class: 'border-acento/50' },
-  );
+/**
+ * A rotina de 5 minutos: passos na vertical, ligados por um fio. Só o passo
+ * aberto mostra o texto (e fica roxo, com o marcador ciano). Clique ou setas
+ * (↑ ↓ ← →), Home e End trocam o passo — o padrão de abas do ARIA.
+ */
+function criarRotinaDeCincoMinutos(secao) {
+  let atual = 0;
+  const ultimo = secao.passos.length - 1;
+  // As cores do estado vão nas classes (o hover precisa delas); o raio vai no
+  // style, para a regra do foco (styles/custom.css) não trocá-lo.
+  const CLASSE_BASE = 'w-full border text-left transition-colors duration-150';
+  const CLASSE_ATUAL = ' border-primaria bg-primaria/15';
+  const CLASSE_OUTRO = ' border-borda bg-superficie hover:border-texto-suave';
+
+  const passos = secao.passos.map((passo, indice) => {
+    const marcador = html`<span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;font-family:${MONO};font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">${String(indice + 1)}</span>`;
+    const texto = html`<span style="display:block;margin-top:4px;font-size:14px;color:#9AA7B4">${passo.texto}</span>`;
+    // line-height:normal: no desenho, o texto dentro do botão tem a altura de
+    // linha padrão do navegador (mais justa que a do resto da página).
+    const botao = criarElemento(
+      'button',
+      {
+        type: 'button',
+        role: 'tab',
+        class: CLASSE_BASE,
+        style: 'border-radius:8px;padding:10px 14px;color:#E6EDF3;cursor:pointer;display:flex;gap:10px;align-items:flex-start;min-height:44px;line-height:normal',
+        onclick: () => escolher(indice),
+        onkeydown: (evento) => aoTeclar(evento, indice),
+      },
+      [
+        marcador,
+        criarElemento('span', { style: 'min-width:0;flex:1 1 auto' }, [
+          criarElemento('span', { style: 'display:block;font-size:14px;font-weight:600' }, [passo.titulo]),
+          texto,
+        ]),
+        criarElemento('span', { style: `flex:0 0 auto;font-family:${MONO};font-size:12px;color:#9AA7B4;white-space:nowrap` }, [passo.tempo]),
+      ],
+    );
+    const item = criarElemento('li', { role: 'presentation', style: 'display:flex;flex-direction:column' }, [
+      botao,
+      indice < ultimo &&
+        criarElemento('span', { 'aria-hidden': 'true', style: 'width:2px;height:12px;background:#1F2733;margin-left:23px' }),
+    ]);
+    return { botao, marcador, texto, item };
+  });
+
+  function pintar() {
+    passos.forEach(({ botao, marcador, texto }, i) => {
+      const aberto = i === atual;
+      botao.className = CLASSE_BASE + (aberto ? CLASSE_ATUAL : CLASSE_OUTRO);
+      botao.setAttribute('aria-selected', String(aberto));
+      botao.setAttribute('tabindex', aberto ? '0' : '-1');
+      marcador.style.background = aberto ? '#22D3EE' : '#1F2733';
+      marcador.style.color = aberto ? '#0B0F17' : '#E6EDF3';
+      // style.display, e não `hidden`: o display do próprio style venceria o hidden.
+      texto.style.display = aberto ? 'block' : 'none';
+    });
+  }
+
+  function escolher(indice, moverFoco = false) {
+    atual = indice;
+    pintar();
+    if (moverFoco) passos[indice].botao.focus();
+  }
+
+  function aoTeclar(evento, indice) {
+    const destino = {
+      ArrowDown: (indice + 1) % passos.length,
+      ArrowRight: (indice + 1) % passos.length,
+      ArrowUp: (indice - 1 + passos.length) % passos.length,
+      ArrowLeft: (indice - 1 + passos.length) % passos.length,
+      Home: 0,
+      End: ultimo,
+    }[evento.key];
+    if (destino === undefined) return;
+    evento.preventDefault();
+    escolher(destino, true);
+  }
+
+  pintar();
+
+  return html`<div style="${CAIXA};padding:20px">
+    ${criarElemento(
+      'ol',
+      {
+        role: 'tablist',
+        'aria-label': 'Passos da rotina de 5 minutos',
+        'aria-orientation': 'vertical',
+        style: 'list-style:none;margin:0;padding:0;display:flex;flex-direction:column',
+      },
+      passos.map((passo) => passo.item),
+    )}
+    <p style="margin:12px 0 0;font-size:13px;color:#9AA7B4">${secao.legendaDosPassos}</p>
+  </div>`;
+}
+
+// Endereço oficial × endereço colado numa resposta: o mesmo começo e o mesmo
+// fim; só o meio muda (em vermelho no falso). Endereços inventados.
+function criarEnderecos(enderecos) {
+  const TONS = {
+    ok: { borda: 'rgba(34,197,94,.5)', fundo: 'rgba(34,197,94,.08)', cor: '#22C55E', meioFundo: 'transparent', meioCor: '#9AA7B4' },
+    alerta: { borda: 'rgba(239,68,68,.5)', fundo: 'rgba(239,68,68,.08)', cor: '#F87171', meioFundo: 'rgba(239,68,68,.25)', meioCor: '#F87171' },
+  };
+
+  return html`<figure style="${CAIXA};padding:20px">
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+      <p style="margin:0;font-size:14px;font-weight:600">${enderecos.titulo}</p>
+      <span style="border-radius:999px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);color:#F59E0B;padding:1px 10px;font-size:12px;font-weight:600">${enderecos.selo}</span>
+    </div>
+    <div role="img" aria-label="${enderecos.descricao}" style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+      ${enderecos.itens.map((item) => {
+        const tom = TONS[item.tom] ?? TONS.ok;
+        return html`<div style="border-radius:8px;border:1px solid ${tom.borda};background:${tom.fundo};padding:10px 14px">
+          <p style="${MICRO_11};color:${tom.cor}">${item.rotulo}</p>
+          <p style="margin:4px 0 0;font-family:${MONO};font-size:14px;overflow-wrap:anywhere;line-height:1.5"><span>${item.inicio}</span><span style="border-radius:4px;background:${tom.meioFundo};color:${tom.meioCor};padding:1px 3px">${item.meio}</span><span>${item.fim}</span></p>
+          <p style="margin:6px 0 0;font-size:13px;color:#9AA7B4">${item.nota}</p>
+        </div>`;
+      })}
+    </div>
+    <figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">${enderecos.legenda}</figcaption>
+  </figure>`;
+}
+
+// Os quatro golpes do Discord: número, título, como funciona e a caixa verde
+// "Defesa".
+function criarGolpes(golpes) {
+  const descricao = golpes.map((golpe, i) => i + 1 + '. ' + golpe.titulo + ': ' + golpe.como + ' Defesa: ' + golpe.defesa).join(' ');
+
+  return html`<div role="img" aria-label="${descricao}" style="${DUAS_COLUNAS};gap:12px">
+    ${golpes.map(
+      (golpe, i) => html`<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:14px 16px;display:flex;flex-direction:column;gap:8px">
+        <p style="margin:0;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px">${criarMarcador(i + 1, 22)}<span>${golpe.titulo}</span></p>
+        <p style="margin:0;font-size:14px;color:#9AA7B4">${golpe.como}</p>
+        <div style="margin-top:auto;border-radius:6px;border:1px solid rgba(34,197,94,.5);background:rgba(34,197,94,.12);padding:8px 10px">
+          <p style="${MICRO_11};color:#22C55E">Defesa</p>
+          <p style="margin:2px 0 0;font-size:13px">${golpe.defesa}</p>
+        </div>
+      </div>`,
+    )}
+  </div>`;
+}
+
+// O retorno depois do tweet, com o zero no centro: positivo para a direita em
+// verde, negativo para a esquerda em vermelho, todos na mesma escala.
+function criarBarrasDosCalls(barras) {
+  const teto = Math.max(...barras.itens.map((item) => Math.abs(item.valor)));
+  const largura = (valor) => ((Math.abs(valor) / teto) * 100).toFixed(2);
+
+  return html`<figure style="${CAIXA};padding:16px 20px">
+    <p style="margin:0 0 12px;font-size:14px;font-weight:600">${barras.titulo}</p>
+    <div role="img" aria-label="${barras.descricao}" style="display:flex;flex-direction:column;gap:12px">
+      ${barras.itens.map((item) => {
+        const positivo = item.valor >= 0;
+        return html`<div>
+          <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+            <span style="font-size:14px">${item.quando}</span>
+            <span style="font-family:${MONO};font-size:14px;color:${positivo ? '#22C55E' : '#F87171'}">${item.exibicao}</span>
+          </div>
+          <div style="margin-top:6px;height:20px;display:flex;align-items:center">
+            <div style="width:50%;display:flex;justify-content:flex-end"><div style="height:20px;width:${positivo ? 0 : largura(item.valor)}%;background:#EF4444;border-radius:4px 0 0 4px"></div></div>
+            <div style="width:50%"><div style="height:20px;width:${positivo ? largura(item.valor) : 0}%;background:#22C55E;border-radius:0 4px 4px 0"></div></div>
+          </div>
+        </div>`;
+      })}
+    </div>
+    <figcaption style="margin-top:12px;font-size:13px;color:#9AA7B4">${barras.legenda}</figcaption>
+  </figure>`;
 }
 
 function montarAbaSocial() {
   const pratica = modulo3.praticaSocial;
-  const secao = (id) => {
-    const dados = pratica.secoes.find((item) => item.id === id);
-    return dados ? criarCardDaSecao(dados) : null;
-  };
+  const secao = (id) => pratica.secoes.find((item) => item.id === id);
+  const [nomeDaRotina, nomeDoPerfil, nomeDoDiscord, nomeDosCalls] = folhasDaAba('social');
 
-  return criarElemento('div', { class: 'space-y-6' }, [
-    previa('q6'),
+  const rotina = secao('rotina');
+  const cardDaRotina = criarSecao({
+    titulo: rotina.titulo,
+    emUmaFrase: rotina.emUmaFrase,
+    blocos: [criarRotinaDeCincoMinutos(rotina), criarEnderecos(rotina.enderecos), ...rotina.paragrafos.map(criarParagrafo)],
+    pergunta: rotina.pergunta,
+  });
+
+  const perfil = secao('perfil');
+  const cardDoPerfil = criarSecao({
+    titulo: perfil.titulo,
+    emUmaFrase: perfil.emUmaFrase,
+    blocos: [
+      criarAnatomia({ ...perfil.anatomia, notaDoMockup: perfil.anatomia.nota, legenda: perfil.anatomia.legenda }),
+      ...perfil.paragrafos.map(criarParagrafo),
+      criarParaIrMaisFundo(perfil.detalhe),
+    ],
+    pergunta: perfil.pergunta,
+  });
+
+  const discord = secao('discord-telegram');
+  const cardDoDiscord = criarSecao({
+    titulo: discord.titulo,
+    emUmaFrase: discord.emUmaFrase,
+    blocos: [criarGolpes(discord.golpes), ...discord.paragrafos.map(criarParagrafo), criarParaIrMaisFundo(discord.detalhe)],
+    pergunta: discord.pergunta,
+  });
+
+  const calls = secao('calls');
+  const cardDosCalls = criarSecao({
+    titulo: calls.titulo,
+    emUmaFrase: calls.emUmaFrase,
+    blocos: [
+      criarBarrasDosCalls(calls.barras),
+      criarTabela(calls.tabela),
+      ...calls.paragrafos.map(criarParagrafo),
+      criarParaIrMaisFundo(calls.detalhe),
+    ],
+  });
+
+  return criarColuna([
+    criarPerguntaAntes(pratica.perguntaAntes),
+    montarDestaques(pratica.destaques),
     montarSegmentos({
       partes: [
-        {
-          titulo: 'A rotina de 5 minutos',
-          conteudo: [
-            montarDestaques(pratica.destaques),
-            criarIntroducao(pratica.introducao),
-            criarRotina(pratica.rotina),
-          ],
-        },
-        {
-          titulo: 'O endereço oficial',
-          pergunta: perguntaDoQuiz('q5'),
-          conteudo: [
-            secao('endereco'),
-            montarAnatomia({ id: 'm3-anatomia-perfil', ...pratica.anatomiaPerfil }),
-          ],
-        },
-        { titulo: 'X e Discord', pergunta: perguntaDoQuiz('q7'), conteudo: [secao('x'), secao('discord')] },
-        {
-          titulo: 'Telegram e calls pagos',
-          pergunta: perguntaDoQuiz('q8'),
-          conteudo: [secao('telegram'), secao('calls'), criarBarrasDosCalls()],
-        },
-        {
-          titulo: 'O que cada sinal prova',
-          conteudo: [
-            criarTabela('Cada sinal social: o que prova e o que não prova', pratica.tabela),
-            criarLink(
-              '#/checklist',
-              'Checklist antes de comprar',
-              'O pilar social vira itens marcáveis, na ordem da rotina, junto com o técnico.',
-            ),
-          ],
-        },
+        { titulo: nomeDaRotina, conteudo: [cardDaRotina] },
+        { titulo: nomeDoPerfil, conteudo: [cardDoPerfil] },
+        // "Confira antes de seguir" no fim desta parte.
+        { titulo: nomeDoDiscord, conteudo: [cardDoDiscord], pergunta: perguntaDoQuiz(discord.confira) },
+        { titulo: nomeDosCalls, conteudo: [cardDosCalls] },
       ],
     }),
   ]);
 }
 
 // ---------------------------------------------------------------------------
-// Aba 3 — Pilar técnico na prática (uma ferramenta por vez, na ordem de uso)
+// Aba 4 — Pilar técnico na prática
 // ---------------------------------------------------------------------------
-function criarSecaoDaFerramenta(ferramenta, indice) {
-  const cabecalho = criarCard([
-    criarElemento('div', { class: 'flex flex-wrap items-baseline justify-between gap-2' }, [
-      criarElemento('h2', { class: 'text-lg font-semibold' }, [
-        indice + 1 + '. ' + ferramenta.nome,
-      ]),
-      criarElemento('span', { class: 'font-mono text-sm text-texto-suave' }, [ferramenta.endereco]),
-    ]),
-    criarElemento('p', { class: 'mt-2 text-base text-acento' }, [ferramenta.pergunta]),
-    criarElemento('p', { class: 'mt-3 text-sm text-texto-suave' }, [
-      criarElemento('strong', { class: 'text-texto' }, ['O que é grátis: ']),
-      ferramenta.gratis,
-    ]),
-  ]);
 
-  const passoAPasso = criarCard([
-    criarElemento('h3', { class: 'text-base font-semibold' }, ['Passo a passo']),
-    criarElemento(
-      'ol',
-      { class: 'mt-3 list-decimal space-y-2 pl-5 text-sm text-texto-suave' },
-      ferramenta.passos.map((passo) => criarElemento('li', {}, [passo])),
-    ),
-    criarElemento(
-      'div',
-      { class: 'mt-4 rounded-lg border border-risco-medio/40 bg-risco-medio/10 p-3 text-sm' },
+// O conteúdo do painel de uma ferramenta: título com o endereço, a linha do que
+// é grátis, a anatomia da página e, em duas colunas, o passo a passo e as
+// armadilhas (em vermelho). São os quatro blocos do desenho, iguais nas quatro
+// ferramentas: nada de pergunta aqui dentro (o painel é aria-live="polite" e
+// anunciaria o quiz inteiro a cada troca de ferramenta).
+function criarConteudoDaFerramenta(ferramenta, notaDoMockup) {
+  return [
+    html`<div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+      <h2 class="text-lg font-semibold">${ferramenta.nome} — ${ferramenta.pergunta}</h2>
+      <span style="font-family:${MONO};font-size:13px;color:#22D3EE">${ferramenta.endereco}</span>
+    </div>`,
+    html`<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-size:14px;color:#9AA7B4">${ferramenta.gratis}</p>`,
+    criarAnatomia({ ...ferramenta.anatomia, notaDoMockup, legenda: ferramenta.anatomia.nota }),
+    html`<div style="${DUAS_COLUNAS};gap:16px">
+      <div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:14px 16px">
+        <p style="${MICRO_11};color:#9AA7B4;margin:0 0 8px">Passo a passo</p>
+        <ol style="margin:0;padding-left:20px;font-size:14px;color:#9AA7B4;display:flex;flex-direction:column;gap:4px;list-style:decimal">
+          ${ferramenta.passos.map((passo) => html`<li>${passo}</li>`)}
+        </ol>
+      </div>
+      <div style="border-radius:8px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:14px 16px">
+        <p style="${MICRO_11};color:#F87171;margin:0 0 8px">Armadilhas</p>
+        <ul style="margin:0;padding-left:20px;font-size:14px;display:flex;flex-direction:column;gap:6px;list-style:disc">
+          ${ferramenta.armadilhas.map((armadilha) => html`<li>${armadilha}</li>`)}
+        </ul>
+      </div>
+    </div>`,
+  ];
+}
+
+/**
+ * As quatro ferramentas em ordem (botões com aria-pressed e setas → entre eles)
+ * e o painel embaixo, que troca de ferramenta a cada clique. Na tela estreita os
+ * botões ficam um embaixo do outro. O conteúdo de cada ferramenta é montado uma
+ * vez só: trocar e voltar não perde a resposta marcada.
+ */
+function criarQuatroFerramentas(pratica) {
+  const { ferramentas, ordem, notaDoMockup } = pratica;
+  let atual = ferramentas[0].id;
+  const conteudos = new Map();
+
+  const painel = criarElemento('section', {
+    'aria-live': 'polite',
+    class: 'rounded-card border border-borda bg-superficie p-5',
+    style: 'display:flex;flex-direction:column;gap:16px',
+  });
+
+  // Cores do estado nas classes (hover); o raio no style (a regra do foco não o troca).
+  const CLASSE_BASE = 'border text-left transition-colors duration-150';
+  const CLASSE_ATUAL = ' border-primaria bg-primaria/15';
+  const CLASSE_OUTRO = ' border-borda bg-superficie hover:border-texto-suave';
+
+  const botoes = ferramentas.map((ferramenta, i) => {
+    const marcador = html`<span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;font-family:${MONO};font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">${String(i + 1)}</span>`;
+    // line-height:normal, como nos passos da rotina (a altura de linha do desenho).
+    const botao = criarElemento(
+      'button',
+      {
+        type: 'button',
+        class: CLASSE_BASE,
+        style: 'flex:1 1 auto;min-width:0;border-radius:8px;padding:12px 14px;color:#E6EDF3;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-height:44px;line-height:normal',
+        onclick: () => escolher(ferramenta.id),
+      },
       [
-        criarElemento('strong', { class: 'block text-texto' }, ['Armadilhas de leitura']),
-        criarElemento(
-          'ul',
-          { class: 'mt-2 list-disc space-y-1 pl-5 text-texto-suave' },
-          ferramenta.armadilhas.map((armadilha) => criarElemento('li', {}, [armadilha])),
-        ),
+        criarElemento('span', { style: 'display:flex;gap:8px;align-items:center' }, [
+          marcador,
+          criarElemento('span', { style: 'font-size:14px;font-weight:600' }, [ferramenta.nome]),
+        ]),
+        criarElemento('span', { style: 'font-size:13px;color:#9AA7B4' }, [ferramenta.pergunta]),
       ],
-    ),
-  ]);
+    );
+    return { id: ferramenta.id, botao, marcador };
+  });
 
-  return criarElemento('section', { class: 'space-y-4', 'aria-label': ferramenta.nome }, [
-    cabecalho,
-    montarAnatomia({ id: 'm3-anatomia-' + ferramenta.id, ...ferramenta.anatomia }),
-    passoAPasso,
-  ]);
+  function escolher(id) {
+    atual = id;
+    botoes.forEach(({ id: idDoBotao, botao, marcador }) => {
+      const escolhido = idDoBotao === atual;
+      botao.className = CLASSE_BASE + (escolhido ? CLASSE_ATUAL : CLASSE_OUTRO);
+      botao.setAttribute('aria-pressed', String(escolhido));
+      marcador.style.background = escolhido ? '#22D3EE' : '#1F2733';
+      marcador.style.color = escolhido ? '#0B0F17' : '#E6EDF3';
+    });
+    if (!conteudos.has(atual)) {
+      const ferramenta = ferramentas.find((item) => item.id === atual);
+      conteudos.set(atual, criarConteudoDaFerramenta(ferramenta, notaDoMockup));
+    }
+    painel.replaceChildren(...conteudos.get(atual).filter(Boolean));
+  }
+
+  // Na horizontal (a partir de 640px) cada passo tem pelo menos 150px e a lista
+  // rola dentro da caixa se faltar espaço; no celular, um embaixo do outro, com
+  // a seta apontando para baixo. A folga de 4px (padding 4 e margem −4) é para
+  // a rolagem não cortar o contorno do foco dos botões.
+  //
+  // O rótulo é curto (o título da seção): no desenho a lista é role="img" e o
+  // rótulo descreve as quatro ferramentas no lugar delas; aqui os botões são
+  // conteúdo de verdade e já dizem nome e pergunta — repetir tudo no nome da
+  // lista faria o leitor de tela ler duas vezes. O tabindex é o do desenho: a
+  // faixa rola para o lado em telas estreitas e precisa rolar pelo teclado.
+  const lista = criarElemento(
+    'ol',
+    {
+      role: 'list',
+      'aria-label': ordem.titulo,
+      tabindex: '0',
+      class: 'flex flex-col sm:flex-row',
+      style: 'list-style:none;margin:-4px;padding:4px;align-items:stretch;gap:0;overflow-x:auto',
+    },
+    botoes.map(({ botao }, i) =>
+      criarElemento('li', { class: 'flex flex-col sm:flex-row sm:min-w-[150px]', style: 'flex:1 1 0;align-items:stretch' }, [
+        botao,
+        i < botoes.length - 1 &&
+          criarElemento(
+            'span',
+            { 'aria-hidden': 'true', style: 'flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#9AA7B4;padding:2px 6px' },
+            [criarElemento('span', { class: 'rotate-90 sm:rotate-0', style: 'display:inline-block' }, ['→'])],
+          ),
+      ]),
+    ),
+  );
+
+  const seletor = criarSecao({
+    titulo: ordem.titulo,
+    emUmaFrase: ordem.emUmaFrase,
+    blocos: [
+      html`<figure style="${CAIXA};padding:20px">
+        ${lista}
+        <figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">${ordem.legenda}</figcaption>
+      </figure>`,
+    ],
+  });
+
+  escolher(atual);
+  return [seletor, painel];
 }
 
 function montarAbaTecnico() {
   const pratica = modulo3.praticaTecnica;
+  const { onde } = pratica;
 
-  return criarElemento('div', { class: 'space-y-6' }, [
-    previa('q9'),
-    montarSegmentos({
-      partes: [
-        {
-          titulo: 'As quatro perguntas',
-          conteudo: [montarDestaques(pratica.destaques), criarIntroducao(pratica.introducao)],
-        },
-        ...pratica.ferramentas.map((ferramenta, indice) => ({
-          titulo: ferramenta.nome,
-          pergunta: perguntaDoQuiz({ bubblemaps: 'q10', dexscreener: 'q1' }[ferramenta.id]),
-          conteudo: [criarSecaoDaFerramenta(ferramenta, indice)],
-        })),
-        {
-          titulo: 'Onde checar cada coisa',
-          conteudo: [
-            criarTabela('O que eu quero checar → onde eu checo', pratica.tabelaOnde),
-            criarElemento('div', { class: 'grid gap-4 md:grid-cols-2' }, [
-              criarLink(
-                '#/modulo-6',
-                'Módulo 6 — Ler a tela',
-                'O que cada número significa, como o volume é fabricado e as extensões de contrato em detalhe.',
-              ),
-              criarLink(
-                '#/checklist',
-                'Checklist antes de comprar',
-                'Os itens técnicos em ordem, com a força da evidência de cada um.',
-              ),
-            ]),
-          ],
-        },
+  // Sem "Parte X de N" aqui: o seletor das quatro ferramentas já mostra uma
+  // parte de cada vez (no app antigo, cada ferramenta era uma parte).
+  return criarColuna([
+    criarPerguntaAntes(pratica.perguntaAntes),
+    montarDestaques(pratica.destaques),
+    ...criarQuatroFerramentas(pratica),
+    criarSecao({
+      titulo: onde.titulo,
+      emUmaFrase: onde.emUmaFrase,
+      blocos: [criarTabela(onde.tabela), ...onde.paragrafos.map(criarParagrafo)],
+      pergunta: onde.pergunta,
+    }),
+  ]);
+}
+
+// ---------------------------------------------------------------------------
+// Aba 5 — Matriz de ferramentas
+// ---------------------------------------------------------------------------
+
+const TOM_DO_RISCO = { baixo: TRIO.ok, medio: TRIO.atencao, alto: TRIO.alerta };
+
+// O cartão aberto de uma ferramenta: nome e risco em cima, chips do pilar (roxo),
+// das redes e dos papéis, os avisos (Sigma em vermelho, correção do Axiom em
+// âmbar), "O que faz" e "Quando usar"; só as observações ficam recolhidas.
+function criarCartaoDaFerramenta(ferramenta) {
+  const risco = TOM_DO_RISCO[ferramenta.risco] ?? TRIO.atencao;
+  const nomeDaRede = (id) => {
+    const rede = modulo3.chains.find((item) => item.id === id);
+    return rede?.nomeCurto ?? rede?.nome ?? id;
+  };
+  const nomeDoPapel = (id) => modulo3.papeis.find((item) => item.id === id)?.nome ?? id;
+  const etiquetas = [...ferramenta.chains.map(nomeDaRede), ...ferramenta.papeis.map(nomeDoPapel)];
+  const bloco = (rotulo, texto) => html`<div>
+    <p style="${MICRO_11};color:#9AA7B4">${rotulo}</p>
+    <p style="margin:2px 0 0;font-size:14px;color:#9AA7B4">${texto}</p>
+  </div>`;
+
+  return html`<article style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0">
+    <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline">
+      <p style="margin:0;font-size:15px;font-weight:600">${ferramenta.nome}</p>
+      <span style="border-radius:999px;border:1px solid ${risco.borda};background:${risco.fundo};color:${risco.cor};padding:1px 10px;font-size:12px;font-weight:600;white-space:nowrap">${rotuloRisco(ferramenta.risco)}</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px">
+      <span style="border-radius:999px;border:1px solid rgba(124,58,237,.5);background:rgba(124,58,237,.12);padding:2px 10px;font-size:12px">${ferramenta.pilar === 'social' ? 'Pilar social' : 'Pilar técnico'}</span>
+      ${etiquetas.map((etiqueta) => html`<span style="border-radius:999px;border:1px solid #1F2733;background:#141A24;padding:2px 10px;font-size:12px;color:#9AA7B4">${etiqueta}</span>`)}
+    </div>
+    ${ferramenta.naoSuportaSolana
+      ? html`<p style="margin:0;border-radius:6px;border:1px solid rgba(239,68,68,.5);background:rgba(239,68,68,.12);padding:6px 10px;font-size:13px;color:#F87171;font-weight:600">${modulo3.matriz.avisoSemSolana}</p>`
+      : ''}
+    ${ferramenta.correcao
+      ? html`<p style="margin:0;border-radius:6px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:6px 10px;font-size:13px">${ferramenta.correcao}</p>`
+      : ''}
+    ${bloco('O que faz', ferramenta.oQueFaz)}
+    ${bloco('Quando usar', ferramenta.quandoUsar)}
+    <details style="margin-top:auto;border-radius:6px;border:1px solid #1F2733;background:#141A24;padding:8px 12px">
+      <summary style="cursor:pointer;font-size:13px;font-weight:600">Observações</summary>
+      <p style="margin:6px 0 0;font-size:13px;color:#9AA7B4">${ferramenta.observacoes}</p>
+    </details>
+  </article>`;
+}
+
+/**
+ * A matriz filtrável: três grupos de chips (pilar, rede e papel, um de cada
+ * vez em cada grupo), o contador "N ferramentas de 16", a caixa âmbar quando
+ * nada bate e a grade de cartões (2 colunas no computador, 1 no celular).
+ */
+function criarMatriz() {
+  const filtros = { pilar: 'todos', chain: 'todas', papel: 'todos' };
+  const GRUPOS = [
+    {
+      chave: 'pilar',
+      rotulo: 'Pilar',
+      opcoes: [
+        { id: 'todos', nome: 'Todos' },
+        { id: 'social', nome: 'Social' },
+        { id: 'tecnico', nome: 'Técnico' },
       ],
-    }),
-  ]);
+    },
+    {
+      chave: 'chain',
+      rotulo: 'Rede',
+      opcoes: [{ id: 'todas', nome: 'Todas' }, ...modulo3.chains.map((rede) => ({ id: rede.id, nome: rede.nomeCurto ?? rede.nome }))],
+    },
+    { chave: 'papel', rotulo: 'Papel', opcoes: [{ id: 'todos', nome: 'Todos' }, ...modulo3.papeis] },
+  ];
+
+  // Cores do estado nas classes (hover); o raio no style (a regra do foco não o troca).
+  const CLASSE_BASE = 'border transition-colors duration-150';
+  const CLASSE_ATIVA = ' border-primaria bg-primaria/15';
+  const CLASSE_INATIVA = ' border-borda bg-superficie hover:border-texto-suave';
+
+  const chips = [];
+  const grupos = GRUPOS.map((grupo) =>
+    html`<div>
+      <p style="${MICRO_11};color:#9AA7B4;margin:0 0 6px">${grupo.rotulo}</p>
+      ${criarElemento(
+        'div',
+        { role: 'group', 'aria-label': 'Filtrar por ' + grupo.rotulo.toLowerCase(), style: 'display:flex;flex-wrap:wrap;gap:8px' },
+        grupo.opcoes.map((opcao) => {
+          const chip = criarElemento(
+            'button',
+            {
+              type: 'button',
+              style: 'min-height:40px;border-radius:999px;color:#E6EDF3;padding:6px 14px;font-size:14px;cursor:pointer',
+              onclick: () => {
+                filtros[grupo.chave] = opcao.id;
+                atualizarMatriz();
+              },
+            },
+            [opcao.nome],
+          );
+          chips.push({ chip, grupo: grupo.chave, id: opcao.id });
+          return chip;
+        }),
+      )}
+    </div>`,
+  );
+
+  const contador = html`<p aria-live="polite" style="margin:0;font-size:14px;color:#9AA7B4"></p>`;
+  const vazio = html`<div style="border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:16px;font-size:14px">Nenhuma ferramenta bate com esses filtros ao mesmo tempo. Tente afrouxar um deles.</div>`;
+  const grade = html`<div style="${DUAS_COLUNAS};gap:16px"></div>`;
+
+  // Os cartões são montados uma vez; filtrar só mostra ou esconde.
+  const cartoes = modulo3.ferramentas.map((ferramenta) => ({ ferramenta, cartao: criarCartaoDaFerramenta(ferramenta) }));
+  grade.append(...cartoes.map((item) => item.cartao));
+
+  function passa(ferramenta) {
+    return (
+      (filtros.pilar === 'todos' || ferramenta.pilar === filtros.pilar) &&
+      (filtros.chain === 'todas' || ferramenta.chains.includes(filtros.chain)) &&
+      (filtros.papel === 'todos' || ferramenta.papeis.includes(filtros.papel))
+    );
+  }
+
+  function atualizarMatriz() {
+    for (const { chip, grupo, id } of chips) {
+      const ativo = filtros[grupo] === id;
+      chip.className = CLASSE_BASE + (ativo ? CLASSE_ATIVA : CLASSE_INATIVA);
+      chip.setAttribute('aria-pressed', String(ativo));
+    }
+    // style.display, e não `hidden`: o display do próprio style venceria o hidden.
+    let quantas = 0;
+    for (const { ferramenta, cartao } of cartoes) {
+      const mostra = passa(ferramenta);
+      cartao.style.display = mostra ? 'flex' : 'none';
+      if (mostra) quantas += 1;
+    }
+    contador.textContent = quantas + (quantas === 1 ? ' ferramenta' : ' ferramentas') + ' de ' + cartoes.length;
+    vazio.style.display = quantas > 0 ? 'none' : 'block';
+    grade.style.display = quantas === 0 ? 'none' : 'grid';
+  }
+
+  atualizarMatriz();
+
+  return [html`<div style="display:flex;flex-direction:column;gap:12px">${grupos}</div>`, contador, vazio, grade];
 }
 
-// ---------------------------------------------------------------------------
-// Aba 4 — Matriz de ferramentas (filtrável por pilar/chain/papel)
-// ---------------------------------------------------------------------------
 function montarAbaMatriz() {
-  return criarElemento('div', { class: 'space-y-6' }, [
-    montarDestaques(destaquesDaMatriz()),
-    criarIntroducao(
-      'Filtre por pilar, chain e papel para achar a ferramenta certa. Clique numa ' +
-        'ferramenta para abrir o card com "o que faz", "quando usar" e o risco.',
-    ),
-    montarMatrizDeFerramentas({
-      ferramentas: modulo3.ferramentas,
-      chains: modulo3.chains,
-      papeis: modulo3.papeis,
-    }),
+  const { matriz } = modulo3;
+  return criarColuna([
+    criarSecao({ titulo: matriz.titulo, emUmaFrase: matriz.emUmaFrase, blocos: criarMatriz(), pergunta: matriz.pergunta }),
   ]);
 }
 
 // ---------------------------------------------------------------------------
-// Aba 5 — Cenário de launchpads 2025–2026
+// Aba 6 — Cenário 2025–2026
 // ---------------------------------------------------------------------------
 function montarAbaCenario() {
-  const { cenarioLaunchpads } = modulo3;
-
-  // A lista de eventos virou linha do tempo: a mesma informação, mas agora a
-  // ORDEM e a distância entre os marcos ficam visíveis — que é a tese da aba
-  // (a liderança muda em semanas).
-  return criarElemento('div', { class: 'space-y-6' }, [
-    montarDestaques(DESTAQUES_DO_CENARIO),
-    criarIntroducao(cenarioLaunchpads.introducao),
-
-    montarLinhaDoTempo({
-      id: 'm3-cronologia-launchpads',
-      titulo: cenarioLaunchpads.titulo,
-      marcos: cenarioLaunchpads.eventos.map((evento) => ({
-        data: evento.data,
-        titulo: evento.texto,
-        tom: 'atencao',
-      })),
-    }),
-
-    criarCard(
-      [
-        criarElemento('h2', { class: 'text-lg font-semibold' }, ['Conclusão prática']),
-        criarElemento('p', { class: 'mt-3 text-texto-suave' }, [modulo3.cenarioLaunchpads.conclusao]),
+  const cenario = modulo3.cenarioLaunchpads;
+  return criarColuna([
+    criarSecao({
+      titulo: cenario.titulo,
+      emUmaFrase: cenario.emUmaFrase,
+      blocos: [
+        // Pontos roxos e só o texto de cada evento. As datas ficam como no dado
+        // ("Início de agosto de 2025", "Fim de 2025"): sem dia, sem intervalo.
+        montarLinhaDoTempo({
+          marcos: cenario.eventos.map((evento) => ({ data: evento.data, texto: evento.texto })),
+          caixa: true,
+          pxPorMes: 8,
+        }),
+        criarParagrafo(cenario.conclusao),
       ],
-      { class: 'border-primaria/40' },
-    ),
+    }),
   ]);
 }
 
 // ---------------------------------------------------------------------------
-// Aba 6 — Quiz + botão de concluir o módulo + fontes das abas práticas
+// Aba 7 — Quiz, "Terminou o módulo?" e as fontes
 // ---------------------------------------------------------------------------
 function montarConclusao() {
   const container = criarCard([]);
@@ -641,7 +1149,7 @@ function montarConclusao() {
     const concluido = estaConcluido();
     container.replaceChildren(
       criarElemento('h2', { class: 'text-lg font-semibold' }, ['Terminou o módulo?']),
-      criarElemento('p', { class: 'mt-2 mb-4 text-sm text-texto-suave' }, [
+      criarElemento('p', { style: 'margin:8px 0 16px;font-size:14px;color:#9AA7B4' }, [
         concluido
           ? 'Módulo 3 marcado como concluído. Ele conta na barra de progresso do topo.'
           : 'Marcar aqui faz a barra de progresso do topo avançar. Dá para desmarcar depois.',
@@ -658,115 +1166,80 @@ function montarConclusao() {
   return container;
 }
 
-function montarFontesDaPratica() {
-  return criarElemento(
-    'details',
-    { class: 'group rounded-card border border-borda bg-superficie p-5' },
-    [
-      criarElemento(
-        'summary',
-        { class: 'flex cursor-pointer list-none items-center justify-between text-sm font-medium' },
-        [
-          criarElemento('span', {}, ['Fontes das abas práticas e itens não verificados']),
-          criarElemento(
-            'span',
-            {
-              class: 'text-texto-suave transition-transform duration-150 group-open:rotate-180',
-              'aria-hidden': 'true',
-            },
-            ['▾'],
-          ),
-        ],
-      ),
-      criarElemento('h3', { class: 'mt-4 text-sm font-semibold' }, ['Não verificado']),
-      criarElemento(
-        'ul',
-        { class: 'mt-2 space-y-3' },
-        modulo3.naoVerificadoPratica.map((item) =>
-          criarElemento(
-            'li',
-            {
-              class:
-                'rounded-lg border border-risco-medio/40 bg-risco-medio/10 p-3 text-sm text-texto-suave',
-            },
-            [criarElemento('strong', { class: 'text-texto' }, [item.titulo + ': ']), item.texto],
-          ),
-        ),
-      ),
-      criarElemento('h3', { class: 'mt-4 text-sm font-semibold' }, ['Fontes consultadas']),
-      criarElemento(
-        'ul',
-        { class: 'mt-2 space-y-1 text-sm text-texto-suave' },
-        modulo3.fontesPratica.map((fonte) =>
-          criarElemento('li', {}, [
-            fonte.titulo + ' — ' + fonte.url + ' (consulta em ' + fonte.consultadoEm + ')',
-          ]),
-        ),
-      ),
-    ],
-  );
+// "Fontes e itens não verificados": recolhido, com os itens não verificados em
+// caixas âmbar e a lista de fontes consultadas.
+function montarFontes() {
+  const SUBTITULO = 'margin:16px 0 0;font-size:14px;font-weight:600';
+  return html`<details style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+    <summary style="cursor:pointer;font-size:14px;font-weight:600">Fontes e itens não verificados</summary>
+    <h3 style="${SUBTITULO}">Não verificado</h3>
+    <ul role="list" style="list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:8px">
+      ${modulo3.naoVerificadoPratica.map(
+        (item) => html`<li style="border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.1);padding:12px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">${item.titulo}: </strong>${item.texto}</li>`,
+      )}
+    </ul>
+    <h3 style="${SUBTITULO}">Fontes consultadas</h3>
+    <ul role="list" style="list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:14px;color:#9AA7B4">
+      ${modulo3.fontesPratica.map((fonte) => html`<li>${fonte.titulo} — ${fonte.url} (consulta em ${fonte.consultadoEm})</li>`)}
+    </ul>
+  </details>`;
 }
 
 function montarAbaQuiz() {
-  return criarElemento('div', { class: 'space-y-6' }, [
+  return criarColuna([
+    // Corrigido por pergunta (tela 34). Sem `moduloId`: o card "Terminou o
+    // módulo?" continua separado, logo abaixo, como no desenho.
     montarQuiz({
       id: modulo3.id,
       titulo: 'Mini-quiz do Módulo 3',
-      descricao: modulo3.quiz.length + ' perguntas. As respostas ficam salvas no navegador.',
-      perguntas: juntarPorques(modulo3.quiz, modulo3.porqueErradas),
+      descricao: modulo3.descricaoDoQuiz,
+      perguntas: PERGUNTAS,
+      moduloNome: 'Módulo 3',
     }),
     montarConclusao(),
-    montarFontesDaPratica(),
+    montarFontes(),
   ]);
 }
 
 // ---------------------------------------------------------------------------
 // Montagem da página
 // ---------------------------------------------------------------------------
+
+// Cabeçalho do desenho: "MÓDULO 3", o título, a frase curta e, em âmbar, a
+// correção "Axon → Axiom" (visível em todas as abas).
+function montarCabecalho() {
+  const cabecalho = criarTitulo(modulo3.titulo, { rotulo: 'Módulo 3', subtitulo: modulo3.subtitulo });
+  const { titulo, texto } = modulo3.correcaoAxiom;
+  cabecalho.append(
+    html`<p style="margin:16px 0 0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:12px 16px;font-size:14px;color:#9AA7B4"><strong style="color:#E6EDF3">${titulo} </strong>${texto}</p>`,
+  );
+  return cabecalho;
+}
+
 export function montarModulo3() {
-  const cabecalho = criarElemento('div', {}, [
-    criarTitulo('Módulo 3 — Os dois pilares (Social vs. Técnico)', { subtitulo: modulo3.resumo }),
-    criarElemento(
-      'p',
-      {
-        class:
-          'mb-6 rounded-card border border-risco-medio/40 bg-risco-medio/10 p-3 text-sm ' +
-          'text-texto-suave',
-      },
-      [
-        criarElemento('strong', { class: 'text-texto' }, ['Lembrete: ']),
-        'citar uma ferramenta não é recomendação de uso. Telas e regras de plataforma foram ' +
-          'conferidas em setembro de 2026 — se um campo sumir, procure o mesmo conceito.',
-      ],
-    ),
-  ]);
+  const abas = [
+    { id: 'visao-geral', rotulo: 'Visão geral', montar: montarAbaVisaoGeral },
+    { id: 'narrativas', rotulo: 'Narrativas', montar: montarAbaNarrativas },
+    { id: 'social', rotulo: 'Pilar social na prática', montar: montarAbaSocial },
+    { id: 'tecnico', rotulo: 'Pilar técnico na prática', montar: montarAbaTecnico },
+    { id: 'matriz', rotulo: 'Matriz de ferramentas', montar: montarAbaMatriz },
+    { id: 'cenario', rotulo: 'Cenário 2025–2026', montar: montarAbaCenario },
+    { id: 'quiz', rotulo: 'Quiz', montar: montarAbaQuiz },
+  ];
 
-  // O mapa do módulo abre a página: o todo antes das partes. Cada ramo é uma aba,
-  // e as folhas saem dos títulos das próprias seções.
-  const mapa = criarMapaMental({
-    centro: { rotulo: 'Módulo 3', titulo: 'Os dois pilares', subtitulo: 'Social e técnico: duas checagens, não uma' },
-    ramos: [
-      { titulo: 'Visão geral', folhas: modulo3.secoes.map((secao) => secao.titulo) , aoAbrir: () => abrirAba('modulo-3-aba-visao-geral') },
-      { titulo: 'Narrativas', folhas: modulo3.praticaNarrativas.secoes.map((s) => s.titulo).slice(0, 3) , aoAbrir: () => abrirAba('modulo-3-aba-narrativas') },
-      { titulo: 'Pilar social', folhas: modulo3.praticaSocial.secoes.map((s) => s.titulo).slice(0, 3) , aoAbrir: () => abrirAba('modulo-3-aba-social') },
-      { titulo: 'Pilar técnico', folhas: modulo3.praticaTecnica.ferramentas.map((f) => f.nome).slice(0, 4) , aoAbrir: () => abrirAba('modulo-3-aba-tecnico') },
-      { titulo: 'Matriz de ferramentas', folhas: ['Filtrar por pilar, rede e papel', modulo3.ferramentas.length + ' ferramentas catalogadas'] , aoAbrir: () => abrirAba('modulo-3-aba-matriz') },
-      { titulo: 'Cenário 2025–2026', folhas: ['A liderança entre launchpads muda rápido'] , aoAbrir: () => abrirAba('modulo-3-aba-cenario') },
-    ],
-  });
-  const abas = criarAbas({
-    id: 'modulo-3',
-    rotulo: 'Seções do Módulo 3',
-    abas: [
-      { id: 'visao-geral', rotulo: 'Visão geral', montar: montarVisaoGeral },
-      { id: 'narrativas', rotulo: 'Narrativas', montar: montarAbaNarrativas },
-      { id: 'social', rotulo: 'Pilar social na prática', montar: montarAbaSocial },
-      { id: 'tecnico', rotulo: 'Pilar técnico na prática', montar: montarAbaTecnico },
-      { id: 'matriz', rotulo: 'Matriz de ferramentas', montar: montarAbaMatriz },
-      { id: 'cenario', rotulo: 'Cenário 2025–2026', montar: montarAbaCenario },
-      { id: 'quiz', rotulo: 'Quiz', montar: montarAbaQuiz },
-    ],
+  // O mapa do módulo abre a página: o todo antes das partes. Um ramo por aba
+  // (o Quiz também); as folhas curtas vêm de modulo3.mapa. O ramo da aba aberta
+  // fica roxo.
+  const mapa = criarMapaDoModulo({
+    mapa: modulo3.mapa,
+    abas: abas.map(({ id, rotulo }) => ({ id, rotulo })),
+    perguntas: modulo3.quiz.length,
+    idDasAbas: 'modulo-3',
   });
 
-  return criarElemento('div', { class: 'mx-auto max-w-5xl' }, [cabecalho, mapa, abas]);
+  const painelDeAbas = criarAbas({ id: 'modulo-3', rotulo: 'Seções do Módulo 3', abas });
+
+  // Cabeçalho, mapa e abas com 24px entre eles (a margem de baixo do cabeçalho
+  // e do mapa, e a de cima do painel da aba).
+  return criarElemento('div', {}, [montarCabecalho(), mapa, painelDeAbas]);
 }

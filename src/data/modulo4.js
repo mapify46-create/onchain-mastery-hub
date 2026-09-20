@@ -10,6 +10,10 @@ export const modulo4 = {
     'Os módulos anteriores mostraram por que o preço se move e onde checar o que está por ' +
     'trás dele. Este módulo é sobre a única parte que depende só de você: decidir antes, por ' +
     'escrito, e cumprir o que decidiu — na entrada e, principalmente, na saída.',
+  // Subtítulo do cabeçalho da página: só a segunda frase do resumo, como no desenho.
+  subtitulo:
+    'Este módulo é sobre a única parte que depende só de você: decidir antes, por escrito, e ' +
+    'cumprir o que decidiu — na entrada e, principalmente, na saída.',
 
   objetivos: [
     'Escrever uma tese de entrada e a catálise esperada antes de qualquer compra.',
@@ -19,11 +23,70 @@ export const modulo4 = {
     'Treinar a decisão em 12 cenários de simulador e ler o próprio resumo de disciplina.',
   ],
 
+  // Mapa do módulo ("O módulo inteiro numa olhada", no topo da página): o centro
+  // e as folhas curtas de cada aba, copiados do desenho (M4 Desktop, renderVals ›
+  // ABAS). `aba` é o id da aba na view. O ramo do Quiz não entra aqui: a view
+  // conta as perguntas de `quiz` e escreve "N perguntas".
+  mapa: {
+    titulo: 'Gestão & decisão',
+    subtitulo: 'Decidir antes, por escrito',
+    ramos: [
+      { aba: 'tese', folhas: ['as duas frases', 'ficha de tese', 'mapa das catálises'] },
+      { aba: 'take-profit', folhas: ['escada', 'calculadora', 'recuperação', 'segurar demais'] },
+      { aba: 'checagens', folhas: ['as 6 checagens', 'tamanho da posição'] },
+      { aba: 'simulador', folhas: ['12 cenários fictícios'] },
+    ],
+  },
+
   // ---------------------------------------------------------------------------
   // Aba 1 — Tese vs. catálise
   // ---------------------------------------------------------------------------
   teseVsCatalise: {
     titulo: 'Tese vs. catálise: as duas frases que faltam antes de comprar',
+    // A ideia central do card (a frase com a borda ciano).
+    emUmaFrase:
+      'A tese responde "por que este token?". A catálise responde "por que agora?". Você ' +
+      'precisa das duas.',
+    // O visual do card: as duas frases lado a lado. Cada uma com a pergunta que
+    // responde, o que ela é e o que acontece quando vem sozinha.
+    duasFrases: [
+      {
+        nome: 'Tese',
+        pergunta: 'Por que este token?',
+        oQueE:
+          'A razão para ele chamar atenção: a narrativa que monta, a comunidade que já existe, o ' +
+          'nicho que ocupa ou o momento de mercado que aproveita.',
+        sozinha:
+          'Tese sem catálise é um token que pode ficar meses parado, enquanto o seu capital ' +
+          'envelhece.',
+      },
+      {
+        nome: 'Catálise',
+        pergunta: 'Por que agora?',
+        oQueE:
+          'O evento concreto que precisa acontecer para trazer compradores novos: uma listagem, ' +
+          'uma campanha grande, a graduação para a DEX, um anúncio marcado.',
+        sozinha:
+          'Catálise sem tese é correr atrás de barulho. Quando o evento passa, não sobra nada que ' +
+          'segure o preço.',
+      },
+    ],
+    // Micro-rótulo em vermelho, embaixo de cada frase ("o que acontece se vier sozinha").
+    rotuloSozinha: 'Sozinha',
+    // A caixa verde embaixo das duas frases.
+    juntas: {
+      destaque: 'As duas juntas viram o seu critério de saída.',
+      texto:
+        'Se a catálise aconteceu e o preço não reagiu, a tese estava errada. Se a catálise foi ' +
+        'cancelada, o motivo da posição sumiu. Nos dois casos, a decisão já está tomada — por você ' +
+        'com a cabeça fria, e não às três da manhã com o gráfico caindo.',
+    },
+    // A "Pergunta rápida" que fecha o card: a pergunta q1 do quiz do módulo.
+    perguntaRapida: 'q1',
+
+    // Os parágrafos abaixo são o texto corrido da primeira versão. A tela não os
+    // mostra desde o redesenho (o desenho trocou o texto pelas duas frases lado a
+    // lado, acima); ficam guardados aqui como referência.
     paragrafos: [
       'A tese responde "por que este token?". É a razão para ele chamar atenção.',
       'Essa razão pode ser a narrativa que ele monta, a comunidade que já existe, o nicho que ' +
@@ -52,6 +115,9 @@ export const modulo4 = {
         'você não consegue escrever a segunda frase, não é operação: é aposta.',
     },
 
+    // A ficha aparece dentro do card "A anatomia de um plano", logo depois dos
+    // níveis: cinco cartões lado a lado e a frase `introducao` embaixo. O título
+    // não aparece na tela (o card já tem o dele).
     fichaDeTese: {
       titulo: 'Ficha de tese: cinco campos para preencher antes de clicar em comprar',
       introducao:
@@ -86,6 +152,23 @@ export const modulo4 = {
       ],
     },
 
+    // A tabela "Tese fraca × tese que dá para invalidar": título, ideia central,
+    // os cabeçalhos das 4 colunas e o nome da área que rola no celular.
+    tabelaDosExemplos: {
+      titulo: 'Tese fraca × tese que dá para invalidar',
+      emUmaFrase:
+        'A diferença não é a qualidade da escrita: é existir um evento com data que possa falhar.',
+      colunas: {
+        exemplo: 'Exemplo',
+        tese: 'Tese',
+        catalise: 'Catálise',
+        veredito: 'Dá para invalidar?',
+      },
+      rotuloDaRolagem: 'Três exemplos de tese e catálise (role na horizontal se preciso)',
+    },
+
+    // Uma linha da tabela por exemplo. O veredito responde à última coluna ("Dá
+    // para invalidar?"), por isso começa com "Não." ou "Sim.".
     exemplos: [
       {
         tipo: 'fraca',
@@ -93,8 +176,8 @@ export const modulo4 = {
         tese: '"O gráfico está bonito e está subindo forte."',
         catalise: '"Se continuar subindo, vai muito mais."',
         veredito:
-          'Não há evento nenhum: o motivo da compra é o próprio preço. Isso não tem critério ' +
-          'de invalidação — se cair, a única regra disponível é a esperança.',
+          'Não. O motivo da compra é o próprio preço, e não há evento nenhum — se cair, a única ' +
+          'regra disponível é a esperança.',
       },
       {
         tipo: 'fraca',
@@ -102,8 +185,8 @@ export const modulo4 = {
         tese: '"A comunidade é muito ativa e o projeto tem potencial."',
         catalise: '"Uma hora isso explode."',
         veredito:
-          '"Uma hora" não é prazo e "explode" não é evento. Sem data e sem gatilho, não dá ' +
-          'para dizer se a tese falhou — então nunca chega a hora de sair.',
+          'Não. "Uma hora" não é prazo e "explode" não é evento: sem data e sem gatilho, nunca ' +
+          'chega a hora de sair.',
       },
       {
         tipo: 'forte',
@@ -111,13 +194,25 @@ export const modulo4 = {
         tese: '"Token com comunidade ativa há semanas, checagens técnicas em ordem."',
         catalise: '"Evento do projeto anunciado para a próxima semana, com data marcada."',
         veredito:
-          'Dá para verificar, dá para invalidar e dá para sair. Se o evento acontecer e o ' +
-          'preço não reagir, a tese estava errada — e você sabe disso no mesmo dia.',
+          'Sim. Dá para verificar, dá para invalidar e dá para sair: se o evento acontecer e o ' +
+          'preço não reagir, você sabe no mesmo dia.',
       },
     ],
 
+    // O mapa das catálises: um centro e um ramo por catálise, cada ramo com a
+    // descrição e a caixa âmbar "O que dá errado:". Tudo à vista, sem abrir nada.
     tiposDeCatalise: {
-      titulo: 'Catálises comuns — e o que costuma dar errado em cada uma',
+      titulo: 'O mapa das catálises — e o que costuma dar errado em cada uma',
+      emUmaFrase:
+        'Toda catálise tem um lado que trabalha contra você. Saber qual é muda o tamanho e o ' +
+        'prazo da posição.',
+      centro: { titulo: 'Catálise', subtitulo: '"por que agora?"' },
+      rotuloDoAlerta: 'O que dá errado:',
+      rotuloDaRolagem: 'Mapa das catálises (role na horizontal se preciso)',
+      // Primeira frase da descrição que o leitor de tela lê no mapa. É função
+      // porque leva a quantidade de catálises: o número sai da lista abaixo, e
+      // não escrito à mão, para o texto não mentir se a lista mudar.
+      aberturaDaDescricao: (quantidade) => quantidade + ' catálises comuns.',
       itens: [
         {
           nome: 'Listagem em corretora',
@@ -167,6 +262,9 @@ export const modulo4 = {
   // Aba 2 — Take profit
   // ---------------------------------------------------------------------------
   takeProfit: {
+    // O título e os parágrafos abaixo são o texto corrido da primeira versão. A
+    // tela não os mostra desde o redesenho (as ideias foram para os destaques da
+    // aba e para o card da escada); ficam guardados aqui como referência.
     titulo: 'Take profit: o lucro que você não realizou não é seu',
     paragrafos: [
       'Enquanto a posição está aberta, o lucro é só um número na tela. É uma promessa que ' +
@@ -182,42 +280,82 @@ export const modulo4 = {
         'pelo medo do momento.',
     ],
 
+    // O card da escada: três faixas em degrau, a legenda com o selo "exemplo
+    // didático", um parágrafo e a Pergunta rápida q2.
     escada: {
-      titulo: 'Escada de realização (exemplo didático — não é recomendação)',
-      introducao:
-        'Os números abaixo são exemplo para você entender a estrutura. Não são sugestão de ' +
-        'onde vender. O que importa é o formato: faixas definidas antes, cada uma com um ' +
-        'motivo. E a última com regra de saída, nunca "vou ver na hora".',
+      titulo: 'A escada de realização, faixa a faixa',
+      emUmaFrase:
+        'O lucro que você não realizou não é seu. Nenhuma faixa depende de prever o topo — a ' +
+        'escada existe justamente porque ninguém acerta o topo de forma consistente.',
+      legenda:
+        'Exemplo didático da estrutura — não é sugestão de onde vender. O que importa é o ' +
+        'formato: faixas definidas antes, cada uma com um motivo, e a última com regra de saída ' +
+        'escrita.',
+      selo: 'exemplo didático',
+      paragrafo:
+        'Realização parcial resolve o problema sem exigir que você acerte o topo. Você vende uma ' +
+        'faixa e recupera o valor investido; o que sobra passa a correr por conta do lucro. A ' +
+        'posição continua na mesa, mas o medo sai dela — e é o medo que piora as decisões.',
+      perguntaRapida: 'q2',
+      // Cada faixa aparece como "<alvo> — <acao>" e, embaixo, o porquê.
       faixas: [
         {
           alvo: 'Primeiro alvo',
-          acao: 'Vender a fração que recupera o valor investido.',
+          acao: 'vender a fração que recupera o valor investido',
           porque:
             'A partir daqui o pior caso deixa de ser prejuízo. É a mudança que mais reduz o ' +
             'peso emocional da posição.',
         },
         {
           alvo: 'Segundo alvo',
-          acao: 'Vender outra faixa, já como lucro realizado.',
+          acao: 'vender outra faixa, já como lucro realizado',
           porque:
             'Transforma parte da alta em dinheiro que existe de verdade, sem depender de o ' +
             'movimento continuar.',
         },
         {
           alvo: 'Restante',
-          acao: 'Deixar correr, com uma regra de saída escrita.',
+          acao: 'deixar correr, com uma regra de saída escrita',
           porque:
             'Ex.: sair se cair X% do topo, ou se a catálise falhar. O que não pode existir é ' +
             'restante sem regra — é assim que 5x vira 0.',
         },
       ],
-      observacao:
-        'Repare que nenhuma faixa depende de prever o topo. A escada existe justamente porque ' +
-        'ninguém acerta o topo de forma consistente.',
     },
 
+    // O card do erro de segurar: o fluxograma "você compraria hoje?", a legenda,
+    // um parágrafo, a tributação dentro de "Para ir mais fundo" e a Pergunta rápida q3.
     erroDeSegurar: {
       titulo: 'O erro de segurar demais (e por que ele parece racional na hora)',
+      emUmaFrase:
+        'O dinheiro já foi gasto de qualquer jeito. A única pergunta que importa: você compraria ' +
+        'este token, neste preço, hoje?',
+      // Situação → pergunta → dois ramos, cada um com dois passos. O primeiro
+      // passo de cada ramo é a decisão; o segundo, a explicação (texto cinza).
+      fluxograma: {
+        situacao: 'A posição está em prejuízo, na fase de Degradação',
+        pergunta: 'Você compraria este token, neste preço, hoje?',
+        sim: {
+          rotulo: 'Sim, compraria',
+          decisao: 'A posição continua, pela tese — não pelo preço médio',
+          explicacao: 'Reescreva a tese e a catálise com a data de hoje',
+        },
+        nao: {
+          rotulo: 'Não compraria',
+          decisao: 'A posição já está encerrada. Só falta executar.',
+          explicacao: '"Assumir o prejuízo" não é o custo de vender: é o custo que já aconteceu',
+        },
+        legenda:
+          'Na Degradação a liquidez seca porque a atenção foi embora: cada tentativa de venda ' +
+          'encontra um livro de ofertas mais fino que o do dia anterior. O preço não cai por ' +
+          'acaso — cai porque ninguém está mais olhando.',
+      },
+      paragrafoFinal:
+        'Esse erro, diferente de quase tudo neste mercado, não depende do token, da chain nem da ' +
+        'sorte. Depende só de não ter escrito a regra antes.',
+      perguntaRapida: 'q3',
+      // O texto corrido da primeira versão. A tela não o mostra desde o redesenho
+      // (virou o fluxograma acima); fica guardado aqui como referência.
       paragrafos: [
         'Degradação é a última das 4 fases do Módulo 2. Nela, a atenção já migrou para outro ' +
           'token.',
@@ -236,6 +374,7 @@ export const modulo4 = {
       ],
     },
 
+    // Fica recolhida em "Para ir mais fundo", dentro do card do erro de segurar.
     tributacao: {
       titulo: 'Realizou lucro no Brasil? O que vem depois (informativo)',
       aviso:
@@ -284,12 +423,23 @@ export const modulo4 = {
   // ---------------------------------------------------------------------------
   // Aba 3 — Checagens técnicas antes de entrar
   // ---------------------------------------------------------------------------
+  // O card das seis checagens: um fluxograma em que cada pergunta tem a saída
+  // "Resposta boa: siga" embaixo e a saída "Alerta: não entra" à direita. Depois,
+  // um parágrafo e a Pergunta rápida q4.
   checagens: {
-    titulo: 'As checagens que vêm antes da tese',
-    introducao:
+    titulo: 'As seis checagens que vêm antes da tese',
+    emUmaFrase:
+      'Qualquer resposta ruim aqui derruba a operação, por melhor que a narrativa esteja. Cada ' +
+      '"não" leva ao mesmo lugar.',
+    rotuloDoAlerta: 'Alerta: não entra',
+    rotuloDaRespostaBoa: 'Resposta boa: siga',
+    fim:
+      'Passou nas seis: agora sim, escreva a tese e a catálise. Passar não aprova o token — só ' +
+      'quer dizer que ele não mostrou os problemas que dá para ver.',
+    paragrafoFinal:
       'Tese e catálise só importam se o contrato por trás resistir a uma checagem. Estas seis ' +
-      'perguntas são a peneira do Módulo 3 aplicada à decisão: qualquer resposta ruim aqui ' +
-      'derruba a operação, por melhor que a narrativa esteja.',
+      'perguntas são a peneira do Módulo 3 aplicada à decisão.',
+    perguntaRapida: 'q4',
     itens: [
       {
         pergunta: 'Alguém consegue tirar a liquidez da pool?',
@@ -357,9 +507,107 @@ export const modulo4 = {
       'O que está sendo medido é se a decisão segue a regra ou o impulso. Cada escolha mostra ' +
       'o feedback, o risco daquela decisão e o próximo passo técnico. O histórico fica salvo ' +
       'no seu navegador.',
+    // Aviso amarelo do topo do simulador. O "Cenários fictícios:" em negrito é posto
+    // pelo componente, antes deste texto (tela 34 do desenho).
     aviso:
-      'Os cenários são fictícios e os números neles são inventados para o exercício. Nenhum ' +
-      'deles descreve um token real, e nada aqui é recomendação de compra ou venda.',
+      'os números que aparecem neles são inventados de propósito para o exercício, e a ordem ' +
+      'é sorteada a cada rodada. Nenhum descreve um token real, e nada aqui é recomendação de ' +
+      'compra ou venda.',
+    // Parágrafo logo abaixo do aviso (tela 34 do desenho).
+    abertura:
+      'Não existe pontuação de acerto de preço: o que está sendo medido é se a decisão segue a ' +
+      'regra ou o impulso. As quatro opções são sempre as mesmas — o que muda é a situação.',
+    // Segunda frase da dica "antes de escolher". Só aparece nos cenários em que você
+    // não tem posição (posicao: 'nenhuma' em cenarios.js). Nesses nove, "Realizar
+    // parcial" é sempre a opção marcada como 'naoSeAplica' — conferido nos dados.
+    dicaSemPosicao:
+      '"Realizar parcial" aqui é a única que não se aplica — você não tem posição neste token.',
+    // Frase ao lado do botão "Próximo cenário" (só quando a ordem é sorteada).
+    ordemSorteada: 'A ordem é sorteada: o próximo vem de outro tema.',
+    // Legenda das 4 barras do resultado final. É uma função porque leva o total de
+    // cenários no meio do texto (hoje, 12).
+    legendaBarras: (total) =>
+      'Mesma escala, sobre os ' + total + ' cenários. "Não se aplica" não é erro de mérito: é ' +
+      'escolher uma ação impossível na situação — vale 0 e é contada à parte.',
+    // Legenda da lista das 4 faixas. O desenho diz "deste resultado de exemplo"; aqui o
+    // resultado é o seu de verdade, então sem o "de exemplo".
+    legendaFaixas: 'O simulador pega a primeira faixa que couber. A faixa em destaque é a deste resultado.',
+    // Última frase do resultado final.
+    fraseFinal: 'O simulador não avalia se você ganharia dinheiro, e sim se a decisão seguiu a regra escrita.',
+  },
+
+  // A moldura da aba Simulador (desenho "M4 Desktop"): o card que explica, antes
+  // do simulador, como cada escolha é avaliada — 4 passos ligados por setas e o
+  // feedback em 3 partes. O simulador em si vem logo depois (componente
+  // simulator.js, com os textos do bloco `simulador` acima).
+  //   tom: 'neutro' · 'acento' (ciano) · 'primaria' (roxo) · 'bom' · 'alerta'
+  molduraDoSimulador: {
+    titulo: 'Simulador de decisão',
+    emUmaFrase:
+      'Não existe pontuação de acerto de preço. O que está sendo medido é se a decisão segue a ' +
+      'regra ou o impulso.',
+    // O "Cenários fictícios:" em negrito vem antes deste texto (a view põe).
+    // Este é o único aviso que aparece nesta aba (o componente entra sem o dele,
+    // para o texto não sair duas vezes), então ele também avisa que a ordem é
+    // sorteada — que é o que o simulador faz de verdade a cada rodada.
+    rotuloDoAviso: 'Cenários fictícios:',
+    aviso:
+      'os números que aparecem neles são inventados de propósito para o exercício, e a ordem é ' +
+      'sorteada a cada rodada. Nenhum deles descreve um token real, e nada aqui é recomendação ' +
+      'de compra ou venda.',
+    passos: {
+      titulo: 'Como cada escolha é avaliada',
+      itens: [
+        {
+          titulo: 'A situação',
+          texto: 'Um cenário fictício, com os números inventados de propósito para o exercício.',
+          tom: 'neutro',
+        },
+        {
+          titulo: 'Quatro escolhas',
+          texto: 'Você decide o que faria. Não há acerto de preço para adivinhar.',
+          tom: 'acento',
+        },
+        {
+          titulo: 'O feedback',
+          texto: 'A escolha, o risco daquela decisão e o próximo passo técnico.',
+          tom: 'neutro',
+        },
+        {
+          titulo: 'O resumo de disciplina',
+          texto: 'Mede processo, não resultado: se a decisão seguiu a regra escrita.',
+          tom: 'primaria',
+        },
+      ],
+      legenda: 'Doze situações, quatro escolhas em cada uma. O histórico fica salvo no seu navegador.',
+    },
+    partes: {
+      titulo: 'O feedback de uma escolha, em três partes',
+      itens: [
+        {
+          rotulo: 'A escolha',
+          texto: 'Certa, ou "não foi essa" — sempre com explicação, nunca só o resultado.',
+          tom: 'bom',
+        },
+        {
+          rotulo: 'O risco daquela decisão',
+          texto: 'O que aquela escolha expõe: contraparte, liquidez, impulso, ou tese sem invalidação.',
+          tom: 'alerta',
+        },
+        {
+          rotulo: 'O próximo passo técnico',
+          texto: 'O que checar em seguida, e em qual ferramenta — ligando a decisão ao Módulo 3.',
+          tom: 'acento',
+        },
+      ],
+      // O desenho continua a legenda com "Quando a sua escolha tem contra-argumento,
+      // ele aparece como 'Por que a sua não serve'". O simulador não tem esse bloco
+      // (ele é do quiz), então a frase ficou de fora para a tela não prometer o que
+      // não mostra.
+      legenda:
+        'O simulador não avalia se você ganharia dinheiro, e sim se a decisão seguiu a regra ' +
+        'escrita.',
+    },
   },
 
   // ---------------------------------------------------------------------------
@@ -430,21 +678,25 @@ export const modulo4 = {
   },
 
   // ---------------------------------------------------------------------------
-  // O plano de uma posição, desenhado (aba Tese). Só os rótulos; o SVG mora na
-  // view. De propósito NÃO há linha de preço no desenho: o plano são níveis
-  // decididos antes, e não depende de prever o caminho até eles.
+  // O plano de uma posição (aba Tese): os níveis em linhas, de cima para baixo,
+  // cada um com a sua cor. De propósito NÃO há linha de preço nem eixo: o plano
+  // são níveis decididos antes, e não depende de prever o caminho até eles.
+  // A ficha de tese (acima, em teseVsCatalise) aparece dentro deste mesmo card.
+  //   tom: 'bom' (verde) · 'acento' (ciano) · 'neutro' (branco) · 'alerta' (vermelho)
   // ---------------------------------------------------------------------------
   planoDaPosicao: {
     titulo: 'A anatomia de um plano',
+    emUmaFrase:
+      'Todos os níveis são escritos antes de entrar. Não há gráfico de preço aqui de ' +
+      'propósito: o plano não depende de prever o caminho.',
     legenda:
-      'Todos os níveis são escritos ANTES de entrar. Não há gráfico de preço aqui de ' +
-      'propósito: o plano não depende de prever o caminho — depende de ter os níveis ' +
-      'decididos por você frio, para serem cumpridos por você sob pressão.',
+      'O plano não depende de prever o caminho — depende de ter os níveis decididos por você ' +
+      'frio, para serem cumpridos por você sob pressão.',
     niveis: [
-      { id: 'alvo2', rotulo: '2º alvo', detalhe: 'lucro realizado', y: 34 },
-      { id: 'alvo1', rotulo: '1º alvo', detalhe: 'recupera o investido', y: 78 },
-      { id: 'entrada', rotulo: 'Entrada', detalhe: 'tese + catálise escritas', y: 128, base: true },
-      { id: 'invalidacao', rotulo: 'Invalidação', detalhe: 'onde você admite que errou', y: 176, alerta: true },
+      { id: 'alvo2', rotulo: '2º alvo', detalhe: 'lucro realizado', tom: 'bom' },
+      { id: 'alvo1', rotulo: '1º alvo', detalhe: 'recupera o investido', tom: 'acento' },
+      { id: 'entrada', rotulo: 'Entrada', detalhe: 'tese + catálise escritas', tom: 'neutro' },
+      { id: 'invalidacao', rotulo: 'Invalidação', detalhe: 'onde você admite que errou', tom: 'alerta' },
     ],
     restante: 'Restante: corre com regra escrita — sair se cair X% do topo, ou se a catálise falhar.',
   },
@@ -452,8 +704,43 @@ export const modulo4 = {
   // ---------------------------------------------------------------------------
   // Calculadoras (a matemática mora em views/modulo4.js)
   // ---------------------------------------------------------------------------
+  // Aba Take profit, logo depois da escada. Controles à esquerda; à direita, as 3
+  // barras de "como a posição se reparte" e a caixa com o realizado e o pior caso.
+  // O 2º alvo nunca fica abaixo do 1º: mexer no 1º empurra o 2º para cima, a
+  // pelo menos `distanciaMinima` de distância (1º em 5× → 2º vai para 5,5×).
   calculadoraDeDegraus: {
-    titulo: 'Onde a posição vai parar, faixa a faixa',
+    titulo: 'Mexa nos alvos e veja onde a posição para',
+    emUmaFrase:
+      'A primeira faixa vende exatamente o que recupera o investido — por isso ela não é um ' +
+      'controle, é a definição.',
+    distanciaMinima: 0.5,
+    rotuloDaFigura: 'Como a posição se reparte',
+    // As 3 barras. As notas que levam número são funções: recebem o número já
+    // escrito ("2,0×") e devolvem a frase.
+    barras: {
+      primeiro: {
+        rotulo: 'Vendido no 1º alvo',
+        nota: (alvo1) => 'É a fração que, vendida a ' + alvo1 + ', devolve exatamente o valor investido.',
+      },
+      segundo: {
+        rotulo: 'Vendido no 2º alvo',
+        nota: 'Lucro que existe de verdade, sem depender de o movimento continuar.',
+      },
+      restante: {
+        rotulo: 'Restante na mesa',
+        nota: (naMesa, alvo2) =>
+          'Só pode existir com regra de saída escrita. Vale ' + naMesa + ' o investido a ' + alvo2 + '.',
+      },
+      complemento: 'da posição', // "50% da posição"
+    },
+    // A caixa embaixo das barras, em múltiplos do valor investido.
+    realizado: { rotulo: 'Realizado ao chegar no 2º alvo', nota: 'do valor investido' },
+    piorCaso: {
+      rotulo: 'Pior caso, com o restante a zero',
+      notaAcima: 'acima do investido, mesmo se o resto for a zero',
+      notaAbaixo: 'ainda abaixo do investido: o 1º alvo não foi atingido na conta',
+    },
+    // Texto antigo da calculadora (a tela não mostra desde o redesenho).
     descricao:
       'Exemplo didático da ESTRUTURA da escada — não é sugestão de onde vender. Ajuste os ' +
       'alvos e veja quanto fica realizado, quanto continua na mesa, e no que vira o pior caso.',
@@ -489,14 +776,38 @@ export const modulo4 = {
         formatar: (n) => String(n),
       },
     ],
-    nota:
-      'A primeira faixa vende exatamente o que recupera o valor investido — por isso ela não é ' +
-      'um controle, é a definição. Os números são estrutura, não recomendação: o módulo inteiro ' +
-      'existe para você escrever os seus antes de entrar.',
+    // Frase curta embaixo dos controles.
+    nota: 'Exemplo didático da estrutura — os números são estrutura, não recomendação.',
   },
 
+  // Aba Antes de entrar, depois das seis checagens. Tamanho = risco ÷ invalidação,
+  // com uma casa decimal (0,5% é 0,5%, não 1%).
   calculadoraDeTamanho: {
     titulo: 'Quanto da carteira pode ir numa posição',
+    emUmaFrase: 'Quanto mais longe a invalidação, menor a posição — é aritmética, não opinião.',
+    // Botões que põem a invalidação num valor pronto. `destaque: true` = fica roxo
+    // quando está valendo (só o "pode ir a zero", o cenário realista em memecoin).
+    atalhos: [
+      { rotulo: 'Pode ir a zero (100%)', valor: 100, destaque: true },
+      { rotulo: 'Cai pela metade (50%)', valor: 50 },
+    ],
+    resultado: { rotulo: 'A sua regra implica', nota: 'do capital nesta posição' },
+    rotuloDaFigura: 'A posição dentro do capital',
+    legenda:
+      'Em memecoin, invalidação em 100% ("pode ir a zero") é um cenário realista — e é o que ' +
+      'produz a posição menor.',
+    // Quando a conta passa de 100% do capital (ex.: risco 10% e invalidação 5% dão
+    // 200%): a posição não passa do capital inteiro, e aí o que se perde na
+    // invalidação é menos que o risco escolhido (100% × 5% = 5%, não 10%).
+    acimaDoCapital: {
+      aviso:
+        'A regra permitiria mais do que 100% do capital. Isso não é sinal para alavancar — é ' +
+        'sinal de que a invalidação está apertada demais para o risco escolhido.',
+      perda: (perda) =>
+        'Com a posição no teto de 100% do capital, bater a invalidação custa ' + perda +
+        ' do capital — menos que o risco que você aceitou.',
+    },
+    // Texto antigo da calculadora (a tela não mostra desde o redesenho).
     descricao:
       'A conta que liga o risco que você aceita ao ponto de invalidação que você escreveu. ' +
       'Quanto mais longe a invalidação, menor a posição — é aritmética, não opinião.',
@@ -524,12 +835,30 @@ export const modulo4 = {
     ],
     nota:
       'Fórmula: tamanho = risco ÷ invalidação. A conta não diz quanto risco aceitar — isso é ' +
-      'decisão sua e depende da sua vida, não do mercado. Ela diz só o que a sua própria regra ' +
-      'implica. Em memecoin, invalidação em 100% ("pode ir a zero") é um cenário realista.',
+      'decisão sua e depende da sua vida, não do mercado.',
   },
 
+  // Aba Take profit, depois da calculadora dos degraus. Ganho = 1 ÷ (1 − perda) − 1.
+  // As duas barras (a perda e o ganho) usam a mesma escala, de 0 a `tetoDaTela`.
+  // O teto é escolha de escala desta tela, não um número de mercado — e a tela
+  // diz isso na legenda. A partir de 67% de perda o ganho passa do teto (200%).
   calculadoraDeRecuperacao: {
     titulo: 'O que uma perda exige de volta',
+    emUmaFrase:
+      'Perder e recuperar não são simétricos. Uma perda pequena e planejada custa pouco; um ' +
+      'rombo custa um múltiplo.',
+    rotuloDoNumero: 'Ganho necessário só para voltar ao ponto de partida',
+    rotuloDaFigura: 'Na mesma escala',
+    barras: { perda: 'A perda', ganho: 'O ganho para voltar' },
+    tetoDaTela: 200,
+    // Nota embaixo das barras. Recebe os números já escritos ("50%", "100%").
+    notaAbaixoDoTeto: (perda, ganho) => 'Uma perda de ' + perda + ' exige ' + ganho + ' de ganho só para empatar.',
+    notaAcimaDoTeto: (teto) => 'Passou de ' + teto + ': a barra está no limite da escala.',
+    legenda: (teto, limiar) =>
+      'As duas barras usam a mesma escala, de 0 a ' + teto + ' — escolha de escala desta tela, ' +
+      'não um número do arquivo. A partir de ' + limiar + ' de perda, o ganho necessário passa ' +
+      'desse teto e a barra fica no limite; é isso que o custo afundado produz.',
+    // Texto antigo da calculadora (a tela não mostra desde o redesenho).
     descricao:
       'Perder e recuperar não são simétricos. Arraste a perda e veja o ganho que seria ' +
       'necessário só para voltar ao ponto de partida.',
@@ -545,10 +874,7 @@ export const modulo4 = {
         formatar: (n) => String(n),
       },
     ],
-    nota:
-      'Fórmula: ganho necessário = 1 ÷ (1 − perda) − 1. É por isso que o ponto de invalidação ' +
-      'existe: uma perda pequena e planejada custa pouco para recuperar; um rombo custa um ' +
-      'múltiplo — e é o rombo que o custo afundado produz.',
+    nota: 'Fórmula: ganho necessário = 1 ÷ (1 − perda) − 1. É por isso que o ponto de invalidação existe.',
   },
 
   // ---------------------------------------------------------------------------

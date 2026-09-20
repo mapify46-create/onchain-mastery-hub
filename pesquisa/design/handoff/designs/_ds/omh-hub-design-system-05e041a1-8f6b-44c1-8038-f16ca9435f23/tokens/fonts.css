@@ -1,0 +1,5 @@
+/* Fontes do hub: Inter para texto, JetBrains Mono para número, endereço e fórmula.
+   O código original carrega as duas pelo Google Fonts (link em index.html); nenhum
+   binário .woff2 acompanha o projeto, então o @import abaixo é a mesma fonte de verdade.
+   Se o projeto passar a hospedar os arquivos, troque este @import por @font-face locais. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");

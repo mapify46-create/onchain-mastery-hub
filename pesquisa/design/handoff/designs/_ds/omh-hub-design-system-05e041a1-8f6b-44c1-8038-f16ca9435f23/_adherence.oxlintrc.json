@@ -1,0 +1,523 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/aprendizado/**",
+              "components/core/**",
+              "components/didatica/**",
+              "components/navegacao/**",
+              "ui_kits/app-desktop/**",
+              "ui_kits/site/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Inter|JetBrains Mono))/i]",
+        "message": "Font not provided by the design system. Available: Inter, JetBrains Mono."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='AbaItem'] > JSXAttribute > JSXIdentifier[name!=/^(?:id|rotulo|conteudo|key|ref|className|style|children)$/]",
+        "message": "<AbaItem> doesn't accept that prop. Declared props: id, rotulo, conteudo."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='PainelAnatomia'] > JSXAttribute > JSXIdentifier[name!=/^(?:id|x|y|w|h|rotulo|tipo|alerta|key|ref|className|style|children)$/]",
+        "message": "<PainelAnatomia> doesn't accept that prop. Declared props: id, x, y, w, h, rotulo, tipo, alerta."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='PainelAnatomia'] > JSXAttribute[name.name='tipo'] > Literal[value!=/^(?:texto|grafico|lista|numeros|campo|botao)$/]",
+        "message": "<PainelAnatomia> tipo must be one of 'texto' | 'grafico' | 'lista' | 'numeros' | 'campo' | 'botao'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='BadgeRisco'] > JSXAttribute > JSXIdentifier[name!=/^(?:nivel|rotulo|key|ref|className|style|children)$/]",
+        "message": "<BadgeRisco> doesn't accept that prop. Declared props: nivel, rotulo."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='BadgeRisco'] > JSXAttribute[name.name='nivel'] > Literal[value!=/^(?:baixo|medio|alto)$/]",
+        "message": "<BadgeRisco> nivel must be one of 'baixo' | 'medio' | 'alto'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='BarraProgresso'] > JSXAttribute > JSXIdentifier[name!=/^(?:percentual|rotulo|altura|key|ref|className|style|children)$/]",
+        "message": "<BarraProgresso> doesn't accept that prop. Declared props: percentual, rotulo, altura."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Botao'] > JSXAttribute > JSXIdentifier[name!=/^(?:variante|children|hover|key|ref|className|style|children)$/]",
+        "message": "<Botao> doesn't accept that prop. Declared props: variante, children, hover."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Botao'] > JSXAttribute[name.name='variante'] > Literal[value!=/^(?:primario|secundario|fantasma)$/]",
+        "message": "<Botao> variante must be one of 'primario' | 'secundario' | 'fantasma'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='CabecalhoMobile'] > JSXAttribute > JSXIdentifier[name!=/^(?:aberta|onAlternar|titulo|style|key|ref|className|style|children)$/]",
+        "message": "<CabecalhoMobile> doesn't accept that prop. Declared props: aberta, onAlternar, titulo, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ControleCalculadora'] > JSXAttribute > JSXIdentifier[name!=/^(?:id|rotulo|min|max|passo|valor|sufixo|formatar|key|ref|className|style|children)$/]",
+        "message": "<ControleCalculadora> doesn't accept that prop. Declared props: id, rotulo, min, max, passo, valor, sufixo, formatar."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Card'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|as|key|ref|className|style|children)$/]",
+        "message": "<Card> doesn't accept that prop. Declared props: children, as."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='SecaoConteudo'] > JSXAttribute > JSXIdentifier[name!=/^(?:titulo|emUmaFrase|paragrafos|quadro|subListas|listaTitulo|lista|ordenada|exemplo|paragrafosFinais|detalhe|key|ref|className|style|children)$/]",
+        "message": "<SecaoConteudo> doesn't accept that prop. Declared props: titulo, emUmaFrase, paragrafos, quadro, subListas, listaTitulo, lista, ordenada, exemplo, paragrafosFinais, detalhe."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='RespostaCenario'] > JSXAttribute > JSXIdentifier[name!=/^(?:rotulo|qualidade|risco|feedback|key|ref|className|style|children)$/]",
+        "message": "<RespostaCenario> doesn't accept that prop. Declared props: rotulo, qualidade, risco, feedback."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='RespostaCenario'] > JSXAttribute[name.name='qualidade'] > Literal[value!=/^(?:boa|aceitavel|ruim|naoSeAplica)$/]",
+        "message": "<RespostaCenario> qualidade must be one of 'boa' | 'aceitavel' | 'ruim' | 'naoSeAplica'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='RespostaCenario'] > JSXAttribute[name.name='risco'] > Literal[value!=/^(?:baixo|medio|alto)$/]",
+        "message": "<RespostaCenario> risco must be one of 'baixo' | 'medio' | 'alto'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='CardDeRota'] > JSXAttribute > JSXIdentifier[name!=/^(?:titulo|descricao|hash|progresso|disponivel|style|key|ref|className|style|children)$/]",
+        "message": "<CardDeRota> doesn't accept that prop. Declared props: titulo, descricao, hash, progresso, disponivel, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='CardDeTermo'] > JSXAttribute > JSXIdentifier[name!=/^(?:termo|definicao|exemplo|alerta|categorias|estudado|onAlternar|style|key|ref|className|style|children)$/]",
+        "message": "<CardDeTermo> doesn't accept that prop. Declared props: termo, definicao, exemplo, alerta, categorias, estudado, onAlternar, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='CardDeVies'] > JSXAttribute > JSXIdentifier[name!=/^(?:nome|descricao|antidoto|aberto|style|key|ref|className|style|children)$/]",
+        "message": "<CardDeVies> doesn't accept that prop. Declared props: nome, descricao, antidoto, aberto, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Fase'] > JSXAttribute > JSXIdentifier[name!=/^(?:numero|nome|risco|resumo|oQueVoceVe|oQueChecar|armadilha|key|ref|className|style|children)$/]",
+        "message": "<Fase> doesn't accept that prop. Declared props: numero, nome, risco, resumo, oQueVoceVe, oQueChecar, armadilha."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Fase'] > JSXAttribute[name.name='risco'] > Literal[value!=/^(?:baixo|medio|alto)$/]",
+        "message": "<Fase> risco must be one of 'baixo' | 'medio' | 'alto'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ItemChecklist'] > JSXAttribute > JSXIdentifier[name!=/^(?:id|texto|porque|etiqueta|onde|key|ref|className|style|children)$/]",
+        "message": "<ItemChecklist> doesn't accept that prop. Declared props: id, texto, porque, etiqueta, onde."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Chip'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|cor|key|ref|className|style|children)$/]",
+        "message": "<Chip> doesn't accept that prop. Declared props: children, cor."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Destaque'] > JSXAttribute > JSXIdentifier[name!=/^(?:rotulo|valor|nota|tom|key|ref|className|style|children)$/]",
+        "message": "<Destaque> doesn't accept that prop. Declared props: rotulo, valor, nota, tom."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Destaque'] > JSXAttribute[name.name='tom'] > Literal[value!=/^(?:neutro|alerta|ok)$/]",
+        "message": "<Destaque> tom must be one of 'neutro' | 'alerta' | 'ok'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Etiqueta'] > JSXAttribute > JSXIdentifier[name!=/^(?:rotulo|tom|key|ref|className|style|children)$/]",
+        "message": "<Etiqueta> doesn't accept that prop. Declared props: rotulo, tom."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Etiqueta'] > JSXAttribute[name.name='tom'] > Literal[value!=/^(?:acento|baixo|medio|primaria)$/]",
+        "message": "<Etiqueta> tom must be one of 'acento' | 'baixo' | 'medio' | 'primaria'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='BarraGrafico'] > JSXAttribute > JSXIdentifier[name!=/^(?:rotulo|percentual|detalhe|key|ref|className|style|children)$/]",
+        "message": "<BarraGrafico> doesn't accept that prop. Declared props: rotulo, percentual, detalhe."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='CamadaEmpilhada'] > JSXAttribute > JSXIdentifier[name!=/^(?:chave|rotulo|cor|key|ref|className|style|children)$/]",
+        "message": "<CamadaEmpilhada> doesn't accept that prop. Declared props: chave, rotulo, cor."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='CamadaEmpilhada'] > JSXAttribute[name.name='cor'] > Literal[value!=/^(?:primaria|acento|risco-baixo|risco-medio|risco-alto|borda)$/]",
+        "message": "<CamadaEmpilhada> cor must be one of 'primaria' | 'acento' | 'risco-baixo' | 'risco-medio' | 'risco-alto' | 'borda'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='MarcoLinhaDoTempo'] > JSXAttribute > JSXIdentifier[name!=/^(?:data|titulo|texto|tom|key|ref|className|style|children)$/]",
+        "message": "<MarcoLinhaDoTempo> doesn't accept that prop. Declared props: data, titulo, texto, tom."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='MarcoLinhaDoTempo'] > JSXAttribute[name.name='tom'] > Literal[value!=/^(?:neutro|alerta|ok|atencao)$/]",
+        "message": "<MarcoLinhaDoTempo> tom must be one of 'neutro' | 'alerta' | 'ok' | 'atencao'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Ferramenta'] > JSXAttribute > JSXIdentifier[name!=/^(?:nome|pilar|chains|papeis|risco|oQueFaz|quandoUsar|observacoes|naoSuportaSolana|naoVerificado|key|ref|className|style|children)$/]",
+        "message": "<Ferramenta> doesn't accept that prop. Declared props: nome, pilar, chains, papeis, risco, oQueFaz, quandoUsar, observacoes, naoSuportaSolana, naoVerificado."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Ferramenta'] > JSXAttribute[name.name='pilar'] > Literal[value!=/^(?:social|tecnico)$/]",
+        "message": "<Ferramenta> pilar must be one of 'social' | 'tecnico'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Ferramenta'] > JSXAttribute[name.name='risco'] > Literal[value!=/^(?:baixo|medio|alto)$/]",
+        "message": "<Ferramenta> risco must be one of 'baixo' | 'medio' | 'alto'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='AlternativaPergunta'] > JSXAttribute > JSXIdentifier[name!=/^(?:id|texto|porque|key|ref|className|style|children)$/]",
+        "message": "<AlternativaPergunta> doesn't accept that prop. Declared props: id, texto, porque."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='AlternativaQuiz'] > JSXAttribute > JSXIdentifier[name!=/^(?:id|texto|porque|key|ref|className|style|children)$/]",
+        "message": "<AlternativaQuiz> doesn't accept that prop. Declared props: id, texto, porque."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ParteSegmento'] > JSXAttribute > JSXIdentifier[name!=/^(?:titulo|conteudo|key|ref|className|style|children)$/]",
+        "message": "<ParteSegmento> doesn't accept that prop. Declared props: titulo, conteudo."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='RotaSidebar'] > JSXAttribute > JSXIdentifier[name!=/^(?:id|curto|hash|progresso|disponivel|key|ref|className|style|children)$/]",
+        "message": "<RotaSidebar> doesn't accept that prop. Declared props: id, curto, hash, progresso, disponivel."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ColunaComparativa'] > JSXAttribute > JSXIdentifier[name!=/^(?:chave|rotulo|key|ref|className|style|children)$/]",
+        "message": "<ColunaComparativa> doesn't accept that prop. Declared props: chave, rotulo."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Titulo'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|nivel|subtitulo|key|ref|className|style|children)$/]",
+        "message": "<Titulo> doesn't accept that prop. Declared props: children, nivel, subtitulo."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Toast'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|key|ref|className|style|children)$/]",
+        "message": "<Toast> doesn't accept that prop. Declared props: children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Video'] > JSXAttribute > JSXIdentifier[name!=/^(?:id|titulo|src|duracao|descricao|poster|legendas|transcricao|style|key|ref|className|style|children)$/]",
+        "message": "<Video> doesn't accept that prop. Declared props: id, titulo, src, duracao, descricao, poster, legendas, transcricao, style."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "AbaItem": {
+        "replaces": []
+      },
+      "PainelAnatomia": {
+        "replaces": []
+      },
+      "BadgeRisco": {
+        "replaces": []
+      },
+      "BarraProgresso": {
+        "replaces": []
+      },
+      "Botao": {
+        "replaces": []
+      },
+      "CabecalhoMobile": {
+        "replaces": []
+      },
+      "ControleCalculadora": {
+        "replaces": []
+      },
+      "Card": {
+        "replaces": []
+      },
+      "SecaoConteudo": {
+        "replaces": []
+      },
+      "RespostaCenario": {
+        "replaces": []
+      },
+      "CardDeRota": {
+        "replaces": []
+      },
+      "CardDeTermo": {
+        "replaces": []
+      },
+      "CardDeVies": {
+        "replaces": []
+      },
+      "Fase": {
+        "replaces": []
+      },
+      "ItemChecklist": {
+        "replaces": []
+      },
+      "Chip": {
+        "replaces": []
+      },
+      "Destaque": {
+        "replaces": []
+      },
+      "Etiqueta": {
+        "replaces": []
+      },
+      "BarraGrafico": {
+        "replaces": []
+      },
+      "CamadaEmpilhada": {
+        "replaces": []
+      },
+      "MarcoLinhaDoTempo": {
+        "replaces": []
+      },
+      "Ferramenta": {
+        "replaces": []
+      },
+      "AlternativaPergunta": {
+        "replaces": []
+      },
+      "AlternativaQuiz": {
+        "replaces": []
+      },
+      "ParteSegmento": {
+        "replaces": []
+      },
+      "RotaSidebar": {
+        "replaces": []
+      },
+      "ColunaComparativa": {
+        "replaces": []
+      },
+      "Titulo": {
+        "replaces": []
+      },
+      "Toast": {
+        "replaces": []
+      },
+      "Video": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--omh-aba-ativa",
+      "--omh-acento",
+      "--omh-alvo-minimo",
+      "--omh-badge-borda-alto",
+      "--omh-badge-borda-baixo",
+      "--omh-badge-borda-medio",
+      "--omh-badge-fundo-alto",
+      "--omh-badge-fundo-baixo",
+      "--omh-badge-fundo-medio",
+      "--omh-borda",
+      "--omh-borda-acento",
+      "--omh-borda-ativa",
+      "--omh-borda-hover",
+      "--omh-borda-largura",
+      "--omh-borda-largura-forte",
+      "--omh-borda-padrao",
+      "--omh-caixa-interna-fundo",
+      "--omh-caixa-padding",
+      "--omh-caixa-padding-larga",
+      "--omh-card-borda",
+      "--omh-card-fundo",
+      "--omh-card-padding",
+      "--omh-conteudo-max",
+      "--omh-destaque-gradiente",
+      "--omh-destaque-gradiente-alerta",
+      "--omh-destaque-gradiente-ok",
+      "--omh-dur-lenta",
+      "--omh-dur-media",
+      "--omh-dur-padrao",
+      "--omh-dur-rapida",
+      "--omh-easing",
+      "--omh-espaco-1",
+      "--omh-espaco-10",
+      "--omh-espaco-2",
+      "--omh-espaco-3",
+      "--omh-espaco-4",
+      "--omh-espaco-5",
+      "--omh-espaco-6",
+      "--omh-espaco-8",
+      "--omh-foco",
+      "--omh-foco-anel",
+      "--omh-foco-offset",
+      "--omh-fonte-mono",
+      "--omh-fonte-sans",
+      "--omh-fundo",
+      "--omh-linha-apertada",
+      "--omh-linha-corpo",
+      "--omh-linha-numero",
+      "--omh-link",
+      "--omh-numero-cor",
+      "--omh-numero-grande",
+      "--omh-pagina-fundo",
+      "--omh-peso-bold",
+      "--omh-peso-medio",
+      "--omh-peso-regular",
+      "--omh-peso-semibold",
+      "--omh-pilha",
+      "--omh-pilha-curta",
+      "--omh-primaria",
+      "--omh-progresso",
+      "--omh-raio-caixa",
+      "--omh-raio-campo",
+      "--omh-raio-card",
+      "--omh-raio-foco",
+      "--omh-raio-painel",
+      "--omh-raio-pilula",
+      "--omh-risco-alto",
+      "--omh-risco-alto-texto",
+      "--omh-risco-baixo",
+      "--omh-risco-medio",
+      "--omh-selecao-fundo",
+      "--omh-sidebar-largura",
+      "--omh-sidebar-largura-gaveta",
+      "--omh-sobreposicao",
+      "--omh-sombra-flutuante",
+      "--omh-superficie",
+      "--omh-superficie-alta",
+      "--omh-superficie-baixa",
+      "--omh-texto",
+      "--omh-texto-11",
+      "--omh-texto-2xl",
+      "--omh-texto-3xl",
+      "--omh-texto-base",
+      "--omh-texto-corpo",
+      "--omh-texto-lg",
+      "--omh-texto-sm",
+      "--omh-texto-suave",
+      "--omh-texto-titulo",
+      "--omh-texto-xl",
+      "--omh-texto-xs",
+      "--omh-tint-acento",
+      "--omh-tint-primaria",
+      "--omh-tint-risco-alto",
+      "--omh-tint-risco-baixo",
+      "--omh-tint-risco-medio",
+      "--omh-toast-duracao",
+      "--omh-tracking-numero",
+      "--omh-tracking-rotulo"
+    ],
+    "tokenKinds": {
+      "--omh-fundo": "color",
+      "--omh-superficie": "color",
+      "--omh-borda": "color",
+      "--omh-texto": "color",
+      "--omh-texto-suave": "color",
+      "--omh-primaria": "color",
+      "--omh-acento": "color",
+      "--omh-risco-baixo": "color",
+      "--omh-risco-medio": "color",
+      "--omh-risco-alto": "color",
+      "--omh-risco-alto-texto": "color",
+      "--omh-superficie-alta": "color",
+      "--omh-superficie-baixa": "color",
+      "--omh-pagina-fundo": "color",
+      "--omh-card-fundo": "color",
+      "--omh-card-borda": "color",
+      "--omh-caixa-interna-fundo": "color",
+      "--omh-texto-titulo": "color",
+      "--omh-texto-corpo": "color",
+      "--omh-link": "color",
+      "--omh-foco": "color",
+      "--omh-progresso": "color",
+      "--omh-aba-ativa": "color",
+      "--omh-numero-cor": "color",
+      "--omh-fonte-sans": "font",
+      "--omh-fonte-mono": "font",
+      "--omh-texto-11": "spacing",
+      "--omh-texto-xs": "spacing",
+      "--omh-texto-sm": "spacing",
+      "--omh-texto-base": "spacing",
+      "--omh-texto-lg": "spacing",
+      "--omh-texto-xl": "spacing",
+      "--omh-texto-2xl": "spacing",
+      "--omh-texto-3xl": "spacing",
+      "--omh-linha-corpo": "other",
+      "--omh-linha-apertada": "other",
+      "--omh-linha-numero": "other",
+      "--omh-peso-regular": "font",
+      "--omh-peso-medio": "font",
+      "--omh-peso-semibold": "font",
+      "--omh-peso-bold": "font",
+      "--omh-tracking-rotulo": "other",
+      "--omh-numero-grande": "other",
+      "--omh-tracking-numero": "other",
+      "--omh-espaco-1": "spacing",
+      "--omh-espaco-2": "spacing",
+      "--omh-espaco-3": "spacing",
+      "--omh-espaco-4": "spacing",
+      "--omh-espaco-5": "spacing",
+      "--omh-espaco-6": "spacing",
+      "--omh-espaco-8": "spacing",
+      "--omh-espaco-10": "spacing",
+      "--omh-card-padding": "spacing",
+      "--omh-caixa-padding": "spacing",
+      "--omh-caixa-padding-larga": "spacing",
+      "--omh-pilha": "color",
+      "--omh-pilha-curta": "color",
+      "--omh-sidebar-largura": "spacing",
+      "--omh-sidebar-largura-gaveta": "spacing",
+      "--omh-conteudo-max": "spacing",
+      "--omh-alvo-minimo": "spacing",
+      "--omh-raio-foco": "spacing",
+      "--omh-raio-campo": "spacing",
+      "--omh-raio-caixa": "spacing",
+      "--omh-raio-painel": "spacing",
+      "--omh-raio-card": "spacing",
+      "--omh-raio-pilula": "spacing",
+      "--omh-borda-largura": "spacing",
+      "--omh-borda-largura-forte": "spacing",
+      "--omh-borda-padrao": "other",
+      "--omh-borda-ativa": "other",
+      "--omh-borda-acento": "other",
+      "--omh-borda-hover": "other",
+      "--omh-foco-anel": "other",
+      "--omh-foco-offset": "spacing",
+      "--omh-tint-primaria": "color",
+      "--omh-tint-acento": "color",
+      "--omh-tint-risco-alto": "color",
+      "--omh-tint-risco-medio": "color",
+      "--omh-tint-risco-baixo": "color",
+      "--omh-badge-fundo-baixo": "color",
+      "--omh-badge-fundo-medio": "color",
+      "--omh-badge-fundo-alto": "color",
+      "--omh-badge-borda-baixo": "color",
+      "--omh-badge-borda-medio": "color",
+      "--omh-badge-borda-alto": "color",
+      "--omh-selecao-fundo": "color",
+      "--omh-destaque-gradiente": "color",
+      "--omh-destaque-gradiente-alerta": "color",
+      "--omh-destaque-gradiente-ok": "color",
+      "--omh-sombra-flutuante": "shadow",
+      "--omh-sobreposicao": "color",
+      "--omh-dur-rapida": "other",
+      "--omh-dur-padrao": "other",
+      "--omh-dur-media": "other",
+      "--omh-dur-lenta": "other",
+      "--omh-easing": "other",
+      "--omh-toast-duracao": "other"
+    },
+    "fontFamilies": [
+      "Inter",
+      "JetBrains Mono"
+    ]
+  }
+}

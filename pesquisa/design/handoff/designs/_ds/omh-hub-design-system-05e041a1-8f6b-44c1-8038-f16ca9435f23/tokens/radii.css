@@ -1,0 +1,8 @@
+:root {
+  --omh-raio-foco: 4px;      /* :focus-visible */
+  --omh-raio-campo: 6px;     /* input dentro de um mockup */
+  --omh-raio-caixa: 8px;     /* caixa interna, botão, chip retangular */
+  --omh-raio-painel: 10px;   /* painel desenhado na anatomia */
+  --omh-raio-card: 12px;     /* o card do hub */
+  --omh-raio-pilula: 999px;  /* badge, chip de filtro, barra de progresso */
+}

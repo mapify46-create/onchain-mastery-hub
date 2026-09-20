@@ -1,0 +1,11 @@
+/* Borda é o que separa superfícies no hub — não há sombra fazendo esse trabalho. */
+:root {
+  --omh-borda-largura: 1px;
+  --omh-borda-largura-forte: 2px;
+  --omh-borda-padrao: 1px solid var(--omh-borda); /* @kind other */
+  --omh-borda-ativa: 1px solid var(--omh-primaria); /* @kind other */
+  --omh-borda-acento: 1px solid color-mix(in srgb, var(--omh-acento) 40%, transparent); /* @kind other */
+  --omh-borda-hover: 1px solid var(--omh-texto-suave); /* @kind other */
+  --omh-foco-anel: 2px solid var(--omh-acento); /* @kind other */
+  --omh-foco-offset: 2px;
+}

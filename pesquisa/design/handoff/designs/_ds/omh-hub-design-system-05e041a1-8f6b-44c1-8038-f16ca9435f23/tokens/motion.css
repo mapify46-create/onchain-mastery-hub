@@ -1,0 +1,10 @@
+/* Movimento discreto e curto. Nada entra deslizando, nada quica. Transição é de cor
+   (hover/foco), de largura (barra de progresso) e de rotação (seta de <details>). */
+:root {
+  --omh-dur-rapida: 120ms; /* @kind other */  /* polegar do range, marcador da anatomia */
+  --omh-dur-padrao: 150ms; /* @kind other */  /* cor de botão, link, card */
+  --omh-dur-media: 200ms; /* @kind other */   /* largura da barra, gaveta do menu, saída do toast */
+  --omh-dur-lenta: 400ms; /* @kind other */   /* virar o card de viés (o único movimento longo) */
+  --omh-easing: ease; /* @kind other */
+  --omh-toast-duracao: 2400ms; /* @kind other */
+}

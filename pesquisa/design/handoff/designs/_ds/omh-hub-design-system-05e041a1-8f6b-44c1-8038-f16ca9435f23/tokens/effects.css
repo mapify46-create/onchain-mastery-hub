@@ -1,0 +1,27 @@
+/* Tingimentos de acento: SEMPRE fundo, NUNCA texto. O contraste do texto continua
+   vindo dos tokens sólidos, então a leitura permanece AA por cima de qualquer um. */
+:root {
+  --omh-tint-primaria: rgba(124, 58, 237, 0.16);
+  --omh-tint-acento: rgba(34, 211, 238, 0.1);
+  --omh-tint-risco-alto: rgba(239, 68, 68, 0.12);
+  --omh-tint-risco-medio: rgba(245, 158, 11, 0.12);
+  --omh-tint-risco-baixo: rgba(34, 197, 94, 0.12);
+
+  /* Fundo dos badges e avisos: 15% do tom sólido, borda a 40-50%. */
+  --omh-badge-fundo-baixo: rgba(34, 197, 94, 0.15);
+  --omh-badge-fundo-medio: rgba(245, 158, 11, 0.15);
+  --omh-badge-fundo-alto: rgba(239, 68, 68, 0.15);
+  --omh-badge-borda-baixo: rgba(34, 197, 94, 0.4);
+  --omh-badge-borda-medio: rgba(245, 158, 11, 0.4);
+  --omh-badge-borda-alto: rgba(239, 68, 68, 0.4);
+  --omh-selecao-fundo: rgba(124, 58, 237, 0.15);
+
+  /* Gradiente do cartão de destaque: alfa baixo, só um tingimento diagonal do fundo. */
+  --omh-destaque-gradiente: linear-gradient(135deg, var(--omh-tint-primaria), var(--omh-tint-acento));
+  --omh-destaque-gradiente-alerta: linear-gradient(135deg, var(--omh-tint-risco-alto), transparent);
+  --omh-destaque-gradiente-ok: linear-gradient(135deg, var(--omh-tint-risco-baixo), transparent);
+
+  /* A única sombra do sistema: o toast, que flutua sobre o conteúdo. */
+  --omh-sombra-flutuante: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --omh-sobreposicao: rgba(0, 0, 0, 0.6); /* fundo atrás da gaveta no mobile */
+}

@@ -25,9 +25,9 @@ const CLASSE_POR_TOM = {
  */
 export function montarCartaoDeDestaque(destaque) {
   return html`<div class="rounded-card p-5 ${CLASSE_POR_TOM[destaque.tom ?? 'neutro']}">
-    <p class="text-xs font-semibold uppercase tracking-wide text-texto-suave">${destaque.rotulo}</p>
+    <p class="text-xs font-semibold uppercase leading-[1.6] tracking-wide text-texto-suave">${destaque.rotulo}</p>
     <p class="omh-numero omh-numero-grande mt-2 text-texto">${destaque.valor}</p>
-    ${destaque.nota ? html`<p class="mt-3 text-sm text-texto-suave">${destaque.nota}</p>` : null}
+    ${destaque.nota ? html`<p class="mt-3 text-sm leading-[1.6] text-texto-suave">${destaque.nota}</p>` : null}
   </div>`;
 }
 

@@ -5,8 +5,11 @@ Hub de estudos local, estático, 100% no navegador, em pt-BR, para aprender trad
 
 ## Stack (NÃO mudar sem pedir)
 - HTML5 + Tailwind via Play CDN (dev only) + JavaScript puro com ES Modules.
-- Mermaid via CDN (import ESM) para fluxogramas.
-- Chart.js via CDN (import ESM, versão fixada) para gráficos (ex.: progresso na tela de Início).
+- Fluxogramas, mapas, ciclos, grades e barras são desenhados pelo próprio app, em
+  SVG (src/components/fluxograma.js, visuais.js). Mermaid via CDN continua só como
+  reserva, se o desenho próprio não conseguir ler o diagrama (src/components/diagrama.js).
+- Chart.js saiu do projeto em 19/09/2026 (decisão do dono): nenhum gráfico usa mais
+  biblioteca externa — todos são desenho próprio, no traço do handoff de design.
 - SEM build, SEM Vite, SEM npm, SEM backend. Nada de frameworks (React/Vue).
 - Persistência só com localStorage (chave omh_state_v1).
 

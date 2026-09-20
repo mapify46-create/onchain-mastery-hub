@@ -1,6 +1,11 @@
-// diagrama.js — motor genérico de diagramas Mermaid, com fallback em Tailwind puro.
+// diagrama.js — ponte entre as views e os fluxogramas.
 //
-// Como funciona:
+// Hoje todo diagrama de src/data sai pelo desenho próprio (src/components/fluxograma.js,
+// no traço do design system, sem baixar nada). O Mermaid por CDN continua aqui só como
+// reserva: ele é usado apenas se o texto de um diagrama tiver uma sintaxe que o leitor
+// do fluxograma.js não entende.
+//
+// Como funciona o caminho da reserva (Mermaid):
 //   1. montarDiagrama() devolve o elemento pronto NA HORA (o router não espera promessa),
 //      já com o `reserva` (Node pronto, passado por quem chama) montado e escondido dentro.
 //   2. renderizarDiagrama() é chamada quando a aba que contém o diagrama abre. Ela importa
@@ -103,9 +108,12 @@ function estaVisivel(elemento) {
  * @param {string} opcoes.diagrama        Texto do diagrama em sintaxe Mermaid.
  * @param {Node}   opcoes.reserva         Elemento pronto (Tailwind puro) mostrado se o
  *                                        Mermaid não carregar ou não desenhar.
- * @param {string} opcoes.rotuloAcessivel Descrição do diagrama para leitor de tela
- *                                        (vira o aria-label da área de rolagem).
+ * @param {string} opcoes.rotuloAcessivel Descrição do diagrama para leitor de tela.
+ *                                        Só vale no caminho do Mermaid: o desenho
+ *                                        próprio gera a descrição dos nós e setas.
  * @param {string} [opcoes.legenda]       Texto da legenda embaixo do diagrama.
+ * @param {string} [opcoes.titulo]        Frase em negrito no topo da caixa (como no
+ *                                        desenho do slippage, M5). Opcional.
  * @param {string} [opcoes.mensagemErroSintaxe] Nome do arquivo/campo a apontar se o
  *                                        Mermaid carregar mas não desenhar (erro de sintaxe).
  */
@@ -114,22 +122,23 @@ export function montarDiagrama({
   reserva,
   rotuloAcessivel,
   legenda = '',
+  titulo = '',
   mensagemErroSintaxe = 'no diagrama',
 }) {
-  // Caminho novo (17/09/2026): desenhar aqui mesmo, com as cores e a tipografia do
-  // app, sem baixar nada. Só cai no Mermaid quando o texto do diagrama usa alguma
-  // sintaxe que o nosso leitor ainda não entende.
-  const proprio = criarFluxograma({ diagrama, rotuloAcessivel });
+  // Caminho principal: desenhar aqui mesmo, com as cores e a tipografia do app,
+  // sem baixar nada. A figura que volta já é a moldura do desenho (caixa #0B0F17,
+  // raio 8, padding 20, legenda dentro) — sem card por fora. Só cai no Mermaid
+  // quando o texto do diagrama usa alguma sintaxe que o nosso leitor não entende.
+  // O `rotuloAcessivel` da view NÃO vai para cá: a descrição para leitor de tela
+  // sai dos próprios nós e setas, na ordem do desenho (como pede o handoff), e
+  // assim diz só o que está desenhado.
+  const proprio = criarFluxograma({ diagrama, legenda, titulo });
   if (proprio) {
-    return criarElemento(
-      'figure',
-      { 'data-diagrama': '', 'data-diagrama-proprio': '', class: 'rounded-card border border-borda bg-superficie p-4 sm:p-5' },
-      [
-        proprio,
-        legenda &&
-          criarElemento('figcaption', { class: 'mt-3 text-center text-xs text-texto-suave' }, [legenda]),
-      ],
-    );
+    // As marcas data-* são as que as views procuram para "redesenhar" ao abrir a
+    // aba; o desenho próprio não precisa, e renderizarDiagrama() devolve na hora.
+    proprio.setAttribute('data-diagrama', '');
+    proprio.setAttribute('data-diagrama-proprio', '');
+    return proprio;
   }
 
   const alvoMermaid = criarElemento('div', {
@@ -149,10 +158,13 @@ export function montarDiagrama({
     ['Carregando o diagrama...'],
   );
 
+  // Reserva do Mermaid: a mesma moldura do fluxograma próprio (.omh-fluxo em
+  // styles/custom.css), para não voltar o card dentro de card.
   const figura = criarElemento(
     'figure',
-    { 'data-diagrama': '', class: 'rounded-card border border-borda bg-superficie p-4 sm:p-5' },
+    { 'data-diagrama': '', class: 'omh-fluxo' },
     [
+      titulo ? criarElemento('p', { class: 'omh-fluxo-titulo' }, [titulo]) : null,
       // Em tela estreita o diagrama rola aqui dentro, sem esticar a página.
       // tabindex=0 para quem navega por teclado também conseguir rolar.
       criarElemento(
@@ -168,10 +180,7 @@ export function montarDiagrama({
       ),
       areaDeReserva,
       status,
-      legenda &&
-        criarElemento('figcaption', { class: 'mt-3 text-center text-xs text-texto-suave' }, [
-          legenda,
-        ]),
+      legenda ? criarElemento('figcaption', { class: 'omh-fluxo-legenda' }, [legenda]) : null,
     ],
   );
 

@@ -2,15 +2,20 @@
 // catálogo de ferramentas usado pela matriz filtrável.
 // Aqui só tem DADOS: nenhuma lógica, nenhum HTML. Para adicionar/trocar uma
 // ferramenta ou corrigir um número, mude aqui — a interface se adapta sozinha.
+//
+// Campo `foraDaTela`: trechos da pesquisa que o desenho condensou e a tela não
+// mostra (definições para iniciante e números com fonte). Ficam guardados aqui
+// para não se perderem; nenhuma view lê este campo. Para pôr um deles de volta
+// na tela, mova a frase para `paragrafos`, `detalhe` ou `exemplo` da seção.
 
 export const modulo3 = {
   id: 'modulo-3',
   titulo: 'Os dois pilares (Social vs. Técnico)',
-  resumo:
+  // Frase embaixo do título da página (desenho "M3 Desktop", cabeçalho).
+  subtitulo:
     'Nenhuma decisão de entrada deveria depender de um sinal só. O pilar social mostra ' +
     'onde a atenção está nascendo; o pilar técnico mostra se o contrato por trás merece ' +
-    'confiança. Este módulo mostra como fazer cada checagem, passo a passo, e apresenta ' +
-    'as ferramentas de cada pilar numa matriz filtrável.',
+    'confiança.',
 
   objetivos: [
     'Entender que a decisão de entrada combina sinal social + checagem técnica.',
@@ -22,8 +27,46 @@ export const modulo3 = {
     'Conhecer a correção "Axon → Axiom" e o caso do Sigma, que não suporta Solana.',
   ],
 
+  // Mapa do módulo ("O módulo inteiro numa olhada", no topo da página): o centro
+  // e as folhas curtas de cada aba, copiados do desenho (M3 Desktop, renderVals ›
+  // ABAS). `aba` é o id da aba na view. O ramo do Quiz não entra aqui: a view
+  // conta as perguntas de `quiz` e escreve "N perguntas".
+  mapa: {
+    titulo: 'Os dois pilares',
+    subtitulo: 'Duas perguntas, nunca uma',
+    ramos: [
+      { aba: 'visao-geral', folhas: ['social × técnico', 'o que cada um pergunta'] },
+      { aba: 'narrativas', folhas: ['ciclo', 'narrativa × hype', 'rotação 2024–2025', 'ferramentas'] },
+      { aba: 'social', folhas: ['rotina de 5 min', 'perfil oficial', 'Discord e Telegram', 'calls'] },
+      { aba: 'tecnico', folhas: ['RugCheck', 'Solscan', 'Bubblemaps', 'DexScreener'] },
+      { aba: 'matriz', folhas: ['filtro por pilar, rede e papel'] },
+      { aba: 'cenario', folhas: ['quem liderou quando'] },
+    ],
+  },
+
   // ---------------------------------------------------------------------------
-  // Seções de texto (aba "Visão geral")
+  // Correção em destaque. Fica no cabeçalho da página, visível em todas as abas
+  // (caixa âmbar do desenho): o título em negrito e o texto em seguida.
+  // ---------------------------------------------------------------------------
+  correcaoAxiom: {
+    titulo: 'Correção: "Axon" não existe — o nome certo é Axiom.',
+    texto:
+      'O pedido original citava "Axon" como terminal de execução para Solana. Pesquisa ' +
+      'dedicada não encontrou nenhum terminal de execução relevante com esse nome. O ' +
+      'provável terminal citado é o Axiom Trade: um terminal web não-custodial focado em ' +
+      'Solana.',
+  },
+
+  // ---------------------------------------------------------------------------
+  // Aba "Visão geral" — uma seção só, como no desenho.
+  //
+  // Formato dos textos com destaque, usado em todo este arquivo: um texto pode
+  // ser uma string ou uma lista de pedaços. Um pedaço { forte: '…' } sai em
+  // negrito; { mono: '…' } sai em fonte de código (um endereço, um operador de
+  // busca).
+  //
+  // `pergunta` é a "Pergunta rápida" do fim do card: o id de uma pergunta do
+  // `quiz` deste arquivo.
   // ---------------------------------------------------------------------------
   secoes: [
     {
@@ -32,79 +75,70 @@ export const modulo3 = {
       emUmaFrase:
         'Antes de comprar, você precisa de duas respostas: por que o token chama atenção, e se ' +
         'o contrato por trás dele merece confiança.',
-      paragrafos: [
-        'O pilar social é o que as pessoas estão falando. Ele cobre X/Twitter, Discord e ' +
-          'Telegram. É ali que a atenção nasce, antes de virar preço.',
-        'Ver uma conta grande interagir com um projeto é um sinal cedo. Mas nenhum sinal ' +
-          'social prova que o contrato por trás é seguro.',
-        'O pilar técnico é o que dá para conferir por conta própria. Ele cobre gráfico, ' +
-          'contrato (o programa que cria o token e define as regras dele), liquidez (o dinheiro ' +
-          'disponível para comprar e vender) e holders (as carteiras que têm o token).',
-        'Um contrato limpo sem nenhuma atenção também não vale nada. Sem atenção, não aparece ' +
-          'comprador.',
-      ],
-      quadro: [
+      // A figura dos dois pilares lado a lado. `tom`: 'acento' (ciano) ou 'primaria' (roxo).
+      pilares: [
         {
-          rotulo: 'Pilar social pergunta',
-          texto: 'Este token é quem diz ser? Por que está chamando atenção agora?',
+          nome: 'Pilar social',
+          pergunta: 'Este token é quem diz ser? Por que está chamando atenção agora?',
+          cobre: ['X/Twitter', 'Discord', 'Telegram', 'calls'],
+          sozinho: 'Sozinho: nenhum sinal social prova que o contrato por trás é seguro.',
+          tom: 'acento',
         },
         {
-          rotulo: 'Pilar técnico pergunta',
-          texto: 'O que o contrato e as carteiras ainda permitem fazer contra mim?',
+          nome: 'Pilar técnico',
+          pergunta: 'O que o contrato e as carteiras ainda permitem fazer contra mim?',
+          cobre: ['gráfico', 'contrato', 'liquidez', 'holders'],
+          sozinho:
+            'Sozinho: um contrato limpo sem nenhuma atenção não vale nada — sem atenção, não ' +
+            'aparece comprador.',
+          tom: 'primaria',
         },
       ],
-      paragrafosFinais: [
-        'Os dois pilares se completam. Uma tese de entrada (Módulo 4) só fica de pé quando está ' +
-          'apoiada nos dois ao mesmo tempo.',
-        'Atenção: passar nas duas checagens não torna um token seguro. Só quer dizer que ele não ' +
+      // A legenda âmbar embaixo dos dois pilares.
+      legendaDosPilares: [
+        { forte: 'Os dois juntos, e nem isso aprova: ' },
+        'passar nas duas checagens não torna um token seguro. Só quer dizer que ele não ' +
           'mostrou os problemas que dá para ver.',
       ],
+      paragrafos: [
+        'Ver uma conta grande interagir com um projeto é um sinal cedo. Mas nenhum sinal social ' +
+          'prova que o contrato por trás é seguro. E um contrato limpo sem nenhuma atenção ' +
+          'também não vale nada: sem atenção, não aparece comprador.',
+        'Uma tese de entrada (Módulo 4) só fica de pé quando está apoiada nos dois ao mesmo tempo.',
+      ],
+      // Aviso 1 de 3 do "reconhecer narrativa não prevê preço": antecipa o limite
+      // antes das abas práticas (linha com borda âmbar).
+      aviso:
+        'Aviso desde já: o pilar social diz de onde vem a atenção. Ele não diz para onde vai o ' +
+        'preço.',
+      detalhe: {
+        titulo: 'o pilar social e o "J7 Tracker"',
+        paragrafos: [
+          'Trackers de tweets e de carteiras servem para detectar cedo quando uma conta grande — ' +
+            'influenciador, projeto, carteira "smart money" — interage com um token, dando tempo ' +
+            'de reação antes de a multidão chegar. Serve só para você não ser o último a saber; o ' +
+            'que fazer com isso depende do pilar técnico e da sua tese.',
+          [
+            { forte: '"J7 Tracker": existe, mas não é o que o nome sugere aqui. ' },
+            'Ele existe (j7tracker.io) — mas é uma ferramenta de sniping e deploy de token ' +
+              '("sub-1ms server-side deploys"), com um rastreador de tweets embutido como recurso ' +
+              'auxiliar; acesso por credenciais via Discord. A categoria em si — "tracker de ' +
+              'tweets / alertas sociais" — é real e usada no mercado; o hub cita o nome só para ' +
+              'deixar claro o que ele de fato é, não como recomendação de uso.',
+          ],
+        ],
+      },
+      pergunta: 'q4',
     },
   ],
 
   // ---------------------------------------------------------------------------
-  // Correção em destaque (mostrada no topo da página, difícil de não ver)
-  // ---------------------------------------------------------------------------
-  correcaoAxiom: {
-    titulo: 'Correção: "Axon" não existe — o nome certo é Axiom',
-    texto:
-      'O pedido original citava "Axon" como terminal de execução para Solana. Pesquisa ' +
-      'dedicada não encontrou nenhum terminal de execução relevante com esse nome. O ' +
-      'provável terminal citado é o Axiom Trade: um terminal web não-custodial focado em ' +
-      'Solana. Este hub usa "Axiom" em todo o conteúdo e mantém esta correção à vista.',
-  },
-
-  // ---------------------------------------------------------------------------
-  // Pilar social (aba "Visão geral", seção própria) — inclui a ressalva do J7 Tracker
-  // ---------------------------------------------------------------------------
-  pilarSocial: {
-    titulo: 'Pilar social: monitorar antes de checar',
-    paragrafos: [
-      'Trackers de tweets e de carteiras servem para detectar cedo quando uma conta grande ' +
-        '— influenciador, projeto, carteira "smart money" — interage com um token, dando ' +
-        'tempo de reação antes de a multidão chegar.',
-      'Isso não substitui a checagem técnica: serve só para você não ser o último a saber ' +
-        'que algo está acontecendo. O que fazer com essa informação ainda depende do pilar ' +
-        'técnico e da sua tese (Módulo 4).',
-    ],
-    jTracker: {
-      titulo: '"J7 Tracker": existe, mas não é o que o nome sugere aqui',
-      texto:
-        'O J7 Tracker existe (j7tracker.io) — mas é uma ferramenta de sniping e deploy de ' +
-        'token ("sub-1ms server-side deploys"), com um rastreador de tweets embutido como ' +
-        'recurso auxiliar; acesso por credenciais via Discord. Não é uma ferramenta de ' +
-        'tracker de narrativa como exemplo isolado. A categoria em si — "tracker de tweets / ' +
-        'alertas sociais" — é real e usada no mercado; o hub cita o nome só para deixar ' +
-        'claro o que ele de fato é, não como recomendação de uso.',
-    },
-  },
-
-  // ---------------------------------------------------------------------------
-  // Dimensões de filtro da matriz (aba "Matriz de ferramentas")
+  // Dimensões de filtro da matriz (aba "Matriz de ferramentas"). `nomeCurto` é o
+  // nome que aparece no filtro e nos chips do cartão (o desenho escreve só "EVM").
   // ---------------------------------------------------------------------------
   chains: [
     { id: 'solana', nome: 'Solana' },
-    { id: 'evm', nome: 'EVM (Ethereum, Base, BSC, Arbitrum...)' },
+    { id: 'evm', nome: 'EVM (Ethereum, Base, BSC, Arbitrum...)', nomeCurto: 'EVM' },
     { id: 'bnb', nome: 'BNB Chain' },
     { id: 'multi', nome: 'Multi-chain' },
   ],
@@ -118,8 +152,8 @@ export const modulo3 = {
 
   // ---------------------------------------------------------------------------
   // Matriz de ferramentas (aba "Matriz de ferramentas") — filtrável por
-  // pilar (social/técnico), chain e papel. Cada ferramenta abre (via <details>)
-  // um card com "o que faz", "quando usar" e "risco".
+  // pilar (social/técnico), chain e papel. Cada ferramenta vira um cartão aberto
+  // com o risco, "o que faz" e "quando usar"; só as observações ficam recolhidas.
   // ---------------------------------------------------------------------------
   ferramentas: [
     {
@@ -254,9 +288,11 @@ export const modulo3 = {
         'Avalanche, Blast), com checagem rápida do contrato de deploy ("factory").',
       quandoUsar: 'Sniping e checagem rápida em redes EVM — nunca em Solana.',
       risco: 'alto',
+      // Sem repetir "não suporta Solana": isso já sai na faixa vermelha do cartão
+      // (matriz.avisoSemSolana), como no desenho.
       observacoes:
-        'Verificado: o Sigma NÃO suporta Solana. "Factory" é o contrato que faz o deploy ' +
-        'de outros contratos/tokens; checar a factory é um padrão conhecido para detectar scam.',
+        '"Factory" é o contrato que faz o deploy de outros contratos/tokens; checar a ' +
+        'factory é um padrão conhecido para detectar scam.',
     },
     {
       id: 'rugcheck',
@@ -373,16 +409,31 @@ export const modulo3 = {
   ],
 
   // ---------------------------------------------------------------------------
+  // Aba "Matriz de ferramentas": o card em volta da matriz filtrável. As
+  // ferramentas em si estão em `ferramentas`, logo acima.
+  // ---------------------------------------------------------------------------
+  matriz: {
+    titulo: 'Matriz de ferramentas',
+    emUmaFrase:
+      'Cada ferramenta tem um papel: visualização, execução, checagem ou monitoramento ' +
+      'social. Filtre por pilar, rede e papel.',
+    // A faixa vermelha no cartão de quem tem `naoSuportaSolana: true` (o Sigma).
+    avisoSemSolana: 'Verificado: não suporta Solana.',
+    pergunta: 'q3',
+  },
+
+  // ---------------------------------------------------------------------------
   // Cenário de launchpads 2025–2026 (aba "Cenário 2025–2026")
   // ---------------------------------------------------------------------------
   cenarioLaunchpads: {
     titulo: 'A liderança entre launchpads muda rápido',
-    introducao:
-      'Verificado, com uma ressalva importante: os números abaixo mudam de mês em mês. O ' +
-      'que fica é o conceito — launchpad + bonding curve + graduação para uma DEX — não o ' +
+    emUmaFrase:
+      'O que fica é o conceito — launchpad + bonding curve + graduação para uma DEX — não o ' +
       'nome de quem lidera hoje.',
     // Em ordem cronológica — a view desenha isto como linha do tempo, e uma
-    // linha do tempo fora de ordem ensina errado.
+    // linha do tempo fora de ordem ensina errado. As datas ficam como a
+    // pesquisa achou: "Início de agosto de 2025" e "Fim de 2025" não têm dia
+    // (o desenho escreveu "01/08/2025", que não tem fonte).
     eventos: [
       {
         data: '07/07/2025',
@@ -404,22 +455,31 @@ export const modulo3 = {
           '20.000 tokens criados no dia.',
       },
     ],
-    conclusao:
-      'O líder muda rápido; o hub ensina o conceito e mantém os nomes e números editáveis ' +
-      'bem aqui, em src/data/modulo3.js.',
+    // O parágrafo que fecha a aba (no formato de pedaços: { mono } é o caminho do arquivo).
+    conclusao: [
+      'Verificado, com uma ressalva importante: os números acima mudam de mês em mês. O ' +
+        'líder muda rápido; o hub ensina o conceito e mantém os nomes e números editáveis em ',
+      { mono: 'src/data/modulo3.js' },
+      '.',
+    ],
   },
 
   // ---------------------------------------------------------------------------
   // Aba "Narrativas" — pesquisas 8 a 11 dos módulos, com as correções de
   // pesquisa/modulos/pesquisas/VERIFICACOES-AO-VIVO-2.md (seção 3). Onde a
   // pesquisa e a conferência divergem, vale a conferência.
+  // As cinco seções seguem o desenho "M3 Desktop", na ordem da aba.
   // ---------------------------------------------------------------------------
   praticaNarrativas: {
-    introducao:
-      'Uma narrativa é um tema que puxa vários tokens ao mesmo tempo: celebridades, animais ' +
-      'virais, agentes de IA, políticos. Esta aba ensina a reconhecer uma, a situar em que fase ' +
-      'ela está e a rastrear com ferramentas — e diz com todas as letras o que a pesquisa não ' +
-      'sabe: ninguém mediu se ler narrativa ajuda a prever o preço.',
+    // Esta aba NÃO tem "Antes de ler: o que você acha?" (o desenho também não
+    // tem o bloco). A q11 usada aqui antes ("em qual rede social a atenção
+    // aparece primeiro?") é respondida pelo 2º destaque da própria aba
+    // ("Estudos que mediram... — Nenhum"), 24px abaixo e na mesma tela: o aluno
+    // lia a resposta antes de tentar, e a tentativa perdia o efeito. Das 13
+    // perguntas do quiz não sobra nenhuma para o lugar: q13 e q12 são a
+    // "Pergunta rápida" das seções desta aba, e as livres (q2, do nome Axiom, e
+    // q10, do Bubblemaps) são de outras abas. O bloco fica no Pilar técnico.
+    perguntaAntes: null,
 
     termos: [
       { termo: 'Narrativa', definicao: 'Um tema que puxa vários tokens ao mesmo tempo, e não o hype de um token só.' },
@@ -453,175 +513,174 @@ export const modulo3 = {
 
     secoes: [
       {
-        id: 'o-que-e',
-        titulo: 'O que é uma narrativa, e o que ela não é',
-        emUmaFrase: 'Narrativa é um tema que puxa vários tokens juntos, e não o hype de um token só.',
-        paragrafos: [
-          'Um exemplo: quando a atenção vai para "agentes de IA", vários tokens com esse tema sobem ' +
-            'ao mesmo tempo. Logo depois aparecem centenas de cópias.',
-          'Isso importa porque memecoin sobe e desce por atenção (Módulo 2). A narrativa é a forma ' +
-            'que essa atenção toma.',
-        ],
-        quadro: [
-          { rotulo: 'É narrativa', texto: 'Um tema, como "agentes de IA", que puxa vários tokens ao mesmo tempo.' },
-          { rotulo: 'Não é narrativa', texto: 'O hype de um token só.' },
-        ],
-        paragrafosFinais: [
-          'Mas saber a narrativa do momento não diz qual token comprar, nem quando. A seção ' +
-            '"Narrativa e preço" mostra o que a pesquisa mediu, e é pouco.',
-        ],
-      },
-      {
-        id: 'onde-nasce',
-        titulo: 'Onde a narrativa nasce',
-        emUmaFrase:
-          'A narrativa quase sempre nasce fora da blockchain: primeiro vem o post, a notícia ou o ' +
-          'vídeo, e só depois o token.',
-        paragrafos: [
-          'Pense no token como uma reação. Um assunto chama atenção nas redes, e alguém cria um ' +
-            'token com aquele tema.',
-          'Um estudo olhou os 15,2 milhões de tokens criados no pump.fun em dois anos. Achou 23,5% ' +
-            'deles criados logo depois de um post no X ou no Truth Social.',
-          'Para quem cria, isso pode render muito: 31 desses posts renderam pelo menos US$ 1 milhão ' +
-            'cada a quem criou o token.',
-        ],
-        exemplo: {
-          titulo: 'Dois casos reais',
-          passos: [
-            'Fim de outubro de 2024: o esquilo Peanut é apreendido e morto em Nova York. Na esteira ' +
-              'do caso, surge o token PNUT.',
-            'Outubro de 2024: o token GOAT nasce empurrado pelos posts de um bot de IA, o Truth ' +
-              'Terminal.',
-          ],
-        },
-        paragrafosFinais: [
-          'Depois do primeiro token vêm as cópias. Elas são sintoma de uma narrativa que já está ' +
-            'andando, não a origem dela.',
-          'Em qual rede a atenção aparece primeiro? Telegram, X, TikTok ou Discord: ninguém mediu.',
-          'Em golpe organizado, a ordem é conhecida. Em canais VIP de pump-and-dump (grupos que ' +
-            'inflam o preço e vendem em cima de quem chega depois), o nome da moeda sai de 12 a 24 ' +
-            'horas antes do sinal público.',
-          'Ou seja: quem vê o sinal na rede aberta chegou depois de quem organizou.',
-        ],
-        detalhe: {
-          titulo: 'os estudos e os números das cópias',
-          paragrafos: [
-            'O estudo dos 15,2 milhões de tokens é o "Meme Coin Factories", um preprint de 2026. ' +
-              'Preprint é um estudo divulgado antes de passar pela revisão de outros cientistas.',
-            'O mesmo estudo contou 1,5 milhão de tokens que copiam nome, símbolo, descrição e ' +
-              'imagem de outro. Isso é mais de 10% de tudo.',
-            'Entre os originais que ganharam cópia, 9,2% graduaram. Entre as cópias, só 0,86%. ' +
-              'Graduar é completar a fase inicial do pump.fun e passar a ser negociado fora dela.',
-            'O número alto dos originais tem um viés: só ganha cópia quem já chamou atenção.',
-            'Por que ninguém sabe qual rede vem primeiro: os estudos que existem comparam uma rede ' +
-              'com o preço, não uma rede com outra.',
-            'O dado dos canais VIP é de Ardia & Bluteau, International Review of Financial ' +
-              'Analysis, 2024.',
-          ],
-        },
-      },
-      {
-        id: 'fabricada',
-        titulo: 'Quanto da atenção é fabricada',
-        emUmaFrase:
-          'Uma parte grande da atenção que você vê é fabricada, por bots, por grupos organizados e ' +
-          'por divulgação paga.',
-        paragrafos: [
-          'Bot é uma conta automática que se passa por pessoa. Um levantamento com mais de 50 ' +
-            'milhões de mensagens no X, no Telegram e no Discord mediu o peso deles.',
-          'Mais de 56% das contas do X que espalhavam convites para grupos eram bots ou foram ' +
-            'suspensas.',
-          'E 93% dos links postados por bots levavam a canais de pump-and-dump no Telegram.',
-          'No estudo do pump.fun, 17% das negociações eram wash trading. Wash trading é comprar e ' +
-            'vender de si mesmo, só para parecer que há movimento.',
-          'Some a isso os calls pagos, da aba "Pilar social na prática". Call é quando alguém com ' +
-            'público indica um token. A narrativa que você vê chegando pode ser campanha.',
-        ],
-        detalhe: {
-          titulo: 'a escala e as fontes',
-          paragrafos: [
-            'O levantamento das mensagens durou três meses (Nizzoli et al., IEEE Access, 2020). No ' +
-              'Discord, ele achou um único canal de pump-and-dump, contra 296 no Telegram.',
-            'O estudo do pump.fun achou 800 mil canais públicos e 236 mil privados do Telegram ' +
-              'ligados a tokens da plataforma.',
-            'No mesmo estudo, o top 1% dos grupos de criadores criou 58,6% de todos os tokens.',
-          ],
-        },
-      },
-      {
         id: 'ciclo',
         titulo: 'O ciclo de vida de uma narrativa',
         emUmaFrase:
-          'Uma narrativa nasce, cresce, chega ao pico, satura e morre, parecido com as fases de um ' +
-          'token do Módulo 2.',
+          'Uma narrativa nasce, cresce, chega ao pico, satura e morre. Os sinais descrevem o que ' +
+          'aconteceu — nenhum foi medido como aviso de entrar ou sair.',
+        // As cinco fases: o título vai na caixa do círculo; título e texto, na lista embaixo.
+        fases: [
+          {
+            titulo: 'Nascimento',
+            texto: 'um evento fora de cripto (post, notícia, vídeo viral) e um primeiro token que chama atenção.',
+          },
+          {
+            titulo: 'Crescimento',
+            texto:
+              'aparecem vários tokens com o mesmo tema. Uma corretora grande lista um deles, e uma ' +
+              'figura pública entra na conversa. O PNUT foi listado na Binance em 11/11/2024, com ' +
+              'Elon Musk usando o esquilo no X.',
+          },
+          {
+            titulo: 'Pico',
+            texto:
+              'o valor somado do tema para de subir. A imprensa fora de cripto costuma chegar aqui ' +
+              'ou depois — nos casos PNUT e LIBRA, a cobertura veio no topo.',
+          },
+          {
+            titulo: 'Saturação',
+            texto:
+              'continuam nascendo tokens do tema, mas o valor dele já cai. Há registro disso nos ' +
+              'agentes de IA e no Believe; nos outros três casos, não há dado.',
+          },
+          {
+            titulo: 'Morte',
+            texto:
+              'as cópias perdem quase tudo. Dos 30 tokens de celebridades lançados na Solana a ' +
+              'partir de maio de 2024, a queda média foi de 94% em cerca de um mês.',
+          },
+        ],
+        // O texto no meio do círculo, e a frase que fecha a descrição para leitor de tela.
+        centroDoCiclo: 'e o tema seguinte começa',
+        fimDoCiclo: 'Depois da morte, o tema seguinte começa.',
         paragrafos: [
-          'As cinco narrativas de 2024 e 2025 com dados públicos seguiram esse desenho.',
-          'Os sinais abaixo descrevem o que aconteceu. Nenhum foi medido como aviso de hora de ' +
-            'entrar ou de sair.',
+          'As cinco narrativas de 2024 e 2025 com dados públicos seguiram esse desenho. A ' +
+            'narrativa quase sempre nasce fora da blockchain: primeiro vem o post, a notícia ou o ' +
+            'vídeo, e só depois o token.',
         ],
-        listaTitulo: 'As fases, e o que deu para ver em cada uma:',
-        ordenada: true,
-        lista: [
-          'Nascimento: um evento fora de cripto (post, notícia, vídeo viral) e um primeiro token ' +
-            'que chama atenção.',
-          'Crescimento: aparecem vários tokens com o mesmo tema. Uma corretora grande lista um ' +
-            'deles, e uma figura pública entra na conversa. Exemplo: o PNUT foi listado na Binance ' +
-            'em 11/11/2024, com Elon Musk usando o esquilo no X.',
-          'Pico: o valor somado do tema para de subir. A imprensa fora de cripto costuma chegar ' +
-            'aqui ou depois. Nos casos PNUT e LIBRA, a cobertura veio no topo, não antes.',
-          'Saturação: continuam nascendo tokens do tema, mas o valor dele já cai. Há registro ' +
-            'disso nos agentes de IA e no Believe. Nos outros três casos, não há dado.',
-          'Morte: as cópias perdem quase tudo. Dos 30 tokens de celebridades lançados na Solana a ' +
-            'partir de maio de 2024, a queda média foi de 94% em cerca de um mês.',
+        // Aviso 2 de 3: limita a leitura da fase (caixa âmbar).
+        aviso: [
+          { forte: 'O que o ciclo mostra, e o que não mostra: ' },
+          'as cinco fases descrevem a atenção subindo e caindo. Situar a fase não posiciona o ' +
+            'preço na mesma linha — nos casos com data, a imprensa chegou no topo, e a saturação ' +
+            'só ficou visível depois. A fase é leitura do que já aconteceu, não do próximo passo.',
         ],
+        detalhe: {
+          titulo: 'onde a narrativa nasce, e quanto da atenção é fabricada',
+          lista: [
+            'Um estudo olhou os 15,2 milhões de tokens criados no pump.fun em dois anos e achou ' +
+              '23,5% deles criados logo depois de um post no X ou no Truth Social ("Meme Coin ' +
+              'Factories", preprint). 31 desses posts renderam pelo menos US$ 1 milhão cada a quem ' +
+              'criou o token.',
+            'Cópias: 1,5 milhão de tokens copiam nome, símbolo, descrição e imagem de outro — mais ' +
+              'de 10% de tudo. Entre os originais que ganharam cópia, 9,2% graduaram; entre as ' +
+              'cópias, 0,86%.',
+            'Fabricação: mais de 56% das contas do X que espalhavam convites para grupos eram bots ' +
+              'ou foram suspensas, e 93% dos links postados por bots levavam a canais de ' +
+              'pump-and-dump no Telegram (Nizzoli et al., IEEE Access, 2020). No estudo do ' +
+              'pump.fun, 17% das negociações eram wash trading.',
+            'Em canais VIP de pump-and-dump, o nome da moeda sai de 12 a 24 horas antes do sinal ' +
+              'público (Ardia & Bluteau, 2024). Quem vê o sinal na rede aberta chegou depois de ' +
+              'quem organizou.',
+          ],
+        },
+        // Guardado, fora da tela (ver o cabeçalho do arquivo): as definições para
+        // iniciante e os números com fonte que o desenho condensou nesta seção.
+        foraDaTela: [
+          'O estudo dos 15,2 milhões de tokens é o "Meme Coin Factories", um preprint de 2026. ' +
+            'Preprint é um estudo divulgado antes de passar pela revisão de outros cientistas.',
+          'Graduar é completar a fase inicial do pump.fun e passar a ser negociado fora dela.',
+          'O número alto dos originais tem um viés: só ganha cópia quem já chamou atenção.',
+          'Onde a narrativa nasce, nos dois casos com data: no fim de outubro de 2024, o esquilo ' +
+            'Peanut é apreendido e morto em Nova York, e na esteira do caso surge o token PNUT; em ' +
+            'outubro de 2024, o token GOAT nasce empurrado pelos posts de um bot de IA, o Truth ' +
+            'Terminal.',
+          'No mesmo levantamento de três meses (Nizzoli et al., IEEE Access, 2020), o Discord ' +
+            'tinha um único canal de pump-and-dump, contra 296 no Telegram.',
+          'O estudo do pump.fun achou 800 mil canais públicos e 236 mil privados do Telegram ' +
+            'ligados a tokens da plataforma.',
+          'No mesmo estudo, o top 1% dos grupos de criadores criou 58,6% de todos os tokens.',
+        ],
+        pergunta: 'q13',
       },
       {
         id: 'narrativa-e-preco',
-        titulo: 'Narrativa move o preço? O que está medido',
+        titulo: 'Narrativa ou hype de um token? E narrativa move preço?',
         emUmaFrase:
-          'A narrativa explica por que um token chama atenção, mas não há evidência de que ela ' +
-          'ajude a prever o preço.',
-        paragrafos: [
-          'O mercado repete que narrativa move preço. O que foi medido é bem menos do que isso.',
-          'Memecoin de launchpad é a criada num site de lançamento, como o pump.fun. Para esse ' +
-            'tipo de token, não existe estudo revisado por pares que ligue, com um número, a ' +
-            'atenção nas redes ao preço.',
-          'Revisado por pares quer dizer conferido por outros cientistas antes de sair. Os estudos ' +
-            'que existem, dentro e fora de memecoin, apontam três coisas.',
-        ],
-        quadro: [
+          'Narrativa é um tema que puxa vários tokens juntos, e não o hype de um token só. E não ' +
+          'há evidência de que ela ajude a prever o preço.',
+        // O fluxograma de triagem: uma pergunta, dois ramos e o nó final que os
+        // dois ramos encontram. O nó final é o aviso 3 de 3 (ponte para as barras).
+        triagem: {
+          pergunta: 'O tema puxa vários tokens ao mesmo tempo?',
+          sim: {
+            rotulo: 'Sim',
+            titulo: 'É narrativa',
+            texto: 'Um tema, como "agentes de IA", que puxa vários tokens ao mesmo tempo',
+          },
+          nao: { rotulo: 'Não', titulo: 'Não é narrativa', texto: 'É o hype de um token só' },
+          fim:
+            'Nos dois casos: o tema explica a atenção, não a direção do preço. As barras abaixo ' +
+            'mostram por quê.',
+          descricao:
+            'O tema puxa vários tokens ao mesmo tempo? Se sim, é narrativa: um tema, como agentes ' +
+            'de IA, que puxa vários tokens. Se não, não é narrativa: é o hype de um token só. Nos ' +
+            'dois casos, reconhecer o tema não diz qual token comprar, nem quando.',
+        },
+        // As duas barras na mesma escala. `valor` é o teto de cada faixa (3% e 6
+        // pontos), só para o comprimento da barra; o que aparece escrito é `exibicao`.
+        conta: {
+          titulo: 'A conta que nenhum estudo fez para memecoin',
+          sinal: {
+            rotulo: 'O sinal social, no melhor caso',
+            exibicao: '1% a 3%',
+            valor: 3,
+            nota: 'E só por poucos minutos.',
+          },
+          custo: {
+            rotulo: 'Custo de entrar e sair (Módulo 5)',
+            exibicao: '3 a 6 pontos',
+            valor: 6,
+            nota: 'O custo come o sinal antes de ele virar lucro.',
+          },
+          legenda:
+            'Mesma escala, em pontos percentuais. A faixa de 1 a 3% é o teto do que os estudos ' +
+            'acharam; nenhum deles é de memecoin de launchpad.',
+          descricao:
+            'No melhor caso, o sinal social rende de 1% a 3%, e só por poucos minutos. Entrar e ' +
+            'sair de uma memecoin custa de 3 a 6 pontos. O custo come o sinal antes de ele virar ' +
+            'lucro.',
+        },
+        // Os três achados. `tom` dá a cor do rótulo: 'alerta' (vermelho),
+        // 'atencao' (âmbar) ou 'acento' (ciano).
+        evidencias: [
           {
             rotulo: 'Aponta para perda',
             texto:
               'Depois do tweet de um influenciador, o preço sobe 1,83% no dia e cai 6,53% em 30 ' +
               'dias.',
+            tom: 'alerta',
           },
           {
             rotulo: 'Dura minutos',
             texto:
               'A atenção prevê melhor quanto se negocia e quanto o preço oscila do que para que ' +
               'lado ele vai. Quando acerta o lado, o efeito dura minutos.',
+            tom: 'atencao',
           },
           {
             rotulo: 'Muitas vezes é ao contrário',
             texto: 'O preço sobe primeiro, e só depois as pessoas falam dele.',
+            tom: 'acento',
           },
         ],
-        exemplo: {
-          titulo: 'A conta que nenhum estudo fez para memecoin',
-          passos: [
-            'No melhor caso, o sinal social rende de 1% a 3%, e só por poucos minutos.',
-            'Entrar e sair de uma memecoin custa de 3 a 6 pontos (Módulo 5).',
-            'Resultado: o custo come o sinal antes de ele virar lucro.',
-          ],
-        },
-        paragrafosFinais: [
-          'Em grupos de pump no Telegram, os sinais vêm segundos antes do preço. Quem lê o sinal ' +
-            'chega depois.',
+        paragrafos: [
+          'O mercado repete que narrativa move preço. O que foi medido é bem menos do que isso. ' +
+            'Para memecoin de launchpad, não existe estudo revisado por pares que ligue, com um ' +
+            'número, a atenção nas redes ao preço.',
           'Cuidado com um número que circula: tokens com link de Telegram no cadastro graduam ' +
-            'cerca de 9 vezes mais no pump.fun. Não use isso como sinal.',
-          'Esse estudo mede só se existe um link, e link é o sinal mais barato de falsificar que ' +
-            'existe. Além disso, a coleta cobriu só os primeiros minutos de cada token.',
+            'cerca de 9 vezes mais no pump.fun. Não use isso como sinal — o estudo mede só se ' +
+            'existe um link, e link é o sinal mais barato de falsificar que existe.',
         ],
         detalhe: {
           titulo: 'quais estudos dizem o quê',
@@ -631,16 +690,153 @@ export const modulo3 = {
               'Wong & Cai (WWW 2025) só descreve médias.',
             'Tweet de influenciador, +1,83% no dia e −6,53% em 30 dias: Merkley et al., 2024. É um ' +
               'dado de fora dos launchpads.',
-            'Sinais segundos antes do preço em grupos de pump no Telegram: Moura et al., preprint ' +
-              'de 2026.',
             'Atenção prevê negociação e oscilação melhor do que direção: Shen, Urquhart & Wang, ' +
-              '2019. É cripto grande, onde há mais estudo, e o quadro é o mesmo.',
-            'Efeito de minutos: com um milhão de mensagens sobre o Bitcoin, o sinal só valia por 15 ' +
-              'minutos. Os autores escrevem que custos de transação razoáveis tornam impossível ' +
-              'lucrar com ele (Guégan & Renault, Finance Research Letters, 2021).',
-            'Preço subindo antes da conversa: Süssmuth, Journal of Forecasting, 2021.',
-            'Link de Telegram e graduação cerca de 9 vezes maior: Kamat, preprint de 2026.',
+              '2019. Efeito de minutos: com um milhão de mensagens sobre o Bitcoin, o sinal só ' +
+              'valia por 15 minutos, e os autores escrevem que custos de transação razoáveis ' +
+              'tornam impossível lucrar com ele (Guégan & Renault, 2021).',
+            'Preço subindo antes da conversa: Süssmuth, Journal of Forecasting, 2021. Link de ' +
+              'Telegram e graduação 9 vezes maior: Kamat, preprint de 2026.',
           ],
+        },
+        // Guardado, fora da tela (ver o cabeçalho do arquivo).
+        foraDaTela: [
+          'Memecoin de launchpad é a criada num site de lançamento, como o pump.fun.',
+          'Revisado por pares quer dizer conferido por outros cientistas antes de sair.',
+        ],
+      },
+      {
+        id: 'rotacao',
+        titulo: 'A rotação das narrativas, 2024–2025',
+        emUmaFrase:
+          'Cada tema dominou por semanas e deu lugar ao seguinte — enquanto o setor inteiro ' +
+          'encolhia.',
+        // A linha do tempo. As datas ficam EXATAMENTE como a pesquisa achou: com o
+        // intervalo ("10–11/10/2024") e o "~" de aproximado. O desenho tirou os dois;
+        // não copiar. `tom: 'atencao'` = ponto âmbar.
+        linhaDoTempo: {
+          marcos: [
+            {
+              data: '26/05/2024',
+              titulo: 'Celebridades: Caitlyn Jenner lança o JENNER',
+              texto:
+                'Na esteira vieram MOTHER (Iggy Azalea) e DADDY (Andrew Tate). Cerca de um mês depois, ' +
+                'os 30 tokens de celebridades da Solana acumulavam queda média de 94%.',
+            },
+            {
+              data: '11/09/2024',
+              titulo: 'Animais: nasce o MOODENG',
+              texto: 'Depois viria o PNUT, listado na Binance em 11/11/2024.',
+            },
+            {
+              data: '10–11/10/2024',
+              titulo: 'IA: nasce o GOAT, empurrado pelo bot Truth Terminal',
+              texto:
+                'O GOAT chegou a cerca de US$ 1,3 bilhão em 17/11/2024. O tema vira "agentes de IA": ' +
+                'ai16z, Virtuals, AIXBT.',
+            },
+            {
+              data: '04–05/12/2024',
+              titulo: 'HAWK, o token da influenciadora Hawk Tuah',
+              texto:
+                'O market cap chegou a US$ 491 milhões e caiu mais de 90% em horas. Virou ação ' +
+                'coletiva nos EUA.',
+              tom: 'atencao',
+            },
+            {
+              data: '~06/01/2025',
+              titulo: 'Pico dos agentes de IA: cerca de US$ 20 bilhões somados',
+              texto: 'Em fevereiro, cerca de US$ 6,5 bilhões.',
+            },
+            {
+              data: '17/01/2025',
+              titulo: 'Políticos: lançamento do TRUMP',
+              texto: 'Em três semanas, mais de 700 memecoins-cópia foram enviadas à carteira dele.',
+            },
+            {
+              data: '14/02/2025',
+              titulo: 'LIBRA, promovida por Javier Milei',
+              texto:
+                'Das 15.430 carteiras que negociaram mais de US$ 1.000, mais de 86% venderam no ' +
+                'prejuízo, somando US$ 251 milhões (Nansen). Fim da onda de memecoins políticas.',
+              tom: 'atencao',
+            },
+            {
+              data: '12–15/05/2025',
+              titulo: '"Internet Capital Markets": pico do LAUNCHCOIN, no app Believe',
+              texto: 'Mais de 21 mil moedas na primeira semana; a queda começou em dias.',
+            },
+            {
+              data: '2026',
+              titulo: 'Nenhuma narrativa dominante confirmada',
+              texto: 'O que os dados mostram é retração do setor.',
+              tom: 'atencao',
+            },
+          ],
+          nota:
+            'Datas e números de imprensa e de relatórios de empresa, vários só por resumo de busca. ' +
+            'Detalhes em "não verificado", na aba Quiz.',
+        },
+        // A tabela das cinco narrativas: uma narrativa por linha.
+        tabela: {
+          rotuloDasLinhas: 'Narrativa',
+          rotulo: 'As cinco narrativas, lado a lado (role na horizontal se preciso)',
+          larguraMinima: 640,
+          colunas: [
+            { chave: 'nascimento', rotulo: 'Primeiro token' },
+            { chave: 'pico', rotulo: 'Pico' },
+            { chave: 'duracao', rotulo: 'Até perder a atenção' },
+            { chave: 'destino', rotulo: 'O que aconteceu' },
+          ],
+          linhas: [
+            {
+              titulo: 'Celebridades',
+              valores: {
+                nascimento: 'JENNER, 26/05/2024',
+                pico: 'Junho de 2024',
+                duracao: 'Cerca de 1 mês',
+                destino: '30 tokens: queda média de 94%; metade perdeu mais de 99%',
+              },
+            },
+            {
+              titulo: 'Animais virais',
+              valores: {
+                nascimento: 'MOODENG, 11/09/2024',
+                pico: 'Dois picos: 28/09 e 15/11/2024 (~US$ 614 mi)',
+                duracao: 'Cerca de 2 meses',
+                destino: 'MOODENG −44% do pico até 27/11/2024',
+              },
+            },
+            {
+              titulo: 'IA / agentes',
+              valores: {
+                nascimento: 'GOAT, 10–11/10/2024',
+                pico: '~06/01/2025, cerca de US$ 20 bi somados',
+                duracao: 'Cerca de 1 mês de queda',
+                destino: 'Setor −67% até fevereiro de 2025',
+              },
+            },
+            {
+              titulo: 'Políticos',
+              valores: {
+                nascimento: 'TRUMP, 17/01/2025',
+                pico: 'Janeiro de 2025',
+                duracao: 'Cerca de 1 mês, até a LIBRA',
+                destino: 'LIBRA: mais de 86% das carteiras acima de US$ 1.000 no prejuízo',
+              },
+            },
+            {
+              titulo: 'Internet Capital Markets',
+              valores: {
+                nascimento: 'LAUNCHCOIN, 03/05/2025',
+                pico: '15/05/2025',
+                duracao: 'Cerca de 4 dias',
+                destino: 'Receita semanal do Believe −94% do pico, em junho de 2025',
+              },
+            },
+          ],
+          frase:
+            'A última das cinco (Believe) foi de longe a mais curta, mas cinco casos não formam ' +
+            'tendência: a de animais durou mais que a de celebridades.',
         },
       },
       {
@@ -649,53 +845,145 @@ export const modulo3 = {
         emUmaFrase:
           'Uma lista de "em alta" mostra onde a atenção está agora. Não mostra se essa atenção é ' +
           'real.',
-        paragrafos: [
-          'Toda lista de "em alta" é montada com atividade de negociação, com pagamento, ou com as ' +
-            'duas coisas.',
-          'E atividade é exatamente o que o volume falso do Módulo 6 fabrica.',
-          'Nenhuma dessas métricas tem validação publicada como previsão de preço de memecoin.',
-          'A tabela abaixo diz o que cada ferramenta mede, segundo a documentação dela, conferida ' +
-            'em 13 e 14/09/2026.',
-        ],
-        quadro: [
-          { rotulo: 'Grátis', texto: 'Ler as listas e as páginas, em quase todas as ferramentas.' },
-          {
-            rotulo: 'Pago',
-            texto:
-              'O dado social, as APIs (o acesso aos dados feito por programas) e as assinaturas.',
-          },
-        ],
-        detalhe: {
-          titulo: 'quanto custa cada coisa',
-          lista: [
-            'LunarCrush: o plano grátis só tem dados de mercado. O dado social começa em US$ 5 por dia.',
-            'Birdeye: API a partir de US$ 39 por mês.',
-            'X Premium: de US$ 3 a US$ 40 por mês.',
-            'Nansen Pro: de US$ 49 a US$ 69 por mês.',
-            'DexScreener: o preço dos Boosts (pagamento para aparecer em alta) não é publicado em ' +
-              'página oficial.',
-            'O Galaxy Score e o AltRank do LunarCrush são descritos só por material do próprio ' +
-              'vendedor.',
+        // A tabela, conferida na documentação de cada ferramenta em 13 e 14/09/2026.
+        // A coluna `novo` é um selo com cor (`tom`): 'alerta' (vermelho) = cobre
+        // memecoin nova; 'atencao' (âmbar) = em parte, ou não verificado; 'ok'
+        // (verde) = não cobre. `selo: 'curto'` = selo numa linha só, em 13px e
+        // negrito. A coluna `comprado` tem a borda ciano do desenho.
+        tabela: {
+          rotuloDasLinhas: 'Ferramenta',
+          rotulo: 'O que cada ferramenta mede (role na horizontal se preciso)',
+          larguraMinima: 680,
+          colunas: [
+            { chave: 'mede', rotulo: 'O que mede' },
+            { chave: 'novo', rotulo: 'Memecoin nova', selo: 'curto' },
+            { chave: 'gratis', rotulo: 'Ler é grátis' },
+            { chave: 'comprado', rotulo: 'Pago ou fabricável', destaque: true },
+          ],
+          linhas: [
+            {
+              titulo: 'DexScreener',
+              subtitulo: 'lista "em alta"',
+              valores: {
+                mede: 'Um "Trending Score" próprio: volume, liquidez, transações, carteiras distintas, holders, visitas à página e reações. A fórmula não é publicada.',
+                novo: { texto: 'Sim', tom: 'alerta' },
+                gratis: 'Sim',
+                comprado: 'Sim: Boosts pagos multiplicam o score por 12 a 24 horas. Visitas e reações também são fabricáveis.',
+              },
+            },
+            {
+              titulo: 'GMGN',
+              subtitulo: 'lista "em alta" e carteiras',
+              valores: {
+                mede: 'Compras e vendas, volume, variação de preço e crescimento de holders, por minuto; também carteiras "smart money" e de influenciadores.',
+                novo: { texto: 'Sim', tom: 'alerta' },
+                gratis: 'Sim. Operar pede login com a chave privada num bot do Telegram — risco de custódia (Módulo 5).',
+                comprado: 'Fabricável: são os números que o wash trading infla.',
+              },
+            },
+            {
+              titulo: 'Birdeye',
+              valores: {
+                mede: 'Tokens que mais se moveram numa janela de tempo; mais vistos e mais negociados.',
+                novo: { texto: 'Sim', tom: 'alerta' },
+                gratis: 'Sim. A API custa de US$ 39 a US$ 499 por mês; o PRO, US$ 45 por mês (não verificado).',
+                comprado: 'Fabricável pela mesma via.',
+              },
+            },
+            {
+              titulo: 'pump.fun',
+              subtitulo: 'board',
+              valores: {
+                mede: 'A atividade recente de negociação dos tokens da plataforma.',
+                novo: { texto: 'Sim — é onde nascem', tom: 'alerta' },
+                gratis: 'Sim. Negociar na curva custa 1,25% por operação.',
+                comprado: 'Fabricável.',
+              },
+            },
+            {
+              titulo: 'LunarCrush',
+              valores: {
+                mede: 'Sentimento e volume de posts no X, Reddit, YouTube e TikTok.',
+                novo: { texto: 'Em parte', tom: 'atencao' },
+                gratis: 'Não para o social: o plano grátis só tem dados de mercado. O social vai de US$ 5 a US$ 45 por dia.',
+                comprado: 'Sem mecanismo de compra documentado, mas posts podem vir de bots.',
+              },
+            },
+            {
+              titulo: 'Santiment',
+              valores: {
+                mede: 'Volume social e as palavras que dispararam, a partir de mais de 6.000 canais de cripto.',
+                novo: { texto: 'Não verificado', tom: 'atencao' },
+                gratis: 'Grátis limitado; o resto é pago.',
+                comprado: 'Posts podem vir de bots.',
+              },
+            },
+            {
+              titulo: 'Kaito',
+              valores: {
+                mede: 'Mindshare de projetos e de temas.',
+                novo: { texto: 'Não', tom: 'ok' },
+                gratis: 'Pago. O programa "Yaps" acabou em 15/01/2026 (não verificado).',
+                comprado: 'Não pesquisado.',
+              },
+            },
+            {
+              titulo: 'Google Trends',
+              valores: {
+                mede: 'Interesse de busca relativo, de 0 a 100, por termo, período e região.',
+                novo: { texto: 'Só com busca suficiente', tom: 'atencao' },
+                gratis: 'Sim',
+                comprado: 'Sem mecanismo de compra documentado. O número é relativo e tem ruído de propósito.',
+              },
+            },
+            {
+              titulo: 'X',
+              subtitulo: 'busca avançada e listas',
+              valores: {
+                mede: 'Posts públicos, filtráveis por conta, data e curtidas.',
+                novo: { texto: 'Sim', tom: 'alerta' },
+                gratis: 'Sim, mas só logado. O Premium vai de US$ 3 a US$ 40 por mês e não muda a busca.',
+                comprado: 'Contas e curtidas podem ser de bots: de 9% a 15% das contas ativas do X são bots (Varol et al., 2017).',
+              },
+            },
+            {
+              titulo: 'Arkham e Nansen',
+              valores: {
+                mede: 'Carteiras rotuladas como traders lucrativos ("smart money").',
+                novo: { texto: 'Em parte', tom: 'atencao' },
+                gratis: 'Nível grátis limitado. Nansen Pro: US$ 49 a US$ 69 por mês.',
+                comprado: 'Não pesquisado.',
+              },
+            },
           ],
         },
+        paragrafos: [
+          'Toda lista de "em alta" é montada com atividade de negociação, com pagamento, ou com as ' +
+            'duas coisas. E atividade é exatamente o que o volume falso do Módulo 6 fabrica. ' +
+            'Nenhuma dessas métricas tem validação publicada como previsão de preço de memecoin.',
+        ],
+        // Guardado, fora da tela (ver o cabeçalho do arquivo).
+        foraDaTela: [
+          'O Galaxy Score e o AltRank do LunarCrush são descritos só por material do próprio ' +
+            'vendedor.',
+        ],
+        pergunta: 'q12',
       },
       {
         id: 'rotina',
         titulo: 'Uma rotina de estudo de narrativa',
-        emUmaFrase: 'Esta rotina serve para treinar o olho. Não é método de entrada.',
-        paragrafos: [
-          'Nenhum destes passos foi medido como capaz de melhorar resultado.',
-        ],
-        listaTitulo: 'Uma vez por dia, ou quando um tema chamar atenção:',
-        ordenada: true,
-        lista: [
+        emUmaFrase:
+          'Esta rotina serve para treinar o olho. Não é método de entrada — nenhum destes passos ' +
+          'foi medido como capaz de melhorar resultado.',
+        rotuloDosPassos: 'Uma vez por dia, ou quando um tema chamar atenção',
+        // O último passo (o Checklist) sai destacado em ciano.
+        passos: [
           'Abra o feed de lançamentos do pump.fun e duas listas de "em alta". Anote os temas que ' +
             'se repetem.',
           'Ao ler as listas, lembre: parte delas é paga, e as cópias seguem a narrativa, não a ' +
             'criam.',
           'Procure a origem fora de cripto: o post, a notícia, o vídeo. Na busca avançada do X ' +
-            '(só logado), from: filtra por conta e since: filtra por data. Isso ajuda a achar quem ' +
-            'falou primeiro entre as contas que você acompanha.',
+            '(só logado), from: filtra por conta e since: filtra por data.',
           'Veja há quanto tempo o tema existe e quantos tokens já copiaram. Muitos tokens novos ' +
             'com o valor do tema caindo é o desenho da saturação.',
           'Anote no diário do Módulo 7: data, tema, primeiro token e a fase que você acha que é.',
@@ -704,262 +992,21 @@ export const modulo3 = {
         ],
       },
     ],
-
-    linhaDoTempo: {
-      titulo: 'A rotação das narrativas, 2024–2025',
-      descricao: 'Cada tema dominou por semanas e deu lugar ao seguinte.',
-      marcos: [
-        {
-          data: '26/05/2024',
-          titulo: 'Celebridades: Caitlyn Jenner lança o JENNER',
-          texto:
-            'Na esteira vieram MOTHER (Iggy Azalea) e DADDY (Andrew Tate). Cerca de um mês depois, ' +
-            'os 30 tokens de celebridades da Solana acumulavam queda média de 94%.',
-        },
-        {
-          data: '11/09/2024',
-          titulo: 'Animais: nasce o MOODENG',
-          texto: 'Depois viria o PNUT, listado na Binance em 11/11/2024.',
-        },
-        {
-          data: '10–11/10/2024',
-          titulo: 'IA: nasce o GOAT, empurrado pelo bot Truth Terminal',
-          texto:
-            'O GOAT chegou a cerca de US$ 1,3 bilhão em 17/11/2024. O tema vira "agentes de IA": ' +
-            'ai16z, Virtuals, AIXBT.',
-        },
-        {
-          data: '04–05/12/2024',
-          titulo: 'HAWK, o token da influenciadora Hawk Tuah',
-          texto:
-            'O market cap chegou a US$ 491 milhões e caiu mais de 90% em horas. Virou ação ' +
-            'coletiva nos EUA.',
-          tom: 'atencao',
-        },
-        {
-          data: '~06/01/2025',
-          titulo: 'Pico dos agentes de IA: cerca de US$ 20 bilhões somados',
-          texto: 'Em fevereiro, cerca de US$ 6,5 bilhões.',
-        },
-        {
-          data: '17/01/2025',
-          titulo: 'Políticos: lançamento do TRUMP',
-          texto: 'Em três semanas, mais de 700 memecoins-cópia foram enviadas à carteira dele.',
-        },
-        {
-          data: '14/02/2025',
-          titulo: 'LIBRA, promovida por Javier Milei',
-          texto:
-            'Das 15.430 carteiras que negociaram mais de US$ 1.000, mais de 86% venderam no ' +
-            'prejuízo, somando US$ 251 milhões (Nansen). Fim da onda de memecoins políticas.',
-          tom: 'atencao',
-        },
-        {
-          data: '12–15/05/2025',
-          titulo: '"Internet Capital Markets": pico do LAUNCHCOIN, no app Believe',
-          texto: 'Mais de 21 mil moedas na primeira semana; a queda começou em dias.',
-        },
-        {
-          data: '2026',
-          titulo: 'Nenhuma narrativa dominante confirmada',
-          texto: 'O que os dados mostram é retração do setor.',
-        },
-      ],
-      nota:
-        'Datas e números de imprensa e de relatórios de empresa, vários só por resumo de busca. ' +
-        'Detalhes em "não verificado", na aba Quiz.',
-    },
-
-    tabelaNarrativas: {
-      colunas: [
-        { chave: 'nascimento', rotulo: 'Primeiro token' },
-        { chave: 'pico', rotulo: 'Pico' },
-        { chave: 'duracao', rotulo: 'Até perder a atenção' },
-        { chave: 'destino', rotulo: 'O que aconteceu' },
-      ],
-      linhas: [
-        {
-          id: 'celebridades',
-          titulo: 'Celebridades',
-          valores: {
-            nascimento: 'JENNER, 26/05/2024',
-            pico: 'Junho de 2024',
-            duracao: 'Cerca de 1 mês',
-            destino: '30 tokens: queda média de 94%; metade perdeu mais de 99%',
-          },
-          detalheExtra:
-            'A última das cinco (Believe) foi de longe a mais curta, mas cinco casos não formam ' +
-            'tendência: a de animais durou mais que a de celebridades.',
-        },
-        {
-          id: 'animais',
-          titulo: 'Animais virais',
-          valores: {
-            nascimento: 'MOODENG, 11/09/2024',
-            pico: 'Dois picos: 28/09 e 15/11/2024 (~US$ 614 mi)',
-            duracao: 'Cerca de 2 meses',
-            destino: 'MOODENG −44% do pico até 27/11/2024',
-          },
-        },
-        {
-          id: 'ia',
-          titulo: 'IA / agentes',
-          valores: {
-            nascimento: 'GOAT, 10–11/10/2024',
-            pico: '~06/01/2025, cerca de US$ 20 bi somados',
-            duracao: 'Cerca de 1 mês de queda',
-            destino: 'Setor −67% até fevereiro de 2025',
-          },
-        },
-        {
-          id: 'politicos',
-          titulo: 'Políticos',
-          valores: {
-            nascimento: 'TRUMP, 17/01/2025',
-            pico: 'Janeiro de 2025',
-            duracao: 'Cerca de 1 mês, até a LIBRA',
-            destino: 'LIBRA: mais de 86% das carteiras acima de US$ 1.000 no prejuízo',
-          },
-        },
-        {
-          id: 'icm',
-          titulo: 'Internet Capital Markets',
-          valores: {
-            nascimento: 'LAUNCHCOIN, 03/05/2025',
-            pico: '15/05/2025',
-            duracao: 'Cerca de 4 dias',
-            destino: 'Receita semanal do Believe −94% do pico, em junho de 2025',
-          },
-        },
-      ],
-    },
-
-    tabelaFerramentas: {
-      colunas: [
-        { chave: 'mede', rotulo: 'O que mede' },
-        { chave: 'novo', rotulo: 'Cobre memecoin recém-lançada?' },
-        { chave: 'gratis', rotulo: 'Ler é grátis?' },
-        { chave: 'comprado', rotulo: 'Pode ser pago ou fabricado?' },
-      ],
-      linhas: [
-        {
-          id: 'dexscreener',
-          titulo: 'DexScreener',
-          subtitulo: 'lista "em alta"',
-          valores: {
-            mede: 'Um "Trending Score" próprio: volume, liquidez, transações, carteiras distintas, holders, visitas à página do token e reações (🚀 🔥 💩 🚩). A fórmula não é publicada.',
-            novo: 'Sim',
-            gratis: 'Sim',
-            comprado: 'Sim: Boosts pagos multiplicam o score por 12 a 24 horas. Visitas e reações também são fabricáveis.',
-          },
-        },
-        {
-          id: 'gmgn',
-          titulo: 'GMGN',
-          subtitulo: 'lista "em alta" e carteiras',
-          valores: {
-            mede: 'Compras e vendas, volume, variação de preço e crescimento de holders, por minuto; também carteiras "smart money" e de influenciadores.',
-            novo: 'Sim',
-            gratis: 'Sim. Operar pede login com a chave privada num bot do Telegram — risco de custódia (Módulo 5).',
-            comprado: 'Fabricável: são os números que o wash trading infla.',
-          },
-        },
-        {
-          id: 'birdeye',
-          titulo: 'Birdeye',
-          valores: {
-            mede: 'Tokens que mais se moveram numa janela de tempo; mais vistos e mais negociados.',
-            novo: 'Sim',
-            gratis: 'Sim. A API custa de US$ 39 a US$ 499 por mês; o PRO, US$ 45 por mês (não verificado).',
-            comprado: 'Fabricável pela mesma via.',
-          },
-        },
-        {
-          id: 'pumpfun',
-          titulo: 'pump.fun',
-          subtitulo: 'board',
-          valores: {
-            mede: 'A atividade recente de negociação dos tokens da plataforma.',
-            novo: 'Sim — é onde eles nascem',
-            gratis: 'Sim. Negociar na curva custa 1,25% por operação.',
-            comprado: 'Fabricável.',
-          },
-        },
-        {
-          id: 'lunarcrush',
-          titulo: 'LunarCrush',
-          valores: {
-            mede: 'Sentimento e volume de posts no X, Reddit, YouTube e TikTok.',
-            novo: 'Em parte',
-            gratis: 'Não para o social: o plano grátis só tem dados de mercado. O social vai de US$ 5 a US$ 45 por dia.',
-            comprado: 'Sem mecanismo de compra documentado, mas posts podem vir de bots.',
-          },
-        },
-        {
-          id: 'santiment',
-          titulo: 'Santiment',
-          valores: {
-            mede: 'Volume social e as palavras que dispararam, a partir de mais de 6.000 canais de cripto.',
-            novo: 'Não verificado para token recém-criado',
-            gratis: 'Grátis limitado; o resto é pago.',
-            comprado: 'Posts podem vir de bots.',
-          },
-        },
-        {
-          id: 'kaito',
-          titulo: 'Kaito',
-          valores: {
-            mede: 'Mindshare de projetos e de temas.',
-            novo: 'Não: mede projeto e tema, não memecoin nova',
-            gratis: 'Pago. O programa "Yaps" acabou em 15/01/2026 (não verificado).',
-            comprado: 'Não pesquisado.',
-          },
-        },
-        {
-          id: 'google-trends',
-          titulo: 'Google Trends',
-          valores: {
-            mede: 'Interesse de busca relativo, de 0 a 100, por termo, período e região.',
-            novo: 'Só se o termo tiver busca suficiente',
-            gratis: 'Sim',
-            comprado: 'Sem mecanismo de compra documentado. O número é relativo (0 a 100) e tem ruído de propósito.',
-          },
-        },
-        {
-          id: 'x',
-          titulo: 'X',
-          subtitulo: 'busca avançada e listas',
-          valores: {
-            mede: 'Posts públicos, filtráveis por conta, data e curtidas.',
-            novo: 'Sim',
-            gratis: 'Sim, mas só logado. O Premium vai de US$ 3 a US$ 40 por mês e não muda a busca.',
-            comprado: 'Contas e curtidas podem ser de bots: de 9% a 15% das contas ativas do X são bots (Varol et al., 2017).',
-          },
-        },
-        {
-          id: 'arkham-nansen',
-          titulo: 'Arkham e Nansen',
-          valores: {
-            mede: 'Carteiras rotuladas como traders lucrativos ("smart money").',
-            novo: 'Em parte',
-            gratis: 'Nível grátis limitado. Nansen Pro: US$ 49 a US$ 69 por mês.',
-            comprado: 'Não pesquisado.',
-          },
-        },
-      ],
-    },
   },
 
   // ---------------------------------------------------------------------------
   // Aba "Pilar social na prática" — pesquisa 5 dos módulos (pilar social) e a
   // prova ao vivo do ticker repetido (VERIFICACOES-AO-VIVO.md, seção 7).
+  // As quatro seções seguem o desenho "M3 Desktop", na ordem da aba.
   // ---------------------------------------------------------------------------
   praticaSocial: {
-    introducao:
-      'O pilar social responde duas perguntas: o token é quem diz ser, e a atenção em cima ' +
-      'dele é real? A primeira evita a perda total e se resolve em 5 minutos. A segunda ' +
-      'nunca se resolve por completo — e tudo aqui é manual, porque não existe forma ' +
-      'gratuita e dentro das regras de automatizar o social, com uma exceção pequena.',
+    // Esta aba NÃO tem "Antes de ler: o que você acha?" (o desenho também não
+    // tem o bloco). As 13 perguntas do quiz já estão ocupadas: q6, q5 e q7 são a
+    // "Pergunta rápida" das seções desta aba, q8 fecha a Parte 3, e as que
+    // sobram (q2 sobre o nome Axiom, q10 sobre o Bubblemaps) são de outras abas.
+    // A q4 usada antes aqui já é a "Pergunta rápida" da aba "Visão geral": o
+    // aluno chegaria a este pré-teste depois de ter visto a resposta certa.
+    perguntaAntes: null,
 
     destaques: [
       {
@@ -985,307 +1032,323 @@ export const modulo3 = {
       },
     ],
 
-    rotina: {
-      titulo: 'A rotina de 5 minutos, para todo token novo',
-      descricao:
-        'Na ordem em que você abre cada coisa. Qualquer divergência de endereço, em qualquer ' +
-        'etapa, encerra a checagem: não compre.',
-      passos: [
-        {
-          tempo: '0 a 45 s',
-          titulo: 'Ache a conta oficial no X',
-          texto:
-            'Confira o @ letra por letra (l e I, 0 e o), veja se há badge de afiliação e se a bio ' +
-            'aponta para um site. Se você só tem um @ que veio de resposta de post ou de DM, pare.',
-        },
-        {
-          tempo: '45 s a 1 min 30',
-          titulo: 'Abra o site oficial pelo link da bio',
-          texto: 'Ache o endereço do contrato no site e copie dali. É a sua fonte de maior confiança.',
-        },
-        {
-          tempo: '1 min 30 a 2 min',
-          titulo: 'Compare com o post fixado do X oficial',
-          texto: 'O endereço do site e o do post fixado têm que ser o mesmo, caractere por caractere. Se não forem, pare.',
-        },
-        {
-          tempo: '2 min a 3 min 30',
-          titulo: 'Cole o endereço no explorador',
-          texto:
-            'Na Solana, o Solscan: extensões, autoridades, idade e holders (passo a passo na aba ' +
-            'Pilar técnico). Numa rede EVM, o Etherscan: contrato "verified" quer dizer que o ' +
-            'código publicado bate com o que roda — não que é seguro ou auditado.',
-        },
-        {
-          tempo: '3 min 30 a 4 min 30',
-          titulo: 'Cole o endereço no DexScreener',
-          texto:
-            'Olhe liquidez, volume e negociações. Ícone e links da página não provam nada: são ' +
-            'preenchidos e pagos pelo próprio projeto.',
-        },
-        {
-          tempo: '4 min 30 a 5 min',
-          titulo: 'Sanidade final no canal oficial',
-          texto:
-            'Abra t.me/s/nomedocanal no navegador e confira se o endereço anunciado bate com o ' +
-            'que você já validou. Se o token chegou por um call, procure os sinais de call pago.',
-        },
-      ],
-    },
-
-    anatomiaPerfil: {
-      titulo: 'O que olhar num perfil que se diz oficial',
-      descricao: 'Mockup desenhado, não captura do X. Clique num item da legenda para localizar.',
-      viewBox: [0, 0, 640, 332],
-      paineis: [
-        { id: 'nome', x: 12, y: 12, w: 400, h: 56, rotulo: 'Nome e @handle', tipo: 'texto' },
-        { id: 'selo', x: 424, y: 12, w: 204, h: 56, rotulo: 'Selo · badge de afiliação', tipo: 'campo', alerta: true },
-        { id: 'bio', x: 12, y: 80, w: 400, h: 64, rotulo: 'Bio com o link do site', tipo: 'texto' },
-        { id: 'data', x: 424, y: 80, w: 204, h: 64, rotulo: 'Entrou em · seguidores', tipo: 'numeros' },
-        { id: 'fixado', x: 12, y: 156, w: 616, h: 72, rotulo: 'Post fixado com o endereço', tipo: 'lista' },
-        { id: 'respostas', x: 12, y: 240, w: 616, h: 80, rotulo: 'Respostas: "o endereço certo é este…"', tipo: 'lista', alerta: true },
-      ],
-      itens: [
-        { painel: 'nome', titulo: 'Nome e @handle', texto: 'O nome qualquer um copia. O @ é único: compare letra por letra, atrás de caractere trocado.' },
-        { painel: 'selo', titulo: 'Selo', texto: 'Azul é assinatura Premium, não identidade. Dourado é organização verificada; o badge de afiliação liga a conta a uma.' },
-        { painel: 'bio', titulo: 'Bio', texto: 'O link do site sai daqui. Não use site achado por busca ou anúncio.' },
-        { painel: 'data', titulo: 'Data de entrada e seguidores', texto: 'Conta nova para um projeto "antigo", ou muitos seguidores com pouco engajamento, são sinais de conta falsa.' },
-        { painel: 'fixado', titulo: 'Post fixado', texto: 'É onde o projeto costuma deixar o endereço. Tem que bater com o do site.' },
-        { painel: 'respostas', titulo: 'Respostas', texto: 'Endereço colado em resposta é o golpe clássico. Nunca pegue o endereço daqui.' },
-      ],
-      nota: 'Selos segundo a central de ajuda do X, consultada em setembro de 2026.',
-    },
-
     secoes: [
       {
-        id: 'endereco',
-        titulo: 'O endereço: a checagem que sozinha evita a perda total',
-        emUmaFrase:
-          'Nome e ticker qualquer um copia. O que identifica um token de verdade é o endereço do ' +
-          'contrato.',
+        id: 'rotina',
+        titulo: 'A rotina de 5 minutos, para todo token novo',
+        emUmaFrase: 'Qualquer divergência de endereço, em qualquer etapa, encerra a checagem: não compre.',
+        // Os passos abrem um de cada vez (clique ou setas). `tempo` é a janela de
+        // cada passo, em minutos:segundos.
+        passos: [
+          {
+            tempo: '0–45 s',
+            titulo: 'Ache a conta oficial no X',
+            texto:
+              'Confira o @ letra por letra (l e I, 0 e o), veja se há badge de afiliação e se a bio ' +
+              'aponta para um site. Se você só tem um @ que veio de resposta de post ou de DM, pare.',
+          },
+          {
+            tempo: '45 s–1:30',
+            titulo: 'Abra o site oficial pelo link da bio',
+            texto: 'Ache o endereço do contrato no site e copie dali. É a sua fonte de maior confiança.',
+          },
+          {
+            tempo: '1:30–2:00',
+            titulo: 'Compare com o post fixado do X oficial',
+            texto: 'O endereço do site e o do post fixado têm que ser o mesmo, caractere por caractere. Se não forem, pare.',
+          },
+          {
+            tempo: '2:00–3:30',
+            titulo: 'Cole o endereço no explorador',
+            texto:
+              'Na Solana, o Solscan: extensões, autoridades, idade e holders. Numa rede EVM, o ' +
+              'Etherscan: contrato "verified" quer dizer que o código publicado bate com o que roda ' +
+              '— não que é seguro ou auditado.',
+          },
+          {
+            tempo: '3:30–4:30',
+            titulo: 'Cole o endereço no DexScreener',
+            texto:
+              'Olhe liquidez, volume e negociações. Ícone e links da página não provam nada: são ' +
+              'preenchidos e pagos pelo próprio projeto.',
+          },
+          {
+            tempo: '4:30–5:00',
+            titulo: 'Sanidade final no canal oficial',
+            texto:
+              'Abra t.me/s/nomedocanal no navegador e confira se o endereço anunciado bate com o ' +
+              'que você já validou. Se o token chegou por um call, procure os sinais de call pago.',
+          },
+        ],
+        legendaDosPassos: 'Na ordem em que você abre cada coisa. O tempo é uma referência, não um cronômetro.',
+        // Os dois endereços são INVENTADOS (o selo "endereços inventados" aparece na
+        // tela): mostram a forma do golpe, não um token real. Só o meio muda.
+        enderecos: {
+          titulo: 'Endereço oficial × endereço colado numa resposta',
+          selo: 'endereços inventados',
+          itens: [
+            {
+              rotulo: 'Do site oficial, e igual ao post fixado',
+              inicio: '7xKq',
+              meio: 'Rt4mP9vZ2hLbN6yDcE8sWfJ3aQu5',
+              fim: 'gT1n',
+              nota: 'As duas fontes oficiais batem, caractere por caractere. Identidade confirmada.',
+              tom: 'ok',
+            },
+            {
+              rotulo: 'De uma resposta embaixo do post viral',
+              inicio: '7xKq',
+              meio: 'Bd7wS1kY4jXzM8pFhR2vNc6tLe9o',
+              fim: 'gT1n',
+              nota: 'Mesmo começo, mesmo fim. Só o meio muda. Não compre.',
+              tom: 'alerta',
+            },
+          ],
+          descricao:
+            'Dois endereços com o mesmo começo e o mesmo fim; só os caracteres do meio mudam. O ' +
+            'primeiro vem do site oficial e bate com o post fixado. O segundo veio de uma resposta ' +
+            'embaixo de um post viral.',
+          legenda:
+            'Golpistas geram endereços com os mesmos primeiros e últimos caracteres do original, ' +
+            'para enganar quem só olha as pontas. Compare o endereço inteiro, caractere por ' +
+            'caractere.',
+        },
         paragrafos: [
-          'O endereço do contrato é uma sequência longa de letras e números. Ele é a identidade do ' +
-            'token na blockchain.',
-          'Ticker é o apelido curto do token. Em 12/09/2026, dois tokens diferentes do pump.fun ' +
-            'usavam o ticker SATOSHI ao mesmo tempo.',
-          'No mesmo dia, um terceiro token tinha o ticker "Usdt", imitando uma stablecoin (moeda ' +
-            'feita para acompanhar o dólar).',
+          'Nome e ticker qualquer um copia. Em 12/09/2026, dois tokens diferentes do pump.fun ' +
+            'usavam o ticker SATOSHI ao mesmo tempo, e um terceiro tinha o ticker "Usdt", imitando ' +
+            'uma stablecoin.',
           'O projeto publica o endereço em três lugares. Do mais confiável para o menos: o site ' +
             'oficial, a bio ou o post fixado do X oficial, e o canal oficial de anúncios no Discord ' +
-            'ou no Telegram.',
+            'ou no Telegram. Nunca pegue o endereço de DM, de resposta embaixo de post viral, de ' +
+            'site que veio de anúncio ou de busca, nem de QR code ou link encurtado.',
         ],
-        listaTitulo: 'Nunca pegue o endereço de:',
-        lista: [
-          'DM (mensagem direta) ou mensagem de desconhecido.',
-          'Resposta embaixo de post viral.',
-          'Site que veio de anúncio ou de busca.',
-          'QR code ou link encurtado.',
+        // Guardado, fora da tela (ver o cabeçalho do arquivo).
+        foraDaTela: [
+          'O endereço do contrato é uma sequência longa de letras e números. Ele é a identidade ' +
+            'do token na blockchain.',
+          'Ticker é o apelido curto do token.',
+          'O terceiro token com o ticker "Usdt" imitava uma stablecoin: moeda feita para ' +
+            'acompanhar o dólar.',
         ],
-        exemplo: {
-          titulo: 'Como conferir, na prática',
-          passos: [
-            'Copie o endereço do site oficial, aberto por um link confiável. Nunca por anúncio ou ' +
-              'busca.',
-            'Compare com o endereço da bio ou do post fixado do X oficial.',
-            'Compare o endereço inteiro, caractere por caractere. Golpistas geram endereços com os ' +
-              'mesmos primeiros e últimos caracteres do original, para enganar quem só olha as pontas.',
-            'Site e post fixado batendo entre si confirmam a identidade. São as fontes mais ' +
-              'controladas pelo projeto.',
-            'Se eles não batem, não compre. A divergência, por si só, é motivo para não comprar.',
-          ],
-        },
-        paragrafosFinais: [
-          'Um canal fácil de sequestrar nunca desempata. Resposta de post, DM e link curto do ' +
-            'Discord estão nesse grupo.',
-        ],
+        pergunta: 'q6',
       },
       {
-        id: 'x',
-        titulo: 'X: o que o selo prova, e como achar conta falsa',
+        id: 'perfil',
+        titulo: 'O que olhar num perfil que se diz oficial',
         emUmaFrase:
           'No X, o selo azul só quer dizer que a conta paga uma assinatura. Ele não prova que a ' +
           'conta é do projeto.',
+        // Mockup desenhado (não é captura): cada painel tem um número, e a lista ao
+        // lado explica o que olhar nele. `grade` monta as linhas do mockup: `cols`
+        // é a divisão da linha, `ids` os painéis, `altura` a altura mínima.
+        // Painel com `alerta: true` sai em âmbar.
+        anatomia: {
+          paineis: {
+            nome: { rotulo: 'Nome e @handle' },
+            selo: { rotulo: 'Selo · badge de afiliação', alerta: true },
+            bio: { rotulo: 'Bio com o link do site' },
+            data: { rotulo: 'Entrou em · seguidores' },
+            fixado: { rotulo: 'Post fixado com o endereço' },
+            respostas: { rotulo: 'Respostas: "o endereço certo é este…"', alerta: true },
+          },
+          grade: [
+            { cols: '2fr 1fr', ids: ['nome', 'selo'], altura: '46px' },
+            { cols: '2fr 1fr', ids: ['bio', 'data'], altura: '50px' },
+            { cols: '1fr', ids: ['fixado'], altura: '46px' },
+            { cols: '1fr', ids: ['respostas'], altura: '52px' },
+          ],
+          itens: [
+            { painel: 'nome', titulo: 'Nome e @handle', texto: 'O nome qualquer um copia. O @ é único: compare letra por letra, atrás de caractere trocado.' },
+            { painel: 'selo', titulo: 'Selo', texto: 'Azul é assinatura Premium, não identidade. Dourado é organização verificada; o badge de afiliação liga a conta a uma.' },
+            { painel: 'bio', titulo: 'Bio', texto: 'O link do site sai daqui. Não use site achado por busca ou anúncio.' },
+            { painel: 'data', titulo: 'Data de entrada e seguidores', texto: 'Conta nova para um projeto "antigo", ou muitos seguidores com pouco engajamento, são sinais de conta falsa.' },
+            { painel: 'fixado', titulo: 'Post fixado', texto: 'É onde o projeto costuma deixar o endereço. Tem que bater com o do site.' },
+            { painel: 'respostas', titulo: 'Respostas', texto: 'Endereço colado em resposta é o golpe clássico. Nunca pegue o endereço daqui.' },
+          ],
+          nota: 'Mockup desenhado, não captura do X. Os campos aparecem sem valores: o que se aprende é onde olhar.',
+          legenda:
+            'Selos segundo a central de ajuda do X, consultada em setembro de 2026. Selo azul: ' +
+            'assinatura Premium ativa, sem revisão de identidade. Dourado: organização verificada. ' +
+            'Cinza: governo.',
+        },
         paragrafos: [
-          'O selo azul, hoje, quer dizer assinatura Premium ativa. A central de ajuda do X diz que ' +
-            'essas contas não passam por revisão de identidade.',
-          'Existe também o badge de afiliação: a foto da organização ao lado do selo. Ele liga a ' +
-            'conta a uma organização verificada.',
-        ],
-        quadro: [
-          { rotulo: 'Selo azul', texto: 'Assinatura Premium ativa. Sem revisão de identidade.' },
-          { rotulo: 'Selo dourado', texto: 'Organização verificada.' },
-          { rotulo: 'Selo cinza', texto: 'Governo.' },
-        ],
-        listaTitulo: 'Sinais grátis de conta falsa imitando um projeto:',
-        lista: [
-          '@ com caractere trocado (l por I, 0 por o).',
-          'Conta criada há pouco, ou que trocou de @ recentemente.',
-          'Selo azul sem badge de afiliação num "perfil oficial".',
-          'Muitos seguidores com pouco engajamento, e respostas repetitivas de bots.',
-        ],
-        paragrafosFinais: [
-          'Automatizar essa checagem de graça não existe. Raspar o X (copiar os dados com um ' +
-            'programa) fora da API é proibido pelos termos, e a API, o acesso oficial para ' +
-            'programas, é paga.',
+          'Sinais grátis de conta falsa: @ com caractere trocado (l por I, 0 por o); conta criada ' +
+            'há pouco, ou que trocou de @ recentemente; selo azul sem badge de afiliação num ' +
+            '"perfil oficial"; muitos seguidores com pouco engajamento e respostas repetitivas de ' +
+            'bots.',
         ],
         detalhe: {
           titulo: 'a busca avançada do X',
-          paragrafos: ['Funciona de graça, desde que você esteja logado.'],
           lista: [
-            'from:conta mostra só os posts dela.',
-            'since:2026-09-01 filtra por data.',
-            'min_faves:100 mostra só os posts com pelo menos 100 curtidas.',
-            'Aspas buscam o endereço exato.',
-            'Os operadores near:, source: e geocode: foram removidos. Eles devolvem página vazia, ' +
-              'sem aviso de erro.',
+            [
+              'Funciona de graça, desde que você esteja logado. ',
+              { mono: 'from:conta' },
+              ' mostra só os posts dela; ',
+              { mono: 'since:2026-09-01' },
+              ' filtra por data; ',
+              { mono: 'min_faves:100' },
+              ' mostra só os posts com pelo menos 100 curtidas; aspas buscam o endereço exato.',
+            ],
+            [
+              'Os operadores ',
+              { mono: 'near:' },
+              ', ',
+              { mono: 'source:' },
+              ' e ',
+              { mono: 'geocode:' },
+              ' foram removidos. Eles devolvem página vazia, sem aviso de erro.',
+            ],
+            'Automatizar essa checagem de graça não existe: raspar o X fora da API é proibido pelos ' +
+              'termos, e a API é paga.',
           ],
         },
+        pergunta: 'q5',
       },
       {
-        id: 'discord',
-        titulo: 'Discord: os quatro golpes, e a defesa de cada um',
+        id: 'discord-telegram',
+        titulo: 'Discord e Telegram: os golpes, e a defesa de cada um',
         emUmaFrase:
-          'No Discord, os golpes chegam por link e por bot falso. A defesa é entrar pelo site ' +
-          'oficial e não assinar nada que veio da comunidade.',
+          'Os golpes chegam por link e por bot falso. A defesa é entrar pelo site oficial e não ' +
+          'assinar nada que veio da comunidade.',
+        // Os quatro golpes do Discord, do mais frequente nos alertas de segurança
+        // para o menos: como o golpe funciona, e a defesa de cada um.
+        golpes: [
+          {
+            titulo: 'Servidor falso',
+            como:
+              'O projeto deixa de pagar o link curto (discord.gg/nome), o golpista assume esse link ' +
+              'e recria um servidor idêntico.',
+            defesa: 'Entre sempre pelo link do site ou do X oficial.',
+          },
+          {
+            titulo: 'Bot falso de verificação',
+            como:
+              'Parece o Collab.Land, mas o @ é outro. Leva a um site que pede para conectar a ' +
+              'carteira e assinar. Foi o caminho do Inferno Drainer.',
+            defesa: 'Verificação legítima não pede assinatura.',
+          },
+          {
+            titulo: '"Conecte a carteira"',
+            como: 'Depois de conectar, uma assinatura autoriza a transferência silenciosa dos seus ativos.',
+            defesa:
+              'Não assine nada que veio de link de comunidade; use uma carteira separada para ' +
+              'projetos novos (Módulo 1).',
+          },
+          {
+            titulo: 'DM de "suporte" e admin invadido',
+            como:
+              'Suporte de verdade não chama primeiro, e até um anúncio oficial pode vir de conta ' +
+              'sequestrada.',
+            defesa:
+              'Desligue DMs de membros do servidor. Trate anúncio urgente com link como suspeito até ' +
+              'conferir no site.',
+          },
+        ],
         paragrafos: [
-          'Servidores de memecoin costumam ter canais de anúncios, verificação, conversa, calls ' +
-            '(indicações de tokens) e um canal com o endereço.',
           'Assinar é aprovar uma mensagem com a sua carteira. Em golpe, uma assinatura pode ' +
-            'autorizar a saída dos seus ativos sem você perceber.',
-        ],
-        listaTitulo: 'Os golpes, do mais frequente nos alertas de segurança para o menos:',
-        ordenada: true,
-        lista: [
-          'Servidor falso. O projeto deixa de pagar o link curto (discord.gg/nome), o golpista ' +
-            'assume esse link e recria um servidor idêntico. Defesa: entre sempre pelo link do site ' +
-            'ou do X oficial.',
-          'Bot falso de verificação. Ele parece o Collab.Land, mas o @ é outro. Leva a um site que ' +
-            'pede para conectar a carteira e assinar. Foi o caminho do Inferno Drainer. Defesa: ' +
-            'verificação legítima não pede assinatura.',
-          '"Conecte a carteira". Depois de conectar, uma assinatura autoriza a transferência ' +
-            'silenciosa dos seus ativos. Defesa: não assine nada que veio de link de comunidade, e ' +
-            'use uma carteira separada para projetos novos (Módulo 1).',
-          'DM de "suporte" e admin invadido. Suporte de verdade não chama primeiro, e até um ' +
-            'anúncio oficial pode vir de conta sequestrada. Defesa: desligue DMs de membros do ' +
-            'servidor. Trate anúncio urgente com link como suspeito até conferir no site.',
+            'autorizar a saída dos seus ativos sem você perceber. O bot falso de verificação foi o ' +
+            'caminho do Inferno Drainer: mais de 30 mil carteiras esvaziadas, pelo menos US$ 9 ' +
+            'milhões em seis meses.',
+          [
+            'No Telegram, dá para ler um canal público sem entrar: abra ',
+            { mono: 't.me/s/nomedocanal' },
+            ' no navegador. O perigo maior está nos bots de compra: muitos criam a carteira e ' +
+              'guardam a chave privada no servidor deles, então uma falha no bot pode custar tudo. ' +
+              'Falhas registradas: Maestro (24/10/2023) e Unibot (31/10/2023), somando US$ 1,1 ' +
+              'milhão roubados; Banana Gun (19/09/2024), cerca de US$ 3 milhões de 11 usuários, ' +
+              'reembolsados pelo próprio bot.',
+          ],
         ],
         detalhe: {
-          titulo: 'ler e automatizar o Discord',
-          paragrafos: [
-            'Não dá para ler o histórico sem entrar no servidor.',
-            'Automatizar a leitura com a sua própria conta (o chamado self-bot) é proibido pelas ' +
-              'regras do Discord, com risco de perder a conta.',
-            'A única automação grátis e permitida é seguir um canal de anúncios, o do ícone de ' +
-              'megafone. Os anúncios passam a cair num canal do seu próprio servidor.',
-            'Isso só funciona se o projeto usar esse tipo de canal. E só chega o que o admin ' +
-              'escolher publicar.',
+          titulo: 'o que dá e o que não dá para automatizar',
+          lista: [
+            'Discord: não dá para ler o histórico sem entrar no servidor. Automatizar com a própria ' +
+              'conta (self-bot) é proibido, com risco de perder a conta. A única automação grátis e ' +
+              'permitida é seguir um canal de anúncios (ícone de megafone) — e só chega o que o ' +
+              'admin escolher publicar.',
+            'Telegram: automatizar a leitura de canal alheio não dá. Um bot só recebe os posts de ' +
+              'um canal se for administrador dele.',
+            'Bot falso, com nome parecido com o verdadeiro, drena quem cola a seed. Confira o @ do ' +
+              'bot no site oficial dele e ative a verificação em duas etapas na sua conta.',
           ],
         },
-      },
-      {
-        id: 'telegram',
-        titulo: 'Telegram: ler sem entrar, e o risco dos bots de compra',
-        emUmaFrase:
-          'Dá para ler um canal do Telegram sem entrar nele. O perigo maior está nos bots de compra.',
-        paragrafos: [
-          'Para ler um canal público, abra t.me/s/nomedocanal no navegador. O /s/ mostra o ' +
-            'histórico de posts, sem app e sem conta.',
+        // Guardado, fora da tela (ver o cabeçalho do arquivo).
+        foraDaTela: [
           'Bot de compra é um robô dentro do Telegram que compra e vende tokens por você.',
-          'Muitos desses bots criam a carteira e guardam a chave privada no servidor deles. Chave ' +
-            'privada é a senha mestra da carteira: quem tem a chave mexe no dinheiro.',
-          'Por isso, se o bot for comprometido, a perda pode ser total.',
+          'Chave privada é a senha mestra da carteira: quem tem a chave mexe no dinheiro.',
         ],
-        exemplo: {
-          titulo: 'Quando os bots falharam',
-          passos: [
-            '24/10/2023: falha no Maestro.',
-            '31/10/2023: falha no Unibot. Somadas, as duas falhas de outubro de 2023 tiveram US$ ' +
-              '1,1 milhão roubados.',
-            '19/09/2024: uma falha no Banana Gun drenou cerca de US$ 3 milhões de 11 usuários. O ' +
-              'próprio bot reembolsou.',
-          ],
-        },
-        paragrafosFinais: [
-          'Existe também o bot falso, com nome parecido com o verdadeiro. Ele drena quem cola a ' +
-            'seed (as palavras que recuperam a carteira).',
-          'Duas defesas: confira o @ do bot no site oficial dele, e ative a verificação em duas ' +
-            'etapas na sua conta do Telegram.',
-        ],
-        detalhe: {
-          titulo: 'o que dá e o que não dá para ver',
-          paragrafos: [
-            'Como membro do canal, você vê posts, visualizações, fixados e, se houver grupo ' +
-              'vinculado, os comentários.',
-            'Automatizar a leitura de um canal alheio não dá. Um bot só recebe os posts de um canal ' +
-              'se for administrador dele.',
-          ],
-        },
+        pergunta: 'q7',
+        // "Confira antes de seguir" no fim da parte (bloco de didática do app):
+        // a pergunta sobre ler canal de Telegram, que o desenho não põe na aba.
+        confira: 'q8',
       },
       {
         id: 'calls',
-        titulo: 'Calls pagos: a regra, os números e como perceber',
+        titulo: 'Calls pagos, e o que cada sinal social prova',
         emUmaFrase:
           'Um call mostra que houve atenção naquele momento. Na média, o preço caiu nos 30 dias ' +
           'seguintes.',
-        paragrafos: [
-          'Call é quando um influenciador indica um token. Call pago é quando ele recebeu para ' +
-            'fazer essa indicação.',
-          'Nos EUA e no Brasil existem regras contra publicidade paga disfarçada.',
-          'Um caso real: Kim Kardashian pagou US$ 1,26 milhão em 2022 por promover o token EMAX ' +
-            'sem dizer que tinha recebido US$ 250 mil. Ela pôs #AD, e não bastou.',
-        ],
-        exemplo: {
-          titulo: 'O que um estudo mediu',
-          passos: [
-            'Foram 36 mil tweets de 180 influenciadores, sobre mais de 1.600 criptoativos.',
-            'No primeiro dia depois do tweet, o preço subia 1,83%.',
-            'Em 10 dias, caía 2,24%. Em 30 dias, caía 6,53%.',
-            'Quem pôs US$ 1.000 em tokens fora do top 100 no dia do tweet e segurou 30 dias ' +
-              'perdeu US$ 79, em média.',
+        // As barras com o zero no centro: `valor` positivo cresce para a direita
+        // (verde), negativo para a esquerda (vermelho). Números do estudo de
+        // Merkley et al. (Review of Accounting Studies, 2024).
+        barras: {
+          titulo: 'Retorno médio depois do tweet de um influenciador',
+          itens: [
+            { quando: '1 dia depois do tweet', valor: 1.83, exibicao: '+1,83%' },
+            { quando: '10 dias depois', valor: -2.24, exibicao: '−2,24%' },
+            { quando: '30 dias depois', valor: -6.53, exibicao: '−6,53%' },
           ],
-          paragrafos: [
-            'Os autores dizem que o padrão combina com pump-and-dump, mas que a prova é inconclusiva.',
+          descricao:
+            'No primeiro dia depois do tweet, o preço subia 1,83%. Em 10 dias, caía 2,24%. Em 30 ' +
+            'dias, caía 6,53%. Quem pôs mil dólares em tokens fora do top 100 no dia do tweet e ' +
+            'segurou 30 dias perdeu 79 dólares, em média.',
+          legenda:
+            'Mesma escala, zero no centro. 36 mil tweets de 180 influenciadores, sobre mais de 1.600 ' +
+            'criptoativos (Review of Accounting Studies, 2024). Os autores dizem que o padrão ' +
+            'combina com pump-and-dump, mas que a prova é inconclusiva.',
+        },
+        // O que cada sinal prova. `tom` pinta o selo da coluna "O que prova":
+        // 'ok' (verde), 'alerta' (vermelho) ou nada (texto cinza).
+        tabela: {
+          rotuloDasLinhas: 'Sinal',
+          rotulo: 'O que cada sinal prova e não prova (role na horizontal se preciso)',
+          larguraMinima: 560,
+          colunas: [
+            { chave: 'prova', rotulo: 'O que prova', selo: true },
+            { chave: 'naoProva', rotulo: 'O que não prova', destaque: true },
+          ],
+          linhas: [
+            { titulo: 'Endereço no site oficial', valores: { prova: { texto: 'A referência primária do projeto', tom: 'ok' }, naoProva: 'Que o site é o oficial — cruze com o X' } },
+            { titulo: 'Endereço no post fixado do X oficial', valores: { prova: { texto: 'Coerência com o site: identidade confirmada', tom: 'ok' }, naoProva: 'Que o token é bom' } },
+            { titulo: 'Selo azul no X', valores: { prova: 'Assinatura Premium ativa', naoProva: 'Que é a conta do projeto' } },
+            { titulo: 'Selo dourado ou badge de afiliação', valores: { prova: 'Organização verificada, ou vínculo com uma', naoProva: 'Mérito do token' } },
+            { titulo: 'Ícone e links no DexScreener', valores: { prova: 'Que alguém pagou para preencher a página', naoProva: 'Identidade oficial' } },
+            { titulo: 'Anúncio no canal oficial', valores: { prova: 'O que o admin publicou', naoProva: 'Que a conta do admin não foi invadida' } },
+            { titulo: 'Call de influenciador', valores: { prova: 'Que houve atenção naquele momento', naoProva: 'Valor futuro' } },
+            { titulo: 'Verificação pedindo para conectar a carteira', valores: { prova: { texto: 'Golpe', tom: 'alerta' }, naoProva: 'Nada legítimo' } },
           ],
         },
+        paragrafos: [
+          'Sinais de call pago não declarado, de graça: posts quase idênticos em várias contas, na ' +
+            'mesma janela de horário; a carteira do influenciador recebe o token antes do post (dá ' +
+            'para ver no explorador); post apagado logo depois da alta; link de afiliado; "não é ' +
+            'conselho financeiro" seguido do endereço do contrato.',
+        ],
         detalhe: {
           titulo: 'as regras nos EUA e no Brasil',
           lista: [
-            'EUA, FTC: pagamento a quem recomenda tem que ser declarado de forma clara.',
-            'EUA, SEC: para ativos que sejam valores mobiliários (investimentos regulados, como ' +
-              'ações), a exigência é maior. É preciso declarar o fato e o valor.',
-            'Brasil, Código de Defesa do Consumidor: proíbe publicidade disfarçada.',
-            'Brasil, CONAR: o guia para influenciadores (nova versão de maio de 2026) pede ' +
-              'identificação clara já na primeira visualização.',
-            'Brasil, CVM: reserva a recomendação de valores mobiliários a analistas registrados.',
+            'EUA, FTC: pagamento a quem recomenda tem que ser declarado de forma clara. SEC: para ' +
+              'ativos que sejam valores mobiliários, é preciso declarar o fato e o valor. Caso real: ' +
+              'Kim Kardashian pagou US$ 1,26 milhão em 2022 por promover o token EMAX sem dizer que ' +
+              'tinha recebido US$ 250 mil — ela pôs #AD, e não bastou.',
+            'Brasil: o Código de Defesa do Consumidor proíbe publicidade disfarçada; o guia do CONAR ' +
+              'para influenciadores (nova versão de maio de 2026) pede identificação clara já na ' +
+              'primeira visualização; a CVM reserva a recomendação de valores mobiliários a ' +
+              'analistas registrados.',
           ],
         },
-        listaTitulo: 'Sinais de call pago não declarado, de graça:',
-        lista: [
-          'Posts quase idênticos em várias contas, na mesma janela de horário.',
-          'A carteira do influenciador recebe o token antes do post (dá para ver no explorador).',
-          'Post apagado logo depois da alta.',
-          'Link de afiliado ou de indicação.',
-          '"Não é conselho financeiro" seguido do endereço do contrato.',
-        ],
       },
     ],
-
-    tabela: {
-      colunas: [
-        { chave: 'prova', rotulo: 'O que prova' },
-        { chave: 'naoProva', rotulo: 'O que não prova' },
-      ],
-      linhas: [
-        { id: 'site', titulo: 'Endereço no site oficial', valores: { prova: 'A referência primária do projeto', naoProva: 'Que o site é o oficial — cruze com o X' } },
-        { id: 'fixado', titulo: 'Endereço no post fixado do X oficial', valores: { prova: 'Coerência com o site: identidade confirmada', naoProva: 'Que o token é bom' } },
-        { id: 'selo-azul', titulo: 'Selo azul no X', valores: { prova: 'Assinatura Premium ativa', naoProva: 'Que é a conta do projeto' } },
-        { id: 'afiliacao', titulo: 'Selo dourado ou badge de afiliação', valores: { prova: 'Organização verificada, ou vínculo com uma', naoProva: 'Mérito do token' } },
-        { id: 'socials-dex', titulo: 'Ícone e links no DexScreener', valores: { prova: 'Que alguém pagou para preencher a página', naoProva: 'Identidade oficial' } },
-        { id: 'anuncio', titulo: 'Anúncio no canal oficial', valores: { prova: 'O que o admin publicou', naoProva: 'Que a conta do admin não foi invadida' } },
-        { id: 'call', titulo: 'Call de influenciador', valores: { prova: 'Que houve atenção naquele momento', naoProva: 'Valor futuro' } },
-        { id: 'verify', titulo: 'Verificação pedindo para conectar a carteira', valores: { prova: 'Golpe', naoProva: 'Nada legítimo' } },
-      ],
-    },
   },
 
   // ---------------------------------------------------------------------------
@@ -1294,11 +1357,9 @@ export const modulo3 = {
   // seções 5 e 6). As anatomias são mockups desenhados, não capturas.
   // ---------------------------------------------------------------------------
   praticaTecnica: {
-    introducao:
-      'Quatro ferramentas grátis, cada uma respondendo uma pergunta. A ordem importa: primeiro ' +
-      'o que o contrato permite, depois quem controla as carteiras, por fim quanto dinheiro há ' +
-      'na pool. O exemplo é o BONK, conferido ao vivo em 12/09/2026. Nenhuma delas pede ' +
-      'carteira conectada para ler.',
+    // "Antes de ler: o que você acha?" no topo da aba (bloco de didática do app).
+    // Não repete a q9, que é a "Pergunta rápida" do fim da aba.
+    perguntaAntes: 'q1',
 
     destaques: [
       {
@@ -1321,6 +1382,25 @@ export const modulo3 = {
       },
     ],
 
+    // A seção que escolhe a ferramenta (as quatro, em ordem, trocam o painel embaixo).
+    ordem: {
+      titulo: 'Quatro ferramentas, uma pergunta cada — nesta ordem',
+      emUmaFrase:
+        'Primeiro o que o contrato permite, depois quem controla as carteiras, por fim quanto ' +
+        'dinheiro há na pool.',
+      legenda:
+        'Nenhuma delas pede carteira conectada para ler. O exemplo é o BONK, conferido ao vivo ' +
+        'em 12/09/2026.',
+    },
+
+    // A frase que fica embaixo de todo mockup das ferramentas.
+    notaDoMockup:
+      'Mockup desenhado, não é captura de nenhuma plataforma. Os campos aparecem sem valores: o ' +
+      'que se aprende é onde olhar.',
+
+    // Cada ferramenta: a pergunta que ela responde, o que é grátis, a anatomia da
+    // página (mockup no mesmo formato da anatomia do perfil, na aba social), o
+    // passo a passo e as armadilhas de leitura.
     ferramentas: [
       {
         id: 'rugcheck',
@@ -1332,15 +1412,18 @@ export const modulo3 = {
           'conectada — não conecte.',
         anatomia: {
           titulo: 'A página de um token no RugCheck',
-          descricao: 'Mockup desenhado. Clique num item da legenda para localizar.',
-          viewBox: [0, 0, 640, 300],
-          paineis: [
-            { id: 'score', x: 12, y: 12, w: 200, h: 120, rotulo: 'Score', tipo: 'numeros' },
-            { id: 'risks', x: 224, y: 12, w: 404, h: 120, rotulo: 'Risks', tipo: 'lista' },
-            { id: 'markets', x: 12, y: 144, w: 200, h: 64, rotulo: 'Markets', tipo: 'numeros' },
-            { id: 'insiders', x: 224, y: 144, w: 200, h: 64, rotulo: 'Insiders', tipo: 'campo', alerta: true },
-            { id: 'holders', x: 436, y: 144, w: 192, h: 64, rotulo: 'Holders', tipo: 'numeros' },
-            { id: 'lockers', x: 12, y: 220, w: 616, h: 68, rotulo: 'Lockers & LP', tipo: 'campo' },
+          paineis: {
+            score: { rotulo: 'Score' },
+            risks: { rotulo: 'Risks' },
+            markets: { rotulo: 'Markets' },
+            insiders: { rotulo: 'Insiders', alerta: true },
+            holders: { rotulo: 'Holders' },
+            lockers: { rotulo: 'Lockers & LP' },
+          },
+          grade: [
+            { cols: '1fr 2fr', ids: ['score', 'risks'], altura: '58px' },
+            { cols: '1fr 1fr 1fr', ids: ['markets', 'insiders', 'holders'], altura: '52px' },
+            { cols: '1fr', ids: ['lockers'], altura: '44px' },
           ],
           itens: [
             { painel: 'score', titulo: 'Score', texto: 'Good, Warning ou Danger. Número maior é risco maior. A fórmula, os pesos e os limiares não são publicados.' },
@@ -1356,7 +1439,7 @@ export const modulo3 = {
           'Abra rugcheck.xyz e cole o endereço do contrato. Nunca busque pelo nome.',
           'Leia o Score junto com a lista de Risks, nunca sozinho.',
           'Abra cada item de Risks: o nível diz o peso, a descrição diz o porquê.',
-          'Olhe Insiders. Num lançamento recente e limpo, o esperado é zero redes de transferência. Redes de negociação entre si preocupam quando são a maioria das contas negociando.',
+          'Olhe Insiders. Num lançamento recente e limpo, o esperado é zero redes de transferência.',
           'Clique nas contas de uma rede: o RugCheck leva ao explorador para você conferir.',
         ],
         armadilhas: [
@@ -1373,16 +1456,20 @@ export const modulo3 = {
           'Consulta sem login. O preço só aparece se o token estiver listado na CoinGecko.',
         anatomia: {
           titulo: 'A página de um token no Solscan',
-          descricao: 'Mockup desenhado. Clique num item da legenda para localizar.',
-          viewBox: [0, 0, 640, 340],
-          paineis: [
-            { id: 'mcap', x: 12, y: 12, w: 200, h: 64, rotulo: 'Market Cap', tipo: 'numeros' },
-            { id: 'holders', x: 224, y: 12, w: 200, h: 64, rotulo: 'Holders', tipo: 'numeros' },
-            { id: 'authority', x: 436, y: 12, w: 192, h: 64, rotulo: 'Authority ▾', tipo: 'campo', alerta: true },
-            { id: 'creator', x: 12, y: 88, w: 300, h: 56, rotulo: 'Creator', tipo: 'campo' },
-            { id: 'programa', x: 328, y: 88, w: 300, h: 56, rotulo: 'Owner Program · Token Extensions', tipo: 'campo' },
-            { id: 'abas', x: 12, y: 156, w: 616, h: 40, rotulo: 'Transfers · Activities · Holders · Metadata · Markets', tipo: 'texto' },
-            { id: 'transfers', x: 12, y: 208, w: 616, h: 120, rotulo: 'Transfers, em ordem "Oldest First"', tipo: 'lista' },
+          paineis: {
+            mcap: { rotulo: 'Market Cap' },
+            holders: { rotulo: 'Holders' },
+            authority: { rotulo: 'Authority ▾', alerta: true },
+            creator: { rotulo: 'Creator' },
+            programa: { rotulo: 'Owner Program · Token Extensions' },
+            abas: { rotulo: 'Transfers · Activities · Holders · Metadata · Markets' },
+            transfers: { rotulo: 'Transfers, em ordem "Oldest First"' },
+          },
+          grade: [
+            { cols: '1fr 1fr 1fr', ids: ['mcap', 'holders', 'authority'], altura: '52px' },
+            { cols: '1fr 1fr', ids: ['creator', 'programa'], altura: '48px' },
+            { cols: '1fr', ids: ['abas'], altura: '38px' },
+            { cols: '1fr', ids: ['transfers'], altura: '52px' },
           ],
           itens: [
             { painel: 'mcap', titulo: 'Market Cap', texto: 'Aqui é totalmente diluído — o que o DexScreener chama de FDV.' },
@@ -1401,7 +1488,7 @@ export const modulo3 = {
           'Token Extensions: num token do pump.fun, só metadataPointer e tokenMetadata. Qualquer outra, pare.',
           'Authority: abra o menu e veja quais autoridades aparecem. Para confirmar mint e freeze, o RugCheck também mostra.',
           'Creator: clique na carteira e veja o histórico — outros tokens criados, e se vendeu.',
-          'Aba Transfers em "Oldest First": as primeiras compras. O Solscan não tem um campo "quanto o criador comprou"; a resposta está nessas linhas.',
+          'Aba Transfers em "Oldest First": as primeiras compras. Não há campo "quanto o criador comprou"; a resposta está nessas linhas.',
         ],
         armadilhas: [
           'No BONK, "Authority" mostra um endereço — o mesmo do Creator —, mas mint e freeze estão nulas na blockchain. O endereço é a autoridade de metadados.',
@@ -1418,14 +1505,17 @@ export const modulo3 = {
           'com 1.000 holders, lucro e prejuízo, análise entre redes e IA.',
         anatomia: {
           titulo: 'O mapa de bolhas do Bubblemaps',
-          descricao: 'Mockup desenhado. Clique num item da legenda para localizar.',
-          viewBox: [0, 0, 640, 320],
-          paineis: [
-            { id: 'mapa', x: 12, y: 12, w: 400, h: 296, rotulo: 'Mapa de bolhas · top 250', tipo: 'grafico' },
-            { id: 'carteira', x: 424, y: 12, w: 204, h: 120, rotulo: 'Detalhe: % do supply', tipo: 'numeros', alerta: true },
-            { id: 'magic', x: 424, y: 144, w: 204, h: 48, rotulo: 'Magic Nodes', tipo: 'botao' },
-            { id: 'olho', x: 424, y: 204, w: 204, h: 48, rotulo: 'Mostrar contratos e CEX', tipo: 'botao' },
-            { id: 'hora', x: 424, y: 264, w: 204, h: 44, rotulo: 'Hora do cálculo', tipo: 'campo' },
+          paineis: {
+            mapa: { rotulo: 'Mapa de bolhas · top 250' },
+            carteira: { rotulo: 'Detalhe: % do supply', alerta: true },
+            magic: { rotulo: 'Magic Nodes' },
+            olho: { rotulo: 'Mostrar contratos e CEX' },
+            hora: { rotulo: 'Hora do cálculo' },
+          },
+          grade: [
+            { cols: '2fr 1fr', ids: ['mapa', 'carteira'], altura: '80px' },
+            { cols: '1fr 1fr', ids: ['magic', 'olho'], altura: '44px' },
+            { cols: '1fr', ids: ['hora'], altura: '40px' },
           ],
           itens: [
             { painel: 'mapa', titulo: 'Bolhas e linhas', texto: 'Cada bolha é um holder; o tamanho é quanto ele tem. Uma linha é uma transferência na blockchain entre os dois. Bolhas ligadas formam um cluster.' },
@@ -1458,15 +1548,18 @@ export const modulo3 = {
           '(a partir de US$ 299) e Boosts para aparecer em alta.',
         anatomia: {
           titulo: 'A página de um par no DexScreener',
-          descricao: 'Mockup desenhado. Clique num item da legenda para localizar.',
-          viewBox: [0, 0, 640, 320],
-          paineis: [
-            { id: 'grafico', x: 12, y: 12, w: 400, h: 200, rotulo: 'Gráfico', tipo: 'grafico' },
-            { id: 'preco', x: 424, y: 12, w: 204, h: 48, rotulo: 'Price USD', tipo: 'numeros' },
-            { id: 'liquidez', x: 424, y: 72, w: 204, h: 64, rotulo: 'Liquidity · FDV · Mkt Cap', tipo: 'numeros' },
-            { id: 'txns', x: 424, y: 148, w: 204, h: 64, rotulo: 'Txns · Volume · Makers', tipo: 'numeros', alerta: true },
-            { id: 'info', x: 12, y: 224, w: 300, h: 84, rotulo: 'Info e socials', tipo: 'texto', alerta: true },
-            { id: 'audit', x: 324, y: 224, w: 304, h: 84, rotulo: 'Audit', tipo: 'lista' },
+          paineis: {
+            grafico: { rotulo: 'Gráfico' },
+            preco: { rotulo: 'Price USD' },
+            liquidez: { rotulo: 'Liquidity · FDV · Mkt Cap' },
+            txns: { rotulo: 'Txns · Volume · Makers', alerta: true },
+            info: { rotulo: 'Info e socials', alerta: true },
+            audit: { rotulo: 'Audit' },
+          },
+          grade: [
+            { cols: '2fr 1fr', ids: ['grafico', 'preco'], altura: '60px' },
+            { cols: '2fr 1fr', ids: ['liquidez', 'txns'], altura: '52px' },
+            { cols: '1fr 1fr', ids: ['info', 'audit'], altura: '48px' },
           ],
           itens: [
             { painel: 'grafico', titulo: 'Gráfico', texto: 'O preço do par escolhido. Um token pode ter vários pares; confira que é o do endereço certo.' },
@@ -1492,22 +1585,39 @@ export const modulo3 = {
       },
     ],
 
-    tabelaOnde: {
-      colunas: [
-        { chave: 'onde', rotulo: 'Onde checar' },
-        { chave: 'campo', rotulo: 'Campo' },
+    // A última seção da aba: a tabela "onde checar", um campo por pergunta.
+    onde: {
+      titulo: 'Onde checar cada coisa',
+      emUmaFrase:
+        'Cada pergunta tem um lugar e um campo. O mesmo nome de campo mede coisas diferentes em ' +
+        'sites diferentes.',
+      // A coluna `campo` sai em fonte de código (o nome do campo como está no site).
+      tabela: {
+        rotuloDasLinhas: 'O que você quer saber',
+        rotulo: 'Onde checar cada coisa (role na horizontal se preciso)',
+        larguraMinima: 560,
+        colunas: [
+          { chave: 'onde', rotulo: 'Onde checar' },
+          { chave: 'campo', rotulo: 'Campo', mono: true },
+        ],
+        linhas: [
+          { titulo: 'Programa e extensões', valores: { onde: 'Solscan', campo: 'Owner Program, Token Extensions' } },
+          { titulo: 'Mint e freeze authority', valores: { onde: 'Solscan e RugCheck', campo: 'Authority (menu); Risks' } },
+          { titulo: 'Nome e imagem podem mudar?', valores: { onde: 'Solscan', campo: 'Aba Metadata' } },
+          { titulo: 'Quem criou, e se já vendeu', valores: { onde: 'Solscan', campo: 'Creator + Transfers em "Oldest First"' } },
+          { titulo: 'Concentração real', valores: { onde: 'Bubblemaps e RugCheck', campo: 'Clusters e Magic Nodes; Insiders' } },
+          { titulo: 'Compra coordenada no lançamento', valores: { onde: 'trench.bot (só pump.fun)', campo: 'Current held %' } },
+          { titulo: 'Liquidez do par', valores: { onde: 'DexScreener', campo: 'Liquidity' } },
+          { titulo: 'FDV e market cap', valores: { onde: 'DexScreener', campo: 'FDV, Mkt Cap' } },
+          { titulo: 'Volume e negociações', valores: { onde: 'DexScreener', campo: 'Txns, Volume, Makers' } },
+        ],
+      },
+      paragrafos: [
+        'No mesmo dia, o BONK mostrou liquidez de US$ 279 mil no DexScreener e US$ 1,69 milhão no ' +
+          'Solscan: o primeiro mostrou um par, o segundo somou vários pools. Não compare o mesmo ' +
+          'nome de campo entre sites.',
       ],
-      linhas: [
-        { id: 'programa', titulo: 'Programa e extensões', valores: { onde: 'Solscan', campo: 'Owner Program, Token Extensions' } },
-        { id: 'autoridades', titulo: 'Mint e freeze authority', valores: { onde: 'Solscan e RugCheck', campo: 'Authority (menu); Risks' } },
-        { id: 'metadata', titulo: 'Nome e imagem podem mudar?', valores: { onde: 'Solscan', campo: 'Aba Metadata' } },
-        { id: 'criador', titulo: 'Quem criou, e se já vendeu', valores: { onde: 'Solscan', campo: 'Creator + aba Transfers em "Oldest First"' } },
-        { id: 'concentracao', titulo: 'Concentração real', valores: { onde: 'Bubblemaps e RugCheck', campo: 'Clusters e Magic Nodes; Insiders' } },
-        { id: 'bundle', titulo: 'Compra coordenada no lançamento', valores: { onde: 'trench.bot (só pump.fun)', campo: 'Current held %' } },
-        { id: 'liquidez', titulo: 'Liquidez do par', valores: { onde: 'DexScreener', campo: 'Liquidity' } },
-        { id: 'fdv', titulo: 'FDV e market cap', valores: { onde: 'DexScreener', campo: 'FDV, Mkt Cap' } },
-        { id: 'volume', titulo: 'Volume e negociações', valores: { onde: 'DexScreener', campo: 'Txns, Volume, Makers' } },
-      ],
+      pergunta: 'q9',
     },
   },
 
@@ -1581,6 +1691,9 @@ export const modulo3 = {
   // ---------------------------------------------------------------------------
   // Mini-quiz (aba "Quiz") — 13 perguntas
   // ---------------------------------------------------------------------------
+
+  // A frase embaixo do título do quiz. Se mudar o número de perguntas, mude aqui.
+  descricaoDoQuiz: 'Treze perguntas. As respostas ficam salvas no navegador.',
 
   // Por que cada alternativa errada não serve (q1 a q10; q11 a q13 trazem o
   // `porque` dentro da própria alternativa).

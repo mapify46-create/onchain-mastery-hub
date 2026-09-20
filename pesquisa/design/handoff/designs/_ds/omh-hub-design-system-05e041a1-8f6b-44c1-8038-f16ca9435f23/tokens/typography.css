@@ -1,0 +1,33 @@
+/* Duas famílias, sem exceção. Mono é reservada a dado quantitativo, endereço de
+   carteira, hash, ticker e fórmula — nunca a texto corrido. */
+:root {
+  --omh-fonte-sans: "Inter", -apple-system, "Segoe UI", Roboto, sans-serif; /* @kind font */
+  --omh-fonte-mono: "JetBrains Mono", ui-monospace, Consolas, monospace; /* @kind font */
+
+  /* Escala (os mesmos degraus usados no código, em rem) */
+  --omh-texto-11: 11px;   /* etiqueta de evidência, o único degrau em px */
+  --omh-texto-xs: 0.75rem;
+  --omh-texto-sm: 0.875rem;
+  --omh-texto-base: 1rem;
+  --omh-texto-lg: 1.125rem;
+  --omh-texto-xl: 1.25rem;
+  --omh-texto-2xl: 1.5rem;
+  --omh-texto-3xl: 1.875rem;
+
+  /* Altura de linha */
+  --omh-linha-corpo: 1.6; /* @kind other */    /* body: leitura longa em português */
+  --omh-linha-apertada: 1.25; /* @kind other */
+  --omh-linha-numero: 1.1; /* @kind other */
+
+  /* Peso */
+  --omh-peso-regular: 400; /* @kind font */
+  --omh-peso-medio: 500; /* @kind font */
+  --omh-peso-semibold: 600; /* @kind font */
+  --omh-peso-bold: 700; /* @kind font */
+
+  /* Rótulo de seção: maiúsculas pequenas com espaçamento */
+  --omh-tracking-rotulo: 0.05em; /* @kind other */
+  /* Número grande: fluido entre 28px e 40px */
+  --omh-numero-grande: clamp(1.75rem, 1.2rem + 2.2vw, 2.5rem); /* @kind other */
+  --omh-tracking-numero: -0.02em; /* @kind other */
+}

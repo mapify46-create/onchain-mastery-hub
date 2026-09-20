@@ -6,16 +6,72 @@
 // Cada termo: id, termo, categorias (uma ou mais, para os que cruzam dois temas),
 // definicao (curta), exemplo (prático) e alerta (sinal de risco a observar).
 
-// Categorias usadas no filtro. Os ids batem com o que aparece em `categorias`
-// de cada termo abaixo.
+// Categorias usadas no filtro e no mapa. Os ids batem com o que aparece em
+// `categorias` de cada termo abaixo.
+// `tom` é a cor da etiqueta da categoria no card do termo, como no desenho
+// (32 Glossario): alto = vermelho, baixo = verde, primaria = roxo,
+// medio = âmbar, acento = ciano, neutro = cinza.
 export const CATEGORIAS_GLOSSARIO = [
-  { id: 'seguranca', nome: 'Segurança' },
-  { id: 'liquidez', nome: 'Liquidez' },
-  { id: 'execucao', nome: 'Execução' },
-  { id: 'social', nome: 'Social' },
-  { id: 'solana', nome: 'Solana' },
-  { id: 'evm', nome: 'EVM' },
+  { id: 'seguranca', nome: 'Segurança', tom: 'alto' },
+  { id: 'liquidez', nome: 'Liquidez', tom: 'baixo' },
+  { id: 'execucao', nome: 'Execução', tom: 'primaria' },
+  { id: 'social', nome: 'Social', tom: 'medio' },
+  { id: 'solana', nome: 'Solana', tom: 'acento' },
+  { id: 'evm', nome: 'EVM', tom: 'neutro' },
 ];
+
+// Textos da tela que não são termos: cabeçalho, mapa, contador e estado vazio.
+// Vêm do desenho (32 Glossario). Os números que mudam com os dados (34 termos,
+// 6 categorias, as contagens) são calculados na tela; só a introdução do mapa
+// escreve "Seis" e "Dois" por extenso — se entrar categoria nova ou outro termo
+// de duas categorias, atualize a frase.
+export const TEXTOS_GLOSSARIO = {
+  titulo: 'Glossário',
+  subtitulo:
+    'Todo termo que aparece nos módulos, com definição, exemplo prático e o sinal de risco a ' +
+    'observar. Abra aqui sempre que um termo novo aparecer e marque como estudado o que já entendeu.',
+  // Nota do contador. Os dias ("no dia seguinte, e depois em 3, 7, 16 e 35 dias")
+  // saem da escada da Revisão (ESCADA_DIAS em src/components/revisao.js).
+  notaDaRevisao: {
+    antes: 'Marcar um termo como estudado coloca as perguntas dele na fila da ',
+    link: 'Revisão',
+    depois: ': elas voltam ',
+  },
+  mapa: {
+    titulo: 'O mapa dos termos',
+    relacao: 'Relação: o todo e suas partes',
+    intro:
+      'Seis categorias. Clique numa para filtrar a lista abaixo; clique de novo para ver todas. ' +
+      'Dois termos pertencem a duas categorias ao mesmo tempo — eles aparecem nas duas, ligados ' +
+      'pela cor ciana, e não duplicados em silêncio.',
+    legendaCruzado: 'termo em duas categorias — a seta diz qual é a outra',
+    legendaEstudado: 'já estudado',
+    // Só para leitor de tela, em cada folha do mapa: o que as cores dizem a
+    // quem enxerga (ciano = duas categorias, verde = estudado) dito em palavras.
+    // A seta "⇢ Outra" é aria-hidden, porque o símbolo não se lê bem.
+    leitorEstudado: ', estudado',
+    leitorCruzado: { antes: ' (também em ', depois: ')' },
+  },
+  // Nome do campo de busca para quem usa leitor de tela. O rótulo visível
+  // ("Buscar termo") é escrito em caixa alta pelo CSS, e o navegador expõe o
+  // texto já transformado ("BUSCAR TERMO"), que alguns leitores soletram letra
+  // por letra. O desenho (32 Glossario) resolve com este aria-label.
+  buscaAriaLabel: 'Buscar no glossário',
+  // A linha que a busca escreve ("8 termos em "Solana" · 2 já estudados").
+  // O desenho monta a frase com as mesmas partes e faz a concordância de
+  // "termo/termos"; aqui "já estudado/já estudados" também concorda com o
+  // número, para não sair "1 já estudados".
+  resultado: {
+    nenhum: 'Nenhum termo encontrado.',
+    termo: ' termo',
+    termos: ' termos',
+    jaEstudado: ' já estudado',
+    jaEstudados: ' já estudados',
+  },
+  // Ao lado das etiquetas, no card de um termo que está em duas categorias.
+  cruzado: 'aparece nas duas categorias',
+  vazio: 'Nenhum termo bate com essa busca e esse filtro ao mesmo tempo. Tente limpar um dos dois.',
+};
 
 export const glossario = [
   {

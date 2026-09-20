@@ -1,0 +1,22 @@
+/* Espaçamento. O card do hub tem padding 20px (p-5); caixa interna, 12 ou 16px. */
+:root {
+  --omh-espaco-1: 4px;
+  --omh-espaco-2: 8px;
+  --omh-espaco-3: 12px;
+  --omh-espaco-4: 16px;
+  --omh-espaco-5: 20px;
+  --omh-espaco-6: 24px;
+  --omh-espaco-8: 32px;
+  --omh-espaco-10: 40px;
+
+  --omh-card-padding: var(--omh-espaco-5);
+  --omh-caixa-padding: var(--omh-espaco-3);
+  --omh-caixa-padding-larga: var(--omh-espaco-4);
+  --omh-pilha: var(--omh-espaco-6);       /* space-y-6 entre cards de uma view */
+  --omh-pilha-curta: var(--omh-espaco-4); /* gap-4 dentro de uma grade */
+
+  --omh-sidebar-largura: 16rem; /* @kind spacing */           /* lg:w-64 no desktop */
+  --omh-sidebar-largura-gaveta: 18rem; /* @kind spacing */    /* w-72 na gaveta do mobile */
+  --omh-conteudo-max: 64rem; /* @kind spacing */              /* max-w-5xl das views */
+  --omh-alvo-minimo: 44px; /* @kind spacing */                /* alvo de toque mínimo (WCAG 2.2) */
+}

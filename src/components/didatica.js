@@ -5,8 +5,28 @@
 //   montarPerguntaPrevia   uma pergunta antes de ler a aba
 //   montarPerguntaDaParte  uma pergunta no fim de uma parte, corrigida na hora
 //   montarTermos           os termos-chave da aba, antes do conteúdo
+//
+// Estes blocos não estão nos desenhos; o dono decidiu mantê-los (18/09/2026), no
+// traço do desenho: micro-rótulo de 12px, botões de 44px, caixas de raio 8
+// (rounded-lg) e as alternativas e o feedback iguais aos do quiz (tela 34).
 
 import { criarElemento, criarBotao } from '../ui.js';
+import {
+  MICRO_ROTULO,
+  criarAlternativa,
+  pintarAlternativa,
+  preencherFeedback,
+  mostrar,
+  navegarComSetas,
+  ajustarTabDoGrupo,
+} from './quiz.js';
+
+// Ids únicos na página, para ligar cada grupo de botões ao texto que o nomeia.
+let contadorDeIds = 0;
+function novoId(prefixo) {
+  contadorDeIds += 1;
+  return prefixo + '-' + contadorDeIds;
+}
 
 /**
  * Divide uma aba longa em partes que aparecem uma de cada vez.
@@ -25,7 +45,8 @@ import { criarElemento, criarBotao } from '../ui.js';
  *                                se houver, aparece no fim da parte, antes do "Continuar".
  */
 export function montarSegmentos({ partes = [] }) {
-  const container = criarElemento('div', { class: 'space-y-8' });
+  // gap (e não space-y): o que está escondido não deixa espaço sobrando.
+  const container = criarElemento('div', { class: 'flex flex-col gap-8' });
   let visiveis = 1;
 
   const secoes = partes.map((parte, indice) =>
@@ -35,7 +56,7 @@ export function montarSegmentos({ partes = [] }) {
         {
           tabindex: '-1',
           'data-parte': String(indice),
-          class: 'text-xs font-semibold uppercase tracking-wide text-texto-suave',
+          class: MICRO_ROTULO,
         },
         ['Parte ' + (indice + 1) + ' de ' + partes.length + ' — ' + parte.titulo],
       ),
@@ -45,7 +66,7 @@ export function montarSegmentos({ partes = [] }) {
   );
 
   const rodape = criarElemento('div', {
-    class: 'flex flex-wrap items-center gap-4 rounded-card border border-borda bg-superficie p-4',
+    class: 'flex flex-wrap items-center gap-3 rounded-lg border border-borda bg-superficie p-5',
   });
 
   function renderizar(parteParaFocar) {
@@ -54,11 +75,14 @@ export function montarSegmentos({ partes = [] }) {
     });
 
     if (visiveis >= partes.length) {
-      rodape.hidden = true;
+      // style.display, e não `hidden`: a classe "flex" venceria o hidden.
+      mostrar(rodape, false);
     } else {
-      rodape.hidden = false;
+      mostrar(rodape, true);
       rodape.replaceChildren(
+        // cursor-pointer: a mãozinha dos botões do desenho (o Tailwind põe a seta).
         criarBotao('Continuar: ' + partes[visiveis].titulo, {
+          class: 'cursor-pointer',
           onclick: () => {
             visiveis += 1;
             renderizar(visiveis - 1);
@@ -66,12 +90,13 @@ export function montarSegmentos({ partes = [] }) {
         }),
         criarBotao('Mostrar tudo', {
           variante: 'secundario',
+          class: 'cursor-pointer',
           onclick: () => {
             visiveis = partes.length;
             renderizar(null);
           },
         }),
-        criarElemento('span', { class: 'text-sm text-texto-suave' }, [
+        criarElemento('span', { class: 'text-[13px] text-texto-suave' }, [
           visiveis + ' de ' + partes.length + ' partes abertas',
         ]),
       );
@@ -97,47 +122,78 @@ export function montarSegmentos({ partes = [] }) {
  * texto da aba, e o quiz confere.
  *
  * @param {object} opcoes
- * @param {string} opcoes.id        Id do módulo, para o nome dos botões de rádio.
+ * @param {string} opcoes.id        Id do módulo (entra nos ids da página).
  * @param {object} opcoes.pergunta  Uma pergunta no formato do quiz.
  */
 export function montarPerguntaPrevia({ id, pergunta }) {
   if (!pergunta) return null;
 
-  const aviso = criarElemento('p', { class: 'mt-3 text-sm text-texto-suave', role: 'status' });
-  const nome = 'previa-' + id + '-' + pergunta.id;
+  const idDoRotulo = novoId('previa-' + id + '-' + pergunta.id + '-rotulo');
+  const idDoTexto = novoId('previa-' + id + '-' + pergunta.id + '-texto');
+  let escolhida = null;
 
-  const alternativas = pergunta.alternativas.map((alternativa) =>
-    criarElemento(
-      'label',
-      {
-        class:
-          'flex cursor-pointer items-start gap-3 rounded-lg border border-borda bg-fundo p-3 ' +
-          'text-sm transition-colors duration-150 hover:border-texto-suave',
-      },
-      [
-        criarElemento('input', {
-          type: 'radio',
-          name: nome,
-          value: alternativa.id,
-          class: 'mt-0.5 h-4 w-4 shrink-0 accent-primaria',
-          onchange: () => {
-            aviso.textContent =
-              'Anotado. Leia a aba com essa resposta na cabeça — o quiz do fim do módulo confere.';
-          },
-        }),
-        criarElemento('span', {}, [alternativa.texto]),
-      ],
-    ),
+  // O aviso fica sempre na página (vazio no começo) para o leitor de tela anunciar.
+  const aviso = criarElemento('p', { class: 'text-[13px] text-texto-suave', role: 'status' });
+
+  // Alternativas no traço do quiz: botões role="radio"; a escolhida fica roxa.
+  const alternativas = pergunta.alternativas.map((alternativa) => ({
+    alternativa,
+    ...criarAlternativa(alternativa.texto, {
+      role: 'radio',
+      'aria-checked': 'false',
+      onclick: () => escolher(alternativa.id),
+      onkeydown: (evento) => navegarComSetas(evento, alternativas.map((item) => item.botao)),
+    }),
+  }));
+
+  function escolher(alternativaId) {
+    escolhida = alternativaId;
+    pintar();
+    aviso.classList.add('mt-3');
+    aviso.textContent =
+      'Anotado. Leia a aba com essa resposta na cabeça — o quiz do fim do módulo confere.';
+  }
+
+  function pintar() {
+    for (const item of alternativas) {
+      const estaEscolhida = item.alternativa.id === escolhida;
+      pintarAlternativa(item, { escolhida: estaEscolhida, certa: false, corrigida: false });
+      item.botao.setAttribute('aria-checked', String(estaEscolhida));
+    }
+    ajustarTabDoGrupo(
+      alternativas.map((item) => item.botao),
+      alternativas.findIndex((item) => item.alternativa.id === escolhida),
+    );
+  }
+
+  pintar();
+
+  return criarElemento(
+    'div',
+    {
+      role: 'group',
+      'aria-labelledby': idDoRotulo,
+      class: 'flex flex-col gap-3.5 rounded-lg border border-acento/50 bg-acento/10 p-5',
+    },
+    [
+      criarElemento(
+        'p',
+        { id: idDoRotulo, class: 'text-xs font-semibold uppercase tracking-[.05em] text-acento leading-[1.6]' },
+        ['Antes de ler: o que você acha?'],
+      ),
+      criarElemento('p', { id: idDoTexto, class: 'text-[17px] font-semibold text-pretty text-texto' }, [
+        pergunta.pergunta,
+      ]),
+      criarElemento('div', {}, [
+        criarElemento(
+          'div',
+          { role: 'radiogroup', 'aria-labelledby': idDoTexto, class: 'flex flex-col gap-2' },
+          alternativas.map((item) => item.botao),
+        ),
+        aviso,
+      ]),
+    ],
   );
-
-  return criarElemento('fieldset', { class: 'rounded-card border border-acento/40 bg-acento/5 p-5' }, [
-    criarElemento('legend', { class: 'px-1 text-xs font-semibold uppercase tracking-wide text-acento' }, [
-      'Antes de ler: o que você acha?',
-    ]),
-    criarElemento('p', { class: 'text-base font-semibold text-texto' }, [pergunta.pergunta]),
-    criarElemento('div', { class: 'mt-3 space-y-2' }, alternativas),
-    aviso,
-  ]);
 }
 
 /**
@@ -154,86 +210,97 @@ export function montarPerguntaPrevia({ id, pergunta }) {
 export function montarPerguntaDaParte({ pergunta }) {
   if (!pergunta) return null;
 
-  const container = criarElemento('fieldset', {
-    class: 'rounded-card border border-primaria/40 bg-primaria/5 p-5',
+  const idDoRotulo = novoId('confira-' + pergunta.id + '-rotulo');
+  const idDoTexto = novoId('confira-' + pergunta.id + '-texto');
+  let escolhida = null;
+
+  // Um clique já responde: cada alternativa é um botão que corrige na hora.
+  const alternativas = pergunta.alternativas.map((alternativa) => ({
+    alternativa,
+    ...criarAlternativa(alternativa.texto, {
+      'aria-pressed': 'false',
+      onclick: () => responder(alternativa.id),
+    }),
+  }));
+
+  // O feedback (verde ou vermelho, como no quiz) e o "Tentar de novo". O feedback
+  // recebe o foco depois da resposta (para o leitor de tela ler), mas não é um
+  // controle: fica sem contorno, e o raio vai no style para a regra de foco não trocá-lo.
+  const resultado = criarElemento('div', {
+    'data-resultado': '',
+    tabindex: '-1',
+    style: 'outline:none;border-radius:8px',
   });
-
-  function renderizar(escolhida) {
-    const respondida = Boolean(escolhida);
-    const acertou = escolhida === pergunta.correta;
-    const marcada = pergunta.alternativas.find((alternativa) => alternativa.id === escolhida);
-
-    const alternativas = pergunta.alternativas.map((alternativa) => {
-      const certa = alternativa.id === pergunta.correta;
-      const foiEscolhida = alternativa.id === escolhida;
-      let cor = ' border-borda bg-fundo hover:border-texto-suave';
-      if (respondida && certa) cor = ' border-risco-baixo/60 bg-risco-baixo/10';
-      else if (respondida && foiEscolhida) cor = ' border-risco-alto/60 bg-risco-alto/10';
-      else if (respondida) cor = ' border-borda bg-fundo opacity-70';
-
-      return criarElemento(
-        'button',
-        {
-          type: 'button',
-          disabled: respondida,
-          'aria-pressed': String(foiEscolhida),
-          class:
-            'w-full rounded-lg border p-3 text-left text-sm text-texto transition-colors ' +
-            'duration-150 disabled:cursor-default' +
-            cor,
-          onclick: () => {
-            renderizar(alternativa.id);
-            container.querySelector('[data-resultado]')?.focus();
-          },
+  const blocoDoResultado = criarElemento('div', { class: 'flex flex-col gap-3' }, [
+    resultado,
+    criarElemento('div', {}, [
+      criarBotao('Tentar de novo', {
+        variante: 'fantasma',
+        class: 'cursor-pointer',
+        onclick: () => {
+          escolhida = null;
+          pintar();
+          alternativas[0]?.botao.focus();
         },
-        [alternativa.texto],
-      );
-    });
+      }),
+    ]),
+  ]);
 
-    const resultado = respondida
-      ? [
-          criarElemento(
-            'p',
-            {
-              'data-resultado': '',
-              tabindex: '-1',
-              class:
-                'mt-4 rounded-lg border p-3 text-sm ' +
-                (acertou
-                  ? 'border-risco-baixo/40 bg-risco-baixo/10'
-                  : 'border-risco-medio/40 bg-risco-medio/10'),
-            },
-            [criarElemento('strong', {}, [acertou ? 'Isso. ' : 'Não foi essa. ']), pergunta.explicacao],
-          ),
-          !acertou && marcada?.porque
-            ? criarElemento(
-                'p',
-                { class: 'mt-2 rounded-lg border border-borda bg-fundo p-3 text-sm text-texto-suave' },
-                [criarElemento('strong', { class: 'text-texto' }, ['Por que a sua não serve: ']), marcada.porque],
-              )
-            : null,
-          criarElemento('div', { class: 'mt-3' }, [
-            criarBotao('Tentar de novo', { variante: 'fantasma', onclick: () => renderizar(null) }),
-          ]),
-        ]
-      : [];
-
-    container.replaceChildren(
-      ...[
-        criarElemento(
-          'legend',
-          { class: 'px-1 text-xs font-semibold uppercase tracking-wide text-texto' },
-          ['Confira antes de seguir'],
-        ),
-        criarElemento('p', { class: 'text-base font-semibold text-texto' }, [pergunta.pergunta]),
-        criarElemento('div', { class: 'mt-3 space-y-2' }, alternativas),
-        ...resultado,
-      ].filter(Boolean),
-    );
+  function responder(alternativaId) {
+    escolhida = alternativaId;
+    pintar();
+    resultado.focus();
   }
 
-  renderizar(null);
-  return container;
+  function pintar() {
+    const respondida = Boolean(escolhida);
+    const acertou = escolhida === pergunta.correta;
+
+    for (const item of alternativas) {
+      const estaEscolhida = item.alternativa.id === escolhida;
+      pintarAlternativa(item, {
+        escolhida: estaEscolhida,
+        certa: item.alternativa.id === pergunta.correta,
+        corrigida: respondida,
+      });
+      item.botao.setAttribute('aria-pressed', String(estaEscolhida));
+      item.botao.disabled = respondida;
+    }
+
+    if (respondida) {
+      const marcada = pergunta.alternativas.find((alternativa) => alternativa.id === escolhida);
+      preencherFeedback(resultado, {
+        acertou,
+        titulo: acertou ? 'Isso. ' : 'Não foi essa. ',
+        explicacao: pergunta.explicacao,
+        porque: marcada?.porque,
+      });
+    }
+    mostrar(blocoDoResultado, respondida);
+  }
+
+  pintar();
+
+  return criarElemento(
+    'div',
+    {
+      role: 'group',
+      'aria-labelledby': idDoRotulo,
+      class: 'flex flex-col gap-3.5 rounded-lg border border-borda bg-superficie p-5',
+    },
+    [
+      criarElemento('p', { id: idDoRotulo, class: MICRO_ROTULO }, ['Confira antes de seguir']),
+      criarElemento('p', { id: idDoTexto, class: 'text-[17px] font-semibold text-pretty text-texto' }, [
+        pergunta.pergunta,
+      ]),
+      criarElemento(
+        'div',
+        { role: 'group', 'aria-labelledby': idDoTexto, class: 'flex flex-col gap-2' },
+        alternativas.map((item) => item.botao),
+      ),
+      blocoDoResultado,
+    ],
+  );
 }
 
 /**
@@ -251,14 +318,16 @@ export function montarTermos(termos = []) {
     'aside',
     { class: 'rounded-card border border-borda bg-superficie p-5', 'aria-label': 'Termos desta aba' },
     [
-      criarElemento('p', { class: 'text-sm font-semibold text-texto' }, ['Termos desta aba']),
+      // leading-[1.6]: a altura de linha do desenho (o text-sm sozinho daria 20px).
+      criarElemento('p', { class: 'text-sm font-semibold text-texto leading-[1.6]' }, ['Termos desta aba']),
+      // Colunas pelo CSS: cabem quantas tiverem 200px ou mais (1 no celular).
       criarElemento(
         'dl',
-        { class: 'mt-3 grid gap-4 sm:grid-cols-3' },
+        { class: 'mt-3 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4' },
         termos.map((item) =>
           criarElemento('div', {}, [
-            criarElemento('dt', { class: 'text-sm font-semibold text-acento' }, [item.termo]),
-            criarElemento('dd', { class: 'mt-1 text-sm text-texto-suave' }, [item.definicao]),
+            criarElemento('dt', { class: 'text-sm font-semibold text-acento leading-[1.6]' }, [item.termo]),
+            criarElemento('dd', { class: 'mt-1 text-sm text-texto-suave leading-[1.6]' }, [item.definicao]),
           ]),
         ),
       ),

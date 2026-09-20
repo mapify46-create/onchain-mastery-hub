@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Página de módulo" description="Uma rota de módulo do OMH Hub: cabeçalho, números de abertura, termos, cards de seção e mini-quiz." -->
+<helmet><script src="./ds-base.js"></script><style>body{margin:0;background:#0B0F17;color:#E6EDF3;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6}</style></helmet>
+<main style="margin:0 auto;max-width:64rem;padding:32px 24px;display:flex;flex-direction:column;gap:24px">
+<header style="margin-bottom:0">
+<h1 style="margin:0;font-size:1.875rem;font-weight:600;line-height:1.25;color:#E6EDF3">Módulo 1 — Fundamentos &amp; Segurança Cripto</h1>
+<p style="margin:8px 0 0;max-width:48rem;color:#9AA7B4">Como a blockchain funciona e por que ela é imutável, como ler uma transação, o que são chave privada, gas e contrato inteligente — e como não perder a carteira para um golpe.</p>
+</header>
+<x-import component-from-global-scope="{{ nsDestaques }}" destaques="{{ destaques }}" hint-size="100%,190px"></x-import>
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600;color:#E6EDF3">O que você leva deste módulo</h2>
+<ul style="margin:12px 0 0;padding-left:20px;color:#9AA7B4">
+<li style="margin-top:8px">Abrir uma transação num explorador de blocos e explicar, em voz alta, o que aconteceu.</li>
+<li style="margin-top:8px">Explicar a diferença entre chave privada, chave pública e endereço, e por que a frase-semente gera todas elas.</li>
+<li style="margin-top:8px">Explicar o que é gas e por que uma transação que falha ainda cobra taxa.</li>
+</ul>
+</section>
+<aside aria-label="Termos desta aba" style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<p style="margin:0;font-size:0.875rem;font-weight:600;color:#E6EDF3">Termos desta aba</p>
+<dl style="margin:12px 0 0;display:grid;gap:16px;grid-template-columns:repeat(3,minmax(0,1fr))">
+<div><dt style="font-size:0.875rem;font-weight:600;color:#22D3EE">Bloco</dt><dd style="margin:4px 0 0;font-size:0.875rem;color:#9AA7B4">Uma "página" do caderno de registros, com várias transações.</dd></div>
+<div><dt style="font-size:0.875rem;font-weight:600;color:#22D3EE">Hash</dt><dd style="margin:4px 0 0;font-size:0.875rem;color:#9AA7B4">A impressão digital que resume um bloco e o liga ao anterior.</dd></div>
+<div><dt style="font-size:0.875rem;font-weight:600;color:#22D3EE">Gas</dt><dd style="margin:4px 0 0;font-size:0.875rem;color:#9AA7B4">O preço do processamento de uma transação na rede.</dd></div>
+</dl>
+</aside>
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600;color:#E6EDF3">O que é uma blockchain</h2>
+<p style="margin:12px 0 0;border-left:2px solid #22D3EE;padding-left:12px;font-size:1rem;font-weight:600;color:#E6EDF3">Blockchain é um caderno de registros público, copiado em milhares de computadores, que ninguém consegue alterar escondido.</p>
+<p style="margin:12px 0 0;color:#9AA7B4">No banco, uma empresa guarda sozinha a lista de quem tem o quê. Numa blockchain, milhares de computadores no mundo guardam cópias idênticas da mesma lista.</p>
+<p style="margin:12px 0 0;color:#9AA7B4">Cada bloco carrega o hash do bloco anterior. Hash é uma impressão digital matemática: um código que resume todo o conteúdo do bloco.</p>
+<div style="margin-top:16px;border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:16px">
+<p style="margin:0;font-size:0.875rem;font-weight:600;color:#E6EDF3">O que acontece se alguém tentar mudar uma transação antiga</p>
+<ol style="margin:8px 0 0;padding-left:20px;font-size:0.875rem;color:#9AA7B4">
+<li style="margin-top:4px">A pessoa altera uma transação dentro de um bloco antigo.</li>
+<li style="margin-top:4px">O hash daquele bloco muda, porque o conteúdo mudou.</li>
+<li style="margin-top:4px">Isso quebra a ligação com todos os blocos seguintes. A fraude fica evidente para toda a rede.</li>
+</ol>
+</div>
+</section>
+<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px">
+<h2 style="margin:0;font-size:1.125rem;font-weight:600;color:#E6EDF3">Imutabilidade e "confirmações"</h2>
+<p style="margin:12px 0 0;border-left:2px solid #22D3EE;padding-left:12px;font-size:1rem;font-weight:600;color:#E6EDF3">Depois de confirmada, uma transação não tem botão de "desfazer". Nem para golpe, nem para erro.</p>
+<p style="margin:12px 0 0;color:#9AA7B4">"Confirmação" é o número de blocos já fechados em cima do bloco onde a sua transação entrou. Com 12, 30 ou mais confirmações, reverter fica cada vez mais impossível.</p>
+</section>
+<x-import component-from-global-scope="{{ nsQuiz }}" id="modulo-1" titulo="Mini-quiz do Módulo 1" descricao="O resultado fica salvo no seu navegador, e as perguntas voltam na página Revisão." perguntas="{{ perguntas }}" hint-size="100%,420px"></x-import>
+<p style="margin:0;border-radius:12px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:16px;font-size:0.875rem;color:#9AA7B4"><strong style="color:#E6EDF3">Aviso: </strong>material de estudo próprio. Memecoin é o ativo de maior risco do mercado: 68,67% dos tokens do Pump.fun pararam de negociar no mesmo dia em que nasceram (CoinGecko Research).</p>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1024,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  renderVals() {
+    const ns = 'OMHHubDesignSystem_05e041';
+    return {
+      nsDestaques: ns + '.Destaques',
+      nsQuiz: ns + '.Quiz',
+      destaques: [
+        { rotulo: 'Transação confirmada', valor: 'Sem desfazer', nota: 'Não há suporte que estorne uma transação confirmada. Nem para golpe, nem para erro.', tom: 'alerta' },
+        { rotulo: 'Quem tem a frase-semente', valor: 'Tem a carteira', nota: 'Ela gera todas as chaves privadas. Não existe recuperação por suporte.' },
+      ],
+      perguntas: [
+        {
+          id: 'q1',
+          pergunta: 'Uma transação que falha cobra taxa?',
+          alternativas: [
+            { id: 'a', texto: 'Sim — a rede executou o trabalho de qualquer forma.' },
+            { id: 'b', texto: 'Não — se não deu certo, nada é cobrado.', porque: 'O gas paga o processamento, não o sucesso da operação.' },
+          ],
+          correta: 'a',
+          explicacao: 'O gas paga o processamento. Uma transação com Failed no explorador também aparece com taxa paga.',
+        },
+        {
+          id: 'q2',
+          pergunta: 'O que a frase-semente representa?',
+          alternativas: [
+            { id: 'a', texto: 'Uma senha de recuperação da conta na corretora.', porque: 'Corretora tem senha e suporte; a frase-semente não pertence a esse mundo.' },
+            { id: 'b', texto: 'A própria carteira: ela gera todas as chaves privadas.' },
+          ],
+          correta: 'b',
+          explicacao: 'Quem tem a frase-semente tem a carteira. Não existe suporte que a recupere nem que a bloqueie.',
+        },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

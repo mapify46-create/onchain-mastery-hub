@@ -1,13 +1,68 @@
 # Estado do projeto — leia isto primeiro
 
-> 13/09/2026. Uma página. Serve para retomar o trabalho numa sessão nova sem
+> Atualizado em 20/09/2026. Uma página. Serve para retomar o trabalho numa sessão nova sem
 > precisar do histórico da conversa.
+
+## Agora (20/09/2026): o redesenho foi reimplantado por inteiro — local, ainda não publicado
+
+Em 18/09 o dono achou a implantação do redesenho "completamente diferente" do desenho. Uma
+auditoria (12 relatórios, `pesquisa/design/auditoria/README.md`) confirmou o motivo: o
+conteúdo estava certo, a forma não era a do desenho. A partir daí, o app inteiro foi
+reimplantado tela por tela contra os `.dc.html`, com uma segunda pessoa (agente
+independente) conferindo cada peça antes de fechar. **As 11 telas e as 6 animações estão
+prontas, testadas nas duas larguras (1280/390), sem erro no console e sem rolagem lateral.**
+
+- **Decisões do dono (18/09), aplicadas:** "Antes de ler"/"Parte X de N"/"Confira" ficam,
+  junto com a "Pergunta rápida" do desenho; progresso pelo acerto (não pelo responder);
+  quiz corrigido por pergunta (tela 34); Chart.js saiu do projeto (arquivo apagado,
+  `CLAUDE.md` atualizado).
+- **O que foi feito:**
+  - moldura: coluna de 868px, aviso âmbar no fim de cada página (`src/components/aviso.js`),
+    sidebar com os nomes/ordem do desenho, abas e botões de 44px, micro-rótulo no cabeçalho;
+  - componentes: quiz e simulador da tela 34, `montarPerguntaRapida`, linha do tempo
+    proporcional, tabela comparativa, fluxogramas (+ `criarFluxoLinear` para o Checklist e
+    a checagem do contrato do M6), mapa do módulo, ciclo, grade de 100, barras, curva
+    deslizante — todos revisados por agente independente, em até 2 rodadas cada;
+  - as 6 animações: motor único no contrato da Fase 4 (`src/components/animacoes/motor.js`)
+    + um arquivo por palco (`pool.js`, `drainer.js`, `sanduiche.js`, `caminho-do-token.js`,
+    `narrativa.js`, `envenenamento.js`), cada um revisado à parte;
+  - as 11 telas (Início, Revisão, Checklist, Glossário, M1–M7) reescritas contra o desenho,
+    com os dados novos que faltavam em `src/data/*.js` (ex.: `src/data/inicio.js`, novo);
+  - erros corrigidos: calculadora de tamanho do M4 (0,5% não vira mais 1%), grade da ruína
+    do M7 (100 vermelhos), cores da grade do M6, legenda cortada do ciclo do M3, emoji do
+    M3, cor fora da paleta nas animações, número "99,5%" quebrando em 3 linhas no celular
+    (`criarGradeDe100`), `leading-[1.6]` faltando em 3 componentes compartilhados
+    (`criarTitulo`, `criarAvisoDeRodape`, `montarCartaoDeDestaque`);
+  - fechamento: `service-worker.js` reescrito com a lista real de 55 arquivos (conferida por
+    script) e `CACHE_VERSAO` em `omh-cache-v21`; `src/components/grafico.js` e
+    `calculadora.js` apagados (órfãos, sem nenhum import restante); `CLAUDE.md` atualizado.
+- **Pendências pequenas, para o dono decidir (nenhuma quebra nada, só refinamento):**
+  - Início: o anel de progresso não desenha o arco roxo com 0% (o desenho sempre desenha,
+    mesmo em 0% — vira um pontinho). Manter como está ou seguir o desenho?
+  - Revisão: a frase de reagendamento no último degrau da escada, e a dica ao lado do botão
+    depois de corrigir — o desenho não cobre esses casos; o app tem um texto próprio.
+  - Módulo 5, aba Quiz: "Fontes e itens não verificados" mostra os 9 itens de `src/data`
+    (o desenho resume em 4 títulos mais curtos, dois deles sem correspondência no dado) —
+    mantido em 9, seguindo a regra "onde o desenho resume um dado, seguir `src/data`".
+  - Alguns refinamentos de celular ficaram como pedido registrado, não como bug (não
+    quebram a página nem o teste de fumaça): o ciclo da Revisão com padding fixo a 390px,
+    a tabela CEX×DEX do M1 sem rolagem própria a 390px, o fluxo linear do Checklist com
+    padding a ajustar a 390px. Lista completa, tela por tela, nos relatórios da etapa 2 em
+    `pesquisa/design/auditoria/` (arquivo `implantacao/` + os `.output` das rodadas, ainda
+    no scratchpad da sessão — vale copiar para o repo se for útil depois).
+- **Falta:** o dono conferir no navegador e decidir as pendências acima; depois, publicar
+  (`git push`, só quando o dono mandar); o app desktop precisa de uma versão nova para
+  levar o redesenho.
+- Ferramenta de captura usada nesta reimplantação inteira: Chrome headless + script CDP em
+  Node, sem dependência (`scratchpad/shot.mjs` e `scratchpad/fumaca.mjs` — o segundo abre
+  as 11 rotas, clica em cada aba e reporta erro de console/exceção/rolagem lateral; refazer
+  se precisar: `chrome --headless=new --remote-debugging-port=9555` +
+  `Page.captureScreenshot` com `clip`).
 
 ## As duas frentes
 
-**1. O hub (`onchain-mastery-hub` / app "mmc")** — a versão publicada tem 5 módulos.
-**A versão local, construída em 13/09/2026 e ainda não publicada, fecha o app:** 7
-módulos e a página **Checklist antes de comprar**.
+**1. O hub (`onchain-mastery-hub` / app "mmc")** — publicado até o commit `b468a47`
+(7 módulos, Checklist, Glossário, Revisão, Início e o redesenho de 17/09).
 - **Módulo 6 — Ler a tela** (`src/data/modulo6.js`): números da tela e calculadora de
   saída, volume falso e bundles, contrato (SPL × Token-2022, extensões, autoridades,
   metadata, dev dump), o que a pesquisa prevê sobre rug. Quiz de 8.
@@ -77,11 +132,8 @@ o rótulo já está escrito, e ninguém analisa nada antes de a coleta existir.
    SQLite, WebSocket e fetch, testado); confirmar o universo "só tokens que graduam"
    (graduação como gatilho, nunca filtro); e o banco em
    `observador/dados/observatorio.db`, fora do Git.
-2. **Publicar a leva de 13/09:** commit e `git push origin master` só quando o dono
-   mandar. Arquivos novos a versionar: `src/data/{checklist,modulo6,modulo7}.js`,
-   `src/views/{checklist,modulo6,modulo7}.js` e a pasta `pesquisa/modulos/`.
-   `PROMPT-RECEITA-APP-EXE-E-SITE.md` também está sem versionar. O app desktop precisa
-   de uma versão nova para levar os Módulos 6 e 7.
+2. ~~Publicar a leva de 13/09~~ → publicada (commits até `b468a47`). O app desktop
+   ainda precisa de uma versão nova para levar os Módulos 6 e 7.
 
 **Feito em 13/09/2026:**
 - ~~Mínimo da gorjeta do Jito~~ → 1.000 lamports (0,000001 SOL) nos dois lugares do M5.

@@ -1,0 +1,42 @@
+/* Paleta do OMH Hub. Dark mode é o único tema: não existe variante clara no produto.
+   Os hex vêm de styles/custom.css e do bloco @theme do index.html do código original. */
+:root {
+  color-scheme: dark;
+
+  /* --- Base ------------------------------------------------------------- */
+  --omh-fundo: #0B0F17;
+  --omh-superficie: #141A24;
+  --omh-borda: #1F2733;
+  --omh-texto: #E6EDF3;
+  --omh-texto-suave: #9AA7B4;
+
+  /* --- Marca ------------------------------------------------------------ */
+  --omh-primaria: #7C3AED;
+  --omh-acento: #22D3EE;
+
+  /* --- Risco ------------------------------------------------------------ */
+  --omh-risco-baixo: #22C55E;
+  --omh-risco-medio: #F59E0B;
+  --omh-risco-alto: #EF4444;
+  /* Vermelho SÓ para texto: o #EF4444 sobre os fundos escuros com 10-15% de vermelho
+     fica em 4,0-4,2:1 e reprova no AA. Este tom claro passa em todos (5,4:1 ou mais).
+     Bordas e fundos continuam no #EF4444. */
+  --omh-risco-alto-texto: #F87171;
+
+  /* --- Elevação: mesma família da superfície, um degrau acima e um abaixo -- */
+  --omh-superficie-alta: #1B2330;
+  --omh-superficie-baixa: #10151E;
+
+  /* --- Aliases semânticos ---------------------------------------------- */
+  --omh-pagina-fundo: var(--omh-fundo);
+  --omh-card-fundo: var(--omh-superficie);
+  --omh-card-borda: var(--omh-borda);
+  --omh-caixa-interna-fundo: var(--omh-fundo);
+  --omh-texto-titulo: var(--omh-texto);
+  --omh-texto-corpo: var(--omh-texto-suave);
+  --omh-link: var(--omh-acento);
+  --omh-foco: var(--omh-acento);
+  --omh-progresso: var(--omh-primaria);
+  --omh-aba-ativa: var(--omh-primaria);
+  --omh-numero-cor: var(--omh-texto);
+}

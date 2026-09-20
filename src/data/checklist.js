@@ -8,12 +8,14 @@
 //   fraco  — sinal sem medição, ou que já é contornado de propósito. Triagem, nunca prova.
 //   rotina — hábito de decisão. Ajuda a cumprir a própria regra; não diz nada do token.
 //
-// Por que quatro etiquetas e não duas cores: "freeze authority ativa" é mecânica
-// certa (o dono consegue congelar), mas como PREDITOR de rug não tem medição. Com duas
-// cores ela ficaria junto do folclore, e isso ensinaria errado.
+// Por que quatro etiquetas e não duas cores: o parágrafo está em
+// `checklistPreCompra.etiquetas.porQueQuatro`, e a página mostra.
 //
 // A classificação vem das pesquisas em pesquisa/modulos/pesquisas/ (em especial a P5,
 // a P7 e as verificações ao vivo de 12 e 13/09/2026).
+//
+// `peso` é a frase no pé do cartão de cada etiqueta (desenho "31 Checklist"): o quanto
+// um item com essa etiqueta pesa na decisão.
 
 export const EVIDENCIAS = {
   fato: {
@@ -21,28 +23,34 @@ export const EVIDENCIAS = {
     tom: 'acento',
     descricao:
       'Mecânica da blockchain ou golpe documentado. Diz o que pode acontecer, por construção — não o que vai acontecer.',
+    peso: 'Um "não" aqui encerra a checagem.',
   },
   medido: {
     rotulo: 'Sinal medido',
     tom: 'baixo',
     descricao:
       'Há pesquisa publicada mostrando que o sinal prevê rug ou prejuízo. Pede julgamento: não existe limiar oficial.',
+    peso: 'Pesa, mas exige julgamento seu.',
   },
   fraco: {
     rotulo: 'Sinal fraco',
     tom: 'medio',
     descricao:
       'Sem medição, ou já contornado de propósito por quem monta golpes. Serve para triar, nunca para confiar.',
+    peso: 'Não use como prova de nada.',
   },
   rotina: {
     rotulo: 'Rotina',
     tom: 'primaria',
     descricao:
       'Hábito de decisão. Ajuda você a cumprir a própria regra; não diz nada sobre o token.',
+    peso: 'Depende só de você.',
   },
 };
 
 export const checklistPreCompra = {
+  // Micro-rótulo acima do título, como no desenho.
+  rotulo: 'Rotina, a cada token',
   titulo: 'Checklist antes de comprar',
   resumo:
     'A checagem de cada compra, com os dois pilares — social e técnico — e o que decide se ' +
@@ -75,23 +83,48 @@ export const checklistPreCompra = {
     },
   ],
 
+  // A seção "As quatro etiquetas de evidência": o parágrafo de abertura e a figura
+  // com a contagem. Os números da contagem (8 de 23…) NÃO ficam aqui: a página conta
+  // os itens dos blocos abaixo, então a figura acompanha qualquer mudança na lista.
+  // "{total}" é trocado pelo total de itens.
+  etiquetas: {
+    titulo: 'As quatro etiquetas de evidência',
+    porQueQuatro:
+      'Por que quatro e não duas cores: "freeze authority ativa" é mecânica certa — o dono ' +
+      'consegue congelar —, mas como preditor de rug não tem medição. Com duas cores ela ' +
+      'ficaria junto do folclore, e isso ensinaria errado.',
+    tituloDaContagem: 'Quantos itens de cada etiqueta, no checklist inteiro',
+    legendaDaContagem:
+      'Mesma escala, de 0 a {total} itens. Só três famílias de sinal têm medição que se ' +
+      'repete entre estudos: concentração real dos holders, carteiras coordenadas no ' +
+      'lançamento e volume artificial. O resto é mecânica do protocolo ou hábito seu.',
+  },
+
+  // Cada item da lista é um texto ou uma lista de pedaços; { forte } sai em negrito.
   comoUsar: {
     titulo: 'Como usar',
     paragrafos: [
       'Siga a ordem: pilar social, pilar técnico, decisão. Um endereço errado torna o resto ' +
         'inútil, e um contrato com armadilha torna a tese irrelevante.',
-      'Um "não" em qualquer item marcado como fato do protocolo encerra a checagem: não ' +
-        'compre. Os sinais medidos pedem julgamento — não existe limiar publicado para ' +
-        '"concentração alta".',
+      [
+        'Um "não" em qualquer item marcado como ',
+        { forte: 'fato do protocolo' },
+        ' encerra a checagem: não compre. Os ',
+        { forte: 'sinais medidos' },
+        ' pedem julgamento — não existe limiar publicado para "concentração alta".',
+      ],
       'Passar em tudo não aprova o token. Só quer dizer que ele não mostrou os sinais que dá ' +
         'para ver.',
     ],
   },
 
+  // Frase embaixo da lista de cada bloco.
+  notaDoPainel: 'Marque conforme for aplicando. As marcas ficam salvas no seu navegador.',
+
   blocos: [
     {
       id: 'social',
-      rotuloCurto: 'pilar social',
+      rotuloCurto: 'Pilar social',
       titulo: 'Pilar social — o token é quem diz ser?',
       descricao:
         'Faça estes primeiro. Tudo aqui é manual: não existe forma gratuita e dentro das ' +
@@ -164,7 +197,7 @@ export const checklistPreCompra = {
     },
     {
       id: 'tecnico',
-      rotuloCurto: 'pilar técnico',
+      rotuloCurto: 'Pilar técnico',
       titulo: 'Pilar técnico — o contrato e as carteiras resistem?',
       descricao:
         'Os itens mecânicos vêm primeiro: eles dizem o que o dono do token consegue fazer com ' +
@@ -270,7 +303,7 @@ export const checklistPreCompra = {
     },
     {
       id: 'decisao',
-      rotuloCurto: 'decisão',
+      rotuloCurto: 'Decisão',
       titulo: 'Decisão — você sabe o que vai fazer?',
       descricao:
         'Nenhum destes itens diz nada sobre o token. Dizem sobre você, e são os únicos que ' +
@@ -360,43 +393,79 @@ export const checklistPreCompra = {
     },
   ],
 
+  // O fluxograma "Do token visto à decisão de entrar". `titulo`, `relacao` e
+  // `introducao` são o cabeçalho do card; o resto vai direto para criarFluxoLinear.
   fluxograma: {
     titulo: 'Do token visto à decisão de entrar',
+    relacao: 'Relação: se isto, então aquilo',
     introducao:
       'O checklist em forma de caminho. Os primeiros cortes são mecânicos; a decisão só ' +
       'entra depois que o token passou por eles.',
-    legenda: 'Em vermelho, os pontos onde a checagem termina. Em verde, o único caminho até a compra.',
-    codigoMermaid: [
-      'flowchart TD',
-      '  A["Vi um token"] --> B{"O endereço veio da fonte oficial e bate?"}',
-      '  B -- "Não" --> X["Não compro"]',
-      '  B -- "Sim" --> C{"Extensão fora do padrão, ou mint ou freeze ativa?"}',
-      '  C -- "Sim" --> X',
-      '  C -- "Não" --> D{"Carteiras ligadas concentram muito, ou o criador já vendeu?"}',
-      '  D -- "Sim" --> X',
-      '  D -- "Não" --> E{"Tese, catálise e invalidação escritas?"}',
-      '  E -- "Não" --> Y["Não compro: sem isso é aposta"]',
-      '  E -- "Sim" --> F{"Valor que posso perder inteiro, com saída que executa sozinha?"}',
-      '  F -- "Não" --> G["Ajusto o tamanho e a saída"]',
-      '  G --> F',
-      '  F -- "Sim" --> H["Registro no diário e só então entro"]',
-      '  classDef nao fill:#3B1418,stroke:#EF4444,color:#FCA5A5,stroke-width:2px',
-      '  classDef sim fill:#0E2A1B,stroke:#22C55E,color:#86EFAC,stroke-width:2px',
-      '  class X,Y nao',
-      '  class H sim',
-    ].join('\n'),
-    versaoEmTexto: [
-      'Vejo um token e decido checar.',
-      'Confiro se o endereço veio do site oficial e bate com o X oficial. Se não bate, não compro — nome e ticker não identificam nada.',
-      'Confiro as extensões, a mint authority e a freeze authority. Extensão fora do padrão, ou mint ou freeze ativa: não compro. Isso é mecânica, não opinião.',
-      'Olho as carteiras: quanto o top 10 concentra depois de juntar as carteiras ligadas, e se o criador já vendeu. Concentração muito alta ou venda do criador: não compro. Não existe limiar publicado para "muito alta" — é julgamento, e por isso vem depois dos itens mecânicos.',
-      'Escrevo tese, catálise e invalidação. Se não consigo escrever, não compro: é aposta.',
-      'Defino um valor que posso perder inteiro e uma saída que executa sozinha. Se não estão definidos, ajusto antes de seguir.',
-      'Registro no diário e só então entro. Passar por tudo não aprova o token: só quer dizer que ele não mostrou os sinais que dá para ver.',
+    legenda:
+      'Em vermelho, os pontos onde a checagem termina. Em verde, o único caminho até a compra. ' +
+      'As duas primeiras perguntas são mecânica do protocolo, não opinião; a terceira pede ' +
+      'julgamento, e por isso vem depois delas.',
+
+    // O mesmo caminho no formato do fluxo linear (criarFluxoLinear, em
+    // src/components/fluxograma.js), com os textos do desenho "31 Checklist".
+    // tom do desvio: 'nao' = caixa vermelha ("Não compro"); 'ajusta' = âmbar.
+    inicio: 'Vi um token',
+    passos: [
+      {
+        pergunta: 'O endereço veio da fonte oficial e bate com o X oficial?',
+        evidencia: { rotulo: 'Fato do protocolo', tom: 'fato' },
+        desvio: { rotulo: 'Não bate', texto: 'Não compro', tom: 'nao' },
+        segue: { rotulo: 'Bate', texto: 'Nome e ticker não identificam nada. Sigo para o contrato.' },
+      },
+      {
+        pergunta: 'Extensão fora do padrão, ou mint ou freeze authority ativa?',
+        evidencia: { rotulo: 'Fato do protocolo', tom: 'fato' },
+        desvio: { rotulo: 'Sim', texto: 'Não compro. Isso é mecânica, não opinião.', tom: 'nao' },
+        segue: { rotulo: 'Não', texto: 'Metadata travada também. Sigo para as carteiras.' },
+      },
+      {
+        pergunta: 'Carteiras ligadas concentram muito, ou o criador já vendeu?',
+        evidencia: { rotulo: 'Sinal medido — pede julgamento', tom: 'medido' },
+        desvio: { rotulo: 'Sim', texto: 'Não compro', tom: 'nao' },
+        segue: {
+          rotulo: 'Não',
+          texto:
+            'Não existe limiar publicado para "muito": é julgamento, e por isso vem depois dos ' +
+            'itens mecânicos.',
+        },
+      },
+      {
+        pergunta: 'Tese, catálise e invalidação estão escritas?',
+        evidencia: { rotulo: 'Rotina', tom: 'rotina' },
+        desvio: { rotulo: 'Não', texto: 'Não compro: sem isso é aposta.', tom: 'nao' },
+        segue: { rotulo: 'Sim', texto: 'Com prazo e com o que me provaria errado. Sigo para o tamanho.' },
+      },
+      {
+        pergunta: 'É um valor que posso perder inteiro, com saída que executa sozinha?',
+        evidencia: { rotulo: 'Rotina', tom: 'rotina' },
+        desvio: { rotulo: 'Não', texto: 'Ajusto o tamanho e a saída, e volto a esta pergunta.', tom: 'ajusta' },
+        segue: { rotulo: 'Sim', texto: 'Tamanho e saída definidos antes de entrar.' },
+      },
+      {
+        pergunta: 'Registrei a operação no diário antes de clicar?',
+        evidencia: { rotulo: 'Rotina', tom: 'rotina' },
+        desvio: {
+          rotulo: 'Não',
+          texto: 'Registro primeiro. O diário existe para a revisão saber o que você pensou.',
+          tom: 'ajusta',
+        },
+        segue: { rotulo: 'Sim', texto: 'Tese, tamanho e saída no papel, antes do resultado.' },
+      },
     ],
+    fim: 'Registro no diário e só então entro',
+    fechamento:
+      'Passar por tudo não aprova o token: só quer dizer que ele não mostrou os sinais que dá para ver.',
+    // A versão em texto do caminho não fica mais aqui: o componente gera a
+    // alternativa para leitor de tela a partir dos próprios passos acima.
   },
 
   // Sinais que ficaram de fora do checklist, e por quê.
+  tituloDeFora: 'Sinais que ficaram de fora, e por quê',
   sinaisDeFora: [
     {
       titulo: 'A nota do RugCheck',

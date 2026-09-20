@@ -13,6 +13,8 @@ import { montarModulo7 } from './views/modulo7.js';
 import { montarViewChecklist } from './views/checklist.js';
 import { montarViewRevisao } from './views/revisao.js';
 import { montarViewGlossario } from './views/glossario.js';
+import { criarAvisoDeRodape } from './components/aviso.js';
+import { criarElemento } from './ui.js';
 
 // Catálogo de rotas. É a única lista de páginas do app: a sidebar e a tela de
 // início se montam a partir daqui, então acrescentar uma rota basta editar este
@@ -36,7 +38,7 @@ export const ROTAS = [
   {
     hash: '#/modulo-1',
     id: 'modulo-1',
-    curto: 'Módulo 1',
+    curto: 'M1 Fundamentos & Segurança',
     titulo: 'Módulo 1 — Fundamentos & Segurança',
     tipo: 'modulo',
     disponivel: true,
@@ -46,7 +48,7 @@ export const ROTAS = [
   {
     hash: '#/modulo-2',
     id: 'modulo-2',
-    curto: 'Módulo 2',
+    curto: 'M2 Psicologia',
     titulo: 'Módulo 2 — Psicologia das memecoins',
     tipo: 'modulo',
     disponivel: true,
@@ -56,7 +58,7 @@ export const ROTAS = [
   {
     hash: '#/modulo-3',
     id: 'modulo-3',
-    curto: 'Módulo 3',
+    curto: 'M3 Os dois pilares',
     titulo: 'Módulo 3 — Os dois pilares',
     tipo: 'modulo',
     disponivel: true,
@@ -66,7 +68,7 @@ export const ROTAS = [
   {
     hash: '#/modulo-4',
     id: 'modulo-4',
-    curto: 'Módulo 4',
+    curto: 'M4 Gestão & decisão',
     titulo: 'Módulo 4 — Gestão & decisão',
     tipo: 'modulo',
     disponivel: true,
@@ -76,7 +78,7 @@ export const ROTAS = [
   {
     hash: '#/modulo-5',
     id: 'modulo-5',
-    curto: 'Módulo 5',
+    curto: 'M5 Execução',
     titulo: 'Módulo 5 — A mecânica da execução',
     tipo: 'modulo',
     disponivel: true,
@@ -86,7 +88,7 @@ export const ROTAS = [
   {
     hash: '#/modulo-6',
     id: 'modulo-6',
-    curto: 'Módulo 6',
+    curto: 'M6 Ler a tela',
     titulo: 'Módulo 6 — Ler a tela',
     tipo: 'modulo',
     disponivel: true,
@@ -97,7 +99,7 @@ export const ROTAS = [
   {
     hash: '#/modulo-7',
     id: 'modulo-7',
-    curto: 'Módulo 7',
+    curto: 'M7 A rotina',
     titulo: 'Módulo 7 — A rotina',
     tipo: 'modulo',
     disponivel: true,
@@ -105,9 +107,19 @@ export const ROTAS = [
     montar: montarModulo7,
   },
   {
+    hash: '#/glossario',
+    id: 'glossario',
+    curto: 'Glossário',
+    titulo: 'Glossário',
+    tipo: 'pagina',
+    disponivel: true,
+    descricao: 'Termos on-chain com definição, exemplo e sinal de alerta.',
+    montar: montarViewGlossario,
+  },
+  {
     hash: '#/checklist',
     id: 'checklist',
-    curto: 'Checklist',
+    curto: 'Checklist antes de comprar',
     titulo: 'Checklist antes de comprar',
     tipo: 'pagina',
     disponivel: true,
@@ -125,16 +137,6 @@ export const ROTAS = [
     descricao:
       'As perguntas dos quizzes que você já fez voltam em 1, 3, 7, 16 e 35 dias — e mostram onde a sua certeza engana.',
     montar: montarViewRevisao,
-  },
-  {
-    hash: '#/glossario',
-    id: 'glossario',
-    curto: 'Glossário',
-    titulo: 'Glossário',
-    tipo: 'pagina',
-    disponivel: true,
-    descricao: 'Termos on-chain com definição, exemplo e sinal de alerta.',
-    montar: montarViewGlossario,
   },
 ];
 
@@ -188,7 +190,15 @@ function renderizar({ forcar = false } = {}) {
   const main = document.getElementById('conteudo');
   if (!main) return;
 
-  main.replaceChildren(rota.montar());
+  // A coluna do desenho: 868px de largura, 24px entre os blocos, e o aviso
+  // âmbar fechando a página. O Início não leva o aviso aqui porque tem o
+  // próprio ("Antes de tudo:").
+  main.replaceChildren(
+    criarElemento('div', { class: 'omh-coluna' }, [
+      rota.montar(),
+      rota.id === 'inicio' ? null : criarAvisoDeRodape(),
+    ]),
+  );
   hashRenderizado = rota.hash;
 
   // O título do documento acompanha a rota.
