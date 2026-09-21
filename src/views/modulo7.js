@@ -4,8 +4,8 @@
 // "M7 Desktop.dc.html" e "M7 Celular.dc.html"): cabeçalho com a caixa roxa, o
 // mapa "O módulo inteiro numa olhada", as abas e, em cada aba, os destaques e
 // depois um card por seção. Cada card tem o título, a ideia central (borda
-// ciano), o visual DENTRO do card, 1 a 3 frases e, quando o desenho pede, a
-// "Pergunta rápida" no fim.
+// ciano), o visual DENTRO do card e o texto que explica a ideia: parágrafos,
+// quadro, lista, exemplo resolvido, parágrafos finais e "Para ir mais fundo".
 //
 // Abas internas (padrão ARIA de tabs, vindo de ui.js):
 //   A regra · Tamanho · O diário · A revisão · Números que circulam · Quiz
@@ -20,8 +20,7 @@
 
 import { modulo7 } from '../data/modulo7.js';
 import { criarElemento, criarTitulo, criarCard, criarBotao, criarAbas, mostrarToast, html } from '../ui.js';
-import { montarQuiz, montarPerguntaRapida, juntarPorques } from '../components/quiz.js';
-import { montarPerguntaPrevia } from '../components/didatica.js';
+import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarMapaDoModulo, criarGradeDe100 } from '../components/visuais.js';
 import { montarDestaques } from '../components/destaques.js';
 import { obterEstado, atualizar } from '../store.js';
@@ -102,24 +101,75 @@ function criarMarcador(numero) {
   return html`<span aria-hidden="true" style="flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:#22D3EE;color:#0B0F17;font-family:${MONO};font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center">${String(numero)}</span>`;
 }
 
+// O quadro de uma seção: caixas lado a lado, cada uma com um micro-rótulo e um
+// texto. Com `destaque: true` a caixa fica ciano (a ênfase do desenho).
+function criarQuadro(itens) {
+  if (!itens || itens.length === 0) return null;
+  return html`<div style="${DUAS_COLUNAS};gap:12px">
+    ${itens.map((item) => {
+      const tom = item.destaque ? TOM.acento : TOM.neutro;
+      const fundo = item.destaque ? tom.fundo : '#0B0F17';
+      return html`<div style="border-radius:8px;border:1px solid ${tom.borda};background:${fundo};padding:14px 16px">
+        <p style="${MICRO_11};color:${tom.cor}">${item.rotulo}</p>
+        <p style="margin:6px 0 0;font-size:14px;color:#9AA7B4">${textoComForte(item.texto)}</p>
+      </div>`;
+    })}
+  </div>`;
+}
+
+// O exemplo resolvido: a conta feita à mão, um passo por linha, com os mesmos
+// marcadores numerados das cinco partes da regra.
+function criarExemplo(exemplo) {
+  if (!exemplo) return null;
+  return html`<figure style="${CAIXA}">
+    <p style="margin:0;font-size:14px;font-weight:600">${exemplo.titulo ?? 'Exemplo'}</p>
+    <ol style="list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:10px">
+      ${(exemplo.passos ?? []).map(
+        (passo, i) => html`<li style="display:flex;gap:12px;align-items:flex-start">
+          ${criarMarcador(i + 1)}
+          <span style="flex:1 1 auto;min-width:0;font-size:14px;color:#9AA7B4">${textoComForte(passo)}</span>
+        </li>`,
+      )}
+    </ol>
+  </figure>`;
+}
+
+// A lista solta de uma seção (`listaTitulo` + `lista`), numerada quando
+// `ordenada` é verdadeiro.
+function criarLista(secao) {
+  if (!secao.lista || secao.lista.length === 0) return null;
+  const itens = secao.lista.map((item) => html`<li style="margin-bottom:6px">${textoComForte(item)}</li>`);
+  const estilo = 'margin:0;padding-left:20px;color:#9AA7B4';
+  const lista = secao.ordenada
+    ? html`<ol style="${estilo}">${itens}</ol>`
+    : html`<ul style="${estilo}">${itens}</ul>`;
+  if (!secao.listaTitulo) return lista;
+  return html`<div>
+    <p style="margin:0 0 8px;font-size:14px;font-weight:600">${secao.listaTitulo}</p>
+    ${lista}
+  </div>`;
+}
+
+// Os blocos de texto que vêm DEPOIS dos parágrafos, sempre nesta ordem:
+// quadro → lista → exemplo resolvido → parágrafos finais → "Para ir mais fundo".
+// Cada aba chama isto no fim dos blocos do card; o que a seção não tiver volta
+// como null e some no `filter(Boolean)` de criarSecao.
+function criarTextoDaSecao(secao) {
+  return [
+    criarQuadro(secao.quadro),
+    criarLista(secao),
+    criarExemplo(secao.exemplo),
+    ...(secao.paragrafosFinais ?? []).map(criarParagrafo),
+    criarDetalhe(secao.detalhe),
+  ];
+}
+
 // As perguntas do quiz já com o "Por que a sua não serve" de cada errada.
 const PERGUNTAS = juntarPorques(modulo7.quiz, modulo7.porqueErradas);
 
-function perguntaDoQuiz(id) {
-  return PERGUNTAS.find((pergunta) => pergunta.id === id);
-}
-
-// A "Pergunta rápida" do fim de um card: a pergunta `id` do quiz do módulo.
-// Não grava nada e não conta no Início (é só para conferir a leitura).
-function criarPerguntaRapida(id) {
-  return montarPerguntaRapida({ id: 'm7-rapida-' + id, pergunta: perguntaDoQuiz(id), moduloNome: 'Módulo 7' });
-}
-
-// "Antes de ler: o que você acha?" no topo da aba (decisão do dono, 18/09): a
-// pergunta vem de modulo7.perguntaAntes e volta corrigida na "Pergunta rápida".
-function criarPerguntaAntes(idDaAba) {
-  return montarPerguntaPrevia({ id: modulo7.id, pergunta: perguntaDoQuiz(modulo7.perguntaAntes[idDaAba]) });
-}
+// Decisão do dono (20/09): nenhuma pergunta aparece nas abas de conteúdo — nem
+// a "Antes de ler: o que você acha?" do topo da aba, nem a "Pergunta rápida" do
+// fim do card. Todas as perguntas ficam no quiz do fim do módulo (aba Quiz).
 
 // Uma seção pelo id em modulo7.secoes.
 function secaoPorId(id) {
@@ -129,8 +179,8 @@ function secaoPorId(id) {
 }
 
 // O card de uma seção, no traço do desenho: título (com a pílula "em branco",
-// se houver) → ideia central → os blocos (visual, frases, "Para ir mais fundo")
-// → "Pergunta rápida". Tudo numa coluna com 16px entre as partes.
+// se houver) → ideia central → os blocos (visual, texto, "Para ir mais fundo").
+// Tudo numa coluna com 16px entre as partes.
 function criarSecao(secao, blocos = []) {
   const titulo = html`<h2 style="margin:0;font-size:1.125rem;font-weight:600">${secao.titulo}</h2>`;
   const topo = secao.etiqueta
@@ -141,7 +191,6 @@ function criarSecao(secao, blocos = []) {
     ${topo}
     ${secao.emUmaFrase ? html`<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">${secao.emUmaFrase}</p>` : ''}
     ${blocos.filter(Boolean)}
-    ${secao.pergunta ? criarPerguntaRapida(secao.pergunta) : ''}
   </section>`;
 }
 
@@ -307,12 +356,27 @@ function montarAbaRegra() {
   const saida = secaoPorId('stop-automatico');
 
   return criarElemento('div', { class: 'flex flex-col gap-6' }, [
-    criarPerguntaAntes('regra'),
     montarDestaques(modulo7.destaques.regra),
-    criarSecao(porQue, [criarMemoria(porQue.memoria), criarDetalhe(porQue.detalhe)]),
-    criarSecao(partes, [criarFormularioDaRegra(partes)]),
-    criarSecao(ciclo, [criarCicloDaOperacao(ciclo.ciclo)]),
-    criarSecao(saida, [criarComparacao(saida.comparacao), ...saida.paragrafos.map(criarParagrafo)]),
+    criarSecao(porQue, [
+      criarMemoria(porQue.memoria),
+      ...porQue.paragrafos.map(criarParagrafo),
+      ...criarTextoDaSecao(porQue),
+    ]),
+    criarSecao(partes, [
+      criarFormularioDaRegra(partes),
+      ...partes.paragrafos.map(criarParagrafo),
+      ...criarTextoDaSecao(partes),
+    ]),
+    criarSecao(ciclo, [
+      criarCicloDaOperacao(ciclo.ciclo),
+      ...ciclo.paragrafos.map(criarParagrafo),
+      ...criarTextoDaSecao(ciclo),
+    ]),
+    criarSecao(saida, [
+      criarComparacao(saida.comparacao),
+      ...saida.paragrafos.map(criarParagrafo),
+      ...criarTextoDaSecao(saida),
+    ]),
   ]);
 }
 
@@ -519,15 +583,23 @@ function montarAbaTamanho() {
   const ruina = secaoPorId('ruina');
 
   return criarElemento('div', { class: 'flex flex-col gap-6' }, [
-    criarPerguntaAntes('tamanho'),
     montarDestaques(modulo7.destaques.tamanho),
     criarSecao(fracaoFixa, [
       criarMecanismo(fracaoFixa.mecanismo),
       ...fracaoFixa.paragrafos.map(criarParagrafo),
-      criarDetalhe(fracaoFixa.detalhe),
+      ...criarTextoDaSecao(fracaoFixa),
     ]),
-    criarSecao(sequencia, [criarCalculadoraDaSequencia(), ...sequencia.paragrafos.map(criarParagrafo)]),
-    criarSecao(ruina, [criarGrade(ruina.grade), criarComparacao(ruina.comparacao), ...ruina.paragrafos.map(criarParagrafo)]),
+    criarSecao(sequencia, [
+      criarCalculadoraDaSequencia(),
+      ...sequencia.paragrafos.map(criarParagrafo),
+      ...criarTextoDaSecao(sequencia),
+    ]),
+    criarSecao(ruina, [
+      criarGrade(ruina.grade),
+      criarComparacao(ruina.comparacao),
+      ...ruina.paragrafos.map(criarParagrafo),
+      ...criarTextoDaSecao(ruina),
+    ]),
   ]);
 }
 
@@ -574,10 +646,18 @@ function montarAbaDiario() {
   const campos = secaoPorId('nove-campos');
 
   return criarElemento('div', { class: 'flex flex-col gap-6' }, [
-    criarPerguntaAntes('diario'),
     montarDestaques(modulo7.destaques.diario),
-    criarSecao(oQueFaz, [criarComparacao(oQueFaz.comparacao), criarGrade(oQueFaz.grade), ...oQueFaz.paragrafos.map(criarParagrafo)]),
-    criarSecao(campos, [criarFormularioDoDiario(campos)]),
+    criarSecao(oQueFaz, [
+      criarComparacao(oQueFaz.comparacao),
+      criarGrade(oQueFaz.grade),
+      ...oQueFaz.paragrafos.map(criarParagrafo),
+      ...criarTextoDaSecao(oQueFaz),
+    ]),
+    criarSecao(campos, [
+      criarFormularioDoDiario(campos),
+      ...campos.paragrafos.map(criarParagrafo),
+      ...criarTextoDaSecao(campos),
+    ]),
   ]);
 }
 
@@ -629,14 +709,18 @@ function montarAbaRevisao() {
   const amostra = secaoPorId('amostra');
 
   return criarElemento('div', { class: 'flex flex-col gap-6' }, [
-    criarPerguntaAntes('revisao'),
     montarDestaques(modulo7.destaques.revisao),
     criarSecao(olharPouco, [
       criarComparacao(olharPouco.comparacao),
       ...olharPouco.paragrafos.map(criarParagrafo),
       criarPerguntaDaRevisao(olharPouco.aPergunta),
+      ...criarTextoDaSecao(olharPouco),
     ]),
-    criarSecao(amostra, [criarBarrasDaAmostra(amostra.barras), ...amostra.paragrafos.map(criarParagrafo)]),
+    criarSecao(amostra, [
+      criarBarrasDaAmostra(amostra.barras),
+      ...amostra.paragrafos.map(criarParagrafo),
+      ...criarTextoDaSecao(amostra),
+    ]),
   ]);
 }
 
@@ -663,9 +747,12 @@ function montarAbaMitos() {
   const mitos = secaoPorId('mitos');
 
   return criarElemento('div', { class: 'flex flex-col gap-6' }, [
-    criarPerguntaAntes('mitos'),
     montarDestaques(modulo7.destaques.mitos),
-    criarSecao(mitos, [criarMitos(mitos), ...mitos.paragrafos.map(criarParagrafo)]),
+    criarSecao(mitos, [
+      criarMitos(mitos),
+      ...mitos.paragrafos.map(criarParagrafo),
+      ...criarTextoDaSecao(mitos),
+    ]),
   ]);
 }
 

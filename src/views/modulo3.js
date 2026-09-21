@@ -26,7 +26,7 @@
 
 import { modulo3 } from '../data/modulo3.js';
 import { criarElemento, criarTitulo, criarCard, criarBotao, criarAbas, mostrarToast, rotuloRisco, html } from '../ui.js';
-import { montarQuiz, montarPerguntaRapida, juntarPorques } from '../components/quiz.js';
+import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
 import { videoDaSecao } from '../components/video.js';
 import { criarMapaDoModulo, criarCiclo } from '../components/visuais.js';
@@ -107,23 +107,46 @@ function criarParaIrMaisFundo(detalhe) {
   </details>`;
 }
 
+// "Exemplo resolvido": a conta feita à mão, em passos numerados. É o mesmo
+// bloco de components/secao.js, redesenhado aqui com as medidas do M3 porque
+// neste módulo os blocos de cada card são montados um a um (a ordem muda de
+// seção para seção).
+function criarExemplo(exemplo) {
+  if (!exemplo) return null;
+  return html`<div style="border-radius:8px;border:1px solid #1F2733;background:#0B0F17;padding:14px 16px">
+    <p style="margin:0;font-size:14px;font-weight:600;color:#E6EDF3">${exemplo.titulo ?? 'Exemplo'}</p>
+    <ol style="margin:8px 0 0;padding-left:20px;font-size:14px;color:#9AA7B4;display:flex;flex-direction:column;gap:4px;list-style:decimal">
+      ${(exemplo.passos ?? []).map((passo) => html`<li>${montarTexto(passo)}</li>`)}
+    </ol>
+  </div>`;
+}
+
+// Os parágrafos que fecham um card (`paragrafosFinais`), depois do exemplo e
+// antes do "Para ir mais fundo". Devolve uma lista, para espalhar nos blocos.
+function criarParagrafosFinais(secao) {
+  return (secao.paragrafosFinais ?? []).map(criarParagrafo);
+}
+
 // Caixa âmbar com o texto em cinza e o começo em negrito (aviso do ciclo).
 function criarCaixaAmbar(texto) {
   return html`<p style="margin:0;border-radius:8px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:12px 16px;font-size:14px;color:#9AA7B4">${montarTexto(texto)}</p>`;
 }
 
 // O card de uma seção, no traço do desenho: título, ideia central (borda ciano)
-// e os blocos na ordem do desenho, com 16px entre eles; a "Pergunta rápida"
-// fecha o card. É o card de components/secao.js: aqui os blocos já chegam
-// montados, porque a ordem muda de uma seção para outra no M3.
-function criarSecao({ titulo, emUmaFrase, blocos = [], pergunta = null, id = '' }) {
+// e os blocos na ordem do desenho, com 16px entre eles. É o card de
+// components/secao.js: aqui os blocos já chegam montados, porque a ordem muda
+// de uma seção para outra no M3.
+//
+// Sem "Pergunta rápida": em 20/09/2026 ela saiu de todas as seções deste
+// módulo (decisão do dono). As perguntas ficam só no quiz do fim; o array
+// `quiz` continua inteiro, com as 13.
+function criarSecao({ titulo, emUmaFrase, blocos = [], id = '' }) {
   return criarCardDaSecao(
     { titulo, emUmaFrase },
     {
       // A videoaula da seção, se houver (o dado diz a seção: `videos[...].secao`).
       video: id ? videoDaSecao(modulo3.videos, id) : null,
       depois: blocos,
-      pergunta: pergunta ? criarPerguntaRapida(pergunta) : null,
     },
   );
 }
@@ -137,12 +160,6 @@ function criarColuna(nos) {
 const PERGUNTAS = juntarPorques(modulo3.quiz, modulo3.porqueErradas);
 function perguntaDoQuiz(id) {
   return PERGUNTAS.find((pergunta) => pergunta.id === id);
-}
-
-// A "Pergunta rápida" do fim de um card: a pergunta `id` do quiz do módulo.
-// Não grava nada e não conta no Início (é só para conferir a leitura).
-function criarPerguntaRapida(id) {
-  return montarPerguntaRapida({ id: 'm3-rapida-' + id, pergunta: perguntaDoQuiz(id), moduloNome: 'Módulo 3' });
 }
 
 // "Antes de ler: o que você acha?" — a pergunta `id` do quiz, antes da aba.
@@ -366,9 +383,10 @@ function montarAbaVisaoGeral() {
         ...secao.paragrafos.map(criarParagrafo),
         // Aviso 1 de 3 ("reconhecer narrativa não prevê preço"): linha âmbar.
         html`<p style="margin:0;border-left:2px solid #F59E0B;padding-left:12px;font-size:14px;color:#9AA7B4">${secao.aviso}</p>`,
+        criarExemplo(secao.exemplo),
+        ...criarParagrafosFinais(secao),
         criarParaIrMaisFundo(secao.detalhe),
       ],
-      pergunta: secao.pergunta,
     }),
     criarObjetivos(),
   ]);
@@ -504,9 +522,10 @@ function montarAbaNarrativas() {
       ...ciclo.paragrafos.map(criarParagrafo),
       // Aviso 2 de 3: limita a leitura da fase.
       criarCaixaAmbar(ciclo.aviso),
+      criarExemplo(ciclo.exemplo),
+      ...criarParagrafosFinais(ciclo),
       criarParaIrMaisFundo(ciclo.detalhe),
     ],
-    pergunta: ciclo.pergunta,
   });
 
   const preco = secao('narrativa-e-preco');
@@ -518,6 +537,8 @@ function montarAbaNarrativas() {
       criarContaDoSinal(preco.conta),
       criarEvidencias(preco.evidencias),
       ...preco.paragrafos.map(criarParagrafo),
+      criarExemplo(preco.exemplo),
+      ...criarParagrafosFinais(preco),
       criarParaIrMaisFundo(preco.detalhe),
     ],
   });
@@ -531,6 +552,10 @@ function montarAbaNarrativas() {
       // marcos só sai onde as datas permitem. Escala do desenho do M3: 8px por mês.
       montarLinhaDoTempo({ ...rotacao.linhaDoTempo, caixa: true, pxPorMes: 8 }),
       criarTabela(rotacao.tabela),
+      ...rotacao.paragrafos.map(criarParagrafo),
+      criarExemplo(rotacao.exemplo),
+      ...criarParagrafosFinais(rotacao),
+      criarParaIrMaisFundo(rotacao.detalhe),
     ],
   });
 
@@ -538,15 +563,24 @@ function montarAbaNarrativas() {
   const cardDeRastrear = criarSecao({
     titulo: rastrear.titulo,
     emUmaFrase: rastrear.emUmaFrase,
-    blocos: [criarTabela(rastrear.tabela), ...rastrear.paragrafos.map(criarParagrafo)],
-    pergunta: rastrear.pergunta,
+    blocos: [
+      criarTabela(rastrear.tabela),
+      ...rastrear.paragrafos.map(criarParagrafo),
+      criarExemplo(rastrear.exemplo),
+      ...criarParagrafosFinais(rastrear),
+      criarParaIrMaisFundo(rastrear.detalhe),
+    ],
   });
 
   const rotina = secao('rotina');
   const cardDaRotina = criarSecao({
     titulo: rotina.titulo,
     emUmaFrase: rotina.emUmaFrase,
-    blocos: [criarRotinaDeEstudo(rotina)],
+    blocos: [
+      criarRotinaDeEstudo(rotina),
+      ...rotina.paragrafos.map(criarParagrafo),
+      ...criarParagrafosFinais(rotina),
+    ],
   });
 
   return criarColuna([
@@ -748,8 +782,13 @@ function montarAbaSocial() {
   const cardDaRotina = criarSecao({
     titulo: rotina.titulo,
     emUmaFrase: rotina.emUmaFrase,
-    blocos: [criarRotinaDeCincoMinutos(rotina), criarEnderecos(rotina.enderecos), ...rotina.paragrafos.map(criarParagrafo)],
-    pergunta: rotina.pergunta,
+    blocos: [
+      criarRotinaDeCincoMinutos(rotina),
+      criarEnderecos(rotina.enderecos),
+      ...rotina.paragrafos.map(criarParagrafo),
+      criarExemplo(rotina.exemplo),
+      ...criarParagrafosFinais(rotina),
+    ],
   });
 
   const perfil = secao('perfil');
@@ -759,17 +798,23 @@ function montarAbaSocial() {
     blocos: [
       criarAnatomia({ ...perfil.anatomia, notaDoMockup: perfil.anatomia.nota, legenda: perfil.anatomia.legenda }),
       ...perfil.paragrafos.map(criarParagrafo),
+      criarExemplo(perfil.exemplo),
+      ...criarParagrafosFinais(perfil),
       criarParaIrMaisFundo(perfil.detalhe),
     ],
-    pergunta: perfil.pergunta,
   });
 
   const discord = secao('discord-telegram');
   const cardDoDiscord = criarSecao({
     titulo: discord.titulo,
     emUmaFrase: discord.emUmaFrase,
-    blocos: [criarGolpes(discord.golpes), ...discord.paragrafos.map(criarParagrafo), criarParaIrMaisFundo(discord.detalhe)],
-    pergunta: discord.pergunta,
+    blocos: [
+      criarGolpes(discord.golpes),
+      ...discord.paragrafos.map(criarParagrafo),
+      criarExemplo(discord.exemplo),
+      ...criarParagrafosFinais(discord),
+      criarParaIrMaisFundo(discord.detalhe),
+    ],
   });
 
   const calls = secao('calls');
@@ -780,6 +825,8 @@ function montarAbaSocial() {
       criarBarrasDosCalls(calls.barras),
       criarTabela(calls.tabela),
       ...calls.paragrafos.map(criarParagrafo),
+      criarExemplo(calls.exemplo),
+      ...criarParagrafosFinais(calls),
       criarParaIrMaisFundo(calls.detalhe),
     ],
   });
@@ -791,8 +838,9 @@ function montarAbaSocial() {
       partes: [
         { titulo: nomeDaRotina, conteudo: [cardDaRotina] },
         { titulo: nomeDoPerfil, conteudo: [cardDoPerfil] },
-        // "Confira antes de seguir" no fim desta parte.
-        { titulo: nomeDoDiscord, conteudo: [cardDoDiscord], pergunta: perguntaDoQuiz(discord.confira) },
+        // Sem "Confira antes de seguir" nesta parte: a q8 saiu junto com as
+        // "Pergunta rápida" (20/09/2026). Ela continua no quiz do fim.
+        { titulo: nomeDoDiscord, conteudo: [cardDoDiscord] },
         { titulo: nomeDosCalls, conteudo: [cardDosCalls] },
       ],
     }),
@@ -833,6 +881,19 @@ function criarConteudoDaFerramenta(ferramenta, notaDoMockup) {
   ];
 }
 
+// A explicação em texto de uma ferramenta: o que ela é, por que a pergunta dela
+// vem naquela posição, e o erro que ela evita. Fica num card separado, fora do
+// painel `aria-live="polite"` — se ficasse dentro, o leitor de tela releria
+// todos estes parágrafos a cada troca de ferramenta. O título repete o nome
+// para o texto não ficar solto de quem ele fala.
+function criarTextoDaFerramenta(ferramenta) {
+  return [
+    html`<h3 class="text-base font-semibold">${ferramenta.nome}</h3>`,
+    ...(ferramenta.paragrafos ?? []).map(criarParagrafo),
+    ...criarParagrafosFinais(ferramenta),
+  ];
+}
+
 /**
  * As quatro ferramentas em ordem (botões com aria-pressed e setas → entre eles)
  * e o painel embaixo, que troca de ferramenta a cada clique. Na tela estreita os
@@ -849,6 +910,16 @@ function criarQuatroFerramentas(pratica) {
     class: 'rounded-card border border-borda bg-superficie p-5',
     style: 'display:flex;flex-direction:column;gap:16px',
   });
+
+  // O texto de cada ferramenta fica FORA do painel `aria-live`, num card só
+  // dele: dentro, o leitor de tela releria tudo a cada troca de ferramenta.
+  // Vem depois do painel porque o mockup e os passos são o visual da seção, e
+  // a ordem do app é visual → parágrafos → parágrafos finais.
+  const texto = criarElemento('section', {
+    class: 'rounded-card border border-borda bg-superficie p-5',
+    style: 'display:flex;flex-direction:column;gap:16px',
+  });
+  const textos = new Map();
 
   // Cores do estado nas classes (hover); o raio no style (a regra do foco não o troca).
   const CLASSE_BASE = 'border text-left transition-colors duration-150';
@@ -886,11 +957,15 @@ function criarQuatroFerramentas(pratica) {
       marcador.style.background = escolhido ? '#22D3EE' : '#1F2733';
       marcador.style.color = escolhido ? '#0B0F17' : '#E6EDF3';
     });
+    const ferramenta = ferramentas.find((item) => item.id === atual);
     if (!conteudos.has(atual)) {
-      const ferramenta = ferramentas.find((item) => item.id === atual);
       conteudos.set(atual, criarConteudoDaFerramenta(ferramenta, notaDoMockup));
     }
     painel.replaceChildren(...conteudos.get(atual).filter(Boolean));
+    if (!textos.has(atual)) {
+      textos.set(atual, criarTextoDaFerramenta(ferramenta));
+    }
+    texto.replaceChildren(...textos.get(atual).filter(Boolean));
   }
 
   // Na horizontal (a partir de 640px) cada passo tem pelo menos 150px e a lista
@@ -925,10 +1000,14 @@ function criarQuatroFerramentas(pratica) {
     ),
   );
 
+  // Os parágrafos vêm ANTES da figura, ao contrário das outras seções: a figura
+  // aqui não é um desenho, são os botões que trocam o painel. Texto entre eles e
+  // o painel obrigaria a rolar a tela a cada clique.
   const seletor = criarSecao({
     titulo: ordem.titulo,
     emUmaFrase: ordem.emUmaFrase,
     blocos: [
+      ...ordem.paragrafos.map(criarParagrafo),
       html`<figure style="${CAIXA};padding:20px">
         ${lista}
         <figcaption style="margin:12px 0 0;font-size:13px;color:#9AA7B4">${ordem.legenda}</figcaption>
@@ -937,7 +1016,7 @@ function criarQuatroFerramentas(pratica) {
   });
 
   escolher(atual);
-  return [seletor, painel];
+  return [seletor, painel, texto];
 }
 
 function montarAbaTecnico() {
@@ -953,8 +1032,11 @@ function montarAbaTecnico() {
     criarSecao({
       titulo: onde.titulo,
       emUmaFrase: onde.emUmaFrase,
-      blocos: [criarTabela(onde.tabela), ...onde.paragrafos.map(criarParagrafo)],
-      pergunta: onde.pergunta,
+      blocos: [
+        criarTabela(onde.tabela),
+        ...onde.paragrafos.map(criarParagrafo),
+        ...criarParagrafosFinais(onde),
+      ],
     }),
   ]);
 }
@@ -1104,7 +1186,16 @@ function criarMatriz() {
 function montarAbaMatriz() {
   const { matriz } = modulo3;
   return criarColuna([
-    criarSecao({ titulo: matriz.titulo, emUmaFrase: matriz.emUmaFrase, blocos: criarMatriz(), pergunta: matriz.pergunta }),
+    criarSecao({
+      titulo: matriz.titulo,
+      emUmaFrase: matriz.emUmaFrase,
+      blocos: [
+        ...criarMatriz(),
+        ...matriz.paragrafos.map(criarParagrafo),
+        criarExemplo(matriz.exemplo),
+        ...criarParagrafosFinais(matriz),
+      ],
+    }),
   ]);
 }
 
@@ -1125,6 +1216,8 @@ function montarAbaCenario() {
           caixa: true,
           pxPorMes: 8,
         }),
+        ...cenario.paragrafos.map(criarParagrafo),
+        ...criarParagrafosFinais(cenario),
         criarParagrafo(cenario.conclusao),
       ],
     }),

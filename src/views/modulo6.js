@@ -11,13 +11,13 @@
 // Abas internas (padrão ARIA de tabs, vindo de ui.js):
 //   Os números · Volume falso · O contrato · Prever o golpe · Quiz
 //
-// Blocos de didática que só o app tinha e o dono decidiu manter (18/09/2026):
-// "Antes de ler" no topo das quatro abas de conteúdo e "Parte X de N" com
-// "Continuar" nas abas Os números e O contrato (perguntas e nomes das partes em
-// src/data/modulo6.js: perguntaAntes, partes). O "Confira antes de seguir" não
-// entra no M6: as três perguntas que ele fazia (q2, q4, q7) são, no desenho, a
-// "Pergunta rápida" do card que fecha a mesma parte — a mesma pergunta
-// apareceria duas vezes seguidas.
+// Bloco de didática que só o app tem: "Parte X de N" com "Continuar" nas abas
+// Os números e O contrato (nomes das partes em src/data/modulo6.js: partes).
+// Em 20/09/2026 o dono tirou TODAS as perguntas das abas de conteúdo: o "Antes
+// de ler" do topo das abas (perguntaAntes) e a "Pergunta rápida" do fim dos
+// cards (perguntaRapida) saíram do arquivo de dados. As funções que as montavam
+// continuam aqui, sem dado que as acione; o quiz do fim do módulo segue igual.
+// O "Confira antes de seguir" nunca entrou no M6.
 //
 // As cores e medidas são as do desenho (tokens do README do handoff). Os textos
 // vêm todos de src/data/modulo6.js; aqui ficam só a montagem e as contas.
@@ -178,6 +178,8 @@ function montarTresNumeros() {
     criarBarrasNaMesmaEscala(dados.barras),
     criarQuadro(dados.quadro),
     ...criarParagrafos(dados.paragrafos),
+    criarExemplo(dados.exemplo),
+    ...criarParagrafos(dados.paragrafosFinais),
     criarParaIrMaisFundo(dados.detalhe),
   ]);
 }
@@ -209,6 +211,7 @@ function montarQuantoSai() {
     ...criarParagrafos(dados.paragrafos),
     animacao,
     criarTresPontos(dados.tresPontos),
+    ...criarParagrafos(dados.paragrafosFinais),
     criarParaIrMaisFundo(dados.detalhe),
   ]);
 }
@@ -221,12 +224,20 @@ function criarTresPontos({ titulo, itens }) {
   </div>`;
 }
 
+// O exemplo resolvido de uma seção ({ titulo, passos }), do texto de 20/09/2026:
+// a mesma caixa dos três pontos, com os passos em lista. Sem exemplo, sai nada.
+function criarExemplo(exemplo) {
+  return exemplo ? criarTresPontos({ titulo: exemplo.titulo, itens: exemplo.passos }) : null;
+}
+
 // 1C. Zeros compactados: a lupa dos zeros, a frase e o "Para ir mais fundo".
 function montarZerosCompactados() {
   const dados = secao('zeros-compactados');
   return criarSecao(dados, [
     criarLupaDosZeros(dados.lupa),
     ...criarParagrafos(dados.paragrafos),
+    criarExemplo(dados.exemplo),
+    ...criarParagrafos(dados.paragrafosFinais),
     criarParaIrMaisFundo(dados.detalhe),
   ]);
 }
@@ -262,6 +273,8 @@ function montarPnl() {
   return criarSecao(dados, [
     criarRealizadoENaoRealizado(dados.cartoes),
     ...criarParagrafos(dados.paragrafos),
+    criarExemplo(dados.exemplo),
+    ...criarParagrafos(dados.paragrafosFinais),
     criarParaIrMaisFundo(dados.detalhe),
   ]);
 }
@@ -309,6 +322,7 @@ function montarComoFabrica() {
     criarFiguraDoWashTrading(),
     ...criarParagrafos(dados.paragrafos),
     criarCustoDoVolume(dados.custo),
+    criarExemplo(dados.exemplo),
     ...criarParagrafos(dados.paragrafosFinais),
     criarParaIrMaisFundo(dados.detalhe),
   ]);
@@ -369,7 +383,13 @@ function criarCustoDoVolume(custo) {
 // 2B. Todo sinal público é otimizado contra: as duas colunas e a frase.
 function montarOtimizadoContra() {
   const dados = secao('otimizado-contra');
-  return criarSecao(dados, [criarDuasColunas(dados.duasColunas), ...criarParagrafos(dados.paragrafos)]);
+  return criarSecao(dados, [
+    criarDuasColunas(dados.duasColunas),
+    ...criarParagrafos(dados.paragrafos),
+    criarExemplo(dados.exemplo),
+    ...criarParagrafos(dados.paragrafosFinais),
+    criarParaIrMaisFundo(dados.detalhe),
+  ]);
 }
 
 // À esquerda, em vermelho, o que o vendedor de volume diz que faz; à direita, em
@@ -397,6 +417,8 @@ function montarOQueDaParaVer() {
   return criarSecao(dados, [
     criarDoisPassos(dados.passos),
     ...criarParagrafos(dados.paragrafos),
+    criarExemplo(dados.exemplo),
+    ...criarParagrafos(dados.paragrafosFinais),
     criarParaIrMaisFundo(dados.detalhe),
   ]);
 }
@@ -426,6 +448,8 @@ function montarBundles() {
     criarBundleNoMesmoBloco(dados.bundle),
     criarEnganaEImporta(dados.cartoes),
     ...criarParagrafos(dados.paragrafos),
+    criarExemplo(dados.exemplo),
+    ...criarParagrafos(dados.paragrafosFinais),
     criarParaIrMaisFundo(dados.detalhe),
   ]);
 }
@@ -488,6 +512,8 @@ function montarSplOu2022() {
   return criarSecao(dados, [
     criarArvoreDoPrograma(dados.arvore),
     ...criarParagrafos(dados.paragrafos),
+    criarExemplo(dados.exemplo),
+    ...criarParagrafos(dados.paragrafosFinais),
     criarParaIrMaisFundo(dados.detalhe),
   ]);
 }
@@ -553,7 +579,13 @@ function criarFolhasDoRamo(folhas = []) {
 // 3B. As extensões que mudam o jogo: a tabela e a frase (sem pergunta).
 function montarExtensoes() {
   const dados = secao('extensoes');
-  return criarSecao(dados, [criarTabelaDasExtensoes(), ...criarParagrafos(dados.paragrafos)]);
+  return criarSecao(dados, [
+    criarTabelaDasExtensoes(),
+    ...criarParagrafos(dados.paragrafos),
+    criarExemplo(dados.exemplo),
+    ...criarParagrafos(dados.paragrafosFinais),
+    criarParaIrMaisFundo(dados.detalhe),
+  ]);
 }
 
 // Estilos das células das tabelas do desenho.
@@ -631,6 +663,8 @@ function montarAutoridades() {
   return criarSecao(dados, [
     criarTresAutoridades(dados.autoridades),
     ...criarParagrafos(dados.paragrafos),
+    criarExemplo(dados.exemplo),
+    ...criarParagrafos(dados.paragrafosFinais),
     criarChecagemDoContrato(),
     criarParaIrMaisFundo(dados.detalhe),
   ]);
@@ -675,6 +709,8 @@ function montarDevDump() {
   return criarSecao(dados, [
     criarPassosDoDevDump(dados.passos),
     ...criarParagrafos(dados.paragrafos),
+    criarExemplo(dados.exemplo),
+    ...criarParagrafos(dados.paragrafosFinais),
     criarParaIrMaisFundo(dados.detalhe),
   ]);
 }
@@ -722,7 +758,13 @@ function montarAbaContrato() {
 // 4A. O que conta como rug: as 4 réguas e as duas frases (sem pergunta).
 function montarOQueConta() {
   const dados = secao('o-que-conta');
-  return criarSecao(dados, [criarReguas(dados.reguas), ...criarParagrafos(dados.paragrafos)]);
+  return criarSecao(dados, [
+    criarReguas(dados.reguas),
+    ...criarParagrafos(dados.paragrafos),
+    criarExemplo(dados.exemplo),
+    ...criarParagrafos(dados.paragrafosFinais),
+    criarParaIrMaisFundo(dados.detalhe),
+  ]);
 }
 
 // A cor de cada barra das réguas (tom no dado).
@@ -759,6 +801,8 @@ function montarMelhorDetector() {
       ${criarReguaDoMcc(dados.mcc)}
     </figure>`,
     ...criarParagrafos(dados.paragrafos),
+    criarExemplo(dados.exemplo),
+    ...criarParagrafos(dados.paragrafosFinais),
     criarParaIrMaisFundo(dados.detalhe),
   ]);
 }
@@ -814,7 +858,14 @@ function criarReguaDoMcc(mcc) {
 // 4C. Os sinais: a tabela com a etiqueta da evidência e a frase (sem pergunta).
 function montarSinais() {
   const dados = secao('sinais');
-  return criarSecao(dados, [criarTabelaDosSinais(), ...criarParagrafos(dados.paragrafos)]);
+  return criarSecao(dados, [
+    criarTabelaDosSinais(),
+    ...criarParagrafos(dados.paragrafos),
+    criarQuadro(dados.quadro),
+    criarExemplo(dados.exemplo),
+    ...criarParagrafos(dados.paragrafosFinais),
+    criarParaIrMaisFundo(dados.detalhe),
+  ]);
 }
 
 // A tabela dos sinais: o sinal, a etiqueta da evidência num selo colorido, o
@@ -846,6 +897,9 @@ function montarPorQueImporta() {
   return criarSecao(dados, [
     criarAnuncio(dados.anuncio),
     ...criarParagrafos(dados.paragrafos),
+    criarExemplo(dados.exemplo),
+    ...criarParagrafos(dados.paragrafosFinais),
+    criarParaIrMaisFundo(dados.detalhe),
     criarLinkParaChecklist(dados.link),
   ]);
 }

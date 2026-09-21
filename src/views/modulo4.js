@@ -18,7 +18,7 @@ import { cenarios } from '../data/cenarios.js';
 import { criarElemento, criarTitulo, criarCard, criarBotao, criarAbas, mostrarToast, html } from '../ui.js';
 import { criarCardDaSecao } from '../components/secao.js';
 import { montarSimulador } from '../components/simulator.js';
-import { montarQuiz, montarPerguntaRapida, juntarPorques } from '../components/quiz.js';
+import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { montarDestaques } from '../components/destaques.js';
 import { criarFluxograma, criarFluxoLinear } from '../components/fluxograma.js';
 import { criarMapaDoModulo } from '../components/visuais.js';
@@ -85,12 +85,8 @@ function criarMarcador(numeroDoPasso) {
 // As perguntas do quiz já com o "Por que a sua não serve" de cada errada.
 const PERGUNTAS = juntarPorques(modulo4.quiz, modulo4.porqueErradas);
 
-// A "Pergunta rápida" do fim de um card: a pergunta `id` do quiz do módulo.
-// Não grava nada e não conta no Início (é só para conferir a leitura).
-function criarPerguntaRapida(id) {
-  const pergunta = PERGUNTAS.find((item) => item.id === id);
-  return montarPerguntaRapida({ id: 'm4-rapida-' + id, pergunta, moduloNome: 'Módulo 4' });
-}
+// A "Pergunta rápida" saiu de todas as seções em 20/09 (decisão do dono): as
+// perguntas ficam só no mini-quiz do fim do módulo, que continua usando PERGUNTAS.
 
 // Um controle deslizante no traço do desenho: rótulo à esquerda, valor em
 // JetBrains Mono à direita e o trilho .omh-range (styles/custom.css) embaixo.
@@ -346,24 +342,27 @@ function montarAbaTese() {
   return criarElemento('div', { class: 'space-y-6' }, [
     montarDestaques(modulo4.destaques.tese),
 
-    // As duas frases + regra de ouro + Pergunta rápida q1.
-    criarCardDaSecao(
-      { titulo: tese.titulo, emUmaFrase: tese.emUmaFrase },
-      { visual: criarDuasFrases(), depois: [criarRegraDeOuro()], pergunta: criarPerguntaRapida(tese.perguntaRapida) },
-    ),
+    // As duas frases + o texto do card + a regra de ouro fechando. A seção
+    // inteira vai para criarCardDaSecao (e não só título e ideia central): é
+    // dela que saem paragrafos, exemplo, paragrafosFinais e o "Para ir mais
+    // fundo", que antes ficavam no arquivo de dados sem chegar à tela.
+    criarCardDaSecao(tese, { visual: criarDuasFrases(), depois: [criarRegraDeOuro()] }),
 
-    // O plano em níveis e, no mesmo card, a ficha de 5 campos.
-    criarCardDaSecao(
-      { titulo: plano.titulo, emUmaFrase: plano.emUmaFrase },
-      {
-        visual: criarPlano(),
-        depois: [criarFicha(), criarElemento('p', { class: 'text-texto-suave' }, [tese.fichaDeTese.introducao])],
-      },
-    ),
+    // O plano em níveis e, no mesmo card, a ficha de 5 campos. A ficha entra
+    // junto com o visual (e não em `depois`) para continuar logo abaixo dos
+    // níveis, antes do texto — `depois` agora cairia depois do "Para ir mais
+    // fundo".
+    criarCardDaSecao(plano, {
+      visual: criarElemento('div', { class: 'flex flex-col gap-4' }, [
+        criarPlano(),
+        criarFicha(),
+        criarElemento('p', { class: 'text-texto-suave' }, [tese.fichaDeTese.introducao]),
+      ]),
+    }),
 
-    criarCardDaSecao({ titulo: tabela.titulo, emUmaFrase: tabela.emUmaFrase }, { visual: criarTabelaDosExemplos() }),
+    criarCardDaSecao(tabela, { visual: criarTabelaDosExemplos() }),
 
-    criarCardDaSecao({ titulo: tipos.titulo, emUmaFrase: tipos.emUmaFrase }, { visual: criarMapaDasCatalises() }),
+    criarCardDaSecao(tipos, { visual: criarMapaDasCatalises() }),
   ]);
 }
 
@@ -589,6 +588,10 @@ function criarTributacao() {
       'Para ir mais fundo: ' + titulo,
     ]),
     html`<p style="margin:8px 0 0;border-radius:6px;border:1px solid rgba(245,158,11,.4);background:rgba(245,158,11,.12);padding:8px 12px;font-size:14px">${tributacao.aviso}</p>`,
+    // O texto de abertura, antes da lista de pontos.
+    ...(tributacao.paragrafos ?? []).map((paragrafo) =>
+      html`<p style="margin:12px 0 0;font-size:14px;color:#9AA7B4">${paragrafo}</p>`,
+    ),
     criarElemento(
       'dl',
       { style: 'margin:12px 0 0;display:flex;flex-direction:column;gap:10px' },
@@ -598,6 +601,9 @@ function criarTributacao() {
           criarElemento('dd', { style: 'margin:2px 0 0;font-size:14px;color:#9AA7B4' }, [ponto.texto]),
         ]),
       ),
+    ),
+    ...(tributacao.paragrafosFinais ?? []).map((paragrafo) =>
+      html`<p style="margin:12px 0 0;font-size:14px;color:#9AA7B4">${paragrafo}</p>`,
     ),
   ]);
 }
@@ -610,26 +616,15 @@ function montarAbaTakeProfit() {
   return criarElemento('div', { class: 'space-y-6' }, [
     montarDestaques(modulo4.destaques.takeProfit),
 
-    criarCardDaSecao(
-      { titulo: escada.titulo, emUmaFrase: escada.emUmaFrase, paragrafos: [escada.paragrafo] },
-      { visual: criarEscada(), pergunta: criarPerguntaRapida(escada.perguntaRapida) },
-    ),
+    criarCardDaSecao(escada, { visual: criarEscada() }),
 
-    criarCardDaSecao({ titulo: degraus.titulo, emUmaFrase: degraus.emUmaFrase }, { visual: criarCalculadoraDeDegraus() }),
+    criarCardDaSecao(degraus, { visual: criarCalculadoraDeDegraus() }),
 
-    criarCardDaSecao(
-      { titulo: recuperacao.titulo, emUmaFrase: recuperacao.emUmaFrase },
-      { visual: criarCalculadoraDeRecuperacao() },
-    ),
+    criarCardDaSecao(recuperacao, { visual: criarCalculadoraDeRecuperacao() }),
 
-    criarCardDaSecao(
-      { titulo: erroDeSegurar.titulo, emUmaFrase: erroDeSegurar.emUmaFrase, paragrafos: [erroDeSegurar.paragrafoFinal] },
-      {
-        visual: criarFluxoDeSegurar(),
-        depois: [criarTributacao()],
-        pergunta: criarPerguntaRapida(erroDeSegurar.perguntaRapida),
-      },
-    ),
+    // A tributação continua em `depois`: ela é o "Para ir mais fundo" deste
+    // card (por isso a seção não tem campo `detalhe`).
+    criarCardDaSecao(erroDeSegurar, { visual: criarFluxoDeSegurar(), depois: [criarTributacao()] }),
   ]);
 }
 
@@ -760,15 +755,9 @@ function montarAbaChecagens() {
   return criarElemento('div', { class: 'space-y-6' }, [
     montarDestaques(modulo4.destaques.checagens),
 
-    criarCardDaSecao(
-      { titulo: checagens.titulo, emUmaFrase: checagens.emUmaFrase, paragrafos: [checagens.paragrafoFinal] },
-      { visual: criarFluxoDasChecagens(), pergunta: criarPerguntaRapida(checagens.perguntaRapida) },
-    ),
+    criarCardDaSecao(checagens, { visual: criarFluxoDasChecagens() }),
 
-    criarCardDaSecao(
-      { titulo: calculadoraDeTamanho.titulo, emUmaFrase: calculadoraDeTamanho.emUmaFrase },
-      { visual: criarCalculadoraDeTamanho() },
-    ),
+    criarCardDaSecao(calculadoraDeTamanho, { visual: criarCalculadoraDeTamanho() }),
   ]);
 }
 
@@ -821,6 +810,22 @@ function criarPartesDoFeedback() {
   </figure>`;
 }
 
+// O "Para ir mais fundo" recolhido de um card montado à mão (o da moldura do
+// simulador, abaixo, que não passa por criarCardDaSecao porque não repete o h2).
+// Mesmo traço do recolhido da tributação, inclusive os 44px de área de toque.
+function criarRecolhido(detalhe) {
+  const TOQUE_DO_RESUMO =
+    'min-height:44px;padding:12px 16px;margin:-12px -16px;border-radius:8px;display:list-item';
+  return criarElemento('details', { class: 'rounded-lg border border-borda bg-fundo px-4 py-3' }, [
+    criarElemento('summary', { class: 'cursor-pointer text-sm font-semibold text-texto', style: TOQUE_DO_RESUMO }, [
+      'Para ir mais fundo: ' + detalhe.titulo,
+    ]),
+    ...(detalhe.paragrafos ?? []).map((paragrafo) =>
+      criarElemento('p', { class: 'mt-2 text-sm text-texto-suave' }, [paragrafo]),
+    ),
+  ]);
+}
+
 function montarAbaSimulador() {
   const moldura = modulo4.molduraDoSimulador;
 
@@ -845,6 +850,15 @@ function montarAbaSimulador() {
       aviso,
       criarPassosDoSimulador(),
       criarPartesDoFeedback(),
+      // O texto do card vem depois das duas figuras, na mesma ordem de
+      // criarCardDaSecao: parágrafos, parágrafos finais e o recolhido.
+      ...(moldura.paragrafos ?? []).map((paragrafo) =>
+        criarElemento('p', { class: 'text-texto-suave' }, [paragrafo]),
+      ),
+      ...(moldura.paragrafosFinais ?? []).map((paragrafo) =>
+        criarElemento('p', { class: 'text-texto-suave' }, [paragrafo]),
+      ),
+      moldura.detalhe && criarRecolhido(moldura.detalhe),
     ],
   );
 

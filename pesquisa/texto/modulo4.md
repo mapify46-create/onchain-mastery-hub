@@ -1,46 +1,16 @@
-// modulo4.js — conteúdo do Módulo 4 (gestão, catálise, tese de entrada, take profit).
-// Aqui só tem DADOS: nenhuma lógica, nenhum HTML. Para mudar um texto ou um número,
-// mude aqui — a interface se adapta sozinha.
-// Os cenários do simulador ficam separados, em src/data/cenarios.js.
+# Módulo 4 — texto reescrito
 
-export const modulo4 = {
-  id: 'modulo-4',
-  titulo: 'Gestão, catálises & tomada de decisão',
-  resumo:
-    'Os módulos anteriores mostraram por que o preço se move e onde checar o que está por ' +
-    'trás dele. Este módulo é sobre a única parte que depende só de você: decidir antes, por ' +
-    'escrito, e cumprir o que decidiu — na entrada e, principalmente, na saída.',
-  // Subtítulo do cabeçalho da página: só a segunda frase do resumo, como no desenho.
-  subtitulo:
-    'Este módulo é sobre a única parte que depende só de você: decidir antes, por escrito, e ' +
-    'cumprir o que decidiu — na entrada e, principalmente, na saída.',
+Medi o texto corrido que aparece na tela hoje, card a card: o módulo inteiro tem cerca de 4.854 caracteres visíveis, e 1.147 deles são a tributação, que fica recolhida. Os cards mais curtos são a tabela de teses (88), o mapa das catálises (101) e a calculadora dos degraus (184) — todos legenda de visual, nenhum explicação. Há ainda 2.678 caracteres de texto bom guardados em arrays que a tela parou de mostrar no redesenho (`teseVsCatalise.paragrafos`, `takeProfit.paragrafos`, `erroDeSegurar.paragrafos`): o módulo não ficou curto porque alguém escreveu pouco, ficou curto porque o texto saiu da tela. Esta reescrita devolve a explicação para dentro dos campos que o card mostra, na ordem fixa, sabendo que o visual vem antes dos parágrafos. Depois dela o módulo passa a ter cerca de 36.900 caracteres de texto escrito — 27.900 de texto corrido (parágrafos, parágrafos finais e os "Para ir mais fundo") e 9.000 nos quadros, exemplos e pontos da tributação.
 
-  objetivos: [
-    'Escrever uma tese de entrada e a catálise esperada antes de qualquer compra.',
-    'Reconhecer a diferença entre catálise concreta e narrativa vaga.',
-    'Definir alvos de realização e entender por que realizar parcial tira risco da mesa.',
-    'Identificar o erro de segurar demais na fase de Degradação (custo afundado).',
-    'Treinar a decisão em 12 cenários de simulador e ler o próprio resumo de disciplina.',
-  ],
+---
 
-  // Mapa do módulo ("O módulo inteiro numa olhada", no topo da página): o centro
-  // e as folhas curtas de cada aba, copiados do desenho (M4 Desktop, renderVals ›
-  // ABAS). `aba` é o id da aba na view. O ramo do Quiz não entra aqui: a view
-  // conta as perguntas de `quiz` e escreve "N perguntas".
-  mapa: {
-    titulo: 'Gestão & decisão',
-    subtitulo: 'Decidir antes, por escrito',
-    ramos: [
-      { aba: 'tese', folhas: ['as duas frases', 'ficha de tese', 'mapa das catálises'] },
-      { aba: 'take-profit', folhas: ['escada', 'calculadora', 'recuperação', 'segurar demais'] },
-      { aba: 'checagens', folhas: ['as 6 checagens', 'tamanho da posição'] },
-      { aba: 'simulador', folhas: ['12 cenários fictícios'] },
-    ],
-  },
+## teseVsCatalise
 
-  // ---------------------------------------------------------------------------
-  // Aba 1 — Tese vs. catálise
-  // ---------------------------------------------------------------------------
+ANTES: só a frase de abertura e a caixa verde "As duas juntas viram o seu critério de saída" — 338 caracteres na tela (mais 230 na regra de ouro); o array `paragrafos`, com 1.047 caracteres, está fora da tela desde o redesenho.
+
+pergunta: REMOVER (hoje 'q1')
+
+```js
   teseVsCatalise: {
     titulo: 'Tese vs. catálise: as duas frases que faltam antes de comprar',
     // A ideia central do card (a frase com a borda ciano). Não repete o título nem
@@ -48,44 +18,11 @@ export const modulo4 = {
     emUmaFrase:
       'Duas frases escritas antes de clicar em comprar são o que separa uma operação de uma ' +
       'aposta — e são elas, depois, que decidem a hora de sair.',
-    // O visual do card: as duas frases lado a lado. Cada uma com a pergunta que
-    // responde, o que ela é e o que acontece quando vem sozinha.
-    duasFrases: [
-      {
-        nome: 'Tese',
-        pergunta: 'Por que este token?',
-        oQueE:
-          'A razão para ele chamar atenção: a narrativa que monta, a comunidade que já existe, o ' +
-          'nicho que ocupa ou o momento de mercado que aproveita.',
-        sozinha:
-          'Tese sem catálise é um token que pode ficar meses parado, enquanto o seu capital ' +
-          'envelhece.',
-      },
-      {
-        nome: 'Catálise',
-        pergunta: 'Por que agora?',
-        oQueE:
-          'O evento concreto que precisa acontecer para trazer compradores novos: uma listagem, ' +
-          'uma campanha grande, a graduação para a DEX, um anúncio marcado.',
-        sozinha:
-          'Catálise sem tese é correr atrás de barulho. Quando o evento passa, não sobra nada que ' +
-          'segure o preço.',
-      },
-    ],
-    // Micro-rótulo em vermelho, embaixo de cada frase ("o que acontece se vier sozinha").
-    rotuloSozinha: 'Sozinha',
-    // A caixa verde embaixo das duas frases.
-    juntas: {
-      destaque: 'As duas juntas viram o seu critério de saída.',
-      texto:
-        'Se a catálise aconteceu e o preço não reagiu, a tese estava errada. Se a catálise foi ' +
-        'cancelada, o motivo da posição sumiu. Nos dois casos, a decisão já está tomada — por você ' +
-        'com a cabeça fria, e não às três da manhã com o gráfico caindo.',
-    },
-    // Texto corrido do card, logo depois do visual. Substitui o array antigo de 9
-    // parágrafos (o texto da primeira versão), que estava guardado aqui só como
-    // referência e fora da tela desde o redesenho. A "Pergunta rápida" saiu de
-    // todas as seções em 20/09: as perguntas ficam só no quiz do fim do módulo.
+
+    // (campos de visual inalterados: duasFrases, rotuloSozinha, juntas, regraDeOuro)
+
+    // Texto corrido do card. Substitui o array antigo de 9 parágrafos, que estava
+    // guardado aqui como referência e fora da tela desde o redesenho.
     paragrafos: [
       'Tese é a frase que responde "por que este token, e não outro?". Ela nomeia o que você ' +
         'viu: a narrativa que o token monta, a comunidade que já existia antes de você chegar, ' +
@@ -153,18 +90,16 @@ export const modulo4 = {
           'caneta para você.',
       ],
     },
+  },
+```
 
-    regraDeOuro: {
-      titulo: 'Regra de ouro',
-      texto:
-        'Antes de entrar, escreva duas frases: (a) a tese — por que este token? e (b) a ' +
-        'catálise esperada — qual evento concreto precisa acontecer para ele valorizar. Se ' +
-        'você não consegue escrever a segunda frase, não é operação: é aposta.',
-    },
+---
 
-    // A ficha aparece dentro do card "A anatomia de um plano", logo depois dos
-    // níveis: cinco cartões lado a lado e a frase `introducao` embaixo. O título
-    // não aparece na tela (o card já tem o dele).
+## teseVsCatalise.fichaDeTese
+
+ANTES: `introducao` com 149 caracteres, logo abaixo dos cinco cartões (a explicação de cada campo não existe em texto; só a pergunta dentro do cartão). O resto do card é `planoDaPosicao`, mais abaixo.
+
+```js
     fichaDeTese: {
       titulo: 'Ficha de tese: cinco campos para preencher antes de clicar em comprar',
       introducao:
@@ -172,37 +107,17 @@ export const modulo4 = {
         'você já ouviu o termo em inglês) e preencha na ordem, antes de cada entrada. Leva dois ' +
         'minutos. O valor não está no papel: está em ter respondido "o que me faria admitir que ' +
         'errei?" num momento em que responder ainda não custava nada.',
-      campos: [
-        {
-          rotulo: 'Tese',
-          pergunta: 'Por que este token, e não os outros mil de hoje?',
-          exemplo: 'Ex.: narrativa X em crescimento, com comunidade ativa há semanas.',
-        },
-        {
-          rotulo: 'Catálise',
-          pergunta: 'Que evento concreto precisa acontecer para trazer compradores novos?',
-          exemplo: 'Ex.: graduação para a DEX; campanha anunciada para a semana que vem.',
-        },
-        {
-          rotulo: 'Prazo',
-          pergunta: 'Até quando esse evento deve acontecer?',
-          exemplo: 'Ex.: 7 dias. Passou o prazo sem a catálise, a tese venceu.',
-        },
-        {
-          rotulo: 'Invalidação',
-          pergunta: 'O que faria você admitir que estava errado?',
-          exemplo: 'Ex.: catálise aconteceu e o preço não reagiu; ou LP destravada.',
-        },
-        {
-          rotulo: 'Alvos de realização',
-          pergunta: 'Em que pontos você vende parte, e quanto?',
-          exemplo: 'Ex.: recuperar o investido no primeiro alvo; faixas seguintes definidas.',
-        },
-      ],
+      // (os 5 campos são o visual do card e ficam como estão)
     },
+```
 
-    // A tabela "Tese fraca × tese que dá para invalidar": título, ideia central,
-    // os cabeçalhos das 4 colunas e o nome da área que rola no celular.
+---
+
+## teseVsCatalise.tabelaDosExemplos
+
+ANTES: só `emUmaFrase`, 88 caracteres, e a tabela de três linhas. Nenhum parágrafo — é o card mais curto do módulo.
+
+```js
     tabelaDosExemplos: {
       titulo: 'Tese fraca × tese que dá para invalidar',
       emUmaFrase:
@@ -260,95 +175,21 @@ export const modulo4 = {
         ],
       },
     },
+```
 
-    // Uma linha da tabela por exemplo. O veredito responde à última coluna ("Dá
-    // para invalidar?"), por isso começa com "Não." ou "Sim.".
-    exemplos: [
-      {
-        tipo: 'fraca',
-        rotulo: 'Tese fraca',
-        tese: '"O gráfico está bonito e está subindo forte."',
-        catalise: '"Se continuar subindo, vai muito mais."',
-        veredito:
-          'Não. O motivo da compra é o próprio preço, e não há evento nenhum — se cair, a única ' +
-          'regra disponível é a esperança.',
-      },
-      {
-        tipo: 'fraca',
-        rotulo: 'Catálise vaga',
-        tese: '"A comunidade é muito ativa e o projeto tem potencial."',
-        catalise: '"Uma hora isso explode."',
-        veredito:
-          'Não. "Uma hora" não é prazo e "explode" não é evento: sem data e sem gatilho, nunca ' +
-          'chega a hora de sair.',
-      },
-      {
-        tipo: 'forte',
-        rotulo: 'Tese + catálise concretas',
-        tese: '"Token com comunidade ativa há semanas, checagens técnicas em ordem."',
-        catalise: '"Evento do projeto anunciado para a próxima semana, com data marcada."',
-        veredito:
-          'Sim. Dá para verificar, dá para invalidar e dá para sair: se o evento acontecer e o ' +
-          'preço não reagir, você sabe no mesmo dia.',
-      },
-    ],
+---
 
-    // O mapa das catálises: um centro e um ramo por catálise, cada ramo com a
-    // descrição e a caixa âmbar "O que dá errado:". Tudo à vista, sem abrir nada.
+## teseVsCatalise.tiposDeCatalise
+
+ANTES: `emUmaFrase` com 101 caracteres e o mapa de cinco ramos. Nenhum parágrafo; a explicação inteira está dentro do visual.
+
+```js
     tiposDeCatalise: {
       titulo: 'O mapa das catálises — e o que costuma dar errado em cada uma',
       emUmaFrase:
         'Toda catálise tem um lado que trabalha contra você. Saber qual é muda o tamanho e o ' +
         'prazo da posição.',
-      centro: { titulo: 'Catálise', subtitulo: '"por que agora?"' },
-      rotuloDoAlerta: 'O que dá errado:',
-      rotuloDaRolagem: 'Mapa das catálises (role na horizontal se preciso)',
-      // Primeira frase da descrição que o leitor de tela lê no mapa. É função
-      // porque leva a quantidade de catálises: o número sai da lista abaixo, e
-      // não escrito à mão, para o texto não mentir se a lista mudar.
-      aberturaDaDescricao: (quantidade) => quantidade + ' catálises comuns.',
-      itens: [
-        {
-          nome: 'Listagem em corretora',
-          descricao: 'Um evento com data, que traz compradores que antes não tinham acesso.',
-          alerta:
-            'O anúncio muitas vezes mexe mais no preço do que a listagem em si. Quem comprou ' +
-            'pelo rumor costuma vender no fato.',
-        },
-        {
-          nome: 'Graduação para a DEX',
-          descricao:
-            'O token sai da bonding curve (a curva de preço do lançamento) e ganha um pool com ' +
-            'liquidez mais profunda. No Pump.fun, isso acontece com cerca de 85 SOL arrecadados ' +
-            '(dados de set/2025). Em dólar não há limiar fixo: numa amostra de ago/2026, 80% das ' +
-            'graduações ficaram entre US$ 11 mil e US$ 101 mil.',
-          alerta:
-            'É também quando quem comprou na curva finalmente consegue vender volume. A ' +
-            'liquidez que atrai você é a mesma que dá saída para eles.',
-        },
-        {
-          nome: 'Atenção de figura pública',
-          descricao: 'Um perfil grande interage e traz uma multidão de olhos de uma vez.',
-          alerta:
-            'Costuma ser catálise curta, e o risco de contrato impostor é alto. Confirme o ' +
-            'endereço oficial na fonte antes de qualquer coisa.',
-        },
-        {
-          nome: 'Narrativa em crescimento',
-          descricao:
-            'Um tema puxa vários tokens ao mesmo tempo, e a atenção do setor migra para lá.',
-          alerta:
-            'É a catálise mais difícil de datar. Se você entra cedo demais, fica segurando. Se ' +
-            'entra tarde demais, compra o topo.',
-        },
-        {
-          nome: 'Evento do projeto com data marcada',
-          descricao: 'Lançamento, parceria anunciada, campanha ou migração, com dia definido.',
-          alerta:
-            'É a melhor catálise para estudar, porque tem prazo. Cuidado com datas que vão ' +
-            'sendo adiadas: adiamento é sinal, não detalhe.',
-        },
-      ],
+      // (centro, rotuloDoAlerta, rotuloDaRolagem, aberturaDaDescricao e itens: visual, inalterados)
 
       paragrafos: [
         'Catálise não é uma coisa só. O mapa acima parte de um centro — "por que agora?" — e ' +
@@ -418,46 +259,32 @@ export const modulo4 = {
         ],
       },
     },
-  },
+```
 
-  // ---------------------------------------------------------------------------
-  // Aba 2 — Take profit
-  // ---------------------------------------------------------------------------
-  takeProfit: {
-    // O título e os parágrafos abaixo são o texto corrido da primeira versão. A
-    // tela não os mostra desde o redesenho (as ideias foram para os destaques da
-    // aba e para o card da escada); ficam guardados aqui como referência.
-    titulo: 'Take profit: o lucro que você não realizou não é seu',
-    paragrafos: [
-      'Enquanto a posição está aberta, o lucro é só um número na tela. É uma promessa que ' +
-        'depende de existir comprador na hora em que você quiser sair.',
-      'Em memecoin, essa promessa some rápido. A liquidez que sustenta o preço na subida é a ' +
-        'mesma que desaparece na descida.',
-      'Realização parcial resolve isso sem exigir que você acerte o topo. Você vende uma faixa ' +
-        'e recupera o valor investido. O que sobra passa a correr por conta do lucro.',
-      'A posição continua na mesa, mas o medo sai dela. E é o medo que piora as decisões.',
-      'O ponto que quase ninguém aceita de primeira: o alvo de realização se define ANTES de ' +
-        'entrar, junto com a tese.',
-      'Definido depois, com o gráfico piscando, o alvo já nasce contaminado pela euforia ou ' +
-        'pelo medo do momento.',
-    ],
+---
 
-    // O card da escada: três faixas em degrau, a legenda com o selo "exemplo
-    // didático" e o texto corrido. A "Pergunta rápida" q2 saiu em 20/09 (as
-    // perguntas ficam só no quiz do fim do módulo).
+## takeProfit (título e parágrafos do topo)
+
+ANTES: 725 caracteres num array de referência, fora da tela desde o redesenho. DEPOIS: inalterado — não reescrevi nada aqui. O conteúdo desses seis parágrafos foi absorvido, ampliado, pelo card `takeProfit.escada` logo abaixo. Ver APONTAMENTOS: o array antigo pode ser apagado depois que a escada entrar, para não haver duas versões do mesmo texto no arquivo.
+
+---
+
+## takeProfit.escada
+
+ANTES: `emUmaFrase` + legenda do visual + um parágrafo de 254 caracteres — 589 no total, sendo 254 de explicação de verdade.
+
+pergunta: REMOVER (hoje 'q2')
+
+```js
     escada: {
       titulo: 'A escada de realização, faixa a faixa',
       emUmaFrase:
         'O lucro que você não realizou não é seu. Nenhuma faixa depende de prever o topo — a ' +
         'escada existe justamente porque ninguém acerta o topo de forma consistente.',
-      legenda:
-        'Exemplo didático da estrutura — não é sugestão de onde vender. O que importa é o ' +
-        'formato: faixas definidas antes, cada uma com um motivo, e a última com regra de saída ' +
-        'escrita.',
-      selo: 'exemplo didático',
+      // (legenda, selo e faixas: visual, inalterados)
 
-      // Substitui o campo `paragrafo` (singular) e absorve os parágrafos de
-      // referência que estavam em takeProfit.paragrafos, acima.
+      // Substitui o campo `paragrafo` (singular) e absorve os parágrafos de referência
+      // que estavam em takeProfit.paragrafos.
       paragrafos: [
         'Realizar é vender uma parte da posição e transformar o número da tela em dinheiro que ' +
           'já está na sua carteira. Em inglês o gesto se chama take profit, literalmente "pegar ' +
@@ -522,63 +349,26 @@ export const modulo4 = {
             'fundo", e é informativo — não é aconselhamento tributário.',
         ],
       },
-      // Cada faixa aparece como "<alvo> — <acao>" e, embaixo, o porquê.
-      faixas: [
-        {
-          alvo: 'Primeiro alvo',
-          acao: 'vender a fração que recupera o valor investido',
-          porque:
-            'A partir daqui o pior caso deixa de ser prejuízo. É a mudança que mais reduz o ' +
-            'peso emocional da posição.',
-        },
-        {
-          alvo: 'Segundo alvo',
-          acao: 'vender outra faixa, já como lucro realizado',
-          porque:
-            'Transforma parte da alta em dinheiro que existe de verdade, sem depender de o ' +
-            'movimento continuar.',
-        },
-        {
-          alvo: 'Restante',
-          acao: 'deixar correr, com uma regra de saída escrita',
-          porque:
-            'Ex.: sair se cair X% do topo, ou se a catálise falhar. O que não pode existir é ' +
-            'restante sem regra — é assim que 5x vira 0.',
-        },
-      ],
     },
+```
 
-    // O card do erro de segurar: o fluxograma "você compraria hoje?", a legenda,
-    // o texto corrido e a tributação dentro de "Para ir mais fundo". A "Pergunta
-    // rápida" q3 saiu em 20/09 (as perguntas ficam só no quiz do fim do módulo).
+---
+
+## takeProfit.erroDeSegurar
+
+ANTES: `emUmaFrase` + legenda do fluxograma + um `paragrafoFinal` de 139 caracteres — 467 no total. Os 906 caracteres do array `paragrafos` estão fora da tela desde o redesenho.
+
+pergunta: REMOVER (hoje 'q3')
+
+```js
     erroDeSegurar: {
       titulo: 'O erro de segurar demais (e por que ele parece racional na hora)',
       emUmaFrase:
         'O dinheiro já foi gasto de qualquer jeito. A única pergunta que importa: você compraria ' +
         'este token, neste preço, hoje?',
-      // Situação → pergunta → dois ramos, cada um com dois passos. O primeiro
-      // passo de cada ramo é a decisão; o segundo, a explicação (texto cinza).
-      fluxograma: {
-        situacao: 'A posição está em prejuízo, na fase de Degradação',
-        pergunta: 'Você compraria este token, neste preço, hoje?',
-        sim: {
-          rotulo: 'Sim, compraria',
-          decisao: 'A posição continua, pela tese — não pelo preço médio',
-          explicacao: 'Reescreva a tese e a catálise com a data de hoje',
-        },
-        nao: {
-          rotulo: 'Não compraria',
-          decisao: 'A posição já está encerrada. Só falta executar.',
-          explicacao: '"Assumir o prejuízo" não é o custo de vender: é o custo que já aconteceu',
-        },
-        legenda:
-          'Na Degradação a liquidez seca porque a atenção foi embora: cada tentativa de venda ' +
-          'encontra um livro de ofertas mais fino que o do dia anterior. O preço não cai por ' +
-          'acaso — cai porque ninguém está mais olhando.',
-      },
-      // Texto corrido do card. Substitui o array de referência da primeira versão,
-      // que a tela não mostrava, e o antigo campo `paragrafoFinal` (agora o
-      // primeiro item de paragrafosFinais, abaixo).
+      // (fluxograma: visual, inalterado)
+
+      // Substitui o array `paragrafos` de referência, que a tela não mostrava.
       paragrafos: [
         'Degradação é a última das 4 fases do Módulo 2. Nela a atenção já migrou para outro ' +
           'token: o grupo esvazia, ninguém mais posta, e não chegam compradores novos. O preço ' +
@@ -589,8 +379,8 @@ export const modulo4 = {
           'para baixo sozinho, e amanhã a fila estará ainda menor.',
         'É exatamente aí que aparece o custo afundado — em inglês, sunk cost: o dinheiro que já ' +
           'saiu e não volta, faça o que você fizer. A cabeça trata vender como "assumir o ' +
-          'prejuízo", como se não vender mantivesse a operação viva. Mas o prejuízo não ' +
-          'acontece no clique de vender; ele já aconteceu. O clique só reconhece o que existe.',
+          'prejuízo", como se não vender mantivesse a operação viva. Mas o prejuízo não acontece ' +
+          'no clique de vender; ele já aconteceu. O clique só reconhece o que existe.',
         'Por isso o fluxograma acima tem uma pergunta só, e ela não menciona o seu preço de ' +
           'entrada: você compraria este token, neste preço, hoje? Da pergunta saem dois ramos. ' +
           'No "sim, compraria", a posição continua pela tese — não pelo preço médio — e a tese ' +
@@ -619,19 +409,27 @@ export const modulo4 = {
         ],
       },
 
+      // Absorve o antigo campo `paragrafoFinal`.
       paragrafosFinais: [
         'Segurar por tempo demais transforma uma perda pequena e planejada num rombo que leva ' +
-          'meses para recuperar. E esse erro, diferente de quase tudo neste mercado, não ' +
-          'depende do token, da chain nem da sorte. Depende só de não ter escrito a regra antes.',
-        'E se o caminho tiver sido o outro, e você tiver realizado lucro, existe uma parte ' +
-          'chata que vem depois: o que o Brasil espera de quem vendeu. Ela está logo abaixo, ' +
-          'recolhida em "Para ir mais fundo", e é informativa.',
+          'meses para recuperar. E esse erro, diferente de quase tudo neste mercado, não depende ' +
+          'do token, da chain nem da sorte. Depende só de não ter escrito a regra antes.',
+        'E se o caminho tiver sido o outro, e você tiver realizado lucro, existe uma parte chata ' +
+          'que vem depois: o que o Brasil espera de quem vendeu. Ela está logo abaixo, recolhida ' +
+          'em "Para ir mais fundo", e é informativa.',
       ],
       // Sem campo `detalhe` aqui: quem ocupa o "Para ir mais fundo" deste card é a
-      // tributação, logo abaixo.
+      // tributação, abaixo. Ver APONTAMENTOS.
     },
+```
 
-    // Fica recolhida em "Para ir mais fundo", dentro do card do erro de segurar.
+---
+
+## takeProfit.tributacao
+
+ANTES: aviso + cinco pontos, 1.147 caracteres — é o bloco mais longo do módulo, mas começa direto nos cinco pontos, sem nada que explique o que é ganho de capital nem por que o limite é sobre as vendas.
+
+```js
     tributacao: {
       titulo: 'Realizou lucro no Brasil? O que vem depois (informativo)',
       aviso:
@@ -639,7 +437,6 @@ export const modulo4 = {
         'frequência e há divergência entre fontes — confirme tudo com um contador ' +
         'especializado antes de declarar qualquer coisa.',
 
-      // Texto de abertura, antes da lista de pontos.
       paragrafos: [
         'Realizar lucro tem uma consequência fora da tela. No Brasil, vender cripto com ganho ' +
           'pode gerar imposto, e apurar e pagar é responsabilidade sua, não da corretora. Ganho ' +
@@ -699,21 +496,23 @@ export const modulo4 = {
       ],
 
       paragrafosFinais: [
-        'Duas atitudes práticas que não dependem de nenhuma regra específica: guardar o ' +
-          'registro de cada compra e de cada venda, com data, valor e taxa, desde a primeira ' +
-          'operação; e, se em algum mês você passar do limite, procurar um contador antes de ' +
-          'declarar, não depois. Esta seção é informativa e não substitui essa conversa.',
+        'Duas atitudes práticas que não dependem de nenhuma regra específica: guardar o registro ' +
+          'de cada compra e de cada venda, com data, valor e taxa, desde a primeira operação; e, ' +
+          'se em algum mês você passar do limite, procurar um contador antes de declarar, não ' +
+          'depois. Esta seção é informativa e não substitui essa conversa.',
       ],
     },
-  },
+```
 
-  // ---------------------------------------------------------------------------
-  // Aba 3 — Checagens técnicas antes de entrar
-  // ---------------------------------------------------------------------------
-  // O card das seis checagens: um fluxograma em que cada pergunta tem a saída
-  // "Resposta boa: siga" embaixo e a saída "Alerta: não entra" à direita. Depois,
-  // o texto corrido e o quadro de vocabulário. A "Pergunta rápida" q4 saiu em
-  // 20/09 (as perguntas ficam só no quiz do fim do módulo).
+---
+
+## checagens
+
+ANTES: `emUmaFrase` + o nó final do fluxograma + um `paragrafoFinal` de 142 caracteres — 404 no total, para seis checagens cheias de jargão em inglês que nunca é traduzido.
+
+pergunta: REMOVER (hoje 'q4')
+
+```js
   checagens: {
     titulo: 'As seis checagens que vêm antes da tese',
     emUmaFrase:
@@ -724,6 +523,8 @@ export const modulo4 = {
     fim:
       'Passou nas seis: agora sim, escreva a tese e a catálise. Passar não aprova o token — só ' +
       'quer dizer que ele não mostrou os problemas que dá para ver.',
+    // (itens: visual, inalterados)
+
     paragrafos: [
       'As seis perguntas acima são sobre o contrato do token e sobre quem controla o quê. Não ' +
         'são sobre o projeto, a arte, o grupo nem a narrativa. São a peneira do Módulo 3 ' +
@@ -731,8 +532,8 @@ export const modulo4 = {
         'tese sobrevive a um contrato desenhado para prender você lá dentro.',
       'No fluxograma, cada pergunta tem duas saídas: "Resposta boa: siga", embaixo, e "Alerta: ' +
         'não entra", à direita. Repare que todas as saídas de alerta vão para o mesmo lugar. ' +
-        'Não é uma nota de zero a dez em que o bom compensa o ruim: basta um "não" para ' +
-        'derrubar a operação inteira, e é por isso que a peneira é rápida.',
+        'Não é uma nota de zero a dez em que o bom compensa o ruim: basta um "não" para derrubar ' +
+        'a operação inteira, e é por isso que a peneira é rápida.',
       'As seis perguntas usam palavras que o mercado só fala em inglês. O quadro abaixo traduz ' +
         'cada uma antes de você ler os alertas, para você não precisar adivinhar pelo contexto.',
     ],
@@ -759,10 +560,10 @@ export const modulo4 = {
       {
         rotulo: 'Supply, holders e concentração',
         texto:
-          'Supply é a quantidade total de unidades do token que existe. Holders são as ' +
-          'carteiras que detêm essas unidades. Concentração é quanto do supply está nas mãos ' +
-          'das maiores carteiras — e "top 10" é a lista das dez maiores, que os exploradores de ' +
-          'rede mostram prontinha.',
+          'Supply é a quantidade total de unidades do token que existe. Holders são as carteiras ' +
+          'que detêm essas unidades. Concentração é quanto do supply está nas mãos das maiores ' +
+          'carteiras — e "top 10" é a lista das dez maiores, que os exploradores de rede mostram ' +
+          'prontinha.',
       },
       {
         rotulo: 'Bundle',
@@ -803,8 +604,8 @@ export const modulo4 = {
         'está eufórico: a peneira não melhora com entusiasmo.',
       'O erro que ela evita é começar pelo fim — se apaixonar pela história, escrever uma tese ' +
         'bonita e só então abrir o RugCheck, quando já é tarde para olhar com isenção. Passar ' +
-        'nas seis não aprova o token; só quer dizer que ele não mostrou os problemas que dá ' +
-        'para ver.',
+        'nas seis não aprova o token; só quer dizer que ele não mostrou os problemas que dá para ' +
+        'ver.',
     ],
 
     detalhe: {
@@ -826,175 +627,29 @@ export const modulo4 = {
           'DexScreener para liquidez do par, volume e profundidade.',
       ],
     },
-
-    itens: [
-      {
-        pergunta: 'Alguém consegue tirar a liquidez da pool?',
-        porque:
-          'Com a liquidez livre, o criador pode removê-la, e o preço vira pó no mesmo bloco. ' +
-          'Esse é o hard rug. No pump.fun, depois da graduação, a pool é do protocolo e isso não ' +
-          'acontece. O golpe que sobra lá é o criador vender a própria compra (Módulo 6).',
-        onde: 'RugCheck (Lockers & LP); e o explorer para ver quem detém os tokens de LP.',
-        alerta:
-          'Tokens de LP numa carteira do criador. Mas trava não aprova token: num estudo, 97,3% ' +
-          'dos tokens com liquidez travada eram maliciosos, contra 97,7% no geral (Mazorra et al., 2022).',
-      },
-      {
-        pergunta: 'A mint authority foi revogada?',
-        porque:
-          'Mint authority ativa significa que ainda dá para criar tokens novos, diluindo quem ' +
-          'já comprou sem aviso nenhum.',
-        onde: 'RugCheck ou a página do token no Solscan.',
-        alerta: 'Authority ativa numa carteira ligada ao criador.',
-      },
-      {
-        pergunta: 'A freeze authority foi revogada?',
-        porque:
-          'Freeze authority ativa permite congelar contas do token. Você compra e pode não ' +
-          'conseguir vender. É o sinal clássico de possível honeypot. Nota técnica ' +
-          'verificada: na Solana, DEXs como a Raydium exigem freeze authority revogada para ' +
-          'criar o pool.',
-        onde: 'RugCheck ou Solscan.',
-        alerta: 'Authority ativa — trate como token potencialmente sem saída.',
-      },
-      {
-        pergunta: 'Como está a concentração dos maiores holders?',
-        porque:
-          'Se poucas carteiras detêm a maior parte do supply, o seu resultado depende da ' +
-          'decisão de um punhado de pessoas — que podem ser a mesma pessoa.',
-        onde: 'Solscan/BscScan para a lista; Bubblemaps para ver clusters ligados.',
-        alerta: 'Top 10 com fatia grande, especialmente em carteiras conectadas entre si.',
-      },
-      {
-        pergunta: 'Houve bundles no lançamento?',
-        porque:
-          'Várias compras no mesmo bloco costumam ser o próprio dev e insiders montando ' +
-          'posição antes de todo mundo, com o preço mais baixo que existirá.',
-        onde: 'RugCheck e ferramentas de análise on-chain; explorer para as primeiras transações.',
-        alerta: 'Percentual alto do supply comprado no bloco do lançamento.',
-      },
-      {
-        pergunta: 'A liquidez aguenta a sua saída?',
-        porque:
-          'Market cap alto com liquidez fina quer dizer que o preço na tela não é o preço que ' +
-          'você consegue realizar. Compare o tamanho da sua posição com o pool.',
-        onde: 'DexScreener: liquidez do par, volume e profundidade.',
-        alerta: 'Posição grande demais para o pool — você derruba o preço ao vender.',
-      },
-    ],
   },
+```
 
-  // ---------------------------------------------------------------------------
-  // Aba 4 — Simulador (textos de apoio; os cenários ficam em cenarios.js)
-  // ---------------------------------------------------------------------------
-  simulador: {
-    titulo: 'Simulador de decisão',
-    introducao:
-      'Doze situações, quatro escolhas em cada uma. Não existe pontuação de acerto de preço. ' +
-      'O que está sendo medido é se a decisão segue a regra ou o impulso. Cada escolha mostra ' +
-      'o feedback, o risco daquela decisão e o próximo passo técnico. O histórico fica salvo ' +
-      'no seu navegador.',
-    // Aviso amarelo do topo do simulador. O "Cenários fictícios:" em negrito é posto
-    // pelo componente, antes deste texto (tela 34 do desenho).
-    aviso:
-      'os números que aparecem neles são inventados de propósito para o exercício, e a ordem ' +
-      'é sorteada a cada rodada. Nenhum descreve um token real, e nada aqui é recomendação de ' +
-      'compra ou venda.',
-    // Parágrafo logo abaixo do aviso (tela 34 do desenho).
-    abertura:
-      'Não existe pontuação de acerto de preço: o que está sendo medido é se a decisão segue a ' +
-      'regra ou o impulso. As quatro opções são sempre as mesmas — o que muda é a situação.',
-    // Segunda frase da dica "antes de escolher". Só aparece nos cenários em que você
-    // não tem posição (posicao: 'nenhuma' em cenarios.js). Nesses nove, "Realizar
-    // parcial" é sempre a opção marcada como 'naoSeAplica' — conferido nos dados.
-    dicaSemPosicao:
-      '"Realizar parcial" aqui é a única que não se aplica — você não tem posição neste token.',
-    // Frase ao lado do botão "Próximo cenário" (só quando a ordem é sorteada).
-    ordemSorteada: 'A ordem é sorteada: o próximo vem de outro tema.',
-    // Legenda das 4 barras do resultado final. É uma função porque leva o total de
-    // cenários no meio do texto (hoje, 12).
-    legendaBarras: (total) =>
-      'Mesma escala, sobre os ' + total + ' cenários. "Não se aplica" não é erro de mérito: é ' +
-      'escolher uma ação impossível na situação — vale 0 e é contada à parte.',
-    // Legenda da lista das 4 faixas. O desenho diz "deste resultado de exemplo"; aqui o
-    // resultado é o seu de verdade, então sem o "de exemplo".
-    legendaFaixas: 'O simulador pega a primeira faixa que couber. A faixa em destaque é a deste resultado.',
-    // Última frase do resultado final.
-    fraseFinal: 'O simulador não avalia se você ganharia dinheiro, e sim se a decisão seguiu a regra escrita.',
-  },
+> Proposta de divisão, para o dono decidir: com o quadro de vocabulário, este card fica longo — visual de seis checagens, cinco verbetes, exemplo e detalhe. Sugiro quebrar em duas seções na aba: **"O vocabulário das seis checagens"** (emUmaFrase + os três primeiros parágrafos + o `quadro`) e **"As seis checagens que vêm antes da tese"** (o fluxograma + exemplo + paragrafosFinais + detalhe). Se preferir manter um card só, o bloco acima funciona como está.
 
-  // A moldura da aba Simulador (desenho "M4 Desktop"): o card que explica, antes
-  // do simulador, como cada escolha é avaliada — 4 passos ligados por setas e o
-  // feedback em 3 partes. O simulador em si vem logo depois (componente
-  // simulator.js, com os textos do bloco `simulador` acima).
-  //   tom: 'neutro' · 'acento' (ciano) · 'primaria' (roxo) · 'bom' · 'alerta'
+---
+
+## molduraDoSimulador
+
+ANTES: `emUmaFrase` + duas legendas, 284 caracteres. Nenhum parágrafo explica como ler o resumo de disciplina.
+
+```js
   molduraDoSimulador: {
     titulo: 'Simulador de decisão',
     emUmaFrase:
       'Doze situações inventadas para treinar a única coisa que dá para treinar antes de ter ' +
       'dinheiro na mesa: decidir com a regra escrita na frente.',
-    // O "Cenários fictícios:" em negrito vem antes deste texto (a view põe).
-    // Este é o único aviso que aparece nesta aba (o componente entra sem o dele,
-    // para o texto não sair duas vezes), então ele também avisa que a ordem é
-    // sorteada — que é o que o simulador faz de verdade a cada rodada.
     rotuloDoAviso: 'Cenários fictícios:',
     aviso:
       'os números que aparecem neles são inventados de propósito para o exercício, e a ordem é ' +
       'sorteada a cada rodada. Nenhum deles descreve um token real, e nada aqui é recomendação ' +
       'de compra ou venda.',
-    passos: {
-      titulo: 'Como cada escolha é avaliada',
-      itens: [
-        {
-          titulo: 'A situação',
-          texto: 'Um cenário fictício, com os números inventados de propósito para o exercício.',
-          tom: 'neutro',
-        },
-        {
-          titulo: 'Quatro escolhas',
-          texto: 'Você decide o que faria. Não há acerto de preço para adivinhar.',
-          tom: 'acento',
-        },
-        {
-          titulo: 'O feedback',
-          texto: 'A escolha, o risco daquela decisão e o próximo passo técnico.',
-          tom: 'neutro',
-        },
-        {
-          titulo: 'O resumo de disciplina',
-          texto: 'Mede processo, não resultado: se a decisão seguiu a regra escrita.',
-          tom: 'primaria',
-        },
-      ],
-      legenda: 'Doze situações, quatro escolhas em cada uma. O histórico fica salvo no seu navegador.',
-    },
-    partes: {
-      titulo: 'O feedback de uma escolha, em três partes',
-      itens: [
-        {
-          rotulo: 'A escolha',
-          texto: 'Certa, ou "não foi essa" — sempre com explicação, nunca só o resultado.',
-          tom: 'bom',
-        },
-        {
-          rotulo: 'O risco daquela decisão',
-          texto: 'O que aquela escolha expõe: contraparte, liquidez, impulso, ou tese sem invalidação.',
-          tom: 'alerta',
-        },
-        {
-          rotulo: 'O próximo passo técnico',
-          texto: 'O que checar em seguida, e em qual ferramenta — ligando a decisão ao Módulo 3.',
-          tom: 'acento',
-        },
-      ],
-      // O desenho continua a legenda com "Quando a sua escolha tem contra-argumento,
-      // ele aparece como 'Por que a sua não serve'". O simulador não tem esse bloco
-      // (ele é do quiz), então a frase ficou de fora para a tela não prometer o que
-      // não mostra.
-      legenda:
-        'O simulador não avalia se você ganharia dinheiro, e sim se a decisão seguiu a regra ' +
-        'escrita.',
-    },
+    // (passos e partes: visual, inalterados)
 
     paragrafos: [
       'O simulador apresenta doze situações. Em cada uma você escolhe entre quatro ações — e ' +
@@ -1022,9 +677,9 @@ export const modulo4 = {
     ],
 
     paragrafosFinais: [
-      'O histórico fica salvo no seu navegador, neste computador, e não sai daqui. Vale ' +
-        'refazer depois de algumas semanas: o interessante não é o primeiro resumo, é a ' +
-        'diferença entre o primeiro e o segundo.',
+      'O histórico fica salvo no seu navegador, neste computador, e não sai daqui. Vale refazer ' +
+        'depois de algumas semanas: o interessante não é o primeiro resumo, é a diferença entre ' +
+        'o primeiro e o segundo.',
     ],
 
     detalhe: {
@@ -1040,96 +695,21 @@ export const modulo4 = {
       ],
     },
   },
+```
 
-  // ---------------------------------------------------------------------------
-  // Destaques — os números grandes que abrem cada aba
-  //
-  // Este módulo não tem lista de `fontes`. Por isso todo destaque abaixo sai do
-  // PRÓPRIO TEXTO do módulo (que já foi pesquisado) ou é aritmética pura. Nenhuma
-  // estatística nova entra aqui — regra do CLAUDE.md.
-  // ---------------------------------------------------------------------------
-  destaques: {
-    tese: [
-      {
-        rotulo: 'Frases antes de comprar',
-        valor: '2',
-        nota: 'A tese ("por que este token?") e a catálise ("por que agora?"). As duas são necessárias e nenhuma sozinha basta.',
-      },
-      {
-        rotulo: 'Campos da ficha de tese',
-        valor: '5',
-        nota: 'Tese, catálise, prazo, invalidação e alvos. Dois minutos que separam uma decisão de um impulso.',
-      },
-      {
-        rotulo: 'Sem a segunda frase',
-        valor: 'Aposta',
-        nota: 'Se você não consegue escrever qual evento concreto precisa acontecer, não é operação.',
-        tom: 'alerta',
-      },
-    ],
+---
 
-    takeProfit: [
-      {
-        rotulo: 'Quando o alvo se define',
-        valor: 'Antes',
-        nota: 'Junto com a tese, não com o gráfico piscando. Definido depois, já nasce contaminado pela euforia ou pelo medo.',
-      },
-      {
-        rotulo: 'Faixas na escada',
-        valor: '3',
-        nota: 'Recuperar o investido, realizar lucro, e um restante COM regra escrita. O que não pode existir é restante sem regra.',
-      },
-      {
-        rotulo: 'Restante sem regra',
-        valor: '5× → 0',
-        nota: 'É assim que uma posição que multiplicou por cinco termina valendo nada. Não depende do token nem da sorte.',
-        tom: 'alerta',
-      },
-    ],
+## planoDaPosicao
 
-    checagens: [
-      {
-        rotulo: 'Checagens antes da tese',
-        valor: '6',
-        nota: 'LP, mint, freeze, concentração, bundles e liquidez de saída. A peneira do Módulo 3 aplicada à decisão.',
-      },
-      {
-        rotulo: 'Respostas ruins que derrubam a operação',
-        valor: '1',
-        nota: 'Qualquer uma delas. Por melhor que a narrativa esteja, o contrato precisa resistir primeiro.',
-        tom: 'alerta',
-      },
-      {
-        rotulo: 'Duração de um hard rug',
-        valor: 'Um bloco',
-        nota: 'Com a liquidez livre, o criador remove a LP e o preço vira pó no mesmo bloco. No pump.fun a pool pós-graduação é do protocolo; lá, o golpe que sobra é o criador vender.',
-        tom: 'alerta',
-      },
-    ],
-  },
+ANTES: `emUmaFrase` + legenda + a linha do restante, 348 caracteres — e a ficha de tese inteira dentro do mesmo card, sem um parágrafo que explique os campos.
 
-  // ---------------------------------------------------------------------------
-  // O plano de uma posição (aba Tese): os níveis em linhas, de cima para baixo,
-  // cada um com a sua cor. De propósito NÃO há linha de preço nem eixo: o plano
-  // são níveis decididos antes, e não depende de prever o caminho até eles.
-  // A ficha de tese (acima, em teseVsCatalise) aparece dentro deste mesmo card.
-  //   tom: 'bom' (verde) · 'acento' (ciano) · 'neutro' (branco) · 'alerta' (vermelho)
-  // ---------------------------------------------------------------------------
+```js
   planoDaPosicao: {
     titulo: 'A anatomia de um plano',
     emUmaFrase:
       'Quatro níveis escritos antes de entrar, e nenhuma linha de preço: o que está desenhado ' +
       'aqui é o que você decide, não o que o mercado faz.',
-    legenda:
-      'O plano não depende de prever o caminho — depende de ter os níveis decididos por você ' +
-      'frio, para serem cumpridos por você sob pressão.',
-    niveis: [
-      { id: 'alvo2', rotulo: '2º alvo', detalhe: 'lucro realizado', tom: 'bom' },
-      { id: 'alvo1', rotulo: '1º alvo', detalhe: 'recupera o investido', tom: 'acento' },
-      { id: 'entrada', rotulo: 'Entrada', detalhe: 'tese + catálise escritas', tom: 'neutro' },
-      { id: 'invalidacao', rotulo: 'Invalidação', detalhe: 'onde você admite que errou', tom: 'alerta' },
-    ],
-    restante: 'Restante: corre com regra escrita — sair se cair X% do topo, ou se a catálise falhar.',
+    // (legenda, niveis e restante: visual, inalterados)
 
     paragrafos: [
       'Um plano de posição é a lista dos níveis que você decide antes de entrar. São quatro, e ' +
@@ -1189,93 +769,30 @@ export const modulo4 = {
       ],
     },
   },
+```
 
-  // ---------------------------------------------------------------------------
-  // Calculadoras (a matemática mora em views/modulo4.js)
-  // ---------------------------------------------------------------------------
-  // Aba Take profit, logo depois da escada. Controles à esquerda; à direita, as 3
-  // barras de "como a posição se reparte" e a caixa com o realizado e o pior caso.
-  // O 2º alvo nunca fica abaixo do 1º: mexer no 1º empurra o 2º para cima, a
-  // pelo menos `distanciaMinima` de distância (1º em 5× → 2º vai para 5,5×).
+---
+
+## calculadoraDeDegraus
+
+ANTES: `emUmaFrase` + a nota curta embaixo dos controles, 184 caracteres — nada explica o que a calculadora faz nem como ler o resultado.
+
+```js
   calculadoraDeDegraus: {
     titulo: 'Mexa nos alvos e veja onde a posição para',
     emUmaFrase:
       'A primeira faixa vende exatamente o que recupera o investido — por isso ela não é um ' +
       'controle, é a definição.',
-    distanciaMinima: 0.5,
-    rotuloDaFigura: 'Como a posição se reparte',
-    // As 3 barras. As notas que levam número são funções: recebem o número já
-    // escrito ("2,0×") e devolvem a frase.
-    barras: {
-      primeiro: {
-        rotulo: 'Vendido no 1º alvo',
-        nota: (alvo1) => 'É a fração que, vendida a ' + alvo1 + ', devolve exatamente o valor investido.',
-      },
-      segundo: {
-        rotulo: 'Vendido no 2º alvo',
-        nota: 'Lucro que existe de verdade, sem depender de o movimento continuar.',
-      },
-      restante: {
-        rotulo: 'Restante na mesa',
-        nota: (naMesa, alvo2) =>
-          'Só pode existir com regra de saída escrita. Vale ' + naMesa + ' o investido a ' + alvo2 + '.',
-      },
-      complemento: 'da posição', // "50% da posição"
-    },
-    // A caixa embaixo das barras, em múltiplos do valor investido.
-    realizado: { rotulo: 'Realizado ao chegar no 2º alvo', nota: 'do valor investido' },
-    piorCaso: {
-      rotulo: 'Pior caso, com o restante a zero',
-      notaAcima: 'acima do investido, mesmo se o resto for a zero',
-      notaAbaixo: 'ainda abaixo do investido: o 1º alvo não foi atingido na conta',
-    },
-    // Texto antigo da calculadora (a tela não mostra desde o redesenho).
-    descricao:
-      'Exemplo didático da ESTRUTURA da escada — não é sugestão de onde vender. Ajuste os ' +
-      'alvos e veja quanto fica realizado, quanto continua na mesa, e no que vira o pior caso.',
-    controles: [
-      {
-        id: 'alvo1',
-        rotulo: 'Primeiro alvo (múltiplo da entrada)',
-        min: 1.5,
-        max: 10,
-        passo: 0.5,
-        valor: 2,
-        sufixo: '×',
-        formatar: (n) => n.toFixed(1).replace('.', ','),
-      },
-      {
-        id: 'alvo2',
-        rotulo: 'Segundo alvo (múltiplo da entrada)',
-        min: 2,
-        max: 20,
-        passo: 0.5,
-        valor: 4,
-        sufixo: '×',
-        formatar: (n) => n.toFixed(1).replace('.', ','),
-      },
-      {
-        id: 'fracao2',
-        rotulo: 'Vendido no segundo alvo (do que sobrou)',
-        min: 0,
-        max: 100,
-        passo: 5,
-        valor: 50,
-        sufixo: '%',
-        formatar: (n) => String(n),
-      },
-    ],
-    // Frase curta embaixo dos controles.
-    nota: 'Exemplo didático da estrutura — os números são estrutura, não recomendação.',
+    // (distanciaMinima, rotuloDaFigura, barras, realizado, piorCaso e controles: inalterados)
 
     paragrafos: [
       'Esta calculadora não diz onde vender. Ela responde uma coisa só: dados dois alvos e a ' +
-        'fração vendida no segundo, como a posição se reparte entre os três degraus da escada ' +
-        '— e no que isso transforma o pior caso.',
-      'Repare que não existe controle para "quanto vender no primeiro alvo". Não é ' +
-        'esquecimento. A primeira faixa é, por definição, a fração que devolve exatamente o ' +
-        'valor investido; ela sai da conta, não do seu gosto. Quanto mais alto o primeiro alvo, ' +
-        'menor a fração que precisa ser vendida ali.',
+        'fração vendida no segundo, como a posição se reparte entre os três degraus da escada — ' +
+        'e no que isso transforma o pior caso.',
+      'Repare que não existe controle para "quanto vender no primeiro alvo". Não é esquecimento. ' +
+        'A primeira faixa é, por definição, a fração que devolve exatamente o valor investido; ' +
+        'ela sai da conta, não do seu gosto. Quanto mais alto o primeiro alvo, menor a fração ' +
+        'que precisa ser vendida ali.',
       'Na tela, os controles ficam de um lado e, do outro, três barras com o título "Como a ' +
         'posição se reparte": vendido no 1º alvo, vendido no 2º alvo e restante na mesa. As ' +
         'três sempre somam a posição inteira. Embaixo delas há duas caixas. "Realizado ao ' +
@@ -1325,63 +842,20 @@ export const modulo4 = {
       ],
     },
   },
+```
 
-  // Aba Antes de entrar, depois das seis checagens. Tamanho = risco ÷ invalidação,
-  // com uma casa decimal (0,5% é 0,5%, não 1%).
+---
+
+## calculadoraDeTamanho
+
+ANTES: `emUmaFrase` + legenda + a nota da fórmula, 322 caracteres. A conta aparece sem nenhum exemplo resolvido.
+
+```js
   calculadoraDeTamanho: {
     titulo: 'Quanto da carteira pode ir numa posição',
-    emUmaFrase: 'Quanto mais longe a invalidação, menor a posição — é aritmética, não opinião.',
-    // Botões que põem a invalidação num valor pronto. `destaque: true` = fica roxo
-    // quando está valendo (só o "pode ir a zero", o cenário realista em memecoin).
-    atalhos: [
-      { rotulo: 'Pode ir a zero (100%)', valor: 100, destaque: true },
-      { rotulo: 'Cai pela metade (50%)', valor: 50 },
-    ],
-    resultado: { rotulo: 'A sua regra implica', nota: 'do capital nesta posição' },
-    rotuloDaFigura: 'A posição dentro do capital',
-    legenda:
-      'Em memecoin, invalidação em 100% ("pode ir a zero") é um cenário realista — e é o que ' +
-      'produz a posição menor.',
-    // Quando a conta passa de 100% do capital (ex.: risco 10% e invalidação 5% dão
-    // 200%): a posição não passa do capital inteiro, e aí o que se perde na
-    // invalidação é menos que o risco escolhido (100% × 5% = 5%, não 10%).
-    acimaDoCapital: {
-      aviso:
-        'A regra permitiria mais do que 100% do capital. Isso não é sinal para alavancar — é ' +
-        'sinal de que a invalidação está apertada demais para o risco escolhido.',
-      perda: (perda) =>
-        'Com a posição no teto de 100% do capital, bater a invalidação custa ' + perda +
-        ' do capital — menos que o risco que você aceitou.',
-    },
-    // Texto antigo da calculadora (a tela não mostra desde o redesenho).
-    descricao:
-      'A conta que liga o risco que você aceita ao ponto de invalidação que você escreveu. ' +
+    emUmaFrase:
       'Quanto mais longe a invalidação, menor a posição — é aritmética, não opinião.',
-    controles: [
-      {
-        id: 'risco',
-        rotulo: 'Risco aceito por operação (% do capital)',
-        min: 0.5,
-        max: 10,
-        passo: 0.5,
-        valor: 2,
-        sufixo: '%',
-        formatar: (n) => n.toFixed(1).replace('.', ','),
-      },
-      {
-        id: 'invalidacao',
-        rotulo: 'Ponto de invalidação (queda desde a entrada)',
-        min: 5,
-        max: 100,
-        passo: 5,
-        valor: 50,
-        sufixo: '%',
-        formatar: (n) => String(n),
-      },
-    ],
-    nota:
-      'Fórmula: tamanho = risco ÷ invalidação. A conta não diz quanto risco aceitar — isso é ' +
-      'decisão sua e depende da sua vida, não do mercado.',
+    // (atalhos, resultado, rotuloDaFigura, legenda, acimaDoCapital e controles: inalterados)
 
     paragrafos: [
       'Esta calculadora liga duas decisões que são suas e devolve uma terceira. As suas: quanto ' +
@@ -1441,44 +915,21 @@ export const modulo4 = {
       ],
     },
   },
+```
 
-  // Aba Take profit, depois da calculadora dos degraus. Ganho = 1 ÷ (1 − perda) − 1.
-  // As duas barras (a perda e o ganho) usam a mesma escala, de 0 a `tetoDaTela`.
-  // O teto é escolha de escala desta tela, não um número de mercado — e a tela
-  // diz isso na legenda. A partir de 67% de perda o ganho passa do teto (200%).
+---
+
+## calculadoraDeRecuperacao
+
+ANTES: `emUmaFrase` + a nota da fórmula, 203 caracteres. O teto de 200 e o limiar de 67% só aparecem em legenda dinâmica.
+
+```js
   calculadoraDeRecuperacao: {
     titulo: 'O que uma perda exige de volta',
     emUmaFrase:
       'Perder e recuperar não são simétricos. Uma perda pequena e planejada custa pouco; um ' +
       'rombo custa um múltiplo.',
-    rotuloDoNumero: 'Ganho necessário só para voltar ao ponto de partida',
-    rotuloDaFigura: 'Na mesma escala',
-    barras: { perda: 'A perda', ganho: 'O ganho para voltar' },
-    tetoDaTela: 200,
-    // Nota embaixo das barras. Recebe os números já escritos ("50%", "100%").
-    notaAbaixoDoTeto: (perda, ganho) => 'Uma perda de ' + perda + ' exige ' + ganho + ' de ganho só para empatar.',
-    notaAcimaDoTeto: (teto) => 'Passou de ' + teto + ': a barra está no limite da escala.',
-    legenda: (teto, limiar) =>
-      'As duas barras usam a mesma escala, de 0 a ' + teto + ' — escolha de escala desta tela, ' +
-      'não um número do arquivo. A partir de ' + limiar + ' de perda, o ganho necessário passa ' +
-      'desse teto e a barra fica no limite; é isso que o custo afundado produz.',
-    // Texto antigo da calculadora (a tela não mostra desde o redesenho).
-    descricao:
-      'Perder e recuperar não são simétricos. Arraste a perda e veja o ganho que seria ' +
-      'necessário só para voltar ao ponto de partida.',
-    controles: [
-      {
-        id: 'perda',
-        rotulo: 'Perda sobre a posição',
-        min: 5,
-        max: 95,
-        passo: 5,
-        valor: 50,
-        sufixo: '%',
-        formatar: (n) => String(n),
-      },
-    ],
-    nota: 'Fórmula: ganho necessário = 1 ÷ (1 − perda) − 1. É por isso que o ponto de invalidação existe.',
+    // (rotuloDoNumero, rotuloDaFigura, barras, tetoDaTela, notas, legenda e controles: inalterados)
 
     paragrafos: [
       'Esta calculadora responde uma pergunta só: depois de uma perda de tanto por cento, de ' +
@@ -1519,114 +970,61 @@ export const modulo4 = {
       ],
     },
   },
+```
 
-  // ---------------------------------------------------------------------------
-  // Aba 5 — Mini-quiz (4 perguntas)
-  // ---------------------------------------------------------------------------
+---
 
-  // Por que cada alternativa errada do quiz não serve (o quiz mostra a da resposta escolhida).
-  porqueErradas: {
-    q1: {
-      a: 'Gráfico e volume descrevem o que já aconteceu; catálise é um evento que ainda vai trazer compradores novos.',
-      c: 'Animação da comunidade é atenção, não evento com data — e pode ser campanha paga.',
-      d: 'Sensação não é verificável: sem evento, não há como saber quando a tese falhou.',
-    },
-    q2: {
-      a: 'Realizar parcial não muda a regra do imposto: cada venda é apurada.',
-      b: 'Nada garante o preço depois; realizar parcial funciona justamente sem prever o topo.',
-      d: 'Vender não aumenta a liquidez da pool; tira dela.',
-    },
-    q3: {
-      b: 'A rede não cobra por tempo de posição.',
-      c: 'O token não é removido da DEX por ficar parado; ele só fica sem comprador.',
-      d: 'Segurar não é neutro: na Degradação, cada dia sem comprador é preço caindo.',
-    },
-    q4: {
-      a: 'Gráfico e volume não dizem nada sobre o contrato nem sobre quem controla o supply.',
-      c: 'Seguidores e tamanho de grupo são fáceis de comprar e não checam o contrato.',
-      d: 'Canal de call é atenção — muitas vezes paga —, não checagem.',
-    },
-  },
+## APONTAMENTOS
 
-  quiz: [
-    {
-      id: 'q1',
-      pergunta: 'Qual destas é uma catálise, no sentido do Módulo 4?',
-      alternativas: [
-        {
-          id: 'a',
-          texto: 'O gráfico está forte e o volume subiu hoje.',
-        },
-        {
-          id: 'b',
-          texto:
-            'Uma listagem numa corretora grande, anunciada para sexta-feira.',
-        },
-        { id: 'c', texto: 'A comunidade no Telegram está muito animada.' },
-        { id: 'd', texto: 'Você sente que agora é a hora de entrar.' },
-      ],
-      correta: 'b',
-      explicacao:
-        'Catálise responde "por que agora?": é o evento verificável que traz demanda nova. A ' +
-        'tese responde "por que este token?". Sem a catálise, sobra torcida — e sem ela também ' +
-        'não existe critério para saber que a tese falhou.',
-    },
-    {
-      id: 'q2',
-      pergunta: 'Por que realizar parcial, em vez de segurar tudo até o alvo final?',
-      alternativas: [
-        { id: 'a', texto: 'Porque reduz o imposto devido sobre a operação.' },
-        { id: 'b', texto: 'Porque garante que o preço vai continuar subindo depois.' },
-        {
-          id: 'c',
-          texto:
-            'Porque tira risco da mesa: recuperado o valor investido, o restante corre por conta do lucro e a decisão deixa de ser tomada pelo medo.',
-        },
-        { id: 'd', texto: 'Porque aumenta a liquidez do pool em que você está.' },
-      ],
-      correta: 'c',
-      explicacao:
-        'Realizar parcial não prevê topo nenhum — e é justamente por isso que funciona. ' +
-        'Vendendo uma faixa, o pior caso deixa de ser prejuízo e o resto da posição pode ' +
-        'correr sem que o medo assuma o volante.',
-    },
-    {
-      id: 'q3',
-      pergunta: 'Qual é o erro de segurar uma posição por tempo demais na fase de Degradação?',
-      alternativas: [
-        {
-          id: 'a',
-          texto:
-            'Custo afundado: a atenção já migrou e não há compradores novos, mas a cabeça trata vender como "assumir o prejuízo" e a perda pequena vira rombo.',
-        },
-        { id: 'b', texto: 'A rede cobra taxa maior de quem segura o token por muitos dias.' },
-        { id: 'c', texto: 'O token é automaticamente removido da DEX depois de um tempo parado.' },
-        { id: 'd', texto: 'Nenhum: segurar é sempre a decisão mais segura em memecoins.' },
-      ],
-      correta: 'a',
-      explicacao:
-        'Na Degradação a liquidez seca porque a atenção foi embora. O dinheiro gasto já foi ' +
-        'gasto; a única pergunta útil é "eu compraria este token, neste preço, hoje?". Se a ' +
-        'resposta é não, a posição já acabou — falta só executar.',
-    },
-    {
-      id: 'q4',
-      pergunta: 'O que checar antes de entrar, mesmo com tese e catálise bem escritas?',
-      alternativas: [
-        { id: 'a', texto: 'Só o gráfico das últimas 24 horas e o volume do dia.' },
-        {
-          id: 'b',
-          texto:
-            'Endereço oficial, extensões e autoridades do contrato, concentração real dos holders, bundles no lançamento e se a liquidez aguenta a sua saída.',
-        },
-        { id: 'c', texto: 'Quantos seguidores o projeto tem no X e o tamanho do grupo no Telegram.' },
-        { id: 'd', texto: 'Apenas se o token já apareceu em algum canal de call que você segue.' },
-      ],
-      correta: 'b',
-      explicacao:
-        'A checagem técnica é a peneira que vem antes de tudo: com endereço errado, extensão fora do padrão, authorities ' +
-        'ativas ou com supply concentrado, nenhuma tese se sustenta. Ferramentas: RugCheck, ' +
-        'Solscan/BscScan, Bubblemaps e DexScreener.',
-    },
-  ],
-};
+1. **Risco maior de todos — os `paragrafos` podem não aparecer na tela.** O próprio arquivo diz, em três lugares (`teseVsCatalise.paragrafos`, `takeProfit.paragrafos`, `erroDeSegurar.paragrafos`), que "a tela não os mostra desde o redesenho". Se a view do módulo 4 não passa esses objetos pelo card de `secao.js`, o texto novo entra no arquivo e continua invisível. Antes de colar, é preciso conferir card a card se `paragrafos`, `exemplo`, `quadro`, `paragrafosFinais` e `detalhe` estão sendo renderizados. Não mexi em `src/` para checar isso (o pedido proibia).
+2. **Campos antigos que eu absorvi, e que precisam ser apagados na mesma colagem, senão o texto sai duplicado:** `takeProfit.escada.paragrafo` (singular), `takeProfit.erroDeSegurar.paragrafoFinal`, `checagens.paragrafoFinal`. Mantive intactos `checagens.fim` e todas as legendas de visual.
+3. **`erroDeSegurar` ficou sem campo `detalhe` de propósito**: o comentário do arquivo diz que quem ocupa o "Para ir mais fundo" daquele card é `tributacao`. Se a view aceitar os dois, dá para mover o parágrafo sobre custo afundado para lá; hoje ele está em `paragrafos`.
+4. **Divergência real encontrada, não corrigida — o limiar de 67%.** O comentário e a legenda da `calculadoraDeRecuperacao` dizem "a partir de 67% de perda o ganho passa do teto (200%)", mas o controle tem `passo: 5`, ou seja, só dá para escolher 65%, 70%, 75%... 67% não é selecionável. Escrevi "arraste até 67%" porque é o número que está no arquivo, mas na tela o usuário vai parar em 65% ou 70%. Decisão do dono: ou a legenda passa a citar o primeiro valor selecionável acima do teto, ou o passo muda. Não alterei nenhum dos dois.
+5. **Jargão que estreia no visual, antes do texto explicar.** Os `destaques` (os números grandes no topo de cada aba) usam "hard rug", "LP, mint, freeze, concentração, bundles" e "5× → 0" antes de qualquer explicação, e eu não podia reescrevê-los (são visual, outro chat). Os `objetivos`, no topo do módulo, usam "custo afundado". Fica o registro para quem cuidar do visual.
+6. **Grafia inconsistente de Pump.fun.** O mapa das catálises escreve "Pump.fun" e a primeira checagem escreve "pump.fun". Mantive cada uma como está no campo correspondente, para não mudar nada por conta própria. Vale padronizar num varrida só.
+7. **Duplicação entre `simulador` e `molduraDoSimulador`.** `simulador.abertura` diz quase exatamente o que `molduraDoSimulador.emUmaFrase` dizia, `simulador.aviso` é quase idêntico a `molduraDoSimulador.aviso`, e `simulador.introducao` repete `molduraDoSimulador.passos.legenda`. O comentário do arquivo sugere que o componente entra sem o aviso dele, o que deixaria esses campos como texto morto. Não toquei em nenhum; só sinalizo.
+8. **`takeProfit.titulo` e `escada.emUmaFrase` repetem a mesma frase** ("o lucro que você não realizou não é seu"). Como o título do topo está fora da tela, hoje não aparece duas vezes — mas se ele voltar, vai aparecer.
+9. **Exemplos resolvidos nas calculadoras: usei só o que já estava escrito no arquivo.** A regra de ouro proíbe número derivado novo, e resultado de calculadora é exatamente isso. Por isso os exemplos usam os pares que o próprio arquivo já traz nos comentários (risco 10% + invalidação 5% → 200%, com perda de 5% no teto; 1º alvo em 5× → 2º em 5,5×; perda de 67% → acima de 200%) e, onde não havia par pronto, descrevo como ler o número em vez de afirmar qual ele é. Se o dono quiser exemplos com o resultado escrito por extenso (por exemplo, o que sai com 2× e 4×), é preciso ele confirmar os números antes.
+10. **Proposta de divisão de card**, repetida aqui para não se perder: `checagens` ficou longo com o quadro de vocabulário. Sugiro duas seções — "O vocabulário das seis checagens" e "As seis checagens que vêm antes da tese". Está explicado no fim daquela seção.
+11. **Nada foi apagado do `quiz` nem de `porqueErradas`.** As quatro `perguntaRapida` (q1 em `teseVsCatalise`, q2 em `escada`, q3 em `erroDeSegurar`, q4 em `checagens`) estão marcadas para remoção nas seções acima, conforme a decisão de hoje; as perguntas seguem existindo no quiz do fim do módulo.
+
+---
+
+## TERMOS TRADUZIDOS
+
+Ordem de estreia na tela (aba Tese → Take profit → Antes de entrar → Simulador), não a ordem do arquivo.
+
+| Termo | Onde passa a ser explicado |
+| --- | --- |
+| tese / catálise | `teseVsCatalise`, parágrafo 1 — as duas perguntas que cada frase responde |
+| caderno de trades | `fichaDeTese.introducao` — traduzido para "caderno de operações", com o termo em inglês entre parênteses |
+| invalidar / invalidação | `tabelaDosExemplos`, parágrafo 1; o campo da ficha é explicado em `planoDaPosicao`, parágrafo 3 |
+| DEX (corretora descentralizada) | `tiposDeCatalise`, parágrafo 1 |
+| bonding curve (curva de preço do lançamento) | `tiposDeCatalise`, parágrafo 4 |
+| graduação | `tiposDeCatalise`, parágrafo 4 |
+| buy the rumor, sell the news | `tiposDeCatalise`, parágrafo 5 — "comprar no rumor, vender no fato" |
+| LP / liquidity pool / pool de liquidez | `planoDaPosicao`, parágrafo 4 (primeira aparição, no exemplo da invalidação); retomado no `quadro` de `checagens` |
+| take profit (realizar) | `escada`, parágrafo 1 |
+| liquidez | `escada`, parágrafo 2 |
+| realização parcial | `escada`, parágrafo 3 |
+| múltiplo da entrada (2×, 5×) | `calculadoraDeDegraus`, exemplo "Uma passada pelos controles" |
+| risco aceito por operação | `calculadoraDeTamanho`, parágrafo 2 |
+| alavancar | `calculadoraDeTamanho`, exemplo (passo 3, no contexto do aviso da tela) |
+| livro de ofertas | `erroDeSegurar`, parágrafo 2 |
+| custo afundado / sunk cost | `erroDeSegurar`, parágrafo 3 |
+| preço médio | `erroDeSegurar`, parágrafo 5 |
+| ganho de capital | `tributacao`, parágrafo 1 |
+| GCAP / DARF | `tributacao`, ponto "Acima do limite" |
+| KYC / P2P | `tributacao`, ponto "Saque em reais" |
+| pool | `checagens`, quadro "Pool e LP" |
+| LP travada × destravada | `checagens`, quadro "Pool e LP" |
+| authority / mint authority / freeze authority / revogada | `checagens`, quadro "Authority (autoridade)" |
+| supply / holders / concentração / top 10 | `checagens`, quadro "Supply, holders e concentração" |
+| bundle | `checagens`, quadro "Bundle" |
+| market cap (valor de mercado) | `checagens`, quadro "Market cap e honeypot" |
+| honeypot (pote de mel) | `checagens`, quadro "Market cap e honeypot" |
+| hard rug (puxada de tapete) | `checagens`, exemplo "Por que a primeira pergunta é a primeira" |
+| bloco | `checagens`, quadro "Bundle" e exemplo do hard rug |
+| explorador de rede (Solscan, BscScan) | `checagens`, detalhe "Para ir mais fundo" |
+| RugCheck / Bubblemaps / DexScreener | `checagens`, detalhe "Para ir mais fundo" |
+| resumo de disciplina / "não se aplica" | `molduraDoSimulador`, parágrafo 4 |

@@ -104,27 +104,23 @@ function criarPerguntaRapida(idDaPergunta) {
 // (o visual, as frases, o "Para ir mais fundo") → a "Pergunta rápida", com 16px
 // entre as partes (components/secao.js). `blocos` pode trazer listas dentro de
 // listas e vazios (null): tudo é achatado e os vazios saem.
-function criarSecao(dados, blocos = []) {
-  return criarCardDaSecao(
-    { titulo: dados.titulo, emUmaFrase: dados.emUmaFrase },
-    {
-      depois: blocos.flat(2).filter(Boolean),
-      pergunta: dados.pergunta ? criarPerguntaRapida(dados.pergunta) : null,
-    },
-  );
-}
-
-// As frases curtas depois do visual, em cinza.
-function criarParagrafos(textos = []) {
-  return textos.map((texto) => html`<p style="margin:0;color:#9AA7B4">${texto}</p>`);
-}
-
-// Lista com marcadores, em cinza.
-function criarLista(itens = []) {
-  if (!itens.length) return null;
-  return html`<ul style="margin:0;padding-left:20px;color:#9AA7B4;display:flex;flex-direction:column;gap:6px;list-style:disc">
-    ${itens.map((item) => html`<li>${item}</li>`)}
-  </ul>`;
+//
+// O card monta sozinho, a partir do próprio dado e nesta ordem fixa, os
+// parágrafos, o quadro, a lista, o exemplo e os parágrafos finais. Por isso
+// `blocos` é o VISUAL da seção, que entra ANTES dos parágrafos, e `noFim` é o
+// que vem depois de tudo (o "Para ir mais fundo", a caixa de não verificado,
+// uma animação). No lugar do visual o card aceita um nó só, então os blocos vão
+// dentro de uma caixa com o mesmo espaçamento do card: na tela fica idêntico.
+function criarSecao(dados, blocos = [], noFim = []) {
+  const visual = blocos.flat(2).filter(Boolean);
+  return criarCardDaSecao(dados, {
+    visual: visual.length ? criarElemento('div', { class: 'flex flex-col gap-4' }, visual) : null,
+    // O "Para ir mais fundo" deste módulo tem desenho próprio (criarDetalhe, aqui
+    // embaixo), então o do card fica de fora e entra por `noFim`.
+    omitir: ['detalhe'],
+    depois: noFim.flat(2).filter(Boolean),
+    pergunta: dados.pergunta ? criarPerguntaRapida(dados.pergunta) : null,
+  });
 }
 
 // Um item do "Para ir mais fundo": texto, ou { rotulo, texto } com o rótulo em negrito.
@@ -375,10 +371,7 @@ function montarAbaTerminal() {
 
   return criarElemento('div', { style: COLUNA_DA_ABA }, [
     montarDestaques(modulo5.destaques.terminal),
-    criarSecao(camadas, [
-      criarPilhaDeCamadas(camadas.pilha),
-      criarTabela(camadas.tabela),
-      criarParagrafos(camadas.paragrafos),
+    criarSecao(camadas, [criarPilhaDeCamadas(camadas.pilha), criarTabela(camadas.tabela)], [
       criarDetalhe(camadas.detalhe),
     ]),
     criarSecao(anatomia, [criarAnatomia(anatomia.anatomia)]),
@@ -460,9 +453,9 @@ function montarAbaCustodia() {
 
   return criarElemento('div', { style: COLUNA_DA_ABA }, [
     montarDestaques(modulo5.destaques.custodia),
-    criarSecao(modelos, [criarModelos(modelos), criarLista(modelos.lista), criarParagrafos(modelos.paragrafos)]),
-    criarSecao(foraDoAr, [criarFluxoDoModulo(foraDoAr.diagrama, { legenda: true }), criarParagrafos(foraDoAr.paragrafos)]),
-    criarSecao(incidente, [criarCartoesDeEstado(incidente.cartoes, incidente.descricaoDosCartoes), criarParagrafos(incidente.paragrafos)]),
+    criarSecao(modelos, [criarModelos(modelos)]),
+    criarSecao(foraDoAr, [criarFluxoDoModulo(foraDoAr.diagrama, { legenda: true })]),
+    criarSecao(incidente, [criarCartoesDeEstado(incidente.cartoes, incidente.descricaoDosCartoes)]),
   ]);
 }
 
@@ -666,16 +659,14 @@ function montarAbaTaxas() {
 
   return criarElemento('div', { style: COLUNA_DA_ABA }, [
     montarDestaques(modulo5.destaques.taxas),
-    criarSecao(anunciada, [criarCaminhoDoDinheiro(anunciada.caminho), criarDetalhe(anunciada.detalhe)]),
+    criarSecao(anunciada, [criarCaminhoDoDinheiro(anunciada.caminho)], [criarDetalhe(anunciada.detalhe)]),
     // A animação do caminho do token fecha o card da matriz, junto do "Para ir
     // mais fundo" que fala do mesmo caminho.
-    criarSecao(matriz, [
-      criarBarrasEmpilhadas(matriz.barras),
-      criarTabela(matriz.tabela, { mono: true, rodape: modulo5.cotacao }),
-      criarParagrafos(matriz.paragrafos),
-      criarDetalhe(matriz.detalhe),
-      criarAnimacaoCaminhoDoToken(),
-    ]),
+    criarSecao(
+      matriz,
+      [criarBarrasEmpilhadas(matriz.barras), criarTabela(matriz.tabela, { mono: true, rodape: modulo5.cotacao })],
+      [criarDetalhe(matriz.detalhe), criarAnimacaoCaminhoDoToken()],
+    ),
     criarSecao(atrito, [criarCalculadoraDoAtrito(atrito.calculadora)]),
   ]);
 }
@@ -844,15 +835,13 @@ function montarAbaConfiguracoes() {
     montarDestaques(modulo5.destaques.configuracoes),
     // A animação do sanduíche vem logo depois do fluxograma do slippage: é o
     // mesmo ataque, contado cena a cena.
-    criarSecao(configs, [
-      criarConfiguracoes(configs),
-      criarFluxoDoModulo(configs.diagrama, { titulo: true }),
-      criarAnimacaoSanduiche(),
-      criarParagrafos(configs.paragrafos),
-      criarDetalhe(configs.detalhe),
-    ]),
+    criarSecao(
+      configs,
+      [criarConfiguracoes(configs), criarFluxoDoModulo(configs.diagrama, { titulo: true }), criarAnimacaoSanduiche()],
+      [criarDetalhe(configs.detalhe)],
+    ),
     criarSecao(impacto, [criarCalculadoraDoImpacto(impacto.calculadora)]),
-    criarSecao(tipos, [criarCartoesDeEstado(tipos.cartoes, tipos.descricaoDosCartoes, { forte: true }), criarNaoVerificado(tipos.naoVerificado)]),
+    criarSecao(tipos, [criarCartoesDeEstado(tipos.cartoes, tipos.descricaoDosCartoes, { forte: true })], [criarNaoVerificado(tipos.naoVerificado)]),
   ]);
 }
 
@@ -918,8 +907,8 @@ function montarAbaErros() {
 
   return criarElemento('div', { style: COLUNA_DA_ABA }, [
     montarDestaques(modulo5.destaques.erros),
-    criarSecao(impostor, [criarBuscaDoImpostor(impostor.impostor), criarLista(impostor.lista), criarParagrafos(impostor.paragrafos)]),
-    criarSecao(velocidade, [criarBarrasDeTempo(velocidade.tempos), criarParagrafos(velocidade.paragrafos)]),
+    criarSecao(impostor, [criarBuscaDoImpostor(impostor.impostor)]),
+    criarSecao(velocidade, [criarBarrasDeTempo(velocidade.tempos)]),
     criarSecao(diagnostico, [criarFluxoDoModulo(diagnostico.diagrama, { legenda: true })]),
   ]);
 }
@@ -987,7 +976,7 @@ function montarAbaProcesso() {
   return criarElemento('div', { style: COLUNA_DA_ABA }, [
     montarDestaques(modulo5.destaques.processo),
     criarSecao(processo, [criarProcesso(processo.processo)]),
-    criarSecao(registro, [criarRegistro(registro.registro), criarNaoVerificado(registro.naoVerificado)]),
+    criarSecao(registro, [criarRegistro(registro.registro)], [criarNaoVerificado(registro.naoVerificado)]),
   ]);
 }
 

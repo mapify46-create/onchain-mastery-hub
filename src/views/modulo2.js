@@ -23,7 +23,7 @@ import {
   mostrarToast,
   rotuloRisco,
 } from '../ui.js';
-import { montarQuiz, montarPerguntaRapida, juntarPorques } from '../components/quiz.js';
+import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
 import { videoDaSecao } from '../components/video.js';
 import { criarMapaDoModulo, criarCiclo, criarGradesLadoALado } from '../components/visuais.js';
@@ -56,11 +56,9 @@ const RISCO = {
 // As 4 perguntas do quiz, já com o "por que a sua não serve" de cada errada.
 const PERGUNTAS = juntarPorques(modulo2.quiz, modulo2.porqueErradas);
 
-// A "Pergunta rápida" do fim de um card: a pergunta N do quiz, sem gravar nada.
-function perguntaRapida(idDaPergunta) {
-  const pergunta = PERGUNTAS.find((item) => item.id === idDaPergunta);
-  return montarPerguntaRapida({ id: 'm2-rapida-' + idDaPergunta, pergunta, moduloNome: MODULO_NOME });
-}
+// A "Pergunta rápida" saiu de todas as seções (decisão do dono, 20/09): as
+// perguntas ficam só no mini-quiz do fim do módulo. `PERGUNTAS` continua aqui
+// porque é o que alimenta esse quiz.
 
 // "Logo depois de um pump…." → "logo depois de um pump…" (vai depois de "Aparece").
 function comoTrecho(texto) {
@@ -193,24 +191,23 @@ function montarVisaoGeral() {
   const secao = (id) => modulo2.secoes.find((item) => item.id === id);
   const antidoto = secao('antidoto');
 
-  // O desenho troca os parágrafos de cada seção pelo visual + legenda (os
-  // parágrafos continuam no arquivo de dados).
+  // O visual de cada seção vem antes do texto; os parágrafos entram logo
+  // depois dele (20/09: eram omitidos, e o card virava legenda da figura).
   return criarElemento('div', { class: 'flex flex-col gap-6' }, [
     montarDestaques(modulo2.destaques.visaoGeral),
     criarCardDaSecao(secao('atencao'), {
       // A videoaula da seção, se houver (o dado diz a seção: `videos[...].secao`).
       video: videoDaSecao(modulo2.videos, 'atencao'),
       visual: criarFiguraDaAtencao(),
-      omitir: ['paragrafos'],
-      pergunta: perguntaRapida('q1'),
     }),
     criarCardDaSecao(comDetalheNumParagrafo(secao('dopamina')), {
       visual: criarLacoDaDopamina(),
-      omitir: ['paragrafos', 'exemplo'],
     }),
     criarCardDaSecao(antidoto, {
       visual: criarCalmoOuEmpolgado(antidoto),
-      omitir: ['paragrafos', 'lista'],
+      // A lista de "Na prática" continua omitida: ela é o que o visual desenha
+      // na coluna "Você calmo, antes", e sairia duas vezes no mesmo card.
+      omitir: ['lista'],
     }),
   ]);
 }
@@ -347,12 +344,11 @@ function montarVieses() {
 
   return criarElemento('div', { class: 'flex flex-col gap-6' }, [
     montarDestaques(modulo2.destaques.vieses),
-    criarCardDaSecao(
-      { titulo: tabela.titulo, emUmaFrase: tabela.emUmaFrase },
-      { visual: criarTabelaDosVieses(), pergunta: perguntaRapida('q2') },
-    ),
-    criarCardDaSecao({ titulo: fomo.titulo, emUmaFrase: fomo.emUmaFrase }, { visual: criarFluxoDoFomo() }),
-    criarCardDaSecao({ titulo: post.titulo, emUmaFrase: post.descricao }, { visual: criarPostDeHype() }),
+    criarCardDaSecao(tabela, { visual: criarTabelaDosVieses() }),
+    criarCardDaSecao(fomo, { visual: criarFluxoDoFomo() }),
+    // O post de hype guarda a frase de abertura em `descricao`; o resto da
+    // seção (parágrafos, exemplo, fecho) vem do dado como nas outras.
+    criarCardDaSecao({ ...post, emUmaFrase: post.descricao }, { visual: criarPostDeHype() }),
   ]);
 }
 
@@ -465,10 +461,7 @@ function montarTiposDeToken() {
 
   return criarElemento('div', { class: 'flex flex-col gap-6' }, [
     montarDestaques(modulo2.destaques.tipos),
-    criarCardDaSecao(
-      { titulo: textos.titulo, emUmaFrase: textos.emUmaFrase },
-      { visual: mapa, depois: [legenda, resultado, grade] },
-    ),
+    criarCardDaSecao(textos, { visual: mapa, depois: [legenda, resultado, grade] }),
   ]);
 }
 
@@ -504,19 +497,18 @@ function montarCasos() {
   const cronologia = modulo2.linhaDoTempoCasos;
 
   // Um card só, como no desenho: a linha do tempo (o espaço entre os marcos
-  // cresce com o tempo: 0,22px por dia = 6,7px por mês), os 3 casos em grade,
-  // a lição e a Pergunta rápida.
+  // cresce com o tempo: 0,22px por dia = 6,7px por mês), os 3 casos em grade
+  // e a lição. A frase de abertura mora em `descricao`, como no post de hype.
   return criarElemento('div', { class: 'flex flex-col gap-6' }, [
     montarDestaques(modulo2.destaques.casos),
     criarCardDaSecao(
-      { titulo: cronologia.titulo, emUmaFrase: cronologia.descricao },
+      { ...cronologia, emUmaFrase: cronologia.descricao },
       {
         visual: montarLinhaDoTempo({ marcos: cronologia.marcos, nota: cronologia.nota, caixa: true, pxPorMes: 6.7 }),
         depois: [
           html`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">${modulo2.casos.map(criarCardDeCaso)}</div>`,
           html`<p style="margin:0;color:#9AA7B4">${modulo2.licaoDosCasos}</p>`,
         ],
-        pergunta: perguntaRapida('q4'),
       },
     ),
   ]);
@@ -639,17 +631,13 @@ function montarFases() {
 
   return criarElemento('div', { class: 'flex flex-col gap-6' }, [
     montarDestaques(modulo2.destaques.fases),
-    criarCardDaSecao(
-      { titulo: textos.titulo, emUmaFrase: textos.emUmaFrase },
-      {
-        visual: criarSeletorDeFases(),
-        depois: [
-          html`<p style="margin:0;color:#9AA7B4">${modulo2.paragrafoDaMortalidade}</p>`,
-          criarGradesLadoALado({ frase: grades.frase, grades: grades.itens, legenda: grades.legenda }),
-        ],
-        pergunta: perguntaRapida('q3'),
-      },
-    ),
+    criarCardDaSecao(textos, {
+      visual: criarSeletorDeFases(),
+      depois: [
+        html`<p style="margin:0;color:#9AA7B4">${modulo2.paragrafoDaMortalidade}</p>`,
+        criarGradesLadoALado({ frase: grades.frase, grades: grades.itens, legenda: grades.legenda }),
+      ],
+    }),
   ]);
 }
 
