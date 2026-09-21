@@ -3278,4 +3278,30 @@ export const modulo5 = {
       },
     ],
   },
+
+  // ---------------------------------------------------------------------------
+  // Vídeos — cada um vira o botão "Assistir a videoaula" dentro do card da seção
+  // que ele reforça (o campo `secao` diz qual, casando com o `id` da seção em
+  // `secoes`). O player só aparece no clique.
+  // PENDENTE: a `transcricao`; enquanto ela não existe, o aviso padrão de
+  // src/data/videoaulas.js entra embaixo do player.
+  // ---------------------------------------------------------------------------
+  videos: {
+    'erros-de-execucao-e-bots': {
+      titulo: 'Erros de execução e bots',
+      secao: 'erros-de-execucao',
+      src: 'assets/videos/erros-de-execucao-e-bots.mp4',
+      duracao: '8:17',
+      descricao: 'Por que você não vence bots na velocidade, e os erros que custam dinheiro sem envolver o mercado.',
+      transcricao: [],
+    },
+    'do-token-ao-encerramento': {
+      titulo: 'Do token ao encerramento',
+      secao: 'do-token-ao-encerramento',
+      src: 'assets/videos/do-token-ao-encerramento.mp4',
+      duracao: '5:40',
+      descricao: 'O fluxo completo de uma operação, do "vi um token" ao registro para o imposto.',
+      transcricao: [],
+    },
+  },
 };

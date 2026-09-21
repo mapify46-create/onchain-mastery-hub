@@ -18,6 +18,7 @@ import { modulo5 } from '../data/modulo5.js';
 import { criarElemento, criarTitulo, criarCard, criarBotao, criarAbas, mostrarToast, html, svg } from '../ui.js';
 import { montarQuiz, montarPerguntaRapida, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
+import { videoDaSecao } from '../components/video.js';
 import { criarMapaDoModulo } from '../components/visuais.js';
 import { criarFluxograma } from '../components/fluxograma.js';
 import { criarAnimacaoSanduiche, criarAnimacaoCaminhoDoToken } from '../components/animacoes.js';
@@ -114,6 +115,8 @@ function criarPerguntaRapida(idDaPergunta) {
 function criarSecao(dados, blocos = [], noFim = []) {
   const visual = blocos.flat(2).filter(Boolean);
   return criarCardDaSecao(dados, {
+    // A videoaula da seção, se houver (o dado diz a seção: `videos[...].secao`).
+    video: dados.id ? videoDaSecao(modulo5.videos, dados.id) : null,
     visual: visual.length ? criarElemento('div', { class: 'flex flex-col gap-4' }, visual) : null,
     // O "Para ir mais fundo" deste módulo tem desenho próprio (criarDetalhe, aqui
     // embaixo), então o do card fica de fora e entra por `noFim`.

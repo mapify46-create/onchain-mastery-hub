@@ -2158,4 +2158,30 @@ export const modulo6 = {
     { titulo: 'Solidus Labs — Solana Rug Pulls & Pump-and-Dumps', url: 'https://www.soliduslabs.com/reports/solana-rug-pulls-pump-dumps-crypto-compliance', consultadoEm: '12/09/2026' },
     { titulo: 'Checagem própria na blockchain (RPC público da Solana): Token-2022, extensões e autoridades em tokens do pump.fun', url: 'https://api.mainnet-beta.solana.com (getMultipleAccounts)', consultadoEm: '12/09/2026' },
   ],
+
+  // ---------------------------------------------------------------------------
+  // Vídeos — cada um vira o botão "Assistir a videoaula" dentro do card da seção
+  // que ele reforça (o campo `secao` diz qual, casando com o `id` da seção). O
+  // player só aparece no clique.
+  // PENDENTE: a `transcricao`; enquanto ela não existe, o aviso padrão de
+  // src/data/videoaulas.js entra embaixo do player.
+  // ---------------------------------------------------------------------------
+  videos: {
+    'numeros-da-tela': {
+      titulo: 'Os números na tela',
+      secao: 'tres-numeros',
+      src: 'assets/videos/numeros-da-tela.mp4',
+      duracao: '7:09',
+      descricao: 'Market cap, liquidez e o PnL que não chega na carteira — e a armadilha dos zeros compactados.',
+      transcricao: [],
+    },
+    'volume-falso-e-bundles': {
+      titulo: 'Volume falso e bundles',
+      secao: 'como-fabrica',
+      src: 'assets/videos/volume-falso-e-bundles.mp4',
+      duracao: '9:58',
+      descricao: 'Como o volume é fabricado entre carteiras da mesma pessoa, e todo sinal público é otimizado contra você.',
+      transcricao: [],
+    },
+  },
 };

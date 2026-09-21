@@ -1629,4 +1629,37 @@ export const modulo4 = {
         'Solscan/BscScan, Bubblemaps e DexScreener.',
     },
   ],
+
+  // ---------------------------------------------------------------------------
+  // Vídeos — cada um vira o botão "Assistir a videoaula" dentro do card da seção
+  // que ele reforça (o campo `secao` diz qual). O player só aparece no clique.
+  // PENDENTE: a `transcricao`; enquanto ela não existe, o aviso padrão de
+  // src/data/videoaulas.js entra embaixo do player.
+  // ---------------------------------------------------------------------------
+  videos: {
+    'tese-vs-catalise': {
+      titulo: 'Tese × catálise',
+      secao: 'tese-vs-catalise',
+      src: 'assets/videos/tese-vs-catalise.mp4',
+      duracao: '7:22',
+      descricao: 'As duas frases que faltam antes de comprar, e o exemplo com a graduação de 85 SOL.',
+      transcricao: [],
+    },
+    'take-profit-em-degraus': {
+      titulo: 'Take profit em degraus',
+      secao: 'take-profit-em-degraus',
+      src: 'assets/videos/take-profit-em-degraus.mp4',
+      duracao: '8:12',
+      descricao: 'A escada de realização e o erro de segurar demais na fase de degradação.',
+      transcricao: [],
+    },
+    'simulador': {
+      titulo: 'O simulador de 12 cenários',
+      secao: 'simulador',
+      src: 'assets/videos/simulador-de-decisao.mp4',
+      duracao: '7:44',
+      descricao: 'Como usar o simulador e ler o resumo de disciplina no fim.',
+      transcricao: [],
+    },
+  },
 };

@@ -25,6 +25,7 @@
 import { modulo6 } from '../data/modulo6.js';
 import { criarElemento, criarTitulo, criarCard, criarBotao, criarAbas, mostrarToast, html } from '../ui.js';
 import { criarCardDaSecao } from '../components/secao.js';
+import { videoDaSecao } from '../components/video.js';
 import { montarQuiz, montarPerguntaRapida, juntarPorques } from '../components/quiz.js';
 import { montarSegmentos, montarPerguntaPrevia, montarTermos } from '../components/didatica.js';
 import { montarDestaques } from '../components/destaques.js';
@@ -86,7 +87,12 @@ function criarPerguntaAntes(idDaAba) {
 function criarSecao(dados, blocos) {
   return criarCardDaSecao(
     { titulo: dados.titulo, emUmaFrase: dados.emUmaFrase },
-    { depois: blocos, pergunta: dados.perguntaRapida ? criarPerguntaRapida(dados.perguntaRapida) : null },
+    {
+      // A videoaula da seção, se houver (o dado diz a seção: `videos[...].secao`).
+      video: dados.id ? videoDaSecao(modulo6.videos, dados.id) : null,
+      depois: blocos,
+      pergunta: dados.perguntaRapida ? criarPerguntaRapida(dados.perguntaRapida) : null,
+    },
   );
 }
 

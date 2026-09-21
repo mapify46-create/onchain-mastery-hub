@@ -517,6 +517,7 @@ function montarAbaNarrativas() {
   const cardDoCiclo = criarSecao({
     titulo: ciclo.titulo,
     emUmaFrase: ciclo.emUmaFrase,
+    id: 'ciclo',
     blocos: [
       ...criarCicloDaNarrativa(ciclo),
       ...ciclo.paragrafos.map(criarParagrafo),
@@ -1032,6 +1033,7 @@ function montarAbaTecnico() {
     criarSecao({
       titulo: onde.titulo,
       emUmaFrase: onde.emUmaFrase,
+      id: 'pilar-tecnico-na-pratica',
       blocos: [
         criarTabela(onde.tabela),
         ...onde.paragrafos.map(criarParagrafo),
@@ -1208,6 +1210,7 @@ function montarAbaCenario() {
     criarSecao({
       titulo: cenario.titulo,
       emUmaFrase: cenario.emUmaFrase,
+      id: 'cenario-2025-2026',
       blocos: [
         // Pontos roxos e só o texto de cada evento. As datas ficam como no dado
         // ("Início de agosto de 2025", "Fim de 2025"): sem dia, sem intervalo.

@@ -17,6 +17,7 @@ import { modulo4 } from '../data/modulo4.js';
 import { cenarios } from '../data/cenarios.js';
 import { criarElemento, criarTitulo, criarCard, criarBotao, criarAbas, mostrarToast, html } from '../ui.js';
 import { criarCardDaSecao } from '../components/secao.js';
+import { videoDaSecao } from '../components/video.js';
 import { montarSimulador } from '../components/simulator.js';
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { montarDestaques } from '../components/destaques.js';
@@ -346,7 +347,11 @@ function montarAbaTese() {
     // inteira vai para criarCardDaSecao (e não só título e ideia central): é
     // dela que saem paragrafos, exemplo, paragrafosFinais e o "Para ir mais
     // fundo", que antes ficavam no arquivo de dados sem chegar à tela.
-    criarCardDaSecao(tese, { visual: criarDuasFrases(), depois: [criarRegraDeOuro()] }),
+    criarCardDaSecao(tese, {
+      video: videoDaSecao(modulo4.videos, 'tese-vs-catalise'),
+      visual: criarDuasFrases(),
+      depois: [criarRegraDeOuro()],
+    }),
 
     // O plano em níveis e, no mesmo card, a ficha de 5 campos. A ficha entra
     // junto com o visual (e não em `depois`) para continuar logo abaixo dos
@@ -616,7 +621,10 @@ function montarAbaTakeProfit() {
   return criarElemento('div', { class: 'space-y-6' }, [
     montarDestaques(modulo4.destaques.takeProfit),
 
-    criarCardDaSecao(escada, { visual: criarEscada() }),
+    criarCardDaSecao(escada, {
+      video: videoDaSecao(modulo4.videos, 'take-profit-em-degraus'),
+      visual: criarEscada(),
+    }),
 
     criarCardDaSecao(degraus, { visual: criarCalculadoraDeDegraus() }),
 
@@ -847,6 +855,7 @@ function montarAbaSimulador() {
     { class: 'flex flex-col gap-4 rounded-card border border-borda bg-superficie p-5', 'aria-label': moldura.titulo },
     [
       criarElemento('p', { class: 'border-l-2 border-acento pl-3 font-semibold text-texto' }, [moldura.emUmaFrase]),
+      videoDaSecao(modulo4.videos, 'simulador'),
       aviso,
       criarPassosDoSimulador(),
       criarPartesDoFeedback(),
