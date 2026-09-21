@@ -21,7 +21,7 @@ import { criarMapaDoModulo, criarSequencia } from '../components/visuais.js';
 import { criarAnimacaoDrainer, criarAnimacaoEnvenenamento } from '../components/animacoes.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
-import { montarVideo } from '../components/video.js';
+import { videoDaSecao } from '../components/video.js';
 import { obterEstado, atualizar } from '../store.js';
 
 // As perguntas do quiz já com o "por que a sua não serve" de cada alternativa.
@@ -162,6 +162,8 @@ function montarSecao(id, { visual = [], antesDoDetalhe = [] } = {}) {
   visuais.append(...[].concat(visual).filter(Boolean));
 
   return criarCardDaSecao(secao, {
+    // A videoaula da seção, se houver (o dado diz a seção: `videos[...].secao`).
+    video: videoDaSecao(modulo1.videos, id),
     visual: visuais,
     omitir: ['detalhe'],
     depois: [...antesDoDetalhe, criarDetalhe(secao.detalhe)].filter(Boolean),
@@ -345,30 +347,16 @@ function criarContraste(c) {
   </div>`;
 }
 
-// O vídeo (decisão do dono: fica, junto da seção dele). Todo visual do hub tem
-// versão em texto; a transcrição deste ainda não existe, então o aviso do dado
-// entra embaixo do player, junto da linha "o vídeo precisa de internet".
-function montarVideoDaSecao(id, video) {
-  const bloco = montarVideo({ id, ...video });
-  if (video.avisoDeTranscricao) {
-    bloco.append(criarElemento('p', { class: 'mt-2 text-xs text-texto-suave' }, [video.avisoDeTranscricao]));
-  }
-  return bloco;
-}
-
 function montarAbaFundamentos() {
   const blockchain = secaoPorId('o-que-e-blockchain');
   const gas = secaoPorId('gas-taxa-de-rede');
   const cexDex = secaoPorId('cex-x-dex');
-  const video = modulo1.videos?.['mecanica-do-gas'];
 
   return criarElemento('div', { class: 'flex flex-col gap-6' }, [
     montarDestaques(modulo1.destaques.fundamentos),
     montarSecao('o-que-e-blockchain', { visual: criarConfirmacoes(blockchain.confirmacoes) }),
     montarSecao('explorador-de-blocos', { visual: criarAnatomiaDaTransacao(modulo1.anatomias.transacao) }),
     montarSecao('gas-taxa-de-rede', { visual: criarContraste(gas.contraste) }),
-    // O vídeo não está no desenho; fica logo depois da seção que ele reforça.
-    video ? montarVideoDaSecao('m1-video-mecanica-do-gas', video) : null,
     montarSecao('cex-x-dex', { visual: montarComparacaoLadoALado(cexDex.comparacao) }),
   ]);
 }

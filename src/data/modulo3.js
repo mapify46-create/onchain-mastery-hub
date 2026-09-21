@@ -1979,4 +1979,21 @@ export const modulo3 = {
         'topo ou depois.',
     },
   ],
+
+  // ---------------------------------------------------------------------------
+  // Vídeos — cada um vira o botão "Assistir a videoaula" dentro do card da seção
+  // que ele reforça (o campo `secao` diz qual). O player só aparece no clique.
+  // PENDENTE: a `transcricao`; enquanto ela não existe, o aviso padrão de
+  // src/data/videoaulas.js entra embaixo do player.
+  // ---------------------------------------------------------------------------
+  videos: {
+    'dois-pilares': {
+      titulo: 'Por que duas checagens',
+      secao: 'dois-pilares',
+      src: 'assets/videos/dois-pilares.mp4',
+      duracao: '7:32',
+      descricao: 'Por que o pilar social e o técnico respondem a perguntas diferentes.',
+      transcricao: [],
+    },
+  },
 };

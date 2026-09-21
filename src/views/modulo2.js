@@ -25,6 +25,7 @@ import {
 } from '../ui.js';
 import { montarQuiz, montarPerguntaRapida, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
+import { videoDaSecao } from '../components/video.js';
 import { criarMapaDoModulo, criarCiclo, criarGradesLadoALado } from '../components/visuais.js';
 import { montarDestaques } from '../components/destaques.js';
 import { montarLinhaDoTempo } from '../components/linhaDoTempo.js';
@@ -197,6 +198,8 @@ function montarVisaoGeral() {
   return criarElemento('div', { class: 'flex flex-col gap-6' }, [
     montarDestaques(modulo2.destaques.visaoGeral),
     criarCardDaSecao(secao('atencao'), {
+      // A videoaula da seção, se houver (o dado diz a seção: `videos[...].secao`).
+      video: videoDaSecao(modulo2.videos, 'atencao'),
       visual: criarFiguraDaAtencao(),
       omitir: ['paragrafos'],
       pergunta: perguntaRapida('q1'),

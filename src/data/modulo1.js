@@ -2062,34 +2062,110 @@ export const modulo1 = {
   // Vídeos
   //
   // Ficam em assets/videos/, servidos pelo próprio GitHub Pages — sem YouTube,
-  // sem conta de terceiro. Cada um aparece logo depois da seção que ele reforça
-  // (o da mecânica do gas vem logo depois da seção "Gas", em views/modulo1.js).
+  // sem conta de terceiro. Cada um vira um botão "Assistir a videoaula" dentro do
+  // card da seção que ele reforça, logo depois da ideia central; o campo `secao`
+  // diz qual. O player só aparece no clique (components/video.js).
   //
   // O vídeo NUNCA substitui a seção de texto: ele entra ao lado dela. Quem lê
   // rápido pula, quem prefere assistir assiste, e quem está sem internet ainda
   // tem o módulo inteiro — porque o vídeo fica fora do precache do service
   // worker (300 MB de precache tornaria a primeira visita insuportável).
   // ---------------------------------------------------------------------------
+  // PENDENTE em todos: a `transcricao`. Todo outro visual do hub tem versão em
+  // texto (diagrama tem versaoEmTexto, anatomia tem legenda). Enquanto ela não
+  // existe, o player mostra o aviso padrão de `src/data/videoaulas.js`. Preencher
+  // com o resumo navegável de cada aula (o segundo entregável do prompt).
   videos: {
+    'o-que-e-blockchain': {
+      titulo: 'A mecânica da blockchain',
+      // A seção onde o botão "Assistir a videoaula" aparece (id em `secoes`).
+      secao: 'o-que-e-blockchain',
+      src: 'assets/videos/o-que-e-blockchain.mp4',
+      duracao: '7:08',
+      descricao: 'O que é uma blockchain e por que ela é chamada de "imutável".',
+      transcricao: [],
+    },
+    'ler-uma-transacao': {
+      titulo: 'Ler uma transação',
+      secao: 'explorador-de-blocos',
+      src: 'assets/videos/ler-uma-transacao.mp4',
+      duracao: '7:50',
+      descricao: 'Como ler uma transação no explorador de blocos, campo por campo.',
+      transcricao: [],
+    },
+    'chaves-e-enderecos': {
+      titulo: 'Chaves e endereços',
+      secao: 'chave-publica-privada-endereco',
+      src: 'assets/videos/chaves-e-enderecos.mp4',
+      duracao: '5:46',
+      descricao: 'Chave pública, chave privada e endereço: o que cada um faz.',
+      transcricao: [],
+    },
     'mecanica-do-gas': {
       titulo: 'A mecânica do gas',
+      secao: 'gas-taxa-de-rede',
       src: 'assets/videos/mecanica-do-gas.mp4',
-      duracao: '8:01',
+      duracao: '6:40',
       descricao:
         'Por que toda transação cobra taxa, por que ela varia de minuto a minuto, e por que ' +
         'uma transação que falha cobra do mesmo jeito.',
-      // PENDENTE: transcrição. Todo outro visual do hub tem versão em texto
-      // (diagrama tem versaoEmTexto, gráfico tem reserva, anatomia tem legenda).
-      // Sem ela, este vídeo é o único elemento do hub sem equivalente em texto —
-      // o que quebra o padrão de acessibilidade e deixa quem está offline sem
-      // nada. Preencher assim que houver a transcrição do áudio.
       transcricao: [],
-      // Enquanto a transcrição não existe, a tela diz isso embaixo do vídeo, em
-      // vez de deixar o único bloco sem versão em texto sem nenhum aviso.
-      // Quando `transcricao` for preenchida, esta linha sai.
-      avisoDeTranscricao:
-        'Transcrição em texto: ainda não disponível. O assunto deste vídeo está escrito na ' +
-        'seção "Gas: toda ação paga uma taxa, mesmo quando dá errado", logo acima.',
+    },
+    'cex-x-dex': {
+      titulo: 'CEX × DEX: o que muda',
+      secao: 'cex-x-dex',
+      src: 'assets/videos/cex-x-dex.mp4',
+      duracao: '7:07',
+      descricao: 'Corretora e troca on-chain: o que muda na prática para quem opera.',
+      transcricao: [],
+    },
+    'onde-ficam-as-chaves': {
+      titulo: 'CEX, hot e cold wallet',
+      secao: 'onde-ficam-chaves',
+      src: 'assets/videos/onde-ficam-as-chaves.mp4',
+      duracao: '8:10',
+      descricao: 'Onde ficam suas chaves em cada tipo de carteira, e o que isso custa.',
+      transcricao: [],
+    },
+    'wallet-drainers': {
+      titulo: 'O golpe do drainer',
+      secao: 'wallet-drainers-conceito',
+      src: 'assets/videos/wallet-drainers.mp4',
+      duracao: '7:57',
+      descricao: 'O golpe que não pede a sua frase-semente — e mesmo assim esvazia a carteira.',
+      transcricao: [],
+    },
+    'vetores-e-address-poisoning': {
+      titulo: 'Vetores e address poisoning',
+      secao: 'vetores-tecnicos',
+      src: 'assets/videos/vetores-e-address-poisoning.mp4',
+      duracao: '8:05',
+      descricao: 'Os vetores técnicos do golpe e o endereço sósia no seu histórico.',
+      transcricao: [],
+    },
+    'plano-de-emergencia': {
+      titulo: 'Plano de emergência',
+      secao: 'plano-de-emergencia',
+      src: 'assets/videos/plano-de-emergencia.mp4',
+      duracao: '8:51',
+      descricao: 'Os primeiros 10 minutos depois de descobrir que a carteira foi drenada.',
+      transcricao: [],
+    },
+    'sacar-para-reais': {
+      titulo: 'Sacar cripto no Brasil',
+      secao: 'sacar-para-reais',
+      src: 'assets/videos/sacar-para-reais.mp4',
+      duracao: '9:11',
+      descricao: 'Pix, KYC, o marco regulatório e o registro para o imposto.',
+      transcricao: [],
+    },
+    'golpes-comuns-no-brasil': {
+      titulo: 'Golpes comuns no Brasil',
+      secao: 'golpes-comuns-no-brasil',
+      src: 'assets/videos/golpes-comuns-no-brasil.mp4',
+      duracao: '5:12',
+      descricao: 'Os golpes que aparecem em português, e o que todos têm em comum.',
+      transcricao: [],
     },
   },
 

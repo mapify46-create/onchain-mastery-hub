@@ -1067,4 +1067,21 @@ export const modulo2 = {
         'de repente.',
     },
   ],
+
+  // ---------------------------------------------------------------------------
+  // Vídeos — cada um vira o botão "Assistir a videoaula" dentro do card da seção
+  // que ele reforça (o campo `secao` diz qual). O player só aparece no clique.
+  // PENDENTE: a `transcricao`; enquanto ela não existe, o aviso padrão de
+  // src/data/videoaulas.js entra embaixo do player.
+  // ---------------------------------------------------------------------------
+  videos: {
+    'economia-da-atencao': {
+      titulo: 'Economia da atenção',
+      secao: 'atencao',
+      src: 'assets/videos/economia-da-atencao.mp4',
+      duracao: '7:11',
+      descricao: 'Por que o preço de uma memecoin é feito de olhos, e não de lucro.',
+      transcricao: [],
+    },
+  },
 };

@@ -12,7 +12,7 @@
 // IMPORTANTE ao editar arquivos do app: aumente o número em CACHE_VERSAO. Sem isso,
 // quem já instalou o app continua vendo a versão antiga guardada em cache.
 
-const CACHE_VERSAO = 'omh-cache-v21';
+const CACHE_VERSAO = 'omh-cache-v22';
 
 const ARQUIVOS_DO_APP = [
   './',
@@ -62,6 +62,7 @@ const ARQUIVOS_DO_APP = [
   'src/data/modulo6.js',
   'src/data/modulo7.js',
   'src/data/referencias.js',
+  'src/data/videoaulas.js',
   'src/router.js',
   'src/store.js',
   'src/ui.js',

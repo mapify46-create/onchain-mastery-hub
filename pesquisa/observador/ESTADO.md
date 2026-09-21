@@ -3,7 +3,60 @@
 > Atualizado em 20/09/2026. Uma página. Serve para retomar o trabalho numa sessão nova sem
 > precisar do histórico da conversa.
 
-## Agora (20/09/2026): o redesenho foi reimplantado por inteiro — local, ainda não publicado
+## Agora (20/09/2026): 13 videoaulas ligadas pelo botão "Assistir a videoaula"
+
+O dono mandou 18 vídeos gerados no Gemini Notebook (pasta `video aulas gemini notebook mmc`,
+fora do repositório). **13 já estão no app**, cada um como botão na seção que ele reforça:
+
+- **M1 (11):** blockchain, ler uma transação, chaves e endereços, gas (trocou o antigo de
+  8:01 e 48,5 MB pelo novo de 6:40 e 18,0 MB), CEX × DEX, onde ficam as chaves, drainer,
+  vetores e address poisoning, plano de emergência, sacar para reais, golpes no Brasil.
+- **M2 (1):** economia da atenção. **M3 (1):** por que duas checagens.
+- **Espaço:** 277 MB em `assets/videos/`, maior arquivo 33,0 MB (teto do GitHub: 100 MB).
+  O bitrate destes é ~2,65 MB/min, contra 6 MB/min do vídeo antigo.
+- **Faltam 5 dos 18, por falta de lugar certo:** "Contratos e Segurança" (aula 5) não tem
+  seção correspondente no M1 e nem foi copiado; "A fiação do cérebro" (17), "Guia tipos de
+  memecoins" (18) e os dois vídeos de ciclo (prováveis 19 e 20) caem nas abas Vieses, Tipos
+  e Casos do M2, que não são seções comuns e sim cards próprios — o encaixe é diferente em
+  cada aba. Os dois vídeos de ciclo ainda precisam ser identificados no índice.
+- **Transcrição: pendente nos 13.** Cada player mostra o aviso padrão de
+  `src/data/videoaulas.js`. Quando os resumos navegáveis chegarem, é só preencher
+  `transcricao` no dado — nenhuma mudança de código. Os slides de cada vídeo foram
+  extraídos com ffmpeg (10 a 24 por vídeo) e podem virar a base do resumo; o áudio não foi
+  transcrito (não há reconhecimento de fala no ambiente).
+- **Número a conferir:** o vídeo do gas mostra um gráfico "Base (queimada) 70% / Gorjeta
+  (validador) 30%". Esse número não foi encontrado em `src/data/modulo1.js` — candidato a
+  dado inventado pelo Gemini, precisa de fonte ou de aviso na tela.
+
+## 20/09/2026: o botão "Assistir a videoaula" — a forma
+
+O dono tem 20 das 46 videoaulas prontas e vai mandá-las aos poucos. A forma foi decidida e
+já está implantada no único vídeo que existe (o do gas, Módulo 1 › Fundamentos): a seção
+mostra um **botão "Assistir a videoaula (8:01) ▾"** logo depois da ideia central, e o
+player só aparece no clique. Antes disso não existe nenhum `<video>` na página. Quem quer
+só ler não vê player nenhum.
+
+- **Onde está:** `src/components/video.js` (`montarVideoaula` e `videoDaSecao`),
+  `src/data/videoaulas.js` (novo — os textos do botão e a nota), `criarCardDaSecao` com a
+  opção `video` (entre a ideia central e o visual) e `src/views/modulo1.js`. Saiu o card
+  solto que ficava embaixo da seção (`montarVideoDaSecao` e `montarVideo`).
+- **Como ligar uma aula nova:** pôr o item em `videos` do `src/data/moduloN.js` com o campo
+  `secao` (o id da seção). A view acha sozinha, por `videoDaSecao`.
+- **Desenho:** o handoff não previu vídeo. O botão foi feito no traço dele — 44px, trio
+  ciano (borda 50% / fundo 10% / texto `#E6EDF3`), foco de 2px `#22D3EE` com offset 2, sem
+  emoji e sem ícone: a única marca é o `▾`, girado 180° por CSS quando está aberto.
+- **Regra que não muda:** vídeo novo só entra com a transcrição (o resumo navegável do
+  segundo entregável do prompt do Gemini). O do gas continua sem ela, com o aviso no dado —
+  pendência aberta, o dono vai mandar o resumo junto com um lote.
+- **Espaço:** sobram ~950 MB no Pages e o bitrate atual é ~6 MB/min — cabem ~158 min nos 20
+  vídeos, com teto de 100 MB (~16 min) por arquivo. Conferir o tamanho de cada `.mp4` antes
+  de commitar. O `.mp4` continua fora de `ARQUIVOS_DO_APP`.
+- **Verificado** em Chrome headless (SW ignorado, cache desligado), a 1280 e a 390px:
+  botão de 44px, foco ciano, zero `<video>` antes do clique, nenhum pedido ao `.mp4` antes
+  do play, fechar pausa o vídeo; fumaça nas 11 rotas sem erro de console e sem rolagem
+  lateral. `CACHE_VERSAO` em `omh-cache-v22`. **Não publicado** (sem commit até o dono mandar).
+
+## 20/09/2026: o redesenho foi reimplantado por inteiro — local, ainda não publicado
 
 Em 18/09 o dono achou a implantação do redesenho "completamente diferente" do desenho. Uma
 auditoria (12 relatórios, `pesquisa/design/auditoria/README.md`) confirmou o motivo: o

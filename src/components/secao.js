@@ -83,6 +83,8 @@ function criarDetalhe(detalhe) {
  * @param {object} secao  { titulo, emUmaFrase?, paragrafos?, quadro?, exemplo?, lista?,
  *                          listaTitulo?, ordenada?, subListas?, paragrafosFinais?, detalhe? }
  * @param {object} [opcoes]
+ * @param {Node}   [opcoes.video]     o botão "Assistir a videoaula" (components/video.js),
+ *                                    logo depois da ideia central e antes do visual
  * @param {Node}   [opcoes.visual]    o desenho da seção, logo depois da ideia central
  * @param {Node}   [opcoes.pergunta]  a "Pergunta rápida" que fecha o card
  * @param {Array}  [opcoes.omitir]    campos do dado que o visual já mostra
@@ -92,7 +94,7 @@ function criarDetalhe(detalhe) {
  * @param {string} [opcoes.class]     classes extras do card
  */
 export function criarCardDaSecao(secao, opcoes = {}) {
-  const { visual = null, pergunta = null, omitir = [], depois = [], class: extra = '' } = opcoes;
+  const { video = null, visual = null, pergunta = null, omitir = [], depois = [], class: extra = '' } = opcoes;
   const mostra = (campo) => !omitir.includes(campo);
 
   return criarElemento(
@@ -105,6 +107,8 @@ export function criarCardDaSecao(secao, opcoes = {}) {
         criarElemento('p', { class: 'border-l-2 border-acento pl-3 font-semibold text-texto' }, [
           secao.emUmaFrase,
         ]),
+
+      video,
 
       visual,
 

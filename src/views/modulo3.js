@@ -28,6 +28,7 @@ import { modulo3 } from '../data/modulo3.js';
 import { criarElemento, criarTitulo, criarCard, criarBotao, criarAbas, mostrarToast, rotuloRisco, html } from '../ui.js';
 import { montarQuiz, montarPerguntaRapida, juntarPorques } from '../components/quiz.js';
 import { criarCardDaSecao } from '../components/secao.js';
+import { videoDaSecao } from '../components/video.js';
 import { criarMapaDoModulo, criarCiclo } from '../components/visuais.js';
 import { criarAnimacaoNarrativa } from '../components/animacoes.js';
 import { montarDestaques } from '../components/destaques.js';
@@ -115,8 +116,16 @@ function criarCaixaAmbar(texto) {
 // e os blocos na ordem do desenho, com 16px entre eles; a "Pergunta rápida"
 // fecha o card. É o card de components/secao.js: aqui os blocos já chegam
 // montados, porque a ordem muda de uma seção para outra no M3.
-function criarSecao({ titulo, emUmaFrase, blocos = [], pergunta = null }) {
-  return criarCardDaSecao({ titulo, emUmaFrase }, { depois: blocos, pergunta: pergunta ? criarPerguntaRapida(pergunta) : null });
+function criarSecao({ titulo, emUmaFrase, blocos = [], pergunta = null, id = '' }) {
+  return criarCardDaSecao(
+    { titulo, emUmaFrase },
+    {
+      // A videoaula da seção, se houver (o dado diz a seção: `videos[...].secao`).
+      video: id ? videoDaSecao(modulo3.videos, id) : null,
+      depois: blocos,
+      pergunta: pergunta ? criarPerguntaRapida(pergunta) : null,
+    },
+  );
 }
 
 // Uma coluna de blocos com 24px entre eles (o painel de cada aba no desenho).
@@ -349,6 +358,7 @@ function montarAbaVisaoGeral() {
   const secao = modulo3.secoes[0];
   return criarColuna([
     criarSecao({
+      id: secao.id,
       titulo: secao.titulo,
       emUmaFrase: secao.emUmaFrase,
       blocos: [
