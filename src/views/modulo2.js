@@ -344,7 +344,7 @@ function montarVieses() {
 
   return criarElemento('div', { class: 'flex flex-col gap-6' }, [
     montarDestaques(modulo2.destaques.vieses),
-    criarCardDaSecao(tabela, { visual: criarTabelaDosVieses() }),
+    criarCardDaSecao(tabela, { video: videoDaSecao(modulo2.videos, 'vieses'), visual: criarTabelaDosVieses() }),
     criarCardDaSecao(fomo, { visual: criarFluxoDoFomo() }),
     // O post de hype guarda a frase de abertura em `descricao`; o resto da
     // seção (parágrafos, exemplo, fecho) vem do dado como nas outras.
@@ -461,7 +461,7 @@ function montarTiposDeToken() {
 
   return criarElemento('div', { class: 'flex flex-col gap-6' }, [
     montarDestaques(modulo2.destaques.tipos),
-    criarCardDaSecao(textos, { visual: mapa, depois: [legenda, resultado, grade] }),
+    criarCardDaSecao(textos, { video: videoDaSecao(modulo2.videos, 'tipos'), visual: mapa, depois: [legenda, resultado, grade] }),
   ]);
 }
 
@@ -504,6 +504,7 @@ function montarCasos() {
     criarCardDaSecao(
       { ...cronologia, emUmaFrase: cronologia.descricao },
       {
+        video: videoDaSecao(modulo2.videos, 'casos'),
         visual: montarLinhaDoTempo({ marcos: cronologia.marcos, nota: cronologia.nota, caixa: true, pxPorMes: 6.7 }),
         depois: [
           html`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">${modulo2.casos.map(criarCardDeCaso)}</div>`,
@@ -632,6 +633,7 @@ function montarFases() {
   return criarElemento('div', { class: 'flex flex-col gap-6' }, [
     montarDestaques(modulo2.destaques.fases),
     criarCardDaSecao(textos, {
+      video: videoDaSecao(modulo2.videos, 'fases'),
       visual: criarSeletorDeFases(),
       depois: [
         html`<p style="margin:0;color:#9AA7B4">${modulo2.paragrafoDaMortalidade}</p>`,
