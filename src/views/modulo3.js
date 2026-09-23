@@ -783,6 +783,7 @@ function montarAbaSocial() {
   const cardDaRotina = criarSecao({
     titulo: rotina.titulo,
     emUmaFrase: rotina.emUmaFrase,
+    id: 'pilar-social-na-pratica',
     blocos: [
       criarRotinaDeCincoMinutos(rotina),
       criarEnderecos(rotina.enderecos),

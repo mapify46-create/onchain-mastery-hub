@@ -2576,5 +2576,13 @@ export const modulo3 = {
       descricao: 'Como a liderança entre launchpads mudou em 2025, e por que perseguir o nome do momento não é estratégia.',
       transcricao: [],
     },
+    'pilar-social-na-pratica': {
+      titulo: 'Pilar social na prática: o endereço oficial em 5 minutos',
+      secao: 'pilar-social-na-pratica',
+      src: 'assets/videos/pilar-social-na-pratica.mp4',
+      duracao: '6:57',
+      descricao: 'A rotina de 5 minutos e os golpes do X, do Discord e do Telegram.',
+      transcricao: [],
+    },
   },
 };

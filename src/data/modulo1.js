@@ -2821,6 +2821,38 @@ export const modulo1 = {
       descricao: 'Os golpes que aparecem em português, e o que todos têm em comum.',
       transcricao: [],
     },
+    'contrato-inteligente': {
+      titulo: 'O que é um contrato inteligente, em linguagem de leigo',
+      secao: 'o-que-e-blockchain',
+      src: 'assets/videos/contrato-inteligente.mp4',
+      duracao: '6:55',
+      descricao: 'Um programa que roda sozinho na blockchain, e por que ler o que ele pede é defesa.',
+      transcricao: [],
+    },
+    'criar-primeira-carteira': {
+      titulo: 'Como criar sua primeira carteira, passo a passo',
+      secao: 'quando-cada-carteira-faz-sentido',
+      src: 'assets/videos/criar-primeira-carteira.mp4',
+      duracao: '5:42',
+      descricao: 'As etapas de criar uma carteira com segurança, da instalação à primeira conferência.',
+      transcricao: [],
+    },
+    'frase-semente': {
+      titulo: 'Frase-semente: por que 12 ou 24 palavras SÃO a carteira',
+      secao: 'seed-e-carteira',
+      src: 'assets/videos/frase-semente.mp4',
+      duracao: '6:30',
+      descricao: 'Quem tem as palavras tem o dinheiro — e onde guardá-las.',
+      transcricao: [],
+    },
+    'revogar-aprovacoes': {
+      titulo: 'Revogar aprovações: como fazer, e o que isso não resolve',
+      secao: 'revogar-aprovacoes',
+      src: 'assets/videos/revogar-aprovacoes.mp4',
+      duracao: '5:46',
+      descricao: 'Revogar interrompe gastos futuros. Não é um botão de desfazer.',
+      transcricao: [],
+    },
   },
 
   anatomias: {
