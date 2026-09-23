@@ -526,7 +526,7 @@ export const modulo1 = {
           'carteira fria. Nada disso é recomendação.',
       },
       paragrafos: [
-        'Não existe "a melhor" carteira, e sim a certa para cada uso — a árvore acima mostra ' +
+        'Não existe "a melhor" carteira, e sim a certa para cada uso — a árvore abaixo mostra ' +
           'os três que cobrem quase tudo.',
         'O prejuízo de iniciante raramente vem de uma carteira ruim: vem de usar uma só para ' +
           'tudo. A carteira que você conecta em dez sites por semana não deveria guardar o que ' +
@@ -680,7 +680,7 @@ export const modulo1 = {
         },
       },
       paragrafos: [
-        'Três termos da lista acima. Phishing ("pescaria") é a isca — site, e-mail, página — que ' +
+        'Três termos da lista abaixo. Phishing ("pescaria") é a isca — site, e-mail, página — que ' +
           'imita algo legítimo para você digitar ali o que o golpista quer. Airdrop é uma ' +
           'distribuição gratuita de tokens: existe de verdade, por isso é ótima isca. ' +
           'Infostealer é um programa que se instala escondido e vasculha o computador atrás de ' +
@@ -819,7 +819,7 @@ export const modulo1 = {
           'coleção. Os três terminam no mesmo lugar: permissão para mover seus ativos.',
       },
       paragrafos: [
-        'Os três cartões acima são as três formas de conseguir aquela permissão. Um termo novo ' +
+        'Os três cartões abaixo são as três formas de conseguir aquela permissão. Um termo novo ' +
           'neles: NFT ("token não fungível") é um token que representa um item único. Duas ' +
           'notas de dez reais são iguais entre si (fungíveis); duas figurinhas numeradas, não. ' +
           'Os sites de compra e venda desses itens pedem o setApprovalForAll para mover a sua ' +
@@ -987,7 +987,7 @@ export const modulo1 = {
           'lista é pública. Para revogar, você conecta a carteira e clica em "Revoke" — uma ' +
           'transação com taxa de rede. Assim dá para auditar de qualquer computador e só ' +
           'assinar no aparelho de confiança.',
-        'O limite está no contraste acima: revogar fecha a porta para o futuro, mas não ' +
+        'O limite está no contraste abaixo: revogar fecha a porta para o futuro, mas não ' +
           'devolve o que saiu, não salva uma frase-semente vazada (quem tem a frase não precisa ' +
           'de permissão) e não remove vírus do aparelho. É tranca, não botão de desfazer.',
       ],
@@ -1838,7 +1838,7 @@ export const modulo1 = {
   // "M1 Desktop.dc.html"), por isso ficam aqui e não na view.
   // ---------------------------------------------------------------------------
   checklistSegurancaTitulo: 'Checklist de segurança',
-  checklistSegurancaDescricao: 'Marque conforme for aplicando; fica salvo no seu navegador. Alguns itens usam termos das abas Golpes, Defesa e Brasil: volte a eles depois.',
+  checklistSegurancaDescricao: 'Tudo o que o módulo ensinou, numa lista só. Marque conforme for aplicando; fica salvo no seu navegador.',
 
   checklistSeguranca: [
     {
@@ -2652,7 +2652,7 @@ export const modulo1 = {
     },
     'contrato-inteligente': {
       titulo: 'O que é um contrato inteligente, em linguagem de leigo',
-      secao: 'o-que-e-blockchain',
+      secao: 'explorador-de-blocos',
       src: 'assets/videos/contrato-inteligente.mp4',
       duracao: '6:55',
       descricao: 'Um programa que roda sozinho na blockchain, e por que ler o que ele pede é defesa.',

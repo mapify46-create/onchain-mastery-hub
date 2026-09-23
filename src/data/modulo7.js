@@ -1459,7 +1459,7 @@ export const modulo7 = {
     },
     'o-diario': {
       titulo: 'O diário de 9 campos',
-      secao: 'duas-frases',
+      secao: 'nove-campos',
       src: 'assets/videos/o-diario.mp4',
       duracao: '8:06',
       descricao: 'Ele ajuda a seguir a regra, não a ganhar dinheiro.',

@@ -487,17 +487,6 @@ function montarAbaSeed() {
     montarDestaques(modulo1.destaques.seed),
     montarSecao('seed-e-carteira', { visual: [criarSemente(seed.semente), criarContraste(seed.contraste)] }),
     montarSecao('formas-de-perder-tudo', { visual: criarFormasDePerder(formas.formas) }),
-    criarCard([
-      criarElemento('h2', { class: 'text-lg font-semibold' }, [modulo1.checklistSegurancaTitulo]),
-      criarElemento('p', { class: 'mt-2 mb-4 text-[14px] text-texto-suave' }, [
-        modulo1.checklistSegurancaDescricao,
-      ]),
-      montarChecklist({
-        id: 'modulo-1-seguranca-seed',
-        itens: modulo1.checklistSeguranca,
-        rotuloProgresso: 'Progresso do checklist de segurança',
-      }),
-    ]),
   ]);
 }
 
@@ -836,6 +825,20 @@ function montarAbaBrasil() {
     }),
     montarSecao('impostos', { visual: [criarRegistroDoImposto(impostos.registro), criarPassosDoImposto(impostos.passosDoImposto)] }),
     montarSecao('sacar-para-reais', { visual: criarSaque(saque.saque) }),
+    // O checklist de segurança fecha o módulo (antes ficava na aba Seed, mas
+    // metade dos itens usa termos de Golpes, Defesa e Brasil). O id continua
+    // o mesmo para não perder o progresso já marcado.
+    criarCard([
+      criarElemento('h2', { class: 'text-lg font-semibold' }, [modulo1.checklistSegurancaTitulo]),
+      criarElemento('p', { class: 'mt-2 mb-4 text-[14px] text-texto-suave' }, [
+        modulo1.checklistSegurancaDescricao,
+      ]),
+      montarChecklist({
+        id: 'modulo-1-seguranca-seed',
+        itens: modulo1.checklistSeguranca,
+        rotuloProgresso: 'Progresso do checklist de segurança',
+      }),
+    ]),
   ]);
 }
 

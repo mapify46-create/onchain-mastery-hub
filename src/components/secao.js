@@ -85,7 +85,7 @@ function criarDetalhe(detalhe) {
  * @param {object} [opcoes]
  * @param {Node}   [opcoes.video]     o botão "Assistir a videoaula" (components/video.js),
  *                                    logo depois da ideia central e antes do visual
- * @param {Node}   [opcoes.visual]    o desenho da seção, logo depois da ideia central
+ * @param {Node}   [opcoes.visual]    o desenho da seção, depois dos parágrafos e do quadro de termos
  * @param {Node}   [opcoes.pergunta]  a "Pergunta rápida" que fecha o card
  * @param {Array}  [opcoes.omitir]    campos do dado que o visual já mostra
  *                                    (ex.: ['exemplo']) — o desenho troca alguns
@@ -110,13 +110,15 @@ export function criarCardDaSecao(secao, opcoes = {}) {
 
       video,
 
-      visual,
-
       ...(mostra('paragrafos') ? secao.paragrafos ?? [] : []).map((paragrafo) =>
         criarElemento('p', { class: 'text-texto-suave' }, [paragrafo]),
       ),
 
       mostra('quadro') && secao.quadro?.length > 0 && criarQuadro(secao.quadro),
+
+      // O desenho vem DEPOIS da explicação e do vocabulário (decisão do dono,
+      // 23/09/2026): antes, o visual mostrava termos que o texto só explicava embaixo.
+      visual,
 
       // Duas sequências de passos numeradas de forma independente (ex.: "no
       // Revoke.cash" e "no Etherscan"), cada uma com o próprio <ol>.

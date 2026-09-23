@@ -148,7 +148,7 @@ export function montarVideoaula(id, video) {
  * A videoaula de uma seção, se houver: procura em `videos` (de src/data/moduloN.js)
  * os itens cujo campo `secao` é o id da seção. Devolve null se a seção não tem vídeo.
  * Se houver mais de um (ex.: o de contrato inteligente mora junto com o de
- * blockchain, no Módulo 1), os botões ficam um embaixo do outro, na ordem do dado.
+ * ler uma transação, no Módulo 1), os botões ficam um embaixo do outro, na ordem do dado.
  */
 export function videoDaSecao(videos = {}, idDaSecao) {
   const achados = Object.entries(videos).filter(([, video]) => video.secao === idDaSecao);

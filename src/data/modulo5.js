@@ -201,7 +201,7 @@ export const modulo5 = {
           'níveis conforme o volume); "líquido" quer dizer já descontada a devolução em ' +
           'SOL que a plataforma dá. Você paga por conveniência, não por preço melhor — é ' +
           'onde o marketing da categoria mais escorrega.',
-        'Na tela você vê só um campo, um botão e uma taxa; a pilha acima é o que ' +
+        'Na tela você vê só um campo, um botão e uma taxa; a pilha abaixo é o que ' +
           'acontece depois do clique.',
       ],
       exemplo: {
@@ -301,7 +301,7 @@ export const modulo5 = {
       paragrafos: [
         'Toda tela de terminal tem as mesmas peças: gráfico, tira de números, lista de ' +
           'holders, feed do que está sendo negociado, campo de quantia e botão. A grade ' +
-          'acima mostra a divisão sem valores: aqui se aprende onde olhar.',
+          'abaixo mostra a divisão sem valores: aqui se aprende onde olhar.',
         'Cada painel responde a uma pergunta. O gráfico conta o passado (cada barrinha ' +
           'dele, a vela, é o preço num intervalo de tempo); os números, o tamanho; os ' +
           'holders, a concentração; o feed, o ritmo. Nenhum diz se o token é seguro nem ' +
@@ -701,7 +701,7 @@ export const modulo5 = {
           '(automated market maker, criador de mercado automático) é o contrato que ' +
           'calcula o preço sozinho a partir das duas reservas. A Raydium é o exemplo de ' +
           'AMM madura, já estabelecida, com taxa padrão de 0,25%.',
-        'A matriz acima é a mesma plataforma, no mesmo dia, em três situações. Nenhuma ' +
+        'A matriz abaixo é a mesma plataforma, no mesmo dia, em três situações. Nenhuma ' +
           'taxa de tabela mudou: a fatia da plataforma ficou perto de 0,95% nas três.',
         // O desenho escreveu "R$100 ou a R$1.000" na primeira frase; a pesquisa diz
         // "R$50 ou a R$5.000" — vale a pesquisa.
@@ -880,7 +880,7 @@ export const modulo5 = {
           'como no sanduíche da aba Taxas. No Axiom há três modos: Off (desligado), ' +
           'Reduced (reduzido) e Secure (seguro).',
         'As três erram para os dois lados, e cada lado quebra uma coisa (os cartões ' +
-          'acima). "Slippage exceeded" quer dizer deslizamento excedido: a transação ' +
+          'abaixo). "Slippage exceeded" quer dizer deslizamento excedido: a transação ' +
           'falhou e a taxa de rede foi paga. Front-running é alguém passar na frente da ' +
           'sua ordem. Não é opinião do módulo: a documentação da Solana diz que limitar ' +
           'o slippage é a defesa mais eficaz contra ataques de sandwich, e a do Axiom ' +
@@ -1161,7 +1161,7 @@ export const modulo5 = {
           'antes de o preço se mover. Quem faz isso não é uma pessoa clicando rápido: é ' +
           'um programa ligado direto à infraestrutura da rede, com a transação já ' +
           'montada e assinada, esperando só o gatilho.',
-        'Nas barras acima, na mesma escala: um slot da Solana (a janela em que a rede ' +
+        'Nas barras abaixo, na mesma escala: um slot da Solana (a janela em que a rede ' +
           'produz um bloco) dura 350 ms desde 21/08/2026 (eram 400 ms); o bot reage em ' +
           'dezenas de milissegundos, dentro de um único slot; você leva de 30 a 60 ' +
           'segundos do "vi" ao "confirmado".',
