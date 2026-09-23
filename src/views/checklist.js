@@ -15,6 +15,7 @@ import { montarChecklist, criarEtiqueta } from '../components/checklist.js';
 import { montarDestaques } from '../components/destaques.js';
 import { criarFluxoLinear } from '../components/fluxograma.js';
 import { obterEstado, atualizar } from '../store.js';
+import { videoDaSecao } from '../components/video.js';
 
 const dados = checklistPreCompra;
 
@@ -407,6 +408,8 @@ function montarDeFora() {
 export function montarViewChecklist() {
   return criarElemento('div', { class: 'flex flex-col gap-6' }, [
     montarCabecalho(),
+    // A videoaula da página inteira, logo abaixo do título.
+    videoDaSecao(checklistPreCompra.videos, 'checklist'),
     ...montarOsDestaques(),
     montarFluxograma(),
     montarEtiquetas(),

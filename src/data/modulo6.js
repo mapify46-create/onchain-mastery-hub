@@ -2183,5 +2183,13 @@ export const modulo6 = {
       descricao: 'Como o volume é fabricado entre carteiras da mesma pessoa, e todo sinal público é otimizado contra você.',
       transcricao: [],
     },
+    'prever-o-golpe': {
+      titulo: 'Dá para prever um rug? O que o melhor detector acerta',
+      secao: 'o-que-conta',
+      src: 'assets/videos/prever-o-golpe.mp4',
+      duracao: '7:53',
+      descricao: 'O que a pesquisa consegue e não consegue prever sobre um golpe — e o chute que ganha do detector.',
+      transcricao: [],
+    },
   },
 };

@@ -763,7 +763,7 @@ function montarAbaChecagens() {
   return criarElemento('div', { class: 'space-y-6' }, [
     montarDestaques(modulo4.destaques.checagens),
 
-    criarCardDaSecao(checagens, { visual: criarFluxoDasChecagens() }),
+    criarCardDaSecao(checagens, { video: videoDaSecao(modulo4.videos, 'antes-de-entrar'), visual: criarFluxoDasChecagens() }),
 
     criarCardDaSecao(calculadoraDeTamanho, { visual: criarCalculadoraDeTamanho() }),
   ]);

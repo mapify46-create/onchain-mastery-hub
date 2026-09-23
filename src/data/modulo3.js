@@ -2584,5 +2584,13 @@ export const modulo3 = {
       descricao: 'A rotina de 5 minutos e os golpes do X, do Discord e do Telegram.',
       transcricao: [],
     },
+    'matriz-de-ferramentas': {
+      titulo: 'O pilar social e a matriz de ferramentas',
+      secao: 'matriz',
+      src: 'assets/videos/matriz-de-ferramentas.mp4',
+      duracao: '10:07',
+      descricao: 'Que ferramenta responde a qual pergunta — e o que nenhuma delas prova.',
+      transcricao: [],
+    },
   },
 };

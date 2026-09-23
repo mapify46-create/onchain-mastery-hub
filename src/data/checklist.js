@@ -565,4 +565,21 @@ export const checklistPreCompra = {
       consultadoEm: '12/09/2026',
     },
   ],
+
+  // ---------------------------------------------------------------------------
+  // Vídeos — cada um vira o botão "Assistir a videoaula" dentro do card da seção
+  // que ele reforça (o campo `secao` diz qual). O player só aparece no clique.
+  // PENDENTE: a `transcricao`; enquanto ela não existe, o aviso padrão de
+  // src/data/videoaulas.js entra embaixo do player.
+  // ---------------------------------------------------------------------------
+  videos: {
+    'checklist-antes-de-comprar': {
+      titulo: 'O Checklist antes de comprar, item por item',
+      secao: 'checklist',
+      src: 'assets/videos/checklist-antes-de-comprar.mp4',
+      duracao: '9:06',
+      descricao: 'Os dois pilares, item por item, com a força de cada evidência.',
+      transcricao: [],
+    },
+  },
 };

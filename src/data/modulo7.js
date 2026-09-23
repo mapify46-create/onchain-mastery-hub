@@ -1608,4 +1608,53 @@ export const modulo7 = {
     { titulo: 'ESMA — medidas sobre CFDs e opções binárias (23/03/2018)', url: 'https://www.esma.europa.eu/node/84933', consultadoEm: '12/09/2026' },
     { titulo: 'Catálogo de números sem fonte (blogs de plataforma de diário)', url: 'pesquisa/modulos/pesquisas/P6-rotina-e-tamanho-de-posicao-v2.md, seção 6', consultadoEm: '12/09/2026' },
   ],
+
+  // ---------------------------------------------------------------------------
+  // Vídeos — cada um vira o botão "Assistir a videoaula" dentro do card da seção
+  // que ele reforça (o campo `secao` diz qual). O player só aparece no clique.
+  // PENDENTE: a `transcricao`; enquanto ela não existe, o aviso padrão de
+  // src/data/videoaulas.js entra embaixo do player.
+  // ---------------------------------------------------------------------------
+  videos: {
+    'a-regra-escrita': {
+      titulo: 'A regra escrita antes da compra',
+      secao: 'por-que-antes',
+      src: 'assets/videos/a-regra-escrita.mp4',
+      duracao: '8:53',
+      descricao: 'O que a regra precisa ter para ser testada — e por que ela vem antes, não depois.',
+      transcricao: [],
+    },
+    'tamanho-de-posicao': {
+      titulo: 'Tamanho de posição: por que a fórmula de Kelly quebra',
+      secao: 'fracao-fixa',
+      src: 'assets/videos/tamanho-de-posicao.mp4',
+      duracao: '8:32',
+      descricao: 'Fração fixa, sequência de perdas e ruína: o que sobra é sobreviver.',
+      transcricao: [],
+    },
+    'o-diario': {
+      titulo: 'O diário de 9 campos',
+      secao: 'duas-frases',
+      src: 'assets/videos/o-diario.mp4',
+      duracao: '8:06',
+      descricao: 'Ele ajuda a seguir a regra, não a ganhar dinheiro.',
+      transcricao: [],
+    },
+    'a-revisao': {
+      titulo: 'Revisar sem se enganar',
+      secao: 'olhar-pouco',
+      src: 'assets/videos/a-revisao.mp4',
+      duracao: '7:44',
+      descricao: 'Olhe o resultado pouco, o comportamento muito — e quantas operações provam algo.',
+      transcricao: [],
+    },
+    'numeros-que-circulam': {
+      titulo: 'As estatísticas de trading que circulam',
+      secao: 'mitos',
+      src: 'assets/videos/numeros-que-circulam.mp4',
+      duracao: '8:19',
+      descricao: 'Os números que se repetem por aí, e o dado real por trás de cada um.',
+      transcricao: [],
+    },
+  },
 };

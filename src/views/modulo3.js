@@ -1192,6 +1192,7 @@ function montarAbaMatriz() {
     criarSecao({
       titulo: matriz.titulo,
       emUmaFrase: matriz.emUmaFrase,
+      id: 'matriz',
       blocos: [
         ...criarMatriz(),
         ...matriz.paragrafos.map(criarParagrafo),

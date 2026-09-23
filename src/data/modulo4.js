@@ -1661,5 +1661,13 @@ export const modulo4 = {
       descricao: 'Como usar o simulador e ler o resumo de disciplina no fim.',
       transcricao: [],
     },
+    'antes-de-entrar': {
+      titulo: 'Antes de entrar: as checagens, o tamanho da posição e a curva de recuperação',
+      secao: 'antes-de-entrar',
+      src: 'assets/videos/antes-de-entrar.mp4',
+      duracao: '7:12',
+      descricao: 'As seis checagens antes da compra, e por que perder 50% pede 100% para voltar.',
+      transcricao: [],
+    },
   },
 };

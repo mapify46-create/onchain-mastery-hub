@@ -23,6 +23,7 @@ import { criarElemento, criarTitulo, criarCard, criarBotao, criarAbas, mostrarTo
 import { montarQuiz, juntarPorques } from '../components/quiz.js';
 import { criarMapaDoModulo, criarGradeDe100 } from '../components/visuais.js';
 import { montarDestaques } from '../components/destaques.js';
+import { videoDaSecao } from '../components/video.js';
 import { obterEstado, atualizar } from '../store.js';
 
 // ---------------------------------------------------------------------------
@@ -190,6 +191,7 @@ function criarSecao(secao, blocos = []) {
   return html`<section style="border-radius:12px;border:1px solid #1F2733;background:#141A24;padding:20px;display:flex;flex-direction:column;gap:16px;min-width:0">
     ${topo}
     ${secao.emUmaFrase ? html`<p style="margin:0;border-left:2px solid #22D3EE;padding-left:12px;font-weight:600;text-wrap:pretty">${secao.emUmaFrase}</p>` : ''}
+    ${secao.id ? videoDaSecao(modulo7.videos, secao.id) ?? '' : ''}
     ${blocos.filter(Boolean)}
   </section>`;
 }
