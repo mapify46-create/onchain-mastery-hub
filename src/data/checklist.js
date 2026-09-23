@@ -22,28 +22,28 @@ export const EVIDENCIAS = {
     rotulo: 'Fato do protocolo',
     tom: 'acento',
     descricao:
-      'Mecânica da blockchain ou golpe documentado. Diz o que pode acontecer, por construção — não o que vai acontecer.',
+      'Mecânica da blockchain ou golpe documentado: o que pode acontecer, não o que vai acontecer.',
     peso: 'Um "não" aqui encerra a checagem.',
   },
   medido: {
     rotulo: 'Sinal medido',
     tom: 'baixo',
     descricao:
-      'Há pesquisa publicada mostrando que o sinal prevê rug ou prejuízo. Pede julgamento: não existe limiar oficial.',
+      'Pesquisa publicada mostra que o sinal prevê rug ou prejuízo. Não há limiar oficial.',
     peso: 'Pesa, mas exige julgamento seu.',
   },
   fraco: {
     rotulo: 'Sinal fraco',
     tom: 'medio',
     descricao:
-      'Sem medição, ou já contornado de propósito por quem monta golpes. Serve para triar, nunca para confiar.',
+      'Sem medição, ou já contornado de propósito por golpistas. Só serve para triar.',
     peso: 'Não use como prova de nada.',
   },
   rotina: {
     rotulo: 'Rotina',
     tom: 'primaria',
     descricao:
-      'Hábito de decisão. Ajuda você a cumprir a própria regra; não diz nada sobre o token.',
+      'Hábito de decisão: ajuda a cumprir a própria regra, não diz nada do token.',
     peso: 'Depende só de você.',
   },
 };
@@ -53,9 +53,8 @@ export const checklistPreCompra = {
   rotulo: 'Rotina, a cada token',
   titulo: 'Checklist antes de comprar',
   resumo:
-    'A checagem de cada compra, com os dois pilares — social e técnico — e o que decide se ' +
-    'você entra. Cada item diz por que está aqui: mecânica do protocolo, sinal medido por ' +
-    'pesquisa, sinal fraco ou hábito de decisão.',
+    'A checagem de cada compra: pilar social, pilar técnico e decisão. Cada item diz por que ' +
+    'está aqui.',
 
   // Números grandes que abrem a página. Todos com fonte em `fontes`, abaixo.
   destaques: [
@@ -63,23 +62,23 @@ export const checklistPreCompra = {
       rotulo: 'A checagem que sozinha evita perda total',
       valor: 'O endereço',
       nota:
-        'Nome e ticker qualquer um copia. Em 12/09/2026, dois tokens diferentes do pump.fun ' +
-        'usavam o ticker SATOSHI ao mesmo tempo.',
+        'Nome e ticker qualquer um copia: em 12/09/2026, dois tokens do pump.fun usavam o ' +
+        'ticker SATOSHI ao mesmo tempo.',
     },
     {
       rotulo: 'Tokens que deram rug no teste do melhor detector publicado',
       valor: '81,9%',
       nota:
         'No PumpFun (arXiv 2608.20271, preprint). Com a maioria dando rug, nenhum item aprova ' +
-        'um token — eles só reprovam.',
+        'um token: só reprova.',
       tom: 'alerta',
     },
     {
-      rotulo: 'Famílias de sinal com medição que se repete entre estudos',
+      rotulo: 'Famílias de sinal com medição repetida entre estudos',
       valor: '3',
       nota:
-        'Concentração real dos holders, carteiras coordenadas no lançamento e volume ' +
-        'artificial. O resto é mecânica do protocolo ou folclore.',
+        'Concentração real dos holders, carteiras coordenadas no lançamento e volume falso. ' +
+        'O resto é mecânica ou folclore.',
     },
   ],
 
@@ -90,36 +89,34 @@ export const checklistPreCompra = {
   etiquetas: {
     titulo: 'As quatro etiquetas de evidência',
     porQueQuatro:
-      'Por que quatro e não duas cores: "freeze authority ativa" é mecânica certa — o dono ' +
-      'consegue congelar —, mas como preditor de rug não tem medição. Com duas cores ela ' +
-      'ficaria junto do folclore, e isso ensinaria errado.',
+      'Por que quatro, e não duas cores: "freeze authority ativa" é mecânica certa (o dono ' +
+      'consegue congelar), mas sem medição como preditor de rug. Com duas, ficaria junto do ' +
+      'folclore e ensinaria errado.',
     tituloDaContagem: 'Quantos itens de cada etiqueta, no checklist inteiro',
     legendaDaContagem:
-      'Mesma escala, de 0 a {total} itens. Só três famílias de sinal têm medição que se ' +
-      'repete entre estudos: concentração real dos holders, carteiras coordenadas no ' +
-      'lançamento e volume artificial. O resto é mecânica do protocolo ou hábito seu.',
+      'Mesma escala, de 0 a {total} itens. Só três famílias de sinal têm medição repetida ' +
+      'entre estudos (destaque do topo); o resto é mecânica ou hábito seu.',
   },
 
   // Cada item da lista é um texto ou uma lista de pedaços; { forte } sai em negrito.
   comoUsar: {
     titulo: 'Como usar',
     paragrafos: [
-      'Siga a ordem: pilar social, pilar técnico, decisão. Um endereço errado torna o resto ' +
-        'inútil, e um contrato com armadilha torna a tese irrelevante.',
+      'Siga a ordem: social, técnico, decisão. Endereço errado torna o resto inútil; contrato ' +
+        'com armadilha torna a tese irrelevante.',
       [
-        'Um "não" em qualquer item marcado como ',
+        'Um "não" em item de ',
         { forte: 'fato do protocolo' },
         ' encerra a checagem: não compre. Os ',
         { forte: 'sinais medidos' },
-        ' pedem julgamento — não existe limiar publicado para "concentração alta".',
+        ' pedem julgamento: não há limiar publicado para "concentração alta".',
       ],
-      'Passar em tudo não aprova o token. Só quer dizer que ele não mostrou os sinais que dá ' +
-        'para ver.',
+      'Passar em tudo não aprova o token: só quer dizer que ele não mostrou os sinais visíveis.',
     ],
   },
 
   // Frase embaixo da lista de cada bloco.
-  notaDoPainel: 'Marque conforme for aplicando. As marcas ficam salvas no seu navegador.',
+  notaDoPainel: 'Marque conforme avança; as marcas ficam salvas no seu navegador.',
 
   blocos: [
     {
@@ -127,26 +124,26 @@ export const checklistPreCompra = {
       rotuloCurto: 'Pilar social',
       titulo: 'Pilar social — o token é quem diz ser?',
       descricao:
-        'Faça estes primeiro. Tudo aqui é manual: não existe forma gratuita e dentro das ' +
-        'regras de automatizar o pilar social no X, no Telegram ou no Discord.',
+        'Faça estes primeiro, à mão: no X, no Telegram e no Discord não há jeito gratuito e ' +
+        'permitido de automatizar.',
       itens: [
         {
           id: 'endereco-oficial',
-          texto: 'O endereço do contrato veio do site oficial e bate com o post fixado do X oficial',
+          texto: 'O endereço do contrato veio do site oficial e bate com o post fixado no X oficial',
           porque:
             'Nome e ticker qualquer um copia; o endereço é a identidade do token. Se as fontes ' +
             'divergem, não compre.',
-          onde: 'Site oficial (alcançado por link confiável) e post fixado ou bio do X do projeto.',
+          onde: 'Site oficial (aberto por link confiável) e post fixado ou bio do X do projeto.',
           evidencia: 'fato',
           fonte: 'Pesquisa 5 (regra de decisão) e amostra on-chain de 12/09/2026',
         },
         {
           id: 'link-oficial',
           texto:
-            'Cheguei ao site, ao Discord e ao Telegram por link oficial — não por busca, anúncio, DM ou resposta de post',
+            'Abri site, Discord e Telegram por link oficial, não por busca, anúncio, DM ou resposta de post',
           porque:
-            'Servidor falso, bot falso de verificação e DM de "suporte" começam sempre por um ' +
-            'link. O Inferno Drainer esvaziou mais de 30 mil carteiras por esse caminho.',
+            'Servidor falso, bot falso de verificação e DM de "suporte" sempre começam por um ' +
+            'link: assim o Inferno Drainer esvaziou mais de 30 mil carteiras.',
           onde: 'Links da bio do X oficial ou do próprio site.',
           evidencia: 'fato',
           fonte: 'Check Point Research, "Inferno Drainer Reloaded" (2025)',
@@ -155,31 +152,31 @@ export const checklistPreCompra = {
           id: 'sem-assinatura',
           texto: 'Nenhuma "verificação" me pediu para conectar a carteira ou assinar algo',
           porque:
-            'Bot legítimo de verificação não precisa da sua assinatura. Pedido de assinatura ' +
-            'vindo de link de comunidade é o roteiro do drainer.',
+            'Bot legítimo de verificação não pede assinatura; pedido assim, vindo de link de ' +
+            'comunidade, é roteiro de drainer.',
           onde: 'Canal de verificação do Discord ou do Telegram.',
           evidencia: 'fato',
           fonte: 'Check Point Research (2025): bot falso imitando o Collab.Land leva à assinatura maliciosa',
         },
         {
           id: 'conta-oficial',
-          texto: 'Confirmei a conta oficial pelo link do site ou pelo badge de afiliação — não pelo selo azul',
+          texto: 'Confirmei a conta oficial pelo link do site ou badge de afiliação, não pelo selo azul',
           porque:
-            'Hoje o selo azul do X quer dizer assinatura Premium ativa, não identidade ' +
-            'verificada. Selo dourado e badge de afiliação dizem mais.',
+            'No X, selo azul hoje é assinatura Premium ativa, não identidade verificada. Selo ' +
+            'dourado e badge de afiliação dizem mais.',
           onde: 'Perfil no X: tipo de selo e badge ao lado do nome.',
           evidencia: 'fato',
           fonte: 'Central de ajuda do X, "About profile labels and checkmarks"',
         },
         {
           id: 'call-pago',
-          texto: 'Se o token chegou por um influenciador, conferi se o post declara que foi pago',
+          texto: 'Se o token veio de influenciador, conferi se o post declara que foi pago',
           porque:
-            'Depois de tweets de influenciadores, os tokens caíram em média 6,53% em 30 dias. ' +
-            'Call é atenção, não valor.',
+            'Após posts de influenciadores, os tokens caíram em média 6,53% em 30 dias. Call é ' +
+            'atenção, não valor.',
           onde:
-            'O próprio post: "publi", "parceria", link de afiliado. Posts quase idênticos em ' +
-            'várias contas na mesma hora indicam campanha.',
+            'No post: "publi", "parceria", link de afiliado. Posts quase iguais em várias contas ' +
+            'na mesma hora indicam campanha.',
           evidencia: 'medido',
           fonte: 'Merkley, Pacelli, Piorkowski & Williams, Review of Accounting Studies (2024)',
         },
@@ -187,8 +184,8 @@ export const checklistPreCompra = {
           id: 'atencao-real',
           texto: 'O número de carteiras negociando acompanha o volume',
           porque:
-            'Quem vende volume falso espalha as operações em mais de 100 carteiras justamente ' +
-            'porque você olha isso. Use para triar, não para confiar.',
+            'Quem vende volume falso já espalha as operações em mais de 100 carteiras, justamente ' +
+            'para passar neste teste.',
           onde: 'DexScreener: Volume, Txns e Makers na mesma janela de tempo.',
           evidencia: 'fraco',
           fonte: 'OpenLiquid (vendedor de volume, autopublicado) e Midsummer (USENIX Security 2026)',
@@ -200,16 +197,16 @@ export const checklistPreCompra = {
       rotuloCurto: 'Pilar técnico',
       titulo: 'Pilar técnico — o contrato e as carteiras resistem?',
       descricao:
-        'Os itens mecânicos vêm primeiro: eles dizem o que o dono do token consegue fazer com ' +
-        'você. Os sinais medidos vêm depois e pedem julgamento.',
+        'Primeiro a mecânica: o que o dono do token consegue fazer com você. Depois os sinais ' +
+        'medidos, que pedem julgamento.',
       itens: [
         {
           id: 'extensoes',
-          texto: 'Conferi as extensões do token: num token do pump.fun, só metadataPointer e tokenMetadata',
+          texto: 'Conferi as extensões: num token do pump.fun, só metadataPointer e tokenMetadata',
           porque:
             'Hoje todo token do pump.fun é Token-2022 com exatamente essas duas (24 de 24 em ' +
-            '12/09/2026). Taxa de transferência, delegado permanente ou hook fora disso: não compre.',
-          onde: 'Solscan: campo "Token Extensions" e aba Metadata. O RugCheck também sinaliza.',
+            '12/09/2026). Taxa de transferência, delegado permanente ou hook: não compre.',
+          onde: 'Solscan: campo "Token Extensions" e aba Metadata. RugCheck também sinaliza.',
           evidencia: 'fato',
           fonte: 'Documentação do Token-2022 e checagem própria na blockchain (12/09/2026)',
         },
@@ -217,11 +214,9 @@ export const checklistPreCompra = {
           id: 'mint-authority',
           texto: 'A mint authority está revogada',
           porque:
-            'Ativa, o dono pode criar tokens do nada e diluir quem comprou. No pump.fun ela vem ' +
-            'sempre revogada — lá, não separa um token do outro.',
-          onde:
-            'Solscan: menu "Authority", que junta mint, freeze e metadados e mostra "N/A" quando ' +
-            'estão revogadas. RugCheck.',
+            'Ativa, o dono pode criar tokens do nada e diluir quem comprou. No pump.fun vem ' +
+            'sempre revogada: lá, não diferencia tokens.',
+          onde: 'Solscan: menu "Authority" (mint, freeze e metadados), com "N/A" se revogada. RugCheck.',
           evidencia: 'fato',
           fonte: 'Documentação da Solana; guia oficial do Solscan (campo Authority)',
         },
@@ -229,43 +224,43 @@ export const checklistPreCompra = {
           id: 'freeze-authority',
           texto: 'A freeze authority está revogada',
           porque:
-            'Ativa, o dono pode congelar sua conta e você não consegue vender. Também vem ' +
-            'revogada no pump.fun.',
+            'Ativa, o dono pode congelar sua conta, e você não consegue vender. No pump.fun, ' +
+            'também vem revogada.',
           onde: 'Solscan: menu "Authority". RugCheck.',
           evidencia: 'fato',
           fonte: 'Documentação da Solana (freeze account)',
         },
         {
           id: 'metadata',
-          texto: 'O nome e a imagem do token não podem mais ser alterados',
+          texto: 'Nome e imagem do token não podem mais ser alterados',
           porque:
-            'Metadata mutável permite o token se passar por outro depois da sua compra. No ' +
-            'pump.fun ela vem travada (11 de 11 checados).',
+            'Metadata mutável deixa o token se passar por outro depois da sua compra. No ' +
+            'pump.fun vem travada (11 de 11 checados).',
           onde:
-            'Solscan: aba Metadata — campo "Mutable" num token SPL clássico, ou a update authority ' +
-            'do tokenMetadata num Token-2022.',
+            'Solscan, aba Metadata: campo "Mutable" num SPL clássico; update authority do ' +
+            'tokenMetadata num Token-2022.',
           evidencia: 'fato',
           fonte: 'Documentação do Metaplex e do Token-2022; checagem própria (12/09/2026)',
         },
         {
           id: 'concentracao-real',
-          texto: 'Olhei a concentração dos maiores holders juntando as carteiras ligadas entre si',
+          texto: 'Olhei a concentração dos maiores holders somando as carteiras ligadas entre si',
           porque:
-            'Juntando as carteiras coordenadas, a fatia do top 10 sobe 24 pontos nos tokens de ' +
-            'alto risco, contra 6 nos de baixo risco. A lista crua de holders esconde isso.',
+            'Somando as carteiras coordenadas, a fatia do top 10 sobe 24 pontos percentuais nos ' +
+            'tokens de alto risco, contra 6 nos de baixo. A lista crua esconde isso.',
           onde: 'Bubblemaps (clusters) e RugCheck (Insiders). Solscan para a lista de holders.',
           evidencia: 'medido',
           fonte: 'MELT/MemeTrans, arXiv 2602.13480 (preprint); Mazorra et al., Mathematics (2022)',
         },
         {
           id: 'bundles',
-          texto: 'Vi se houve compra coordenada no lançamento, e quanto essas carteiras ainda seguram',
+          texto: 'Vi se houve compra coordenada no lançamento (bundle) e quanto essas carteiras ainda seguram',
           porque:
-            'Bundle está entre os sinais mais preditivos de alto risco. O que importa é quanto ' +
-            'elas AINDA seguram, não quanto compraram.',
+            'Bundle está entre os sinais que mais preveem alto risco. Importa quanto as carteiras ' +
+            'AINDA seguram, não quanto compraram.',
           onde:
-            'trench.bot (só pump.fun): "Current held %". RugCheck, e as compras do bloco de ' +
-            'criação no Solscan.',
+            'trench.bot (só pump.fun): "Current held %". RugCheck e as compras do primeiro bloco ' +
+            'no Solscan.',
           evidencia: 'medido',
           fonte: 'MELT/MemeTrans (preprint); documentação do trench.bot',
         },
@@ -273,18 +268,18 @@ export const checklistPreCompra = {
           id: 'historico-criador',
           texto: 'Olhei o histórico da carteira do criador',
           porque:
-            'Em Ethereum e BSC, 1% dos endereços cria de 20% a 25% dos tokens. Criador com ' +
-            'tokens anteriores mortos é sinal forte. No pump.fun, só há dado de empresa.',
+            'Em Ethereum e BSC, 1% dos endereços cria de 20% a 25% dos tokens; criador com ' +
+            'tokens mortos no histórico é sinal forte. Sobre o pump.fun, só há dados de empresas.',
           onde: 'Solscan: campo "Creator" e o histórico dessa carteira.',
           evidencia: 'medido',
           fonte: 'Cernera et al., USENIX Security 2023 (Ethereum e BSC)',
         },
         {
           id: 'dev-dump',
-          texto: 'O criador não vendeu a própria compra nos primeiros minutos',
+          texto: 'O criador não vendeu a própria compra nos primeiros minutos (dev dump)',
           porque:
-            'No pump.fun o criador não consegue retirar a liquidez, então o golpe que sobra é ' +
-            'vender. É o sinal que mais importa lá — e o menos medido pela pesquisa.',
+            'No pump.fun o criador não consegue tirar a liquidez: o golpe que sobra é vender. É ' +
+            'o sinal que mais importa lá, e o menos medido.',
           onde: 'Solscan: carteira do "Creator", em Token Balance Change e nas transações.',
           evidencia: 'fraco',
           fonte: 'Pesquisa 7: nenhum preditor revisado por pares isola esse sinal',
@@ -293,8 +288,8 @@ export const checklistPreCompra = {
           id: 'lp-travada',
           texto: 'Li o "LP travado ou queimado" sem contar a favor do token',
           porque:
-            'No pump.fun a pool pós-graduação é do protocolo, então está sempre "ok". Em outros ' +
-            'lugares, tokens com trava eram maliciosos na mesma proporção que o resto.',
+            'No pump.fun a pool pós-graduação é do protocolo e sempre aparece "ok". Fora dele, ' +
+            'tokens com trava eram maliciosos na mesma proporção que o resto.',
           onde: 'RugCheck: "Lockers & LP".',
           evidencia: 'fraco',
           fonte: 'Mazorra et al., Mathematics (2022): 97,3% maliciosos com trava, contra 97,7% no conjunto',
@@ -306,15 +301,14 @@ export const checklistPreCompra = {
       rotuloCurto: 'Decisão',
       titulo: 'Decisão — você sabe o que vai fazer?',
       descricao:
-        'Nenhum destes itens diz nada sobre o token. Dizem sobre você, e são os únicos que ' +
-        'dependem só de você.',
+        'Estes itens não falam do token: falam de você, e só dependem de você.',
       itens: [
         {
           id: 'ficha',
-          texto: 'Escrevi a tese, a catálise com prazo e o que me provaria errado',
+          texto: 'Escrevi a tese, a catálise com prazo e a invalidação (o que me provaria errado)',
           porque:
-            'Escrever antes congela o que você pensou. Depois do resultado, a memória reescreve ' +
-            'a própria história.',
+            'Escrever antes congela o que você pensou; depois do resultado, a memória reescreve ' +
+            'a história.',
           onde: 'Ficha de tese do Módulo 4.',
           evidencia: 'rotina',
           fonte: 'Módulo 4; pesquisa 6 (viés de retrospectiva e intenções "se-então")',
@@ -322,7 +316,7 @@ export const checklistPreCompra = {
         {
           id: 'saidas',
           texto: 'Defini os alvos de saída antes de entrar',
-          porque: 'Alvo definido com o gráfico piscando nasce contaminado pela euforia ou pelo medo.',
+          porque: 'Alvo definido com o gráfico piscando nasce contaminado por euforia ou medo.',
           onde: 'Escada de realização do Módulo 4.',
           evidencia: 'rotina',
           fonte: 'Módulo 4',
@@ -331,9 +325,8 @@ export const checklistPreCompra = {
           id: 'pre-mortem',
           texto: 'Imaginei que a operação já deu errado e escrevi três razões',
           porque:
-            'Imaginar o fracasso como já acontecido faz aparecer cerca de 30% mais razões do ' +
-            'que só perguntar "o que pode dar errado". São mais hipóteses, não necessariamente ' +
-            'melhores.',
+            'Imaginar o fracasso como já acontecido gera cerca de 30% mais razões do que ' +
+            'perguntar "o que pode dar errado" — mais hipóteses, não necessariamente melhores.',
           onde: 'Campo da tese no diário do Módulo 7.',
           evidencia: 'rotina',
           fonte: 'Mitchell, Russo & Pennington, J. Behavioral Decision Making (1989) — experimento fora de trading',
@@ -342,8 +335,8 @@ export const checklistPreCompra = {
           id: 'argumento-contrario',
           texto: 'Escrevi o melhor argumento de que estou errado',
           porque:
-            'Pedir para "considerar o oposto" reduziu o viés mais do que pedir para "ser ' +
-            'imparcial", em dois experimentos.',
+            'Em dois experimentos, pedir para "considerar o oposto" reduziu o viés a favor da ' +
+            'própria opinião mais do que pedir para "ser imparcial".',
           onde: 'Ficha de tese do Módulo 4.',
           evidencia: 'rotina',
           fonte: 'Lord, Lepper & Preston, J. Personality and Social Psychology (1984) — experimento fora de trading',
@@ -352,9 +345,9 @@ export const checklistPreCompra = {
           id: 'taxa-base',
           texto: 'Pensei em contagem: de cada 100 tokens como este, quantos ainda negociam amanhã?',
           porque:
-            'Pensar em contagens em vez de porcentagens ajuda a pesar a taxa-base: num ' +
-            'experimento, as respostas corretas subiram de 16% para 46%. No Pump.fun, de cada ' +
-            '100 tokens, cerca de 69 param de negociar no mesmo dia em que nasceram.',
+            'Contagem, em vez de porcentagem, ajuda a pesar a taxa-base (com que frequência algo ' +
+            'acontece no conjunto todo): num experimento, os acertos foram de 16% para 46%. No ' +
+            'pump.fun, cerca de 69 em 100 tokens param de negociar no dia em que nascem.',
           onde: 'Mortalidade no Módulo 2; aba Prever o golpe do Módulo 6.',
           evidencia: 'rotina',
           fonte: 'Gigerenzer & Hoffrage, Psychological Review (1995); CoinGecko Research (68,67%)',
@@ -363,18 +356,18 @@ export const checklistPreCompra = {
           id: 'tamanho',
           texto: 'O valor é um que eu posso perder inteiro',
           porque:
-            'Com a cauda pesada da memecoin, não existe fórmula de tamanho ótimo — a de Kelly ' +
-            'nem se aplica. O que sobra é sobreviver.',
+            'Na cauda pesada da memecoin, não há fórmula de tamanho ótimo; nem a de Kelly se ' +
+            'aplica. O que sobra é sobreviver.',
           onde: 'Aba Tamanho do Módulo 7.',
           evidencia: 'rotina',
           fonte: 'Bamberg & Neuhierl, German Economic Review (2012); ruína do apostador (Feller)',
         },
         {
           id: 'stop',
-          texto: 'A saída de proteção executa sozinha, sem depender de eu lembrar',
+          texto: 'O stop (saída automática) executa sozinho, sem depender de eu lembrar',
           porque:
-            'Stop automático reduz o erro de segurar perdedor; lembrete não reduz. Confira no ' +
-            'Módulo 5 se a ordem da sua plataforma depende do servidor dela.',
+            'Stop reduz o erro de segurar perdedoras; lembrete, não. Veja no Módulo 5 se a ordem ' +
+            'da sua plataforma depende do servidor dela.',
           onde: 'Configuração de ordens do terminal.',
           evidencia: 'rotina',
           fonte: 'Fischbacher, Hoffmann & Schudy, Review of Financial Studies (2017)',
@@ -399,12 +392,11 @@ export const checklistPreCompra = {
     titulo: 'Do token visto à decisão de entrar',
     relacao: 'Relação: se isto, então aquilo',
     introducao:
-      'O checklist em forma de caminho. Os primeiros cortes são mecânicos; a decisão só ' +
-      'entra depois que o token passou por eles.',
+      'O checklist em forma de caminho: primeiro os cortes mecânicos, depois a decisão.',
     legenda:
-      'Em vermelho, os pontos onde a checagem termina. Em verde, o único caminho até a compra. ' +
-      'As duas primeiras perguntas são mecânica do protocolo, não opinião; a terceira pede ' +
-      'julgamento, e por isso vem depois delas.',
+      'Vermelho: onde a checagem termina. Verde: o único caminho até a compra. As duas ' +
+      'primeiras perguntas são mecânica do protocolo; a terceira pede julgamento, por isso vem ' +
+      'depois.',
 
     // O mesmo caminho no formato do fluxo linear (criarFluxoLinear, em
     // src/components/fluxograma.js), com os textos do desenho "31 Checklist".
@@ -420,7 +412,7 @@ export const checklistPreCompra = {
       {
         pergunta: 'Extensão fora do padrão, ou mint ou freeze authority ativa?',
         evidencia: { rotulo: 'Fato do protocolo', tom: 'fato' },
-        desvio: { rotulo: 'Sim', texto: 'Não compro. Isso é mecânica, não opinião.', tom: 'nao' },
+        desvio: { rotulo: 'Sim', texto: 'Não compro: é mecânica, não opinião.', tom: 'nao' },
         segue: { rotulo: 'Não', texto: 'Metadata travada também. Sigo para as carteiras.' },
       },
       {
@@ -429,21 +421,19 @@ export const checklistPreCompra = {
         desvio: { rotulo: 'Sim', texto: 'Não compro', tom: 'nao' },
         segue: {
           rotulo: 'Não',
-          texto:
-            'Não existe limiar publicado para "muito": é julgamento, e por isso vem depois dos ' +
-            'itens mecânicos.',
+          texto: 'É julgamento: não há limiar publicado para "muito".',
         },
       },
       {
         pergunta: 'Tese, catálise e invalidação estão escritas?',
         evidencia: { rotulo: 'Rotina', tom: 'rotina' },
         desvio: { rotulo: 'Não', texto: 'Não compro: sem isso é aposta.', tom: 'nao' },
-        segue: { rotulo: 'Sim', texto: 'Com prazo e com o que me provaria errado. Sigo para o tamanho.' },
+        segue: { rotulo: 'Sim', texto: 'Com prazo e o que me provaria errado. Sigo para o tamanho.' },
       },
       {
         pergunta: 'É um valor que posso perder inteiro, com saída que executa sozinha?',
         evidencia: { rotulo: 'Rotina', tom: 'rotina' },
-        desvio: { rotulo: 'Não', texto: 'Ajusto o tamanho e a saída, e volto a esta pergunta.', tom: 'ajusta' },
+        desvio: { rotulo: 'Não', texto: 'Ajusto tamanho e saída e volto a esta pergunta.', tom: 'ajusta' },
         segue: { rotulo: 'Sim', texto: 'Tamanho e saída definidos antes de entrar.' },
       },
       {
@@ -451,7 +441,7 @@ export const checklistPreCompra = {
         evidencia: { rotulo: 'Rotina', tom: 'rotina' },
         desvio: {
           rotulo: 'Não',
-          texto: 'Registro primeiro. O diário existe para a revisão saber o que você pensou.',
+          texto: 'Registro primeiro: a revisão precisa saber o que você pensou.',
           tom: 'ajusta',
         },
         segue: { rotulo: 'Sim', texto: 'Tese, tamanho e saída no papel, antes do resultado.' },
@@ -459,7 +449,7 @@ export const checklistPreCompra = {
     ],
     fim: 'Registro no diário e só então entro',
     fechamento:
-      'Passar por tudo não aprova o token: só quer dizer que ele não mostrou os sinais que dá para ver.',
+      'Passar por tudo não aprova o token: só quer dizer que ele não mostrou os sinais visíveis.',
     // A versão em texto do caminho não fica mais aqui: o componente gera a
     // alternativa para leitor de tela a partir dos próprios passos acima.
   },
@@ -470,26 +460,25 @@ export const checklistPreCompra = {
     {
       titulo: 'A nota do RugCheck',
       texto:
-        'A fórmula e os limiares da nota não são publicados. Leia os riscos listados um por um, ' +
-        'não o número.',
+        'A fórmula e os limiares da nota não são publicados: leia os riscos um a um, não o número.',
     },
     {
       titulo: 'O projeto ter site e redes sociais',
       texto:
-        'É trivial de montar, e nenhuma pesquisa mediu isso como preditor de golpe. Golpe ' +
-        'bem-feito tem site bonito.',
+        'Fácil de montar, e nenhuma pesquisa mediu isso como preditor de golpe. Golpe bem-feito ' +
+        'tem site bonito.',
     },
     {
       titulo: '"Muitos holders"',
       texto:
-        'Existem bots que inflam a contagem. A medição que existe é indireta: poucos holders se ' +
-        'associa a alto risco, mas muitos não prova nada.',
+        'Bots inflam a contagem. A medição é indireta: poucos holders se associa a alto risco; ' +
+        'muitos não prova nada.',
     },
     {
       titulo: 'Detector automático de rug',
       texto:
-        'No teste do PumpFun, o melhor modelo publicado teve F1 de 0,79 — e chutar "tudo é rug" ' +
-        'dá 0,90. Serve, no máximo, de pré-filtro.',
+        'No teste do PumpFun, o melhor modelo publicado teve F1 de 0,79; chutar "tudo é rug" dá ' +
+        '0,90. Serve, no máximo, de pré-filtro.',
     },
   ],
 

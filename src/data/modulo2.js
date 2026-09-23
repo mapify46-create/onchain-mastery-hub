@@ -6,15 +6,15 @@ export const modulo2 = {
   id: 'modulo-2',
   titulo: 'Psicologia das memecoins & economia da atenção',
   resumo:
-    'Memecoin não tem produto nem receita: o preço é feito de atenção. Este módulo ' +
-    'mostra como essa atenção nasce, como ela some, e quais vieses do seu próprio ' +
-    'cérebro fazem você comprar no topo e segurar no fundo.',
+    'Memecoin não tem produto nem receita: o preço é feito de atenção. Aqui você vê como ' +
+    'essa atenção nasce e some, e quais vieses do seu cérebro fazem você comprar no topo e ' +
+    'segurar no fundo.',
 
   objetivos: [
     'Entender por que o preço de uma memecoin depende de atenção, e não de fundamento.',
     'Reconhecer em você os vieses que fazem comprar no topo e segurar no prejuízo.',
     'Classificar tipos de token para saber o que você está olhando antes de agir.',
-    'Visualizar as 4 fases do ciclo de vida de uma moeda e onde mora o risco em cada uma.',
+    'Reconhecer as 4 fases da vida de uma moeda e onde mora o risco em cada uma.',
   ],
 
   // Mapa do módulo ("O módulo inteiro numa olhada", no topo da página): o centro
@@ -41,149 +41,114 @@ export const modulo2 = {
       id: 'atencao',
       titulo: 'Economia da atenção: o preço é feito de olhos',
       emUmaFrase:
-        'Existe preço com chão embaixo e existe preço sem chão nenhum. A diferença entre os ' +
-        'dois decide tudo o que vem depois neste módulo.',
+        'Existe preço com chão embaixo e preço sem chão nenhum. Essa diferença decide tudo o ' +
+        'que vem depois.',
       paragrafos: [
-        'Token é o nome genérico de qualquer moeda criada dentro de uma blockchain — o ' +
-          'registro público que o Módulo 1 apresentou. Memecoin é um tipo de token que não ' +
-          'tem produto, receita nem promessa de utilidade: não existe empresa vendendo nada, ' +
-          'não existe serviço cobrando mensalidade, não existe nada sendo entregue a ninguém. ' +
-          'O que ela tem é uma piada, uma imagem ou um nome que muita gente resolveu levar a ' +
-          'sério ao mesmo tempo. "Economia da atenção" é o nome dessa troca: o único ' +
-          'combustível do preço é quanta gente está olhando.',
-        'Compare com uma ação de empresa. Se o preço de uma ação cai demais, ainda existe ' +
-          'alguma coisa embaixo dele: fábrica, contrato assinado, dinheiro em caixa, lucro que ' +
-          'entra todo mês. Isso não impede a queda, mas cria um chão — um ponto abaixo do qual ' +
-          'vender fica difícil de justificar. Numa memecoin não há nada disso. Embaixo do ' +
-          'preço só tem atenção, e atenção não fica parada em lugar nenhum: ela é escassa e ' +
-          'muda de lugar.',
-        'Isso importa porque muda a pergunta que você deve fazer. Quando uma ação cai, faz ' +
-          'sentido perguntar "o que aconteceu com a empresa?". Quando uma memecoin cai, essa ' +
-          'pergunta não tem resposta, porque não existe empresa. A pergunta que funciona é ' +
-          'outra: "para onde foi a atenção?". E quase sempre ela foi para outro token, ' +
-          'lançado ontem, com uma piada mais nova. Você não está comprando um pedaço de um ' +
-          'negócio; está apostando que mais gente vai olhar depois de você.',
-        'Na tela, a atenção aparece em três agulhas que se mexem juntas. O volume é quanto ' +
-          'dinheiro trocou de mãos naquele token num período. Os holders são as carteiras que ' +
-          'detêm o token — é a palavra em inglês para "quem segura", e ela vai voltar em todo ' +
-          'o hub. E as menções são quantas vezes o token foi citado nas redes. Quando as três ' +
-          'sobem juntas, a atenção está chegando. Quando o preço ainda está alto mas as ' +
-          'menções já caíram, a atenção já foi embora e o preço só não percebeu. Repare: ' +
-          'nenhuma das três fala de lucro, de produto ou de receita. Não há o que medir desse ' +
-          'lado, porque esse lado não existe.',
+        'Token é qualquer moeda criada numa blockchain, o registro público do Módulo 1. ' +
+          'Memecoin é um token sem produto, receita nem promessa de utilidade: só uma piada, ' +
+          'imagem ou nome que muita gente levou a sério ao mesmo tempo. O único combustível do ' +
+          'preço é quanta gente olha: é a "economia da atenção".',
+        'Compare com uma ação de empresa: se o preço dela cai demais, fábrica, dinheiro em ' +
+          'caixa e lucro todo mês não impedem a queda, mas criam um chão. Na memecoin, embaixo ' +
+          'do preço só tem atenção, que é escassa e muda de lugar. Por isso a pergunta muda: ' +
+          'numa ação que cai, "o que aconteceu com a empresa?"; numa memecoin, "para onde foi ' +
+          'a atenção?". Quase sempre, para um token lançado ontem, com uma piada mais nova. ' +
+          'Você não compra um pedaço de negócio: aposta que mais gente vai olhar depois de você.',
+        'Na tela, a atenção aparece em três números. Volume: quanto dinheiro trocou de mãos ' +
+          'no token num período. Holders ("quem segura", em inglês): as carteiras que têm o ' +
+          'token. Menções: quantas vezes o token foi citado nas redes. Os três subindo juntos: ' +
+          'a atenção está chegando. Preço alto com menções caindo: ela já foi embora, e o ' +
+          'preço só não percebeu.',
       ],
       quadro: [
         {
           rotulo: 'Market cap',
           texto:
-            'Capitalização de mercado: o preço de uma unidade multiplicado por quantas ' +
-            'unidades existem. É o número que diz o tamanho do token, e é por ele que se ' +
-            'comparam moedas diferentes. Preço baixo não quer dizer token pequeno — um preço ' +
-            'de centavos com bilhões de unidades dá um market cap grande.',
+            'Capitalização de mercado: preço de uma unidade vezes quantas unidades existem. ' +
+            'É por ele que se compara o tamanho das moedas. Preço baixo não é token pequeno: ' +
+            'centavos vezes bilhões de unidades dá market cap grande.',
         },
         {
           rotulo: 'O "x": 2x, 5x, 10x',
           texto:
-            'O "x" é multiplicação, não porcentagem. 10x quer dizer dez vezes o preço de ' +
-            'partida; 2x, o dobro. Neste hub o "x" aparece tanto para descrever uma subida ' +
-            'que já aconteceu quanto para marcar um alvo de venda combinado antes.',
+            'Multiplicação, não porcentagem: 10x é dez vezes o preço de partida; 2x, o dobro. ' +
+            'Serve para uma alta que já aconteceu e para um alvo de venda combinado antes.',
         },
         {
           rotulo: 'Pump, dump e pump-and-dump',
           texto:
-            'Pump é a alta rápida puxada por atenção. Dump é a venda em massa que vem logo ' +
-            'depois. "Pump-and-dump" é o nome do par quando alguém organiza os dois de ' +
-            'propósito: sobe com barulho e vende para quem chegou pelo barulho. As três ' +
-            'palavras voltam nas próximas abas.',
+            'Pump é a alta rápida puxada por atenção. Dump é a venda em massa logo depois. ' +
+            'Pump-and-dump é o par feito de propósito: sobe com barulho e vende para quem ' +
+            'chegou pelo barulho.',
           destaque: true,
         },
       ],
       exemplo: {
         titulo: 'Um dia inteiro de uma memecoin',
         passos: [
-          'De manhã quase ninguém está olhando: volume baixo, menções que cabem nos dedos.',
-          'Uma conta grande posta. Em horas o preço faz 10x — cada real virou dez, e quem ' +
-            'entrou cedo está com dez vezes o que pôs.',
-          'A multidão que chegou pelo post já está dentro. Não sobrou mais ninguém de fora ' +
-            'para comprar.',
-          'A atenção acha o próximo token. Sem comprador novo, cada venda empurra o preço ' +
-            'para baixo, e ele volta ao ponto de partida no mesmo dia.',
-          'Ninguém precisou de uma má notícia para isso acontecer. Bastou a atenção mudar de ' +
-            'lugar.',
+          'De manhã quase ninguém olha: volume baixo, poucas menções.',
+          'Uma conta grande posta. Em horas o preço faz 10x: cada real de quem entrou cedo ' +
+            'virou dez.',
+          'Quem chegou pelo post já comprou. Não sobrou ninguém de fora para comprar.',
+          'A atenção vai para o próximo token. Sem comprador novo, cada venda derruba o preço, ' +
+            'que volta ao ponto de partida no mesmo dia.',
+          'Sem nenhuma má notícia: bastou a atenção mudar de lugar.',
         ],
       },
       paragrafosFinais: [
-        'O erro que essa ideia evita é o mais comum de todos: procurar um motivo de ' +
-          'fundamento para uma queda que não tem fundamento nenhum. Quem pensa "o projeto é ' +
-          'bom, o mercado é que não entendeu" fica segurando um token que já perdeu a única ' +
-          'coisa que o sustentava. Subir 10x em horas e voltar ao ponto de partida no mesmo ' +
-          'dia não é anomalia: é o funcionamento normal desse mercado.',
-        'Quando você aceita isso, as regras dos próximos módulos deixam de parecer exagero e ' +
-          'passam a parecer o mínimo. Nada aqui é recomendação de compra ou de venda — é ' +
-          'descrição de como o preço se forma.',
+        'O erro que isso evita: procurar motivo de fundamento para uma queda sem fundamento. ' +
+          'Quem pensa "o projeto é bom, o mercado é que não entendeu" segura um token que já ' +
+          'perdeu a única coisa que o sustentava. Nada aqui é recomendação de compra ou de ' +
+          'venda.',
       ],
     },
     {
       id: 'dopamina',
       titulo: 'Dopamina e reforço intermitente',
       emUmaFrase:
-        'Ganhar às vezes, e não sempre, é o que mais prende. É o mesmo mecanismo das máquinas ' +
-        'de aposta.',
+        'Ganhar às vezes, e não sempre, é o que mais prende: o mecanismo das máquinas de ' +
+        'aposta.',
       paragrafos: [
-        'Dopamina é uma substância que o cérebro libera diante da chance de uma recompensa. ' +
-          'Repare na palavra chance: ela não vem só quando você ganha, vem quando você acha ' +
-          'que pode ganhar. Por isso o número subindo na tela já produz a sensação, mesmo ' +
-          'antes de qualquer dinheiro entrar ou sair da sua conta.',
-        'O cérebro aprende por repetição: ele registra o que você fez pouco antes da ' +
-          'recompensa e manda repetir. Aqui a regra que ele aprende é curta — abrir o gráfico ' +
-          'e clicar em comprar traz recompensa. Se a recompensa viesse sempre, o hábito seria ' +
-          'fraco: bastaria um dia ruim para você desconfiar. Como ela vem às vezes, e sem hora ' +
-          'marcada, o hábito fica muito mais forte. Isso tem nome: reforço intermitente. É a ' +
-          'mesma lógica das máquinas de aposta, que pagam pouco e de vez em quando, e por isso ' +
-          'são tão difíceis de largar.',
-        'Duas palavras antes de seguir, porque elas voltam o tempo todo. Uma posição é o ' +
-          'dinheiro que você tem parado dentro de um token: "abrir posição" é comprar, ' +
-          '"fechar" é vender. Uma operação é o ciclo completo, da compra até a venda. Quando ' +
-          'este módulo fala em "tamanho da posição", está falando de quanto do seu dinheiro ' +
-          'está exposto naquele token ao mesmo tempo.',
-        'O que faz esse mecanismo ser perigoso é que o estrago não aparece como perda: ' +
-          'aparece como entusiasmo. Você não sente que está perdendo o controle, sente que ' +
-          'está melhorando. Na prática, o sinal é a sua rotina mudando sem que você tenha ' +
-          'decidido mudar nada — você abre o aplicativo em horários em que antes não abria, ' +
-          'opera em dias em que não havia nada para operar, e passa a checar o preço em ' +
-          'intervalos cada vez menores. Nenhum desses passos parece errado sozinho.',
+        'Dopamina é uma substância que o cérebro libera diante da chance de recompensa — ' +
+          'quando você acha que pode ganhar, não só quando ganha. Por isso o número subindo na ' +
+          'tela já dá a sensação, antes de qualquer dinheiro entrar.',
+        'O cérebro repete o que veio antes da recompensa: aqui, abrir o gráfico e clicar em ' +
+          'comprar. Recompensa certa formaria um hábito fraco, que um dia ruim desmancha. ' +
+          'Recompensa às vezes, sem hora marcada, forma um hábito muito mais forte: é o reforço ' +
+          'intermitente, a lógica das máquinas de aposta, que pagam pouco e de vez em quando.',
+        'Duas palavras que voltam sempre. Posição é o dinheiro que você tem parado num token ' +
+          '(abrir posição é comprar; fechar, vender), e o tamanho da posição é quanto do seu ' +
+          'dinheiro está ali. Operação é o ciclo completo, da compra à venda.',
+        'O estrago aparece como entusiasmo, não como perda. O sinal é a rotina mudando sem ' +
+          'você decidir: aplicativo aberto em horários novos, operação em dia sem nada para ' +
+          'operar, preço checado cada vez mais. Nenhum passo parece errado sozinho.',
       ],
       exemplo: {
         titulo: 'Como o laço aperta, passo a passo',
         passos: [
-          'Você acerta algumas operações seguidas — nenhuma delas por um motivo que você ' +
-            'saiba explicar por escrito.',
-          'Passa a operar mais vezes, porque operar virou a parte boa do dia.',
-          'Com posições maiores, porque o tamanho antigo agora parece tímido perto do que ' +
-            'você "podia ter ganhado".',
-          'E com menos checagem, porque checar atrasa a entrada e as últimas vezes deram ' +
-            'certo sem checar.',
-          'O ganho de ontem financia o erro de amanhã: o dinheiro que sobrou dos acertos é ' +
-            'exatamente o que permite fazer a operação grande e sem checagem que devolve tudo.',
+          'Você acerta algumas operações seguidas, sem motivo que saiba explicar por escrito.',
+          'Passa a operar mais vezes: operar virou a parte boa do dia.',
+          'Com posições maiores: o tamanho antigo parece tímido perto do que você "podia ter ' +
+            'ganhado".',
+          'E com menos checagem: nas últimas vezes deu certo sem checar.',
+          'O ganho de ontem financia o erro de amanhã: o dinheiro dos acertos paga a operação ' +
+            'grande e sem checagem que devolve tudo.',
         ],
       },
       paragrafosFinais: [
-        'O erro que essa ideia evita é o de ler uma sequência boa como prova de habilidade. ' +
-          'Num mercado que se mexe tanto, acertar várias vezes seguidas acontece com quem sabe ' +
-          'e com quem não sabe — e o cérebro não distingue as duas coisas, porque a dopamina é ' +
-          'a mesma nos dois casos.',
-        'Quem entende o mecanismo troca de pergunta. Sai de "estou ganhando?" e entra em "eu ' +
-          'decidi isto, ou fui puxado até aqui?". É a segunda pergunta que protege a conta, e ' +
-          'ela só tem resposta honesta se a decisão estiver escrita em algum lugar — que é ' +
-          'exatamente o assunto da próxima seção.',
+        'O erro que isso evita é ler sequência boa como habilidade: num mercado que se mexe ' +
+          'tanto, acertos seguidos acontecem com quem sabe e com quem não sabe, e a dopamina é ' +
+          'a mesma. Troque "estou ganhando?" por "eu decidi isto, ou fui puxado até aqui?". Só ' +
+          'a decisão escrita, assunto da próxima seção, responde com honestidade.',
       ],
       detalhe: {
         titulo: 'de onde vem essa ideia',
         paragrafos: [
-          'Esse padrão é descrito em literatura de divulgação e em artigos revisados por pares ' +
-            'sobre jogo e investimento especulativo (disponíveis no PMC/NCBI).',
-          'Aqui ele é usado de forma educacional, para você reconhecer o mecanismo. Não é ' +
-            'material clínico, não serve para diagnóstico e não substitui ajuda profissional.',
+          'Esse padrão aparece em literatura de divulgação e em artigos revisados por pares ' +
+            '(conferidos por outros pesquisadores) sobre jogo e investimento especulativo, no ' +
+            'PMC/NCBI, acervo público de artigos científicos dos EUA.',
+          'Aqui ele serve para você reconhecer o mecanismo. Não é material clínico nem ' +
+            'diagnóstico, e não substitui ajuda profissional.',
         ],
       },
     },
@@ -191,38 +156,28 @@ export const modulo2 = {
       id: 'antidoto',
       titulo: 'O antídoto não é força de vontade',
       emUmaFrase:
-        'Você não vai conseguir ser outra pessoa na hora H. O que dá para fazer é chegar na ' +
-        'hora H com a decisão já tomada.',
+        'Na hora H você não vira outra pessoa. Dá para chegar nela com a decisão já tomada.',
       paragrafos: [
-        'Viés cognitivo é um atalho que o cérebro usa para decidir rápido. Não é burrice: é ' +
-          'economia — sem atalhos, ninguém atravessaria a rua. O problema é que cada atalho ' +
-          'erra sempre para o mesmo lado, e o mercado de memecoins é feito justamente do lado ' +
-          'para onde eles erram. Como o erro é sistemático, ele é previsível. E porque é ' +
-          'previsível, existe antídoto.',
-        'O antídoto não é força de vontade, e vale entender por quê. Força de vontade é um ' +
-          'recurso que acaba: ela depende de você estar descansado, sem pressa e sem plateia. ' +
-          'Com o gráfico piscando, um grupo gritando e o preço subindo sem você, é exatamente ' +
-          'quando ela está no fim. Contar com ela nesse momento é como combinar de fazer dieta ' +
-          'e resolver isso na frente do bolo. Ninguém vence um viés cognitivo no impulso.',
-        'O que funciona é mudar a hora da decisão. Você decide antes, frio, sem nada em risco ' +
-          'naquele segundo, e deixa a decisão escrita. Na hora do impulso você não decide ' +
-          'nada: você executa o que já estava escrito. A regra escrita é o seu "eu calmo" ' +
-          'mandando no seu "eu empolgado" — e ela só manda se estiver escrita mesmo, porque ' +
-          'uma regra lembrada de cabeça é uma regra negociável.',
-        'Escrever antes quer dizer cinco coisas concretas, que estão na figura acima e voltam ' +
-          'nos próximos módulos. Tese é a frase que explica por que este token subiria. ' +
-          'Catálise é o evento concreto que faria isso acontecer, com data ou prazo — sem ' +
-          'catálise clara não é tese, é aposta. Alvos de realização são os preços em que você ' +
-          'já combinou vender um pedaço; realizar é justamente isso, transformar parte do ' +
-          'lucro de tela em dinheiro de verdade. Tempo de espera é o intervalo entre "quero ' +
-          'comprar" e "comprei": 5, 10 ou 30 minutos, o suficiente para o impulso passar e a ' +
-          'tese continuar de pé — ou não. Teto de perda é quanto você aceita perder por ' +
-          'operação e por dia; quando bate, você para de verdade, e não "só mais uma".',
+        'Viés cognitivo é um atalho que o cérebro usa para decidir rápido. Não é burrice, é ' +
+          'economia; o problema é que cada atalho erra sempre para o mesmo lado, e o mercado de ' +
+          'memecoins vive desse lado. Erro previsível tem antídoto.',
+        'Esse antídoto não é força de vontade: ela acaba justo quando o gráfico pisca, o grupo ' +
+          'grita e o preço sobe sem você. É resolver a dieta na frente do bolo. O que funciona ' +
+          'é mudar a hora da decisão: decidir antes, frio, deixar escrito e, no impulso, só ' +
+          'executar. Regra de cabeça é negociável; escrita, é o seu "eu calmo" mandando no "eu ' +
+          'empolgado".',
+        'Escrever antes quer dizer as cinco coisas da figura. Tese: a frase que explica por ' +
+          'que este token subiria. Catálise: o evento concreto, com data ou prazo, que faria ' +
+          'isso acontecer; sem ela, é aposta. Alvos de realização: os preços em que você já ' +
+          'combinou vender um pedaço (realizar é transformar parte do lucro de tela em ' +
+          'dinheiro de verdade). Tempo de espera: a pausa entre "quero comprar" e "comprei", ' +
+          'para o impulso passar. Teto de perda: quanto você aceita perder por operação e por ' +
+          'dia, sem "só mais uma".',
       ],
       listaTitulo: 'Na prática:',
       lista: [
         'Escreva a tese e a catálise antes de comprar (Módulo 4). Sem catálise clara, é aposta.',
-        'Defina os alvos de realização antes de entrar. Não depois de já estar no lucro.',
+        'Defina os alvos de realização antes de entrar, não depois de já estar no lucro.',
         'Imponha um tempo de espera (5, 10, 30 minutos) entre "quero comprar" e "comprei".',
         'Estabeleça um teto de perda por operação e por dia. Quando bater, pare de verdade.',
         'Nunca opere com dinheiro que faz falta. A maioria dos tokens vai a zero.',
@@ -230,26 +185,24 @@ export const modulo2 = {
       exemplo: {
         titulo: 'A mesma tarde, com e sem regra escrita',
         passos: [
-          'Sem regra: o preço sobe, você compra em segundos e só depois começa a pensar em ' +
-            'quanto vender e quando sair.',
-          'Com regra: você escreve tese e catálise antes de qualquer clique. Se não conseguir ' +
-            'escrever a catálise, a operação acaba ali — de graça.',
-          'Com regra: você marca os alvos antes de entrar, por exemplo vender uma parte no 2x ' +
-            'e outra parte no 5x, e anota o teto de perda daquela operação.',
-          'Com regra: você deixa os 10 minutos de espera passarem. Se a tese continuar de pé ' +
-            'depois deles, aí sim entra, com tamanho reduzido.',
-          'No fim do mês a diferença não é ter acertado mais vezes. É que as perdas ficaram ' +
-            'do tamanho que você escolheu, e não do tamanho que o susto escolheu.',
+          'Sem regra: o preço sobe, você compra em segundos e só depois pensa em quanto vender ' +
+            'e quando sair.',
+          'Com regra: tese e catálise escritas antes do clique. Sem catálise, a operação acaba ' +
+            'ali, de graça.',
+          'Com regra: alvos marcados antes (uma parte no 2x, outra no 5x) e teto de perda ' +
+            'anotado.',
+          'Com regra: passam os 10 minutos de espera. Se a tese continua de pé, você entra, ' +
+            'com tamanho reduzido.',
+          'No fim do mês, suas perdas ficaram do tamanho que você escolheu, não do que o susto ' +
+            'escolheu.',
         ],
       },
       paragrafosFinais: [
-        'O erro que essa ideia evita é o de achar que já se protegeu porque entendeu. ' +
-          'Entender o viés não protege ninguém: a leitura acontece no seu "eu calmo" e o ' +
-          'prejuízo acontece no seu "eu empolgado". Só a regra escrita atravessa os dois.',
-        'E a regra é sua: ela depende do seu dinheiro e do seu prazo. Nada aqui é recomendação ' +
-          'de compra ou de venda. O único item da lista acima que não admite ajuste é o ' +
-          'último — a maioria dos tokens vai a zero, então nunca opere com dinheiro que faz ' +
-          'falta.',
+        'O erro que isso evita é achar que entender já protege. Você entende com o "eu calmo" ' +
+          'e perde com o "eu empolgado"; só a regra escrita atravessa os dois.',
+        'A regra é sua, do seu dinheiro e do seu prazo; nada aqui é recomendação de compra ou ' +
+          'de venda. Só o último item da figura não admite ajuste: nunca opere com dinheiro ' +
+          'que faz falta.',
       ],
     },
   ],
@@ -266,12 +219,12 @@ export const modulo2 = {
   figuraDaAtencao: {
     comChao: {
       rotulo: 'Ação com empresa',
-      texto: 'Produto, receita e caixa ficam embaixo do preço. Eles seguram um chão.',
+      texto: 'Produto, receita e caixa embaixo do preço seguram um chão.',
       legenda: 'O bloco roxo é o chão: lucro e caixa.',
     },
     semChao: {
       rotulo: 'Memecoin',
-      texto: 'Não há produto, receita nem utilidade. Embaixo do preço só tem atenção.',
+      texto: 'Sem produto, receita nem utilidade: embaixo do preço só tem atenção.',
       legenda: 'Tracejado: não existe chão nenhum.',
     },
     sequencia: [
@@ -282,14 +235,13 @@ export const modulo2 = {
     ],
     legenda:
       'Atenção é escassa e muda de lugar. Por isso o mesmo token pode subir 10x em horas e ' +
-      'voltar ao ponto de partida no mesmo dia — isso não é anomalia, é o funcionamento ' +
-      'normal desse mercado.',
+      'voltar ao ponto de partida no mesmo dia — não é anomalia, é o normal desse mercado.',
     // Alternativa em texto da figura inteira (leitor de tela).
     descricao:
-      'Numa ação com empresa, produto, receita e caixa ficam embaixo do preço e seguram um ' +
-      'chão. Numa memecoin não há produto, receita nem utilidade: embaixo do preço só tem ' +
-      'atenção, e não existe chão. A atenção cresce, o preço cresce junto, a multidão acha o ' +
-      'próximo token, a atenção vai embora e o preço vai atrás.',
+      'Ação com empresa: produto, receita e caixa embaixo do preço seguram um chão. ' +
+      'Memecoin: sem produto, receita nem utilidade, só atenção embaixo do preço, e nenhum ' +
+      'chão. A atenção cresce, o preço cresce junto, a multidão acha o próximo token, a ' +
+      'atenção vai embora e o preço vai atrás.',
   },
 
   // "Dopamina e reforço intermitente": o laço em círculo. As 5 etapas curtas
@@ -301,9 +253,8 @@ export const modulo2 = {
     etapas: ['Alta na tela', 'Dopamina', 'Opera mais vezes', 'Posições maiores', 'Menos checagem'],
     centro: 'e o laço aperta',
     legenda:
-      'Como a recompensa vem às vezes, e não sempre, o hábito fica mais reforçado — é o ' +
-      '"reforço intermitente". Cada alta na tela libera dopamina, e o cérebro aprende que ' +
-      'olhar o gráfico e clicar em comprar traz recompensa.',
+      'Cada alta na tela libera dopamina. Como a recompensa vem às vezes, e não sempre, o ' +
+      'hábito fica mais forte: é o "reforço intermitente".',
     descricao:
       '1 Alta na tela → 2 Dopamina → 3 Opera mais vezes → 4 Posições maiores → 5 Menos ' +
       'checagem → volta a 1, e o laço aperta. O ganho de ontem financia o erro de amanhã.',
@@ -333,13 +284,13 @@ export const modulo2 = {
       nome: 'FOMO',
       subtitulo: 'Fear of missing out — medo de ficar de fora',
       gatilho:
-        'Você vê o gráfico subindo sem você e sente que esta é a última chance da sua vida. ' +
-        'Compra correndo, sem checar contrato, liquidez nem nada.',
+        'O gráfico sobe sem você e parece a última chance da sua vida. Você compra correndo, ' +
+        'sem checar contrato, liquidez nem nada.',
       quandoAparece: 'Logo depois de um pump que você assistiu de fora.',
       antidoto:
-        'Aceite que perder oportunidade é o custo normal de operar com regra — e que existe ' +
-        'token novo toda hora. Use o tempo de espera: se depois de 10 minutos a tese ainda ' +
-        'fizer sentido por escrito, aí sim considere entrar, com tamanho reduzido.',
+        'Perder oportunidade é o custo normal de operar com regra: existe token novo toda ' +
+        'hora. Espere 10 minutos; se a tese ainda fizer sentido por escrito, aí sim considere ' +
+        'entrar, com tamanho reduzido.',
       custo: 'É o mecanismo número 1 de compra no topo.',
     },
     {
@@ -348,13 +299,13 @@ export const modulo2 = {
       subtitulo: 'Se todo mundo está comprando, deve estar certo',
       gatilho:
         'Milhares de posts, um grupo eufórico e vários influenciadores repetindo o mesmo ' +
-        'ticker. Parece validação — e é só volume de vozes.',
+        'token. Parece validação, e é só volume de vozes.',
       quandoAparece: 'Quando a timeline e os grupos são inundados pelo mesmo token.',
       antidoto:
-        'Separe barulho de evidência. Volume de posts não é liquidez, não é número de holders ' +
-        'e não é contrato auditável. Antes de dar peso a qualquer post, cheque LP, authorities ' +
-        'e concentração dos maiores holders.',
-      custo: 'Prova social é fabricável: bots e calls pagos custam pouco.',
+        'Separe barulho de evidência: volume de posts não é liquidez, nem holders, nem ' +
+        'contrato auditável. Antes de confiar num post, cheque liquidez, permissões do ' +
+        'contrato e concentração dos maiores holders.',
+      custo: 'Prova social é fabricável: robôs e posts pagos custam pouco.',
     },
     {
       id: 'custo-afundado',
@@ -365,9 +316,9 @@ export const modulo2 = {
         'já gasto vira argumento para gastar mais tempo (e, muitas vezes, mais dinheiro).',
       quandoAparece: 'Na fase de Degradação, quando a atenção já migrou para outro token.',
       antidoto:
-        'O dinheiro já perdido não volta por você segurar. A pergunta certa não é "quanto eu ' +
-        'já perdi?", é "com o preço de hoje, eu compraria este token agora?". Se a resposta ' +
-        'for não, a posição não deveria existir.',
+        'O dinheiro perdido não volta por você segurar. A pergunta não é "quanto já perdi?", ' +
+        'é "com o preço de hoje, eu compraria este token agora?". Se não, a posição não ' +
+        'deveria existir.',
       custo: 'É o que transforma uma perda de 30% numa perda de 100%.',
     },
     {
@@ -375,15 +326,15 @@ export const modulo2 = {
       nome: 'Excesso de confiança',
       subtitulo: 'Três acertos seguidos e você acha que pegou o jeito',
       gatilho:
-        'A sequência boa vira explicação: "eu tenho olho". O tamanho da posição dobra, a ' +
-        'checagem encolhe e o horário de operar se estende madrugada adentro.',
+        'A sequência boa vira explicação ("eu tenho olho"): a posição dobra, a checagem ' +
+        'encolhe e o horário de operar vai madrugada adentro.',
       quandoAparece: 'Depois da sua melhor semana, nunca depois da pior.',
       antidoto:
-        'Registre todas as operações, não só as boas. Em mercado de altíssima volatilidade, ' +
-        'sequência de acertos é estatisticamente esperada mesmo sem habilidade nenhuma. ' +
-        'Mantenha o tamanho da posição fixo por regra, não por humor.',
+        'Registre todas as operações, não só as boas. Num mercado que oscila tanto, sequência ' +
+        'de acertos é esperada mesmo sem habilidade nenhuma. Mantenha o tamanho da posição ' +
+        'fixo por regra, não por humor.',
       custo:
-        'A operação que quebra a banca costuma ser a maior — feita logo depois da melhor sequência.',
+        'A operação que zera a conta costuma ser a maior, feita logo depois da melhor sequência.',
     },
     {
       id: 'disposicao',
@@ -394,9 +345,8 @@ export const modulo2 = {
         'os ganhos são pequenos e as perdas são inteiras.',
       quandoAparece: 'Em toda posição aberta, o tempo todo.',
       antidoto:
-        'Inverta a assimetria por regra: alvos de realização parcial escalonados (parte no ' +
-        '2x, parte no 5x) e um limite de perda definido antes da entrada. A decisão de sair ' +
-        'não pode ser tomada no calor do gráfico.',
+        'Inverta isso por regra: realização parcial em etapas (parte no 2x, parte no 5x) e ' +
+        'limite de perda definido antes da entrada. Nunca decida a saída no calor do gráfico.',
       custo: 'Explica por que muita gente acerta mais do que erra e mesmo assim perde dinheiro.',
     },
   ],
@@ -408,100 +358,78 @@ export const modulo2 = {
   tabelaDosVieses: {
     titulo: 'Os cinco vieses: o que você pensa → o que acontece → o que fazer',
     emUmaFrase:
-      'São cinco, e cada um age numa hora diferente: dois fazem você entrar, dois fazem você ' +
-      'sair na hora errada, e um aumenta o tamanho da aposta sem você perceber.',
+      'São cinco, cada um numa hora: dois fazem você entrar, dois fazem você sair na hora ' +
+      'errada, e um aumenta a aposta sem você perceber.',
     paragrafos: [
-      'A tabela acima lê cada viés em três tempos. "O que você pensa" é a frase que passa ' +
-        'pela sua cabeça e parece razoável naquele momento. "O que acontece" é o resultado ' +
-        'prático dessa frase na sua conta. "O que fazer" é o antídoto — e repare que todos os ' +
-        'antídotos são coisas decididas antes, nunca reações no calor do gráfico.',
-      'Os dois primeiros fazem você entrar. FOMO é a sigla do inglês fear of missing out, o ' +
-        'medo de ficar de fora: você vê o gráfico subindo sem você e sente que esta é a última ' +
-        'chance da sua vida. Prova social é o outro: mil pessoas repetindo o mesmo ticker ' +
-        'parece confirmação, e é só volume de vozes. Ticker é o apelido curto do token, ' +
-        'aquelas três ou cinco letras com um cifrão na frente. Ele não é único: qualquer ' +
-        'pessoa pode lançar um token com o mesmo ticker. O que é único é o endereço do ' +
-        'contrato, às vezes escrito como CA, de contract address — é ele que você confere, ' +
-        'nunca o nome nem a imagem.',
-      'O antídoto da prova social manda separar barulho de evidência, e para isso é preciso ' +
-        'saber o que conta como evidência aqui. Nenhuma das quatro coisas do quadro abaixo se ' +
-        'vê num post; todas se veem na página do token. Enquanto isso, o que se vê no post é ' +
-        'barato de fabricar: bot é conta automatizada e call pago é post de divulgação ' +
-        'comprado. Os dois custam pouco e produzem exatamente a aparência de multidão.',
-      'Os dois seguintes agem depois que você já está dentro. Custo afundado é a tradução de ' +
-        'sunk cost: o dinheiro já gasto vira argumento para gastar mais. Com a posição em ' +
-        '−70%, vender parece assumir a perda, então você segura — e o que você está segurando ' +
-        'não é o token, é a sensação de ainda não ter errado. Efeito disposição é o gêmeo ' +
-        'dele: vender rápido o que sobe, para "garantir", e segurar para sempre o que cai, ' +
-        'para "não perder". Parece prudência e é o contrário: corta os ganhos no começo e ' +
-        'deixa as perdas correrem até o fim.',
-      'O quinto age no tamanho. Depois de três acertos seguidos, a sequência vira explicação ' +
-        '— "eu tenho olho" — e o tamanho da posição dobra enquanto a checagem encolhe. Só que ' +
-        'em mercado de altíssima volatilidade (volatilidade é o tamanho das oscilações de ' +
-        'preço) uma sequência de acertos é estatisticamente esperada mesmo sem habilidade ' +
-        'nenhuma. É por isso que a operação que quebra a banca costuma ser a maior, feita ' +
-        'logo depois da melhor sequência, e nunca depois da pior.',
+      'Repare na última coluna: todo antídoto é decidido antes, nunca no calor do gráfico.',
+      'FOMO é a sigla do inglês fear of missing out, o medo de ficar de fora. Na prova ' +
+        'social, mil pessoas repetindo o mesmo ticker parece confirmação. Ticker é o apelido ' +
+        'curto do token (três ou cinco letras com um cifrão na frente), e qualquer um pode ' +
+        'lançar outro token com o mesmo. Único é o endereço do contrato, às vezes escrito CA ' +
+        '(de contract address): é ele que você confere, nunca o nome nem a imagem.',
+      'O que se vê num post é barato de fabricar: bot é conta automatizada, e call pago é ' +
+        'post de divulgação comprado. Evidência é o quadro abaixo, que se vê na página do ' +
+        'token, nunca num post.',
+      'Custo afundado traduz sunk cost: com a posição em −70%, você não segura o token, e ' +
+        'sim a sensação de ainda não ter errado. O efeito disposição, gêmeo dele, parece ' +
+        'prudência e é o contrário: corta os ganhos cedo e deixa as perdas correrem.',
+      'No excesso de confiança, lembre: em mercado de altíssima volatilidade (volatilidade é ' +
+        'o tamanho das oscilações de preço), uma sequência de acertos é estatisticamente ' +
+        'esperada mesmo sem habilidade.',
     ],
     quadro: [
       {
         rotulo: 'Liquidez e LP',
         texto:
-          'Liquidez é quanto dinheiro está disponível no par de negociação para absorver ' +
-          'compras e vendas. Com pouca liquidez, a sua própria venda derruba o preço. LP é a ' +
-          'sigla de liquidity pool, o depósito que segura essa liquidez.',
+          'Quanto dinheiro há no pool do token (o reservatório do Módulo 1) para absorver ' +
+          'compras e vendas. Com pouca, a sua própria venda derruba o preço. LP é a sigla de ' +
+          'liquidity pool, o depósito que segura essa liquidez.',
       },
       {
         rotulo: 'Holders',
         texto:
-          'As carteiras que detêm o token. O que interessa não é o total de holders, é quanto ' +
-          'os maiores detêm juntos: se poucas carteiras seguram muito, elas decidem sozinhas ' +
-          'o que acontece com o preço.',
+          'As carteiras que têm o token. Importa quanto os maiores detêm juntos: se poucas ' +
+          'seguram muito, decidem sozinhas o preço.',
       },
       {
         rotulo: 'Authorities',
         texto:
-          'As permissões que sobraram no contrato do token. As duas que importam são a de ' +
-          'criar novas unidades e a de congelar as unidades que estão na sua carteira. ' +
-          'Revogar quer dizer abrir mão dessas permissões em definitivo.',
+          'As permissões que sobraram no contrato: criar novas unidades e congelar as que ' +
+          'estão na sua carteira. Revogar é abrir mão delas em definitivo.',
       },
       {
         rotulo: 'O que nada disso é',
         texto:
           'Volume de posts não é liquidez, não é número de holders e não é contrato ' +
-          'auditável. Um post pode te dar entusiasmo; ele não consegue te dar nenhum dos três.',
+          'auditável. Um post pode te dar entusiasmo, mas nenhum dos três.',
         destaque: true,
       },
     ],
     exemplo: {
       titulo: 'O mês de quem acertou mais do que errou e mesmo assim perdeu',
       passos: [
-        'Duas posições sobem 20%. Você realiza as duas "para garantir": dois ganhos pequenos ' +
-          'no bolso.',
-        'Uma terceira cai 60%. Você segura "para não perder", porque vender seria assumir a ' +
-          'perda.',
-        'Ela continua caindo e chega a −70%. Agora vender parece ainda mais impossível: "já ' +
-          'perdi tanto que agora tenho que esperar voltar".',
-        'A atenção migrou para outro token e não volta. A perda de 30% que dava para cortar ' +
-          'no começo virou perda de 100%.',
-        'No placar você acertou mais vezes do que errou. Na conta, o mês fechou no vermelho: ' +
-          'os ganhos foram pequenos e a perda foi inteira.',
+        'Duas posições sobem 20%. Você realiza as duas "para garantir".',
+        'Uma terceira cai 60%. Você segura "para não perder".',
+        'Ela chega a −70%: "já perdi tanto que agora tenho que esperar voltar".',
+        'A atenção migrou e não volta. A perda de 30% que dava para cortar no começo virou ' +
+          '100%.',
+        'Você acertou mais do que errou, e o mês fechou no vermelho: ganhos pequenos, perda ' +
+          'inteira.',
       ],
     },
     paragrafosFinais: [
-      'O erro que essa tabela evita é o de tratar cada uma dessas frases como opinião sua. ' +
-        'Elas não são: são atalhos que aparecem na cabeça de todo mundo, na mesma ordem e nas ' +
-        'mesmas horas. Reconhecer a frase — "é a última chance", "todo mundo está comprando", ' +
-        '"já perdi tanto que agora tenho que esperar" — é o sinal de que o viés está agindo, ' +
-        'e não de que você pensou.',
-      'E o antídoto de todos eles é o mesmo: precisa estar escrito antes. No momento em que ' +
-        'você mais precisa dele, já não dá para escrever.',
+      'O erro que a tabela evita é tratar essas frases como opinião sua: são atalhos que ' +
+        'aparecem na cabeça de todo mundo, nas mesmas horas. Ouvir "é a última chance" ou ' +
+        '"todo mundo está comprando" é sinal de viés agindo, não de pensamento.',
+      'E o antídoto precisa estar escrito antes: na hora em que você mais precisa dele, já ' +
+        'não dá para escrever.',
     ],
     detalhe: {
       titulo: 'os nomes em inglês, para procurar depois',
       paragrafos: [
-        'Se quiser ler sobre cada um fora daqui, os nomes em inglês são: FOMO (fear of ' +
-          'missing out), social proof (prova social), sunk cost (custo afundado), ' +
-          'overconfidence (excesso de confiança) e disposition effect (efeito disposição).',
+        'Para ler sobre cada um fora daqui: FOMO (fear of missing out), social proof (prova ' +
+          'social), sunk cost (custo afundado), overconfidence (excesso de confiança) e ' +
+          'disposition effect (efeito disposição).',
       ],
     },
     colunas: {
@@ -525,50 +453,32 @@ export const modulo2 = {
       'O gatilho do FOMO é o preço já ter subido. Se a vontade de comprar nasceu do gráfico, ' +
       'ela não é tese.',
     paragrafos: [
-      'O fluxograma acima é para usar no momento exato em que a vontade aparece, não depois. ' +
-        'São três perguntas, cada uma com uma saída que reprova. Não é teste de caráter, é ' +
-        'filtro. Ele existe porque, no minuto em que o preço está subindo, você não consegue ' +
-        'avaliar nada com calma — mas consegue, sim, responder sim ou não a três perguntas ' +
-        'curtas.',
-      'A primeira é a mais importante: a vontade nasceu do gráfico já ter subido? Se a ' +
-        'resposta for sim, é FOMO por definição. Repare na inversão de tempo. Numa decisão ' +
-        'com tese, você primeiro encontra um motivo e só então olha o preço. No FOMO, o preço ' +
-        'é o motivo. Aí o antídoto é um só, e é de relógio: espere 10 minutos antes de ' +
-        'qualquer clique. Dez minutos não fazem você perder nada que valesse a pena — se a ' +
-        'única coisa que a operação tinha era pressa, ela não tinha nada.',
-      'A segunda pergunta cobra o que a seção anterior pediu: existe tese e catálise ' +
-        'escritas, de antes? "De antes" quer dizer antes de o preço subir, e não escritas ' +
-        'agora para justificar a vontade de agora — essa diferença é a coisa mais fácil de ' +
-        'burlar e a mais cara de burlar. Sem catálise clara, é aposta, e aposta não entra.',
-      'A terceira cobra a saída: os alvos de realização e o limite de perda já estão ' +
-        'definidos? Definir depois de já estar no lucro não vale, porque aí quem define é a ' +
-        'euforia. E passar nas três não é autorização para comprar: ainda falta a checagem ' +
-        'técnica do token — contrato, liquidez, concentração de holders — que é assunto do ' +
-        'Módulo 3 e do Checklist. Passar nas três só quer dizer que a sua cabeça está em ' +
-        'condições de fazer essa checagem.',
+      'Use o fluxograma na hora em que a vontade aparece: com o preço subindo, você ainda ' +
+        'consegue responder sim ou não a três perguntas curtas.',
+      'A primeira é a mais importante. Numa decisão com tese, você primeiro acha um motivo e ' +
+        'só depois olha o preço; no FOMO, o preço é o motivo. Se a operação só tinha pressa, ' +
+        'esperar 10 minutos não tira de você nada que valesse a pena.',
+      'Na segunda, "de antes" quer dizer antes de o preço subir, e não escritas agora para ' +
+        'justificar a vontade de agora: é o ponto mais fácil e mais caro de burlar.',
+      'Na terceira, definir a saída depois de já estar no lucro não vale: aí quem define é a ' +
+        'euforia. E passar nas três não autoriza a compra. Falta a checagem técnica do token ' +
+        '(contrato, liquidez, concentração de holders), assunto do Módulo 3 e do Checklist.',
     ],
     exemplo: {
       titulo: 'Os 10 minutos, na prática',
       passos: [
-        'É noite. Um token que você nunca viu aparece na sua timeline com o gráfico em pé.',
-        'Você sente que precisa comprar agora. Primeira pergunta respondida: a vontade nasceu ' +
-          'do gráfico. É FOMO.',
-        'Em vez de clicar, você marca 10 minutos e usa esse tempo para tentar escrever a tese ' +
-          'e a catálise.',
-        'Se aos 10 minutos você não conseguiu escrever que evento concreto faria o preço ' +
-          'subir, a resposta da segunda pergunta é não — e a operação morre ali, sem custar ' +
-          'nada.',
-        'Se conseguiu escrever, ainda faltam os alvos e o limite de perda antes de entrar. E ' +
-          'a entrada é com tamanho reduzido.',
+        'É noite. Um token que você nunca viu aparece na timeline com o gráfico em pé.',
+        'A vontade de comprar agora nasceu do gráfico: é FOMO.',
+        'Em vez de clicar, você marca 10 minutos e tenta escrever tese e catálise.',
+        'Não achou um evento concreto que faria o preço subir? A operação morre ali, sem ' +
+          'custar nada.',
+        'Achou? Ainda faltam os alvos e o limite de perda. E a entrada é com tamanho reduzido.',
       ],
     },
     paragrafosFinais: [
-      'O erro que esse filtro evita é o de confundir oportunidade perdida com prejuízo. ' +
-        'Perder uma alta não tira dinheiro da sua conta; entrar sem tese tira. Aceite que ' +
-        'perder oportunidade é o custo normal de operar com regra — e que existe token novo ' +
-        'toda hora.',
-      'A aba seguinte mostra três casos em que a oportunidade que "não dava para perder" ' +
-        'durou horas. Quem ficou de fora não perdeu nada.',
+      'O erro que esse filtro evita é confundir oportunidade perdida com prejuízo. Perder ' +
+        'uma alta não tira dinheiro da sua conta; entrar sem tese tira. A aba "Casos reais" ' +
+        'mostra três oportunidades que "não dava para perder" e duraram horas.',
     ],
     inicio: 'Quero comprar agora',
     passos: [
@@ -611,78 +521,52 @@ export const modulo2 = {
   mapaDosTipos: {
     titulo: 'O mapa dos tipos de token',
     emUmaFrase:
-      'Saber que tipo você está olhando muda a pergunta que você faz. Cada um tem um motor ' +
-      'de atenção diferente — e 8 dos 10 são risco alto.',
+      'Saber o tipo muda a pergunta que você faz. Cada um tem um motor de atenção ' +
+      'diferente, e 8 dos 10 são risco alto.',
     paragrafos: [
-      'Classificar aqui não é decorar. A utilidade de saber o tipo é que cada tipo tem um ' +
-        'motor de atenção diferente — quer dizer, um motivo diferente para as pessoas ' +
-        'olharem — e motores diferentes quebram de jeitos diferentes. Um token que vive de ' +
-        'uma notícia morre quando a notícia envelhece. Um token que vive de um meme antigo ' +
-        'aguenta mais tempo, porque o meme não depende de cripto para existir. A pergunta ' +
-        'que você faz muda junto com o motor.',
-      'São 5 categorias e 10 tipos no mapa acima. "IA / agentes de IA" reúne os tokens que se ' +
-        'apresentam como inteligência artificial: de um lado o agente de verdade, um programa ' +
-        'com personalidade fixa que publica sozinho nas redes; do outro a narrativa "IA" sem ' +
-        'produto nenhum, em que a sigla é só marketing. "Comunidade / CTO" junta o token que ' +
-        'nasce de um grupo que já existia antes dele e o CTO. CTO é sigla de community ' +
-        'takeover, tomada pela comunidade: o criador abandona o projeto e um grupo de ' +
-        'voluntários assume as redes e o site, enquanto o token continua exatamente o mesmo.',
-      '"Memes orgânicos e culturais" são os que existiam fora de cripto antes de virar moeda. ' +
-        '"Narrativas virais" são os oportunistas: o token de notícia e o token que copia o ' +
-        'formato do que está dando certo no launchpad do momento — launchpad é o site onde ' +
-        'qualquer pessoa cria e lança um token em minutos. E "Figuras públicas" separa o ' +
-        'token que a própria pessoa anunciou daquele que usa o nome dela sem autorização ' +
-        'nenhuma.',
-      'Três palavras aparecem nos alertas dos cards e vale fixar agora. Dev é o ' +
-        'desenvolvedor, quem criou o token. Supply é a quantidade total de unidades que ' +
-        'existem daquele token — e o que importa não é o número em si, é quanto dele está na ' +
-        'mão de poucos, porque quem tem muito pode vender tudo de uma vez. Rug pull, ou só ' +
-        'rug, é quando quem está por dentro tira a liquidez ou despeja o supply de uma vez e ' +
-        'o preço vai a praticamente nada em segundos: "puxar o tapete", ao pé da letra.',
-      'Repare no que o mapa não tem: nenhum tipo é risco baixo. 8 dos 10 são risco alto, e os ' +
-        'dois que ficam em risco médio são médios por motivos limitados. O token de ' +
-        'comunidade nativa é médio porque comunidade real reduz o risco de rug — há gente com ' +
-        'nome e reputação envolvida — mas comunidade não sustenta preço sozinha: atenção de ' +
-        'fora ainda precisa chegar. E o meme cultural de longa duração é médio porque ser ' +
-        'antigo não impede quedas de 90%; só torna o desaparecimento total um pouco menos ' +
-        'provável.',
+      'Cada tipo tem um motor de atenção, o motivo para as pessoas olharem, e cada motor ' +
+        'quebra de um jeito: token de notícia morre quando a notícia envelhece; meme antigo ' +
+        'aguenta mais, porque não depende de cripto para existir.',
+      'Alguns nomes do mapa pedem tradução. Agente de IA: um programa com personalidade fixa ' +
+        'que publica sozinho nas redes. CTO (community takeover, tomada pela comunidade): o ' +
+        'criador abandona o projeto, voluntários assumem as redes e o site, e o token continua ' +
+        'o mesmo. Launchpad: o site onde qualquer pessoa cria e lança um token em minutos.',
+      'E três palavras dos alertas. Dev: o desenvolvedor, quem criou o token. Supply: o total ' +
+        'de unidades do token; importa quanto está na mão de poucos, que podem vender tudo de ' +
+        'uma vez. Rug pull, ou só rug ("puxar o tapete"): quem está por dentro tira a liquidez ' +
+        'ou despeja o supply de uma vez, e o preço vai a quase nada em segundos.',
+      'Nenhum tipo é risco baixo. Mesmo os dois médios têm motivo limitado: comunidade real ' +
+        'reduz o risco de rug (há gente com nome e reputação envolvida), mas não sustenta ' +
+        'preço; e ser antigo não impede um meme de cair 90%.',
     ],
     exemplo: {
       titulo: 'O teste dos 30 segundos, e os dois extremos do mapa',
       passos: [
-        'Um token se apresenta como projeto de IA. O site fala em modelos, agentes e roadmap ' +
-          '— roadmap é a lista de entregas prometidas, dividida por trimestre.',
-        'Abra o produto e tente usar. Se em 30 segundos você não conseguiu usar nada, o ' +
-          'produto é o token.',
-        'Procure o repositório público, que é o lugar onde o código fica aberto para qualquer ' +
-          'um ler. Se não existe, não há como conferir se existe tecnologia.',
-        'No outro extremo: o meme do Shiba Inu é de 2013 e o token DOGE nasceu no mesmo ano. ' +
-          'Alguém que nunca ouviu falar de blockchain reconhece a imagem.',
-        'No meio fica a maioria. A WIF nasceu da imagem de um cão de gorro, arte única e ' +
-          'reconhecível, sem história anterior fora de cripto — e com dezenas de cópias de ' +
-          'mesmo nome e mesma arte aparecendo em horas.',
+        'Um token se diz projeto de IA; o site fala em modelos, agentes e roadmap (a lista de ' +
+          'entregas prometidas, por trimestre).',
+        'Abra o produto e tente usar. Se em 30 segundos não conseguiu, o produto é o token.',
+        'Procure o repositório público, onde o código fica aberto para leitura. Sem ele, não ' +
+          'há como conferir se existe tecnologia.',
+        'No outro extremo, o meme do Shiba Inu é de 2013, e o token DOGE nasceu no mesmo ano.',
+        'No meio fica a maioria, como a WIF: um cão de gorro sem história fora de cripto, com ' +
+          'dezenas de cópias de mesmo nome e mesma arte em horas.',
       ],
     },
     paragrafosFinais: [
-      'O erro que o mapa evita é o de olhar todo token com a mesma pergunta. Quem pergunta ' +
-        '"isso é bom?" não chega a lugar nenhum, porque nada aqui tem fundamento para ser ' +
-        'bom. Quem pergunta "de onde vem a atenção deste, e o que a faria acabar?" já sabe ' +
-        'onde olhar.',
-      'E uma regra vale para os dez: confira sempre o contrato, nunca o nome nem a imagem. ' +
-        'Impersonação — usar nome, rosto ou marca de alguém sem autorização — é o padrão, e ' +
-        'não a exceção. Sem anúncio no canal oficial da pessoa, assuma que é falso. Os nomes ' +
-        'citados aqui aparecem como exemplo de categoria, não como indicação.',
+      'O erro que o mapa evita é perguntar "isso é bom?" para todo token: nada aqui tem ' +
+        'fundamento para ser bom. A pergunta útil é "de onde vem a atenção deste, e o que a ' +
+        'faria acabar?".',
+      'E uma regra vale para os dez: confira o contrato, nunca o nome nem a imagem. ' +
+        'Impersonação (usar nome, rosto ou marca de alguém sem autorização) é o padrão: sem ' +
+        'anúncio no canal oficial da pessoa, assuma que é falso. Os nomes citados são exemplo ' +
+        'de categoria, não indicação.',
     ],
     detalhe: {
       titulo: 'duas ressalvas que não cabem no mapa',
       paragrafos: [
-        'No CTO, nem toda tomada pela comunidade vinga — e o supply que o dev original tinha ' +
-          'continua existindo. Vale checar se ele já vendeu ou se ainda pode vender: um ' +
-          'projeto "adotado" não apaga o que ficou na carteira de quem saiu.',
-        'Os tokens de agente de IA são uma categoria consolidada desde 2024, mas os nomes ' +
-          'específicos mudam a cada ciclo; por isso o mapa descreve o tipo e não fica preso a ' +
-          'exemplos que envelhecem. Automatizar posts é barato e não exige tecnologia ' +
-          'própria: "ter um agente" não é diferencial técnico nem garantia de nada.',
+        'No CTO, um projeto "adotado" não apaga o que ficou na carteira de quem saiu.',
+        'Agentes de IA são categoria consolidada desde 2024, mas os nomes mudam a cada ciclo; ' +
+          'por isso o mapa descreve o tipo, sem exemplos que envelhecem.',
       ],
     },
     centro: 'Tipos de token',
@@ -708,11 +592,11 @@ export const modulo2 = {
       nome: 'Token de agente de IA',
       categoria: 'ia',
       descricao:
-        'Um bot com personalidade própria posta sozinho nas redes e tem um token associado. ' +
-        'O produto é o próprio personagem: o token vale enquanto o personagem chamar atenção.',
+        'Um bot com personalidade própria posta sozinho nas redes e tem um token associado, ' +
+        'que vale enquanto o personagem chamar atenção.',
       comoReconhecer:
         'Conta automatizada com identidade fixa, publicando sem parar, e um contrato ' +
-        'divulgado na bio do perfil.',
+        'divulgado na bio.',
       exemplos: ['Categoria consolidada desde 2024; os nomes específicos mudam a cada ciclo'],
       risco: 'alto',
       alerta:
@@ -724,11 +608,11 @@ export const modulo2 = {
       nome: 'Token de narrativa "IA" sem produto',
       categoria: 'ia',
       descricao:
-        'Usa a palavra IA no nome, na arte e no texto de divulgação, sem nenhum agente, ' +
-        'modelo ou produto por trás. A IA é o marketing.',
+        'Usa "IA" no nome, na arte e na divulgação, sem agente, modelo ou produto por trás. ' +
+        'A IA é o marketing.',
       comoReconhecer:
-        'Site com jargão genérico, nenhum repositório público, nenhuma demonstração ' +
-        'funcionando e roadmap cheio de trimestres vagos.',
+        'Site com jargão genérico, sem repositório público, sem demonstração funcionando e ' +
+        'com roadmap de trimestres vagos.',
       exemplos: [],
       risco: 'alto',
       alerta: 'Se você não consegue usar o produto em 30 segundos, o produto é o token.',
@@ -738,16 +622,16 @@ export const modulo2 = {
       nome: 'CTO (community takeover)',
       categoria: 'comunidade',
       descricao:
-        'O criador abandona o projeto e a comunidade assume: novas redes sociais, novo site, ' +
-        'novos organizadores. O token continua o mesmo; quem cuida dele é que muda.',
+        'O criador abandona o projeto e a comunidade assume: novas redes, novo site, novos ' +
+        'organizadores. O token é o mesmo; muda quem cuida dele.',
       comoReconhecer:
         'Anúncio público do takeover, contas oficiais transferidas e dev original sumido ' +
         'ou tendo renunciado ao controle.',
       exemplos: [],
       risco: 'alto',
       alerta:
-        'Nem todo CTO vinga. E o supply que o dev original tinha continua existindo — cheque ' +
-        'se ele já vendeu ou se ainda pode vender.',
+        'Nem todo CTO vinga, e o supply do dev original continua existindo: cheque se ele já ' +
+        'vendeu ou ainda pode vender.',
     },
     {
       id: 'comunidade-nativa',
@@ -755,7 +639,7 @@ export const modulo2 = {
       categoria: 'comunidade',
       descricao:
         'Nasce de um grupo que já existia antes do token: um servidor de Discord, um fórum, ' +
-        'uma cena local. A comunidade não foi comprada, ela veio junto.',
+        'uma cena local. A comunidade veio junto, não foi comprada.',
       comoReconhecer:
         'Histórico de conversa anterior ao lançamento, membros que se conhecem pelo nome e ' +
         'piadas internas antigas.',
@@ -770,11 +654,10 @@ export const modulo2 = {
       nome: 'Meme cultural de longa duração',
       categoria: 'cultural',
       descricao:
-        'O meme existia e já era popular muito antes do token. O token é a expressão ' +
-        'financeira de algo que a cultura carrega há anos.',
+        'O meme já era popular muito antes do token. O token é a expressão financeira de ' +
+        'algo que a cultura carrega há anos.',
       comoReconhecer:
-        'O meme sobrevive fora do universo cripto — alguém que nunca ouviu falar de ' +
-        'blockchain reconhece a imagem.',
+        'O meme vive fora de cripto: quem nunca ouviu falar de blockchain reconhece a imagem.',
       exemplos: ['DOGE — o meme do Shiba Inu é de 2013 e o token nasceu no mesmo ano'],
       risco: 'medio',
       alerta:
@@ -800,22 +683,22 @@ export const modulo2 = {
       nome: 'Token de evento ou notícia',
       categoria: 'narrativa',
       descricao:
-        'Nasce nas horas seguintes a um acontecimento: uma declaração, um vídeo, um ' +
-        'escândalo. Aposta num pico curto de busca e de conversa.',
+        'Nasce horas depois de um acontecimento (uma declaração, um vídeo, um escândalo) e ' +
+        'aposta num pico curto de busca e de conversa.',
       comoReconhecer: 'Lançado poucos minutos depois da notícia; o nome copia a manchete.',
       exemplos: [],
       risco: 'alto',
       alerta:
         'Janela de atenção curtíssima e vários tokens disputando o mesmo assunto. Costuma ' +
-        'haver mais vendedor do que comprador já na primeira hora.',
+        'haver mais vendedor que comprador já na primeira hora.',
     },
     {
       id: 'tendencia-plataforma',
       nome: 'Token de tendência de plataforma',
       categoria: 'narrativa',
       descricao:
-        'Copia o formato do que está performando no launchpad da vez — mesmo tema, mesma ' +
-        'estética, mesma mecânica — para pegar carona no fluxo de quem garimpa ali.',
+        'Copia o formato do que está dando certo no launchpad da vez — mesmo tema, estética ' +
+        'e mecânica — para pegar carona em quem garimpa ali.',
       comoReconhecer: 'Vários tokens quase idênticos lançados no mesmo dia, na mesma plataforma.',
       exemplos: [],
       risco: 'alto',
@@ -826,8 +709,8 @@ export const modulo2 = {
       nome: 'Token oficial de figura pública',
       categoria: 'figura-publica',
       descricao:
-        'Lançado, assinado ou publicamente endossado pela própria pessoa. Endosso real, ' +
-        'risco real: os casos mais documentados de 2025 são exatamente desse tipo.',
+        'Lançado, assinado ou endossado publicamente pela própria pessoa. Endosso real, ' +
+        'risco real: os casos mais documentados de 2025 são desse tipo.',
       comoReconhecer: 'Anúncio nas contas oficiais e verificadas da própria pessoa.',
       exemplos: ['TRUMP', 'MELANIA', 'LIBRA — veja a aba "Casos reais"'],
       risco: 'alto',
@@ -840,8 +723,8 @@ export const modulo2 = {
       nome: 'Token não-oficial com nome de terceiro',
       categoria: 'figura-publica',
       descricao:
-        'Usa nome, rosto ou marca de alguém sem autorização nenhuma, contando com a confusão ' +
-        'para atrair compradores.',
+        'Usa nome, rosto ou marca de alguém sem autorização, contando com a confusão para ' +
+        'atrair compradores.',
       comoReconhecer:
         'Nenhuma menção nas contas oficiais da pessoa; o contrato só circula em grupos e em ' +
         'respostas de posts.',
@@ -863,8 +746,8 @@ export const modulo2 = {
       chain: 'Solana',
       data: 'Lançada em 17/01/2025',
       resumo:
-        'Em cerca de 24 horas virou a segunda maior memecoin do mercado, atrás apenas do ' +
-        'Dogecoin. Depois despencou e passou a operar por uma fração do topo.',
+        'Em cerca de 24 horas virou a segunda maior memecoin do mercado, atrás só do ' +
+        'Dogecoin. Depois despencou para uma fração do topo.',
       numeros: [
         { rotulo: 'Pico de preço', valor: 'cerca de US$ 73 a US$ 75' },
         { rotulo: 'Pico de market cap', valor: 'cerca de US$ 15 bilhões em ~24h' },
@@ -873,8 +756,8 @@ export const modulo2 = {
       ],
       fontes: ['CoinGecko'],
       licao:
-        'A atenção máxima aconteceu no primeiro dia. Quem chegou no segundo dia comprou de ' +
-        'quem estava saindo.',
+        'A atenção máxima foi no primeiro dia: quem chegou no segundo comprou de quem estava ' +
+        'saindo.',
     },
     {
       id: 'melania',
@@ -883,8 +766,8 @@ export const modulo2 = {
       chain: 'Solana',
       data: 'Lançada em janeiro de 2025',
       resumo:
-        'Lançada poucos dias depois da TRUMP, aproveitando a mesma onda de atenção. A queda ' +
-        'foi mais rápida e mais profunda.',
+        'Lançada poucos dias depois da TRUMP, na mesma onda de atenção. A queda foi mais ' +
+        'rápida e mais profunda.',
       numeros: [
         { rotulo: 'Pico de preço', valor: 'cerca de US$ 13,73' },
         {
@@ -899,8 +782,8 @@ export const modulo2 = {
       ],
       fontes: ['Bloomberg (06/02/2025)', 'Messari (dezembro de 2025)'],
       licao:
-        'O segundo token da mesma narrativa aproveita a atenção que sobrou — e ela sobra ' +
-        'por muito menos tempo.',
+        'O segundo token da mesma narrativa pega a atenção que sobrou, e ela sobra por muito ' +
+        'menos tempo.',
     },
     {
       id: 'libra',
@@ -910,8 +793,8 @@ export const modulo2 = {
       data: '14/02/2025, Argentina',
       resumo:
         'Promovida publicamente pelo presidente argentino Javier Milei. Subiu e desabou no ' +
-        'mesmo dia, com evidência on-chain de saques de insiders. Virou investigação de ' +
-        'fraude na Argentina.',
+        'mesmo dia, com evidência on-chain de saques de insiders, e virou investigação de ' +
+        'fraude.',
       numeros: [
         { rotulo: 'Pico de market cap', valor: 'cerca de US$ 4,56 bilhões em 14/02/2025' },
         { rotulo: 'Queda', valor: 'cerca de 94%, para ~US$ 257 milhões, em cerca de 11 horas' },
@@ -933,16 +816,15 @@ export const modulo2 = {
   rotulosDosCasos: { licao: 'Lição', fontes: 'Fontes: ' },
 
   licaoDosCasos:
-    'Hype e endosso de celebridade não garantem durabilidade. Nos três casos o pico de ' +
-    'atenção durou horas, e quem comprou perto do topo ficou com o prejuízo quando a ' +
-    'atenção migrou. É o padrão clássico de pump-and-dump — só que com nomes conhecidos ' +
-    'no anúncio.',
+    'Hype e endosso de celebridade não garantem durabilidade: nos três casos o pico de ' +
+    'atenção durou horas, e quem comprou perto do topo ficou com o prejuízo. É o padrão ' +
+    'clássico de pump-and-dump, com nomes conhecidos no anúncio.',
 
   // Não aparece na tela desde o redesenho (o desenho não tem esta nota; a nota
   // da linha do tempo, em `linhaDoTempoCasos`, diz o mesmo sobre as fontes).
   notaDosCasos:
-    'Números registrados pelas fontes citadas, nas datas indicadas. Cotação muda todo dia; ' +
-    'fato histórico, não. Nada aqui é recomendação de compra ou de venda.',
+    'Números das fontes citadas, nas datas indicadas. Cotação muda; fato histórico, não. ' +
+    'Nada aqui é recomendação de compra ou de venda.',
 
   // ---------------------------------------------------------------------------
   // As 4 fases (aba "As 4 fases") — o seletor das fases com o painel "o que
@@ -963,7 +845,7 @@ export const modulo2 = {
         'Nenhum histórico para comparar',
       ],
       oQueChecar: [
-        'Alguém consegue tirar a liquidez? (No pump.fun, a pool pós-graduação é do protocolo; fora dele, trava não prova que é seguro.)',
+        'Alguém consegue tirar a liquidez?',
         'Mint e freeze authority foram revogadas?',
         'Quanto os maiores holders detêm juntos?',
         'Houve compras em bloco (bundles) no lançamento?',
@@ -1057,83 +939,50 @@ export const modulo2 = {
       'Saber em que fase você está muda o que perguntar. É modelo didático, não previsão: ' +
       'muitos tokens pulam fases, e a maioria não passa da primeira.',
     paragrafos: [
-      'As quatro fases são um jeito de organizar o que você está vendo, não uma profecia. ' +
-        'Elas descrevem o caminho completo de um token que dá certo por algum tempo: nasce, ' +
-        'se acalma, ganha atenção nova e depois perde tudo. A maioria não faz esse caminho. A ' +
-        'utilidade do modelo não é adivinhar a próxima fase; é saber qual pergunta fazer na ' +
-        'fase em que você está.',
-      'No Lançamento tudo acontece em minutos. A idade do token se mede em minutos, há um ' +
-        'punhado de holders e o volume vem de bots e de snipers — sniper é um programa feito ' +
-        'para comprar no primeiro segundo do lançamento, antes de qualquer pessoa. O preço ' +
-        'sai de uma bonding curve ou do primeiro pool. Bonding curve é uma regra automática ' +
-        'em que o preço sobe conforme as pessoas compram e cai conforme vendem, sem precisar ' +
-        'de ninguém do outro lado; pool é o depósito onde o token e o dinheiro ficam juntos ' +
-        'para as trocas acontecerem. Nessa fase as checagens são todas sobre o contrato: dá ' +
-        'para alguém tirar a liquidez? As permissões de criar novas unidades (mint) e de ' +
-        'congelar (freeze) foram revogadas? Quanto os maiores holders detêm juntos? Houve ' +
-        'compras em bloco, os bundles — várias compras enfiadas na mesma transação, para o ' +
-        'mesmo dono parecer muita gente?',
-      'Vale guardar duas palavras que voltam logo abaixo. Pump.fun é um launchpad de ' +
-        'memecoins, e é de lá que vêm os números que acompanham este card. Graduação é o ' +
-        'momento em que um token junta compradores suficientes e sai da bonding curve para ' +
-        'uma pool normal numa DEX — DEX é corretora descentralizada, um site onde as trocas ' +
-        'acontecem direto entre carteiras, sem empresa no meio guardando o seu dinheiro. E ' +
-        'atenção à ressalva da própria checagem: no pump.fun, a pool que nasce depois da ' +
-        'graduação é do protocolo; fora dele, ver a liquidez travada não prova que é seguro.',
-      'Na Consolidação o preço lateraliza, quer dizer, anda de lado, sem altas nem quedas ' +
-        'violentas. Quem estava só pelo pump vai embora, e quem fica começa a virar ' +
-        'comunidade. As perguntas mudam de contrato para gente: a comunidade é de verdade ou ' +
-        'são bots repetindo a mesma frase? O dev continua presente e comunicando? Existe ' +
-        'alguma catálise concreta marcada para acontecer? Na Expansão por catálise, um evento ' +
-        'concreto traz atenção nova — uma listagem (quando uma corretora passa a oferecer o ' +
-        'token), um post de conta grande, a graduação para a DEX — e o preço destrava. A ' +
-        'pergunta mais útil aqui é desconfortável: a catálise que chegou é a que você tinha ' +
-        'previsto, ou é outra? Se for outra, você acertou por sorte, e sorte não se repete ' +
-        'por método.',
-      'Na Degradação a atenção já migrou. Volume caindo junto com o preço, holders ' +
-        'diminuindo, grupo esvaziando ou virando reclamação, máximas cada vez mais baixas — ' +
-        'máxima é o ponto mais alto que o preço tocou num período, e uma sequência de máximas ' +
-        'mais baixas é o desenho de quem está indo embora. Sem atenção não há comprador; sem ' +
-        'comprador o preço só tem um caminho. As duas perguntas desta fase são as mais curtas ' +
-        'do módulo: eu compraria este token pelo preço de hoje? Se a resposta é não, por que ' +
-        'eu ainda estou dentro?',
-      'Repare onde estão os riscos altos: 2 de 4, no começo e no fim. No Lançamento o risco é ' +
-        'comprar nos primeiros segundos disputando com bots que enxergam o lançamento antes ' +
-        'de você e já estão posicionados quando a sua ordem chega. Na Degradação o risco é ' +
-        'não sair, por custo afundado, segurando "até voltar" — é nesta fase que a maior ' +
-        'parte do capital de quem está começando é destruída. As duas fases do meio são risco ' +
-        'médio e têm armadilhas próprias: confundir consolidação com garantia (muito token ' +
-        'lateraliza e morre ali, sem nunca ter uma fase 3) e entrar no meio da expansão ' +
-        'achando que ainda é a fase 2, comprando de quem já vai realizar.',
-      '"A maioria vai a zero" é a frase mais repetida deste hub, e ela precisa de uma ' +
-        'explicação honesta, porque o número depende da régua. Nenhuma das fontes que ' +
-        'acompanham este card mede o preço chegando literalmente a zero. Uma mede quantos ' +
-        'tokens simplesmente param de negociar; a outra mede quantos ficam com a liquidez ' +
-        'abaixo de um valor mínimo, que é quando não há mais como vender sem derrubar tudo. ' +
-        'São réguas diferentes, dão números diferentes, e as duas descrevem a mesma coisa na ' +
-        'prática: o token continua existindo e não dá mais para sair dele. É isso que "vai a ' +
-        'zero" quer dizer.',
+      'As fases descrevem um token que dá certo por um tempo: nasce, se acalma, ganha ' +
+        'atenção nova e perde tudo. O modelo não adivinha a próxima; diz qual pergunta fazer ' +
+        'na fase em que você está.',
+      'O Lançamento traz os termos mais novos. Sniper é um programa que compra no primeiro ' +
+        'segundo, antes de qualquer pessoa. Bonding curve é uma regra automática: o preço sobe ' +
+        'quando compram e cai quando vendem, sem ninguém do outro lado; pool é o reservatório ' +
+        'do Módulo 1. Mint e freeze são as permissões de criar novas unidades e de congelar. ' +
+        'Bundles são várias compras enfiadas numa só transação, para um dono parecer muita ' +
+        'gente. Aqui, as checagens são todas sobre o contrato.',
+      'Pump.fun é um launchpad de memecoins, de onde vêm os números abaixo. Graduação é ' +
+        'quando um token junta compradores suficientes e sai da bonding curve para uma pool ' +
+        'normal numa DEX, a troca on-chain do Módulo 1.',
+      'Na Consolidação o preço lateraliza (anda de lado, sem altas nem quedas violentas) e as ' +
+        'perguntas mudam de contrato para gente. Na Expansão, a pergunta útil é ' +
+        'desconfortável: a catálise que chegou é a que você previu? Se for outra, você acertou ' +
+        'por sorte, e sorte não se repete por método.',
+      'Na Degradação, repare nas máximas. Máxima é o ponto mais alto que o preço tocou num ' +
+        'período; máximas cada vez mais baixas são o desenho de quem está indo embora. Sem ' +
+        'atenção não há comprador; sem comprador, o preço só tem um caminho.',
+      'Os riscos altos são 2 de 4, no começo e no fim: disputar os primeiros segundos com ' +
+        'bots, e segurar "até voltar" na Degradação, onde a maior parte do capital de quem ' +
+        'está começando é destruída.',
+      '"A maioria vai a zero" depende da régua. Nenhuma das fontes abaixo mede o preço ' +
+        'chegando literalmente a zero: medem tokens que param de negociar ou que ficam com ' +
+        'tão pouca liquidez que não dá mais para vender sem derrubar tudo. Nos dois casos, o ' +
+        'token existe e você não consegue sair dele.',
     ],
     paragrafosFinais: [
-      'O erro que as quatro fases evitam é o de usar a mesma cabeça o tempo todo. A pergunta ' +
-        'que protege no Lançamento ("dá para alguém tirar a liquidez?") não serve de nada na ' +
-        'Degradação, e a pergunta que salva na Degradação ("eu compraria isto hoje?") não faz ' +
-        'sentido no minuto zero de um token. Antes de decidir qualquer coisa, decida em que ' +
-        'fase você está olhando.',
-      'E lembre da moldura: isto é modelo didático, não previsão. Muitos tokens pulam fases, ' +
-        'a maioria não passa da primeira, e nada aqui é recomendação de compra ou de venda.',
+      'O erro que as fases evitam é usar a mesma pergunta o tempo todo: "dá para alguém ' +
+        'tirar a liquidez?" protege no Lançamento e não serve na Degradação; "eu compraria ' +
+        'isto hoje?" salva na Degradação e não faz sentido no minuto zero. Decida primeiro em ' +
+        'que fase você está. Nada aqui é recomendação de compra ou de venda.',
     ],
     detalhe: {
-      titulo: 'por que os dois números não batem entre si',
+      titulo: 'os números que não batem e a liquidez "travada"',
       paragrafos: [
-        'Os dois números que acompanham este card medem coisas diferentes, e por isso não ' +
-          'batem: um mede tokens que pararam de negociar, o outro mede tokens que ficaram sem ' +
-          'liquidez. Nenhum dos dois mede preço zerado, e nenhum dos dois mede fraude. Quando ' +
-          'alguém disser um número sozinho, a primeira pergunta a fazer é qual régua ele usou.',
-        'A plataforma citada contestou publicamente um desses relatórios, e a contestação ' +
-          'está registrada ao lado do número, com fonte e data. Os dois lados ficam à vista de ' +
-          'propósito: o número é forte o bastante para orientar o tamanho da sua posição, e ' +
-          'frágil o bastante para não virar acusação.',
+        'Os dois números abaixo não batem porque medem coisas diferentes, e nenhum mede ' +
+          'fraude. Quando alguém disser um número sozinho, pergunte qual régua ele usou.',
+        'A plataforma contestou publicamente um dos relatórios (a contestação está ao lado do ' +
+          'número, com fonte e data). O número é forte o bastante para orientar o tamanho da ' +
+          'sua posição, e frágil o bastante para não virar acusação.',
+        'Sobre "dá para alguém tirar a liquidez?": no pump.fun, a pool que nasce depois da ' +
+          'graduação é do protocolo (o programa da própria plataforma). Fora dele, ver a ' +
+          'liquidez "travada" (presa num contrato por um tempo) não prova que é seguro.',
       ],
     },
     rotuloDaLista: 'As quatro fases',
@@ -1209,12 +1058,12 @@ export const modulo2 = {
       {
         rotulo: 'O que move o preço de uma memecoin',
         valor: 'Olhos',
-        nota: 'Não fundamento: atenção. "O preço é feito de olhos" — quando a atenção migra, o preço vai junto.',
+        nota: 'Não fundamento: atenção. Quando a atenção migra, o preço vai junto.',
       },
       {
         rotulo: 'Fases de um ciclo típico',
         valor: '4',
-        nota: 'Lançamento, consolidação, expansão por catálise, degradação. Muitos tokens pulam fases — e a maioria não passa da primeira.',
+        nota: 'Lançamento, consolidação, expansão e degradação. Muitos tokens pulam fases, e a maioria não passa da primeira.',
       },
       {
         rotulo: 'Desfecho da maioria',
@@ -1228,12 +1077,12 @@ export const modulo2 = {
       {
         rotulo: 'Vieses que fazem quase todo o estrago',
         valor: '5',
-        nota: 'FOMO, prova social, custo afundado, excesso de confiança e efeito disposição. Cada um tem gatilho, momento e antídoto.',
+        nota: 'FOMO, prova social, custo afundado, excesso de confiança e efeito disposição.',
       },
       {
         rotulo: 'Mecanismo nº 1 de compra no topo',
         valor: 'FOMO',
-        nota: 'Você vê o gráfico subindo sem você e sente que é a última chance. Compra correndo, sem checar nada.',
+        nota: 'Medo de ficar de fora: o gráfico sobe sem você, parece a última chance, e você compra sem checar nada.',
         tom: 'alerta',
       },
       {
@@ -1248,7 +1097,7 @@ export const modulo2 = {
       {
         rotulo: 'Tipos de token catalogados',
         valor: '10',
-        nota: 'Em 5 categorias: IA, comunidade, memes culturais, narrativas virais e figuras públicas. Cada um com um motor de atenção diferente.',
+        nota: 'Em 5 categorias: IA, comunidade, memes culturais, narrativas virais e figuras públicas. Cada um com seu motor de atenção.',
       },
       {
         rotulo: 'Tipos com risco alto',
@@ -1259,7 +1108,7 @@ export const modulo2 = {
       {
         rotulo: 'O teste dos 30 segundos',
         valor: '30 s',
-        nota: '"Se você não consegue usar o produto em 30 segundos, o produto é o token." Vale para toda narrativa "IA" sem produto.',
+        nota: '"Se você não consegue usar o produto em 30 segundos, o produto é o token."',
       },
     ],
 
@@ -1278,7 +1127,7 @@ export const modulo2 = {
       {
         rotulo: 'Duração do pico de atenção nos três casos',
         valor: 'Horas',
-        nota: 'Quem comprou perto do topo ficou com o prejuízo quando a atenção migrou. Pump-and-dump com nomes conhecidos.',
+        nota: 'Quem comprou perto do topo ficou com o prejuízo quando a atenção migrou.',
         tom: 'alerta',
       },
     ],
@@ -1287,18 +1136,18 @@ export const modulo2 = {
       {
         rotulo: 'Fases com risco alto',
         valor: '2 de 4',
-        nota: 'Lançamento e degradação — o começo e o fim. É onde a atenção está no extremo, e onde mais se perde.',
+        nota: 'Lançamento e degradação, o começo e o fim: onde a atenção está no extremo e onde mais se perde.',
         tom: 'alerta',
       },
       {
         rotulo: 'Tempo de vida de um lançamento',
         valor: 'Minutos',
-        nota: 'Idade medida em minutos, punhado de holders, volume de bots e snipers. Nenhum histórico para comparar.',
+        nota: 'Idade medida em minutos, punhado de holders, volume vindo de robôs. Nenhum histórico para comparar.',
       },
       {
         rotulo: 'O que muda a pergunta certa',
         valor: 'A fase',
-        nota: 'Saber em que fase você está muda o que perguntar. É modelo didático, não previsão — muitos tokens pulam fases.',
+        nota: 'Saber a fase muda o que perguntar. É modelo didático, não previsão: muitos tokens pulam fases.',
       },
     ],
   },
@@ -1316,49 +1165,34 @@ export const modulo2 = {
       descricao: 'Os seis elementos que quase toda campanha repete — e o viés que cada um está tentando acionar em você.',
       paragrafos: [
         'Hype é o barulho organizado em volta de um token: posts, prints, gente animada, ' +
-          'urgência. Nem todo barulho é armado — às vezes a empolgação é sincera. Mas o ' +
-          'barulho armado tem forma fixa, e é a forma que você aprende a reconhecer aqui. O ' +
-          'post acima é esquemático: nenhum perfil ou token real foi copiado.',
-        'Cada elemento marcado está ali de propósito, mirando um viés específico dos cinco da ' +
-          'tabela anterior. O texto sem tese mira o FOMO: "vai 100x", "não fique de fora", ' +
-          'nenhum evento concreto, nenhum prazo, só o preço como motivo. O print do gráfico ' +
-          'mira o FOMO também, de outro jeito — ele mostra o que você perdeu, não o que vem, ' +
-          'e quem posta comprou antes do print. As métricas miram a prova social: milhares de ' +
-          'curtidas e dezenas de "eu comprei" que custam pouco para fabricar. E o perfil ' +
-          'grande e verificado mira a autoridade que você empresta automaticamente a quem tem ' +
-          'muitos seguidores, mesmo sabendo que ele muitas vezes recebe pelo post ou comprou ' +
-          'antes.',
-        'Repare que dois campos estão marcados em cor de alerta, e que eles funcionam em ' +
-          'par. O endereço do contrato na bio é onde o impostor mora: como o ticker é só ' +
-          'apelido e qualquer um pode repetir, quem busca pelo nome pode comprar o token ' +
-          'errado — e é o post que escolhe qual endereço você vai copiar. A pressa é o outro: ' +
-          '"últimas horas antes da listagem" existe para impedir exatamente a espera de 10 ' +
-          'minutos que o antídoto do FOMO pede. Urgência e endereço andam juntos porque a ' +
-          'pressa serve para você colar o endereço sem conferir na fonte oficial, que é o que ' +
-          'o Módulo 1 mandou fazer.',
+          'urgência. Às vezes a empolgação é sincera, mas o barulho armado tem forma fixa, e é ' +
+          'ela que você aprende a reconhecer.',
+        'Cada elemento mira um dos cinco vieses: a promessa sem tese e o print miram o FOMO; ' +
+          'curtidas e "eu comprei" miram a prova social; o perfil grande mira a autoridade que ' +
+          'você empresta a quem tem muitos seguidores.',
+        'Os dois campos em alerta andam juntos. Como qualquer um repete o ticker, é o post que ' +
+          'escolhe o endereço que você copia; e a pressa ("últimas horas antes da listagem" — ' +
+          'listagem é quando uma corretora passa a oferecer o token) serve para você colar esse ' +
+          'endereço sem esperar os 10 minutos nem conferir na fonte oficial, como o Módulo 1 ' +
+          'mandou.',
       ],
       exemplo: {
         titulo: 'Lendo o mesmo post duas vezes',
         passos: [
           'Primeira leitura, sem método: perfil grande, gráfico subindo, milhares de ' +
-            'curtidas, gente dizendo "eu comprei" e uma listagem chegando. Parece oportunidade ' +
-            'com confirmação de todos os lados.',
-          'Segunda leitura, elemento por elemento: a promessa não tem evento concreto nem ' +
-            'prazo, só o preço como motivo.',
-          'O print é de uma alta que já aconteceu, e quem postou comprou antes dela.',
-          'As curtidas e os "eu comprei" são compráveis: bots e calls pagos custam pouco.',
-          'O perfil grande pode ter sido pago ou ter comprado antes — endosso não é análise.',
-          'Sobra o quê? Um endereço na bio e uma pressa. Nenhuma tese, nenhuma catálise e ' +
-            'nenhuma checagem possível a partir do post.',
+            'curtidas, "eu comprei", listagem chegando. Parece oportunidade confirmada.',
+          'Segunda leitura: a promessa não tem evento concreto nem prazo.',
+          'O print é de uma alta que já aconteceu, e quem postou comprou antes.',
+          'Curtidas e "eu comprei" são compráveis: bots e calls pagos custam pouco.',
+          'O perfil grande pode ter sido pago ou ter comprado antes: endosso não é análise.',
+          'Sobra um endereço na bio e uma pressa. Nenhuma tese, nenhuma catálise, nenhuma ' +
+            'checagem possível a partir do post.',
         ],
       },
       paragrafosFinais: [
-        'O erro que essa leitura evita é o de tratar entusiasmo como informação. Entusiasmo é ' +
-          'barato de produzir e não diz nada sobre liquidez, sobre concentração de holders ou ' +
-          'sobre o que sobrou no contrato — as únicas coisas que você consegue conferir ' +
-          'sozinho, e nenhuma delas cabe num post.',
-        'E vale a direção do exercício: ele é defensivo, na lógica do módulo. A ideia é ' +
-          'reconhecer, não produzir.',
+        'O erro que essa leitura evita é tratar entusiasmo como informação. Entusiasmo é ' +
+          'barato e não diz nada sobre liquidez, concentração de holders ou o que sobrou no ' +
+          'contrato, as únicas coisas que você confere sozinho.',
       ],
       // Os seis campos do post. `rotulo` é o texto que aparece dentro do campo;
       // `alerta: true` pinta o campo de âmbar (os outros são ciano). A posição
@@ -1375,12 +1209,12 @@ export const modulo2 = {
         {
           painel: 'texto',
           titulo: 'A promessa sem tese',
-          texto: '"Vai 100x", "não fique de fora". Nenhum evento concreto, nenhum prazo — só o preço como motivo. É o FOMO sendo fabricado, não descrito.',
+          texto: '"Vai 100x", "não fique de fora". Nenhum evento, nenhum prazo: só o preço como motivo. É o FOMO sendo fabricado.',
         },
         {
           painel: 'grafico',
           titulo: 'O gráfico que já subiu',
-          texto: 'Print de vela verde é a isca do FOMO: mostra o que você perdeu, não o que vem. Quem posta comprou antes do print.',
+          texto: 'Print de alta é a isca do FOMO: mostra o que você perdeu, não o que vem. Quem posta comprou antes do print.',
         },
         {
           painel: 'metricas',
@@ -1429,56 +1263,43 @@ export const modulo2 = {
     titulo: 'Os três casos, na ordem em que aconteceram',
     descricao: 'Da estreia ao esquecimento, em semanas. Repare na distância entre o pico e a queda.',
     paragrafos: [
-      'Os três casos abaixo não estão aqui como fofoca nem como denúncia. Estão porque são os ' +
-        'mais documentados de 2025 e porque mostram, com número e data, o que as abas ' +
-        'anteriores explicaram em teoria: atenção que chega de repente também vai embora de ' +
-        'repente. Os três são da mesma chain — chain é a blockchain em que o token vive, e ' +
-        'aqui é a Solana nos três — e os três tiveram endosso de figura pública no anúncio.',
-      'A OFFICIAL TRUMP foi lançada em 17/01/2025. Em cerca de 24 horas virou a segunda maior ' +
-        'memecoin do mercado, atrás apenas do Dogecoin, com pico de market cap perto de US$ ' +
-        '15 bilhões e preço no topo entre cerca de US$ 73 e US$ 75. A lição não está na ' +
-        'subida, está no calendário: a atenção máxima aconteceu no primeiro dia. Quem chegou ' +
-        'no segundo dia comprou de quem estava saindo. Depois, o token passou a operar mais ' +
-        'de 96% abaixo do topo, perto de US$ 2,27 (CoinGecko).',
-      'A MELANIA MEME veio poucos dias depois, em janeiro de 2025, aproveitando a mesma onda ' +
-        'de atenção. O segundo token de uma narrativa sempre pega a atenção que sobrou, e ela ' +
-        'sobra por muito menos tempo: o pico de preço ficou perto de US$ 13,73 e o market cap ' +
-        'saiu de cerca de US$ 1,73 bilhão para cerca de US$ 164 milhões. Em 06/02/2025 a ' +
-        'queda já era de cerca de 90% (Bloomberg) e, até dezembro de 2025, passava de 99% do ' +
-        'pico (Messari).',
-      'A LIBRA é o caso mais curto e o mais grave. Lançada em 14/02/2025 na Argentina e ' +
-        'promovida publicamente pelo presidente Javier Milei, chegou a um pico de market cap ' +
-        'de cerca de US$ 4,56 bilhões no mesmo dia e caiu cerca de 94%, para cerca de US$ 257 ' +
-        'milhões, em cerca de 11 horas. Dois números explicam a velocidade. Cerca de 82% do ' +
-        'supply já estava desbloqueado no lançamento (Bubblemaps) — quer dizer, disponível ' +
-        'para venda desde o primeiro minuto, sem nenhuma trava de tempo. E cerca de 8 ' +
-        'carteiras de insiders sacaram cerca de US$ 107 milhões (Lookonchain). Insider é quem ' +
-        'estava por dentro antes do público; on-chain quer dizer que esses saques ficam ' +
-        'registrados na blockchain, à vista de qualquer pessoa que saiba olhar. O caso virou ' +
-        'investigação de fraude na Argentina.',
-      'Junte as duas coisas que a LIBRA teve ao mesmo tempo: concentração de supply e endosso ' +
-        'de autoridade, na mesma operação. São exatamente as duas coisas que você aprende a ' +
-        'checar neste hub, falhando juntas em 11 horas. E repare no espaço entre os marcos da ' +
-        'linha do tempo acima: entre o lançamento da TRUMP e a queda da MELANIA foram ' +
-        'semanas; entre a LIBRA nascer e a LIBRA cair, foram horas dentro do mesmo dia.',
+      'São os três casos mais documentados de 2025: atenção que chega de repente vai embora ' +
+        'de repente, com número e data. Os três são da mesma chain (a blockchain em que o ' +
+        'token vive, aqui a Solana) e tiveram endosso de figura pública.',
+      'A OFFICIAL TRUMP, lançada em 17/01/2025, virou em cerca de 24 horas a segunda maior ' +
+        'memecoin do mercado, atrás só do Dogecoin: pico de market cap perto de US$ 15 ' +
+        'bilhões, preço no topo entre cerca de US$ 73 e US$ 75. A atenção máxima foi no ' +
+        'primeiro dia; quem chegou no segundo comprou de quem saía. Depois, mais de 96% abaixo ' +
+        'do topo, perto de US$ 2,27 (CoinGecko).',
+      'A MELANIA MEME veio poucos dias depois, em janeiro de 2025, com a atenção que sobrou, ' +
+        'e ela sobra por muito menos tempo. Pico de preço perto de US$ 13,73; market cap de ' +
+        'cerca de US$ 1,73 bilhão para cerca de US$ 164 milhões; queda de cerca de 90% em ' +
+        '06/02/2025 (Bloomberg) e de mais de 99% do pico até dezembro de 2025 (Messari).',
+      'A LIBRA, o caso mais curto e mais grave, foi lançada em 14/02/2025 na Argentina e ' +
+        'promovida publicamente pelo presidente Javier Milei. No mesmo dia chegou a um pico de ' +
+        'market cap de cerca de US$ 4,56 bilhões e caiu cerca de 94%, para cerca de US$ 257 ' +
+        'milhões, em cerca de 11 horas. Cerca de 82% do supply já estava desbloqueado no ' +
+        'lançamento, livre para venda desde o primeiro minuto (Bubblemaps), e cerca de 8 ' +
+        'carteiras de insiders (quem estava por dentro antes do público) sacaram cerca de US$ ' +
+        '107 milhões (Lookonchain). Esses saques são on-chain: ficam registrados na ' +
+        'blockchain, à vista de quem souber olhar. Virou investigação de fraude.',
+      'A LIBRA juntou concentração de supply e endosso de autoridade, as duas coisas que você ' +
+        'aprende a checar, falhando juntas em 11 horas. Da TRUMP à queda da MELANIA foram ' +
+        'semanas; da LIBRA nascer a cair, horas.',
     ],
     paragrafosFinais: [
-      'O erro que esses três casos evitam é o de ler nome conhecido como garantia. É o ' +
-        'contrário: o nome conhecido é o que faz a atenção chegar toda de uma vez, e atenção ' +
-        'que chega toda de uma vez não tem para onde crescer depois. Endosso concentra ' +
-        'atenção num pico curto e depois a leva embora junto.',
-      'Os números acima foram registrados pelas fontes citadas, nas datas indicadas. Cotação ' +
-        'muda todo dia; fato histórico, não. Nada aqui é recomendação de compra ou de venda, ' +
-        'e os nomes aparecem como exemplo de categoria, não como julgamento de pessoa.',
+      'O erro que esses casos evitam é ler nome conhecido como garantia. O nome conhecido faz ' +
+        'a atenção chegar toda de uma vez, e aí ela não tem para onde crescer: endosso ' +
+        'concentra atenção num pico curto e depois a leva embora.',
+      'Nada aqui é recomendação de compra ou de venda, e os nomes são exemplo de categoria, ' +
+        'não julgamento de pessoa.',
     ],
     detalhe: {
       titulo: 'por que a MELANIA aparece só com o mês',
       paragrafos: [
-        'Na linha do tempo, dois marcos têm só o mês no arquivo (01/2025 e 12/2025), porque ' +
-          'foi só isso que a fonte registrou. Quando não dá para contar os dias, o intervalo ' +
-          'não é chutado: ele aparece como "cerca de", como "no mesmo mês", ou simplesmente ' +
-          'não aparece. Quando o dado não existe, o espaço fica vazio — e não preenchido por ' +
-          'estimativa.',
+        'Dois marcos têm só o mês (01/2025 e 12/2025), porque foi só isso que a fonte ' +
+          'registrou. Sem os dias, o intervalo não é chutado: aparece como "cerca de", como ' +
+          '"no mesmo mês", ou não aparece.',
       ],
     },
     marcos: [
@@ -1492,10 +1313,9 @@ export const modulo2 = {
     // MELANIA registrada só pelo mês (01/2025), não dá para dizer quantos dias
     // passaram até 06/02/2025: ali a pílula não sai.
     nota:
-      'Números registrados pelas fontes citadas em cada caso, nas datas indicadas. Fato ' +
-      'histórico, não recomendação. Dois marcos têm só o mês no arquivo (01/2025 e 12/2025): ' +
-      'quando o arquivo não permite contar os dias, o intervalo aparece como "cerca de" ou ' +
-      'como "no mesmo mês", e onde nem isso dá para dizer ele não aparece.',
+      'Números das fontes citadas em cada caso, nas datas indicadas. Fato histórico, não ' +
+      'recomendação. Dois marcos têm só o mês (01/2025 e 12/2025): sem os dias, o intervalo ' +
+      'aparece como "cerca de" ou "no mesmo mês", e onde nem isso dá, não aparece.',
   },
 
   // Por que cada alternativa errada do quiz não serve (o quiz mostra a da resposta escolhida).

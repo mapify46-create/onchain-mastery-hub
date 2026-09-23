@@ -27,14 +27,13 @@ export const modulo1 = {
     'aparecem só como exemplos de categoria, nunca como recomendação.',
 
   resumo:
-    'Este módulo ensina, do zero, como a blockchain funciona e por que ela é "imutável", ' +
-    'como ler uma transação num explorador de blocos, o que são chave privada, chave ' +
-    'pública, gas e contrato inteligente, e a diferença entre corretora (CEX) e troca ' +
-    'on-chain (DEX). Aprofunda a segurança: onde guardar cripto, por que a frase-semente ' +
-    'É a sua carteira, como funcionam os golpes de esvaziamento de carteira (wallet ' +
-    'drainers), como revogar aprovações clique a clique e o que fazer nos primeiros ' +
-    'minutos se você descobrir que foi drenado. Por fim, cobre os golpes mais comuns no ' +
-    'Brasil e como sacar para reais dentro do cenário regulatório atual.',
+    'Do zero: como a blockchain funciona e por que ela é "imutável", como ler uma ' +
+    'transação num explorador de blocos, o que são chave privada, chave pública, gas e ' +
+    'contrato inteligente, e a diferença entre corretora (CEX) e troca on-chain (DEX). ' +
+    'Depois, a segurança: onde guardar cripto, por que a frase-semente É a sua carteira, ' +
+    'como funcionam os golpes de esvaziamento de carteira (wallet drainers), como revogar ' +
+    'aprovações e o que fazer nos primeiros minutos após uma drenagem. Por fim, os golpes ' +
+    'mais comuns no Brasil e como sacar para reais no cenário regulatório atual.',
 
   objetivos: [
     'Abrir uma transação num explorador de blocos e explicar, em voz alta, o que aconteceu.',
@@ -88,8 +87,8 @@ export const modulo1 = {
       aba: 'fundamentos',
       titulo: 'O que é uma blockchain, e por que não tem "desfazer"',
       emUmaFrase:
-        'Ninguém consegue apagar o seu saldo. E ninguém consegue devolver o seu erro. As duas ' +
-        'coisas saem exatamente da mesma regra.',
+        'Ninguém consegue apagar o seu saldo, e ninguém consegue devolver o seu erro. As duas ' +
+        'coisas saem da mesma regra.',
       // A vida de uma transação: 4 passos, cada um com a pilha de blocos (o roxo é
       // o bloco com a sua transação; os cinzas, os blocos fechados por cima).
       confirmacoes: {
@@ -119,45 +118,34 @@ export const modulo1 = {
           'de liberar um depósito.',
       },
       paragrafos: [
-        'Uma blockchain é um caderno de registros que muita gente copia ao mesmo tempo. No ' +
-          'banco, uma empresa guarda sozinha a lista de quem tem o quê, e essa lista é a ' +
-          'verdade. Numa blockchain, milhares de computadores espalhados pelo mundo guardam ' +
-          'cópias idênticas da mesma lista, e a verdade é aquilo em que as cópias concordam. ' +
-          'Cada página desse caderno se chama bloco. Cada bloco carrega o hash do bloco ' +
-          'anterior — hash é uma impressão digital, um código curto que resume todo o conteúdo ' +
-          'de um bloco e muda por inteiro se qualquer detalhe lá dentro mudar.',
-        'É esse detalhe que fecha a porta. Mexer numa vírgula de um bloco antigo muda o hash ' +
-          'dele, o que quebra a ligação com o bloco seguinte, que quebra a ligação com o ' +
-          'próximo, e assim por diante. Para esconder uma transação do passado, alguém teria ' +
-          'de refazer aquele bloco e todos os que vieram depois, em todas as cópias, ao mesmo ' +
-          'tempo. É isso que a palavra "imutável" quer dizer aqui: não é que seja proibido ' +
-          'mudar, é que sai caro demais.',
-        'Isso importa para você por causa do segundo lado. O lado bom: nenhuma empresa ' +
-          'congela, apaga ou "corrige" o seu saldo por conta própria, porque nenhuma empresa é ' +
-          'dona da lista. O lado ruim: se você digitou o endereço errado, ou assinou um golpe, ' +
-          'o dinheiro se foi. Não existe estorno, não existe contestação de cartão, não existe ' +
-          'falar com o gerente. A irreversibilidade não distingue acerto de erro — e uma ' +
-          'transação que deu errado também fica gravada para sempre.',
-        'Na tela, tudo isso aparece numa palavra só: confirmações. Quando você envia algo, a ' +
-          'carteira mostra "pendente" por alguns segundos, porque a transação ainda não entrou ' +
-          'em nenhum bloco. Depois ela entra, e daí em diante o explorador e a corretora ' +
-          'passam a contar quantos blocos já foram fechados em cima do seu. O número só cresce, ' +
-          'e cada unidade a mais é mais um bloco que um atacante teria de refazer.',
+        'Uma blockchain é um caderno de registros que milhares de computadores copiam ao ' +
+          'mesmo tempo. Não há um dono da lista, como o banco: a verdade é aquilo em que as ' +
+          'cópias concordam. Cada página é um bloco, e cada bloco carrega o hash do anterior — ' +
+          'uma impressão digital, um código curto que muda por inteiro se qualquer detalhe do ' +
+          'bloco mudar.',
+        'Por isso não há "desfazer". Mexer num bloco antigo muda o hash dele e quebra a ' +
+          'ligação com todos os seguintes: para esconder uma transação, alguém teria de refazer ' +
+          'tudo, em todas as cópias, ao mesmo tempo. "Imutável" não quer dizer proibido mudar; ' +
+          'quer dizer caro demais.',
+        'O lado bom: nenhuma empresa congela ou "corrige" o seu saldo. O ruim: se você digitou ' +
+          'o endereço de destino errado ou caiu num golpe, o dinheiro se foi — sem estorno, sem ' +
+          'gerente. E a transação que deu errado também fica gravada para sempre.',
+        'Na tela, isso vira confirmações. A carteira (o aplicativo com que você envia e recebe ' +
+          'cripto) mostra "pendente" até a transação entrar num bloco; depois, cada bloco ' +
+          'fechado em cima do seu soma uma confirmação.',
       ],
       exemplo: {
         titulo: 'A mesma transação, minuto a minuto',
         passos: [
-          'Ela entra num bloco: 1 confirmação. Já está na corrente, e o saldo já mudou.',
-          'A rede fecha os blocos seguintes em cima dele: 2, 3, 4… Cada bloco fechado soma uma confirmação.',
-          'Com 12, 30 ou mais, reverter deixa de ser difícil e passa a ser impossível na prática: seria preciso reescrever todos ao mesmo tempo, em todas as cópias.',
-          'É por isso que a corretora não libera o seu depósito no instante em que ele chega: ela espera o número mínimo de confirmações que ela mesma definiu e só então credita.',
+          'Ela entra num bloco: 1 confirmação. O saldo já mudou.',
+          'A rede fecha blocos em cima dele: 2, 3, 4…',
+          'Com 12, 30 ou mais, reverter é impossível na prática: seria preciso reescrever todos, em todas as cópias.',
+          'Por isso a corretora só libera o seu depósito depois do mínimo de confirmações que ela mesma definiu.',
         ],
       },
       paragrafosFinais: [
-        'O erro que essa ideia evita é o de operar como se houvesse um socorro depois. No ' +
-          'cartão você contesta; no Pix existe um caminho para pedir devolução. Aqui não existe ' +
-          'nenhum dos dois. A hora de conferir é sempre antes de apertar o botão, porque depois ' +
-          'a única coisa que a blockchain oferece é a prova detalhada de que aconteceu.',
+        'O erro que isso evita é operar como se houvesse socorro depois. No cartão você ' +
+          'contesta; no Pix há pedido de devolução; aqui, nada. Confira antes de apertar o botão.',
       ],
       detalhe: {
         titulo: 'bloco, hash e rede',
@@ -165,8 +153,8 @@ export const modulo1 = {
           'Bloco: uma "página" do caderno, com várias transações.',
           'Hash: a impressão digital que resume um bloco e o liga ao anterior.',
           'Rede: os milhares de computadores que guardam cópias iguais.',
-          'Você não precisa de permissão nem de conta para "ler" a blockchain. É essa ' +
-            'transparência que permite auditar golpes e revisar permissões.',
+          'Qualquer pessoa "lê" a blockchain, sem conta nem permissão — é o que permite ' +
+            'auditar golpes e revisar permissões.',
         ],
       },
     },
@@ -180,52 +168,46 @@ export const modulo1 = {
       // O visual é a anatomia modulo1.anatomias.transacao (mais abaixo neste arquivo).
       anatomia: 'transacao',
       paragrafos: [
-        'Um explorador de blocos é um site que lê a blockchain e mostra o conteúdo dela numa ' +
-          'página. Ele só mostra. Não guarda suas chaves, não faz trocas, não pede senha e não ' +
-          'consegue mexer no seu dinheiro — você pode abrir o endereço de qualquer pessoa sem ' +
-          'permissão nenhuma, porque a lista é pública. Cada rede tem o seu: Solscan para a ' +
-          'Solana, Etherscan para a Ethereum, BscScan para a BNB Chain e Basescan para a Base.',
-        'Isso importa porque o explorador é o único lugar onde ninguém está tentando te vender ' +
-          'nada. A tela da carteira e a tela do site que você usou mostram o que os programas ' +
-          'deles dizem; o explorador mostra o que ficou registrado. Quando as duas versões ' +
-          'discordam, quem ganha é o explorador.',
-        'As três respostas ficam em três campos fixos, os mesmos da ilustração acima. "Deu ' +
-          'certo?" está no campo Status: Success quer dizer que executou, Failed quer dizer ' +
-          'que falhou. "Quanto custou?" está no campo Transaction Fee (ou Gas): é a taxa que a ' +
-          'rede cobrou, e ela é cobrada mesmo quando o Status é Failed. "O que se moveu?" quase ' +
-          'nunca está na primeira tela — está na aba Token Transfers, mais abaixo.',
-        'Confira sempre a URL antes de colar qualquer coisa. Existem cópias falsas de ' +
-          'explorador, feitas para você digitar ali algo que não deveria. Um explorador ' +
-          'legítimo nunca pede a sua frase-semente, nunca pede senha e nunca pede para conectar ' +
-          'a carteira só para ver uma transação.',
+        'Um explorador de blocos é um site que lê a blockchain e mostra o que ficou ' +
+          'registrado. Só mostra: não guarda nada seu, não faz trocas, não pede senha. Quando a ' +
+          'carteira ou um site dizem uma coisa e o explorador diz outra, vale o explorador. Cada ' +
+          'rede tem o seu: Solscan (Solana), Etherscan (Ethereum), BscScan (BNB Chain) e ' +
+          'Basescan (Base).',
+        'As três respostas ficam em campos fixos, os da ilustração. "Deu certo?" é o Status: ' +
+          'Success ou Failed. "Quanto custou?" é o Transaction Fee (ou Gas), cobrado mesmo com ' +
+          'Failed. "O que se moveu?" fica na aba Token Transfers. Token é qualquer moeda criada ' +
+          'dentro de uma rede, além da moeda nativa dela (a própria da rede, como o ETH na ' +
+          'Ethereum).',
+        'O campo To às vezes mostra um contrato (ou contrato inteligente): um programa que ' +
+          'mora na blockchain e executa sozinho quando é chamado — tokens e trocas funcionam ' +
+          'assim. E confira sempre a URL, porque há exploradores falsos. O verdadeiro nunca pede ' +
+          'senha, nem a frase-semente (as palavras secretas da carteira, vistas adiante), nem ' +
+          'que você conecte a carteira para ver uma transação.',
       ],
       exemplo: {
         titulo: 'A transação que "não fez nada"',
         passos: [
-          'Você troca um token, abre a transação no explorador e o campo Value mostra 0 ETH.',
-          'O primeiro impulso é achar que deu errado e refazer a operação.',
-          'Mas Value só conta a moeda nativa da rede — o ETH. Numa troca de tokens, ela pode ser zero mesmo quando tudo deu certo.',
-          'Desça até a aba Token Transfers: é ali que aparece o que de fato saiu e o que de fato entrou na sua carteira.',
-          'Só depois olhe o Status. Success com Value 0 e Token Transfers preenchido é uma operação normal, não um erro.',
+          'Você troca um token, abre a transação e o campo Value mostra 0 ETH.',
+          'O impulso é achar que deu errado e refazer.',
+          'Mas Value só conta a moeda nativa (o ETH). Numa troca de tokens, ele pode ser zero com tudo certo.',
+          'Na aba Token Transfers aparece o que saiu e o que entrou na sua carteira.',
+          'Success, Value 0 e Token Transfers preenchido: operação normal, não erro.',
         ],
       },
       paragrafosFinais: [
-        'O erro comum que essa leitura evita é o mais caro do módulo: refazer uma operação que ' +
-          'já tinha dado certo, pagando taxa duas vezes e, pior, pensando que foi roubado ' +
-          'quando não foi. Saber ler essa página é o que separa "sumiu meu dinheiro" de ' +
-          '"entendi exatamente o que aconteceu com ele".',
+        'O erro que essa leitura evita é o mais caro do módulo: refazer uma operação que já ' +
+          'tinha dado certo, pagando taxa duas vezes — e achar que foi roubado.',
       ],
       detalhe: {
         titulo: 'os outros campos, e como é no Solscan',
         lista: [
           'Transaction Hash: identificador único de 66 caracteres, começando com "0x". ' +
-            'Block: em qual bloco entrou, mais o número de confirmações. Timestamp: data e ' +
-            'hora em UTC.',
-          'Logs: a aba de eventos. O erro comum de iniciante é ver "Value: 0 ETH" e não abrir ' +
-            '"Token Transfers", onde os tokens aparecem.',
-          'No Solscan a lógica é a mesma: Signature é o identificador, há Block/Slot, ' +
-            'Timestamp, Result (Success/Failed), Signer (quem iniciou e pagou), Fee (em SOL, ' +
-            'frações de centavo), Main Actions e Balance Changes (saldo antes e depois).',
+            'Block: o bloco e as confirmações. Timestamp: data e hora em UTC (o horário ' +
+            'universal).',
+          'Logs: a aba de eventos.',
+          'No Solscan a lógica é a mesma: Signature (o identificador), Block/Slot, Timestamp, ' +
+            'Result (Success/Failed), Signer (quem iniciou e pagou), Fee (em SOL, frações de ' +
+            'centavo), Main Actions e Balance Changes (saldo antes e depois).',
         ],
       },
     },
@@ -234,7 +216,7 @@ export const modulo1 = {
       aba: 'fundamentos',
       titulo: 'Gas: toda ação paga uma taxa, mesmo quando dá errado',
       emUmaFrase:
-        'A rede não cobra pelo resultado. Ela cobra pelo trabalho — e o trabalho existe mesmo ' +
+        'A rede não cobra pelo resultado. Cobra pelo trabalho — e o trabalho existe mesmo ' +
         'quando o resultado não vem.',
       // Success × Failed: dois cartões lado a lado. `texto` é uma lista de pedaços;
       // o pedaço { forte } sai em negrito.
@@ -248,53 +230,43 @@ export const modulo1 = {
           'gas do mesmo jeito, o resultado não acontece. Vale na EVM e na Solana.',
       },
       paragrafos: [
-        'Gas é a medida de quanto trabalho de computador a sua transação exige da rede. Mandar ' +
-          'uma moeda de uma carteira para outra dá pouco trabalho; usar um programa complicado ' +
-          'dá muito mais. A conta final é simples: quanto trabalho a sua transação usou, vezes ' +
-          'o preço de cada unidade de trabalho naquele momento. Esse preço não é fixo — ele ' +
-          'sobe quando muita gente quer usar a rede ao mesmo tempo, como uma corrida de ' +
-          'aplicativo em horário de pico.',
-        'Quem executa esse trabalho são os validadores: os computadores que montam os blocos e ' +
-          'mantêm as cópias da lista. Parte do que você paga vai para eles, como uma gorjeta ' +
-          'por ter colocado a sua transação num bloco. Outra parte é queimada, que é o nome ' +
-          'que se dá a destruir moedas de propósito: elas saem de circulação e não vão para ' +
-          'ninguém. O que interessa para você é que as duas partes saem do seu bolso.',
-        'A parte que pega iniciante é o cartão vermelho ali em cima. Se a sua transação falhar ' +
-          '— porque o preço mudou no meio do caminho, porque o limite que você deu era baixo ' +
-          'demais, porque o contrato rejeitou — a rede já fez o trabalho até o ponto do erro, e ' +
-          'esse trabalho é cobrado. Você paga e não leva nada. Vale na EVM (a família de redes ' +
-          'compatíveis com a Ethereum, que inclui a BNB Chain e a Base) e vale na Solana.',
-        'Na tela, o gas aparece duas vezes. Antes, na janela da carteira, como "taxa estimada ' +
-          'de rede": é uma estimativa, e por isso o valor final pode sair diferente. Depois, no ' +
-          'explorador, como Transaction Fee: esse é o valor real, e é o que você paga. Na ' +
-          'Solana a taxa base é fixa: 5.000 lamports por assinatura (0,000005 SOL), mais uma ' +
-          'gorjeta opcional. Lamport é só o nome da menor fração do SOL, como o centavo é do real.',
+        'Gas é o trabalho de computador que a sua transação exige da rede: mandar uma moeda ' +
+          'dá pouco; usar um contrato complicado, muito. Você paga o trabalho usado vezes o ' +
+          'preço da unidade, que sobe quando muita gente usa a rede ao mesmo tempo — como ' +
+          'corrida de aplicativo no horário de pico.',
+        'Quem faz o trabalho são os validadores, os computadores que montam os blocos. Parte ' +
+          'do que você paga vai para eles, como gorjeta; outra parte é queimada — destruída de ' +
+          'propósito, sai de circulação. As duas saem do seu bolso.',
+        'O que pega o iniciante é o cartão vermelho: se a transação falha — o preço mudou no ' +
+          'caminho, o limite de gas era baixo, o contrato recusou —, a rede já trabalhou até o ' +
+          'erro e cobra. Você paga e não leva nada, na EVM (a família de redes compatíveis com ' +
+          'a Ethereum, como BNB Chain e Base) e na Solana.',
+        'Na tela, o gas aparece antes, na carteira, como "taxa estimada de rede" (pode mudar), ' +
+          'e depois, no explorador, como Transaction Fee (o valor real). Na Solana a taxa base ' +
+          'é fixa: 5.000 lamports por assinatura (0,000005 SOL), mais gorjeta opcional; lamport ' +
+          'é a menor fração do SOL, a moeda da Solana, como o centavo é do real.',
       ],
       exemplo: {
         titulo: 'Duas transações, duas taxas',
         passos: [
-          'Você manda ETH para outra pessoa. Essa operação usa 21.000 unidades de gas — é a mais simples que existe na Ethereum.',
+          'Você manda ETH para alguém: 21.000 unidades de gas, a operação mais simples da Ethereum.',
           'Status: Success. Você paga a taxa e o dinheiro chega.',
-          'Na segunda tentativa, agora uma troca, algo dá errado no meio e o Status volta Failed.',
-          'O campo Transaction Fee continua preenchido: a rede trabalhou até o ponto do erro e cobrou por isso.',
-          'Nada mudou no seu saldo de tokens. Só a taxa saiu.',
+          'Depois, numa troca, algo dá errado no meio: Status Failed.',
+          'O Transaction Fee continua lá: a rede trabalhou até o erro e cobrou. Seus tokens não mudaram; só a taxa saiu.',
         ],
       },
       paragrafosFinais: [
-        'O erro que essa ideia evita é apertar "tentar de novo" cinco vezes seguidas numa ' +
-          'transação que insiste em falhar. Cada tentativa é uma taxa a mais, e cinco falhas ' +
-          'custam cinco taxas sem produzir nada. Quando uma transação falha duas vezes, o certo ' +
-          'é parar e descobrir o motivo no explorador, não repetir mais rápido.',
+        'O erro que isso evita é apertar "tentar de novo" cinco vezes: cinco falhas, cinco ' +
+          'taxas. Falhou duas vezes? Pare e veja o motivo no explorador.',
       ],
       detalhe: {
         titulo: 'EIP-1559, base fee, max fee e as redes L2',
         paragrafos: [
-          'Desde a EIP-1559 (agosto de 2021), o preço do gas na Ethereum tem dois componentes: ' +
-            'a base fee, calculada pela rede conforme o congestionamento e queimada, e a ' +
+          'A EIP-1559 (agosto de 2021), mudança nas regras da Ethereum, dividiu o preço do gas ' +
+            'em duas partes: a base fee, calculada pelo congestionamento e queimada, e a ' +
             'priority fee, opcional, que vai para o validador. O max fee é o teto que você ' +
-            'aceita pagar; o que sobrar é devolvido. Base é uma L2 construída em cima da ' +
-            'Ethereum; a BNB Chain é uma rede alternativa. Mandar ETH para outra pessoa usa ' +
-            '21.000 unidades de gas.',
+            'aceita pagar; a sobra volta. Base é uma L2, uma rede construída em cima da ' +
+            'Ethereum; a BNB Chain é uma rede alternativa.',
         ],
       },
     },
@@ -303,8 +275,8 @@ export const modulo1 = {
       aba: 'fundamentos',
       titulo: 'Corretora (CEX) × troca on-chain (DEX): quem guarda a chave',
       emUmaFrase:
-        'A diferença entre as duas não é o visual nem a taxa. É quem fica com a sua chave — e ' +
-        'quem atende o telefone quando dá errado.',
+        'A diferença entre as duas não é o visual nem a taxa: é quem fica com a sua chave — e ' +
+        'quem atende quando dá errado.',
       // Tabela de verdade: critérios nas linhas, CEX e DEX nas colunas.
       comparacao: {
         rotulo: 'Comparação CEX e DEX (role na horizontal se preciso)',
@@ -342,45 +314,39 @@ export const modulo1 = {
         ],
       },
       paragrafos: [
-        'CEX quer dizer corretora centralizada: uma empresa, com CNPJ, que guarda o dinheiro ' +
-          'dos clientes e registra internamente quanto é de cada um. DEX quer dizer troca ' +
-          'descentralizada: não é uma empresa, é um programa publicado na blockchain, que ' +
-          'ninguém atende e ninguém opera no dia a dia. A tabela acima compara as duas, e a ' +
-          'linha que decide tudo é a primeira: quem guarda o dinheiro.',
-        'Três palavras da tabela precisam de tradução. KYC é a sigla inglesa de "conheça o seu ' +
-          'cliente": é o cadastro com documento, selfie e comprovante que a corretora é ' +
-          'obrigada a fazer — o mesmo ritual de abrir conta em banco. Livro de ofertas (order ' +
-          'book) é a lista de quem quer comprar e de quem quer vender, com os preços de cada ' +
-          'um; o negócio fecha quando duas pontas se encontram. Pool de liquidez é um ' +
-          'reservatório com duas moedas dentro, depositadas por outras pessoas, de onde você ' +
-          'tira uma e no qual você deixa a outra.',
-        'Numa DEX não existe alguém do outro lado da sua ordem. Existe um AMM — "criador de ' +
-          'mercado automático", em português —, que é a fórmula que calcula o preço olhando ' +
-          'apenas a proporção entre as duas moedas do pool. Quanto mais de uma moeda você ' +
-          'tira, mais cara ela fica para você mesmo, dentro da sua própria ordem. Essa ' +
-          'diferença entre o preço que a tela mostrava e o que você de fato recebeu chama-se ' +
-          'slippage (escorregamento).',
-        'Isso importa porque quase todo token novo e toda memecoin só existem em DEX: criar um ' +
-          'pool não exige autorização de ninguém, não passa por análise e não tem porta de ' +
-          'entrada. É liberdade e é desamparo ao mesmo tempo. Na CEX existe suporte, e às vezes ' +
-          'a empresa até desfaz um erro internamente, porque o registro dela é interno. Na DEX ' +
-          'não há suporte, não há reversão e não há a quem recorrer: o que você assinou, valeu.',
+        'CEX é a corretora centralizada: uma empresa, com CNPJ, que guarda o dinheiro dos ' +
+          'clientes. DEX é a troca descentralizada, ou on-chain (direto na blockchain): um ' +
+          'contrato publicado na rede, que ninguém atende. A linha que decide é a primeira da ' +
+          'tabela: quem guarda o dinheiro — ou seja, quem tem a chave, o segredo que autoriza ' +
+          'movê-lo (a aba Carteiras explica).',
+        'Três termos da tabela. KYC ("conheça o seu cliente") é o cadastro com documento, ' +
+          'selfie e comprovante, como num banco. Livro de ofertas (order book) é a lista de ' +
+          'quem quer comprar e vender, com preços; o negócio fecha quando duas pontas se ' +
+          'encontram. Pool de liquidez é um reservatório com duas moedas, depositadas por ' +
+          'outras pessoas: você tira uma e deixa a outra.',
+        'Na DEX não há ninguém do outro lado: um AMM ("criador de mercado automático") calcula ' +
+          'o preço pela proporção entre as duas moedas do pool. Quanto mais você tira de uma, ' +
+          'mais cara ela fica, dentro da própria ordem. Essa diferença entre o preço da tela e ' +
+          'o que você recebe é o slippage (escorregamento).',
+        'Quase todo token novo e toda memecoin (token feito em torno de uma piada ou meme, sem ' +
+          'produto por trás; tema do Módulo 2) só existem em DEX, porque criar um pool não pede ' +
+          'licença a ninguém. É liberdade e desamparo juntos: na CEX, a empresa às vezes desfaz ' +
+          'um erro; na DEX, o que você confirmou, valeu.',
       ],
       exemplo: {
         titulo: 'O mesmo token, dois caminhos',
         passos: [
-          'Na CEX: você faz o cadastro (KYC), manda reais por Pix, compra, e o saldo aparece na conta da empresa — as chaves são dela.',
-          'Se você esquecer a senha, recupera por e-mail. Se errar um envio, existe alguém para abrir um chamado.',
-          'Na DEX: você conecta a sua carteira, escolhe o token e assina. Não há cadastro, não há senha para recuperar, não há chamado.',
-          'O preço que você paga sai da proporção do pool na hora — o cálculo está em "Para ir mais fundo", com um pool inventado.',
-          'A diferença aparece no dia ruim, não no dia bom: nos dois lugares comprar é fácil; num deles, errar tem conserto.',
+          'Na CEX: cadastro, Pix, compra. O saldo fica na conta da empresa — as chaves são dela.',
+          'Esqueceu a senha? E-mail de recuperação. Errou um envio? Chamado no suporte.',
+          'Na DEX: você conecta a carteira, escolhe o token e confirma. Sem cadastro, sem senha para recuperar, sem chamado.',
+          'O preço sai da proporção do pool — a conta está em "Para ir mais fundo", com um pool inventado.',
+          'Comprar é fácil nos dois. Errar só tem conserto num deles.',
         ],
       },
       paragrafosFinais: [
-        'O erro que essa distinção evita é procurar suporte onde não existe suporte. Muita ' +
-          'gente perde horas escrevendo para um "atendimento" depois de um erro numa DEX — e ' +
-          'quem responde é o golpista, que monitora justamente essas mensagens. Se a operação ' +
-          'foi on-chain, não há ninguém para chamar: o próximo passo é o explorador, não o chat.',
+        'O erro que isso evita é procurar suporte onde não existe. Depois de um erro numa DEX, ' +
+          'quem responde ao seu pedido de "atendimento" é o golpista, que vigia essas ' +
+          'mensagens. O próximo passo é o explorador, não o chat.',
       ],
       detalhe: {
         titulo: 'como o preço anda numa DEX (pool inventado, sem taxas)',
@@ -393,7 +359,7 @@ export const modulo1 = {
           'Você coloca 1 ETH. O pool fica com 11 ETH, então só pode ficar com 100.000 ÷ 11 ≈ ' +
             '9.091 tokens.',
           'Você recebe cerca de 909 tokens, não os 1.000 que a tela mostrava. A diferença é o ' +
-            'slippage. Quanto menor o pool e maior a sua ordem, pior.',
+            'slippage: quanto menor o pool e maior a ordem, pior.',
         ],
         selo: 'exemplo inventado',
       },
@@ -405,8 +371,8 @@ export const modulo1 = {
       aba: 'carteiras',
       titulo: 'Chave privada, chave pública e endereço',
       emUmaFrase:
-        'São três coisas com nomes parecidos e funções opostas. Trocar uma pela outra é o ' +
-        'jeito mais rápido de entregar a carteira sem perceber.',
+        'Três coisas de nomes parecidos e funções opostas. Confundir uma com a outra é o jeito ' +
+        'mais rápido de entregar a carteira sem perceber.',
       // Da frase-semente ao endereço: 4 caixas ligadas por setas de mão única.
       chaves: {
         passos: [
@@ -423,25 +389,18 @@ export const modulo1 = {
           'endereço. Cada seta é de mão única: do endereço ninguém volta à chave.',
       },
       paragrafos: [
-        'Em cripto não existe uma senha só, do tipo que você cria e o site guarda. Existe um ' +
-          'par de números ligados por matemática, mais um endereço que nasce desse par. A ' +
-          'chave privada é um número secreto sorteado ao acaso na hora em que a carteira é ' +
-          'criada. A chave pública é calculada a partir dela. O endereço é calculado a partir ' +
-          'da chave pública. O diagrama acima mostra essa fila, e as setas são todas de mão ' +
-          'única: dá para ir para a frente, nunca para trás.',
-        '"Assinar" é o verbo que aparece o tempo todo daqui em diante, então vale fixar o que ' +
-          'ele significa. Assinar é usar a chave privada para produzir uma prova matemática de ' +
-          'que aquela ordem partiu de você. A rede confere essa prova com a chave pública e ' +
-          'aceita a transação — sem nunca ver a chave privada. Por isso a assinatura é tudo: ' +
-          'quem consegue assinar no seu lugar é, para a rede, você.',
-        'Na prática, a divisão é simples. O endereço serve para receber, e pode ser colado num ' +
-          'grupo, mandado por mensagem, impresso num QR Code — é como o número da conta que ' +
-          'você passa para alguém te mandar um Pix. A chave privada serve para gastar, e nunca ' +
-          'sai do aparelho: nenhuma tela legítima pede que você a digite. Se algo pede a chave ' +
-          'privada, a resposta é não, sem exceção e sem discussão.',
-        'A mão única é a razão de você poder divulgar o endereço sem medo. Saber o seu endereço ' +
-          'permite a qualquer pessoa ver o seu saldo e o seu histórico, porque a lista é ' +
-          'pública — mas não permite a ninguém descobrir a sua chave, nem gastar um centavo. ' +
+        'Em cripto não há senha guardada pelo site. Há a chave privada: um número secreto ' +
+          'sorteado quando a carteira é criada, a partir da frase-semente — as 12 ou 24 ' +
+          'palavras que o aplicativo mostra nessa hora (a aba Seed phrase explica). Da privada ' +
+          'se calcula a chave pública; da pública, o endereço. As setas são de mão única: ' +
+          'nunca voltam.',
+        'Assinar — verbo que você vai ver o tempo todo — é usar a chave privada para provar, ' +
+          'com matemática, que a ordem partiu de você. A rede confere a prova com a chave ' +
+          'pública, sem ver a privada. Por isso, quem assina no seu lugar é, para a rede, você.',
+        'O endereço serve para receber: pode ir num grupo ou num QR Code, como o número da ' +
+          'conta para receber um Pix. Quem o tem vê o seu saldo e o seu histórico (a lista é ' +
+          'pública), mas não descobre a sua chave nem gasta um centavo. A chave privada serve ' +
+          'para gastar e nunca sai do aparelho: nenhuma tela legítima pede que você a digite. ' +
           'Privacidade e segurança, aqui, são problemas diferentes.',
       ],
       quadro: [
@@ -460,21 +419,20 @@ export const modulo1 = {
         },
       ],
       paragrafosFinais: [
-        'O erro comum que isso evita é o do "me manda sua chave para eu te enviar o token". ' +
-          'Quem quer te pagar precisa apenas do endereço. Qualquer pedido que vá além disso — ' +
-          'chave privada, frase-semente, print da tela de backup — não é um pedido de ' +
-          'pagamento, é um pedido de posse.',
+        'O erro que isso evita é o do "me manda sua chave para eu te enviar o token". Para te ' +
+          'pagar, basta o endereço. Pedir chave privada, frase-semente ou print do backup é ' +
+          'pedir posse, não pagamento.',
       ],
       detalhe: {
         titulo: 'bytes, curvas e o formato em cada rede',
         lista: [
-          'A chave privada tem 32 bytes (256 bits de aleatoriedade). Da privada à pública: ' +
-            'curva secp256k1 na EVM, Ed25519 na Solana.',
+          'A chave privada tem 32 bytes (256 bits de aleatoriedade). Da privada à pública, a ' +
+            'conta usa a curva secp256k1 na EVM e a Ed25519 na Solana.',
           'Na EVM, o endereço são os últimos 20 bytes do hash Keccak-256 da chave pública: 42 ' +
-            'caracteres começando com "0x". É um resumo da chave pública, não ela mesma.',
-          'Na Solana, a chave pública de 32 bytes é o próprio endereço, escrita em base58 (32 ' +
-            'a 44 letras e números). Por isso chamar endereço de "chave pública" está certo na ' +
-            'Solana e não na Ethereum.',
+            'caracteres começando com "0x", um resumo dela, não ela mesma.',
+          'Na Solana, a chave pública de 32 bytes é o próprio endereço, em base58 (32 a 44 ' +
+            'letras e números). Por isso chamar endereço de "chave pública" está certo na ' +
+            'Solana, não na Ethereum.',
         ],
       },
     },
@@ -483,60 +441,52 @@ export const modulo1 = {
       aba: 'carteiras',
       titulo: 'Onde ficam suas chaves: CEX, hot wallet e cold wallet',
       emUmaFrase:
-        'Existem três lugares onde a sua chave pode estar, e a diferença entre eles não é ' +
-        'conforto nem preço: é quem consegue gastar o seu dinheiro sem te pedir licença.',
+        'A sua chave pode estar em três lugares. A diferença entre eles não é conforto nem ' +
+        'preço: é quem consegue gastar o seu dinheiro sem te pedir licença.',
       // O visual é a tabela modulo1.tabelaCarteiras (mais abaixo neste arquivo).
       paragrafos: [
-        'Comece desfazendo uma imagem errada: as suas moedas não ficam "dentro" da carteira, ' +
-          'como dinheiro dentro de um envelope. Elas ficam registradas na blockchain, na lista ' +
-          'pública que todo mundo copia. O que você possui de fato é a chave privada que ' +
-          'autoriza mover aquele saldo. Daí o ditado em inglês "not your keys, not your coins" ' +
-          '— se as chaves não são suas, as moedas não são suas.',
-        'A tabela acima compara as três categorias, e a linha decisiva é a primeira. Na CEX, a ' +
-          'corretora guarda as chaves por você: isso se chama custódia, e é o mesmo arranjo do ' +
-          'banco. Na hot wallet, ou carteira quente, você guarda as suas chaves, mas num ' +
-          'aparelho ligado à internet — celular ou navegador. Na cold wallet, ou carteira fria, ' +
-          'você guarda as chaves num aparelho físico que nunca se conecta.',
-        'Isso importa porque cada categoria falha de um jeito diferente, e conhecer a falha ' +
-          'certa muda o que você faz. Na CEX, o perigo não é o golpista: é a própria empresa ' +
-          'quebrar, ser bloqueada ou bloquear a sua conta. Isso tem nome — risco de contraparte ' +
-          '— e é o risco de depender de alguém que pode sumir. Na carteira quente, o perigo é o ' +
-          'que entra pelo aparelho: um site falso, um vírus, uma assinatura errada. Na carteira ' +
-          'fria, o perigo passa a ser quase todo humano: perder o papel, ou digitar a frase ' +
-          'onde não devia.',
-        'Na prática, a pergunta que separa as três é uma só: "se eu quiser tirar o dinheiro ' +
-          'agora, de madrugada, preciso da autorização de alguém?". Na CEX, precisa — a empresa ' +
-          'pode estar em manutenção, pedir mais documentos ou suspender saques. Nas outras ' +
-          'duas, não: a sua chave assina e pronto. Essa é a liberdade, e é também a ausência de ' +
-          'rede de proteção.',
+        'As moedas não ficam "dentro" da carteira, como dinheiro num envelope: ficam ' +
+          'registradas na blockchain, e você possui a chave privada que autoriza movê-las. Daí ' +
+          'o ditado "not your keys, not your coins": se as chaves não são suas, as moedas não ' +
+          'são suas.',
+        'Na CEX, a corretora guarda as chaves por você (custódia, como num banco). Na hot ' +
+          'wallet, ou carteira quente, você guarda, num aparelho ligado à internet — celular ou ' +
+          'navegador. Na cold wallet, ou carteira fria, num aparelho físico que nunca se conecta.',
+        'Cada uma falha de um jeito. Na CEX, a empresa pode quebrar, ser bloqueada ou ' +
+          'bloquear a sua conta: é o risco de contraparte, de depender de alguém que pode ' +
+          'sumir. Na quente, o perigo entra pelo aparelho — site falso, vírus, assinatura ' +
+          'errada. Na fria, é quase todo humano: perder o papel ou digitar a frase-semente onde ' +
+          'não devia.',
+        'O teste prático: "para tirar o dinheiro agora, de madrugada, preciso da autorização ' +
+          'de alguém?". Na CEX, sim — ela pode estar em manutenção, pedir documentos ou ' +
+          'suspender saques. Nas outras, não: a sua chave assina e pronto. É liberdade, e ' +
+          'também falta de rede de proteção.',
       ],
       exemplo: {
         titulo: 'O celular caiu na piscina',
         passos: [
-          'Se o dinheiro estava na CEX: você instala o app em outro aparelho, faz login e o saldo está lá. A empresa guardava tudo.',
-          'Se estava numa carteira quente e você anotou a frase-semente: instala a carteira no aparelho novo, importa a frase, e o saldo reaparece.',
-          'Se estava numa carteira quente e você NÃO anotou a frase: acabou. Não há suporte, não há e-mail de recuperação, não há segunda via.',
-          'Se estava numa carteira fria: o celular molhado não tinha as chaves, então nada aconteceu.',
+          'Dinheiro na CEX: você instala o app em outro aparelho, faz login e o saldo está lá.',
+          'Carteira quente, com a frase-semente anotada: você instala a carteira no aparelho novo, importa a frase e o saldo reaparece.',
+          'Carteira quente SEM a frase anotada: acabou. Sem suporte, sem recuperação, sem segunda via.',
+          'Carteira fria: o celular não tinha as chaves, então nada aconteceu.',
         ],
       },
       paragrafosFinais: [
-        'O erro comum que essa ideia evita é confiar a categoria errada ao dinheiro errado — ' +
-          'deixar tudo o que se tem numa corretora e descobrir tarde que a empresa não está ' +
-          'mais lá, ou deixar tudo numa carteira quente que se usa para clicar em site novo ' +
-          'todo dia. Antes de escolher a ferramenta, a pergunta é qual falha você consegue ' +
-          'suportar.',
+        'O erro que isso evita é pôr o dinheiro na categoria errada: tudo numa corretora que um ' +
+          'dia some, ou tudo numa carteira quente que clica em site novo todo dia. Antes de ' +
+          'escolher, pergunte qual falha você aguenta.',
       ],
       detalhe: {
         titulo: 'exemplos de cada categoria e o risco de contraparte',
         lista: [
-          'CEX: Binance e Mercado Bitcoin, só como exemplos da categoria. A CEX faz o KYC. O ' +
-            'risco de contraparte apareceu nos colapsos da FTX, Celsius e Mt. Gox.',
-          'Hot wallet: Phantom (Solana) e MetaMask (EVM), só como exemplos. A entropia é ' +
-            'gerada pelo próprio dispositivo.',
+          'CEX: Binance e Mercado Bitcoin, só como exemplos. O risco de contraparte apareceu ' +
+            'nos colapsos da FTX, Celsius e Mt. Gox.',
+          'Hot wallet: Phantom (Solana) e MetaMask (EVM), só como exemplos. A entropia (a ' +
+            'aleatoriedade que gera a chave) vem do próprio aparelho.',
           'Cold wallet: aparelhos da Ledger e de outros fabricantes. Protegem a chave, mas não ' +
-            'protegem você de digitar a seed num site de golpe. Em dezembro de 2023, a ' +
-            'biblioteca Ledger Connect Kit foi comprometida num ataque de cadeia de ' +
-            'suprimentos.',
+            'impedem você de digitar a frase-semente num site de golpe. Em dezembro de 2023, a ' +
+            'biblioteca Ledger Connect Kit foi adulterada num ataque de cadeia de suprimentos ' +
+            '(uma peça de software usada por vários aplicativos).',
         ],
       },
     },
@@ -545,8 +495,8 @@ export const modulo1 = {
       aba: 'carteiras',
       titulo: 'Em que situação cada carteira faz sentido',
       emUmaFrase:
-        'A pergunta certa não é "qual é a mais segura". É "para que serve esta aqui" — porque ' +
-        'a mesma carteira que protege é a que atrapalha.',
+        'A pergunta certa não é "qual é a mais segura", e sim "para que serve esta" — porque a ' +
+        'mesma carteira que protege é a que atrapalha.',
       // Árvore "Para que você vai usar?": uma pergunta no topo e 3 ramos.
       usoCarteira: {
         pergunta: 'Para que você vai usar?',
@@ -576,42 +526,33 @@ export const modulo1 = {
           'carteira fria. Nada disso é recomendação.',
       },
       paragrafos: [
-        'Não existe "a melhor" carteira, existe a certa para cada uso, e a árvore acima mostra ' +
-          'os três usos que cobrem quase tudo. Entrar e sair em reais é trabalho de corretora: ' +
-          'é ela que fala com o Pix, faz o cadastro e converte. Operar on-chain é trabalho de ' +
-          'carteira quente: é ela que conecta nos sites e assina. Guardar por muito tempo é ' +
-          'trabalho de carteira fria: é ela que mantém as chaves longe da internet.',
-        'Isso importa porque a maioria dos prejuízos de iniciante não vem de escolher uma ' +
-          'carteira ruim — vem de usar uma só para tudo. A mesma carteira que você conecta em ' +
-          'dez sites por semana não deveria ser a que guarda o que você não pode perder, ' +
-          'porque basta uma assinatura errada em qualquer um desses dez sites para alcançar ' +
-          'todo o saldo que estiver ali dentro.',
-        'Daí as duas regras práticas que muita gente adota. A primeira: não deixar na corretora ' +
-          'mais do que se está disposto a perder num eventual bloqueio ou incidente, porque ' +
-          'ali as chaves não são suas. A segunda: manter uma carteira quente só para operar, ' +
-          'com pouco saldo, separada da carteira onde está o grosso do patrimônio. Nenhuma das ' +
-          'duas é recomendação de investimento — é arrumação de risco.',
-        'Na prática, as três convivem, e o dinheiro anda entre elas numa direção só na maior ' +
-          'parte do tempo: entra pela corretora, passa pela carteira quente quando vai ser ' +
-          'usado, e o que sobrar e não for mexido tão cedo vai para a fria. Quem está ' +
-          'começando quase sempre começa só com a primeira, e isso está certo: a carteira fria ' +
-          'faz sentido quando já existe algo para guardar.',
+        'Não existe "a melhor" carteira, e sim a certa para cada uso — a árvore acima mostra ' +
+          'os três que cobrem quase tudo.',
+        'O prejuízo de iniciante raramente vem de uma carteira ruim: vem de usar uma só para ' +
+          'tudo. A carteira que você conecta em dez sites por semana não deveria guardar o que ' +
+          'você não pode perder — uma assinatura errada num desses sites alcança todo o saldo ' +
+          'dela.',
+        'Daí duas regras que muita gente adota. Não deixar na corretora mais do que aceitaria ' +
+          'perder num bloqueio, porque ali as chaves não são suas. E operar com uma carteira ' +
+          'quente de pouco saldo, separada do grosso do patrimônio. Não é recomendação de ' +
+          'investimento: é arrumação de risco.',
+        'O dinheiro costuma entrar pela corretora, passar pela quente quando vai ser usado e ' +
+          'ir para a fria quando não será mexido tão cedo. Quem começa quase sempre usa só a ' +
+          'corretora, e está certo: a fria faz sentido quando já há algo para guardar.',
       ],
       exemplo: {
         titulo: 'Três carteiras, três papéis, um mês comum',
         passos: [
-          'Corretora: você deposita reais por Pix e compra. É a porta de entrada e a porta de saída.',
-          'Carteira quente: você envia dali só o que vai usar na semana, e é essa que você conecta nos sites.',
-          'Carteira fria: recebe o que você decidiu não mexer. Ela quase nunca assina nada.',
-          'Se a carteira quente for comprometida, o prejuízo é o saldo da semana — não o de tudo.',
-          'É essa separação, e não a marca do aparelho, que limita o tamanho do estrago.',
+          'Corretora: você deposita reais por Pix e compra. É a porta de entrada e de saída.',
+          'Carteira quente: recebe só o que você vai usar na semana; é a que você conecta nos sites.',
+          'Carteira fria: guarda o que você decidiu não mexer. Quase nunca assina nada.',
+          'Se a quente for comprometida, você perde o saldo da semana, não tudo. É a separação, e não a marca do aparelho, que limita o estrago.',
         ],
       },
       paragrafosFinais: [
-        'O erro comum que isso evita é o inverso do esperado: não é usar a carteira "insegura", ' +
-          'é concentrar. Uma carteira quente com pouco saldo é uma ferramenta de trabalho ' +
-          'normal; a mesma carteira com tudo dentro é uma aposta diária. O passo a passo para ' +
-          'criar a sua primeira carteira, em sete etapas, está em "Para ir mais fundo".',
+        'O erro que isso evita é concentrar. Carteira quente com pouco saldo é ferramenta de ' +
+          'trabalho; com tudo dentro, é aposta diária. Como criar a primeira carteira está em ' +
+          '"Para ir mais fundo".',
       ],
       detalhe: {
         titulo: 'como criar sua primeira carteira, em 7 passos',
@@ -670,43 +611,41 @@ export const modulo1 = {
           'Quem perde as palavras: se o aparelho quebrar, ninguém no mundo recupera.',
       },
       paragrafos: [
-        'Quando você cria uma carteira, o aplicativo sorteia um número secreto e te mostra ' +
-          'esse número escrito como uma lista de palavras comuns, na ordem. É a frase-semente ' +
-          '(em inglês, seed phrase). Ela não é uma cópia de segurança de algo guardado em ' +
-          'outro lugar: ela é a origem. Da frase nascem a chave privada, o endereço, e todas ' +
-          'as contas que você criar depois.',
-        'Isso muda o que "perder a carteira" significa. Perder o celular não é perder o ' +
-          'dinheiro: você compra outro aparelho, escolhe "importar carteira", digita as mesmas ' +
-          'palavras na mesma ordem, e os saldos reaparecem — porque eles nunca estiveram no ' +
-          'celular. Estavam na blockchain, e as palavras só provam que são seus. Perder as ' +
-          'palavras, esse sim é perder o dinheiro.',
-        'Na tela isso aparece uma vez só. Logo depois de "criar nova carteira", o aplicativo ' +
-          'mostra as palavras numeradas e, em seguida, pede algumas de volta: "qual é a ' +
-          'palavra 9?". Essa conferência não é burocracia. É a única vez em que o aplicativo ' +
-          'checa se você realmente anotou.',
+        'Ao criar uma carteira, o aplicativo sorteia um número secreto e o mostra como ' +
+          'palavras comuns, em ordem: a frase-semente (em inglês, seed phrase). Ela não é cópia ' +
+          'de nada — é a origem da chave privada, do endereço e de todas as contas que você ' +
+          'criar.',
+        'Por isso, perder o celular não é perder o dinheiro: em outro aparelho, você escolhe ' +
+          '"importar carteira", digita as mesmas palavras na mesma ordem e os saldos reaparecem ' +
+          '— eles estavam na blockchain, não no celular. Perder as palavras, sim, é perder o ' +
+          'dinheiro.',
+        'Na tela, isso acontece uma vez só: logo depois de "criar nova carteira", o aplicativo ' +
+          'mostra as palavras numeradas e pede algumas de volta ("qual é a palavra 9?"). Não é ' +
+          'burocracia: é a única conferência de que você anotou.',
       ],
       exemplo: {
         titulo: 'O erro que parece cuidado',
         passos: [
-          'Você desconfia que sua carteira foi comprometida e cria uma "Conta 2" dentro do mesmo aplicativo.',
+          'Você desconfia que a carteira foi comprometida e cria uma "Conta 2" no mesmo aplicativo.',
           'A Conta 2 tem endereço novo e parece limpa.',
-          'Mas ela nasceu das mesmas palavras: é outro galho da mesma árvore.',
-          'Se a frase vazou, quem tem a frase abre a Conta 2 junto com a Conta 1. Carteira nova de verdade exige frase nova.',
+          'Mas nasceu das mesmas palavras: é outro galho da mesma árvore.',
+          'Quem tem a frase abre a Conta 2 junto com a Conta 1. Carteira nova de verdade exige frase nova.',
         ],
       },
       paragrafosFinais: [
-        'Guardar a frase-semente com segurança é a habilidade número um de todo este módulo. ' +
-          'Tudo o que vem depois — golpes, aprovações, plano de emergência — supõe que essa ' +
-          'parte está resolvida.',
+        'Guardar a frase-semente com segurança é a habilidade número um deste módulo. Tudo o ' +
+          'que vem depois — golpes, aprovações, plano de emergência — supõe que isso está ' +
+          'resolvido.',
       ],
       detalhe: {
         titulo: 'como as palavras viram chaves (BIP-39, BIP-32, BIP-44)',
         lista: [
           'BIP-39 é o padrão das palavras: uma lista fixa de 2.048. O aparelho sorteia a ' +
-            'entropia e acrescenta um checksum.',
-          'Cada pedaço de 11 bits vira uma palavra. 128 bits viram 12 palavras; 256 bits, 24.',
-          'A frase passa por PBKDF2-HMAC-SHA512 e vira uma semente de 512 bits. O BIP-32 cria ' +
-            'a árvore de chaves (carteira HD); o BIP-44 organiza por moeda e por conta.',
+            'entropia (o número aleatório) e acrescenta um checksum (um trecho de conferência).',
+          'Cada pedaço de 11 bits vira uma palavra: 128 bits dão 12 palavras; 256 bits, 24.',
+          'A frase passa pela função PBKDF2-HMAC-SHA512 e vira uma semente de 512 bits. O ' +
+            'BIP-32 cria a árvore de chaves (carteira HD); o BIP-44 organiza por moeda e por ' +
+            'conta.',
         ],
       },
     },
@@ -741,52 +680,40 @@ export const modulo1 = {
         },
       },
       paragrafos: [
-        'Perder a frase-semente para alguém não tem nada de sofisticado. Nos cinco casos ' +
-          'listados acima, o que acontece é sempre a mesma coisa: as palavras deixam de ' +
-          'existir só no papel, na sua gaveta, e passam a existir também em algum lugar que ' +
-          'outra pessoa consegue alcançar. Uma nuvem, um arquivo, um site, uma conversa. A ' +
-          'partir daí a carteira pertence a quem tiver a cópia, e você nem fica sabendo.',
-        'Três palavras dessa lista precisam de tradução. Phishing é "pescaria": o golpista ' +
-          'joga uma isca — um site, um e-mail, uma página — que imita algo legítimo e espera ' +
-          'você digitar ali o que ele quer. Airdrop é uma distribuição gratuita de tokens, ' +
-          'algo que existe de verdade e que por isso funciona tão bem como isca. Infostealer ' +
-          'é um programa que se instala escondido e vasculha o seu computador atrás de dados ' +
-          'valiosos, inclusive arquivos de carteira.',
-        'Isso importa porque a frase-semente não tem revogação. Uma senha vazada se troca; um ' +
-          'cartão clonado se cancela. A frase, não. No instante em que ela vira um arquivo, ' +
-          'uma foto ou uma mensagem, a única defesa que resta é mover tudo para uma carteira ' +
-          'nova, gerada a partir de uma frase nova — e isso só funciona se você chegar antes ' +
-          'de quem copiou.',
-        'Na prática, o pedido quase nunca chega com cara de roubo. Chega como ajuda, como ' +
-          'prêmio ou como emergência: um atendente que aparece sozinho no seu Telegram, uma ' +
-          'página de "verificador de carteira" que precisa sincronizar, um resgate que expira ' +
-          'em minutos. Nenhum suporte, nenhuma corretora, nenhum airdrop e nenhum verificador ' +
-          'precisa das suas 12 ou 24 palavras — porque a frase não serve para conferir nada, ' +
-          'serve só para gastar.',
+        'Três termos da lista acima. Phishing ("pescaria") é a isca — site, e-mail, página — que ' +
+          'imita algo legítimo para você digitar ali o que o golpista quer. Airdrop é uma ' +
+          'distribuição gratuita de tokens: existe de verdade, por isso é ótima isca. ' +
+          'Infostealer é um programa que se instala escondido e vasculha o computador atrás de ' +
+          'dados valiosos, como arquivos de carteira.',
+        'O pior: a frase não tem revogação, e você nem fica sabendo que ela vazou. Senha ' +
+          'vazada se troca, cartão clonado se cancela; frase vazada só tem uma defesa — mover ' +
+          'tudo para uma carteira nova, com frase nova, antes de quem copiou.',
+        'O pedido chega com cara de ajuda, prêmio ou emergência: um atendente que aparece ' +
+          'sozinho no Telegram, um "verificador de carteira", um resgate que expira em minutos. ' +
+          'Nenhum precisa das suas 12 ou 24 palavras: a frase não serve para conferir nada, só ' +
+          'para gastar.',
       ],
       exemplo: {
         titulo: 'Como o pedido costuma chegar',
         passos: [
-          'Você comenta num grupo público que está com um problema na carteira.',
-          'Minutos depois, alguém com foto e nome parecidos com os do suporte oficial chama você no privado. Suporte de verdade não faz isso.',
-          'A conversa é educada, técnica e sem pressa. Em algum momento aparece um link para "validar" ou "sincronizar" a carteira.',
-          'A página pede as 12 palavras, na ordem, em campos numerados — exatamente como a tela original do aplicativo.',
-          'Digitar ali não é um passo de validação. É a transferência da carteira inteira, e ela acontece antes de você fechar a aba.',
+          'Você comenta num grupo público que está com problema na carteira.',
+          'Minutos depois, alguém com foto e nome parecidos com os do suporte oficial te chama no privado. Suporte de verdade não faz isso.',
+          'A conversa é educada e técnica, até aparecer um link para "validar" ou "sincronizar" a carteira.',
+          'A página pede as 12 palavras em campos numerados, igual à tela do aplicativo.',
+          'Digitar ali não valida nada: entrega a carteira inteira.',
         ],
       },
       paragrafosFinais: [
-        'O erro comum que essa ideia evita é achar que existe um lugar digital seguro o ' +
-          'bastante para a frase. Não existe gerenciador, nuvem privada ou pasta com senha ' +
-          'que mude a conta: qualquer cópia digital é uma cópia a mais que pode vazar. ' +
-          'Ninguém legítimo jamais pede a sua frase-semente, e todo pedido é golpe — sem ' +
-          'meio-termo.',
+        'O erro que isso evita é achar que existe lugar digital seguro para a frase. ' +
+          'Gerenciador, nuvem privada, pasta com senha: toda cópia digital pode vazar. E todo ' +
+          'pedido da sua frase-semente é golpe.',
       ],
       detalhe: {
         titulo: 'o que um infostealer copia',
         paragrafos: [
           'Famílias como RedLine e Lumma copiam arquivos de carteira (wallet.dat) e dados de ' +
-            'extensões de navegador, como a MetaMask. Também vigiam a área de transferência ' +
-            'atrás de frases e endereços.',
+            'extensões de navegador, como a MetaMask. Também vigiam a área de transferência (o ' +
+            '"copiar e colar") atrás de frases e endereços.',
         ],
       },
     },
@@ -797,8 +724,8 @@ export const modulo1 = {
       aba: 'golpes',
       titulo: 'Wallet drainers: o golpe que não rouba a sua seed',
       emUmaFrase:
-        'Este golpe não precisa das suas palavras secretas. Ele precisa de um clique seu, ' +
-        'num botão que parece rotina.',
+        'Este golpe não precisa das suas palavras secretas. Precisa de um clique seu, num ' +
+        'botão que parece rotina.',
       // A sequência clicável dos 5 passos (os passos são modulo1.roteiroDrainer).
       // `passoInicial` e `passoDeVirada` contam do zero: 2 = o passo 3, "Assinar".
       sequencia: {
@@ -810,43 +737,34 @@ export const modulo1 = {
         legenda: 'O dano não está em conectar, e sim em assinar. O passo 3 é o ponto de virada.',
       },
       paragrafos: [
-        'Um wallet drainer — literalmente, "esvaziador de carteira" — é um kit de golpe ' +
-          'instalado num site falso. O site imita uma marca conhecida, oferece alguma coisa ' +
-          '(um resgate, um sorteio, um mint de NFT, que é a criação de um item novo numa ' +
-          'coleção) e pede que você assine uma operação que parece rotina. A assinatura não ' +
-          'transfere dinheiro na hora: ela concede uma permissão. Com a permissão na mão, o ' +
-          'golpista esvazia a carteira depois, no tempo dele.',
-        'Essa permissão tem nome, e ele aparece o tempo todo daqui para a frente: aprovação, ' +
-          'em inglês approval. Aprovar é autorizar um programa da blockchain a mover um token ' +
-          'seu sem precisar te perguntar de novo. É um mecanismo legítimo — quase todo site ' +
-          'de troca depende dele para funcionar — e é justamente por ser legítimo que serve ' +
-          'tão bem ao golpe: a tela do golpista é a mesma tela do site honesto.',
-        'Isso importa porque muda o lugar do perigo. Conectar a carteira a um site não move ' +
-          'nada: conectar só deixa o site ver os seus saldos, que já são públicos de qualquer ' +
-          'jeito. O dano começa no momento em que você assina. Por isso o passo 3 da ' +
-          'sequência acima é marcado como ponto de virada: antes dele, dá para fechar a aba e ' +
-          'nada aconteceu; depois dele, não há o que desfazer.',
-        'Por trás dos sites há um negócio montado, não um hacker solitário. O operador ' +
-          'escreve o kit e o aluga para afiliados, que cuidam de espalhar as páginas falsas, ' +
-          'comprar anúncios e copiar marcas. O que for roubado é repartido automaticamente ' +
-          'por um contrato, sem que as partes precisem confiar umas nas outras: a divisão ' +
-          'mais comum é 80% para o afiliado e 20% para o operador. Entender isso explica por ' +
-          'que os sites reaparecem tão rápido quando um domínio cai.',
+        'Wallet drainer ("esvaziador de carteira") é um kit de golpe num site falso que imita ' +
+          'uma marca conhecida. O site oferece algo — um resgate, um sorteio, um "mint" de NFT ' +
+          '(a criação de um item digital de coleção) — e pede que você assine uma operação com ' +
+          'cara de rotina. A assinatura não move dinheiro na hora: dá uma permissão, e o ' +
+          'golpista esvazia a carteira depois.',
+        'Essa permissão é a aprovação (approval): autorizar um contrato a mover um token seu ' +
+          'sem te perguntar de novo. Quase todo site de troca honesto usa isso — por isso a tela ' +
+          'do golpista é igual à do site honesto.',
+        'Conectar a carteira não move nada: só deixa o site ver os seus saldos, que já são ' +
+          'públicos. O dano começa quando você assina — por isso o passo 3 é o ponto de virada.',
+        'Por trás há um negócio, não um hacker solitário: o operador aluga o kit a afiliados, ' +
+          'que espalham as páginas, compram anúncios e copiam marcas. Um contrato reparte o ' +
+          'roubo sozinho — o mais comum é 80% para o afiliado e 20% para o operador. Por isso ' +
+          'os sites voltam tão rápido quando um cai.',
       ],
       exemplo: {
         titulo: 'Por que "eu nunca dei minha seed" não protege aqui',
         passos: [
-          'Você guardou a frase-semente no papel e nunca a digitou em lugar nenhum. Essa parte está certa.',
-          'Mas o drainer não quer a frase: ele quer uma assinatura — e a assinatura é feita pela própria carteira, com a sua chave, a seu pedido.',
-          'Do ponto de vista da rede, a permissão foi concedida por você. Não há nada de irregular a reverter.',
-          'Por isso a defesa deste card é outra: ler o que a tela pede antes de confirmar, e desconfiar do que promete algo de graça.',
+          'Você nunca digitou a sua frase-semente em lugar nenhum. Essa parte está certa.',
+          'Mas o drainer quer uma assinatura — e ela sai da sua própria carteira, com a sua chave, a seu pedido.',
+          'Para a rede, a permissão foi dada por você: não há nada irregular a reverter.',
+          'A defesa aqui é ler o que a tela pede antes de confirmar, e desconfiar do que promete algo de graça.',
         ],
       },
       paragrafosFinais: [
-        'O erro comum que essa ideia evita é se sentir seguro por não ter caído no golpe da ' +
-          'frase-semente. São dois golpes diferentes, com defesas diferentes. Proteger as ' +
-          'palavras resolve um deles. O outro se resolve na janela de assinatura, e é sobre ' +
-          'ela que falam os dois próximos cards.',
+        'O erro que isso evita é se achar seguro só por proteger a frase-semente. São dois ' +
+          'golpes: um se evita guardando as palavras; o outro, na janela de assinatura — o tema ' +
+          'dos dois próximos cards.',
       ],
       detalhe: {
         titulo: 'os números da Scam Sniffer e o estudo revisado por pares',
@@ -860,6 +778,7 @@ export const modulo1 = {
             '6.087 afiliados; afiliados ficam "tipicamente com 80% a 90%".',
           'Inferno Drainer (nov/2022–nov/2023): mais de US$ 80 milhões de cerca de 137.000 ' +
             'vítimas, 16.000 domínios, mais de 100 marcas imitadas (Group-IB).',
+          'Na drenagem, o golpista chama a função transferFrom, que usa a permissão dada.',
         ],
       },
     },
@@ -868,8 +787,8 @@ export const modulo1 = {
       aba: 'golpes',
       titulo: 'Os três truques: nos três, você entrega uma permissão sem perceber',
       emUmaFrase:
-        'Cada um dos três chega por uma tela diferente, com um nome diferente. Vale reconhecer ' +
-        'os três pelo que eles pedem, não pelo que eles prometem.',
+        'Cada um chega por uma tela diferente, com um nome diferente. Reconheça os três pelo ' +
+        'que pedem, não pelo que prometem.',
       // 3 cartões; o pé de cada um diz onde os três terminam.
       truques: {
         consequencia: '→ permissão sobre seus ativos',
@@ -900,46 +819,33 @@ export const modulo1 = {
           'coleção. Os três terminam no mesmo lugar: permissão para mover seus ativos.',
       },
       paragrafos: [
-        'Os três cartões acima são as três formas que um drainer usa para obter aquela ' +
-          'permissão. O primeiro é o approval ilimitado: você autoriza um contrato a gastar ' +
-          'um token seu sem teto de valor, e ele fica livre para levar aquele token quando ' +
-          'quiser, sem pedir nada de novo. O segundo é o Permit (e o Permit2): a mesma ' +
-          'autorização, mas obtida por um simples "assinar mensagem", sem taxa. O terceiro é ' +
-          'o setApprovalForAll, que entrega de uma vez todos os seus NFTs de uma coleção.',
-        'NFT é a sigla de "token não fungível": um token que representa um item único, com ' +
-          'número próprio, em vez de uma quantidade intercambiável. Duas notas de dez reais ' +
-          'são iguais entre si — isso é ser fungível. Duas figurinhas numeradas de uma coleção ' +
-          'não são. O setApprovalForAll existe porque os sites de compra e venda desses itens ' +
-          'precisam poder mover a sua figurinha no instante em que alguém a compra.',
-        'Isso importa porque nenhum dos três é ilegal ou estranho: sites honestos pedem os ' +
-          'três todos os dias. O que muda no golpe são os detalhes que ninguém lê. No ' +
-          'approval, o detalhe é o valor: ilimitado, em vez do valor exato daquela operação. ' +
-          'No Permit, o detalhe é o disfarce: como não cobra taxa e não parece uma transação, ' +
-          'a cabeça registra aquilo como "só uma assinatura de login". No setApprovalForAll, o ' +
-          'detalhe é o alcance: um clique cobre a coleção inteira, não o item que você está ' +
-          'vendendo.',
-        'Na tela, os três se distinguem em três campos da janela da carteira: o tipo do ' +
-          'pedido, o valor e quem recebe a permissão. Se o tipo for uma aprovação de gasto, ' +
-          'procure o valor e troque-o pelo valor da operação sempre que a carteira deixar. Se ' +
-          'não houver taxa de rede nenhuma, desconfie: é sinal de assinatura, e assinatura ' +
-          'também autoriza. Há ainda um quarto caminho, mais novo, o EIP-7702, de 2025, ' +
-          'tratado no próximo card da aba "Defesa".',
+        'Os três cartões acima são as três formas de conseguir aquela permissão. Um termo novo ' +
+          'neles: NFT ("token não fungível") é um token que representa um item único. Duas ' +
+          'notas de dez reais são iguais entre si (fungíveis); duas figurinhas numeradas, não. ' +
+          'Os sites de compra e venda desses itens pedem o setApprovalForAll para mover a sua ' +
+          'figurinha quando alguém a compra.',
+        'Sites honestos pedem os três todos os dias; o golpe mora no detalhe. No approval, é o ' +
+          'valor: ilimitado, em vez do exato da operação. No Permit, é o disfarce: sem taxa, ' +
+          'parece "só um login". No setApprovalForAll, é o alcance: a coleção inteira, não o ' +
+          'item que você vende.',
+        'Na janela da carteira, leia o tipo do pedido, o valor e quem recebe a permissão. ' +
+          'Aprovação de gasto? Troque o valor pelo da operação, se der. Nenhuma taxa? É ' +
+          'assinatura, e assinatura também autoriza. Há ainda um quarto caminho: o EIP-7702, de ' +
+          '2025, que faz a carteira agir como um contrato (aba Defesa).',
       ],
       exemplo: {
         titulo: 'A mesma tela, honesta e desonesta',
         passos: [
-          'Site honesto de troca: pede aprovação do token que você vai vender, e o valor mostrado é o da sua operação.',
-          'Site de golpe: pede aprovação do token de que você tem mais, e o valor mostrado é ILIMITADO.',
-          'Site honesto de coleção: pede setApprovalForAll quando você põe um item à venda — o alcance é a coleção, e é assim mesmo.',
-          'Site de golpe: pede a mesma coisa para "verificar" a carteira ou para liberar um resgate, sem que você esteja vendendo nada.',
-          'A diferença nunca está no botão. Está em por que aquilo está sendo pedido agora.',
+          'Site honesto de troca: aprovação do token que você vai vender, no valor da operação.',
+          'Site de golpe: aprovação do token de que você tem mais, com valor ILIMITADO.',
+          'Site honesto de coleção: setApprovalForAll quando você põe um item à venda. É normal.',
+          'Site de golpe: o mesmo pedido para "verificar" a carteira ou liberar um resgate, sem você vender nada.',
+          'A diferença não está no botão: está em por que aquilo é pedido agora.',
         ],
       },
       paragrafosFinais: [
-        'O erro comum que isso evita é tratar "assinar mensagem" como inofensivo porque não ' +
-          'cobra taxa. A ausência de taxa não quer dizer ausência de consequência — quer dizer ' +
-          'apenas que quem vai pagar o gas é o golpista, mais tarde, na hora de usar a ' +
-          'permissão que você deu.',
+        'O erro que isso evita é achar "assinar mensagem" inofensivo por não cobrar taxa. Quem ' +
+          'paga o gas é o golpista, depois, ao usar a permissão que você deu.',
       ],
       detalhe: {
         titulo: 'os padrões técnicos e os números da Scam Sniffer',
@@ -949,7 +855,7 @@ export const modulo1 = {
             'ERC-20 é o padrão dos tokens na EVM; Permit e Permit2 são assinaturas EIP-712 sem ' +
               'gás. O Permit2 fica em ',
             { mono: '0x000000000022D473030F116dDEE9F6B43aC78BA3' },
-            ' em várias redes. setApprovalForAll é dos padrões ERC-721 e ERC-1155.',
+            ' em várias redes. setApprovalForAll é dos padrões de NFT ERC-721 e ERC-1155.',
           ],
           'Relatório 2024 da Scam Sniffer: Permit 56,7% dos roubos, setOwner 31,9%, Transfer ' +
             '4,5%, increaseAllowance 3,5%. A Ethereum concentrou 85,3% das perdas. Em 2025, ' +
@@ -996,51 +902,39 @@ export const modulo1 = {
           'pontas e envia. O dinheiro vai para o golpista.',
       },
       paragrafos: [
-        'Address poisoning quer dizer "envenenamento de endereço". O golpista gera, por ' +
-          'tentativa e erro em massa, um endereço cujos primeiros e últimos caracteres são ' +
-          'iguais aos de um endereço que você usa de verdade — o par acima mostra a ideia, com ' +
-          'o mesmo começo, o mesmo fim e só o miolo diferente. Depois ele manda uma transação ' +
-          'de valor insignificante para você. O objetivo daquela migalha não é o dinheiro: é ' +
-          'plantar o endereço falso no seu histórico, esperando que um dia você copie dali.',
-        'O clipper é o outro caminho para o mesmo fim, e o nome vem de clipboard, a área de ' +
-          'transferência — o lugar invisível onde fica o que você acabou de copiar. É um vírus ' +
-          'que vigia esse lugar. Você copia o endereço certo; na hora de colar, ele troca o ' +
-          'texto por outro, parecido, em silêncio. Os quatro passos ilustrados acima acontecem ' +
-          'em menos de um segundo e sem nenhum aviso na tela.',
-        'Isso importa porque os dois exploram um hábito que quase todo mundo tem: conferir só ' +
-          'as pontas. Endereços são longos e sem sentido para o olho humano, então a gente ' +
-          'olha o começo, olha o fim, vê que bate e envia. É exatamente esse atalho que os ' +
-          'dois golpes compram. E o resultado cai na regra do primeiro card do módulo: ' +
-          'enviado, confirmado, acabou.',
-        'A defesa é a mesma para os dois e tem duas partes. A primeira: nunca copiar endereço ' +
-          'do histórico de transações, sempre da fonte original, e conferir a linha inteira ' +
-          'depois de colar, não só as pontas. A segunda, que vale ainda mais: enviar primeiro ' +
-          'uma transação de valor baixo e confirmar que chegou, antes de enviar o valor cheio. ' +
-          'Uma carteira fria acrescenta uma terceira camada, porque mostra o endereço de ' +
-          'destino na telinha do próprio aparelho, fora do alcance de um vírus que esteja no ' +
-          'computador.',
+        'Address poisoning é "envenenamento de endereço". O golpista gera, por tentativa e ' +
+          'erro em massa, um endereço com o começo e o fim iguais aos de um que você usa, como ' +
+          'no par acima. Depois manda para você uma transação de valor insignificante, só para ' +
+          'plantar o endereço falso no seu histórico.',
+        'O clipper (de clipboard, a área de transferência onde fica o que você copiou) é um ' +
+          'vírus que vigia esse lugar: você copia o endereço certo e, ao colar, ele troca por ' +
+          'outro parecido, em silêncio, em menos de um segundo.',
+        'Os dois exploram o hábito de conferir só as pontas, porque endereço é longo e sem ' +
+          'sentido para o olho. E vale a regra do primeiro card: enviado, confirmado, acabou.',
+        'A defesa serve para os dois: copiar da fonte original, nunca do histórico; conferir a ' +
+          'linha inteira depois de colar; e enviar primeiro um valor baixo. A carteira fria soma ' +
+          'uma camada: mostra o destino na telinha do próprio aparelho, fora do alcance de um ' +
+          'vírus no computador.',
       ],
       exemplo: {
         titulo: 'O teste de valor baixo, na ordem certa',
         passos: [
-          'Copie o endereço da fonte original — a tela de depósito da corretora, ou a carteira de destino aberta na sua frente. Nunca do histórico.',
-          'Cole e confira a linha inteira, caractere por caractere, não só o começo e o fim.',
-          'Envie um valor pequeno primeiro e espere a confirmação.',
-          'Confira no explorador que chegou na carteira certa — e confira no saldo de destino, não só no comprovante de envio.',
-          'Só então envie o restante. O custo desse cuidado é uma taxa a mais; o custo de pular é o valor inteiro.',
+          'Copie o endereço da fonte original — a tela de depósito da corretora ou a carteira de destino. Nunca do histórico.',
+          'Cole e confira a linha inteira, caractere por caractere.',
+          'Envie um valor pequeno e espere a confirmação.',
+          'Confira no explorador que chegou no saldo de destino, não só no comprovante de envio.',
+          'Só então envie o resto. O cuidado custa uma taxa a mais; pular custa o valor inteiro.',
         ],
       },
       paragrafosFinais: [
-        'O erro comum que isso evita é o mais silencioso do módulo: copiar um endereço do ' +
-          'próprio histórico porque "já mandei para esse antes". O histórico não é uma lista ' +
-          'de contatos confiáveis — qualquer pessoa pode escrever nele, e é exatamente isso ' +
-          'que o golpe faz.',
+        'O erro que isso evita é copiar do histórico porque "já mandei para esse antes". ' +
+          'Histórico não é lista de contatos: qualquer um escreve nele, e é isso que o golpe faz.',
       ],
       detalhe: {
         titulo: 'o tamanho do problema',
         paragrafos: [
           'Estudo da Carnegie Mellon ("Blockchain Address Poisoning", USENIX Security 2025), ' +
-            'Ethereum e BNB Chain de julho de 2022 a junho de 2024: 270 milhões de tentativas ' +
+            'Ethereum e BNB Chain, de julho de 2022 a junho de 2024: 270 milhões de tentativas ' +
             'contra 17 milhões de vítimas, 6.633 incidentes bem-sucedidos e ao menos US$ 83,8 ' +
             'milhões em perdas. Variantes de clipper usam endereços parecidos com o verdadeiro, ' +
             'para enganar quem confere só o começo depois de colar.',
@@ -1082,44 +976,35 @@ export const modulo1 = {
           'remove um vírus que ainda está no aparelho.',
       },
       paragrafos: [
-        'Aprovação, como vimos na aba "Golpes", é a permissão que você dá a um contrato para ' +
-          'mexer nos seus tokens. O ponto deste card é o que ninguém conta: essa permissão não ' +
-          'tem prazo. Ela continua ativa depois que você fecha a aba, depois que você para de ' +
-          'usar o site, depois que o projeto morre — até você cancelar. Revogar é esse ' +
-          'cancelamento, e ele existe justamente porque o padrão é a permissão ficar.',
-        'A lista tem uma coluna que decide tudo: o spender, que em inglês quer dizer "quem vai ' +
-          'gastar". É o contrato que recebeu a permissão. Ao lado dele aparecem o token ' +
-          'autorizado, o valor aprovado — e aqui a palavra "ilimitado" é o sinal vermelho — e ' +
-          'a idade da aprovação. Ler essas quatro colunas é a tarefa inteira: se você não ' +
-          'reconhece o spender, ou se o valor é ilimitado num site que você usou uma única ' +
-          'vez, é candidato a revogação.',
-        'Para só olhar, você não precisa conectar nada: no Revoke.cash basta digitar o seu ' +
-          'endereço, porque a lista é pública como todo o resto. Para revogar de fato, aí sim ' +
-          'você conecta a carteira, filtra e clica em "Revoke" — e isso é uma transação como ' +
-          'qualquer outra, com taxa de rede. Essa diferença é útil na prática: dá para ' +
-          'auditar a própria carteira de qualquer computador, sem risco, e só assinar quando ' +
-          'estiver no aparelho de confiança.',
-        'Isso importa, mas dentro de um limite que o contraste acima deixa explícito. Revogar ' +
-          'fecha a porta para o futuro: aquela permissão deixa de poder ser usada. Revogar não ' +
-          'abre o cofre de volta. O que já saiu, saiu; uma frase-semente vazada continua ' +
-          'vazada, porque quem tem a frase não precisa de permissão nenhuma; e um vírus que ' +
-          'ainda está no aparelho continua lá. Revogar é uma tranca, não um botão de desfazer.',
+        'Aprovação é a permissão que você dá a um contrato para mexer nos seus tokens (aba ' +
+          'Golpes). Ela não tem prazo: continua ativa depois que você fecha a aba, larga o site ' +
+          'ou o projeto morre — até você cancelar. Revogar é esse cancelamento.',
+        'Na lista, a coluna que decide é o spender ("quem vai gastar"): o contrato que recebeu ' +
+          'a permissão. Ao lado vêm o token, o valor — "ilimitado" é o sinal vermelho — e a ' +
+          'idade. Spender que você não reconhece, ou valor ilimitado num site usado uma vez só, ' +
+          'é candidato a revogação.',
+        'Para só olhar, basta digitar o seu endereço no Revoke.cash, sem conectar nada: a ' +
+          'lista é pública. Para revogar, você conecta a carteira e clica em "Revoke" — uma ' +
+          'transação com taxa de rede. Assim dá para auditar de qualquer computador e só ' +
+          'assinar no aparelho de confiança.',
+        'O limite está no contraste acima: revogar fecha a porta para o futuro, mas não ' +
+          'devolve o que saiu, não salva uma frase-semente vazada (quem tem a frase não precisa ' +
+          'de permissão) e não remove vírus do aparelho. É tranca, não botão de desfazer.',
       ],
       exemplo: {
         titulo: 'Por onde começar quando a lista é longa',
         passos: [
-          'Ordene das aprovações mais recentes para as mais antigas: uma aprovação suspeita costuma ser a última coisa que você assinou.',
-          'Comece pelas que estão sobre o token de maior valor que você tem — é o que um atacante levaria primeiro.',
-          'Em seguida, as de spender que você não reconhece, e as de valor ilimitado em sites que você usou uma vez só.',
-          'Deixe por último as de valor pequeno em sites que você usa toda semana: cada revogação custa taxa.',
-          'Confira também a aba do Permit2, que guarda permissões próprias — é o assunto do próximo card.',
+          'Ordene das mais recentes para as mais antigas: a suspeita costuma ser a última coisa que você assinou.',
+          'Comece pelas do token de maior valor — é o que um atacante levaria primeiro.',
+          'Depois, as de spender que você não reconhece e as ilimitadas em sites usados uma vez só.',
+          'Por último, as pequenas em sites que você usa toda semana: cada revogação custa taxa.',
+          'Confira também a aba do Permit2, assunto do próximo card.',
         ],
       },
       paragrafosFinais: [
-        'O erro comum que essa ideia evita é revogar depois de ter sido drenado e achar que o ' +
-          'problema está resolvido. A ordem certa é a inversa: revogar é rotina de manutenção, ' +
-          'feita de vez em quando com a carteira em paz. Depois do estrago, revogar é só um ' +
-          'dos passos — e nem sempre o primeiro, como mostra o card do plano de emergência.',
+        'O erro que isso evita é revogar depois de drenado e achar que resolveu. Revogar é ' +
+          'manutenção, feita com a carteira em paz; depois do estrago, é só um dos passos, e ' +
+          'nem sempre o primeiro.',
       ],
       detalhe: {
         titulo: 'o tutorial clique a clique',
@@ -1129,9 +1014,9 @@ export const modulo1 = {
             passos: [
               'Abra revoke.cash conferindo a URL letra por letra. Digite você mesmo.',
               '"Connect Wallet" para revogar, ou cole o endereço/ENS para só olhar.',
-              'Selecione a rede no menu.',
+              'Selecione a rede.',
               'Leia a lista: token, spender, valor aprovado e idade.',
-              'Ordene de "Newest to Oldest" para achar uma aprovação suspeita recente.',
+              'Ordene por "Newest to Oldest" para achar uma aprovação suspeita recente.',
               'Clique em "Revoke" e confirme na carteira, pagando o gas.',
               'Confira a aba do Permit2 e revogue também as permissões internas.',
             ],
@@ -1155,16 +1040,16 @@ export const modulo1 = {
     {
       id: 'duas-camadas-permit2-e-eip7702',
       aba: 'defesa',
-      titulo: 'As duas camadas do Permit2 e o vetor novo (EIP-7702)',
+      titulo: 'As duas camadas do Permit2 e o golpe novo (EIP-7702)',
       emUmaFrase:
         'Uma única assinatura pode valer a carteira inteira. Leia sempre o que a carteira ' +
         'pede antes de confirmar.',
       // Permit2 em 2 camadas: do app ao Permit2 (roxo) e do Permit2 a cada app
       // (ciano), e as duas funções que revogam (verde).
       camadas: {
-        inicio: 'Você usa um app DeFi',
+        inicio: 'Você usa uma DEX',
         camadas: [
-          { rotulo: 'Camada 1 · você → Permit2', texto: 'Approval ERC-20 ao contrato Permit2, geralmente ilimitado', tom: 'roxo' },
+          { rotulo: 'Camada 1 · você → Permit2', texto: 'Approval de token ao Permit2, geralmente ilimitado', tom: 'roxo' },
           { rotulo: 'Camada 2 · Permit2 → cada app', texto: 'Permit2 guarda sub-permissões por app, com valor e prazo', tom: 'acento' },
         ],
         funcoes: [
@@ -1173,35 +1058,27 @@ export const modulo1 = {
         ],
         legenda: 'Revogar a camada certa importa. O Revoke.cash mostra as duas em abas separadas.',
         descricao:
-          'Você usa um app DeFi. Dá um approval ERC-20 ao contrato Permit2: a camada 1. O ' +
+          'Você usa uma DEX. Dá um approval de token ao contrato Permit2: a camada 1. O ' +
           'Permit2 guarda sub-permissões por app: a camada 2. Dela saem duas funções: ' +
           'lockdown revoga várias de uma vez; invalidateNonces anula assinaturas não usadas.',
       },
       paragrafos: [
-        'O Permit2 é um contrato intermediário criado para resolver um incômodo real: sem ele, ' +
-          'cada site novo pede uma aprovação nova, e cada aprovação custa taxa. Com ele, você ' +
-          'aprova uma vez só — o próprio Permit2 — e depois distribui permissões menores a ' +
-          'cada aplicativo, por assinatura, sem taxa. É por isso que ele virou padrão em tanto ' +
-          'lugar. E é também por isso que ele precisa ser entendido antes de ser usado.',
-        'O desenho acima mostra as duas camadas, e a distinção é prática, não teórica. A ' +
-          'camada 1 é você autorizando o contrato Permit2 a mexer num token seu, geralmente ' +
-          'sem teto de valor. A camada 2 são as sub-permissões que o Permit2 guarda, uma para ' +
-          'cada aplicativo, com valor e prazo próprios. Revogar na camada errada dá a sensação ' +
-          'de ter limpado a casa sem ter limpado nada — o Revoke.cash mostra as duas em abas ' +
-          'separadas justamente por causa disso.',
-        'O lado bom do arranjo é que as permissões da camada 2 expiram sozinhas, o que reduz o ' +
-          'acúmulo de autorizações esquecidas. O lado ruim é que o risco muda de lugar: sai da ' +
-          'transação, que custa taxa e tem cara de operação, e vai para a assinatura, que é ' +
-          'gratuita e tem cara de formalidade. Fica mais barato e mais fácil enganar a vítima ' +
-          '— e é exatamente isso que os drainers exploram.',
-        'O EIP-7702 é o vetor novo, e é de outra natureza. Ativado na atualização Pectra, de ' +
-          'maio de 2025, ele permite que uma carteira comum passe a agir como um contrato, ' +
-          'delegando o seu comportamento a um código. Existe para coisas úteis, como pagar a ' +
-          'taxa em outro token ou agrupar várias operações numa só. O golpe consiste em ' +
-          'esconder essa delegação dentro de uma assinatura que parece uma troca qualquer: ' +
-          'quem assina não entrega um token, entrega o controle do próprio endereço. Casos ' +
-          'reais: cerca de US$ 146,5 mil em 24/05/2025 e mais de US$ 1,54 milhão em ' +
-          '24/08/2025.',
+        'O Permit2 é um contrato intermediário: sem ele, cada site novo pede uma aprovação ' +
+          'nova, com taxa. Com ele, você aprova uma vez só — o próprio Permit2 — e ele distribui ' +
+          'permissões menores a cada aplicativo, por assinatura, sem taxa. Por isso virou ' +
+          'padrão.',
+        'Na camada 1, você autoriza o Permit2 a mexer num token seu, geralmente sem teto. Na ' +
+          'camada 2, ele guarda uma sub-permissão por aplicativo, com valor e prazo próprios. ' +
+          'Revogar na camada errada dá a sensação de limpar a casa sem limpar nada.',
+        'As permissões da camada 2 expiram sozinhas, o que é bom. O ruim: o risco sai da ' +
+          'transação, que custa taxa e tem cara de operação, e vai para a assinatura, grátis e ' +
+          'com cara de formalidade. Enganar fica mais barato, e os drainers exploram isso.',
+        'O EIP-7702, ativado na atualização Pectra da Ethereum em maio de 2025, é outra ' +
+          'coisa: deixa uma carteira comum agir como um contrato, delegando o comportamento ' +
+          'dela a um código — útil para pagar a taxa em outro token ou juntar várias operações ' +
+          'numa só. O golpe esconde essa delegação numa assinatura com cara de troca: quem ' +
+          'assina entrega o controle do endereço, não um token. Casos reais: cerca de US$ 146,5 ' +
+          'mil em 24/05/2025 e mais de US$ 1,54 milhão em 24/08/2025.',
       ],
       quadro: [
         {
@@ -1221,24 +1098,22 @@ export const modulo1 = {
       exemplo: {
         titulo: 'Onde clicar para fechar as duas camadas',
         passos: [
-          'Na camada 2, o aplicativo da Uniswap costuma usar aprovação de 30 dias — ou seja, ela caduca sozinha se você não renovar.',
-          'Para apagar várias sub-permissões de uma vez existe a função lockdown, que o código da Uniswap descreve como revogação em lote.',
-          'Para anular assinaturas que você já fez mas que ainda não foram usadas existe a função invalidateNonces.',
-          'Nenhuma das duas toca na camada 1: o approval que você deu ao próprio Permit2 continua de pé até ser revogado à parte.',
-          'Por isso a auditoria completa é sempre em duas passadas, uma aba de cada vez.',
+          'Na camada 2, o aplicativo da Uniswap (uma DEX) costuma usar aprovação de 30 dias, que caduca sozinha.',
+          'A função lockdown apaga várias sub-permissões de uma vez (revogação em lote, diz o código da Uniswap).',
+          'A função invalidateNonces anula assinaturas feitas e ainda não usadas.',
+          'Nenhuma das duas toca na camada 1: o approval ao próprio Permit2 fica de pé até ser revogado à parte.',
+          'Auditoria completa, então, são duas passadas, uma aba de cada vez.',
         ],
       },
       paragrafosFinais: [
-        'O erro comum que este card evita é julgar o risco pelo esforço da tela. Uma ' +
-          'assinatura sem taxa, feita em dois segundos, pode valer mais do que qualquer ' +
-          'transação que você já pagou. A pergunta certa nunca é "isso custa caro?", e sim "o ' +
-          'que exatamente eu estou autorizando, e sobre o quê?".',
+        'O erro que isso evita é julgar o risco pelo esforço da tela. Uma assinatura grátis, ' +
+          'de dois segundos, pode valer mais do que qualquer transação que você já pagou. ' +
+          'Pergunte: "o que exatamente estou autorizando, e sobre o quê?".',
       ],
       detalhe: {
         titulo: 'as funções do Permit2 e as fontes dos casos',
         lista: [
-          'Na camada 2, o app da Uniswap costuma usar aprovação de 30 dias. lockdown é ' +
-            '"batch revoking approvals" nas palavras do código da Uniswap.',
+          'lockdown é "batch revoking approvals" nas palavras do código da Uniswap.',
           'As assinaturas do Permit2 seguem o padrão EIP-712.',
           'Caso de 24/05/2025: ataque EIP-7702 ligado ao Inferno Drainer, analisado pela ' +
             'SlowMist. Caso de 24/08/2025: mesma técnica, monitorada pela Scam Sniffer.',
@@ -1250,8 +1125,8 @@ export const modulo1 = {
       aba: 'defesa',
       titulo: 'Plano de emergência: os primeiros 10 minutos',
       emUmaFrase:
-        'A ordem dos passos aqui não é detalhe: fazer o certo na hora errada é o que faz ' +
-        'perder o que ainda dava para salvar.',
+        'A ordem dos passos não é detalhe: fazer o certo na hora errada é o que faz perder o ' +
+        'que ainda dava para salvar.',
       // A árvore de decisão: "Sim" (a frase vazou) é o ramo ruim, em vermelho;
       // "Não" é o verde. Os dois terminam no mesmo nó final.
       emergencia: {
@@ -1290,59 +1165,48 @@ export const modulo1 = {
         { forte: 'Desconfie de quem promete "recuperar seu cripto" cobrando adiantado.', texto: 'É um segundo golpe.' },
       ],
       paragrafos: [
-        'Este card é para o pior dia. Você abre a carteira e o saldo não está lá, ou está ' +
-          'menor. A primeira coisa a saber é que o tempo trabalha contra você e o pânico ' +
-          'também: quem age rápido e na ordem errada costuma perder o resto. A segunda é que ' +
-          'a pergunta da árvore acima resolve metade do problema — a frase-semente vazou, ou ' +
-          'foi só uma assinatura maliciosa? Tudo o que você vai fazer depende dessa resposta.',
-        'Se foi só uma assinatura, o atacante tem permissão sobre alguns tokens, e nada além ' +
-          'disso. Revogar aquela permissão fecha a porta, e o que não estava coberto por ela ' +
-          'continua seu. Se a frase vazou, revogar não adianta nada: quem tem a frase tem as ' +
-          'chaves, e quem tem as chaves não precisa de permissão para mover o que quiser. ' +
-          'Nesse caso a carteira acabou — ela não volta a ser segura nunca mais, nem depois de ' +
-          'formatar o aparelho, nem criando uma conta nova dentro dela.',
-        'É aqui que entra a palavra sweeper bot, que quer dizer "robô varredor". Quando uma ' +
-          'frase-semente vaza, o ladrão não fica olhando a tela: ele deixa um programa vigiando ' +
-          'aquele endereço vinte e quatro horas por dia. No instante em que qualquer coisa ' +
-          'chega ali, o robô assina uma transferência de saída. Por isso o conselho intuitivo ' +
-          '— "vou mandar um pouco de gas para conseguir resgatar meus tokens" — falha quase ' +
-          'sempre: o robô leva o gas antes de você conseguir usá-lo.',
-        'Por isso a ordem é esta. Primeiro parar de usar o aparelho, porque ele pode ser a ' +
-          'origem do problema e tudo o que você fizer nele pode ser observado. Depois criar ' +
-          'uma carteira nova, com frase nova, num aparelho limpo — e mover para lá o que ' +
-          'sobrou, começando pelo que vale mais, já que talvez só dê tempo de salvar uma ' +
-          'coisa. Só então vêm as provas e a denúncia, que não são urgentes para o seu bolso ' +
-          'nos primeiros minutos, mas são o que permite qualquer apuração depois.',
-        'Guarde expectativas realistas: recuperar o que já saiu é raro. O que está ao seu ' +
-          'alcance é impedir a segunda perda — a do que ainda estava lá — e registrar tudo. E ' +
-          'sobre a terceira perda, a mais cruel: assim que a notícia circula, aparecem perfis ' +
-          'oferecendo "recuperação de cripto" mediante pagamento adiantado. Isso é sempre um ' +
-          'segundo golpe, montado em cima do primeiro, e ele encontra a vítima no momento em ' +
-          'que ela está mais disposta a acreditar.',
+        'Este card é para o pior dia: o saldo sumiu ou diminuiu. O tempo e o pânico trabalham ' +
+          'contra você — quem age rápido e na ordem errada costuma perder o resto. A pergunta da ' +
+          'árvore resolve metade do problema: a frase-semente vazou, ou foi só uma assinatura ' +
+          'maliciosa?',
+        'Se foi só uma assinatura, o atacante tem permissão sobre alguns tokens, e nada além: ' +
+          'revogar fecha a porta, e o resto continua seu. Se a frase vazou, revogar não adianta ' +
+          '— quem tem a frase tem as chaves. A carteira acabou: não volta a ser segura nem ' +
+          'formatando o aparelho, nem com uma conta nova dentro dela.',
+        'Aí entra o sweeper bot ("robô varredor"): um programa que o ladrão deixa vigiando o ' +
+          'endereço vinte e quatro horas por dia e que leva na hora tudo o que chega. Por isso ' +
+          '"mandar um pouco de gas para resgatar os tokens" quase sempre falha: o robô leva o ' +
+          'gas antes.',
+        'Daí a ordem da lista no fim do card: parar de usar o aparelho, porque ele pode ser a ' +
+          'origem do problema; mover primeiro o mais valioso, porque talvez só dê tempo de ' +
+          'salvar uma coisa; e só depois provas e denúncia, que não salvam o bolso agora, mas ' +
+          'permitem qualquer apuração.',
+        'Seja realista: recuperar o que saiu é raro. Dá para impedir a segunda perda, a do que ' +
+          'sobrou, e registrar tudo. E cuidado com a terceira: perfis oferecendo "recuperação ' +
+          'de cripto" com pagamento adiantado são sempre um segundo golpe, que chega quando a ' +
+          'vítima mais quer acreditar.',
       ],
       exemplo: {
         titulo: 'Os dois caminhos, lado a lado',
         passos: [
-          'Assinatura maliciosa, frase intacta: pare de usar o aparelho, revogue a aprovação envolvida, confira o resto da lista de aprovações e guarde as provas. A carteira continua utilizável.',
-          'Frase vazada: pare de usar o aparelho, crie carteira nova com frase nova num aparelho limpo, e mova o que sobrou começando pelo mais valioso.',
-          'No segundo caso, não deposite gas para "resgatar" o que ficou: o robô varredor leva o depósito.',
-          'Nos dois casos, o último passo é o mesmo: hashes, prints, URL do site, data e horário — e a denúncia.',
+          'Assinatura maliciosa, frase intacta: pare de usar o aparelho, revogue a aprovação, confira o resto da lista e guarde as provas. A carteira segue utilizável.',
+          'Frase vazada: pare de usar o aparelho, crie carteira nova com frase nova num aparelho limpo e mova o que sobrou, do mais valioso para baixo.',
+          'Nesse caso, não deposite gas para "resgatar" nada: o robô varredor leva.',
+          'Nos dois casos: hashes, prints, URL do site, data e horário — e a denúncia.',
         ],
       },
       paragrafosFinais: [
-        'O erro comum que este card evita é o mais humano de todos: mexer primeiro e pensar ' +
-          'depois. Trocar a senha do aplicativo não resolve nada, porque a senha não é a ' +
-          'chave. Criar uma conta nova dentro da mesma carteira não resolve nada, porque a ' +
-          'frase é a mesma. E revogar aprovações quando a frase vazou só gasta taxa num cofre ' +
-          'que já está aberto.',
+        'O erro que isso evita é mexer antes de pensar. Trocar a senha do aplicativo não ' +
+          'resolve: a senha não é a chave. Conta nova na mesma carteira não resolve: a frase é a ' +
+          'mesma. E revogar com a frase vazada só gasta taxa num cofre já aberto.',
       ],
       detalhe: {
         titulo: 'por que depositar gas falha e o que o FBI diz',
         paragrafos: [
-          'Quando a frase vazou, "depositar gas para salvar tokens" costuma fracassar: o robô ' +
-            'leva o gas primeiro. A MetaMask recomenda abandonar a carteira e criar uma nova. ' +
-            'O FBI, no alerta IC3 I-072026 (20/07/2026), afirma que o IC3 nunca cobra para ' +
-            'recuperar fundos, nem indica empresa que cobre, e não tem perfil em rede social.',
+          'Depositar gas falha porque o robô o leva primeiro; a MetaMask recomenda abandonar a ' +
+            'carteira e criar outra. O FBI, no alerta IC3 I-072026 (20/07/2026), afirma que o ' +
+            'IC3 — o centro de denúncias de crimes na internet — nunca cobra para recuperar ' +
+            'fundos, não indica empresa que cobre e não tem perfil em rede social.',
         ],
       },
     },
@@ -1353,8 +1217,8 @@ export const modulo1 = {
       aba: 'brasil',
       titulo: 'Golpes comuns no Brasil',
       emUmaFrase:
-        'Os quatro trocam de roupa o tempo todo, mas a coreografia é sempre a mesma: entrar é ' +
-        'fácil, render é lindo, e sair é impossível.',
+        'Os quatro trocam de roupa, mas a coreografia é a mesma: entrar é fácil, render é ' +
+        'lindo, sair é impossível.',
       // 4 cartões: o que cada golpe promete, onde está a armadilha e o sinal.
       golpes: {
         rotulos: { promete: 'Promete', armadilha: 'Onde está a armadilha', sinal: 'Sinal' },
@@ -1398,43 +1262,34 @@ export const modulo1 = {
         ],
       },
       paragrafos: [
-        'Os quatro cartões acima são disfarces diferentes do mesmo enredo. O falso robô vende ' +
-          'a ideia de um programa que acerta sempre — impossível num mercado de risco, onde ' +
-          'acertar sempre significaria ter capturado todo o dinheiro do mundo. O grupo de ' +
-          'sinais vende antecipação. A falsa gestora vende rendimento. O "assessor" do ' +
-          'WhatsApp vende relacionamento. Em todos, o dinheiro entra sem atrito e trava na ' +
-          'saída.',
-        'Três nomes que aparecem nos cartões merecem tradução. Pump and dump é "inflar e ' +
-          'despejar": o organizador compra barato antes, manda o grupo comprar, o preço sobe ' +
-          'com a entrada de vocês, e ele vende no topo — o lucro dele é a perda de quem ' +
-          'obedeceu. Esquema Ponzi é a pirâmide clássica: não existe investimento nenhum, os ' +
-          'antigos são pagos com o dinheiro dos novos, e o esquema desaba quando param de ' +
-          'entrar novos. Pig butchering, "engorda do porco", é o nome que o crime organizado ' +
-          'dá ao golpe de longo prazo: semanas de conversa afetuosa para engordar a confiança ' +
-          'antes do abate.',
-        'Isso importa porque nenhum dos quatro se apresenta como golpe. Eles se apresentam ' +
-          'como oportunidade, como grupo de amigos, como assessoria. O que os denuncia não é ' +
-          'a aparência, é a estrutura — e é por isso que os sinais abaixo funcionam melhor do ' +
-          'que qualquer tentativa de julgar se o site parece sério.',
+        'Os quatro cartões são disfarces do mesmo enredo: o falso robô vende acerto garantido ' +
+          '(impossível num mercado de risco — quem acertasse sempre teria todo o dinheiro do ' +
+          'mundo); o grupo de sinais, antecipação; a falsa gestora, rendimento; o "assessor" do ' +
+          'WhatsApp, relacionamento. Em todos, o dinheiro entra sem atrito e trava na saída.',
+        'Os nomes, traduzidos. Pump and dump ("inflar e despejar"): o organizador compra ' +
+          'antes, manda o grupo comprar e vende no topo — o lucro dele é a perda de quem ' +
+          'obedeceu. Esquema Ponzi é a pirâmide: não há investimento; os antigos recebem o ' +
+          'dinheiro dos novos, até pararem de entrar novos e tudo desabar. Pig butchering ' +
+          '("engorda do porco"): semanas de conversa afetuosa para engordar a confiança antes do ' +
+          'abate. E a CVM (Comissão de Valores Mobiliários) fiscaliza ofertas de investimento; ' +
+          'stop order é a ordem dela para uma empresa parar de oferecer algo ao público.',
+        'Nenhum se apresenta como golpe. O que os denuncia é a estrutura, não a aparência — ' +
+          'por isso os sinais abaixo valem mais do que julgar se o site parece sério.',
       ],
       listaTitulo: 'Os cinco sinais que se repetem nos quatro',
       lista: [
-        'Promessa de rendimento fixo ou garantido. Em mercado de risco, garantia não existe; quem garante está mentindo ou está pagando com o dinheiro do próximo.',
-        'Pressão por urgência: "é agora ou nunca", contagem regressiva, vaga que acaba hoje. A pressa existe para impedir a pergunta seguinte.',
+        'Rendimento fixo ou garantido. Em mercado de risco, garantia não existe: quem garante mente ou paga com o dinheiro do próximo.',
+        'Urgência: "é agora ou nunca", contagem regressiva, vaga que acaba hoje. A pressa existe para impedir a pergunta seguinte.',
         'Exigência de recrutar outras pessoas. Se o seu ganho depende de quem você trouxer, o produto é você.',
-        'Saque bloqueado até um novo depósito ou o pagamento de uma "taxa". Nenhuma empresa legítima cobra para devolver o seu próprio dinheiro.',
-        'Empresa sem registro ou autorização. É o único sinal que dá para conferir sozinho, fora da conversa, antes de pôr dinheiro.',
+        'Saque bloqueado até um novo depósito ou uma "taxa". Empresa legítima não cobra para devolver o seu dinheiro.',
+        'Empresa sem registro ou autorização. É o único sinal que dá para conferir sozinho, antes de pôr dinheiro.',
       ],
       paragrafosFinais: [
-        'Esse último sinal é o que a checagem acima resolve, e ela tem duas paradas. A ' +
-          'primeira é a CVM, a Comissão de Valores Mobiliários, que fiscaliza ofertas de ' +
-          'investimento e publica alertas e stop orders — a stop order é a ordem formal para ' +
-          'uma empresa parar de ofertar algo ao público, e estar numa delas é sinal forte de ' +
-          'perigo. A segunda é o Banco Central, que autoriza quem pode operar. Passar pelas ' +
-          'duas não é garantia de nada; reprovar em qualquer uma é motivo para parar ali. O ' +
-          'caso mais conhecido do país, o do falso robô da Atlas Quantum, terminou em multas ' +
-          'da CVM de mais de R$ 55,8 milhões em 2024 — e nenhuma dessas multas devolveu ' +
-          'dinheiro a quem investiu.',
+        'Esse último sinal é o que a checagem abaixo resolve: primeiro a CVM (estar num alerta ' +
+          'ou numa stop order é sinal forte de perigo), depois o Banco Central, que autoriza ' +
+          'quem pode operar. Passar não garante nada; reprovar é motivo para parar. No caso mais ' +
+          'conhecido do país, o falso robô da Atlas Quantum, as multas da CVM passaram de R$ ' +
+          '55,8 milhões em 2024 — e nenhuma devolveu dinheiro a quem investiu.',
       ],
       // A checagem antes de colocar dinheiro: CVM primeiro, Banco Central depois.
       checagem: {
@@ -1454,12 +1309,10 @@ export const modulo1 = {
       detalhe: {
         titulo: 'datas, multas e números de cada golpe',
         lista: [
-          'Atlas Quantum: Deliberação CVM nº 826 (13/08/2019) mandou parar a oferta. Em ' +
+          'Atlas Quantum: a Deliberação CVM nº 826 (13/08/2019) mandou parar a oferta. Em ' +
             '21/05/2024, multas de mais de R$ 55,8 milhões por operação fraudulenta e embaraço ' +
             'à fiscalização. Prejuízo: estimativas da imprensa vão de R$ 1,1 bilhão e 47 mil ' +
             'investidores a R$ 7 bilhões e 200 mil pessoas — sem número oficial único.',
-          'Grupos de sinais: o conflito é o "trader" ganhar comissão da corretora pelo volume ' +
-            'que você opera.',
           'Pig butchering: a CVM (06/10/2025) estima prejuízo global acima de US$ 75 bilhões ' +
             'entre 2020 e 2024. Operação Criptoabate (Polícia Civil do RS, 13/08/2026): uma ' +
             'vítima transferiu R$ 37 milhões em seis meses; a estrutura tinha mais de R$ 30 ' +
@@ -1472,56 +1325,49 @@ export const modulo1 = {
       aba: 'brasil',
       titulo: 'Cripto no Brasil: a cronologia que importa',
       emUmaFrase:
-        'A regra nova não mudou o que você pode fazer. Mudou quem pode te atender — e isso já ' +
-        'tirou cinco corretoras do varejo.',
+        'A regra nova não mudou o que você pode fazer: mudou quem pode te atender. E já tirou ' +
+        'cinco corretoras do atendimento a pessoa física.',
       // O visual é a linha do tempo modulo1.linhaDoTempoRegulacao (mais abaixo).
       paragrafos: [
-        'PSAV quer dizer Prestadora de Serviços de Ativos Virtuais. É o nome oficial de ' +
-          'qualquer empresa que guarde, intermedeie ou negocie cripto por você: corretoras, ' +
-          'intermediárias e custodiantes. Até pouco tempo atrás, essas empresas operavam no ' +
-          'Brasil sem uma autorização própria. Desde fevereiro de 2026 elas passaram a seguir ' +
-          'regras do Banco Central, com exigências de prevenção à lavagem de dinheiro, ' +
-          'governança, segurança e segregação do dinheiro dos clientes.',
-        'Essa última exigência é a que mais interessa a você. Segregar significa manter o ' +
-          'dinheiro dos clientes separado do caixa da empresa, em vez de misturar tudo numa ' +
-          'conta só. É exatamente a mistura que transforma o problema financeiro de uma ' +
-          'corretora no prejuízo dos clientes dela — o risco de contraparte de que falamos na ' +
-          'aba "Carteiras".',
-        'Regra nova custa caro, e é aí que está a consequência prática. Empresas que já ' +
-          'operavam têm até 30 de outubro de 2026 para pedir autorização, e nem todas ' +
-          'quiseram. Em 2026, Bitso, Coinext, NovaDAX, Digitra e Bitnuvem anunciaram o fim do ' +
-          'varejo no Brasil, citando justamente o custo de se adequar. Para quem tinha conta ' +
-          'em alguma delas, isso não é notícia de jornal: é uma mudança de endereço obrigatória.',
-        'Na prática, o que muda para você é uma pergunta a mais antes de escolher onde ' +
-          'colocar dinheiro: essa corretora pediu autorização, e pretende continuar atendendo ' +
-          'pessoa física? Qualquer lista de "quem está autorizado" envelhece rápido, então a ' +
-          'consulta que vale é a do próprio Banco Central, feita na hora. Nada disso muda o ' +
-          'que você pode fazer: comprar, vender e guardar cripto continua permitido.',
+        'PSAV (Prestadora de Serviços de Ativos Virtuais) é o nome oficial de toda empresa que ' +
+          'guarda, intermedeia ou negocia cripto por você: corretoras, intermediárias e ' +
+          'custodiantes. Antes, operavam sem autorização própria; desde fevereiro de 2026, ' +
+          'seguem regras do Banco Central — prevenção à lavagem de dinheiro, governança, ' +
+          'segurança e segregação do dinheiro dos clientes.',
+        'Segregar — manter o dinheiro dos clientes separado do caixa da empresa — é o que mais ' +
+          'te interessa: a mistura é o que transforma o problema de uma corretora no prejuízo ' +
+          'dos clientes (o risco de contraparte da aba Carteiras).',
+        'Regra nova custa caro. Quem já operava tem até 30 de outubro de 2026 para pedir ' +
+          'autorização, e nem todas quiseram: em 2026, Bitso, Coinext, NovaDAX, Digitra e ' +
+          'Bitnuvem anunciaram o fim do varejo (o atendimento a pessoa física) no Brasil, ' +
+          'citando o custo de se adequar. Para os clientes delas, foi mudança obrigatória.',
+        'Para você, fica uma pergunta antes de escolher onde pôr dinheiro: essa corretora ' +
+          'pediu autorização e vai continuar atendendo pessoa física? Consulte no próprio Banco ' +
+          'Central, na hora — listas envelhecem rápido. Comprar, vender e guardar cripto ' +
+          'continua permitido.',
       ],
       exemplo: {
         titulo: 'O que aconteceu com quem tinha conta numa das cinco',
         passos: [
           'A corretora anuncia o fim do varejo e dá um prazo para os clientes retirarem o que têm.',
           'A Bitso transferiu a base de clientes para o Mercado Bitcoin, em setembro de 2026; a Coinext anunciou o fim em 03/09/2026.',
-          'Quem acompanhava, migrou com calma. Quem não acompanhava, descobriu pelo e-mail de encerramento.',
-          'A lição não é sobre essas empresas em particular: é que a conta na corretora depende de uma empresa continuar existindo e continuar querendo te atender.',
+          'Quem acompanhava migrou com calma; quem não acompanhava soube pelo e-mail de encerramento.',
+          'A lição: a conta na corretora depende de a empresa continuar existindo e querendo te atender.',
         ],
       },
       paragrafosFinais: [
-        'Vale separar duas coisas que costumam ser confundidas nas manchetes. A Resolução BCB ' +
-          '561 veda o uso de stablecoins — tokens feitos para valer sempre o mesmo que uma ' +
-          'moeda tradicional, quase sempre o dólar — como forma de liquidação em câmbio ' +
-          'eletrônico, isto é, em pagamentos internacionais. Ela não proíbe comprar, vender ' +
-          'nem guardar cripto dentro do país. Regulação muda: confira no Banco Central e na ' +
-          'CVM antes de tomar qualquer decisão baseada nela.',
+        'Não confunda: a Resolução BCB 561 veda stablecoins (tokens feitos para valer sempre o ' +
+          'mesmo que uma moeda tradicional, quase sempre o dólar) na liquidação de câmbio ' +
+          'eletrônico, isto é, em pagamentos internacionais. Ela não proíbe comprar, vender nem ' +
+          'guardar cripto no país. Regulação muda: confira no Banco Central e na CVM antes de ' +
+          'decidir com base nela.',
       ],
       detalhe: {
         titulo: 'números das resoluções e a Resolução 561',
         lista: [
           'Resoluções BCB 519, 520 e 521, fruto das Consultas Públicas 109, 110 e 111 de ' +
             '2024. Elas classificam as PSAVs em modalidades: intermediária, custodiante e ' +
-            'corretora. A Bitso transferiu a base para o Mercado Bitcoin (setembro de 2026); ' +
-            'a Coinext anunciou o fim em 03/09/2026.',
+            'corretora.',
           'Resolução BCB 561 (30/04/2026, vigor em 01/10/2026): veda stablecoins como ' +
             'liquidação em câmbio eletrônico (eFX), isto é, pagamentos internacionais. Não ' +
             'proíbe comprar, vender nem guardar cripto internamente.',
@@ -1533,8 +1379,8 @@ export const modulo1 = {
       aba: 'brasil',
       titulo: 'Impostos: a obrigação existe (e este módulo não ensina a calcular)',
       emUmaFrase:
-        'Este card não ensina a calcular nada. Ele existe para você não descobrir tarde ' +
-        'demais que precisava ter anotado.',
+        'Este card não ensina a calcular. Existe para você não descobrir tarde demais que ' +
+        'precisava ter anotado.',
       // "O que guardar de cada operação": Data, Valor e Taxas.
       registro: {
         frase: 'O que guardar de cada operação',
@@ -1577,54 +1423,47 @@ export const modulo1 = {
           'contador para o seu caso concreto.',
       },
       paragrafos: [
-        'No Brasil, cripto é tratada como um bem — juridicamente parecida com um carro ou um ' +
-          'imóvel, não com dinheiro na conta. Isso tem uma consequência direta: quando você ' +
-          'vende um bem por mais do que pagou, a diferença é lucro, e esse lucro pode ser ' +
-          'tributado. O nome disso é ganho de capital: é o imposto sobre a valorização, ' +
-          'cobrado no momento em que você realiza o ganho, não enquanto o preço apenas sobe na ' +
-          'tela.',
-        'A parte que surpreende iniciante é que trocar também conta. Trocar um token por ' +
-          'outro, sem passar por reais, pode ser um fato tributável do mesmo jeito que vender ' +
-          '— porque, aos olhos da regra, você se desfez de um bem. Além do imposto em si, ' +
-          'existem obrigações de declaração, que valem mesmo quando não há imposto a pagar.',
-        'Isso importa por um motivo bem prático, e é o motivo deste card estar num módulo de ' +
-          'segurança: o registro não dá para reconstruir depois. Os três campos do quadro ' +
-          'acima — data, valor em reais e taxas — precisam ser anotados no dia, porque meses ' +
-          'depois a corretora pode ter encerrado, o histórico pode não estar mais acessível e ' +
-          'a cotação daquele instante vira uma garimpagem. As taxas entram na conta, e sem ' +
-          'elas o cálculo sai errado para mais.',
-        'Este material não dá orientação tributária e não vai dizer alíquota, prazo nem ' +
-          'formulário. O objetivo é deixar claro que a obrigação existe e que ela tem prazo. ' +
-          'As regras mudaram nos últimos anos e a Receita Federal passou a receber muito mais ' +
-          'informação sobre operações com cripto — o que significa que divergências entre o ' +
-          'que você declara e o que a Receita já sabe tendem a aparecer. Essa retenção para ' +
-          'conferência é o que se chama popularmente de malha fina.',
+        'No Brasil, cripto é tratada como um bem — parecida com um carro ou um imóvel, não com ' +
+          'dinheiro na conta. Vender por mais do que pagou dá lucro, e o lucro pode ser ' +
+          'tributado: é o ganho de capital, cobrado quando você realiza o ganho, não enquanto o ' +
+          'preço só sobe na tela.',
+        'A surpresa comum: trocar também conta. Trocar um token por outro, sem passar por ' +
+          'reais, pode ser tributado como uma venda. E há obrigações de declarar que valem ' +
+          'mesmo sem imposto a pagar.',
+        'Isto está num módulo de segurança porque o registro não se reconstrói depois: data, ' +
+          'valor em reais e taxas se anotam no dia. Meses depois, a corretora pode ter fechado, ' +
+          'o histórico pode ter sumido e a cotação daquele instante vira garimpo. Sem as taxas, ' +
+          'o cálculo sai errado para mais.',
+        'Este material não dá orientação tributária — nem alíquota, nem prazo, nem formulário; ' +
+          'só avisa que a obrigação existe e tem prazo. As regras mudaram, e a Receita Federal ' +
+          'passou a receber muito mais informação sobre cripto: diferença entre o que você ' +
+          'declara e o que ela já sabe tende a aparecer. É a malha fina, a retenção da ' +
+          'declaração para conferência.',
       ],
       exemplo: {
         titulo: 'O que anotar no dia da operação',
         passos: [
-          'A data: o dia exato da venda ou da troca. É ela que define em qual período a operação entra.',
-          'O que saiu: qual cripto e qual quantidade você entregou, e quanto aquilo valia em reais naquele momento.',
-          'O que entrou: o que você recebeu, e quanto valia em reais no mesmo momento.',
-          'As taxas: a da corretora, a da pool e a de rede. Todas fazem parte do custo e reduzem o ganho.',
-          'Onde: em qual corretora ou em qual carteira — é o que permite reencontrar o comprovante depois.',
+          'A data exata da venda ou da troca: ela define em qual período a operação entra.',
+          'O que saiu: qual cripto, quanto, e o valor em reais naquele momento.',
+          'O que entrou: o que você recebeu, e o valor em reais no mesmo momento.',
+          'As taxas: da corretora, da pool e de rede. Entram no custo e reduzem o ganho.',
+          'Onde: em qual corretora ou carteira, para reencontrar o comprovante depois.',
         ],
       },
       paragrafosFinais: [
-        'O erro comum que isso evita é deixar para organizar na época da declaração. Quem ' +
-          'anota na hora leva ao contador uma planilha; quem não anota leva um problema, e às ' +
-          'vezes nem consegue reconstruir. Consulte um contador para o seu caso concreto: ' +
-          'aqui o assunto para por aqui, de propósito.',
+        'O erro que isso evita é deixar para organizar na época da declaração. Quem anota na ' +
+          'hora leva ao contador uma planilha; quem não anota leva um problema. Para o seu caso ' +
+          'concreto, consulte um contador: aqui o assunto para, de propósito.',
       ],
       detalhe: {
         titulo: 'a lei e a plataforma DeCripto',
         lista: [
           'As regras mudaram com a Lei 14.754/2023 (a "Lei das Offshores") e com novas ' +
             'normas da Receita Federal.',
-          'A partir de julho de 2026, a plataforma DeCripto amplia a fiscalização, exigindo ' +
-            'que plataformas informem as operações à Receita Federal.',
-          'A DeCripto foi instituída pela IN RFB nº 2.291/2025 e é alinhada ao padrão ' +
-            'internacional CARF da OCDE.',
+          'A partir de julho de 2026, a plataforma DeCripto amplia a fiscalização: as ' +
+            'plataformas informam as operações à Receita Federal.',
+          'A DeCripto foi instituída pela IN RFB nº 2.291/2025 (uma instrução normativa da ' +
+            'Receita) e segue o padrão internacional CARF, da OCDE.',
         ],
       },
     },
@@ -1633,8 +1472,8 @@ export const modulo1 = {
       aba: 'brasil',
       titulo: 'Sacar para reais: Pix, KYC e P2P',
       emUmaFrase:
-        'Sair é o caminho que a maioria estuda menos e é onde moram dois riscos que não ' +
-        'existem em nenhum outro card: o estorno e o bloqueio da sua conta.',
+        'Sair é o que a maioria menos estuda — e é onde moram dois riscos só dele: o estorno e ' +
+        'o bloqueio da sua conta.',
       // Dois caminhos a partir da carteira. O tom pinta o último nó de cada um.
       saque: {
         inicio: 'Cripto na sua carteira',
@@ -1663,44 +1502,34 @@ export const modulo1 = {
           'saque via Pix. Caminho B: negociação P2P; só libera após confirmar o Pix.',
       },
       paragrafos: [
-        'Há dois caminhos para transformar cripto em reais, e o desenho acima mostra os dois. ' +
-          'O caminho A é a corretora: você envia a cripto para uma CEX que fez o seu cadastro ' +
-          '(o KYC, aquela verificação de identidade da aba "Fundamentos"), vende por reais ' +
-          'dentro da plataforma e saca por Pix para a sua conta bancária. O caminho B é o P2P, ' +
-          'sigla de peer-to-peer, ou seja, "de pessoa para pessoa": você negocia direto com ' +
-          'outro indivíduo, sem a corretora comprando de você.',
-        'O caminho A é mais simples e tem um efeito colateral útil: como o cadastro existe, ' +
-          'fica mais fácil explicar a origem do dinheiro ao seu banco. O caminho B costuma ' +
-          'oferecer preço melhor, e é aí que mora o problema — o preço melhor é o pagamento ' +
-          'pelo risco que você está assumindo.',
-        'São três riscos concretos, e nenhum deles é técnico. A outra pessoa pode simplesmente ' +
-          'não pagar depois de você liberar a cripto. Pode pagar e depois pedir o estorno do ' +
-          'Pix ao banco dela, alegando fraude. E pode pagar com dinheiro de origem criminosa ' +
-          '— nesse caso, o valor cai na sua conta, é rastreado até você e a sua conta bancária ' +
-          'pode ser bloqueada, mesmo sem você ter feito nada de errado. Esse terceiro risco é ' +
-          'o que mais gente subestima.',
-        'As plataformas de P2P reduzem parte disso com o escrow, que é um depósito em garantia: ' +
-          'a plataforma segura a cripto enquanto o pagamento é feito e só a libera quando as ' +
-          'duas pontas confirmam. Reduz, não elimina — o escrow protege você de não receber, ' +
-          'mas não protege de receber dinheiro sujo nem de um estorno posterior. Por isso a ' +
-          'regra é simples e não tem exceção: nunca solte a cripto antes de ver o valor ' +
-          'efetivamente creditado na sua conta.',
+        'O caminho A é a corretora: você envia a cripto para uma CEX onde tem cadastro (o KYC ' +
+          'da aba Fundamentos), vende por reais e saca por Pix. O caminho B é o P2P ' +
+          '(peer-to-peer, "de pessoa para pessoa"): você negocia direto com outra pessoa, sem a ' +
+          'corretora comprando de você.',
+        'O A é mais simples e, com o cadastro, facilita explicar ao banco a origem do ' +
+          'dinheiro. O B costuma pagar melhor — e esse preço melhor é o pagamento pelo risco.',
+        'São três riscos, nenhum técnico: a pessoa não pagar depois que você libera a cripto; ' +
+          'pagar e depois pedir ao banco dela o estorno do Pix, alegando fraude; ou pagar com ' +
+          'dinheiro de crime, que cai na sua conta, é rastreado até você e pode levar ao bloqueio ' +
+          'dela, mesmo sem culpa sua. Esse terceiro é o mais subestimado.',
+        'O escrow (depósito em garantia) das plataformas de P2P segura a cripto até as duas ' +
+          'pontas confirmarem o pagamento. Reduz o risco, não elimina: protege de não receber, ' +
+          'não de dinheiro sujo nem de estorno. Regra sem exceção: só solte a cripto depois de ' +
+          'ver o valor creditado na sua conta.',
       ],
       exemplo: {
         titulo: 'A ordem que não se inverte, no P2P',
         passos: [
-          'Combine o negócio dentro da plataforma, com o escrow ativo. Conversa que migra para fora da plataforma é o primeiro sinal de alerta.',
-          'Espere o comprovante — e ignore o comprovante. Ele é uma imagem, e imagem se edita.',
-          'Abra o aplicativo do seu banco e confirme que o valor está creditado e disponível, não apenas agendado.',
-          'Confira se o nome de quem pagou é o mesmo do cadastro da negociação. Pagamento de terceiro é motivo para não liberar.',
-          'Só então libere a cripto. Se algo ficar estranho em qualquer um dos passos, abra a disputa na plataforma em vez de liberar.',
+          'Combine dentro da plataforma, com o escrow ativo. Conversa que migra para fora é o primeiro alerta.',
+          'Espere o comprovante — e ignore o comprovante: é uma imagem, e imagem se edita.',
+          'No aplicativo do banco, confirme que o valor está creditado e disponível, não só agendado.',
+          'Confira se quem pagou tem o nome do cadastro da negociação. Pagamento de terceiro: não libere.',
+          'Só então libere a cripto. Algo estranho? Abra disputa na plataforma em vez de liberar.',
         ],
       },
       paragrafosFinais: [
-        'O erro comum que essa ordem evita é liberar contra um comprovante em vez de contra o ' +
-          'saldo. E vale lembrar, para fechar a aba: sair também é um fato com consequência ' +
-          'tributária. Os dois caminhos geram obrigação a considerar com um contador, como ' +
-          'diz o card anterior.',
+        'O erro que essa ordem evita é liberar contra o comprovante, e não contra o saldo. E ' +
+          'sair também gera obrigação tributária, a ver com um contador, como diz o card anterior.',
       ],
       detalhe: {
         titulo: 'o arranjo Binance + Z.ro Bank no Pix',
@@ -1987,7 +1816,7 @@ export const modulo1 = {
         valores: {
           custodia: { texto: 'Você guarda as chaves, mas num aparelho conectado à internet.', tom: 'atencao' },
           pros: 'Grátis; conecta em aplicativos descentralizados; é o que se usa para negociar on-chain.',
-          contras: 'Exposta a phishing, drainers e malware; uma assinatura errada pode esvaziá-la.',
+          contras: 'Exposta a site falso, golpe e vírus; uma assinatura errada pode esvaziá-la.',
         },
       },
       {
@@ -1995,7 +1824,7 @@ export const modulo1 = {
         subtitulo: 'Aparelhos de hardware — exemplos de categoria',
         valores: {
           custodia: { texto: 'Você guarda as chaves num dispositivo físico offline.', tom: 'ok' },
-          pros: 'As chaves nunca tocam a internet; melhor categoria para guardar por muito tempo; mostra o destino na própria telinha (defesa contra clipper).',
+          pros: 'As chaves nunca tocam a internet; melhor categoria para guardar por muito tempo; mostra o destino na telinha, longe de vírus.',
           contras: 'Custo do aparelho; menos prática para trocas rápidas.',
         },
       },
@@ -2009,7 +1838,7 @@ export const modulo1 = {
   // "M1 Desktop.dc.html"), por isso ficam aqui e não na view.
   // ---------------------------------------------------------------------------
   checklistSegurancaTitulo: 'Checklist de segurança',
-  checklistSegurancaDescricao: 'Marque conforme for aplicando. Fica salvo no seu navegador.',
+  checklistSegurancaDescricao: 'Marque conforme for aplicando; fica salvo no seu navegador. Alguns itens usam termos das abas Golpes, Defesa e Brasil: volte a eles depois.',
 
   checklistSeguranca: [
     {
@@ -2069,7 +1898,7 @@ export const modulo1 = {
     },
     {
       id: 'confirmar-no-aparelho',
-      texto: 'Confirmo transações no aparelho da hardware wallet, lendo o endereço na telinha.',
+      texto: 'Confirmo transações no aparelho da carteira fria, lendo o endereço na telinha.',
       porque: 'Mesmo com clipper no PC, o aparelho mostra o destino real antes de você aprovar.',
     },
     {
@@ -2133,20 +1962,20 @@ export const modulo1 = {
     {
       numero: 3,
       titulo: 'Assinar',
-      oQueVeem: 'Um pop-up pedindo para "assinar", às vezes chamado de "verificação" ou "claim" gratuito, sem taxa.',
-      oQueAcontece: 'É um approve ilimitado, uma assinatura Permit/Permit2 (EIP-712, sem gás) ou um setApprovalForAll de NFTs — autorizando o golpista a mover seus ativos.',
+      oQueVeem: 'Uma janela pedindo para "assinar", chamada de "verificação" ou "claim" (resgate) grátis, sem taxa.',
+      oQueAcontece: 'Uma permissão disfarçada — approve ilimitado, Permit ou setApprovalForAll, os truques do próximo card — que deixa o golpista mover seus ativos.',
     },
     {
       numero: 4,
       titulo: 'Drenagem',
       oQueVeem: 'Nada, ou uma tela de "erro"/"tente de novo"; o saldo some minutos depois.',
-      oQueAcontece: 'O golpista chama transferFrom (ou usa a assinatura/delegação) e transfere os fundos, sem precisar de nova ação da vítima.',
+      oQueAcontece: 'O golpista usa a permissão e transfere os fundos, sem precisar de nova ação da vítima.',
     },
     {
       numero: 5,
       titulo: 'Lavagem',
       oQueVeem: '(a vítima costuma perceber tarde, quando o saldo já sumiu)',
-      oQueAcontece: 'Os fundos passam por mixers, pontes entre redes ou corretoras rapidamente; a divisão operador/afiliado (tipicamente 20%/80%) é paga automaticamente por um contrato.',
+      oQueAcontece: 'Os fundos correm por mixers (que embaralham o rastro), pontes entre redes ou corretoras; um contrato paga sozinho a divisão operador/afiliado (tipicamente 20%/80%).',
     },
   ],
 
@@ -2591,13 +2420,13 @@ export const modulo1 = {
       {
         rotulo: 'Transações que falharam',
         valor: 'Ficam gravadas',
-        nota: 'Para sempre — e cobram a taxa de gas do mesmo jeito. O explorador mostra "Failed" em vermelho, mas o custo já foi pago.',
+        nota: 'Para sempre — e cobram a taxa da rede (o gas) do mesmo jeito. Falhou, mas o custo já foi pago.',
         tom: 'alerta',
       },
       {
         rotulo: 'Partes do preço do gas',
         valor: '2',
-        nota: 'Desde a EIP-1559 (agosto de 2021): uma taxa-base, que é queimada, e uma gorjeta ao validador. É por isso que o preço varia com a demanda.',
+        nota: 'Desde agosto de 2021 (EIP-1559): taxa-base, destruída pela rede, e gorjeta a quem monta o bloco. Por isso o preço varia com a demanda.',
       },
       {
         rotulo: 'Quem reverte uma transação confirmada',
@@ -2610,18 +2439,18 @@ export const modulo1 = {
       {
         rotulo: 'Quem guarda a chave na corretora',
         valor: 'A empresa',
-        nota: '"Not your keys, not your coins." Quando FTX, Celsius e Mt. Gox quebraram, quem deixou fundos lá perdeu o acesso.',
+        nota: 'Quando FTX, Celsius e Mt. Gox quebraram, quem deixou fundos lá perdeu o acesso. Sem a chave, você depende dela.',
         tom: 'alerta',
       },
       {
         rotulo: 'Corretoras que anunciaram saída do varejo em 2026',
         valor: '5',
-        nota: 'Bitso, Coinext, NovaDAX, Digitra e Bitnuvem, citando o custo de adequação à regulação. Nome de corretora é exemplo de categoria, nunca recomendação.',
+        nota: 'Bitso, Coinext, NovaDAX, Digitra e Bitnuvem deixam o varejo (atender pessoa física) pelo custo da regulação. Nomes são exemplo, não recomendação.',
       },
       {
         rotulo: 'Custo de uma hot wallet',
         valor: 'Grátis',
-        nota: 'Você guarda as chaves, num aparelho conectado. O preço é o risco de malware e phishing — e a responsabilidade inteira.',
+        nota: 'Você guarda as chaves, num aparelho conectado. O preço é o risco de vírus e site falso — e a responsabilidade inteira.',
       },
     ],
 
@@ -2649,7 +2478,7 @@ export const modulo1 = {
       {
         rotulo: 'Roubado por drainers em 2024',
         valor: 'US$ 494 mi',
-        nota: 'Mais de 332 mil carteiras, alta de 67% sobre 2023. Em 2025 caiu 83%, para cerca de US$ 83,85 milhões.',
+        nota: 'Esvaziam carteiras: mais de 332 mil, +67% sobre 2023. Em 2025, −83%: cerca de US$ 83,85 milhões.',
       },
       {
         rotulo: 'Fatia de quem espalha a isca',
@@ -2673,7 +2502,7 @@ export const modulo1 = {
         tom: 'alerta',
       },
       {
-        rotulo: 'Vetor novo desde maio de 2025',
+        rotulo: 'Golpe novo desde maio de 2025',
         valor: 'EIP-7702',
         nota: 'Ativado na atualização Pectra do Ethereum. Casos reais: US$ 146,5 mil em 24/05/2025 e mais de US$ 1,54 mi em 24/08/2025.',
         tom: 'alerta',
@@ -2694,7 +2523,7 @@ export const modulo1 = {
       {
         rotulo: 'Prejuízo global do pig butchering (2020–2024)',
         valor: 'US$ 75 bi+',
-        nota: 'Estimativa citada pela CVM. No Brasil, uma só vítima transferiu R$ 37 milhões em seis meses (Operação Criptoabate, 13/08/2026).',
+        nota: 'Falso assessor; estimativa da CVM. Aqui, uma vítima transferiu R$ 37 milhões em seis meses (Operação Criptoabate, 13/08/2026).',
         tom: 'alerta',
       },
       {
@@ -2898,12 +2727,12 @@ export const modulo1 = {
         {
           painel: 'hash',
           titulo: 'O identificador único.',
-          texto: 'Cole no explorador para achar a transação. Começa com "0x" em redes EVM; na Solana o equivalente é a Signature.',
+          texto: 'Cole no explorador para achar a transação. Na Ethereum e similares começa com "0x"; na Solana, é a Signature.',
         },
         {
           painel: 'status',
           titulo: 'Success ou Failed.',
-          texto: 'Verde deu certo, vermelho falhou — e atenção: mesmo falhando, você pagou a taxa de gas.',
+          texto: 'Verde deu certo, vermelho falhou — e, mesmo falhando, você pagou a taxa (o gas).',
         },
         {
           painel: 'para',

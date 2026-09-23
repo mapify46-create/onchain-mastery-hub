@@ -16,10 +16,9 @@ export const modulo6 = {
   titulo: 'Ler a tela',
 
   resumo:
-    'Os números de um terminal parecem medir o token. Medem outra coisa — e alguns são ' +
-    'fabricados de propósito. Este módulo mostra o que cada número é de verdade, como o ' +
-    'volume é inventado, que armadilhas moram no contrato, e o que a pesquisa consegue e ' +
-    'não consegue prever sobre um golpe.',
+    'Os números do terminal parecem medir o token, mas medem outra coisa — e alguns são ' +
+    'fabricados. O que cada um é de verdade, como o volume é inventado, que armadilhas moram ' +
+    'no contrato e o que a pesquisa consegue (e não consegue) prever sobre um golpe.',
 
   // O "Lembrete" âmbar do cabeçalho (a view escreve "Lembrete: " em negrito na frente).
   lembrete:
@@ -42,10 +41,10 @@ export const modulo6 = {
   // "O que você leva deste módulo": o card do fim da aba Quiz.
   objetivos: [
     'Diferenciar market cap, FDV e liquidez, e calcular quanto dá para vender de fato.',
-    'Ler o preço e o PnL da tela sabendo o que eles escondem.',
-    'Reconhecer volume fabricado e entender por que todo sinal público é contornado.',
+    'Ler o preço e o PnL da tela sabendo o que escondem.',
+    'Reconhecer volume fabricado e por que todo sinal público é contornado.',
     'Checar o contrato: SPL clássico ou Token-2022, extensões, autoridades e metadata.',
-    'Saber o que a pesquisa sustenta — e o que não sustenta — sobre prever um rug.',
+    'Saber o que a pesquisa sustenta (e o que não) sobre prever um rug.',
   ],
 
   // Mapa do módulo ("O módulo inteiro numa olhada", no topo da página): o centro
@@ -76,6 +75,8 @@ export const modulo6 = {
   // Texto reescrito em 20/09/2026 (pesquisa/texto/modulo6.md): cada seção diz o
   // que é, por que importa para quem lê, como aparece na tela, um exemplo com
   // números e o erro que a ideia evita. Nenhum número mudou.
+  // Enxugado em 23/09/2026 (pedido do dono: mais direto, mesma base): cerca de um
+  // quarto a menos de palavras, sem tirar número, fonte nem explicação de termo.
   //
   // `foraDaTela`: frases da primeira versão que o desenho tirou e que não
   // aparecem em nenhum outro lugar da tela (definições, sobretudo). Ficam aqui
@@ -91,7 +92,7 @@ export const modulo6 = {
       titulo: 'Market cap, FDV e liquidez: três números, três perguntas',
       emUmaFrase:
         'Market cap e FDV dizem quanto o token "valeria" no papel. Só a liquidez diz quanto ' +
-        'dinheiro existe de verdade para pagar quem vende.',
+        'dinheiro existe para pagar quem vende.',
       // Visual: as duas barras na mesma escala (criarBarrasNaMesmaEscala). Os
       // valores são os do exemplo inventado de `foraDaTela`: US$ 0,00005 × 1 bilhão
       // de tokens = US$ 50 mil; pool com US$ 4 mil em tokens e US$ 4 mil em SOL.
@@ -140,61 +141,35 @@ export const modulo6 = {
         },
       ],
       paragrafos: [
-        'Na tela de qualquer memecoin aparecem três números grandes, um ao lado do outro. Eles ' +
-          'parecem medir a mesma coisa, mas cada um responde a uma pergunta diferente. Market ' +
-          'cap (valor de mercado) é o preço do último negócio multiplicado pelos tokens que já ' +
-          'estão circulando. FDV é a sigla inglesa de fully diluted valuation, valor totalmente ' +
-          'diluído: a mesma multiplicação, só que por todos os tokens que existem — o supply, o ' +
-          'total emitido. Liquidez é outra coisa: é o dinheiro parado na pool, o par de reservas ' +
-          'que uma DEX (corretora sem dono, onde quem faz a troca é um programa) usa para trocar ' +
-          'um token pelo outro.',
-        'A diferença importa porque os dois primeiros são conta, e o terceiro é caixa. Market ' +
-          'cap e FDV pegam um preço que nasceu de uma negociação pequena e multiplicam por uma ' +
-          'quantidade enorme de tokens. Ninguém precisou depositar esse dinheiro em lugar nenhum ' +
-          'para o número existir. A liquidez é a única das três que responde à pergunta de quem ' +
-          'comprou: existe dinheiro do outro lado quando eu quiser sair?',
-        'Na tela, os três vêm em fila no topo do par, com o mesmo tamanho de letra e o mesmo ar ' +
-          'de importância. Dois detalhes atrapalham. O primeiro é que cada site calcula do seu ' +
-          'jeito, e o GeckoTerminal nem mostra market cap. O segundo é que a liquidez vem como ' +
-          'um número só, somando os dois lados da pool — e só um dos lados é o dinheiro que paga ' +
-          'quem vende.',
+        'Os três parecem medir a mesma coisa. Market cap (valor de mercado) e FDV (fully ' +
+          'diluted valuation) são conta: o preço do último negócio, feito numa negociação ' +
+          'pequena, vezes uma quantidade enorme de tokens — ninguém depositou esse dinheiro. A ' +
+          'liquidez é caixa, e ainda soma os dois lados da pool, mas só um deles paga quem vende.',
       ],
       exemplo: {
         titulo: 'Exemplo com um token inventado do pump.fun',
         passos: [
-          'O supply é de 1 bilhão de tokens, todos criados no lançamento. Então circulante = ' +
-            'total, e market cap = FDV.',
-          'O último negócio saiu a US$ 0,00005 por token. Market cap = 0,00005 × 1 bilhão = ' +
-            'US$ 50 mil.',
-          'A pool tem US$ 4 mil em SOL de um lado e US$ 4 mil em tokens do outro. Liquidez = ' +
-            'US$ 8 mil.',
-          'Os "US$ 50 mil" não existem em lugar nenhum. O que existe para pagar vendedores são ' +
-            'os US$ 4 mil em SOL — e cada venda derruba o preço (a próxima seção faz essa conta).',
+          'Supply de 1 bilhão, todo criado no lançamento: circulante = total, então market cap ' +
+            '= FDV.',
+          'Último negócio a US$ 0,00005. Market cap = 0,00005 × 1 bilhão = US$ 50 mil.',
+          'A pool tem US$ 4 mil em SOL e US$ 4 mil em tokens: liquidez de US$ 8 mil.',
+          'Para pagar quem vende, há só os US$ 4 mil em SOL — e cada venda derruba o preço.',
         ],
       },
       paragrafosFinais: [
-        'O erro que essa separação evita é o mais comum da tela: ler "market cap de US$ 50 mil" ' +
-          'e entender que existem US$ 50 mil guardados ali dentro. O market cap supõe que todo ' +
-          'mundo conseguiria vender pelo último preço, e esse preço foi feito por uma negociação ' +
-          'pequena. Se muita gente vender junto, ele despenca muito antes. Por isso a ordem de ' +
-          'leitura é ao contrário da ordem da tela: olhe primeiro a liquidez. Market cap de ' +
-          'milhões com liquidez de milhares é número de vitrine.',
-        'O contrário também não vale: liquidez alta não aprova token nenhum. Ela diz apenas ' +
-          'que, naquele instante, havia mais dinheiro na pool. Quanto desse dinheiro sai de fato ' +
-          'é a conta da próxima seção.',
+        'O erro mais comum é ler "market cap de US$ 50 mil" como US$ 50 mil guardados ali, ' +
+          'como se todos pudessem vender pelo último preço. Leia na ordem inversa da tela: ' +
+          'liquidez primeiro. Market cap de milhões com liquidez de milhares é vitrine — e ' +
+          'liquidez alta não aprova token nenhum.',
       ],
       detalhe: {
         titulo: 'cada site calcula do seu jeito',
         lista: [
-          'DexScreener: FDV = (supply total − tokens queimados) × preço. O market cap só fica ' +
-            'diferente do FDV quando o projeto informa o circulante ou a CoinGecko tem esse dado.',
-          'Token ainda na bonding curve (a fase em que o token é negociado dentro do próprio ' +
-            'pump.fun, antes de migrar para uma pool numa DEX — é essa migração que o mercado ' +
-            'chama de graduação): DexScreener e GeckoTerminal não descontam nada.',
-          'GeckoTerminal: não mostra market cap, só FDV.',
-          'Solscan: o campo chamado "Market Cap" é, pela documentação dele, o valor totalmente ' +
-            'diluído (FDV). Ou seja: o mesmo rótulo, em dois sites, pode significar duas contas ' +
-            'diferentes.',
+          'DexScreener: FDV = (supply total − tokens queimados) × preço; market cap só difere se ' +
+            'o projeto informa o circulante ou a CoinGecko tem o dado.',
+          'GeckoTerminal (site parecido com o DexScreener): só mostra FDV.',
+          'Na bonding curve, nenhum dos dois desconta nada.',
+          'Solscan: pela documentação, o "Market Cap" dele é o FDV.',
         ],
       },
     },
@@ -203,33 +178,24 @@ export const modulo6 = {
       aba: 'numeros',
       titulo: 'Quanto dá para vender antes de derrubar o preço',
       emUmaFrase:
-        'Cada venda derruba o preço. Derrubar o preço pela metade devolve só 14,64% da ' +
-        'liquidez anunciada, seja a pool grande ou pequena.',
+        'Cada venda derruba o preço: derrubá-lo pela metade devolve só 14,64% da liquidez ' +
+        'anunciada, em pool grande ou pequena.',
       // Visual: a curva deslizante x · y = k (criarCurvaDeSaida, em
       // components/visuais.js). Ela lê a liquidez do `exemplo` abaixo e os atalhos
       // (10, 30 e 50%) da tabelaVendaPorQueda. Depois das frases vem a animação
       // do pool, que conta o mesmo exemplo cena por cena.
       paragrafos: [
-        'A liquidez anunciada não é o quanto você consegue tirar. A pool é um par de reservas: ' +
-          'de um lado os tokens, do outro o SOL. Quem vende entrega token e leva SOL, e a cada ' +
-          'venda sobra mais token e menos SOL na pool. É isso que derruba o preço, e é por isso ' +
-          'que a segunda metade da sua venda sai mais barata que a primeira.',
-        'Para mim, isso troca a pergunta. Não adianta perguntar "quanto de liquidez tem?", ' +
-          'porque esse número é o caixa da pool inteira, incluindo o lado que não me paga. A ' +
-          'pergunta útil é "quanto eu tiro antes de o preço cair X%?". E a resposta tem uma ' +
-          'surpresa: em porcentagem, ela não depende do tamanho da pool. Pool grande e pool ' +
-          'pequena devolvem a mesma fração — o que muda é só o valor em dólar.',
-        'O visual acima é essa conta em forma de curva, e ela desliza: você escolhe uma queda ' +
-          'de preço — 10%, 30% ou pela metade — e ela devolve dois números. O primeiro é quanto ' +
-          'dos tokens da reserva foi preciso vender; o segundo é quanto você recebe, em ' +
-          'porcentagem da liquidez anunciada. Leia o segundo número sempre como fatia da ' +
-          'liquidez anunciada, nunca como fatia do saldo que a sua tela mostra: são coisas ' +
-          'diferentes, e é a liquidez que manda.',
+        'A pool tem tokens de um lado e SOL do outro. Quem vende entrega token e leva SOL; a ' +
+          'cada venda sobra menos SOL e o preço cai. Por isso a segunda metade da sua venda sai ' +
+          'mais barata que a primeira.',
+        'A pergunta útil não é "quanto de liquidez tem?", e sim "quanto eu tiro antes de o ' +
+          'preço cair X%?". A curva acima responde, em fatia da liquidez anunciada; numa pool ' +
+          'maior, muda só o valor em dólar.',
       ],
       // A caixa depois da animação: os três pontos da tabelaVendaPorQueda, com os
       // dólares do exemplo (pool de US$ 8 mil).
       tresPontos: {
-        titulo: 'Os três pontos da tabela, em texto',
+        titulo: 'Os três pontos da curva, em texto',
         itens: [
           'Cair 10% — vende ≈ 5,41% da reserva; recebe ≈ 2,57% da liquidez anunciada (≈ US$ 206 ' +
             'na pool de US$ 8 mil).',
@@ -238,26 +204,18 @@ export const modulo6 = {
         ],
       },
       paragrafosFinais: [
-        'O erro que essa conta evita é ler "liquidez: US$ 8 mil" como "dá para tirar US$ 8 ' +
-          'mil". Derrubar o preço pela metade — uma destruição enorme para quem ficou — devolve ' +
-          '14,64% da liquidez anunciada. E a sua própria venda entra nesse limite junto com a de ' +
-          'todo mundo: se outras pessoas venderem ao mesmo tempo, a sua parte sai depois, e mais ' +
-          'barata.',
+        'O erro que isso evita é ler "liquidez: US$ 8 mil" como "dá para tirar US$ 8 mil" — e ' +
+          'esquecer que a sua venda disputa esse limite com a de todo mundo que vender junto.',
       ],
       detalhe: {
         titulo: 'a fórmula por trás e a "proporção saudável"',
         paragrafos: [
-          'A conta vale para pools de produto constante. É a fórmula x · y = k das AMMs, as ' +
-            'pools automáticas das DEXs (automated market maker, formador de mercado ' +
-            'automático: um programa que aceita a troca no preço que as reservas ditam, sem ' +
-            'ninguém do outro lado). A curva do pump.fun também usa essa fórmula. Na fórmula, ' +
-            'x e y são as quantidades dos dois lados da pool. O produto das duas, k, fica ' +
-            'constante a cada troca.',
+          'Vale para pools de produto constante (x · y = k, das AMMs), como a curva do pump.fun: ' +
+            'o produto k dos dois lados da pool, x e y, fica constante a cada troca.',
           'Conta: vende = 1 ÷ √(1 − queda) − 1; recebe = (1 − √(1 − queda)) ÷ 2, em fração da ' +
             'liquidez anunciada. Sem taxas.',
-          'Nenhuma pesquisa revisada por pares (aquela que outros pesquisadores da área checaram ' +
-            'antes de a revista publicar) apresenta uma proporção "saudável" entre liquidez e ' +
-            'market cap. Quem cita uma está usando regra de bolso.',
+          'Nenhuma pesquisa revisada por pares traz uma proporção "saudável" entre liquidez e ' +
+            'market cap: quem cita uma usa regra de bolso.',
         ],
       },
       // O exemplo não aparece na tela, mas a curva lê dele a liquidez: não tire a
@@ -267,10 +225,9 @@ export const modulo6 = {
         titulo: 'Exemplo com o token inventado da seção anterior',
         passos: [
           'A liquidez anunciada é de US$ 8 mil.',
-          'Para derrubar o preço em 10%, você recebe 2,57% disso: cerca de US$ 206.',
-          'Para derrubar o preço pela metade, recebe 14,64%: cerca de US$ 1.171.',
-          'Se a pool fosse dez vezes maior, as porcentagens seriam as mesmas. Só os valores em ' +
-            'dólar mudariam.',
+          'Cair 10% devolve 2,57%: cerca de US$ 206.',
+          'Cair pela metade devolve 14,64%: cerca de US$ 1.171.',
+          'Numa pool dez vezes maior, mesmas porcentagens; só os dólares mudam.',
         ],
       },
       foraDaTela: {
@@ -315,41 +272,30 @@ export const modulo6 = {
           'Lido como texto vira $0.052786, cerca de 19 mil vezes o preço real.',
       },
       paragrafos: [
-        'Preço de memecoin costuma ter zeros demais para caber na tela. Em vez de escrever ' +
-          'todos, as ferramentas compactam: escrevem um zero, um número pequenininho embaixo e ' +
-          'o resto do preço. Esse número pequeno não faz parte do valor. Ele é uma contagem: diz ' +
-          'quantos zeros vêm depois da vírgula antes de os algarismos começarem.',
-        'Isso importa porque é um erro que não parece erro. Nada na tela fica quebrado, nenhum ' +
-          'aviso aparece: o preço simplesmente é lido com uma ordem de grandeza a mais, e todas ' +
-          'as contas feitas em cima dele saem erradas na mesma proporção — quanto eu tenho, ' +
-          'quanto vale a minha posição, quanto subiu.',
-        'Na prática, o tropeço acontece quando o número deixa de ser desenho e vira texto: ' +
-          'copiado para uma planilha, lido às pressas ou lido em voz alta por um leitor de tela ' +
-          '(programa que narra o que está escrito). Fora da tela, o zero pequenininho vira um ' +
-          'algarismo comum, e ninguém percebe a troca.',
+        'Com zeros demais para a tela, o preço vem compactado: um zero, um número pequenininho ' +
+          '(a contagem de zeros depois da vírgula, não parte do valor) e o resto.',
+        'O perigo: quando o preço vira texto (copiado para uma planilha, lido às pressas, ' +
+          'narrado por um leitor de tela), o número pequeno vira algarismo comum. Nada avisa, e ' +
+          'toda conta sai milhares de vezes maior.',
       ],
       exemplo: {
         titulo: 'O mesmo preço, de três jeitos',
         passos: [
-          'Na tela: $0.0₅2786. O 5 pequeno vale cinco zeros.',
-          'Por extenso: US$ 0,000002786 — cinco zeros depois da vírgula, e só então o 2786.',
-          'Copiado para uma planilha, o 5 pequeno vira um 5 comum: $0.052786.',
-          'É cerca de 19 mil vezes o preço real, e nada na planilha avisa.',
+          'Na tela, $0.0₅2786: cinco zeros, ou US$ 0,000002786.',
+          'Copiado para uma planilha, vira $0.052786 — cerca de 19 mil vezes o preço real, e ' +
+            'nada avisa.',
         ],
       },
       paragrafosFinais: [
-        'O erro que essa leitura evita não é só de conta, é de decisão: quem lê o preço grande ' +
-          'demais acha que uma alta já aconteceu, ou calcula uma posição com uma quantidade de ' +
-          'tokens que não existe. Sempre que o preço aparecer com zeros compactados, confirme o ' +
-          'valor por extenso antes de usá-lo em qualquer conta.',
+        'O erro que isso evita também é de decisão: achar que uma alta já aconteceu, ou ' +
+          'calcular uma posição com tokens que não existem. Viu zeros compactados? Confirme o ' +
+          'valor por extenso antes de qualquer conta.',
       ],
       detalhe: {
         titulo: 'onde achar o preço completo',
         paragrafos: [
-          'Nenhuma das ferramentas documenta essa notação. No DexScreener, o valor inteiro fica ' +
-            'guardado na dica que aparece ao passar o mouse. A API (o acesso de dados para ' +
-            'programas: a mesma informação, entregue em texto puro para quem for automatizar) ' +
-            'entrega o preço completo.',
+          'Nenhuma ferramenta documenta essa notação. No DexScreener, o valor inteiro aparece na ' +
+            'dica do mouse; a API (o acesso de dados para programas) entrega o preço completo.',
         ],
       },
     },
@@ -384,48 +330,34 @@ export const modulo6 = {
           'venda nem, pela documentação, as taxas.',
       },
       paragrafos: [
-        'PnL quer dizer lucro ou prejuízo, do inglês profit and loss. A tela mostra dois, e eles ' +
-          'não são da mesma natureza. O realizado é o que você já travou vendendo: dinheiro que ' +
-          'existe, que já entrou na carteira. O não realizado é uma multiplicação feita agora — ' +
-          'preço do momento × tokens que você tem — para mostrar quanto a sua posição "valeria" ' +
-          'se fosse vendida.',
-        'A ilusão mora no segundo. Ele usa o preço do último negócio, que pode ter sido feito ' +
-          'com muito pouco dinheiro, e supõe que a sua venda inteira sairia por esse mesmo ' +
-          'preço. Só que a sua venda é o que derruba o preço: quanto maior a sua posição diante ' +
-          'da pool, mais o número verde promete algo que a própria venda vai desmanchar.',
-        'Na tela, os dois aparecem juntos, com a mesma cor e o mesmo destaque. O realizado é ' +
-          'histórico e não muda sozinho; o não realizado pisca a cada segundo, porque o preço ' +
-          'muda. A documentação dos terminais consultados não diz que ele desconta as taxas. Em ' +
-          'memecoin de pouca liquidez, o número verde quase nunca é o que chega na carteira — e ' +
-          'a curva da seção "Quanto dá para vender" é o jeito de estimar quanto chega.',
+        'PnL é lucro ou prejuízo (do inglês profit and loss). Nos cartões acima, o realizado ' +
+          'já está na carteira; o não realizado é uma conta que pisca a cada segundo.',
+        'A ilusão mora nele: supõe que a venda inteira sairia pelo último preço, mas é a sua ' +
+          'venda que derruba o preço. Quanto maior a posição diante da pool, menos do verde ' +
+          'chega.',
       ],
       exemplo: {
         titulo: 'Quanto do seu PnL chega na carteira',
         passos: [
-          'Posição de US$ 1.000 na tela, numa pool com US$ 20.000 de liquidez anunciada.',
-          'O lado da pool que paga a sua venda é metade disso: US$ 10.000.',
+          'Posição de US$ 1.000 na tela; pool com US$ 20.000 de liquidez anunciada.',
+          'Só metade paga a sua venda: US$ 10.000.',
           'Você recebe 1.000 × 10.000 ÷ (10.000 + 1.000) ≈ US$ 909.',
-          'O preço fica multiplicado por (10.000 ÷ 11.000)² ≈ 0,83 — cai cerca de 17%.',
-          'E isso antes das taxas: a tela dizia US$ 1.000.',
+          'O preço fica multiplicado por (10.000 ÷ 11.000)² ≈ 0,83: cai cerca de 17%.',
+          'Tudo isso antes das taxas. A tela dizia US$ 1.000.',
         ],
       },
       paragrafosFinais: [
-        'O erro que essa distinção evita é planejar a vida pelo número não realizado — somar o ' +
-          'verde ao patrimônio, calcular imposto, decidir o tamanho da próxima entrada. Enquanto ' +
-          'não houver venda, esse número é uma estimativa otimista: não desconta o impacto da ' +
-          'sua própria venda nem, pela documentação, as taxas.',
+        'O erro que isso evita é planejar pelo verde: somá-lo ao patrimônio, calcular imposto, ' +
+          'decidir a próxima entrada. Até a venda, é uma estimativa otimista, que não desconta o ' +
+          'impacto da venda nem, pela documentação dos terminais consultados, as taxas.',
       ],
       detalhe: {
         titulo: 'o erro de leitura ao contrário e as taxas que somem da conta',
         paragrafos: [
-          'A central de ajuda da GMGN registra casos de quem vendeu 0,12 SOL pagando 0,2 SOL de ' +
-            'taxa de prioridade (o valor extra que se paga para a rede colocar a sua transação ' +
-            'na frente das outras). A taxa foi maior que a venda, e a pessoa achou que a venda ' +
-            'não tinha caído na carteira.',
-          'A conta do exemplo é o modelo de produto constante (x · y = k). A liquidez anunciada ' +
-            'soma os dois lados da pool, então só metade dela é o lado que paga a sua venda. Não ' +
-            'inclui taxas (de 0,25% a 1,25%, conforme a pool) nem outras pessoas vendendo ao ' +
-            'mesmo tempo — as duas coisas pioram o resultado.',
+          'A central de ajuda da GMGN registra quem vendeu 0,12 SOL pagando 0,2 SOL de taxa de ' +
+            'prioridade (o extra para furar a fila da rede) e achou que a venda não tinha caído.',
+          'O exemplo usa o modelo de produto constante (x · y = k) sem taxas (de 0,25% a 1,25%, ' +
+            'conforme a pool) e sem outras vendas ao mesmo tempo; as duas pioram o resultado.',
         ],
       },
     },
@@ -441,20 +373,14 @@ export const modulo6 = {
       // Visual: a figura do wash trading, desenhada a partir de
       // diagramas['wash-trading'] (mais abaixo, neste arquivo).
       paragrafos: [
-        'O nome disso é wash trading: negociar consigo mesmo para parecer movimento. A mesma ' +
-          'pessoa, ou o mesmo grupo, compra de um lado e vende do outro, com carteiras ' +
-          'diferentes. A tela não tem como saber que é a mesma pessoa: ela soma tudo e mostra um ' +
-          'volume alto. Numa DEX isso custa dinheiro de verdade, porque cada troca paga a taxa ' +
-          'da pool e a taxa da rede.',
-        'Alguém paga esse custo porque o volume compra lugar nas listas de "em alta" — e a lista ' +
-          'traz compradores de verdade. O volume falso, portanto, não é o objetivo: é a isca. O ' +
-          'dinheiro queimado nas taxas é o preço do anúncio, e quem paga espera recuperá-lo ' +
-          'vendendo para quem chegou pela lista.',
-        'Na tela, isso aparece como volume grande em um token que quase não se mexe, e como ' +
-          'muitos makers (as carteiras diferentes que negociaram no período) sem que o preço ' +
-          'reaja. O visual abaixo mostra a outra ponta: quanto custa fabricar US$ 1 milhão de ' +
-          'volume, somando a taxa que a pool cobra com o 1% que um serviço de volume anuncia ' +
-          'cobrar.',
+        'O nome disso é wash trading: a mesma pessoa usa carteiras diferentes, e a tela soma ' +
+          'tudo como volume. Numa DEX, cada troca paga a taxa da pool e a da rede: fabricar ' +
+          'volume custa dinheiro.',
+        'Alguém paga porque o volume compra lugar nas listas de "em alta", e a lista traz ' +
+          'compradores reais. O volume falso é a isca; quem pagou espera recuperar as taxas ' +
+          'vendendo para quem chegou. Na tela, aparece como volume grande num token que quase ' +
+          'não se mexe, ou muitos makers (carteiras que negociaram no período) sem o preço ' +
+          'reagir.',
       ],
       // As barras "Quanto custa fabricar US$ 1 milhão de volume", entre as frases.
       // A parte roxa é a taxa da pool sobre o volume (0,30% ou 1,25%); a listrada,
@@ -470,39 +396,32 @@ export const modulo6 = {
         ],
         legenda: { pool: 'taxa da pool sobre US$ 1 milhão', servico: '1% do serviço de volume' },
         descricao:
-          'Token grande, taxa de pool de 0,30% — perto de US$ 13 mil. Token recém-graduado, taxa ' +
-          'de pool de 1,25% — perto de US$ 23 mil. As duas contas somam o 1% que um serviço de ' +
-          'volume anuncia cobrar.',
+          'Token grande, taxa de pool de 0,30%: perto de US$ 13 mil. Token recém-graduado, taxa ' +
+          'de 1,25%: perto de US$ 23 mil. Ambos com o 1% do serviço de volume.',
       },
       exemplo: {
         titulo: 'A conta de quem compra volume',
         passos: [
-          'Num token grande, a taxa da pool é de 0,30% sobre cada troca.',
-          'Fabricar US$ 1 milhão de volume ali sai perto de US$ 13 mil, já somando o 1% do ' +
-            'serviço.',
-          'Num token recém-graduado, a taxa da pool é de 1,25%: a mesma fabricação sai perto de ' +
-            'US$ 23 mil.',
-          'A ironia que vale guardar: é mais caro justamente no token pequeno — e é ali que a ' +
-            'manipulação das listas é mais usada.',
+          'Token grande (taxa da pool de 0,30%): US$ 1 milhão de volume custa perto de US$ 13 ' +
+            'mil, com o 1% do serviço.',
+          'Recém-graduado (1,25%): perto de US$ 23 mil.',
+          'A ironia: é mais caro justamente no token pequeno, onde a manipulação das listas é ' +
+            'mais usada.',
         ],
       },
       paragrafosFinais: [
-        'O erro que isso evita é ler volume como interesse. Volume não é gente: é a soma do ' +
-          'dinheiro que passou pela pool, e não existe campo na tela que separe o movimento ' +
-          'comprado do movimento espontâneo. Um token pode estar no alto da lista de "em alta" ' +
-          'porque alguém pagou por isso.',
-        'Também não vale a leitura contrária — volume alto não prova fabricação. É suspeita, e a ' +
-          'seção seguinte mostra até onde dá para ir com ela sem pagar por dados.',
+        'O erro que isso evita é ler volume como interesse: volume é dinheiro que passou pela ' +
+          'pool, não gente, e nenhum campo separa o comprado do espontâneo. Mas volume alto ' +
+          'também não prova fabricação — é suspeita (veja "O que dá para ver de graça").',
       ],
       detalhe: {
         titulo: 'os Boosts do DexScreener',
         paragrafos: [
           'O DexScreener vende "Boosts", que turbinam o token no trending (a lista de "em alta") ' +
-            'por 12 a 24 horas. Ele não publica os pesos do algoritmo que monta essa lista.',
-          'O custo acima soma a taxa oficial da pool com a taxa anunciada por um vendedor de ' +
-            'volume (1%). Não é medição independente de campanha real, e não inclui slippage (a ' +
-            'diferença entre o preço que aparece na tela e o preço em que a troca realmente sai, ' +
-            'justamente porque a sua ordem move a pool).',
+            'por 12 a 24 horas, sem publicar os critérios dessa lista.',
+          'O custo acima soma a taxa oficial da pool com o 1% anunciado por um vendedor de ' +
+            'volume: não é medição independente de campanha real e não inclui slippage (a ' +
+            'diferença de preço que a própria ordem causa).',
         ],
       },
     },
@@ -531,50 +450,37 @@ export const modulo6 = {
           nota: 'Cada sinal é uma triagem (um primeiro filtro), nunca um veredito.',
         },
         descricao:
-          'O que um vendedor de volume diz que faz: espalha em mais de 100 carteiras; sorteia ' +
-          'tamanho e horário; deixa carteiras só comprando; usa carteiras novas. A defesa: cruzar ' +
-          'volume, makers, concentração de holders, carteiras ligadas e idade do token.',
+          'O vendedor de volume diz que espalha em mais de 100 carteiras, sorteia tamanho e ' +
+          'horário, deixa carteiras só comprando e usa carteiras novas. A defesa: cruzar volume, ' +
+          'makers, concentração de holders, carteiras ligadas e idade do token.',
       },
       paragrafos: [
-        'A coluna vermelha do visual acima não é suposição minha: é o que um vendedor de volume ' +
-          'publica, com todas as letras, sobre o próprio serviço. Ele descreve como espalha as ' +
-          'operações, como sorteia tamanhos e horários e como troca de carteiras a cada ' +
-          'campanha. Quer dizer: quem fabrica o número lê as mesmas telas que você e ajusta o ' +
-          'trabalho para que cada sinal pareça normal.',
-        'Isso importa porque muda o valor de qualquer sinal isolado. Um número que ficou famoso ' +
-          'como "prova de token limpo" é exatamente o número que passa a ser falsificado ' +
-          'primeiro, porque agora vale a pena falsificá-lo. Não é que os sinais sejam inúteis: é ' +
-          'que cada um deles, sozinho, é uma triagem (um primeiro filtro), nunca um veredito.',
-        'Na prática, a defesa é cruzar sinais que custam caro falsificar ao mesmo tempo: volume, ' +
-          'makers, concentração de holders (as carteiras que seguram o token, e o quanto o topo ' +
-          'da lista concentra), carteiras ligadas entre si e idade do token. Fabricar um deles é ' +
-          'barato; fabricar todos, de um jeito coerente entre si, é caro e deixa rastro.',
+        'A coluna vermelha é o que um vendedor de volume publica sobre o próprio serviço. Quem ' +
+          'fabrica o número lê as mesmas telas que você e ajusta cada sinal para parecer ' +
+          'normal. O sinal que fica famoso como "prova de token limpo" é o primeiro a ser ' +
+          'falsificado.',
+        'Por isso cada sinal, sozinho, é só uma triagem. A defesa, na coluna verde, é cruzar ' +
+          'os que custam caro falsificar juntos: fabricar um é barato; todos, de forma ' +
+          'coerente, é caro e deixa rastro.',
       ],
       exemplo: {
         titulo: 'O próprio vendedor diz o que denuncia',
         passos: [
-          'Ele avisa que um token com US$ 300 mil de volume e só 50 carteiras "é imediatamente ' +
-            'suspeito".',
-          'Por isso espalha as operações em mais de 100 carteiras.',
-          'Sorteia o tamanho e o horário de cada operação, e deixa algumas carteiras só ' +
-            'comprando.',
-          'E usa carteiras novas a cada campanha, para a idade das carteiras não entregar a ' +
-            'repetição.',
+          'Ele avisa que US$ 300 mil de volume em só 50 carteiras "é imediatamente suspeito".',
+          'Por isso espalha tudo em mais de 100 carteiras e troca de carteiras a cada campanha — ' +
+            'para passar nos mesmos filtros que você usaria.',
         ],
       },
       paragrafosFinais: [
-        'O erro que isso evita é a caça ao número mágico: aquele limiar único que separaria os ' +
-          'tokens bons dos ruins. Ele não existe, e se existisse teria vida curta — no dia em ' +
-          'que virasse regra pública, passaria a ser alvo. A lição vale para a tela inteira: ' +
-          'qualquer número que você aprenda a olhar já foi, ou pode ser, calibrado contra você.',
+        'O erro que isso evita é caçar o número mágico que separaria tokens bons de ruins. Ele ' +
+          'não existe — e, se virasse regra pública, viraria alvo.',
       ],
       detalhe: {
         titulo: 'de onde vem essa lista',
         paragrafos: [
-          'Os quatro itens da coluna vermelha são declarados pelo próprio vendedor de volume, no ' +
-            'material em que ele anuncia o serviço — inclusive o 1% que ele cobra e a ' +
-            'distribuição em mais de 100 carteiras. Não é medição independente: é propaganda de ' +
-            'quem vende, usada aqui como confissão.',
+          'Os quatro itens da coluna vermelha, o 1% e as mais de 100 carteiras são declarados ' +
+            'pelo próprio vendedor, na propaganda do serviço. Não é medição independente: é ' +
+            'confissão.',
         ],
       },
     },
@@ -593,9 +499,9 @@ export const modulo6 = {
             selo: 'de graça',
             tom: 'bom',
             texto:
-              'O volume subiu mais de 500% com o preço variando menos de 5%. A variação de preço ' +
-              'está de graça no DexScreener e no GeckoTerminal. O volume de ontem, para comparar, ' +
-              'só dá para aproximar.',
+              'Volume subiu mais de 500% com o preço variando menos de 5%. A variação de preço ' +
+              'está de graça no DexScreener e no GeckoTerminal; o volume de ontem só dá para ' +
+              'aproximar.',
           },
           {
             titulo: 'A confirmação',
@@ -603,58 +509,43 @@ export const modulo6 = {
             tom: 'ruim',
             texto:
               '"Volume circular": 99% ou mais do volume do dia vem de carteiras que compraram e ' +
-              'venderam no mesmo dia. Isso exige cruzar milhares de operações, carteira por ' +
-              'carteira. Não sai no plano gratuito de ferramenta nenhuma.',
+              'venderam no mesmo dia. Exige cruzar milhares de operações, carteira por carteira: ' +
+              'não sai no plano gratuito de ferramenta nenhuma.',
           },
         ],
         descricao:
           'Passo 1, a suspeita, de graça: volume subiu mais de 500% com o preço variando menos ' +
-          'de 5%. Passo 2, a confirmação, não sai no plano gratuito: volume circular, 99% ou mais ' +
-          'do volume do dia vem de carteiras que compraram e venderam no mesmo dia.',
+          'de 5%. Passo 2, a confirmação, fora do plano gratuito: 99% ou mais do volume do dia ' +
+          'vem de carteiras que compraram e venderam no mesmo dia.',
       },
       paragrafos: [
-        'Detectar volume fabricado tem dois estágios, e eles custam coisas muito diferentes. O ' +
-          'primeiro é a suspeita: um descompasso entre o movimento e o preço. O segundo é a ' +
-          'confirmação: mostrar que o dinheiro andou em círculo, saindo e voltando para as ' +
-          'mesmas carteiras. Um estudo revisado por pares analisou 34.988 tokens em busca de ' +
-          'crescimento artificial e trabalha exatamente nesses dois passos.',
-        'Para mim, importa saber em qual dos dois eu consigo pisar. O primeiro está ao alcance ' +
-          'de qualquer pessoa, de graça. O segundo exige cruzar milhares de operações, carteira ' +
-          'por carteira, e isso não sai no plano gratuito de ferramenta nenhuma. Reconhecer esse ' +
-          'limite evita tanto a paralisia ("não dá para ver nada") quanto o excesso de confiança ' +
-          '("eu confirmei").',
-        'Na tela, o que está de graça é a variação de preço, no DexScreener e no GeckoTerminal. ' +
-          'O volume de ontem, necessário para comparar com o de hoje, só dá para aproximar. E a ' +
-          'confirmação — o tal volume circular — não aparece em campo nenhum: ela teria de ser ' +
-          'calculada por fora, a partir do histórico completo de operações.',
+        'Detectar volume fabricado tem dois passos. A suspeita é um descompasso entre movimento ' +
+          'e preço. A confirmação é mostrar que o dinheiro andou em círculo, voltando às mesmas ' +
+          'carteiras — o que não aparece em campo nenhum da tela. Um estudo revisado por pares ' +
+          'analisou 34.988 tokens assim.',
       ],
       exemplo: {
         titulo: 'Os dois passos com os números do estudo',
         passos: [
-          'Suspeita: o volume subiu mais de 500% com o preço variando menos de 5%.',
-          'Isso sai de graça, porque a variação de preço está publicada nas duas ferramentas.',
-          'Confirmação: 99% ou mais do volume do dia vem de carteiras que compraram e venderam ' +
-            'no mesmo dia.',
-          'Isso não sai de graça — e sem ele você tem uma suspeita forte, não um fato.',
+          'Suspeita, de graça: volume subiu mais de 500% e o preço variou menos de 5%.',
+          'Confirmação, fora do plano gratuito: 99% ou mais do volume do dia veio de quem ' +
+            'comprou e vendeu no mesmo dia.',
+          'Sem ela, você tem uma suspeita forte, não um fato.',
         ],
       },
       paragrafosFinais: [
-        'O erro que essa separação evita é tratar suspeita como prova, nos dois sentidos: nem ' +
-          'anunciar "esse token é wash trading" por causa de um descompasso, nem descartar o ' +
-          'descompasso porque "não dá para provar". Ele é um alerta caro de fabricar e barato de ' +
-          'ver — vale o que vale.',
-        'Evita também um atalho popular: as razões prontas, como "volume por carteira" ou ' +
-          '"volume por liquidez", não têm limiar publicado com método e taxa de erro. Os números ' +
-          'que circulam com elas são regra de bolso.',
+        'O erro que isso evita é tratar a suspeita como prova ("eu confirmei") ou descartá-la ' +
+          'porque "não dá para provar": ela é um alerta caro de fabricar e barato de ver. E ' +
+          'razões prontas como "volume por carteira" ou "volume por liquidez" não têm limiar ' +
+          'publicado com método e taxa de erro — são regra de bolso.',
       ],
       detalhe: {
         titulo: 'qual é o estudo',
         paragrafos: [
-          'É o estudo Midsummer, do USENIX Security 2026, uma conferência de segurança com ' +
-            'revisão por pares.',
-          'No mesmo estudo, em quatro redes (Ethereum, BSC, Solana e Base), 82,9% dos tokens que ' +
-            'subiram mais de 100% mostravam sinais de crescimento artificial. É a medida do ' +
-            'tamanho do problema, não um teste que você possa rodar sozinho.',
+          'É o Midsummer, do USENIX Security 2026, conferência de segurança com revisão por ' +
+            'pares. Nele, em quatro redes (Ethereum, BSC, Solana e Base), 82,9% dos tokens que ' +
+            'subiram mais de 100% mostravam sinais de crescimento artificial — o tamanho do ' +
+            'problema, não um teste que você possa rodar.',
         ],
       },
     },
@@ -685,9 +576,8 @@ export const modulo6 = {
             'token aparecer para o público.',
         },
         descricao:
-          'Um bundle: até 5 transações, de carteiras diferentes do mesmo criador, entram juntas ' +
-          'e em ordem no mesmo bloco — ou entram todas, ou nenhuma. Tudo antes de o token ' +
-          'aparecer para o público.',
+          'Bundle: até 5 transações de carteiras do mesmo criador entram juntas e em ordem no ' +
+          'mesmo bloco, ou nenhuma entra. Tudo antes de o token aparecer para o público.',
       },
       // Os dois números das ferramentas: o que engana (borda tracejada) e o que
       // importa (ciano).
@@ -710,50 +600,35 @@ export const modulo6 = {
       // Um parágrafo pode ser texto ou uma lista de pedaços: { numero } sai em
       // fonte mono, como no desenho.
       paragrafos: [
-        'Bundle quer dizer pacote: um lote de até 5 transações enviadas juntas para a rede, com ' +
-          'uma regra rígida — ou entram todas no mesmo bloco, na ordem pedida, ou não entra ' +
-          'nenhuma. Bloco é o lote de transações que a rede grava de uma vez. No lançamento de ' +
-          'um token, isso permite ao criador comprar com várias carteiras suas antes de o token ' +
-          'aparecer para o público.',
+        'Bundle é um pacote de até 5 transações que entram juntas no mesmo bloco (o lote que a ' +
+          'rede grava de uma vez), ou nenhuma entra.',
         [
-          'O peso disso é grande. Numa amostra de 41.470 tokens que graduaram, ',
+          'Numa amostra de 41.470 tokens que graduaram, ',
           { numero: '36,5%' },
-          ' do supply estava em carteiras de bundle na hora da migração para a DEX. Bundle não é ' +
-            'prova de golpe: há quem use para se proteger de snipers (robôs que compram nos ' +
-            'primeiros instantes de um token). O que ele faz, sempre, é concentrar o token em ' +
-            'mãos que chegaram antes de você.',
+          ' do supply estava em carteiras de bundle na migração para a DEX. Bundle não prova ' +
+            'golpe — há quem use para se proteger de snipers (robôs que compram nos primeiros ' +
+            'instantes) —, mas sempre concentra o token em mãos que chegaram antes de você.',
         ],
-        'Na tela, o fenômeno aparece em ferramentas especializadas, com dois números de nomes ' +
-          'parecidos e sentidos opostos. "Total bundled %" conta o lançamento: quanto foi ' +
-          'comprado em bundle. "Current held %" conta o agora: quanto essas mesmas carteiras ' +
-          'ainda seguram. É assim que o trench.bot mostra esse número.',
       ],
       exemplo: {
         titulo: 'O que aparece quando se juntam as carteiras do bundle',
         passos: [
-          'A lista de holders trata cada carteira do bundle como se fosse uma pessoa diferente.',
-          'Juntando as carteiras ligadas entre si, a fatia do top 10 sobe 24 pontos nos tokens ' +
-            'de alto risco.',
-          'Nos de baixo risco, sobe 6.',
-          'É o mesmo token e a mesma lista: o que mudou foi parar de contar o mesmo dono várias ' +
-            'vezes.',
+          'A lista de holders trata cada carteira do bundle como uma pessoa diferente.',
+          'Juntando as carteiras ligadas, a fatia do top 10 (as dez maiores) sobe 24 pontos ' +
+            'percentuais nos tokens de alto risco, e 6 nos de baixo risco.',
+          'Só se parou de contar o mesmo dono várias vezes.',
         ],
       },
       paragrafosFinais: [
-        'O erro que isso evita é ler "Total bundled %" como veredito. Ele pode estar alto num ' +
-          'token cujas carteiras de bundle já venderam tudo, e pode estar baixo num token em que ' +
-          'o criador comprou depois, sem bundle. O número que fala do risco de hoje é quanto ' +
-          'essas carteiras ainda seguram.',
-        'E evita o erro simétrico: tratar bundle como crime. Ele é uma ferramenta de ' +
-          'infraestrutura, usada também para defesa. O que importa é a concentração que sobra ' +
-          'depois dele.',
+        'O erro que isso evita é ler "Total bundled %" como veredito: ele fica alto se as ' +
+          'carteiras já venderam tudo, e baixo se o criador comprou depois, sem bundle. E o ' +
+          'oposto: tratar bundle como crime — é infraestrutura; importa a concentração que sobra.',
       ],
       detalhe: {
         titulo: 'a infraestrutura e o estudo',
         paragrafos: [
-          'O Jito, usado por quase toda a rede, é a infraestrutura dos bundles. O número de ' +
-            '36,5% e o do top 10 vêm do MELT, um preprint (artigo ainda sem revisão por pares, ' +
-            'publicado antes de outros pesquisadores checarem).',
+          'O Jito, usado por quase toda a rede, é a infraestrutura dos bundles. O 36,5% e o ' +
+            'número do top 10 vêm do MELT, um preprint (publicado antes da revisão por pares).',
         ],
       },
     },
@@ -806,52 +681,40 @@ export const modulo6 = {
           },
         ],
         descricao:
-          'Programa do token: SPL clássico (Owner Program começa com Tokenkeg…; sem taxa, sem ' +
-          'extensões) ou Token-2022 (começa com Tokenz…; aceita extensões). Extensões de ' +
-          'metadados, metadataPointer e tokenMetadata, são o padrão do pump.fun. ' +
+          'SPL clássico (Owner Program Tokenkeg…; sem taxa nem extensões) ou Token-2022 ' +
+          '(Tokenz…; aceita extensões). metadataPointer e tokenMetadata são o padrão do pump.fun; ' +
           'transferFeeConfig, permanentDelegate e transferHook são as perigosas.',
       },
       paragrafos: [
-        'Na Solana, um token não costuma ter um contrato próprio: existe um programa — o código ' +
-          'que administra tokens — e cada token é uma conta administrada por ele. Programas ' +
-          'assim são dois. O SPL clássico é o original: não tem taxa de transferência nem ' +
-          'extensões. O Token-2022 é o novo, e aceita "extensões" opcionais, escolhidas na hora ' +
-          'da criação.',
-        'Saber em qual dos dois o token roda é o primeiro passo porque isso define o que pode ' +
-          'acontecer depois. Num SPL clássico não há como existir taxa na venda, então não ' +
-          'adianta procurar. Num Token-2022 há — e aí a pergunta passa a ser quais extensões ' +
-          'esse token específico carrega. Token-2022 não é perigo por si só: perigosa é a ' +
-          'extensão a mais.',
-        'Na tela do explorador, isso é um campo só: "Owner Program". Se o endereço começa com ' +
-          'Tokenkeg…, é SPL clássico. Se começa com Tokenz…, é Token-2022, e existe uma lista ' +
-          'chamada "Token Extensions" para conferir logo em seguida. É a mesma ordem do visual ' +
-          'acima: programa primeiro, extensões depois.',
+        'Na Solana, um token não costuma ter contrato próprio: é uma conta administrada por um ' +
+          'programa. São dois (a árvore acima): o SPL clássico, sem taxa nem extensões, e o ' +
+          'Token-2022, que aceita "extensões" opcionais, escolhidas na criação.',
+        'Num SPL clássico não existe taxa na venda; num Token-2022, a pergunta vira quais ' +
+          'extensões ele carrega. No explorador, o campo "Owner Program" diz qual é: Tokenkeg… é ' +
+          'SPL clássico; Tokenz…, Token-2022 — e aí confira a lista "Token Extensions".',
       ],
       exemplo: {
         titulo: 'O que uma checagem na blockchain encontrou',
         passos: [
           'Em 12/09/2026, 24 de 24 tokens do pump.fun eram Token-2022.',
-          'Todos os 24 tinham só as duas extensões de metadados: metadataPointer e tokenMetadata.',
-          'As três extensões perigosas — transferFeeConfig, permanentDelegate e transferHook — ' +
-            'apareceram em 0 de 24.',
-          'Logo, num token do pump.fun, o alerta não é ser Token-2022: é aparecer qualquer ' +
-            'extensão além daquelas duas.',
+          'Todos só com as duas extensões de metadados (metadataPointer e tokenMetadata); as ' +
+            'três perigosas (transferFeeConfig, permanentDelegate e transferHook) apareceram em ' +
+            '0 de 24.',
+          'No pump.fun, então, o alerta não é ser Token-2022: é ter qualquer extensão além ' +
+            'daquelas duas.',
         ],
       },
       paragrafosFinais: [
-        'O erro que isso evita é o atalho "Token-2022 = golpe", que circulou quando o padrão era ' +
-          'raro. Desde que o pump.fun passou a criar tokens assim, o rótulo deixou de separar ' +
-          'qualquer coisa: quase todo token novo de lá é Token-2022.',
-        'O atalho contrário também não serve. "Tokenkeg… = seguro" ignora que o SPL clássico tem ' +
-          'as suas próprias portas abertas — as autoridades e o "Mutable" da Metadata, que são ' +
-          'as próximas seções. É nesse formato que a LetsBonk e a LaunchLab (Raydium) criam os ' +
-          'tokens delas.',
+        'O erro que isso evita é o atalho "Token-2022 = golpe", de quando o padrão era raro: ' +
+          'hoje quase todo token novo do pump.fun é Token-2022. E o contrário, "Tokenkeg… = ' +
+          'seguro", ignora as autoridades e o "Mutable" da Metadata, que valem no SPL clássico ' +
+          '— formato da LetsBonk e da LaunchLab (Raydium), outras plataformas de lançamento.',
       ],
       detalhe: {
         titulo: 'nomes técnicos e datas',
         paragrafos: [
-          'A mudança no pump.fun veio com a instrução create_v2, ativada em 12/11/2025. As duas ' +
-            'extensões de metadados se chamam metadataPointer e tokenMetadata.',
+          'A mudança no pump.fun veio com a instrução create_v2 (o novo comando de criação de ' +
+            'tokens), ativada em 12/11/2025.',
         ],
       },
     },
@@ -864,54 +727,39 @@ export const modulo6 = {
         'transferência.',
       // Visual: a tabela das extensões (tabelaExtensoes, mais abaixo).
       paragrafos: [
-        'Extensão é um pedaço de comportamento a mais, escolhido pelo criador na hora em que o ' +
-          'token nasce. Duas delas só guardam nome, símbolo e imagem dentro do próprio token, e ' +
-          'são o padrão do pump.fun. As outras três da tabela acima mudam o que pode acontecer ' +
-          'com o seu token depois que ele já está na sua carteira: transferFeeConfig cobra uma ' +
-          'taxa em cada transferência, inclusive na venda; permanentDelegate (delegado ' +
-          'permanente) dá a uma conta o poder de mover ou queimar tokens de qualquer carteira; e ' +
-          'transferHook (gancho de transferência) roda um programa do criador a cada ' +
-          'transferência, que aprova ou recusa.',
-        'Duas dessas três pesam mais contra quem comprou. O delegado permanente tira os seus ' +
-          'tokens sem a sua assinatura — não é preciso convencer você de nada. O gancho pode ' +
-          'recusar a sua venda e deixar a compra passar, que é o resultado prático de um ' +
-          'honeypot: um token que se compra e não se vende. A taxa, ao menos, você consegue ' +
-          'calcular antes.',
-        'Na tela, tudo isso é uma lista de nomes em inglês no campo "Token Extensions" do ' +
-          'explorador. O trabalho de leitura é curto: comparar essa lista com as duas de ' +
-          'metadados. Se houver qualquer nome além delas, vale abrir a tabela acima e ver o que ' +
-          'aquele nome permite.',
+        'Extensão é um comportamento a mais, escolhido quando o token nasce. As duas de ' +
+          'metadados só guardam nome, símbolo e imagem: são o padrão do pump.fun. As outras ' +
+          'três da tabela agem sobre o token já na sua carteira.',
+        'Duas pesam mais: permanentDelegate (delegado permanente) tira os seus tokens sem a sua ' +
+          'assinatura; transferHook (gancho de transferência) pode recusar a venda e deixar a ' +
+          'compra passar — na prática, um honeypot (token que se compra e não se vende). A ' +
+          'terceira, transferFeeConfig (a taxa), ao menos dá para calcular antes. No ' +
+          'explorador, compare o campo "Token Extensions" com as duas de metadados.',
       ],
       exemplo: {
         titulo: 'A taxa de transferência, do começo ao fim',
         passos: [
-          'A taxa só pode ser configurada na criação: um token criado sem ela não ganha taxa ' +
-            'depois.',
-          'Quando existe, o teto é de 100% — a transferência inteira pode virar taxa.',
-          'Mudar o valor só vale duas epochs depois, cerca de 4 dias (epoch é um ciclo de tempo ' +
-            'da rede Solana).',
-          'Mas a trava só atrasa a mudança: uma taxa alta pode vir configurada desde o ' +
-            'lançamento.',
+          'A taxa só pode ser configurada na criação: token criado sem ela não ganha taxa depois.',
+          'O teto é de 100%: a transferência inteira pode virar taxa.',
+          'Mudar o valor só vale duas epochs (ciclos de tempo da rede Solana) depois: cerca de 4 ' +
+            'dias.',
+          'Mas a trava só atrasa a mudança: a taxa pode vir alta desde o lançamento.',
         ],
       },
       paragrafosFinais: [
-        'O erro que isso evita é confundir "tem aviso prévio" com "estou protegido". As duas ' +
-          'epochs de espera protegem contra a surpresa, não contra a taxa: se ela já nasceu ' +
-          'alta, não há atraso nenhum a aguardar.',
-        'O erro simétrico é assustar-se com a palavra "extensão". As duas de metadados são o ' +
-          'padrão e não fazem mal, desde que a autoridade de atualização esteja nula — o que ' +
-          'leva à próxima seção, sobre as permissões que o dono guardou.',
+        'O erro que isso evita é confundir aviso prévio com proteção: a espera não protege ' +
+          'contra uma taxa que já nasceu alta. E o oposto: temer a palavra "extensão". As de ' +
+          'metadados não fazem mal se ninguém mais puder alterá-las (autoridade de atualização ' +
+          'nula), tema da próxima seção.',
       ],
       detalhe: {
         titulo: 'o que a checagem encontrou, extensão por extensão',
         lista: [
-          'metadataPointer + tokenMetadata: padrão no pump.fun, com as autoridades nulas em 11 ' +
-            'de 11 checados.',
-          'transferFeeConfig: não aparece (0 de 24).',
-          'permanentDelegate: não aparece (0 de 24).',
-          'transferHook: não aparece (0 de 24).',
-          'A regra da taxa e a trava das duas epochs estão na documentação da Solana sobre ' +
-            'transfer fees do Token-2022.',
+          'metadataPointer + tokenMetadata: padrão no pump.fun, autoridades nulas em 11 de 11 ' +
+            'checados.',
+          'transferFeeConfig, permanentDelegate e transferHook: 0 de 24.',
+          'Regra da taxa e trava das duas epochs: documentação da Solana sobre transfer fees do ' +
+            'Token-2022.',
         ],
       },
     },
@@ -951,50 +799,40 @@ export const modulo6 = {
           },
         ],
         descricao:
-          'Mint authority — criar tokens novos; ativa, dilui quem comprou. Freeze authority — ' +
-          'congelar a conta de alguém; ativa, você compra e pode não conseguir vender (o honeypot ' +
-          'da Solana). Autoridade de metadados — trocar nome, símbolo e imagem depois da compra. ' +
-          'No pump.fun, as três vêm revogadas.',
+          'Mint authority: cria tokens novos e dilui quem comprou. Freeze authority: congela ' +
+          'contas; você compra e pode não conseguir vender (o honeypot da Solana). Autoridade de ' +
+          'metadados: troca nome, símbolo e imagem depois da compra. No pump.fun, as três vêm ' +
+          'revogadas.',
       },
       paragrafos: [
-        'Autoridade, aqui, é uma permissão que ficou guardada com alguém depois que o token ' +
-          'nasceu. São três, e cada uma é um poder diferente. A de mint (cunhar) permite criar ' +
-          'tokens novos. A de freeze (congelar) permite congelar a conta de alguém. A de ' +
-          'metadados permite trocar nome, símbolo e imagem — metadados são isso: a identidade ' +
-          'visível do token.',
-        'Para quem comprou, as três agem depois da compra, e é isso que as torna importantes. ' +
-          'Mint ativa dilui você: o dono cria mais tokens e o seu pedaço do total encolhe. ' +
-          'Freeze ativa é o honeypot da Solana — você compra e pode simplesmente não conseguir ' +
-          'vender, sem código esperto nenhum, só uma permissão. Metadados ativa faz o token que ' +
-          'você comprou passar a se parecer com outro.',
-        'No explorador, isso se lê num campo chamado "Authority". Ele mostra "N/A" quando todas ' +
-          'foram revogadas — revogar é abrir mão da permissão, de forma definitiva. No ' +
-          'Token-2022, a autoridade de metadados aparece como a update authority do ' +
-          'tokenMetadata; num SPL clássico, como "Mutable: true" na aba Metadata.',
+        'Autoridade é uma permissão que ficou com alguém depois que o token nasceu — e age ' +
+          'depois da sua compra. São três (os cartões acima): mint (cunhar), freeze (congelar) e ' +
+          'metadados. A de freeze é o honeypot da Solana: sem código esperto, só uma permissão, ' +
+          'você compra e pode não conseguir vender.',
+        'No explorador, o campo "Authority" mostra "N/A" quando todas foram revogadas (revogar ' +
+          'é abrir mão da permissão, para sempre). A de metadados aparece como update authority ' +
+          '(autoridade de atualização) no Token-2022 e "Mutable: true" no SPL clássico.',
       ],
       exemplo: {
         titulo: 'Por que esse campo quase não ajuda dentro do pump.fun',
         passos: [
-          'No pump.fun, mint e freeze vêm revogadas (desligadas) em todo token.',
-          'A autoridade de metadados veio nula em 11 de 11 tokens checados.',
-          'Ou seja: o campo dá o mesmo resultado em praticamente todos os tokens de lá.',
-          'Um sinal que nunca varia não separa um token do outro — ele só confirma a regra da ' +
-            'plataforma.',
+          'No pump.fun, mint e freeze vêm revogadas em todo token, e a de metadados veio nula em ' +
+            '11 de 11 checados.',
+          'O campo dá o mesmo resultado em quase todo token de lá — e sinal que nunca varia não ' +
+            'separa um token do outro: só confirma a regra da plataforma.',
         ],
       },
       paragrafosFinais: [
-        'O erro que isso evita é o mais vendido dos selos: "mint e freeze revogadas, token ' +
-          'seguro". Revogadas é bom, mas dentro do pump.fun é o padrão, e padrão não informa ' +
-          'nada sobre um token específico. Fora do pump.fun a história muda: lá as autoridades ' +
-          'variam de token para token, e são a primeira coisa a olhar.',
+        'O erro que isso evita é o selo mais vendido: "mint e freeze revogadas, token seguro". ' +
+          'No pump.fun isso é o padrão e não diz nada sobre um token específico. Fora dele, as ' +
+          'autoridades variam de token para token e são a primeira coisa a olhar.',
       ],
       // Depois das frases: a checagem do contrato (checagemDoContrato, mais abaixo).
       detalhe: {
         titulo: 'o campo "Authority" do Solscan',
         paragrafos: [
-          'Esse campo é um menu que junta três autoridades: de mint, de freeze e de metadados. ' +
-            'Ele mostra "N/A" quando todas foram revogadas. Um endereço ali não quer dizer que o ' +
-            'dono ainda emite tokens. Pode ser só a autoridade de metadados.',
+          'É um menu com as três autoridades. Um endereço ali não quer dizer que o dono ainda ' +
+            'emite tokens: pode ser só a autoridade de metadados.',
         ],
       },
     },
@@ -1015,68 +853,50 @@ export const modulo6 = {
         ],
       },
       paragrafos: [
-        'Dev dump é o nome de rua do golpe: dev é o criador do token (de developer, ' +
-          'desenvolvedor) e dump é despejar tudo de uma vez. Ele existe porque, no pump.fun, o ' +
-          'golpe clássico foi fechado: depois da graduação, a pool pertence ao protocolo, e o ' +
-          'criador não consegue tirar a liquidez de lá. O que sobra para ele é vender, de uma ' +
-          'vez, o que comprou barato no minuto zero.',
-        'Isso importa porque muda quem paga a conta. Não é a pool que some: é o preço que ' +
-          'desaba, em cima de quem comprou depois. E a compra barata costuma ter sido feita em ' +
-          'várias carteiras ao mesmo tempo, no mesmo bloco, o que faz um criador só parecer ' +
-          'várias pessoas na lista de holders.',
-        'A trilha, ao menos, fica visível. A carteira que criou o token aparece como "Creator" ' +
-          'no Solscan, e o histórico dela mostra quanto comprou e quando vendeu. Dá para abrir ' +
-          'essa carteira e ler as operações uma a uma, sem ferramenta paga.',
+        'Dev dump é o nome de rua do golpe: dev é o criador (de developer, desenvolvedor) e ' +
+          'dump é despejar tudo de uma vez. Depois da graduação, a pool é do protocolo — por ' +
+          'isso sobra vender o que comprou no minuto zero, e o preço desaba em cima de quem ' +
+          'chegou depois.',
+        'Comprar em várias carteiras no mesmo bloco faz um criador parecer várias pessoas na ' +
+          'lista de holders. Mas a trilha fica visível: a carteira "Creator" do Solscan mostra ' +
+          'quanto comprou e quando vendeu, sem ferramenta paga.',
       ],
       exemplo: {
         titulo: 'O padrão que um guia de ferramenta descreve',
         passos: [
-          'O criador compra barato no lançamento, muitas vezes em várias carteiras, no mesmo ' +
-            'bloco.',
-          'Outras pessoas chegam depois e compram mais caro.',
+          'O criador compra barato no lançamento, em várias carteiras, no mesmo bloco; outras ' +
+            'pessoas compram depois, mais caro.',
           'As carteiras do primeiro bloco vendem nos primeiros 30 minutos.',
-          'Importante: isso é descrição de guia de ferramenta, sem medição. É um padrão ' +
-            'relatado, não um limiar testado.',
+          'É padrão relatado por guia de ferramenta, sem medição — não um limiar testado.',
         ],
       },
       paragrafosFinais: [
         'O erro que isso evita é ler "a liquidez não pode ser retirada" como "não pode haver ' +
-          'golpe". A trava da pool fecha uma porta e deixa a outra aberta, e é pela outra que se ' +
-          'sai carregado.',
-        'O erro oposto também custa caro: carteira de Creator parada não prova inocência. Quem ' +
-          'monta o golpe usa carteiras intermediárias para esconder o vínculo, e nenhum estudo ' +
-          'revisado por pares isolou "o criador vendeu" como preditor de rug — um sinal que ' +
-          'antecipa o golpe. É evidência fraca — mas não é evidência nenhuma.',
+          'golpe": a trava fecha uma porta e deixa a outra aberta. E o oposto: carteira de ' +
+          'Creator parada não prova inocência — o golpe usa carteiras intermediárias. Nenhum ' +
+          'estudo revisado por pares isolou "o criador vendeu" como preditor de rug (sinal que ' +
+          'antecipa o golpe): é sinal fraco, mas não nulo.',
       ],
       // O desenho juntou aqui o que eram duas seções à parte ("Metadata mutável" e
       // "Fora da Solana: a taxa mora no código") e os limites do sinal. Cada bloco
-      // abre com um título curto em negrito.
+      // abre com um título curto em negrito. O bloco "Os dois limites do sinal"
+      // saiu em 23/09/2026: repetia, palavra por palavra, o fecho da seção.
       detalhe: {
-        titulo: 'metadata mutável, os limites do sinal e as redes EVM',
+        titulo: 'metadata mutável e as redes EVM',
         blocos: [
           {
             titulo: 'Metadata mutável.',
             texto:
-              'Com a autoridade de metadados ativa, o dono pode trocar nome, símbolo e imagem ' +
-              'depois que você comprou. Num SPL clássico aparece como "Mutable: true" na aba ' +
-              'Metadata do Solscan; num Token-2022 é a update authority do tokenMetadata. Nos ' +
-              'tokens do pump.fun checados, essa porta estava fechada.',
-          },
-          {
-            titulo: 'Os dois limites do sinal.',
-            texto:
-              'Nenhum estudo revisado por pares isolou "o criador vendeu" como preditor de rug. ' +
-              'Quem monta o golpe usa carteiras intermediárias para esconder o vínculo.',
+              'Com a autoridade de metadados ativa, o dono troca nome, símbolo e imagem depois ' +
+              'da sua compra. Nos tokens do pump.fun checados, essa porta estava fechada.',
           },
           {
             titulo: 'Fora da Solana.',
             texto:
-              'Em Ethereum, BSC e Base — as redes EVM, que rodam contratos no mesmo padrão do ' +
-              'Ethereum —, a taxa e o bloqueio da venda ficam no código do contrato, e não num ' +
-              'campo padronizado que dê para conferir de relance. A checagem que funciona é ' +
-              'simular uma compra e uma venda antes (o honeypot.is faz isso de graça) — mas a ' +
-              'simulação é só um retrato do momento. Num contrato atualizável, o dono pode ' +
-              'trocar a lógica depois, e mudar a taxa ou bloquear vendas quando quiser.',
+              'Em Ethereum, BSC e Base (as redes EVM), taxa e bloqueio de venda ficam no código ' +
+              'do contrato, não num campo padronizado. Simular compra e venda antes (o ' +
+              'honeypot.is faz de graça) é só um retrato: num contrato atualizável, o dono muda a ' +
+              'taxa ou bloqueia vendas depois.',
           },
         ],
       },
@@ -1101,54 +921,44 @@ export const modulo6 = {
           { quem: 'Solidus Labs', regua: 'liquidez abaixo de US$ 1.000 (colapso, não fraude provada)', valor: 98.6, exibicao: '98,6%', tom: 'ruim' },
         ],
         legenda:
-          'A régua muda o número. Mesma escala, 0 a 100% dos tokens de cada amostra. Réguas e ' +
-          'amostras são diferentes entre si: não compare os valores como se medissem a mesma ' +
-          'coisa.',
+          'A régua muda o número. Mesma escala: 0 a 100% dos tokens de cada amostra. Réguas e ' +
+          'amostras diferentes: não compare como se medissem a mesma coisa.',
         descricao:
-          'Chainalysis, suspeitos de pump-and-dump em 2024 — 3,59%. Catching the Rug, Raydium, ' +
-          'liquidez caiu 99% ou parado por mais de 80% da vida — 60,8%. Catching the Rug, ' +
-          'PumpFun, mesma régua — 81,9%. Solidus Labs, liquidez abaixo de US$ 1.000 — 98,6%.',
+          'Chainalysis, suspeitos de pump-and-dump em 2024: 3,59%. Catching the Rug, liquidez ' +
+          'caiu 99% ou parado por mais de 80% da vida: Raydium 60,8%, PumpFun 81,9%. Solidus ' +
+          'Labs, liquidez abaixo de US$ 1.000: 98,6%.',
       },
       paragrafos: [
         'Rug vem de "rug pull", puxar o tapete: o token desaba e quem comprou fica sem saída. ' +
-          'Não existe uma definição única. Cada estudo escolhe a sua régua — um exige prova de ' +
-          'intenção, outro se contenta com o colapso da liquidez — e o número muda junto com a ' +
-          'régua escolhida.',
-        'Isso importa porque a mesma realidade pode ser descrita como "3,59% dos tokens" ou ' +
-          '"98,6% dos tokens", sem que ninguém esteja mentindo. Quando alguém cita uma dessas ' +
-          'porcentagens sem dizer o que contou, o número deixa de ser informação e vira ' +
-          'sensação: serve para assustar ou para acalmar, conforme a régua que deu mais jeito.',
-        'No visual acima, as quatro medições aparecem na mesma escala, de 0 a 100% dos tokens de ' +
-          'cada amostra. Leia as barras como quatro perguntas diferentes, não como quatro ' +
-          'respostas para a mesma pergunta: as réguas e as amostras são diferentes entre si.',
+          'Não há definição única: um estudo exige prova de intenção, outro se contenta com o ' +
+          'colapso da liquidez — e o número muda junto.',
+        'Por isso as barras são quatro perguntas diferentes, não quatro respostas para a ' +
+          'mesma — e porcentagem sem a régua só serve para assustar ou acalmar.',
       ],
       exemplo: {
         titulo: 'Os dois extremos, lado a lado',
         passos: [
-          'A Chainalysis contou 3,59% dos tokens de 2024 como suspeitos de pump-and-dump ' +
-            '(inflar o preço e vender em cima de quem chega).',
-          'A Solidus Labs contou 98,6% dos tokens com liquidez abaixo de US$ 1.000.',
-          'A primeira régua pede indício de manipulação; a segunda registra colapso de liquidez, ' +
-            'não fraude provada.',
-          'A pump.fun contestou publicamente o número da Solidus Labs. Os dois continuam ' +
+          'Chainalysis: 3,59% dos tokens de 2024 suspeitos de pump-and-dump (inflar o preço e ' +
+            'vender em cima de quem chega). A régua pede indício de manipulação.',
+          'Solidus Labs: 98,6% dos tokens com liquidez abaixo de US$ 1.000. A régua registra ' +
+            'colapso, não fraude provada.',
+          'A pump.fun contestou publicamente o número da Solidus Labs; os dois continuam ' +
             'verdadeiros dentro da própria régua.',
         ],
       },
       paragrafosFinais: [
-        'O erro que isso evita é comparar porcentagens de estudos diferentes como se fossem ' +
-          'placares do mesmo campeonato — e, pior, decidir alguma coisa com base nessa ' +
-          'comparação. Antes de usar qualquer número deste tipo, a pergunta é sempre a mesma: o ' +
-          'que exatamente foi contado, em que amostra, em que período?',
+        'O erro que isso evita é comparar porcentagens de estudos diferentes como placares do ' +
+          'mesmo campeonato. Antes de usar um número assim, pergunte: o que foi contado, em que ' +
+          'amostra, em que período?',
       ],
       detalhe: {
         titulo: 'o maior estudo e a régua dele',
         paragrafos: [
           'O maior estudo de detecção na Solana acompanhou 6,4 milhões de tokens do PumpFun e ' +
-            'da Raydium, de 30/11/2024 a 30/06/2025, e chamou de rug o token cuja liquidez caiu ' +
-            '99% desde o pico, ou que ficou parado por mais de 80% da própria vida.',
-          'Com essa régua, 60,8% dos tokens da Raydium e 81,9% dos do PumpFun foram ' +
-            'classificados como rug — no PumpFun, 43.835 de 53.546 tokens do teste. É o arXiv ' +
-            '2608.20271, ainda preprint.',
+            'da Raydium, de 30/11/2024 a 30/06/2025. Rug, para ele: liquidez 99% abaixo do pico, ' +
+            'ou token parado por mais de 80% da vida.',
+          'Por essa régua, deram rug 60,8% dos tokens da Raydium e 81,9% dos do PumpFun ' +
+            '(43.835 de 53.546 no teste). É o arXiv 2608.20271, ainda preprint.',
         ],
       },
     },
@@ -1180,7 +990,7 @@ export const modulo6 = {
           },
         ],
         nota:
-          'Estimativa: o artigo não publica esses dois números. Eles foram reconstruídos pelas ' +
+          'Estimativa: o artigo não publica esses dois números; foram reconstruídos pelas ' +
           'contagens do teste.',
       },
       // Visual 2, à esquerda: a nota F1 do modelo contra a do chute "tudo é rug".
@@ -1207,54 +1017,44 @@ export const modulo6 = {
         marcas: ['−1 erra tudo', '0 = chute', '1 perfeito'],
         nota: 'O MCC não se deixa enganar quando quase tudo é rug. Acerto modesto.',
         descricao:
-          'MCC, de menos 1 a 1: menos 1 é errar tudo, 0 é o mesmo que chutar, 1 é acerto quase ' +
-          'perfeito. O modelo marca 0,39. Treinado na Raydium e testado no PumpFun, cai para ' +
-          'perto de zero.',
+          'MCC, de menos 1 (errar tudo) a 1 (acerto quase perfeito); 0 é chutar. O modelo marca ' +
+          '0,39; treinado na Raydium e testado no PumpFun, fica perto de zero.',
       },
       paragrafos: [
-        'O modelo que se saiu melhor se chama XGBoost: um tipo de programa que aprende padrões ' +
-          'a partir de exemplos, sem que ninguém escreva as regras à mão. Ele olha só os 5 ' +
-          'primeiros minutos de negociação — quantidade de compras e vendas, carteiras únicas, ' +
-          'valores e variação de preço — e devolve um palpite. Nenhuma das 23 características ' +
-          'que ele usa é de holders, bundles, autoridades ou redes sociais.',
-        'Ele importa porque é o teto do que está publicado: quando alguém promete detecção de ' +
-          'rug, é com esse resultado que a promessa deveria ser comparada. E os próprios autores ' +
-          'reconhecem dois limites duros — o golpe muda com o tempo, e o que o modelo aprende ' +
-          'numa plataforma não vale na outra.',
-        'Os visuais acima mostram o desempenho de três ângulos. As duas grades de 100 respondem ' +
-          '"quando ele acusa, ele acerta?" e "dos rugs reais, quantos ele pega?". A barra do F1 ' +
-          'compara a nota dele com a de um chute burro. A régua do MCC mostra o quanto ele é ' +
-          'melhor que o acaso, de −1 a 1.',
+        'O melhor modelo publicado é um XGBoost: um programa que aprende padrões com exemplos, ' +
+          'sem regras escritas à mão. Ele olha só os 5 primeiros minutos de negociação ' +
+          '(compras, vendas, carteiras únicas, valores, variação de preço); nenhuma das 23 ' +
+          'características é de holders, bundles, autoridades ou redes sociais. É o teto ' +
+          'publicado: compare com ele qualquer promessa de detecção.',
+        'Leia as notas assim. As grades respondem "quando ele acusa, acerta?" e "dos rugs ' +
+          'reais, quantos pega?". O F1 (de 0 a 1) junta essas duas respostas numa nota só. O ' +
+          'MCC (de −1 a 1) mede quanto ele é melhor que o acaso: 0 é o mesmo que chutar, 1 é ' +
+          'acerto quase perfeito.',
       ],
       exemplo: {
         titulo: 'As três notas, lidas em ordem',
         passos: [
-          'De cada 100 tokens que o modelo marca como rug, cerca de 95 são rug mesmo; e de cada ' +
-            '100 rugs reais, ele pega uns 68.',
-          'Parece ótimo, até comparar: o F1 dele é 0,79, e o de chutar "tudo é rug" é 0,90.',
-          'Isso acontece porque quase todo token do teste era rug (81,9%) — num lugar assim, ' +
-            'chutar sempre a mesma coisa tira nota alta.',
-          'O MCC, que não se deixa enganar por isso, dá 0,39. Treinado na Raydium e testado no ' +
-            'PumpFun, cai para perto de zero — ou seja, perto de chutar.',
+          'Nas grades: cerca de 95 acertos em 100 acusações; uns 68 pegos em 100 rugs reais.',
+          'Parece ótimo, até comparar: F1 de 0,79 contra 0,90 de chutar "tudo é rug".',
+          'É que 81,9% do teste era rug — e aí chutar sempre a mesma coisa tira nota alta.',
+          'O MCC, que não cai nessa, dá 0,39. Treinado na Raydium e testado no PumpFun, cai para ' +
+            'perto de zero: perto de chutar.',
         ],
       },
       paragrafosFinais: [
-        'O erro que esses números evitam é acreditar em "acertou 95%" sem perguntar o que ' +
-          'chutar teria acertado. Numa amostra em que quase tudo é golpe, quase qualquer coisa ' +
-          'parece um bom detector.',
-        'E evita o excesso na direção contrária: 0,39 de MCC não é zero. O modelo enxerga ' +
-          'alguma coisa nos 5 primeiros minutos — só não o bastante para virar semáforo, e os ' +
-          'próprios autores dizem que ele ainda não serve para uso real.',
+        'O erro que isso evita é acreditar em "acertou 95%" sem perguntar quanto o chute ' +
+          'acertaria. E o exagero oposto: 0,39 não é zero — o modelo vê algo, só não o bastante ' +
+          'para virar semáforo: o golpe muda com o tempo, e o aprendido numa plataforma não vale ' +
+          'na outra.',
       ],
       detalhe: {
         titulo: 'como ler F1 e MCC, e de onde vêm esses números',
         paragrafos: [
-          'O F1 junta duas perguntas. Do que o modelo acusou, quanto era rug? E, dos rugs reais, ' +
-            'quantos ele achou? O MCC vai de −1 a 1. Perto de 1 é acerto quase perfeito, 0 é o ' +
-            'mesmo que chutar, e −1 é errar tudo.',
-          'Os números de F1 e MCC são do artigo (arXiv 2608.20271, preprint). Os dois das ' +
-            'grades, 95 e 68, são estimativa: o artigo não os publica, e eles foram ' +
-            'reconstruídos pelas contagens do teste — 43.835 rugs em 53.546 tokens.',
+          'O MCC olha também os tokens que não eram rug; por isso não se engana quando quase ' +
+            'tudo é rug. Na régua dele, −1 é errar tudo.',
+          'F1 e MCC são do artigo (arXiv 2608.20271, preprint). Os números das grades, 95 e 68, ' +
+            'são estimativa reconstruída pelas contagens do teste (43.835 rugs em 53.546 ' +
+            'tokens): o artigo não os publica.',
         ],
       },
     },
@@ -1267,19 +1067,14 @@ export const modulo6 = {
         'mais repete têm menos apoio.',
       // Visual: a tabela dos sinais, com a etiqueta da evidência (tabelaSinais).
       paragrafos: [
-        'A tabela acima não lista sinais em ordem de popularidade: lista em ordem de evidência. ' +
-          'Cada linha recebe uma etiqueta — "Sinal medido" quando algum estudo mediu o poder de ' +
-          'previsão, "Medido e desmentido" quando alguém mediu e não encontrou diferença, e ' +
-          '"Sinal fraco" quando a mecânica faz sentido mas ninguém mediu se antecipa o golpe.',
-        'Essa separação importa mais do que a lista em si. Sinal medido e sinal plausível não ' +
-          'pesam igual, e tratá-los como iguais é o começo de toda falsa segurança. Os sinais ' +
-          'com mais apoio são de uma família só: quem controla o token no minuto zero, e como ' +
-          'disfarça isso. Os que o mercado mais repete estão, em geral, do lado fraco.',
-        'No pump.fun a tabela encurta sozinha, e é por isso que a coluna "No pump.fun" existe: ' +
-          'mint e freeze vêm sempre revogadas, LP travada não se aplica porque a pool é do ' +
-          'protocolo, e o que sobra é o criador vendendo e a concentração de insiders (gente de ' +
-          'dentro, que entrou antes do público). Justamente aí a medição revisada por pares é a ' +
-          'mais fraca.',
+        'A tabela ordena os sinais pela evidência: "Sinal medido" (um estudo mediu o poder de ' +
+          'previsão), "Medido e desmentido" (mediram e não acharam diferença) e "Sinal fraco" (a ' +
+          'mecânica faz sentido, mas ninguém mediu). Tratar medido e plausível como iguais é o ' +
+          'começo de toda falsa segurança.',
+        'No pump.fun a tabela encurta: mint e freeze vêm sempre revogadas, LP travada (liquidez ' +
+          'trancada num contrato) não se aplica, porque a pool é do protocolo, e sobram o ' +
+          'criador vendendo e a concentração de insiders (quem entrou antes do público) — ' +
+          'justamente onde a medição revisada por pares é mais fraca.',
       ],
       quadro: [
         {
@@ -1291,39 +1086,32 @@ export const modulo6 = {
         {
           rotulo: 'O mercado repete, mas têm menos apoio',
           texto:
-            'LP travada (liquidez trancada, quando o criador deixa a liquidez presa num ' +
-            'contrato por um tempo) não separa golpe de não golpe. Mint e freeze authority são ' +
-            'mecânica certa, mas vêm sempre revogadas no pump.fun. Ausência de redes sociais ' +
-            'nunca foi medida como preditor.',
+            'LP travada não separa golpe de não golpe. Mint e freeze authority: mecânica certa, ' +
+            'mas sempre revogadas no pump.fun. Ausência de redes sociais: nunca medida como ' +
+            'preditor.',
         },
       ],
       exemplo: {
         titulo: 'O sinal que foi medido e não passou',
         passos: [
-          'LP travada é vendida como selo de segurança: a liquidez está presa, logo o criador ' +
-            'não a levaria embora.',
-          'Entre os tokens com trava, 97,3% eram maliciosos.',
-          'No conjunto geral, sem trava nenhuma, 97,7%.',
-          'A trava não separou quase nada — e é exatamente isso que a etiqueta "Medido e ' +
-            'desmentido" quer dizer.',
+          'LP travada é vendida como selo: com a liquidez presa, o criador não a levaria embora.',
+          'Entre os tokens com trava, 97,3% eram maliciosos; no conjunto geral, 97,7%.',
+          'A trava não separou quase nada: isso é "Medido e desmentido".',
         ],
       },
       paragrafosFinais: [
-        'O erro que essa tabela evita é somar selos. Uma lista de itens verdes dá a sensação de ' +
-          'aprovação, mas a soma de muitos sinais fracos continua fraca — e alguns deles já ' +
-          'foram testados e não sustentaram a promessa.',
-        'Nenhum desses sinais, medido ou não, diz quando comprar. Eles servem para reprovar pelo ' +
-          'que dá para ver, e para dizer qual é o tamanho da sua incerteza no resto.',
+        'O erro que isso evita é somar selos: muitos sinais fracos somados continuam fracos. E ' +
+          'nenhum sinal, medido ou não, diz quando comprar: eles servem para reprovar pelo que ' +
+          'dá para ver e mostrar o tamanho da sua incerteza.',
       ],
       detalhe: {
         titulo: 'de onde vêm as etiquetas',
         paragrafos: [
-          'A concentração de holders depois de juntar carteiras ligadas e o peso dos bundles ' +
-            'vêm do MELT, ainda preprint: juntando as carteiras, o top 10 sobe 24 pontos nos ' +
-            'tokens de alto risco.',
-          'O volume artificial vem do Midsummer (USENIX Security 2026, com revisão por pares): ' +
-            '82,9% dos tokens que subiram mais de 100% tinham sinais. É também o sinal mais ' +
-            'contornado de propósito, como mostrou a aba do volume.',
+          'Concentração com carteiras juntadas e peso dos bundles: MELT, ainda preprint (o top ' +
+            '10 sobe 24 pontos nos tokens de alto risco).',
+          'Volume artificial: Midsummer (USENIX Security 2026, com revisão por pares), com 82,9% ' +
+            'dos tokens que subiram mais de 100% mostrando sinais — e o sinal mais contornado de ' +
+            'propósito.',
         ],
       },
     },
@@ -1345,49 +1133,39 @@ export const modulo6 = {
         ],
         legenda:
           'O que o detector acrescenta é só a faixa entre a linha ciana (82%) e o fim da barra ' +
-          '(95%). Compare com 82, não com zero. Números do exemplo do arquivo.',
+          '(95%). Compare com 82, não com zero. Números do exemplo.',
         descricao:
           'Se 82% da amostra era golpe, chutar golpe para todo token já acertava 82%. Os 95% ' +
           'anunciados precisam ser comparados com esses 82%, não com zero.',
       },
       paragrafos: [
-        'Todo anúncio de detecção traz uma porcentagem sozinha: "95% de precisão". Um número ' +
-          'assim não quer dizer nada sem duas informações que quase nunca vêm junto. A primeira ' +
-          'é a régua: o que foi chamado de rug ali dentro. A segunda é a comparação certa: ' +
-          'quanto acertaria o chute mais burro possível, o de responder "golpe" para todo token.',
-        'Isso importa porque a porcentagem é desenhada para ser comparada com zero, e a ' +
-          'comparação honesta é com o chute. Em amostras onde quase tudo é golpe, o chute já ' +
-          'acerta quase tudo — e aí o que o detector acrescenta é muito menor do que o número ' +
-          'anunciado sugere.',
-        'O visual acima é esse teste em duas barras. A linha ciana marca o que o chute ' +
-          'acertaria; a barra inteira é o que o anúncio promete. O que o detector de fato ' +
-          'acrescenta é só a faixa entre a linha e o fim da barra.',
+        'Um detector com "95% de precisão" (de cada 100 tokens que acusa, 95 seriam golpe) não ' +
+          'diz nada sozinho. Faltam duas coisas: a régua (o que contou como rug) e a comparação com o ' +
+          'chute mais burro, responder "golpe" para todo token.',
+        'Esse chute acerta exatamente a taxa-base: a fatia da amostra que já era golpe. Onde ' +
+          'quase tudo é golpe, ele já acerta quase tudo — e o detector só acrescenta a faixa ' +
+          'entre a linha ciana e o fim da barra.',
       ],
       exemplo: {
-        titulo: 'Quatro perguntas diante de um "95% de precisão"',
+        titulo: 'O teste de um "95% de precisão", passo a passo',
         passos: [
-          'Primeira: quantos por cento da amostra eram golpe?',
-          'Suponha que eram 82%.',
-          'Então chutar "golpe" para todo token já acertava 82%.',
-          'Os 95% precisam ser comparados com esses 82%, não com zero — e ainda falta saber que ' +
-            'régua definiu "golpe".',
+          'Pergunte: quantos por cento da amostra eram golpe (a taxa-base)?',
+          'Suponha que eram 82%. Então chutar "golpe" para todo token já acertava 82%.',
+          'Os 95% se comparam com esses 82%, não com zero — e ainda falta saber que régua ' +
+            'definiu "golpe".',
         ],
       },
       paragrafosFinais: [
-        'O erro que isso evita é terceirizar a decisão para um selo. Um detector não é um ' +
-          'semáforo: ele é um número que só significa alguma coisa ao lado da régua e do chute.',
-        'É por isso que o checklist deste hub não aprova token nenhum. Ele reprova pelo que dá ' +
-          'para ver, e separa cada item pela força da evidência — a mesma lógica das etiquetas ' +
-          'da seção anterior.',
+        'O erro que isso evita é terceirizar a decisão para um selo: detector não é semáforo. ' +
+          'Por isso o checklist deste hub não aprova token nenhum — só reprova pelo que dá para ' +
+          'ver, com cada item etiquetado pela força da evidência.',
       ],
       detalhe: {
         titulo: 'os números deste exemplo',
         paragrafos: [
-          'Os 82% do exemplo são uma suposição do próprio exemplo, para mostrar a conta: não ' +
-            'são medição de amostra nenhuma. Os 95% representam um anúncio genérico, desses que ' +
-            'circulam sem método publicado.',
-          'A régua que define "golpe" muda o resultado sozinha, como a seção "O que conta como ' +
-            'rug" mostra: com réguas diferentes, os números vão de 3,59% a 98,6%.',
+          'Os 82% são suposição do exemplo, para mostrar a conta, não medição; os 95% ' +
+            'representam um anúncio genérico, sem método publicado. E a régua muda o resultado ' +
+            'sozinha: de 3,59% a 98,6%, como em "O que conta como rug".',
         ],
       },
       // O card-link que fecha a seção, dentro do card.
@@ -1407,18 +1185,18 @@ export const modulo6 = {
       {
         rotulo: 'Liquidez que você tira derrubando o preço pela metade',
         valor: '14,6%',
-        nota: 'Da liquidez anunciada, numa pool de produto constante. Não depende do tamanho da pool.',
+        nota: 'Da liquidez anunciada, numa pool de produto constante, de qualquer tamanho.',
         tom: 'alerta',
       },
       {
         rotulo: 'O que o "Market Cap" do Solscan mede',
         valor: 'Diluído',
-        nota: 'A documentação dele define o campo como totalmente diluído — o que o DexScreener chama de FDV.',
+        nota: 'Pela documentação dele, é o totalmente diluído — o que o DexScreener chama de FDV.',
       },
       {
         rotulo: 'Quanto um preço compactado engana, lido como texto',
         valor: '~19 mil ×',
-        nota: '$0.0₅2786 vira "$0.052786" quando copiado. O 5 pequeno é a quantidade de zeros.',
+        nota: '$0.0₅2786 vira "$0.052786" quando copiado. O 5 pequeno conta os zeros.',
         tom: 'alerta',
       },
     ],
@@ -1431,7 +1209,7 @@ export const modulo6 = {
       {
         rotulo: 'Carteiras em que um serviço de volume espalha as operações',
         valor: '100+',
-        nota: 'Declarado pelo próprio vendedor, para a razão volume/carteiras parecer normal.',
+        nota: 'Declarado pelo vendedor, para a razão volume/carteiras parecer normal.',
         tom: 'alerta',
       },
       {
@@ -1445,18 +1223,18 @@ export const modulo6 = {
       {
         rotulo: 'Tokens do pump.fun que são Token-2022',
         valor: '24 de 24',
-        nota: 'Checagem própria na blockchain, 12/09/2026. Todos só com as duas extensões de metadados.',
+        nota: 'Checagem própria na blockchain, 12/09/2026. Todos só com as extensões de metadados.',
       },
       {
         rotulo: 'Teto da taxa de transferência de um Token-2022',
         valor: '100%',
-        nota: 'Mudar a taxa só vale duas epochs depois, cerca de 4 dias. Mas ela pode vir alta desde o início.',
+        nota: 'Mudar a taxa só vale cerca de 4 dias depois. Mas ela pode vir alta desde o início.',
         tom: 'alerta',
       },
       {
         rotulo: 'O que o criador de um token do pump.fun não consegue fazer',
         valor: 'Tirar a liquidez',
-        nota: 'A pool pós-graduação é do protocolo. O golpe que sobra é vender a própria compra.',
+        nota: 'A pool pós-graduação é do protocolo. Sobra o golpe de vender a própria compra.',
       },
     ],
     deteccao: [
@@ -1469,12 +1247,12 @@ export const modulo6 = {
       {
         rotulo: 'F1 do melhor detector publicado',
         valor: '0,79',
-        nota: 'XGBoost, com os 5 primeiros minutos de negociação.',
+        nota: 'Um modelo (XGBoost) que olha os 5 primeiros minutos de negociação.',
       },
       {
         rotulo: 'F1 de chutar "tudo é rug"',
         valor: '0,90',
-        nota: 'Melhor que o modelo nesse critério. Quando quase tudo é golpe, acurácia e F1 enganam.',
+        nota: 'Ganha do modelo. Quando quase tudo é golpe, taxa de acerto e F1 enganam.',
         tom: 'alerta',
       },
     ],
@@ -1488,7 +1266,7 @@ export const modulo6 = {
   anatomias: {
     numerosDaTela: {
       titulo: 'Os números do topo de um par',
-      descricao: 'O que cada número mede — e o que ele não mede. Clique num item da legenda para localizar.',
+      descricao: 'O que cada número mede — e o que não mede. Clique num item da legenda.',
       viewBox: [0, 0, 640, 300],
       paineis: [
         { id: 'preco', x: 12, y: 12, w: 300, h: 80, rotulo: 'Preço', tipo: 'numeros' },
@@ -1501,37 +1279,37 @@ export const modulo6 = {
         {
           painel: 'preco',
           titulo: 'Preço',
-          texto: 'Pode vir com zeros compactados. Conte os zeros antes de comparar ou copiar.',
+          texto: 'Pode vir com zeros compactados. Conte os zeros antes de copiar.',
         },
         {
           painel: 'mcap',
           titulo: 'Market cap e FDV',
-          texto: 'Preço vezes supply. Não é dinheiro que exista em lugar nenhum. Em token do pump.fun, os dois costumam coincidir.',
+          texto: 'Preço vezes supply: não é dinheiro que exista. No pump.fun, os dois costumam coincidir.',
         },
         {
           painel: 'liquidez',
           titulo: 'Liquidez',
-          texto: 'A soma dos dois lados da pool. É o limite real de quanto dá para sair — e você não tira nem ela inteira.',
+          texto: 'Os dois lados da pool somados: o limite de quanto dá para sair, e nem ela sai inteira.',
         },
         {
           painel: 'volume',
           titulo: 'Volume, transações e makers',
-          texto: 'O número mais fácil de fabricar desta tela. Veja a aba Volume falso.',
+          texto: 'O número mais fácil de fabricar desta tela.',
         },
         {
           painel: 'pnl',
           titulo: 'PnL não realizado',
-          texto: 'Preço de agora vezes os seus tokens. Não desconta o impacto da sua venda.',
+          texto: 'Preço de agora vezes os seus tokens, sem o impacto da sua venda.',
         },
       ],
       nota:
-        'Os rótulos mudam de site para site: no Solscan, "Market Cap" é totalmente diluído; no ' +
-        'DexScreener, "Mkt Cap" usa o circulante quando existe esse dado.',
+        'No Solscan, "Market Cap" é totalmente diluído; no DexScreener, "Mkt Cap" usa o ' +
+        'circulante quando existe.',
     },
 
     contratoNoExplorador: {
       titulo: 'O que olhar do contrato no explorador',
-      descricao: 'Os campos do Solscan que respondem "o que o dono ainda pode fazer com você".',
+      descricao: 'Os campos do Solscan que dizem o que o dono ainda pode fazer.',
       viewBox: [0, 0, 640, 364],
       paineis: [
         { id: 'programa', x: 12, y: 12, w: 300, h: 64, rotulo: 'Owner Program', tipo: 'campo' },
@@ -1545,37 +1323,37 @@ export const modulo6 = {
         {
           painel: 'programa',
           titulo: 'Owner Program',
-          texto: '"Tokenkeg…" é SPL clássico; "Tokenz…" é Token-2022. Diz qual conjunto de regras vale para o token.',
+          texto: '"Tokenkeg…" é SPL clássico; "Tokenz…" é Token-2022.',
         },
         {
           painel: 'extensoes',
           titulo: 'Token Extensions',
-          texto: 'Num token do pump.fun, só metadataPointer e tokenMetadata. Qualquer outra — taxa, delegado permanente, hook — é o alerta mais forte desta tela.',
+          texto: 'No pump.fun, só metadataPointer e tokenMetadata. Qualquer outra — taxa, delegado permanente, hook — é o alerta mais forte.',
         },
         {
           painel: 'authority',
           titulo: 'Authority',
-          texto: 'Um menu com três autoridades: mint, freeze e metadados. "N/A" quando todas foram revogadas. Endereço aqui não prova que o dono ainda emite.',
+          texto: 'Menu com mint, freeze e metadados; "N/A" quando todas foram revogadas. Endereço aqui não prova que o dono ainda emite.',
         },
         {
           painel: 'creator',
           titulo: 'Creator',
-          texto: 'A carteira que criou o token. Clique nela para ver o histórico: tokens anteriores, quanto comprou, quando vendeu.',
+          texto: 'A carteira que criou o token: o histórico mostra tokens anteriores, quanto comprou, quando vendeu.',
         },
         {
           painel: 'metadata',
           titulo: 'Metadata',
-          texto: 'Nome, símbolo e imagem. "Mutable: true" (SPL clássico) ou update authority ativa (Token-2022) quer dizer que podem ser trocados.',
+          texto: 'Nome, símbolo e imagem. "Mutable: true" (SPL clássico) ou update authority ativa (Token-2022): podem ser trocados.',
         },
         {
           painel: 'holders',
           titulo: 'Holders',
-          texto: 'A lista crua das maiores carteiras. Carteiras ligadas entre si não aparecem juntas aqui — para isso, Bubblemaps.',
+          texto: 'A lista crua das maiores carteiras, sem juntar as ligadas entre si (para isso, Bubblemaps).',
         },
       ],
       nota:
-        'Nomes de campo segundo a documentação do Solscan, em setembro de 2026. Interfaces mudam: ' +
-        'se um campo sumir, procure o mesmo conceito.',
+        'Nomes de campo da documentação do Solscan, em setembro de 2026. Se um campo sumir, ' +
+        'procure o mesmo conceito.',
     },
   },
 
@@ -1598,7 +1376,7 @@ export const modulo6 = {
         valores: { vende: '≈ 5,41% dos tokens da reserva', recebe: '≈ 2,57% da liquidez anunciada' },
         detalheExtra:
           'Conta: vende = 1 ÷ √(1 − queda) − 1; recebe = (1 − √(1 − queda)) ÷ 2, em fração da ' +
-          'liquidez anunciada. Sem taxas. A fração não depende do tamanho da pool.',
+          'liquidez anunciada. Sem taxas.',
       },
       {
         id: 'queda-30',
@@ -1641,7 +1419,7 @@ export const modulo6 = {
         tom: 'ruim',
         valores: {
           oQueFaz: 'Cobra uma taxa em cada transferência, inclusive na venda.',
-          risco: 'Pode chegar a 100%. Mudança só vale duas epochs depois.',
+          risco: 'Até 100%. Mudança só vale cerca de 4 dias depois.',
           pumpfun: 'Não aparece (0 de 24).',
         },
       },
@@ -1650,8 +1428,8 @@ export const modulo6 = {
         titulo: 'permanentDelegate',
         tom: 'ruim',
         valores: {
-          oQueFaz: 'Dá a uma conta o poder de mover ou queimar tokens de qualquer carteira.',
-          risco: 'O dono pode tirar os tokens da sua carteira sem a sua assinatura.',
+          oQueFaz: 'Deixa uma conta mover ou queimar tokens de qualquer carteira.',
+          risco: 'O dono tira os tokens da sua carteira sem a sua assinatura.',
           pumpfun: 'Não aparece (0 de 24).',
         },
       },
@@ -1691,7 +1469,7 @@ export const modulo6 = {
         etiqueta: 'medido',
         valores: {
           evidencia: 'Medido: juntando carteiras ligadas, o top 10 sobe 24 pontos nos tokens de alto risco.',
-          pumpfun: 'Vale, se você olhar os clusters e não só a lista.',
+          pumpfun: 'Vale, olhando os clusters, não só a lista.',
         },
       },
       {
@@ -1727,7 +1505,7 @@ export const modulo6 = {
         etiqueta: 'fraco',
         valores: {
           evidencia: 'Mecânica certa, sem medição como preditor de rug.',
-          pumpfun: 'Vêm sempre revogadas: não diferenciam um token do outro.',
+          pumpfun: 'Sempre revogadas: não diferenciam tokens.',
         },
       },
       {
@@ -1752,16 +1530,16 @@ export const modulo6 = {
     titulo: 'Quanto do seu PnL chega na carteira',
     exemplo: {
       passos: [
-        'Posição de US$ 1.000 na tela, numa pool com US$ 20.000 de liquidez anunciada.',
-        'O lado da pool que paga a sua venda é metade disso: US$ 10.000.',
+        'Posição de US$ 1.000; liquidez anunciada de US$ 20.000.',
+        'Só metade paga a sua venda: US$ 10.000.',
         'Você recebe 1.000 × 10.000 ÷ (10.000 + 1.000) ≈ US$ 909.',
-        'O preço fica multiplicado por (10.000 ÷ 11.000)² ≈ 0,83 — cai cerca de 17%.',
-        'Agora arraste a liquidez para baixo e veja quanto do número verde some.',
+        'O preço fica multiplicado por (10.000 ÷ 11.000)² ≈ 0,83: cai cerca de 17%.',
+        'Arraste a liquidez para baixo e veja o verde sumir.',
       ],
     },
     descricao:
-      'Arraste o valor da sua posição na tela e a liquidez anunciada da pool, e veja quanto ' +
-      'você recebe vendendo tudo — e quanto a sua venda derruba o preço.',
+      'Arraste a sua posição e a liquidez anunciada, e veja quanto você recebe vendendo tudo ' +
+      'e quanto a venda derruba o preço.',
     controles: [
       {
         id: 'posicao',
@@ -1783,10 +1561,9 @@ export const modulo6 = {
       },
     ],
     nota:
-      'Modelo de produto constante (x · y = k). A liquidez anunciada soma os dois lados da ' +
-      'pool, então só metade dela é o lado que paga a sua venda. Não inclui taxas (de 0,25% a ' +
-      '1,25%, conforme a pool) nem outras pessoas vendendo ao mesmo tempo — as duas coisas ' +
-      'pioram o resultado.',
+      'Produto constante (x · y = k), com só metade da liquidez anunciada pagando a venda. Sem ' +
+      'taxas (de 0,25% a 1,25%, conforme a pool) e sem outras vendas junto: as duas pioram o ' +
+      'resultado.',
   },
 
   // ---------------------------------------------------------------------------
@@ -1827,7 +1604,7 @@ export const modulo6 = {
         segue: { rotulo: 'Não', tom: 'neutro' },
         desvio: {
           rotulo: 'Sim',
-          texto: 'Não compro. Isso é mecânica, não opinião. O dono ainda pode criar tokens e diluir quem comprou.',
+          texto: 'Não compro. O dono ainda pode criar tokens e diluir quem comprou.',
           tom: 'nao',
         },
       },
@@ -1836,7 +1613,7 @@ export const modulo6 = {
         segue: { rotulo: 'Não', tom: 'neutro' },
         desvio: {
           rotulo: 'Sim',
-          texto: 'Não compro. Isso é mecânica, não opinião. Você compra e pode não conseguir vender.',
+          texto: 'Não compro. Você compra e pode não conseguir vender.',
           tom: 'nao',
         },
       },
@@ -1901,7 +1678,7 @@ export const modulo6 = {
     numeros: [
       { termo: 'Market cap', definicao: 'Preço vezes os tokens em circulação. É uma conta, não dinheiro que exista.' },
       { termo: 'Liquidez', definicao: 'O valor dos dois lados da pool — o dinheiro que paga quem vende.' },
-      { termo: 'PnL não realizado', definicao: 'O lucro que a tela mostra enquanto você ainda não vendeu.' },
+      { termo: 'PnL não realizado', definicao: 'O lucro ou prejuízo (PnL) que a tela mostra enquanto você ainda não vendeu.' },
     ],
     volume: [
       { termo: 'Wash trading', definicao: 'Negociar consigo mesmo, em carteiras diferentes, para fabricar volume.' },
@@ -1914,7 +1691,7 @@ export const modulo6 = {
       { termo: 'Extensão', definicao: 'Recurso opcional de um token Token-2022, escolhido quando ele é criado.' },
     ],
     deteccao: [
-      { termo: 'Taxa-base', definicao: 'Com que frequência algo acontece na amostra inteira, antes de olhar qualquer sinal.' },
+      { termo: 'Taxa-base', definicao: 'Aqui não é a taxa da rede: é quanto da amostra inteira já era golpe, antes de olhar qualquer sinal.' },
       { termo: 'F1', definicao: 'Nota de 0 a 1 que mistura quantos rugs o modelo pega e quantos alarmes dele estão certos.' },
       { termo: 'MCC', definicao: 'Nota de −1 a 1 que não se deixa enganar quando quase tudo é rug.' },
     ],
